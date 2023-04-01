@@ -1,1 +1,250 @@
-nationality_id;nationality_value;nationality_abreviation;nationality_description;nationality_flag;nationality_flag_content_type;nationality_params;nationality_attributs;nationality_stat
+nationality_id;nationality_value;nationality_abreviation;nationality_description;nationality_params;nationality_attributs;nationality_stat
+1;Afghan;;;;;true
+2;Åland Island;;;;;true
+3;Albanian;;;;;true
+4;Algerian;;;;;true
+5;American Samoan;;;;;true
+6;Andorran;;;;;true
+7;Angolan;;;;;true
+8;Anguillan;;;;;true
+9;Antarctic;;;;;true
+10;Antiguan or Barbudan;;;;;true
+11;Argentine;;;;;true
+12;Armenian;;;;;true
+13;Aruban;;;;;true
+14;Australian;;;;;true
+15;Austrian;;;;;true
+16;Azerbaijani, Azeri;;;;;true
+17;Bahamian;;;;;true
+18;Bahraini;;;;;true
+19;Bangladeshi;;;;;true
+20;Barbadian;;;;;true
+21;Belarusian;;;;;true
+22;Belgian;;;;;true
+23;Belizean;;;;;true
+24;Beninese, Beninois;;;;;true
+25;Bermudian, Bermudan;;;;;true
+26;Bhutanese;;;;;true
+27;Bolivian;;;;;true
+28;Bonaire;;;;;true
+29;Bosnian or Herzegovinian;;;;;true
+30;Motswana, Botswanan;;;;;true
+31;Bouvet Island;;;;;true
+32;Brazilian;;;;;true
+33;BIOT;;;;;true
+34;Bruneian;;;;;true
+35;Bulgarian;;;;;true
+36;Burkinabé;;;;;true
+37;Burundian;;;;;true
+38;Cabo Verdean;;;;;true
+39;Cambodian;;;;;true
+40;Cameroonian;;;;;true
+41;Canadian;;;;;true
+42;Caymanian;;;;;true
+43;Central African;;;;;true
+44;Chadian;;;;;true
+45;Chilean;;;;;true
+46;Chinese;;;;;true
+47;Christmas Island;;;;;true
+48;Cocos Island;;;;;true
+49;Colombian;;;;;true
+50;Comoran, Comorian;;;;;true
+51;Congolese;;;;;true
+52;Congolese;;;;;true
+53;Cook Island;;;;;true
+54;Costa Rican;;;;;true
+55;Ivorian;;;;;true
+56;Croatian;;;;;true
+57;Cuban;;;;;true
+58;Curaçaoan;;;;;true
+59;Cypriot;;;;;true
+60;Czech;;;;;true
+61;Danish;;;;;true
+62;Djiboutian;;;;;true
+63;Dominican;;;;;true
+64;Dominican;;;;;true
+65;Ecuadorian;;;;;true
+66;Egyptian;;;;;true
+67;Salvadoran;;;;;true
+68;Equatorial Guinean, Equatoguinean;;;;;true
+69;Eritrean;;;;;true
+70;Estonian;;;;;true
+71;Ethiopian;;;;;true
+72;Falkland Island;;;;;true
+73;Faroese;;;;;true
+74;Fijian;;;;;true
+75;Finnish;;;;;true
+76;French;;;;;true
+77;French Guianese;;;;;true
+78;French Polynesian;;;;;true
+79;French Southern Territories;;;;;true
+80;Gabonese;;;;;true
+81;Gambian;;;;;true
+82;Georgian;;;;;true
+83;German;;;;;true
+84;Ghanaian;;;;;true
+85;Gibraltar;;;;;true
+86;Greek, Hellenic;;;;;true
+87;Greenlandic;;;;;true
+88;Grenadian;;;;;true
+89;Guadeloupe;;;;;true
+90;Guamanian, Guambat;;;;;true
+91;Guatemalan;;;;;true
+92;Channel Island;;;;;true
+93;Guinean;;;;;true
+94;Bissau-Guinean;;;;;true
+95;Guyanese;;;;;true
+96;Haitian;;;;;true
+97;Heard Island or McDonald Islands;;;;;true
+98;Vatican;;;;;true
+99;Honduran;;;;;true
+100;Hong Kong, Hong Kongese;;;;;true
+101;Hungarian, Magyar;;;;;true
+102;Icelandic;;;;;true
+103;Indian;;;;;true
+104;Indonesian;;;;;true
+105;Iranian, Persian;;;;;true
+106;Iraqi;;;;;true
+107;Irish;;;;;true
+108;Manx;;;;;true
+109;Israeli;;;;;true
+110;Italian;;;;;true
+111;Jamaican;;;;;true
+112;Japanese;;;;;true
+113;Channel Island;;;;;true
+114;Jordanian;;;;;true
+115;Kazakhstani, Kazakh;;;;;true
+116;Kenyan;;;;;true
+117;I-Kiribati;;;;;true
+118;North Korean;;;;;true
+119;South Korean;;;;;true
+120;Kuwaiti;;;;;true
+121;Kyrgyzstani, Kyrgyz, Kirgiz, Kirghiz;;;;;true
+122;Lao, Laotian;;;;;true
+123;Latvian;;;;;true
+124;Lebanese;;;;;true
+125;Basotho;;;;;true
+126;Liberian;;;;;true
+127;Libyan;;;;;true
+128;Liechtenstein;;;;;true
+129;Lithuanian;;;;;true
+130;Luxembourg, Luxembourgish;;;;;true
+131;Macanese, Chinese;;;;;true
+132;Macedonian;;;;;true
+133;Malagasy;;;;;true
+134;Malawian;;;;;true
+135;Malaysian;;;;;true
+136;Maldivian;;;;;true
+137;Malian, Malinese;;;;;true
+138;Maltese;;;;;true
+139;Marshallese;;;;;true
+140;Martiniquais, Martinican;;;;;true
+141;Mauritanian;;;;;true
+142;Mauritian;;;;;true
+143;Mahoran;;;;;true
+144;Mexican;;;;;true
+145;Micronesian;;;;;true
+146;Moldovan;;;;;true
+147;Monacan;;;;;true
+148;Mongolian;;;;;true
+149;Montenegrin;;;;;true
+150;Montserratian;;;;;true
+151;Moroccan;;;;;true
+152;Mozambican;;;;;true
+153;Burmese;;;;;true
+154;Namibian;;;;;true
+155;Nauruan;;;;;true
+156;Nepali, Nepalese;;;;;true
+157;Dutch, Netherlandic;;;;;true
+158;New Caledonian;;;;;true
+159;New Zealand, NZ;;;;;true
+160;Nicaraguan;;;;;true
+161;Nigerien;;;;;true
+162;Nigerian;;;;;true
+163;Niuean;;;;;true
+164;Norfolk Island;;;;;true
+165;Northern Marianan;;;;;true
+166;Norwegian;;;;;true
+167;Omani;;;;;true
+168;Pakistani;;;;;true
+169;Palauan;;;;;true
+170;Palestinian;;;;;true
+171;Panamanian;;;;;true
+172;Papua New Guinean, Papuan;;;;;true
+173;Paraguayan;;;;;true
+174;Peruvian;;;;;true
+175;Philippine, Filipino;;;;;true
+176;Pitcairn Island;;;;;true
+177;Polish;;;;;true
+178;Portuguese;;;;;true
+179;Puerto Rican;;;;;true
+180;Qatari;;;;;true
+181;Réunionnais;;;;;true
+182;Romanian;;;;;true
+183;Russian;;;;;true
+184;Rwandan;;;;;true
+185;Barthélemois;;;;;true
+186;Saint Helenian;;;;;true
+187;Kittitian or Nevisian;;;;;true
+188;Saint Lucian;;;;;true
+189;Saint-Martinoise;;;;;true
+190;Saint-Pierrais or Miquelonnais;;;;;true
+191;Saint Vincentian, Vincentian;;;;;true
+192;Samoan;;;;;true
+193;Sammarinese;;;;;true
+194;São Toméan;;;;;true
+195;Saudi, Saudi Arabian;;;;;true
+196;Senegalese;;;;;true
+197;Serbian;;;;;true
+198;Seychellois;;;;;true
+199;Sierra Leonean;;;;;true
+200;Singaporean;;;;;true
+201;Sint Maarten;;;;;true
+202;Slovak;;;;;true
+203;Slovenian, Slovene;;;;;true
+204;Solomon Island;;;;;true
+205;Somali, Somalian;;;;;true
+206;South African;;;;;true
+207;South Georgia or South Sandwich Islands;;;;;true
+208;South Sudanese;;;;;true
+209;Spanish;;;;;true
+210;Sri Lankan;;;;;true
+211;Sudanese;;;;;true
+212;Surinamese;;;;;true
+213;Svalbard;;;;;true
+214;Swazi;;;;;true
+215;Swedish;;;;;true
+216;Swiss;;;;;true
+217;Syrian;;;;;true
+218;Chinese, Taiwanese;;;;;true
+219;Tajikistani;;;;;true
+220;Tanzanian;;;;;true
+221;Thai;;;;;true
+222;Timorese;;;;;true
+223;Togolese;;;;;true
+224;Tokelauan;;;;;true
+225;Tongan;;;;;true
+226;Trinidadian or Tobagonian;;;;;true
+227;Tunisian;;;;;true
+228;Turkish;;;;;true
+229;Turkmen;;;;;true
+230;Turks and Caicos Island;;;;;true
+231;Tuvaluan;;;;;true
+232;Ugandan;;;;;true
+233;Ukrainian;;;;;true
+234;Emirati, Emirian, Emiri;;;;;true
+235;British, UK;;;;;true
+236;American;;;;;true
+237;American;;;;;true
+238;Uruguayan;;;;;true
+239;Uzbekistani, Uzbek;;;;;true
+240;Ni-Vanuatu, Vanuatuan;;;;;true
+241;Venezuelan;;;;;true
+242;Vietnamese;;;;;true
+243;British Virgin Island;;;;;true
+244;U.S. Virgin Island;;;;;true
+245;Wallis and Futuna, Wallisian or Futunan;;;;;true
+246;Sahrawi, Sahrawian, Sahraouian;;;;;true
+247;Yemeni;;;;;true
+248;Zambian;;;;;true
+249;Zimbabwean;;;;;true

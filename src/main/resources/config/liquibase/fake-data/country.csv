@@ -1,1 +1,250 @@
-country_id;country_name;country_code_alpha_2;country_code_alpha_3;country_tel_code;country_description;country_flag;country_flag_content_type;country_params;country_attributs;country_stat
+country_id;country_name;country_code_alpha_2;country_code_alpha_3;country_tel_code;country_description;country_params;country_attributs;country_stat
+1;Afghanistan;AF;AFG;;;;;true
+2;Åland Islands;AX;ALA;;;;;true
+3;Albania;AL;ALB;;;;;true
+4;Algeria;DZ;DZA;;;;;true
+5;American Samoa;AS;ASM;;;;;true
+6;Andorra;AD;AND;;;;;true
+7;Angola;AO;AGO;;;;;true
+8;Anguilla;AI;AIA;;;;;true
+9;Antarctica;AQ;ATA;;;;;true
+10;Antigua and Barbuda;AG;ATG;;;;;true
+11;Argentina;AR;ARG;;;;;true
+12;Armenia;AM;ARM;;;;;true
+13;Aruba;AW;ABW;;;;;true
+14;Australia;AU;AUS;;;;;true
+15;Austria;AT;AUT;;;;;true
+16;Azerbaijan;AZ;AZE;;;;;true
+17;Bahamas;BS;BHS;;;;;true
+18;Bahrain;BH;BHR;;;;;true
+19;Bangladesh;BD;BGD;;;;;true
+20;Barbados;BB;BRB;;;;;true
+21;Belarus;BY;BLR;;;;;true
+22;Belgium;BE;BEL;;;;;true
+23;Belize;BZ;BLZ;;;;;true
+24;Benin;BJ;BEN;;;;;true
+25;Bermuda;BM;BMU;;;;;true
+26;Bhutan;BT;BTN;;;;;true
+27;Bolivia (Plurinational State of);BO;BOL;;;;;true
+28;Bonaire, Sint Eustatius and Saba;BQ;BES;;;;;true
+29;Bosnia and Herzegovina;BA;BIH;;;;;true
+30;Botswana;BW;BWA;;;;;true
+31;Bouvet Island;BV;BVT;;;;;true
+32;Brazil;BR;BRA;;;;;true
+33;British Indian Ocean Territory;IO;IOT;;;;;true
+34;Brunei Darussalam;BN;BRN;;;;;true
+35;Bulgaria;BG;BGR;;;;;true
+36;Burkina Faso;BF;BFA;;;;;true
+37;Burundi;BI;BDI;;;;;true
+38;Cabo Verde;CV;CPV;;;;;true
+39;Cambodia;KH;KHM;;;;;true
+40;Cameroon;CM;CMR;;;;;true
+41;Canada;CA;CAN;;;;;true
+42;Cayman Islands;KY;CYM;;;;;true
+43;Central African Republic;CF;CAF;;;;;true
+44;Chad;TD;TCD;;;;;true
+45;Chile;CL;CHL;;;;;true
+46;China;CN;CHN;;;;;true
+47;Christmas Island;CX;CXR;;;;;true
+48;Cocos (Keeling) Islands;CC;CCK;;;;;true
+49;Colombia;CO;COL;;;;;true
+50;Comoros;KM;COM;;;;;true
+51;Congo (Republic of the);CG;COG;;;;;true
+52;Congo (Democratic Republic of the);CD;COD;;;;;true
+53;Cook Islands;CK;COK;;;;;true
+54;Costa Rica;CR;CRI;;;;;true
+55;Côte d'Ivoire;CI;CIV;;;;;true
+56;Croatia;HR;HRV;;;;;true
+57;Cuba;CU;CUB;;;;;true
+58;Curaçao;CW;CUW;;;;;true
+59;Cyprus;CY;CYP;;;;;true
+60;Czech Republic;CZ;CZE;;;;;true
+61;Denmark;DK;DNK;;;;;true
+62;Djibouti;DJ;DJI;;;;;true
+63;Dominica;DM;DMA;;;;;true
+64;Dominican Republic;DO;DOM;;;;;true
+65;Ecuador;EC;ECU;;;;;true
+66;Egypt;EG;EGY;;;;;true
+67;El Salvador;SV;SLV;;;;;true
+68;Equatorial Guinea;GQ;GNQ;;;;;true
+69;Eritrea;ER;ERI;;;;;true
+70;Estonia;EE;EST;;;;;true
+71;Ethiopia;ET;ETH;;;;;true
+72;Falkland Islands (Malvinas);FK;FLK;;;;;true
+73;Faroe Islands;FO;FRO;;;;;true
+74;Fiji;FJ;FJI;;;;;true
+75;Finland;FI;FIN;;;;;true
+76;France;FR;FRA;;;;;true
+77;French Guiana;GF;GUF;;;;;true
+78;French Polynesia;PF;PYF;;;;;true
+79;French Southern Territories;TF;ATF;;;;;true
+80;Gabon;GA;GAB;;;;;true
+81;Gambia;GM;GMB;;;;;true
+82;Georgia;GE;GEO;;;;;true
+83;Germany;DE;DEU;;;;;true
+84;Ghana;GH;GHA;;;;;true
+85;Gibraltar;GI;GIB;;;;;true
+86;Greece;GR;GRC;;;;;true
+87;Greenland;GL;GRL;;;;;true
+88;Grenada;GD;GRD;;;;;true
+89;Guadeloupe;GP;GLP;;;;;true
+90;Guam;GU;GUM;;;;;true
+91;Guatemala;GT;GTM;;;;;true
+92;Guernsey;GG;GGY;;;;;true
+93;Guinea;GN;GIN;;;;;true
+94;Guinea-Bissau;GW;GNB;;;;;true
+95;Guyana;GY;GUY;;;;;true
+96;Haiti;HT;HTI;;;;;true
+97;Heard Island and McDonald Islands;HM;HMD;;;;;true
+98;Vatican City State;VA;VAT;;;;;true
+99;Honduras;HN;HND;;;;;true
+100;Hong Kong;HK;HKG;;;;;true
+101;Hungary;HU;HUN;;;;;true
+102;Iceland;IS;ISL;;;;;true
+103;India;IN;IND;;;;;true
+104;Indonesia;ID;IDN;;;;;true
+105;Iran;IR;IRN;;;;;true
+106;Iraq;IQ;IRQ;;;;;true
+107;Ireland;IE;IRL;;;;;true
+108;Isle of Man;IM;IMN;;;;;true
+109;Israel;IL;ISR;;;;;true
+110;Italy;IT;ITA;;;;;true
+111;Jamaica;JM;JAM;;;;;true
+112;Japan;JP;JPN;;;;;true
+113;Jersey;JE;JEY;;;;;true
+114;Jordan;JO;JOR;;;;;true
+115;Kazakhstan;KZ;KAZ;;;;;true
+116;Kenya;KE;KEN;;;;;true
+117;Kiribati;KI;KIR;;;;;true
+118;Korea (Democratic People's Republic of);KP;PRK;;;;;true
+119;Korea (Republic of);KR;KOR;;;;;true
+120;Kuwait;KW;KWT;;;;;true
+121;Kyrgyzstan;KG;KGZ;;;;;true
+122;Lao People's Democratic Republic;LA;LAO;;;;;true
+123;Latvia;LV;LVA;;;;;true
+124;Lebanon;LB;LBN;;;;;true
+125;Lesotho;LS;LSO;;;;;true
+126;Liberia;LR;LBR;;;;;true
+127;Libya;LY;LBY;;;;;true
+128;Liechtenstein;LI;LIE;;;;;true
+129;Lithuania;LT;LTU;;;;;true
+130;Luxembourg;LU;LUX;;;;;true
+131;Macao;MO;MAC;;;;;true
+132;Macedonia (the former Yugoslav Republic of);MK;MKD;;;;;true
+133;Madagascar;MG;MDG;;;;;true
+134;Malawi;MW;MWI;;;;;true
+135;Malaysia;MY;MYS;;;;;true
+136;Maldives;MV;MDV;;;;;true
+137;Mali;ML;MLI;;;;;true
+138;Malta;MT;MLT;;;;;true
+139;Marshall Islands;MH;MHL;;;;;true
+140;Martinique;MQ;MTQ;;;;;true
+141;Mauritania;MR;MRT;;;;;true
+142;Mauritius;MU;MUS;;;;;true
+143;Mayotte;YT;MYT;;;;;true
+144;Mexico;MX;MEX;;;;;true
+145;Micronesia (Federated States of);FM;FSM;;;;;true
+146;Moldova (Republic of);MD;MDA;;;;;true
+147;Monaco;MC;MCO;;;;;true
+148;Mongolia;MN;MNG;;;;;true
+149;Montenegro;ME;MNE;;;;;true
+150;Montserrat;MS;MSR;;;;;true
+151;Morocco;MA;MAR;;;;;true
+152;Mozambique;MZ;MOZ;;;;;true
+153;Myanmar;MM;MMR;;;;;true
+154;Namibia;NA;NAM;;;;;true
+155;Nauru;NR;NRU;;;;;true
+156;Nepal;NP;NPL;;;;;true
+157;Netherlands;NL;NLD;;;;;true
+158;New Caledonia;NC;NCL;;;;;true
+159;New Zealand;NZ;NZL;;;;;true
+160;Nicaragua;NI;NIC;;;;;true
+161;Niger;NE;NER;;;;;true
+162;Nigeria;NG;NGA;;;;;true
+163;Niue;NU;NIU;;;;;true
+164;Norfolk Island;NF;NFK;;;;;true
+165;Northern Mariana Islands;MP;MNP;;;;;true
+166;Norway;NO;NOR;;;;;true
+167;Oman;OM;OMN;;;;;true
+168;Pakistan;PK;PAK;;;;;true
+169;Palau;PW;PLW;;;;;true
+170;Palestine, State of;PS;PSE;;;;;true
+171;Panama;PA;PAN;;;;;true
+172;Papua New Guinea;PG;PNG;;;;;true
+173;Paraguay;PY;PRY;;;;;true
+174;Peru;PE;PER;;;;;true
+175;Philippines;PH;PHL;;;;;true
+176;Pitcairn;PN;PCN;;;;;true
+177;Poland;PL;POL;;;;;true
+178;Portugal;PT;PRT;;;;;true
+179;Puerto Rico;PR;PRI;;;;;true
+180;Qatar;QA;QAT;;;;;true
+181;Réunion;RE;REU;;;;;true
+182;Romania;RO;ROU;;;;;true
+183;Russian Federation;RU;RUS;;;;;true
+184;Rwanda;RW;RWA;;;;;true
+185;Saint Barthélemy;BL;BLM;;;;;true
+186;Saint Helena, Ascension and Tristan da Cunha;SH;SHN;;;;;true
+187;Saint Kitts and Nevis;KN;KNA;;;;;true
+188;Saint Lucia;LC;LCA;;;;;true
+189;Saint Martin (French part);MF;MAF;;;;;true
+190;Saint Pierre and Miquelon;PM;SPM;;;;;true
+191;Saint Vincent and the Grenadines;VC;VCT;;;;;true
+192;Samoa;WS;WSM;;;;;true
+193;San Marino;SM;SMR;;;;;true
+194;Sao Tome and Principe;ST;STP;;;;;true
+195;Saudi Arabia;SA;SAU;;;;;true
+196;Senegal;SN;SEN;;;;;true
+197;Serbia;RS;SRB;;;;;true
+198;Seychelles;SC;SYC;;;;;true
+199;Sierra Leone;SL;SLE;;;;;true
+200;Singapore;SG;SGP;;;;;true
+201;Sint Maarten (Dutch part);SX;SXM;;;;;true
+202;Slovakia;SK;SVK;;;;;true
+203;Slovenia;SI;SVN;;;;;true
+204;Solomon Islands;SB;SLB;;;;;true
+205;Somalia;SO;SOM;;;;;true
+206;South Africa;ZA;ZAF;;;;;true
+207;South Georgia and the South Sandwich Islands;GS;SGS;;;;;true
+208;South Sudan;SS;SSD;;;;;true
+209;Spain;ES;ESP;;;;;true
+210;Sri Lanka;LK;LKA;;;;;true
+211;Sudan;SD;SDN;;;;;true
+212;Suriname;SR;SUR;;;;;true
+213;Svalbard and Jan Mayen;SJ;SJM;;;;;true
+214;Swaziland;SZ;SWZ;;;;;true
+215;Sweden;SE;SWE;;;;;true
+216;Switzerland;CH;CHE;;;;;true
+217;Syrian Arab Republic;SY;SYR;;;;;true
+218;Taiwan, Province of China;TW;TWN;;;;;true
+219;Tajikistan;TJ;TJK;;;;;true
+220;Tanzania, United Republic of;TZ;TZA;;;;;true
+221;Thailand;TH;THA;;;;;true
+222;Timor-Leste;TL;TLS;;;;;true
+223;Togo;TG;TGO;;;;;true
+224;Tokelau;TK;TKL;;;;;true
+225;Tonga;TO;TON;;;;;true
+226;Trinidad and Tobago;TT;TTO;;;;;true
+227;Tunisia;TN;TUN;;;;;true
+228;Turkey;TR;TUR;;;;;true
+229;Turkmenistan;TM;TKM;;;;;true
+230;Turks and Caicos Islands;TC;TCA;;;;;true
+231;Tuvalu;TV;TUV;;;;;true
+232;Uganda;UG;UGA;;;;;true
+233;Ukraine;UA;UKR;;;;;true
+234;United Arab Emirates;AE;ARE;;;;;true
+235;United Kingdom of Great Britain;GB;GBR;;;;;true
+236;United States Minor Outlying Islands;UM;UMI;;;;;true
+237;United States of America;US;USA;;;;;true
+238;Uruguay;UY;URY;;;;;true
+239;Uzbekistan;UZ;UZB;;;;;true
+240;Vanuatu;VU;VUT;;;;;true
+241;Venezuela (Bolivarian Republic of);VE;VEN;;;;;true
+242;Vietnam;VN;VNM;;;;;true
+243;Virgin Islands (British);VG;VGB;;;;;true
+244;Virgin Islands (U.S.);VI;VIR;;;;;true
+245;Wallis and Futuna;WF;WLF;;;;;true
+246;Western Sahara;EH;ESH;;;;;true
+247;Yemen;YE;YEM;;;;;true
+248;Zambia;ZM;ZMB;;;;;true
+249;Zimbabwe;ZW;ZWE;;;;;true

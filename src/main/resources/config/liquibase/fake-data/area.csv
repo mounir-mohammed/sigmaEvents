@@ -1,1 +1,10 @@
-area_id;area_name;area_abreviation;area_color;area_description;area_logo;area_logo_content_type;area_params;area_attributs;area_stat
+area_id;area_name;area_abreviation;area_color;area_description;area_params;area_attributs;area_stat
+1;Area_1;AR1;;;;;true
+2;Area_2;AR2;;;;;true
+3;Area_3;AR3;;;;;true
+4;Area_4;AR4;;;;;true
+5;Area_5;AR5;;;;;true
+6;Area_6;AR6;;;;;true
+7;Area_7;AR7;;;;;true
+8;Area_8;AR8;;;;;true
+9;Area_9;AR9;;;;;true

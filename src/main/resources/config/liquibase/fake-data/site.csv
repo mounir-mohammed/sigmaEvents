@@ -1,1 +1,6 @@
-site_id;site_name;site_color;site_abreviation;site_description;site_logo;site_logo_content_type;site_adresse;site_email;site_tel;site_fax;site_responsable_name;site_params;site_attributs;site_stat
+site_id;site_name;site_color;site_abreviation;site_description;site_adresse;site_email;site_tel;site_fax;site_responsable_name;site_params;site_attributs;site_stat
+1;Stade Mohammed V;;SM5;;;;;;;;;true
+2;Grand stade Marrakech;;GSM;;;;;;;;;true
+3;Grand stade Tanger;;GST;;;;;;;;;true
+4;Stade Moulay Hassan;;SMH;;;;;;;;;true
+5;Stade Adrar;;SAD;;;;;;;;;true

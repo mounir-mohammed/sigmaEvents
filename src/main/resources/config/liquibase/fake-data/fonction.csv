@@ -1,1 +1,16 @@
-fonction_id;fonction_name;fonction_abreviation;fonction_color;fonction_description;fonction_logo;fonction_logo_content_type;fonction_params;fonction_attributs;fonction_stat
+fonction_id;fonction_name;fonction_abreviation;fonction_color;fonction_description;fonction_params;fonction_attributs;fonction_stat
+1;Loc1;LOC1;;;;;true
+2;Loc2;LOC2;;;;;true
+3;Loc3;LOC3;;;;;true
+4;Ser1;SER1;;;;;true
+5;Ser2;SER2;;;;;true
+6;Ser3;SER3;;;;;true
+7;Sec1;SEC1;;;;;true
+8;Sec2;SEC2;;;;;true
+9;Sec3;SEC3;;;;;true
+10;Vol1;VOL1;;;;;true
+11;Vol2;VOL2;;;;;true
+12;Vol3;VOL3;;;;;true
+13;Med1;MED1;;;;;true
+14;Med2;MED2;;;;;true
+15;Med3;MED3;;;;;true

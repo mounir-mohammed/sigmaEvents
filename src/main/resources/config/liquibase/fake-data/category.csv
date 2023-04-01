@@ -1,1 +1,6 @@
-category_id;category_name;category_abreviation;category_color;category_description;category_logo;category_logo_content_type;category_params;category_attributs;category_stat
+category_id;category_name;category_abreviation;category_color;category_description;category_params;category_attributs;category_stat
+1;Loc;LOC;;;;;true
+2;Services;SER;;;;;true
+3;Security;SEC;;;;;true
+4;Volunteers;VOL;;;;;true
+5;Medical;MED;;;;;true
