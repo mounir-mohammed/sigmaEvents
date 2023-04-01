@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="operationType">
+      <h2 data-cy="operationTypeDetailsHeading"><span sigmaTranslate="sigmaEventsApp.operationType.detail.title">Operation Type</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.operationType.operationTypeId">Operation Type Id</span></dt>
+        <dd>
+          <span>{{ operationType.operationTypeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.operationType.operationTypeValue">Operation Type Value</span></dt>
+        <dd>
+          <span>{{ operationType.operationTypeValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.operationType.operationTypeDescription">Operation Type Description</span></dt>
+        <dd>
+          <span>{{ operationType.operationTypeDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.operationType.operationTypeParams">Operation Type Params</span></dt>
+        <dd>
+          <span>{{ operationType.operationTypeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.operationType.operationTypeAttributs">Operation Type Attributs</span></dt>
+        <dd>
+          <span>{{ operationType.operationTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.operationType.operationTypeStat">Operation Type Stat</span></dt>
+        <dd>
+          <span>{{ operationType.operationTypeStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/operation-type-sig', operationType.operationTypeId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

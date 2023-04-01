@@ -1,0 +1,30 @@
+{
+  "sigmaEventsApp": {
+    "eventForm": {
+      "home": {
+        "title": "EventForms",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Event Form を追加",
+        "createOrEditLabel": "Event Formを追加または編集",
+        "notFound": "No Event Forms found"
+      },
+      "created": "A new Event Form is created with identifier {{ param }}",
+      "updated": "A Event Form is updated with identifier {{ param }}",
+      "deleted": "A Event Form is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Event Form {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Event Form"
+      },
+      "formId": "Form Id",
+      "formName": "Form Name",
+      "formDescription": "Form Description",
+      "formParams": "Form Params",
+      "formAttributs": "Form Attributs",
+      "formStat": "Form Stat",
+      "eventField": "Event Field",
+      "event": "Event"
+    }
+  }
+}

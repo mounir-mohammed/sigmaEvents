@@ -1,0 +1,39 @@
+{
+  "sigmaEventsApp": {
+    "site": {
+      "home": {
+        "title": "Sites",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Site",
+        "createOrEditLabel": "创建或编辑 Site",
+        "notFound": "No Sites found"
+      },
+      "created": "Site {{ param }} 创建成功",
+      "updated": "Site {{ param }} 更新成功",
+      "deleted": "Site {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Site {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Site"
+      },
+      "siteId": "Site Id",
+      "siteName": "Site Name",
+      "siteColor": "Site Color",
+      "siteAbreviation": "Site Abreviation",
+      "siteDescription": "Site Description",
+      "siteLogo": "Site Logo",
+      "siteAdresse": "Site Adresse",
+      "siteEmail": "Site Email",
+      "siteTel": "Site Tel",
+      "siteFax": "Site Fax",
+      "siteResponsableName": "Site Responsable Name",
+      "siteParams": "Site Params",
+      "siteAttributs": "Site Attributs",
+      "siteStat": "Site Stat",
+      "city": "City",
+      "event": "Event",
+      "accreditation": "Accreditation"
+    }
+  }
+}

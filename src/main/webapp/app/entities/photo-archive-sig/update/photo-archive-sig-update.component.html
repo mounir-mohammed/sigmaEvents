@@ -1,0 +1,252 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-photo-archive-sig-heading"
+        data-cy="PhotoArchiveCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.photoArchive.home.createOrEditLabel"
+      >
+        Create or edit a Photo Archive
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.photoArchiveId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveId" for="field_photoArchiveId"
+            >Photo Archive Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="photoArchiveId"
+            id="field_photoArchiveId"
+            data-cy="photoArchiveId"
+            formControlName="photoArchiveId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveName" for="field_photoArchiveName"
+            >Photo Archive Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="photoArchiveName"
+            id="field_photoArchiveName"
+            data-cy="photoArchiveName"
+            formControlName="photoArchiveName"
+          />
+          <div
+            *ngIf="
+              editForm.get('photoArchiveName')!.invalid &&
+              (editForm.get('photoArchiveName')!.dirty || editForm.get('photoArchiveName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('photoArchiveName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('photoArchiveName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchivePath" for="field_photoArchivePath"
+            >Photo Archive Path</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="photoArchivePath"
+            id="field_photoArchivePath"
+            data-cy="photoArchivePath"
+            formControlName="photoArchivePath"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchivePhoto" for="field_photoArchivePhoto"
+            >Photo Archive Photo</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('photoArchivePhotoContentType')!.value + ';base64,' + editForm.get('photoArchivePhoto')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('photoArchivePhoto')!.value"
+              alt="photoArchive image"
+            />
+            <div *ngIf="editForm.get('photoArchivePhoto')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('photoArchivePhotoContentType')!.value }}, {{ byteSize(editForm.get('photoArchivePhoto')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('photoArchivePhoto', 'photoArchivePhotoContentType', 'file_photoArchivePhoto')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_photoArchivePhoto"
+              data-cy="photoArchivePhoto"
+              (change)="setFileData($event, 'photoArchivePhoto', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoArchivePhoto"
+            id="field_photoArchivePhoto"
+            data-cy="photoArchivePhoto"
+            formControlName="photoArchivePhoto"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoArchivePhotoContentType"
+            id="field_photoArchivePhotoContentType"
+            formControlName="photoArchivePhotoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveDescription" for="field_photoArchiveDescription"
+            >Photo Archive Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="photoArchiveDescription"
+            id="field_photoArchiveDescription"
+            data-cy="photoArchiveDescription"
+            formControlName="photoArchiveDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('photoArchiveDescription')!.invalid &&
+              (editForm.get('photoArchiveDescription')!.dirty || editForm.get('photoArchiveDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('photoArchiveDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveParams" for="field_photoArchiveParams"
+            >Photo Archive Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="photoArchiveParams"
+            id="field_photoArchiveParams"
+            data-cy="photoArchiveParams"
+            formControlName="photoArchiveParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveAttributs" for="field_photoArchiveAttributs"
+            >Photo Archive Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="photoArchiveAttributs"
+            id="field_photoArchiveAttributs"
+            data-cy="photoArchiveAttributs"
+            formControlName="photoArchiveAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveStat" for="field_photoArchiveStat"
+            >Photo Archive Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="photoArchiveStat"
+            id="field_photoArchiveStat"
+            data-cy="photoArchiveStat"
+            formControlName="photoArchiveStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.accreditation" for="field_accreditation"
+            >Accreditation</label
+          >
+          <select
+            class="form-control"
+            id="field_accreditation"
+            data-cy="accreditation"
+            name="accreditation"
+            formControlName="accreditation"
+            [compareWith]="compareAccreditationSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="accreditationOption" *ngFor="let accreditationOption of accreditationsSharedCollection">
+              {{ accreditationOption.accreditationId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

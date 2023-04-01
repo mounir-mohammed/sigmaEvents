@@ -1,0 +1,83 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031414",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "check_accreditation_history",
+  "fields": [
+    {
+      "fieldName": "checkAccreditationHistoryId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "checkAccreditationHistoryReadedCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationHistoryUserId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "checkAccreditationHistoryResult",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "checkAccreditationHistoryError",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationHistoryDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "checkAccreditationHistoryLocalisation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationHistoryIpAdresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationHistoryStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "CheckAccreditationHistory",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "checkAccreditationReport",
+      "otherEntityRelationshipName": "checkAccreditationHistory",
+      "relationshipName": "checkAccreditationReport",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "checkAccreditationHistory",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "checkAccreditationHistory",
+      "relationshipName": "accreditation",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

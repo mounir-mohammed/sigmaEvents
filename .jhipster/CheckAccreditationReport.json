@@ -1,0 +1,70 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031514",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "check_accreditation_report",
+  "fields": [
+    {
+      "fieldName": "checkAccreditationReportId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "checkAccreditationReportDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "checkAccreditationReportPersonPhoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "checkAccreditationReportCINPhoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "checkAccreditationReportAttachment",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "checkAccreditationReportParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationReportAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkAccreditationReportStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "CheckAccreditationReport",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "checkAccreditationReport",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "checkAccreditationHistory",
+      "otherEntityRelationshipName": "checkAccreditationReport",
+      "relationshipName": "checkAccreditationHistory",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

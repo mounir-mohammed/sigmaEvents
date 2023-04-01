@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="InfoSuppTypeHeading">
+    <span sigmaTranslate="sigmaEventsApp.infoSuppType.home.title">Info Supp Types</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.infoSuppType.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-info-supp-type-sig"
+        [routerLink]="['/info-supp-type-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.infoSuppType.home.createLabel"> Create a new Info Supp Type </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="infoSuppTypes?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.infoSuppType.home.notFound">No Info Supp Types found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="infoSuppTypes && infoSuppTypes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="infoSuppTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeId">Info Supp Type Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppTypeName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeName">Info Supp Type Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppTypeDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeDescription">Info Supp Type Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppTypeParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeParams">Info Supp Type Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppTypeAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeAttributs">Info Supp Type Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppTypeStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeStat">Info Supp Type Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let infoSuppType of infoSuppTypes; trackBy: trackInfoSuppTypeId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/info-supp-type-sig', infoSuppType.infoSuppTypeId, 'view']">{{ infoSuppType.infoSuppTypeId }}</a>
+          </td>
+          <td>{{ infoSuppType.infoSuppTypeName }}</td>
+          <td>{{ infoSuppType.infoSuppTypeDescription }}</td>
+          <td>{{ infoSuppType.infoSuppTypeParams }}</td>
+          <td>{{ infoSuppType.infoSuppTypeAttributs }}</td>
+          <td>{{ infoSuppType.infoSuppTypeStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/info-supp-sig']"
+                [queryParams]="{ 'filter[infoSuppTypeId.in]': infoSuppType.infoSuppTypeId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.infoSuppType.infoSupp' | translate) }"
+                  >Show Info Supp</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/info-supp-type-sig', infoSuppType.infoSuppTypeId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/info-supp-type-sig', infoSuppType.infoSuppTypeId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(infoSuppType)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="infoSuppTypes && infoSuppTypes.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

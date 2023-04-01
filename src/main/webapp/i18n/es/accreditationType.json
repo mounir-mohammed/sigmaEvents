@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "accreditationType": {
+      "home": {
+        "title": "Accreditation Types",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Accreditation Type",
+        "createOrEditLabel": "Crear o editar Accreditation Type",
+        "notFound": "Ningún Accreditation Types encontrado"
+      },
+      "created": "Un nuevo Accreditation Type ha sido creado con el identificador {{ param }}",
+      "updated": "Un Accreditation Type ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Accreditation Type ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Accreditation Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Accreditation Type"
+      },
+      "accreditationTypeId": "Accreditation Type Id",
+      "accreditationTypeValue": "Accreditation Type Value",
+      "accreditationTypeAbreviation": "Accreditation Type Abreviation",
+      "accreditationTypeDescription": "Accreditation Type Description",
+      "accreditationTypeParams": "Accreditation Type Params",
+      "accreditationTypeAttributs": "Accreditation Type Attributs",
+      "accreditationTypeStat": "Accreditation Type Stat",
+      "accreditation": "Accreditation",
+      "printingModel": "Printing Model",
+      "event": "Event"
+    }
+  }
+}

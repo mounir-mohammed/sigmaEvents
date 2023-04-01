@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "fonction": {
+      "home": {
+        "title": "Fonctions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Fonction",
+        "createOrEditLabel": "Créer ou éditer un Fonction",
+        "notFound": "Aucun Fonction trouvé"
+      },
+      "created": "Un nouveau Fonction a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Fonction avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Fonction avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Fonction {{ id }} ?"
+      },
+      "detail": {
+        "title": "Fonction"
+      },
+      "fonctionId": "Fonction Id",
+      "fonctionName": "Fonction Name",
+      "fonctionAbreviation": "Fonction Abreviation",
+      "fonctionColor": "Fonction Color",
+      "fonctionDescription": "Fonction Description",
+      "fonctionLogo": "Fonction Logo",
+      "fonctionParams": "Fonction Params",
+      "fonctionAttributs": "Fonction Attributs",
+      "fonctionStat": "Fonction Stat",
+      "accreditation": "Accreditation",
+      "area": "Area",
+      "category": "Category",
+      "event": "Event"
+    }
+  }
+}

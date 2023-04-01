@@ -1,0 +1,40 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401024214",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "log_history",
+  "fields": [
+    {
+      "fieldName": "logHistory",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "logHistoryDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "logHistoryParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "logHistoryAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "logHistoryStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "LogHistory",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

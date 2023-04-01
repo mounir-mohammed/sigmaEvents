@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-event-form-sig-heading"
+        data-cy="EventFormCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.eventForm.home.createOrEditLabel"
+      >
+        Create or edit a Event Form
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.formId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventForm.formId" for="field_formId">Form Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="formId"
+            id="field_formId"
+            data-cy="formId"
+            formControlName="formId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventForm.formName" for="field_formName">Form Name</label>
+          <input type="text" class="form-control" name="formName" id="field_formName" data-cy="formName" formControlName="formName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventForm.formDescription" for="field_formDescription"
+            >Form Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="formDescription"
+            id="field_formDescription"
+            data-cy="formDescription"
+            formControlName="formDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventForm.formParams" for="field_formParams">Form Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="formParams"
+            id="field_formParams"
+            data-cy="formParams"
+            formControlName="formParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventForm.formAttributs" for="field_formAttributs">Form Attributs</label>
+          <input
+            type="text"
+            class="form-control"
+            name="formAttributs"
+            id="field_formAttributs"
+            data-cy="formAttributs"
+            formControlName="formAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventForm.formStat" for="field_formStat">Form Stat</label>
+          <input type="checkbox" class="form-check" name="formStat" id="field_formStat" data-cy="formStat" formControlName="formStat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventForm.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

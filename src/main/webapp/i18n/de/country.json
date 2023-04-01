@@ -1,0 +1,36 @@
+{
+  "sigmaEventsApp": {
+    "country": {
+      "home": {
+        "title": "Countries",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Country erstellen",
+        "createOrEditLabel": "Country erstellen oder bearbeiten",
+        "notFound": "Keine Countries gefunden"
+      },
+      "created": "Country erstellt mit ID {{ param }}",
+      "updated": "Country aktualisiert mit ID {{ param }}",
+      "deleted": "Country gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Country {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Country"
+      },
+      "countryId": "Country Id",
+      "countryName": "Country Name",
+      "countryCodeAlpha2": "Country Code Alpha 2",
+      "countryCodeAlpha3": "Country Code Alpha 3",
+      "countryTelCode": "Country Tel Code",
+      "countryDescription": "Country Description",
+      "countryFlag": "Country Flag",
+      "countryParams": "Country Params",
+      "countryAttributs": "Country Attributs",
+      "countryStat": "Country Stat",
+      "printingCentre": "Printing Centre",
+      "city": "City",
+      "organiz": "Organiz",
+      "accreditation": "Accreditation"
+    }
+  }
+}

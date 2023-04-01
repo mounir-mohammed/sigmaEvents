@@ -1,0 +1,30 @@
+{
+  "sigmaEventsApp": {
+    "eventForm": {
+      "home": {
+        "title": "Event Forms",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Event Form",
+        "createOrEditLabel": "Maak of wijzig een Event Form",
+        "notFound": "No Event Forms found"
+      },
+      "created": "A new Event Form is created with identifier {{ param }}",
+      "updated": "A Event Form is updated with identifier {{ param }}",
+      "deleted": "A Event Form is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Event Form {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Event Form"
+      },
+      "formId": "Form Id",
+      "formName": "Form Name",
+      "formDescription": "Form Description",
+      "formParams": "Form Params",
+      "formAttributs": "Form Attributs",
+      "formStat": "Form Stat",
+      "eventField": "Event Field",
+      "event": "Event"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030114",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "city",
+  "fields": [
+    {
+      "fieldName": "cityId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "cityName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "cityZipCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "cityAbreviation",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "cityDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "cityParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cityAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cityStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "City",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "site",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "site",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "organiz",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "organiz",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "country",
+      "otherEntityRelationshipName": "city",
+      "relationshipName": "country",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

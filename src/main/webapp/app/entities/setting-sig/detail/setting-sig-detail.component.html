@@ -1,0 +1,101 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="setting">
+      <h2 data-cy="settingDetailsHeading"><span sigmaTranslate="sigmaEventsApp.setting.detail.title">Setting</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingId">Setting Id</span></dt>
+        <dd>
+          <span>{{ setting.settingId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingParentId">Setting Parent Id</span></dt>
+        <dd>
+          <span>{{ setting.settingParentId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingType">Setting Type</span></dt>
+        <dd>
+          <span>{{ setting.settingType }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingNameClass">Setting Name Class</span></dt>
+        <dd>
+          <span>{{ setting.settingNameClass }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingDataType">Setting Data Type</span></dt>
+        <dd>
+          <span>{{ setting.settingDataType }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingDescription">Setting Description</span></dt>
+        <dd>
+          <span>{{ setting.settingDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingValueString">Setting Value String</span></dt>
+        <dd>
+          <span>{{ setting.settingValueString }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingValueLong">Setting Value Long</span></dt>
+        <dd>
+          <span>{{ setting.settingValueLong }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingValueDate">Setting Value Date</span></dt>
+        <dd>
+          <span>{{ setting.settingValueDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingValueBoolean">Setting Value Boolean</span></dt>
+        <dd>
+          <span>{{ setting.settingValueBoolean }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingValueBlob">Setting Value Blob</span></dt>
+        <dd>
+          <div *ngIf="setting.settingValueBlob">
+            <a (click)="openFile(setting.settingValueBlob, setting.settingValueBlobContentType)">
+              <img
+                [src]="'data:' + setting.settingValueBlobContentType + ';base64,' + setting.settingValueBlob"
+                style="max-width: 100%"
+                alt="setting image"
+              />
+            </a>
+            {{ setting.settingValueBlobContentType }}, {{ byteSize(setting.settingValueBlob) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingParams">Setting Params</span></dt>
+        <dd>
+          <span>{{ setting.settingParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingAttributs">Setting Attributs</span></dt>
+        <dd>
+          <span>{{ setting.settingAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.settingStat">Setting Stat</span></dt>
+        <dd>
+          <span>{{ setting.settingStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.language">Language</span></dt>
+        <dd>
+          <div *ngIf="setting.language">
+            <a [routerLink]="['/language-sig', setting.language.languageId, 'view']">{{ setting.language.languageId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.setting.event">Event</span></dt>
+        <dd>
+          <div *ngIf="setting.event">
+            <a [routerLink]="['/event-sig', setting.event.eventId, 'view']">{{ setting.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/setting-sig', setting.settingId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

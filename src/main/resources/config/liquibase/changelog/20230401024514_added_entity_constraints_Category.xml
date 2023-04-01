@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Category.
+    -->
+    <changeSet id="20230401024514-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="printing_model_printing_model_id"
+                                 baseTableName="category"
+                                 constraintName="fk_category__printing_model_id"
+                                 referencedColumnNames="printing_model_id"
+                                 referencedTableName="printing_model"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="category"
+                                 constraintName="fk_category__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

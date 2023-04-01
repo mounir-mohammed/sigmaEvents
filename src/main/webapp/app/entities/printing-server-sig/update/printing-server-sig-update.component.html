@@ -1,0 +1,252 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-printing-server-sig-heading"
+        data-cy="PrintingServerCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.printingServer.home.createOrEditLabel"
+      >
+        Create or edit a Printing Server
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.printingServerId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerId" for="field_printingServerId"
+            >Printing Server Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="printingServerId"
+            id="field_printingServerId"
+            data-cy="printingServerId"
+            formControlName="printingServerId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerName" for="field_printingServerName"
+            >Printing Server Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerName"
+            id="field_printingServerName"
+            data-cy="printingServerName"
+            formControlName="printingServerName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.printingServer.printingServerDescription"
+            for="field_printingServerDescription"
+            >Printing Server Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerDescription"
+            id="field_printingServerDescription"
+            data-cy="printingServerDescription"
+            formControlName="printingServerDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingServerDescription')!.invalid &&
+              (editForm.get('printingServerDescription')!.dirty || editForm.get('printingServerDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingServerDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerHost" for="field_printingServerHost"
+            >Printing Server Host</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerHost"
+            id="field_printingServerHost"
+            data-cy="printingServerHost"
+            formControlName="printingServerHost"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerPort" for="field_printingServerPort"
+            >Printing Server Port</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerPort"
+            id="field_printingServerPort"
+            data-cy="printingServerPort"
+            formControlName="printingServerPort"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerDns" for="field_printingServerDns"
+            >Printing Server Dns</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerDns"
+            id="field_printingServerDns"
+            data-cy="printingServerDns"
+            formControlName="printingServerDns"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerProxy" for="field_printingServerProxy"
+            >Printing Server Proxy</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerProxy"
+            id="field_printingServerProxy"
+            data-cy="printingServerProxy"
+            formControlName="printingServerProxy"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerParam1" for="field_printingServerParam1"
+            >Printing Server Param 1</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerParam1"
+            id="field_printingServerParam1"
+            data-cy="printingServerParam1"
+            formControlName="printingServerParam1"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerParam2" for="field_printingServerParam2"
+            >Printing Server Param 2</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerParam2"
+            id="field_printingServerParam2"
+            data-cy="printingServerParam2"
+            formControlName="printingServerParam2"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerParam3" for="field_printingServerParam3"
+            >Printing Server Param 3</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerParam3"
+            id="field_printingServerParam3"
+            data-cy="printingServerParam3"
+            formControlName="printingServerParam3"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerStat" for="field_printingServerStat"
+            >Printing Server Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="printingServerStat"
+            id="field_printingServerStat"
+            data-cy="printingServerStat"
+            formControlName="printingServerStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.printingServerParams" for="field_printingServerParams"
+            >Printing Server Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerParams"
+            id="field_printingServerParams"
+            data-cy="printingServerParams"
+            formControlName="printingServerParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.printingServer.printingServerAttributs"
+            for="field_printingServerAttributs"
+            >Printing Server Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingServerAttributs"
+            id="field_printingServerAttributs"
+            data-cy="printingServerAttributs"
+            formControlName="printingServerAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingServer.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Code.
+    -->
+    <changeSet id="20230401024814-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="code_type_code_type_id"
+                                 baseTableName="code"
+                                 constraintName="fk_code__code_type_id"
+                                 referencedColumnNames="code_type_id"
+                                 referencedTableName="code_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="code"
+                                 constraintName="fk_code__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

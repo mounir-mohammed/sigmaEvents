@@ -1,0 +1,91 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030014",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "country",
+  "fields": [
+    {
+      "fieldName": "countryId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "countryName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "countryCodeAlpha2",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "countryCodeAlpha3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryTelCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "countryFlag",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "countryParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "countryStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Country",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "country",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "country",
+      "relationshipName": "city",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "organiz",
+      "otherEntityRelationshipName": "country",
+      "relationshipName": "organiz",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "country",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

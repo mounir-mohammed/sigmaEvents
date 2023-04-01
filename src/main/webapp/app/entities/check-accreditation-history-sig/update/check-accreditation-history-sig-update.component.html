@@ -1,0 +1,258 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-check-accreditation-history-sig-heading"
+        data-cy="CheckAccreditationHistoryCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.home.createOrEditLabel"
+      >
+        Create or edit a Check Accreditation History
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.checkAccreditationHistoryId.value !== null">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryId"
+            for="field_checkAccreditationHistoryId"
+            >Check Accreditation History Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="checkAccreditationHistoryId"
+            id="field_checkAccreditationHistoryId"
+            data-cy="checkAccreditationHistoryId"
+            formControlName="checkAccreditationHistoryId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryReadedCode"
+            for="field_checkAccreditationHistoryReadedCode"
+            >Check Accreditation History Readed Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationHistoryReadedCode"
+            id="field_checkAccreditationHistoryReadedCode"
+            data-cy="checkAccreditationHistoryReadedCode"
+            formControlName="checkAccreditationHistoryReadedCode"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryUserId"
+            for="field_checkAccreditationHistoryUserId"
+            >Check Accreditation History User Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="checkAccreditationHistoryUserId"
+            id="field_checkAccreditationHistoryUserId"
+            data-cy="checkAccreditationHistoryUserId"
+            formControlName="checkAccreditationHistoryUserId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryResult"
+            for="field_checkAccreditationHistoryResult"
+            >Check Accreditation History Result</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="checkAccreditationHistoryResult"
+            id="field_checkAccreditationHistoryResult"
+            data-cy="checkAccreditationHistoryResult"
+            formControlName="checkAccreditationHistoryResult"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryError"
+            for="field_checkAccreditationHistoryError"
+            >Check Accreditation History Error</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationHistoryError"
+            id="field_checkAccreditationHistoryError"
+            data-cy="checkAccreditationHistoryError"
+            formControlName="checkAccreditationHistoryError"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryDate"
+            for="field_checkAccreditationHistoryDate"
+            >Check Accreditation History Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_checkAccreditationHistoryDate"
+              data-cy="checkAccreditationHistoryDate"
+              type="datetime-local"
+              class="form-control"
+              name="checkAccreditationHistoryDate"
+              formControlName="checkAccreditationHistoryDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryLocalisation"
+            for="field_checkAccreditationHistoryLocalisation"
+            >Check Accreditation History Localisation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationHistoryLocalisation"
+            id="field_checkAccreditationHistoryLocalisation"
+            data-cy="checkAccreditationHistoryLocalisation"
+            formControlName="checkAccreditationHistoryLocalisation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryIpAdresse"
+            for="field_checkAccreditationHistoryIpAdresse"
+            >Check Accreditation History Ip Adresse</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationHistoryIpAdresse"
+            id="field_checkAccreditationHistoryIpAdresse"
+            data-cy="checkAccreditationHistoryIpAdresse"
+            formControlName="checkAccreditationHistoryIpAdresse"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationParams"
+            for="field_checkAccreditationParams"
+            >Check Accreditation Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationParams"
+            id="field_checkAccreditationParams"
+            data-cy="checkAccreditationParams"
+            formControlName="checkAccreditationParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationAttributs"
+            for="field_checkAccreditationAttributs"
+            >Check Accreditation Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationAttributs"
+            id="field_checkAccreditationAttributs"
+            data-cy="checkAccreditationAttributs"
+            formControlName="checkAccreditationAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryStat"
+            for="field_checkAccreditationHistoryStat"
+            >Check Accreditation History Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="checkAccreditationHistoryStat"
+            id="field_checkAccreditationHistoryStat"
+            data-cy="checkAccreditationHistoryStat"
+            formControlName="checkAccreditationHistoryStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.accreditation" for="field_accreditation"
+            >Accreditation</label
+          >
+          <select
+            class="form-control"
+            id="field_accreditation"
+            data-cy="accreditation"
+            name="accreditation"
+            formControlName="accreditation"
+            [compareWith]="compareAccreditationSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="accreditationOption" *ngFor="let accreditationOption of accreditationsSharedCollection">
+              {{ accreditationOption.accreditationId }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Fonction.
+    -->
+    <changeSet id="20230401024414-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="fonction_fonction_id"
+                                 baseTableName="rel_fonction__area"
+                                 constraintName="fk_rel_fonction__area__fonction_id"
+                                 referencedColumnNames="fonction_id"
+                                 referencedTableName="fonction"/>
+
+        <addForeignKeyConstraint baseColumnNames="area_area_id"
+                                 baseTableName="rel_fonction__area"
+                                 constraintName="fk_rel_fonction__area__area_id"
+                                 referencedColumnNames="area_id"
+                                 referencedTableName="area"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_category_id"
+                                 baseTableName="fonction"
+                                 constraintName="fk_fonction__category_id"
+                                 referencedColumnNames="category_id"
+                                 referencedTableName="category"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="fonction"
+                                 constraintName="fk_fonction__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

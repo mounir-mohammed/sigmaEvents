@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="area">
+      <h2 data-cy="areaDetailsHeading"><span sigmaTranslate="sigmaEventsApp.area.detail.title">Area</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaId">Area Id</span></dt>
+        <dd>
+          <span>{{ area.areaId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaName">Area Name</span></dt>
+        <dd>
+          <span>{{ area.areaName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaAbreviation">Area Abreviation</span></dt>
+        <dd>
+          <span>{{ area.areaAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaColor">Area Color</span></dt>
+        <dd>
+          <span>{{ area.areaColor }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaDescription">Area Description</span></dt>
+        <dd>
+          <span>{{ area.areaDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaLogo">Area Logo</span></dt>
+        <dd>
+          <div *ngIf="area.areaLogo">
+            <a (click)="openFile(area.areaLogo, area.areaLogoContentType)">
+              <img [src]="'data:' + area.areaLogoContentType + ';base64,' + area.areaLogo" style="max-width: 100%" alt="area image" />
+            </a>
+            {{ area.areaLogoContentType }}, {{ byteSize(area.areaLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaParams">Area Params</span></dt>
+        <dd>
+          <span>{{ area.areaParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaAttributs">Area Attributs</span></dt>
+        <dd>
+          <span>{{ area.areaAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.areaStat">Area Stat</span></dt>
+        <dd>
+          <span>{{ area.areaStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.area.event">Event</span></dt>
+        <dd>
+          <div *ngIf="area.event">
+            <a [routerLink]="['/event-sig', area.event.eventId, 'view']">{{ area.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/area-sig', area.areaId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

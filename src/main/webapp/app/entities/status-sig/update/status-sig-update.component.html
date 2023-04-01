@@ -1,0 +1,231 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sigma-status-sig-heading" data-cy="StatusCreateUpdateHeading" sigmaTranslate="sigmaEventsApp.status.home.createOrEditLabel">
+        Create or edit a Status
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.statusId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusId" for="field_statusId">Status Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="statusId"
+            id="field_statusId"
+            data-cy="statusId"
+            formControlName="statusId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusName" for="field_statusName">Status Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="statusName"
+            id="field_statusName"
+            data-cy="statusName"
+            formControlName="statusName"
+          />
+          <div *ngIf="editForm.get('statusName')!.invalid && (editForm.get('statusName')!.dirty || editForm.get('statusName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('statusName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('statusName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusAbreviation" for="field_statusAbreviation"
+            >Status Abreviation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="statusAbreviation"
+            id="field_statusAbreviation"
+            data-cy="statusAbreviation"
+            formControlName="statusAbreviation"
+          />
+          <div
+            *ngIf="
+              editForm.get('statusAbreviation')!.invalid &&
+              (editForm.get('statusAbreviation')!.dirty || editForm.get('statusAbreviation')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('statusAbreviation')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusColor" for="field_statusColor">Status Color</label>
+          <input
+            type="text"
+            class="form-control"
+            name="statusColor"
+            id="field_statusColor"
+            data-cy="statusColor"
+            formControlName="statusColor"
+          />
+          <div *ngIf="editForm.get('statusColor')!.invalid && (editForm.get('statusColor')!.dirty || editForm.get('statusColor')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('statusColor')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusDescription" for="field_statusDescription"
+            >Status Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="statusDescription"
+            id="field_statusDescription"
+            data-cy="statusDescription"
+            formControlName="statusDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('statusDescription')!.invalid &&
+              (editForm.get('statusDescription')!.dirty || editForm.get('statusDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('statusDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusUserCanPrint" for="field_statusUserCanPrint"
+            >Status User Can Print</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="statusUserCanPrint"
+            id="field_statusUserCanPrint"
+            data-cy="statusUserCanPrint"
+            formControlName="statusUserCanPrint"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusUserCanUpdate" for="field_statusUserCanUpdate"
+            >Status User Can Update</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="statusUserCanUpdate"
+            id="field_statusUserCanUpdate"
+            data-cy="statusUserCanUpdate"
+            formControlName="statusUserCanUpdate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusUserCanValidate" for="field_statusUserCanValidate"
+            >Status User Can Validate</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="statusUserCanValidate"
+            id="field_statusUserCanValidate"
+            data-cy="statusUserCanValidate"
+            formControlName="statusUserCanValidate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusParams" for="field_statusParams">Status Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="statusParams"
+            id="field_statusParams"
+            data-cy="statusParams"
+            formControlName="statusParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusAttributs" for="field_statusAttributs"
+            >Status Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="statusAttributs"
+            id="field_statusAttributs"
+            data-cy="statusAttributs"
+            formControlName="statusAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusStat" for="field_statusStat">Status Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="statusStat"
+            id="field_statusStat"
+            data-cy="statusStat"
+            formControlName="statusStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

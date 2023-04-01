@@ -1,0 +1,33 @@
+{
+  "sigmaEventsApp": {
+    "code": {
+      "home": {
+        "title": "Codes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Code",
+        "createOrEditLabel": "创建或编辑 Code",
+        "notFound": "No Codes found"
+      },
+      "created": "Code {{ param }} 创建成功",
+      "updated": "Code {{ param }} 更新成功",
+      "deleted": "Code {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Code {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Code"
+      },
+      "codeId": "Code Id",
+      "codeForEntity": "Code For Entity",
+      "codeEntityValue": "Code Entity Value",
+      "codeValue": "Code Value",
+      "codeUsed": "Code Used",
+      "codeParams": "Code Params",
+      "codeAttributs": "Code Attributs",
+      "codeStat": "Code Stat",
+      "accreditation": "Accreditation",
+      "codeType": "Code Type",
+      "event": "Event"
+    }
+  }
+}

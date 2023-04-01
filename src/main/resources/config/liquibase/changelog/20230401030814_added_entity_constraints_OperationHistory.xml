@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity OperationHistory.
+    -->
+    <changeSet id="20230401030814-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="typeoperation_operation_type_id"
+                                 baseTableName="operation_history"
+                                 constraintName="fk_operation_history__typeoperation_id"
+                                 referencedColumnNames="operation_type_id"
+                                 referencedTableName="operation_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="operation_history"
+                                 constraintName="fk_operation_history__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

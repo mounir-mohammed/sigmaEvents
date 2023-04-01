@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eventForm">
+      <h2 data-cy="eventFormDetailsHeading"><span sigmaTranslate="sigmaEventsApp.eventForm.detail.title">Event Form</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.eventForm.formId">Form Id</span></dt>
+        <dd>
+          <span>{{ eventForm.formId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventForm.formName">Form Name</span></dt>
+        <dd>
+          <span>{{ eventForm.formName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventForm.formDescription">Form Description</span></dt>
+        <dd>
+          <span>{{ eventForm.formDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventForm.formParams">Form Params</span></dt>
+        <dd>
+          <span>{{ eventForm.formParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventForm.formAttributs">Form Attributs</span></dt>
+        <dd>
+          <span>{{ eventForm.formAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventForm.formStat">Form Stat</span></dt>
+        <dd>
+          <span>{{ eventForm.formStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventForm.event">Event</span></dt>
+        <dd>
+          <div *ngIf="eventForm.event">
+            <a [routerLink]="['/event-sig', eventForm.event.eventId, 'view']">{{ eventForm.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event-form-sig', eventForm.formId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

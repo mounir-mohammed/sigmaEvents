@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "sexe": {
+      "home": {
+        "title": "Sexes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Sexe を追加",
+        "createOrEditLabel": "Sexeを追加または編集",
+        "notFound": "No Sexes found"
+      },
+      "created": "A new Sexe is created with identifier {{ param }}",
+      "updated": "A Sexe is updated with identifier {{ param }}",
+      "deleted": "A Sexe is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Sexe {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Sexe"
+      },
+      "sexeId": "Sexe Id",
+      "sexeValue": "Sexe Value",
+      "sexeDescription": "Sexe Description",
+      "sexeTypeParams": "Sexe Type Params",
+      "sexeTypeAttributs": "Sexe Type Attributs",
+      "sexeStat": "Sexe Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

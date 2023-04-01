@@ -1,0 +1,37 @@
+{
+  "sigmaEventsApp": {
+    "printingServer": {
+      "home": {
+        "title": "Printing Servers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Printing Server",
+        "createOrEditLabel": "Create or edit a Printing Server",
+        "notFound": "No Printing Servers found"
+      },
+      "created": "A new Printing Server is created with identifier {{ param }}",
+      "updated": "A Printing Server is updated with identifier {{ param }}",
+      "deleted": "A Printing Server is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Printing Server {{ id }}?"
+      },
+      "detail": {
+        "title": "Printing Server"
+      },
+      "printingServerId": "Printing Server Id",
+      "printingServerName": "Printing Server Name",
+      "printingServerDescription": "Printing Server Description",
+      "printingServerHost": "Printing Server Host",
+      "printingServerPort": "Printing Server Port",
+      "printingServerDns": "Printing Server Dns",
+      "printingServerProxy": "Printing Server Proxy",
+      "printingServerParam1": "Printing Server Param 1",
+      "printingServerParam2": "Printing Server Param 2",
+      "printingServerParam3": "Printing Server Param 3",
+      "printingServerStat": "Printing Server Stat",
+      "printingServerParams": "Printing Server Params",
+      "printingServerAttributs": "Printing Server Attributs",
+      "printingCentre": "Printing Centre",
+      "event": "Event"
+    }
+  }
+}

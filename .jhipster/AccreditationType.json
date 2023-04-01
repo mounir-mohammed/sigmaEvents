@@ -1,0 +1,73 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401024914",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "accreditation_type",
+  "fields": [
+    {
+      "fieldName": "accreditationTypeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "accreditationTypeValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "accreditationTypeAbreviation",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "accreditationTypeDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "accreditationTypeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationTypeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationTypeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "AccreditationType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "accreditationType",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "printingModel",
+      "otherEntityRelationshipName": "accreditationType",
+      "relationshipName": "printingModel",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "accreditationType",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

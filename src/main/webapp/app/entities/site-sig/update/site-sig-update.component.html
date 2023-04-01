@@ -1,0 +1,270 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sigma-site-sig-heading" data-cy="SiteCreateUpdateHeading" sigmaTranslate="sigmaEventsApp.site.home.createOrEditLabel">
+        Create or edit a Site
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.siteId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteId" for="field_siteId">Site Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="siteId"
+            id="field_siteId"
+            data-cy="siteId"
+            formControlName="siteId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteName" for="field_siteName">Site Name</label>
+          <input type="text" class="form-control" name="siteName" id="field_siteName" data-cy="siteName" formControlName="siteName" />
+          <div *ngIf="editForm.get('siteName')!.invalid && (editForm.get('siteName')!.dirty || editForm.get('siteName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('siteName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('siteName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteColor" for="field_siteColor">Site Color</label>
+          <input type="text" class="form-control" name="siteColor" id="field_siteColor" data-cy="siteColor" formControlName="siteColor" />
+          <div *ngIf="editForm.get('siteColor')!.invalid && (editForm.get('siteColor')!.dirty || editForm.get('siteColor')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('siteColor')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteAbreviation" for="field_siteAbreviation"
+            >Site Abreviation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="siteAbreviation"
+            id="field_siteAbreviation"
+            data-cy="siteAbreviation"
+            formControlName="siteAbreviation"
+          />
+          <div
+            *ngIf="
+              editForm.get('siteAbreviation')!.invalid &&
+              (editForm.get('siteAbreviation')!.dirty || editForm.get('siteAbreviation')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('siteAbreviation')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteDescription" for="field_siteDescription"
+            >Site Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="siteDescription"
+            id="field_siteDescription"
+            data-cy="siteDescription"
+            formControlName="siteDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('siteDescription')!.invalid &&
+              (editForm.get('siteDescription')!.dirty || editForm.get('siteDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('siteDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteLogo" for="field_siteLogo">Site Logo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('siteLogoContentType')!.value + ';base64,' + editForm.get('siteLogo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('siteLogo')!.value"
+              alt="site image"
+            />
+            <div *ngIf="editForm.get('siteLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('siteLogoContentType')!.value }}, {{ byteSize(editForm.get('siteLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('siteLogo', 'siteLogoContentType', 'file_siteLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_siteLogo"
+              data-cy="siteLogo"
+              (change)="setFileData($event, 'siteLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="siteLogo" id="field_siteLogo" data-cy="siteLogo" formControlName="siteLogo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="siteLogoContentType"
+            id="field_siteLogoContentType"
+            formControlName="siteLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteAdresse" for="field_siteAdresse">Site Adresse</label>
+          <input
+            type="text"
+            class="form-control"
+            name="siteAdresse"
+            id="field_siteAdresse"
+            data-cy="siteAdresse"
+            formControlName="siteAdresse"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteEmail" for="field_siteEmail">Site Email</label>
+          <input type="text" class="form-control" name="siteEmail" id="field_siteEmail" data-cy="siteEmail" formControlName="siteEmail" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteTel" for="field_siteTel">Site Tel</label>
+          <input type="text" class="form-control" name="siteTel" id="field_siteTel" data-cy="siteTel" formControlName="siteTel" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteFax" for="field_siteFax">Site Fax</label>
+          <input type="text" class="form-control" name="siteFax" id="field_siteFax" data-cy="siteFax" formControlName="siteFax" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteResponsableName" for="field_siteResponsableName"
+            >Site Responsable Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="siteResponsableName"
+            id="field_siteResponsableName"
+            data-cy="siteResponsableName"
+            formControlName="siteResponsableName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteParams" for="field_siteParams">Site Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="siteParams"
+            id="field_siteParams"
+            data-cy="siteParams"
+            formControlName="siteParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteAttributs" for="field_siteAttributs">Site Attributs</label>
+          <input
+            type="text"
+            class="form-control"
+            name="siteAttributs"
+            id="field_siteAttributs"
+            data-cy="siteAttributs"
+            formControlName="siteAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.siteStat" for="field_siteStat">Site Stat</label>
+          <input type="checkbox" class="form-check" name="siteStat" id="field_siteStat" data-cy="siteStat" formControlName="siteStat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.city" for="field_city">City</label>
+          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.site.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

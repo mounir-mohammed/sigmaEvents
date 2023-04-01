@@ -1,0 +1,38 @@
+{
+  "sigmaEventsApp": {
+    "organiz": {
+      "home": {
+        "title": "Organizs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Organiz",
+        "createOrEditLabel": "创建或编辑 Organiz",
+        "notFound": "No Organizs found"
+      },
+      "created": "Organiz {{ param }} 创建成功",
+      "updated": "Organiz {{ param }} 更新成功",
+      "deleted": "Organiz {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Organiz {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Organiz"
+      },
+      "organizId": "Organiz Id",
+      "organizName": "Organiz Name",
+      "organizDescription": "Organiz Description",
+      "organizLogo": "Organiz Logo",
+      "organizTel": "Organiz Tel",
+      "organizFax": "Organiz Fax",
+      "organizEmail": "Organiz Email",
+      "organizAdresse": "Organiz Adresse",
+      "organizParams": "Organiz Params",
+      "organizAttributs": "Organiz Attributs",
+      "organizStat": "Organiz Stat",
+      "printingCentre": "Printing Centre",
+      "accreditation": "Accreditation",
+      "country": "Country",
+      "city": "City",
+      "event": "Event"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="language">
+      <h2 data-cy="languageDetailsHeading"><span sigmaTranslate="sigmaEventsApp.language.detail.title">Language</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.language.languageId">Language Id</span></dt>
+        <dd>
+          <span>{{ language.languageId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.language.languageCode">Language Code</span></dt>
+        <dd>
+          <span>{{ language.languageCode }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.language.languageName">Language Name</span></dt>
+        <dd>
+          <span>{{ language.languageName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.language.languageDescription">Language Description</span></dt>
+        <dd>
+          <span>{{ language.languageDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.language.languageParams">Language Params</span></dt>
+        <dd>
+          <span>{{ language.languageParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.language.languageAttributs">Language Attributs</span></dt>
+        <dd>
+          <span>{{ language.languageAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.language.languageStat">Language Stat</span></dt>
+        <dd>
+          <span>{{ language.languageStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/language-sig', language.languageId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

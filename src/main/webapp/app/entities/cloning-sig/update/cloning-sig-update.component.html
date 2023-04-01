@@ -1,0 +1,180 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-cloning-sig-heading"
+        data-cy="CloningCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.cloning.home.createOrEditLabel"
+      >
+        Create or edit a Cloning
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.cloningId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.cloningId" for="field_cloningId">Cloning Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cloningId"
+            id="field_cloningId"
+            data-cy="cloningId"
+            formControlName="cloningId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.cloningDescription" for="field_cloningDescription"
+            >Cloning Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="cloningDescription"
+            id="field_cloningDescription"
+            data-cy="cloningDescription"
+            formControlName="cloningDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('cloningDescription')!.invalid &&
+              (editForm.get('cloningDescription')!.dirty || editForm.get('cloningDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('cloningDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.cloningOldEventId" for="field_cloningOldEventId"
+            >Cloning Old Event Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="cloningOldEventId"
+            id="field_cloningOldEventId"
+            data-cy="cloningOldEventId"
+            formControlName="cloningOldEventId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.cloningNewEventId" for="field_cloningNewEventId"
+            >Cloning New Event Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="cloningNewEventId"
+            id="field_cloningNewEventId"
+            data-cy="cloningNewEventId"
+            formControlName="cloningNewEventId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.cloningUserId" for="field_cloningUserId">Cloning User Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="cloningUserId"
+            id="field_cloningUserId"
+            data-cy="cloningUserId"
+            formControlName="cloningUserId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.cloningDate" for="field_cloningDate">Cloning Date</label>
+          <div class="d-flex">
+            <input
+              id="field_cloningDate"
+              data-cy="cloningDate"
+              type="datetime-local"
+              class="form-control"
+              name="cloningDate"
+              formControlName="cloningDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.clonedEntitys" for="field_clonedEntitys">Cloned Entitys</label>
+          <input
+            type="text"
+            class="form-control"
+            name="clonedEntitys"
+            id="field_clonedEntitys"
+            data-cy="clonedEntitys"
+            formControlName="clonedEntitys"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.clonedParams" for="field_clonedParams">Cloned Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="clonedParams"
+            id="field_clonedParams"
+            data-cy="clonedParams"
+            formControlName="clonedParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.clonedAttributs" for="field_clonedAttributs"
+            >Cloned Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clonedAttributs"
+            id="field_clonedAttributs"
+            data-cy="clonedAttributs"
+            formControlName="clonedAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.cloning.clonedStat" for="field_clonedStat">Cloned Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="clonedStat"
+            id="field_clonedStat"
+            data-cy="clonedStat"
+            formControlName="clonedStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

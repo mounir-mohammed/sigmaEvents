@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "operationType": {
+      "home": {
+        "title": "Operation Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Operation Type",
+        "createOrEditLabel": "创建或编辑 Operation Type",
+        "notFound": "No Operation Types found"
+      },
+      "created": "Operation Type {{ param }} 创建成功",
+      "updated": "Operation Type {{ param }} 更新成功",
+      "deleted": "Operation Type {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Operation Type {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Operation Type"
+      },
+      "operationTypeId": "Operation Type Id",
+      "operationTypeValue": "Operation Type Value",
+      "operationTypeDescription": "Operation Type Description",
+      "operationTypeParams": "Operation Type Params",
+      "operationTypeAttributs": "Operation Type Attributs",
+      "operationTypeStat": "Operation Type Stat",
+      "operationHistory": "Operation History"
+    }
+  }
+}

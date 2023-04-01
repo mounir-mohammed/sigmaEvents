@@ -1,0 +1,38 @@
+{
+  "sigmaEventsApp": {
+    "organiz": {
+      "home": {
+        "title": "Organizs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Organiz",
+        "createOrEditLabel": "Maak of wijzig een Organiz",
+        "notFound": "No Organizs found"
+      },
+      "created": "A new Organiz is created with identifier {{ param }}",
+      "updated": "A Organiz is updated with identifier {{ param }}",
+      "deleted": "A Organiz is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Organiz {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Organiz"
+      },
+      "organizId": "Organiz Id",
+      "organizName": "Organiz Name",
+      "organizDescription": "Organiz Description",
+      "organizLogo": "Organiz Logo",
+      "organizTel": "Organiz Tel",
+      "organizFax": "Organiz Fax",
+      "organizEmail": "Organiz Email",
+      "organizAdresse": "Organiz Adresse",
+      "organizParams": "Organiz Params",
+      "organizAttributs": "Organiz Attributs",
+      "organizStat": "Organiz Stat",
+      "printingCentre": "Printing Centre",
+      "accreditation": "Accreditation",
+      "country": "Country",
+      "city": "City",
+      "event": "Event"
+    }
+  }
+}

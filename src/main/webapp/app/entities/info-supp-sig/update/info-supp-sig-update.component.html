@@ -1,0 +1,195 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-info-supp-sig-heading"
+        data-cy="InfoSuppCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.infoSupp.home.createOrEditLabel"
+      >
+        Create or edit a Info Supp
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.infoSuppId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppId" for="field_infoSuppId">Info Supp Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="infoSuppId"
+            id="field_infoSuppId"
+            data-cy="infoSuppId"
+            formControlName="infoSuppId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppName" for="field_infoSuppName">Info Supp Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="infoSuppName"
+            id="field_infoSuppName"
+            data-cy="infoSuppName"
+            formControlName="infoSuppName"
+          />
+          <div
+            *ngIf="editForm.get('infoSuppName')!.invalid && (editForm.get('infoSuppName')!.dirty || editForm.get('infoSuppName')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('infoSuppName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('infoSuppName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppDescription" for="field_infoSuppDescription"
+            >Info Supp Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="infoSuppDescription"
+            id="field_infoSuppDescription"
+            data-cy="infoSuppDescription"
+            formControlName="infoSuppDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('infoSuppDescription')!.invalid &&
+              (editForm.get('infoSuppDescription')!.dirty || editForm.get('infoSuppDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('infoSuppDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppParams" for="field_infoSuppParams"
+            >Info Supp Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="infoSuppParams"
+            id="field_infoSuppParams"
+            data-cy="infoSuppParams"
+            formControlName="infoSuppParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppAttributs" for="field_infoSuppAttributs"
+            >Info Supp Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="infoSuppAttributs"
+            id="field_infoSuppAttributs"
+            data-cy="infoSuppAttributs"
+            formControlName="infoSuppAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppStat" for="field_infoSuppStat">Info Supp Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="infoSuppStat"
+            id="field_infoSuppStat"
+            data-cy="infoSuppStat"
+            formControlName="infoSuppStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppType" for="field_infoSuppType">Info Supp Type</label>
+          <select
+            class="form-control"
+            id="field_infoSuppType"
+            data-cy="infoSuppType"
+            name="infoSuppType"
+            formControlName="infoSuppType"
+            [compareWith]="compareInfoSuppTypeSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="infoSuppTypeOption" *ngFor="let infoSuppTypeOption of infoSuppTypesSharedCollection">
+              {{ infoSuppTypeOption.infoSuppTypeId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.accreditation" for="field_accreditation">Accreditation</label>
+          <select
+            class="form-control"
+            id="field_accreditation"
+            data-cy="accreditation"
+            name="accreditation"
+            formControlName="accreditation"
+            [compareWith]="compareAccreditationSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="accreditationOption" *ngFor="let accreditationOption of accreditationsSharedCollection">
+              {{ accreditationOption.accreditationId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

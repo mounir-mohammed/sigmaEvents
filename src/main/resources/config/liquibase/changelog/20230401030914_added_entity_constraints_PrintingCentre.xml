@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity PrintingCentre.
+    -->
+    <changeSet id="20230401030914-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="city_city_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__city_id"
+                                 referencedColumnNames="city_id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="country_country_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__country_id"
+                                 referencedColumnNames="country_id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="organiz_organiz_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__organiz_id"
+                                 referencedColumnNames="organiz_id"
+                                 referencedTableName="organiz"/>
+
+        <addForeignKeyConstraint baseColumnNames="printing_type_printing_type_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__printing_type_id"
+                                 referencedColumnNames="printing_type_id"
+                                 referencedTableName="printing_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="printing_server_printing_server_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__printing_server_id"
+                                 referencedColumnNames="printing_server_id"
+                                 referencedTableName="printing_server"/>
+
+        <addForeignKeyConstraint baseColumnNames="printing_model_printing_model_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__printing_model_id"
+                                 referencedColumnNames="printing_model_id"
+                                 referencedTableName="printing_model"/>
+
+        <addForeignKeyConstraint baseColumnNames="language_language_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__language_id"
+                                 referencedColumnNames="language_id"
+                                 referencedTableName="language"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="printing_centre"
+                                 constraintName="fk_printing_centre__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

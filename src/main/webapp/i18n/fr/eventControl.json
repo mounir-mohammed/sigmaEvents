@@ -1,0 +1,34 @@
+{
+  "sigmaEventsApp": {
+    "eventControl": {
+      "home": {
+        "title": "EventControls",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Event Control",
+        "createOrEditLabel": "Créer ou éditer un Event Control",
+        "notFound": "Aucun Event Control trouvé"
+      },
+      "created": "Un nouveau Event Control a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Event Control avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Event Control avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Event Control {{ id }} ?"
+      },
+      "detail": {
+        "title": "Event Control"
+      },
+      "controlId": "Control Id",
+      "controlName": "Control Name",
+      "controlDescription": "Control Description",
+      "controlType": "Control Type",
+      "controlValueString": "Control Value String",
+      "controlValueLong": "Control Value Long",
+      "controlValueDate": "Control Value Date",
+      "controlParams": "Control Params",
+      "controlAttributs": "Control Attributs",
+      "controlValueStat": "Control Value Stat",
+      "event": "Event",
+      "eventField": "Event Field"
+    }
+  }
+}

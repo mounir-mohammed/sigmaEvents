@@ -1,0 +1,161 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-attachement-type-sig-heading"
+        data-cy="AttachementTypeCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.attachementType.home.createOrEditLabel"
+      >
+        Create or edit a Attachement Type
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.attachementTypeId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeId" for="field_attachementTypeId"
+            >Attachement Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="attachementTypeId"
+            id="field_attachementTypeId"
+            data-cy="attachementTypeId"
+            formControlName="attachementTypeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeName" for="field_attachementTypeName"
+            >Attachement Type Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="attachementTypeName"
+            id="field_attachementTypeName"
+            data-cy="attachementTypeName"
+            formControlName="attachementTypeName"
+          />
+          <div
+            *ngIf="
+              editForm.get('attachementTypeName')!.invalid &&
+              (editForm.get('attachementTypeName')!.dirty || editForm.get('attachementTypeName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('attachementTypeName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('attachementTypeName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeDescription"
+            for="field_attachementTypeDescription"
+            >Attachement Type Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="attachementTypeDescription"
+            id="field_attachementTypeDescription"
+            data-cy="attachementTypeDescription"
+            formControlName="attachementTypeDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('attachementTypeDescription')!.invalid &&
+              (editForm.get('attachementTypeDescription')!.dirty || editForm.get('attachementTypeDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('attachementTypeDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeParams" for="field_attachementTypeParams"
+            >Attachement Type Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="attachementTypeParams"
+            id="field_attachementTypeParams"
+            data-cy="attachementTypeParams"
+            formControlName="attachementTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeAttributs"
+            for="field_attachementTypeAttributs"
+            >Attachement Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="attachementTypeAttributs"
+            id="field_attachementTypeAttributs"
+            data-cy="attachementTypeAttributs"
+            formControlName="attachementTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeStat" for="field_attachementTypeStat"
+            >Attachement Type Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="attachementTypeStat"
+            id="field_attachementTypeStat"
+            data-cy="attachementTypeStat"
+            formControlName="attachementTypeStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

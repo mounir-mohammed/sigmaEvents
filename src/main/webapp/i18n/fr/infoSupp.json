@@ -1,0 +1,31 @@
+{
+  "sigmaEventsApp": {
+    "infoSupp": {
+      "home": {
+        "title": "InfoSupps",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Info Supp",
+        "createOrEditLabel": "Créer ou éditer un Info Supp",
+        "notFound": "Aucun Info Supp trouvé"
+      },
+      "created": "Un nouveau Info Supp a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Info Supp avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Info Supp avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Info Supp {{ id }} ?"
+      },
+      "detail": {
+        "title": "Info Supp"
+      },
+      "infoSuppId": "Info Supp Id",
+      "infoSuppName": "Info Supp Name",
+      "infoSuppDescription": "Info Supp Description",
+      "infoSuppParams": "Info Supp Params",
+      "infoSuppAttributs": "Info Supp Attributs",
+      "infoSuppStat": "Info Supp Stat",
+      "infoSuppType": "Info Supp Type",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

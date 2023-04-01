@@ -1,0 +1,277 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-organiz-sig-heading"
+        data-cy="OrganizCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.organiz.home.createOrEditLabel"
+      >
+        Create or edit a Organiz
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.organizId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizId" for="field_organizId">Organiz Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="organizId"
+            id="field_organizId"
+            data-cy="organizId"
+            formControlName="organizId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizName" for="field_organizName">Organiz Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="organizName"
+            id="field_organizName"
+            data-cy="organizName"
+            formControlName="organizName"
+          />
+          <div *ngIf="editForm.get('organizName')!.invalid && (editForm.get('organizName')!.dirty || editForm.get('organizName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('organizName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('organizName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizDescription" for="field_organizDescription"
+            >Organiz Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="organizDescription"
+            id="field_organizDescription"
+            data-cy="organizDescription"
+            formControlName="organizDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('organizDescription')!.invalid &&
+              (editForm.get('organizDescription')!.dirty || editForm.get('organizDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('organizDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizLogo" for="field_organizLogo">Organiz Logo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('organizLogoContentType')!.value + ';base64,' + editForm.get('organizLogo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('organizLogo')!.value"
+              alt="organiz image"
+            />
+            <div *ngIf="editForm.get('organizLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('organizLogoContentType')!.value }}, {{ byteSize(editForm.get('organizLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('organizLogo', 'organizLogoContentType', 'file_organizLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_organizLogo"
+              data-cy="organizLogo"
+              (change)="setFileData($event, 'organizLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="organizLogo"
+            id="field_organizLogo"
+            data-cy="organizLogo"
+            formControlName="organizLogo"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="organizLogoContentType"
+            id="field_organizLogoContentType"
+            formControlName="organizLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizTel" for="field_organizTel">Organiz Tel</label>
+          <input
+            type="text"
+            class="form-control"
+            name="organizTel"
+            id="field_organizTel"
+            data-cy="organizTel"
+            formControlName="organizTel"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizFax" for="field_organizFax">Organiz Fax</label>
+          <input
+            type="text"
+            class="form-control"
+            name="organizFax"
+            id="field_organizFax"
+            data-cy="organizFax"
+            formControlName="organizFax"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizEmail" for="field_organizEmail">Organiz Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="organizEmail"
+            id="field_organizEmail"
+            data-cy="organizEmail"
+            formControlName="organizEmail"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizAdresse" for="field_organizAdresse"
+            >Organiz Adresse</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="organizAdresse"
+            id="field_organizAdresse"
+            data-cy="organizAdresse"
+            formControlName="organizAdresse"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizParams" for="field_organizParams">Organiz Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="organizParams"
+            id="field_organizParams"
+            data-cy="organizParams"
+            formControlName="organizParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizAttributs" for="field_organizAttributs"
+            >Organiz Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="organizAttributs"
+            id="field_organizAttributs"
+            data-cy="organizAttributs"
+            formControlName="organizAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizStat" for="field_organizStat">Organiz Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="organizStat"
+            id="field_organizStat"
+            data-cy="organizStat"
+            formControlName="organizStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.country" for="field_country">Country</label>
+          <select
+            class="form-control"
+            id="field_country"
+            data-cy="country"
+            name="country"
+            formControlName="country"
+            [compareWith]="compareCountrySig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">{{ countryOption.countryId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.city" for="field_city">City</label>
+          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

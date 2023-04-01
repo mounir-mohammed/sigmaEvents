@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "cloning": {
+      "home": {
+        "title": "Clonings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Cloning",
+        "createOrEditLabel": "创建或编辑 Cloning",
+        "notFound": "No Clonings found"
+      },
+      "created": "Cloning {{ param }} 创建成功",
+      "updated": "Cloning {{ param }} 更新成功",
+      "deleted": "Cloning {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Cloning {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Cloning"
+      },
+      "cloningId": "Cloning Id",
+      "cloningDescription": "Cloning Description",
+      "cloningOldEventId": "Cloning Old Event Id",
+      "cloningNewEventId": "Cloning New Event Id",
+      "cloningUserId": "Cloning User Id",
+      "cloningDate": "Cloning Date",
+      "clonedEntitys": "Cloned Entitys",
+      "clonedParams": "Cloned Params",
+      "clonedAttributs": "Cloned Attributs",
+      "clonedStat": "Cloned Stat"
+    }
+  }
+}

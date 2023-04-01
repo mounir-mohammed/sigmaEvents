@@ -1,0 +1,155 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-printing-type-sig-heading"
+        data-cy="PrintingTypeCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.printingType.home.createOrEditLabel"
+      >
+        Create or edit a Printing Type
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.printingTypeId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingType.printingTypeId" for="field_printingTypeId"
+            >Printing Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="printingTypeId"
+            id="field_printingTypeId"
+            data-cy="printingTypeId"
+            formControlName="printingTypeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingType.printingTypeValue" for="field_printingTypeValue"
+            >Printing Type Value</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingTypeValue"
+            id="field_printingTypeValue"
+            data-cy="printingTypeValue"
+            formControlName="printingTypeValue"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingTypeValue')!.invalid &&
+              (editForm.get('printingTypeValue')!.dirty || editForm.get('printingTypeValue')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingTypeValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingTypeValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingType.printingTypeDescription" for="field_printingTypeDescription"
+            >Printing Type Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingTypeDescription"
+            id="field_printingTypeDescription"
+            data-cy="printingTypeDescription"
+            formControlName="printingTypeDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingTypeDescription')!.invalid &&
+              (editForm.get('printingTypeDescription')!.dirty || editForm.get('printingTypeDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingTypeDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingType.printingTypeParams" for="field_printingTypeParams"
+            >Printing Type Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingTypeParams"
+            id="field_printingTypeParams"
+            data-cy="printingTypeParams"
+            formControlName="printingTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingType.printingTypeAttributs" for="field_printingTypeAttributs"
+            >Printing Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingTypeAttributs"
+            id="field_printingTypeAttributs"
+            data-cy="printingTypeAttributs"
+            formControlName="printingTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingType.printingTypeStat" for="field_printingTypeStat"
+            >Printing Type Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="printingTypeStat"
+            id="field_printingTypeStat"
+            data-cy="printingTypeStat"
+            formControlName="printingTypeStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

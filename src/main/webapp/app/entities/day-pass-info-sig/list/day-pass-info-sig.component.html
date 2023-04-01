@@ -1,0 +1,220 @@
+<div>
+  <h2 id="page-heading" data-cy="DayPassInfoHeading">
+    <span sigmaTranslate="sigmaEventsApp.dayPassInfo.home.title">Day Pass Infos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.dayPassInfo.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-day-pass-info-sig"
+        [routerLink]="['/day-pass-info-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.dayPassInfo.home.createLabel"> Create a new Day Pass Info </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="dayPassInfos?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.dayPassInfo.home.notFound">No Day Pass Infos found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="dayPassInfos && dayPassInfos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="dayPassInfoId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoId">Day Pass Info Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoName">Day Pass Info Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassDescription">Day Pass Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassLogo">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassLogo">Day Pass Logo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoCreationDate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoCreationDate">Day Pass Info Creation Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoUpdateDate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoUpdateDate">Day Pass Info Update Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoCreatedByuser">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoCreatedByuser">Day Pass Info Created Byuser</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoDateStart">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoDateStart">Day Pass Info Date Start</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoDateEnd">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoDateEnd">Day Pass Info Date End</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoNumber">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoNumber">Day Pass Info Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassParams">Day Pass Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassAttributs">Day Pass Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfoStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoStat">Day Pass Info Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.dayPassInfo.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dayPassInfo of dayPassInfos; trackBy: trackDayPassInfoId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/day-pass-info-sig', dayPassInfo.dayPassInfoId, 'view']">{{ dayPassInfo.dayPassInfoId }}</a>
+          </td>
+          <td>{{ dayPassInfo.dayPassInfoName }}</td>
+          <td>{{ dayPassInfo.dayPassDescription }}</td>
+          <td>
+            <a *ngIf="dayPassInfo.dayPassLogo" (click)="openFile(dayPassInfo.dayPassLogo, dayPassInfo.dayPassLogoContentType)">
+              <img
+                [src]="'data:' + dayPassInfo.dayPassLogoContentType + ';base64,' + dayPassInfo.dayPassLogo"
+                style="max-height: 30px"
+                alt="dayPassInfo image"
+              />
+            </a>
+            <span *ngIf="dayPassInfo.dayPassLogo">{{ dayPassInfo.dayPassLogoContentType }}, {{ byteSize(dayPassInfo.dayPassLogo) }}</span>
+          </td>
+          <td>{{ dayPassInfo.dayPassInfoCreationDate | formatMediumDatetime }}</td>
+          <td>{{ dayPassInfo.dayPassInfoUpdateDate | formatMediumDatetime }}</td>
+          <td>{{ dayPassInfo.dayPassInfoCreatedByuser }}</td>
+          <td>{{ dayPassInfo.dayPassInfoDateStart | formatMediumDatetime }}</td>
+          <td>{{ dayPassInfo.dayPassInfoDateEnd | formatMediumDatetime }}</td>
+          <td>{{ dayPassInfo.dayPassInfoNumber }}</td>
+          <td>{{ dayPassInfo.dayPassParams }}</td>
+          <td>{{ dayPassInfo.dayPassAttributs }}</td>
+          <td>{{ dayPassInfo.dayPassInfoStat }}</td>
+          <td>
+            <div *ngIf="dayPassInfo.event">
+              <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[dayPassInfoId.in]': dayPassInfo.dayPassInfoId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.dayPassInfo.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/day-pass-info-sig', dayPassInfo.dayPassInfoId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/day-pass-info-sig', dayPassInfo.dayPassInfoId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(dayPassInfo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="dayPassInfos && dayPassInfos.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

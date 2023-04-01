@@ -1,0 +1,220 @@
+<div>
+  <h2 id="page-heading" data-cy="AttachementHeading">
+    <span sigmaTranslate="sigmaEventsApp.attachement.home.title">Attachements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.attachement.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-attachement-sig"
+        [routerLink]="['/attachement-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.attachement.home.createLabel"> Create a new Attachement </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="attachements?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.attachement.home.notFound">No Attachements found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="attachements && attachements.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="attachementId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementId">Attachement Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementName">Attachement Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementPath">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementPath">Attachement Path</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementBlob">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementBlob">Attachement Blob</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementDescription">Attachement Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementPhoto">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementPhoto">Attachement Photo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementParams">Attachement Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementAttributs">Attachement Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementStat">Attachement Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachementType.attachementTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.attachementType">Attachement Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.attachement.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let attachement of attachements; trackBy: trackAttachementId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/attachement-sig', attachement.attachementId, 'view']">{{ attachement.attachementId }}</a>
+          </td>
+          <td>{{ attachement.attachementName }}</td>
+          <td>{{ attachement.attachementPath }}</td>
+          <td>
+            <a
+              *ngIf="attachement.attachementBlob"
+              (click)="openFile(attachement.attachementBlob, attachement.attachementBlobContentType)"
+              sigmaTranslate="entity.action.open"
+              >Open</a
+            >
+            <span *ngIf="attachement.attachementBlob"
+              >{{ attachement.attachementBlobContentType }}, {{ byteSize(attachement.attachementBlob) }}</span
+            >
+          </td>
+          <td>{{ attachement.attachementDescription }}</td>
+          <td>
+            <a
+              *ngIf="attachement.attachementPhoto"
+              (click)="openFile(attachement.attachementPhoto, attachement.attachementPhotoContentType)"
+            >
+              <img
+                [src]="'data:' + attachement.attachementPhotoContentType + ';base64,' + attachement.attachementPhoto"
+                style="max-height: 30px"
+                alt="attachement image"
+              />
+            </a>
+            <span *ngIf="attachement.attachementPhoto"
+              >{{ attachement.attachementPhotoContentType }}, {{ byteSize(attachement.attachementPhoto) }}</span
+            >
+          </td>
+          <td>{{ attachement.attachementParams }}</td>
+          <td>{{ attachement.attachementAttributs }}</td>
+          <td>{{ attachement.attachementStat }}</td>
+          <td>
+            <div *ngIf="attachement.attachementType">
+              <a [routerLink]="['/attachement-type-sig', attachement.attachementType.attachementTypeId, 'view']">{{
+                attachement.attachementType.attachementTypeId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="attachement.event">
+              <a [routerLink]="['/event-sig', attachement.event.eventId, 'view']">{{ attachement.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[attachementId.in]': attachement.attachementId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.attachement.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/attachement-sig', attachement.attachementId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/attachement-sig', attachement.attachementId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(attachement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="attachements && attachements.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

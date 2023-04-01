@@ -1,0 +1,810 @@
+application {
+  config {
+    baseName sigmaEvents
+    applicationType monolith
+    packageName ma.sig.events
+    authenticationType jwt
+    prodDatabaseType mysql
+    clientFramework angularX
+    jhiPrefix	sigma
+    languages	[en, fr, ar-LY, es, de, it, zh-CN, ja, nl]
+  }
+  entities *
+} 
+//DEFAULT EVENT ID 999999
+entity Event {
+	@Id eventId Long,
+	eventName String required minlength(5) maxlength(100),
+	eventColor String maxlength(100),
+	eventDescription String maxlength(200),
+	eventAbreviation String maxlength(10),
+	eventdateStart ZonedDateTime required,
+	eventdateEnd ZonedDateTime required,
+	eventPrintingModelId Long,
+	eventLogo ImageBlob,
+	eventBannerCenter ImageBlob,
+	eventBannerRight ImageBlob,
+	eventBannerLeft ImageBlob,
+	eventBannerBas ImageBlob,
+	eventWithPhoto Boolean,
+	eventNoCode Boolean,
+	eventCodeNoFilter Boolean,
+	eventCodeByTypeAccreditation Boolean,
+	eventCodeByTypeCategorie Boolean,
+	eventCodeByTypeFonction Boolean,
+	eventCodeByTypeOrganiz Boolean,
+	eventDefaultPrintingLanguage Boolean,
+	eventPCenterPrintingLanguage Boolean,
+	eventImported Boolean,
+	eventArchived Boolean,
+	eventArchiveFileName String,
+	eventURL String,
+	eventDomaine String,
+	eventSousDomaine String,
+	eventCloned Boolean,
+	eventParams String,
+	eventAttributs String,
+	eventStat Boolean
+} 
+//GLOBAL
+entity PrintingType {
+	@Id printingTypeId Long,
+	printingTypeValue String required maxlength(50),
+	printingTypeDescription String maxlength(200),
+	printingTypeParams String,
+	printingTypeAttributs String,
+	printingTypeStat Boolean
+}
+
+//GLOBAL
+entity LogHistory {
+	@Id logHistory Long,
+	logHistoryDescription String,
+	logHistoryParams String,
+	logHistoryAttributs String,
+	logHistoryStat Boolean
+}
+
+//EVENT
+entity Area {
+	@Id areaId Long,
+	areaName String required maxlength(50),
+	areaAbreviation String maxlength(10),
+	areaColor String maxlength(100),
+	areaDescription String maxlength(200),
+	areaLogo ImageBlob,
+	areaParams String,
+	areaAttributs String,
+	areaStat Boolean
+} 
+
+//EVENT
+entity Fonction {
+	@Id fonctionId Long,
+	fonctionName String required maxlength(50),
+	fonctionAbreviation String maxlength(10),
+	fonctionColor String maxlength(100),
+	fonctionDescription String maxlength(200),
+	fonctionLogo ImageBlob,
+	fonctionParams String,
+	fonctionAttributs String,
+	fonctionStat Boolean
+}
+
+//EVENT
+entity Category {
+	@Id categoryId Long,
+	categoryName String required maxlength(50),
+	categoryAbreviation String maxlength(10),
+	categoryColor String maxlength(100),
+	categoryDescription String maxlength(200),
+	categoryLogo ImageBlob,
+	categoryParams String,
+	categoryAttributs String,
+	categoryStat Boolean
+}
+
+//EVENT
+entity PrintingModel {
+	@Id printingModelId Long,
+	printingModelName String required maxlength(50),
+	printingModelFile String required,
+	printingModelPath String required,
+	printingModelDescription String maxlength(200),
+	printingModelData AnyBlob,
+	printingModelParams String,
+	printingModelAttributs String,
+	printingModelStat Boolean
+}
+
+//GLOBAL
+entity CodeType {
+	@Id codeTypeId Long,
+	codeTypeValue String required maxlength(50),
+	codeTypeDescription String maxlength(200),
+	codeTypeParams String,
+	codeTypeAttributs String,
+	codeTypeStat Boolean
+}
+
+//EVENT
+entity Code {
+	@Id codeId Long,
+	codeForEntity String,
+	codeEntityValue String,
+	codeValue String required unique,
+	codeUsed Boolean,
+	codeParams String,
+	codeAttributs String,
+	codeStat Boolean
+}
+
+//EVENT
+entity AccreditationType {
+	@Id accreditationTypeId Long,
+	accreditationTypeValue String required maxlength(50),
+	accreditationTypeAbreviation String maxlength(10),
+	accreditationTypeDescription String maxlength(200),
+	accreditationTypeParams String,
+	accreditationTypeAttributs String,
+	accreditationTypeStat Boolean
+}
+
+//GLOBAL
+entity AuthentificationType {
+	@Id authentificationTypeId Long,
+	authentificationTypeValue String required maxlength(50),
+	authentificationTypeDescription String maxlength(200),
+	authentificationTypeParams String,
+	authentificationTypeAttributs String,
+	authentificationTypeStat Boolean
+}
+
+//GLOBAL
+entity Status {
+	@Id statusId Long,
+	statusName String required maxlength(50),
+	statusAbreviation String maxlength(10),
+	statusColor String maxlength(100),
+	statusDescription String maxlength(200),
+	statusUserCanPrint Boolean,
+	statusUserCanUpdate Boolean,
+	statusUserCanValidate Boolean,
+	statusParams String,
+	statusAttributs String,
+	statusStat Boolean
+}
+
+//GLOBAL
+entity AttachementType {
+	@Id attachementTypeId Long,
+	attachementTypeName String required maxlength(50),
+	attachementTypeDescription String maxlength(200),
+	attachementTypeParams String,
+	attachementTypeAttributs String,
+	attachementTypeStat Boolean
+}
+
+//GLOBAL
+entity InfoSuppType {
+	@Id infoSuppTypeId Long,
+	infoSuppTypeName String required maxlength(50),
+	infoSuppTypeDescription String maxlength(200),
+	infoSuppTypeParams String,
+	infoSuppTypeAttributs String,
+	infoSuppTypeStat Boolean
+}
+
+//EVENT
+entity InfoSupp {
+	@Id infoSuppId Long,
+	infoSuppName String required maxlength(50),
+	infoSuppDescription String maxlength(200),
+	infoSuppParams String,
+	infoSuppAttributs String,
+	infoSuppStat Boolean
+}
+
+//EVENT
+entity Attachement {
+	@Id attachementId Long,
+	attachementName String required maxlength(50),
+	attachementPath String,
+	attachementBlob AnyBlob,
+	attachementDescription String maxlength(200),
+	attachementPhoto ImageBlob,
+	attachementParams String,
+	attachementAttributs String,
+	attachementStat Boolean
+}
+
+//EVENT
+entity Organiz {
+	@Id organizId Long,
+	organizName String required maxlength(50),
+	organizDescription String maxlength(200),
+	organizLogo ImageBlob,
+	organizTel String,
+	organizFax String,
+	organizEmail String,
+	organizAdresse String,
+	organizParams String,
+	organizAttributs String,
+	organizStat Boolean
+}
+
+//GLOBAL
+entity Civility {
+	@Id civilityId Long,
+	civilityValue String required maxlength(50),
+	civilityDescription String maxlength(200),
+	civilityCode String,
+	civilityParams String,
+	civilityAttributs String,
+	civilityStat Boolean
+}
+
+//EVENT
+entity PhotoArchive {
+	@Id photoArchiveId Long,
+	photoArchiveName String required maxlength(50),
+	photoArchivePath String,
+	photoArchivePhoto ImageBlob,
+	photoArchiveDescription String maxlength(200),
+	photoArchiveParams String,
+	photoArchiveAttributs String,
+	photoArchiveStat Boolean
+}
+
+//GLOBAL
+entity Nationality {
+	@Id nationalityId Long,
+	nationalityValue String required maxlength(50),
+	nationalityAbreviation String maxlength(10),
+	nationalityDescription String maxlength(200),
+	nationalityFlag ImageBlob,
+	nationalityParams String,
+	nationalityAttributs String,
+	nationalityStat Boolean
+}
+
+//GLOBAL
+entity Country {
+	@Id countryId Long,
+	countryName String required maxlength(50),
+	countryCodeAlpha2 String required,
+	countryCodeAlpha3 String,
+	countryTelCode String,
+	countryDescription String maxlength(200),
+	countryFlag ImageBlob,
+	countryParams String,
+	countryAttributs String,
+	countryStat Boolean
+}
+
+//GLOBAL
+entity City {
+	@Id cityId Long,
+	cityName String required maxlength(50),
+	cityZipCode String required,
+	cityAbreviation String maxlength(10),
+	cityDescription String maxlength(200),
+	cityParams String,
+	cityAttributs String,
+	cityStat Boolean
+}
+
+//EVENT
+entity Site {
+	@Id siteId Long,
+	siteName String required maxlength(50),
+	siteColor String maxlength(100),
+	siteAbreviation String maxlength(10),
+	siteDescription String maxlength(200),
+	siteLogo ImageBlob,
+	siteAdresse String,
+	siteEmail String,
+	siteTel String,
+	siteFax String,
+	siteResponsableName String,
+	siteParams String,
+	siteAttributs String,
+	siteStat Boolean
+}
+
+//EVENT
+entity Accreditation {
+	@Id accreditationId Long,
+	accreditationFirstName String required minlength(2) maxlength(50),
+	accreditationSecondName String maxlength(50),
+	accreditationLastName String required minlength(2) maxlength(50),
+	accreditationBirthDay LocalDate required,
+	accreditationSexe String,
+	accreditationOccupation String,
+	accreditationDescription String,
+	accreditationEmail String,
+	accreditationTel String,
+	accreditationPhoto ImageBlob,
+	accreditationCinId String,
+	accreditationPasseportId String,
+	accreditationCartePresseId String,
+	accreditationCarteProfessionnelleId String,
+	accreditationCreationDate ZonedDateTime,
+	accreditationUpdateDate ZonedDateTime,
+	accreditationCreatedByuser String,
+	accreditationDateStart ZonedDateTime,
+	accreditationDateEnd ZonedDateTime,
+	accreditationPrintStat Boolean,
+	accreditationPrintNumber Long,
+	accreditationParams String,
+	accreditationAttributs String,
+	accreditationStat Boolean
+}
+
+//EVENT
+entity DayPassInfo {
+	@Id dayPassInfoId Long,
+	dayPassInfoName String,
+	dayPassDescription String maxlength(200),
+	dayPassLogo ImageBlob,
+	dayPassInfoCreationDate ZonedDateTime,
+	dayPassInfoUpdateDate ZonedDateTime,
+	dayPassInfoCreatedByuser String,
+	dayPassInfoDateStart ZonedDateTime,
+	dayPassInfoDateEnd ZonedDateTime,
+	dayPassInfoNumber Long,
+	dayPassParams String,
+	dayPassAttributs String,
+	dayPassInfoStat Boolean
+}
+
+//GLOBAL
+entity OperationType {
+	@Id operationTypeId Long,
+	operationTypeValue String required maxlength(50),
+	operationTypeDescription String maxlength(200),
+	operationTypeParams String,
+	operationTypeAttributs String,
+	operationTypeStat Boolean
+}
+
+//GLOBAL
+entity Sexe {
+	@Id sexeId Long,
+	sexeValue String required maxlength(50),
+	sexeDescription String maxlength(200),
+	sexeTypeParams String,
+	sexeTypeAttributs String,
+	sexeStat Boolean
+}
+
+//EVENT
+entity Note {
+	@Id noteId Long,
+	noteValue String required maxlength(50),
+	noteDescription String maxlength(200),
+	noteTypeParams String,
+	noteTypeAttributs String,
+	noteStat Boolean
+}
+
+//EVENT
+entity OperationHistory {
+	@Id operationHistoryId Long,
+	operationHistoryDescription String maxlength(200),
+	operationHistoryDate ZonedDateTime,
+	operationHistoryUserID Long,
+	operationHistoryOldValue String,
+	operationHistoryNewValue String,
+	operationHistoryOldId Long,
+	operationHistoryNewId Long,
+	operationHistoryImportedFile String,
+	operationHistoryImportedFilePath String,
+	operationHistoryParams String,
+	operationHistoryAttributs String,
+	operationHistoryStat Boolean
+}
+
+//EVENT
+entity PrintingCentre {
+	@Id printingCentreId Long,
+	printingCentreDescription String maxlength(200),
+	printingCentreName String required maxlength(50),
+	printingCentreLogo ImageBlob,
+	printingCentreAdresse String,
+	printingCentreEmail String,
+	printingCentreTel String,
+	printingCentreFax String,
+	printingCentreResponsableName String,
+	printingParams String,
+	printingAttributs String,
+	printingCentreStat Boolean
+}
+
+//GLOBAL
+entity Language {
+	@Id languageId Long,
+	languageCode String required maxlength(50),
+	languageName String required maxlength(50),
+	languageDescription String maxlength(200),
+	languageParams String,
+	languageAttributs String,
+	languageStat Boolean
+}
+
+//GLOBAL & EVENT
+entity Setting {
+	@Id settingId Long,
+	settingParentId Long,
+	//GENERAL/EVENMENT
+	settingType String required minlength(2) maxlength(50),
+	settingNameClass String required minlength(2) maxlength(50),
+	settingDataType String required minlength(2) maxlength(50),
+	settingDescription String maxlength(200),
+	settingValueString String,
+	settingValueLong Long,
+	settingValueDate ZonedDateTime,
+	settingValueBoolean Boolean,
+	settingValueBlob ImageBlob,
+	settingParams String,
+	settingAttributs String,
+	settingStat Boolean
+}
+
+//GLOBAL
+entity Cloning {
+	@Id cloningId Long,
+	cloningDescription String maxlength(200),
+	cloningOldEventId Long,
+	cloningNewEventId Long,
+	cloningUserId Long,
+	cloningDate ZonedDateTime,
+	clonedEntitys String,
+	clonedParams String,
+	clonedAttributs String,
+	clonedStat Boolean
+}
+
+//EVENT
+entity PrintingServer {
+	@Id printingServerId Long,
+	printingServerName String,
+	printingServerDescription String maxlength(200),
+	printingServerHost String,
+	printingServerPort String,
+	printingServerDns String,
+	printingServerProxy String,
+	printingServerParam1 String,
+	printingServerParam2 String,
+	printingServerParam3 String,
+	printingServerStat Boolean,
+	printingServerParams String,
+	printingServerAttributs String,
+	printingServerStat Boolean
+}
+
+//EVENT
+entity CheckAccreditationHistory {
+	@Id checkAccreditationHistoryId Long,
+	checkAccreditationHistoryReadedCode String,
+	checkAccreditationHistoryUserId Long,
+	checkAccreditationHistoryResult Boolean,
+	checkAccreditationHistoryError String,
+	checkAccreditationHistoryDate ZonedDateTime,
+	checkAccreditationHistoryLocalisation String,
+	checkAccreditationHistoryIpAdresse String,
+	checkAccreditationParams String,
+	checkAccreditationAttributs String,
+	checkAccreditationHistoryStat Boolean
+}
+
+//EVENT
+entity CheckAccreditationReport {
+	@Id checkAccreditationReportId Long,
+	checkAccreditationReportDescription String maxlength(200),
+	checkAccreditationReportPersonPhoto ImageBlob,
+	checkAccreditationReportCINPhoto ImageBlob,
+	checkAccreditationReportAttachment ImageBlob,
+	checkAccreditationReportParams String,
+	checkAccreditationReportAttributs String,
+	checkAccreditationReportStat Boolean
+}
+
+//Event
+entity EventForm {
+	@Id formId Long,
+	formName String,
+	formDescription String,
+	formParams String,
+	formAttributs String,
+	formStat Boolean
+}
+//Event
+entity EventField {
+	@Id fieldId Long,
+	fieldName String,
+	fieldCategorie String,
+	fieldDescription String,
+	fieldType String,
+	fieldParams String,
+	fieldAttributs String,
+	fieldStat Boolean
+}
+//Event
+entity EventControl {
+	@Id controlId Long,
+	controlName String,
+	controlDescription String,
+	controlType String,
+	controlValueString String,
+	controlValueLong Long,
+	controlValueDate ZonedDateTime,
+	controlParams String,
+	controlAttributs String,
+	controlValueStat Boolean
+}
+
+//Form Field Control Relations
+relationship OneToMany {
+	Event{eventForm} to EventForm{event}
+}
+relationship OneToMany {
+	Event{eventField} to EventField{event}
+}
+relationship OneToMany {
+	Event{eventControl} to EventControl{event}
+}
+relationship OneToMany {
+	EventForm{eventField} to EventField{eventForm}
+}
+relationship OneToMany {
+	EventField{eventControl} to EventControl{eventField}
+}
+
+//END Form Field Control Relations
+relationship OneToMany {
+	OperationType{operationHistory} to OperationHistory{typeoperation}
+}
+relationship OneToMany {
+	City{printingCentre} to PrintingCentre{city}
+}
+relationship OneToMany {
+	Country{printingCentre} to PrintingCentre{country}
+}
+relationship OneToMany {
+	Organiz{printingCentre} to PrintingCentre{organiz}
+}
+relationship OneToMany {
+	City{site} to Site{city}
+}
+relationship OneToMany {
+	Country{city} to City{country}
+}
+relationship OneToMany {
+	Country{organiz} to Organiz{country}
+}
+relationship OneToMany {
+	City{organiz} to Organiz{city}
+}
+relationship OneToMany {
+	CodeType{code} to Code{codeType}
+}
+relationship OneToMany {
+	Category{fonction} to Fonction{category}
+}
+relationship OneToMany {
+	Accreditation{photoArchive} to PhotoArchive{accreditation}
+}
+relationship OneToMany {
+	InfoSuppType{infoSupp} to InfoSupp{infoSuppType}
+}
+relationship OneToMany {
+	Accreditation{infoSupp} to InfoSupp{Accreditation}
+}
+relationship OneToMany {
+	AttachementType{attachement} to Attachement{attachementType}
+}
+relationship OneToMany {
+	PrintingType{printingCentre} to PrintingCentre{printingType}
+}
+relationship OneToMany {
+	PrintingServer{printingCentre} to PrintingCentre{printingServer}
+}
+relationship OneToMany {
+	Accreditation{note} to Note{accreditation}
+}
+relationship OneToMany {
+	PrintingModel{printingCentre} to PrintingCentre{printingModel}
+}
+
+relationship OneToMany {
+	PrintingModel{accreditationType} to AccreditationType{printingModel}
+}
+
+relationship OneToMany {
+	PrintingModel{category} to Category{PrintingModel}
+}
+relationship OneToMany {
+	Language{event} to Event{language}
+}
+relationship OneToMany {
+	Language{setting} to Setting{language}
+}
+relationship OneToMany {
+	Language{printingCentre} to PrintingCentre{language}
+}
+
+//ManyToMany
+relationship ManyToMany {
+	Fonction{area} to Area{fonction}
+}
+relationship ManyToMany {
+	Accreditation{site} to Site{accreditation}
+}
+// Event to
+relationship OneToMany {
+	Event{area} to Area{event}
+}
+relationship OneToMany {
+	Event{fonction} to Fonction{event}
+}
+relationship OneToMany {
+	Event{category} to Category{event}
+}
+relationship OneToMany {
+	Event{printingModel} to PrintingModel{event}
+}
+relationship OneToMany {
+	Event{code} to Code{event}
+}
+relationship OneToMany {
+	Event{infoSupp} to InfoSupp{event}
+}
+relationship OneToMany {
+	Event{attachement} to Attachement{event}
+}
+relationship OneToMany {
+	Event{organiz} to Organiz{event}
+}
+relationship OneToMany {
+	Event{photoArchive} to PhotoArchive{event}
+}
+relationship OneToMany {
+	Event{site} to Site{event}
+}
+relationship OneToMany {
+	Event{accreditation} to Accreditation{event}
+}
+relationship OneToMany {
+	Event{note} to Note{event}
+}
+relationship OneToMany {
+	Event{operationHistory} to OperationHistory{event}
+}
+relationship OneToMany {
+	Event{printingCentre} to PrintingCentre{event}
+}
+relationship OneToMany {
+	Event{setting} to Setting{event}
+}
+relationship OneToMany {
+	Event{printingServer} to PrintingServer{event}
+}
+relationship OneToMany {
+	Event{checkAccreditationHistory} to CheckAccreditationHistory{event}
+}
+relationship OneToMany {
+	Event{checkAccreditationReport} to CheckAccreditationReport{event}
+}
+relationship OneToMany {
+	Event{accreditationType} to AccreditationType{event}
+}
+relationship OneToMany {
+	Event{dayPassInfo} to DayPassInfo{event}
+}
+
+//to Accreditation
+relationship OneToMany {
+	Civility{accreditation} to Accreditation{civility}
+}
+relationship OneToMany {
+	Sexe{accreditation} to Accreditation{sexe}
+}
+relationship OneToMany {
+	Nationality{accreditation} to Accreditation{nationality}
+}
+relationship OneToMany {
+	Country{accreditation} to Accreditation{country}
+}
+relationship OneToMany {
+	City{accreditation} to Accreditation{city}
+}
+relationship OneToMany {
+	Category{accreditation} to Accreditation{category}
+}
+relationship OneToMany {
+	Fonction{accreditation} to Accreditation{fonction}
+}
+relationship OneToMany {
+	Organiz{accreditation} to Accreditation{organiz}
+}
+relationship OneToMany {
+	AccreditationType{accreditation} to Accreditation{accreditationType}
+}
+relationship OneToMany {
+	Status{accreditation} to Accreditation{status}
+}
+relationship OneToMany {
+	Attachement{accreditation} to Accreditation{attachement}
+}
+relationship OneToMany {
+	Code{accreditation} to Accreditation{code}
+}
+relationship OneToMany {
+	DayPassInfo{accreditation} to Accreditation{dayPassInfo}
+}
+
+//CheckAccreditationHistory Relations
+
+relationship OneToMany {
+	CheckAccreditationHistory{checkAccreditationReport} to CheckAccreditationReport{checkAccreditationHistory}
+}
+relationship OneToMany {
+	Accreditation{checkAccreditationHistory} to CheckAccreditationHistory{accreditation}
+}
+
+//TYPE IMPRESSION PAR_CENTRE / ou PAR_CATEGORIE / PAR_EVENEMENT
+// Set pagination options
+paginate Accreditation, Organiz, CodeType, Code, Area, Category, Fonction, PrintingModel, Site, Attachement, Event, AccreditationType, AuthentificationType, Status, Civility, PhotoArchive, Nationality, Country, City, OperationType, OperationHistory, PrintingType, PrintingCentre, AttachementType, Note, InfoSuppType, InfoSupp, Language, Setting, Cloning, Sexe, PrintingServer, CheckAccreditationHistory, CheckAccreditationReport, EventForm, EventField, EventControl, DayPassInfo, LogHistory with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+angularSuffix * with sig
+
+//Filters
+
+filter Accreditation
+filter Organiz
+filter CodeType
+filter Code
+filter Area
+filter Category
+filter Fonction
+filter PrintingModel
+filter Site
+filter PhotoArchive
+filter Attachement
+filter Event
+filter AccreditationType
+filter AuthentificationType
+filter Status
+filter Civility
+filter Nationality
+filter Country
+filter City
+filter OperationType
+filter OperationHistory
+filter PrintingType
+filter PrintingCentre
+filter AttachementType
+filter Note
+filter InfoSuppType
+filter InfoSupp
+filter Language
+filter Setting
+filter Cloning
+filter Sexe
+filter PrintingServer
+filter CheckAccreditationHistory
+filter CheckAccreditationReport
+filter EventForm
+filter EventField
+filter EventControl
+filter DayPassInfo
+filter LogHistory
+

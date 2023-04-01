@@ -1,0 +1,37 @@
+{
+  "sigmaEventsApp": {
+    "operationHistory": {
+      "home": {
+        "title": "OperationHistories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Operation History を追加",
+        "createOrEditLabel": "Operation Historyを追加または編集",
+        "notFound": "No Operation Histories found"
+      },
+      "created": "A new Operation History is created with identifier {{ param }}",
+      "updated": "A Operation History is updated with identifier {{ param }}",
+      "deleted": "A Operation History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Operation History {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Operation History"
+      },
+      "operationHistoryId": "Operation History Id",
+      "operationHistoryDescription": "Operation History Description",
+      "operationHistoryDate": "Operation History Date",
+      "operationHistoryUserID": "Operation History User ID",
+      "operationHistoryOldValue": "Operation History Old Value",
+      "operationHistoryNewValue": "Operation History New Value",
+      "operationHistoryOldId": "Operation History Old Id",
+      "operationHistoryNewId": "Operation History New Id",
+      "operationHistoryImportedFile": "Operation History Imported File",
+      "operationHistoryImportedFilePath": "Operation History Imported File Path",
+      "operationHistoryParams": "Operation History Params",
+      "operationHistoryAttributs": "Operation History Attributs",
+      "operationHistoryStat": "Operation History Stat",
+      "typeoperation": "Typeoperation",
+      "event": "Event"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "sigmaEventsApp": {
+    "country": {
+      "home": {
+        "title": "Countries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Country",
+        "createOrEditLabel": "创建或编辑 Country",
+        "notFound": "No Countries found"
+      },
+      "created": "Country {{ param }} 创建成功",
+      "updated": "Country {{ param }} 更新成功",
+      "deleted": "Country {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Country {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Country"
+      },
+      "countryId": "Country Id",
+      "countryName": "Country Name",
+      "countryCodeAlpha2": "Country Code Alpha 2",
+      "countryCodeAlpha3": "Country Code Alpha 3",
+      "countryTelCode": "Country Tel Code",
+      "countryDescription": "Country Description",
+      "countryFlag": "Country Flag",
+      "countryParams": "Country Params",
+      "countryAttributs": "Country Attributs",
+      "countryStat": "Country Stat",
+      "printingCentre": "Printing Centre",
+      "city": "City",
+      "organiz": "Organiz",
+      "accreditation": "Accreditation"
+    }
+  }
+}

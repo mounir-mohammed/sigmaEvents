@@ -1,0 +1,173 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-authentification-type-sig-heading"
+        data-cy="AuthentificationTypeCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.authentificationType.home.createOrEditLabel"
+      >
+        Create or edit a Authentification Type
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.authentificationTypeId.value !== null">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeId"
+            for="field_authentificationTypeId"
+            >Authentification Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="authentificationTypeId"
+            id="field_authentificationTypeId"
+            data-cy="authentificationTypeId"
+            formControlName="authentificationTypeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeValue"
+            for="field_authentificationTypeValue"
+            >Authentification Type Value</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="authentificationTypeValue"
+            id="field_authentificationTypeValue"
+            data-cy="authentificationTypeValue"
+            formControlName="authentificationTypeValue"
+          />
+          <div
+            *ngIf="
+              editForm.get('authentificationTypeValue')!.invalid &&
+              (editForm.get('authentificationTypeValue')!.dirty || editForm.get('authentificationTypeValue')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('authentificationTypeValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('authentificationTypeValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeDescription"
+            for="field_authentificationTypeDescription"
+            >Authentification Type Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="authentificationTypeDescription"
+            id="field_authentificationTypeDescription"
+            data-cy="authentificationTypeDescription"
+            formControlName="authentificationTypeDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('authentificationTypeDescription')!.invalid &&
+              (editForm.get('authentificationTypeDescription')!.dirty || editForm.get('authentificationTypeDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('authentificationTypeDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeParams"
+            for="field_authentificationTypeParams"
+            >Authentification Type Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="authentificationTypeParams"
+            id="field_authentificationTypeParams"
+            data-cy="authentificationTypeParams"
+            formControlName="authentificationTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeAttributs"
+            for="field_authentificationTypeAttributs"
+            >Authentification Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="authentificationTypeAttributs"
+            id="field_authentificationTypeAttributs"
+            data-cy="authentificationTypeAttributs"
+            formControlName="authentificationTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeStat"
+            for="field_authentificationTypeStat"
+            >Authentification Type Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="authentificationTypeStat"
+            id="field_authentificationTypeStat"
+            data-cy="authentificationTypeStat"
+            formControlName="authentificationTypeStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

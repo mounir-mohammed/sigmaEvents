@@ -1,0 +1,55 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030514",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "operation_type",
+  "fields": [
+    {
+      "fieldName": "operationTypeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "operationTypeValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "operationTypeDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "operationTypeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationTypeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationTypeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "OperationType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "operationHistory",
+      "otherEntityRelationshipName": "typeoperation",
+      "relationshipName": "operationHistory",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,295 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-fonction-sig-heading"
+        data-cy="FonctionCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.fonction.home.createOrEditLabel"
+      >
+        Create or edit a Fonction
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.fonctionId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionId" for="field_fonctionId">Fonction Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="fonctionId"
+            id="field_fonctionId"
+            data-cy="fonctionId"
+            formControlName="fonctionId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionName" for="field_fonctionName">Fonction Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fonctionName"
+            id="field_fonctionName"
+            data-cy="fonctionName"
+            formControlName="fonctionName"
+          />
+          <div
+            *ngIf="editForm.get('fonctionName')!.invalid && (editForm.get('fonctionName')!.dirty || editForm.get('fonctionName')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fonctionName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fonctionName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionAbreviation" for="field_fonctionAbreviation"
+            >Fonction Abreviation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fonctionAbreviation"
+            id="field_fonctionAbreviation"
+            data-cy="fonctionAbreviation"
+            formControlName="fonctionAbreviation"
+          />
+          <div
+            *ngIf="
+              editForm.get('fonctionAbreviation')!.invalid &&
+              (editForm.get('fonctionAbreviation')!.dirty || editForm.get('fonctionAbreviation')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fonctionAbreviation')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionColor" for="field_fonctionColor">Fonction Color</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fonctionColor"
+            id="field_fonctionColor"
+            data-cy="fonctionColor"
+            formControlName="fonctionColor"
+          />
+          <div
+            *ngIf="
+              editForm.get('fonctionColor')!.invalid && (editForm.get('fonctionColor')!.dirty || editForm.get('fonctionColor')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fonctionColor')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionDescription" for="field_fonctionDescription"
+            >Fonction Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fonctionDescription"
+            id="field_fonctionDescription"
+            data-cy="fonctionDescription"
+            formControlName="fonctionDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('fonctionDescription')!.invalid &&
+              (editForm.get('fonctionDescription')!.dirty || editForm.get('fonctionDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('fonctionDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionLogo" for="field_fonctionLogo">Fonction Logo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('fonctionLogoContentType')!.value + ';base64,' + editForm.get('fonctionLogo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('fonctionLogo')!.value"
+              alt="fonction image"
+            />
+            <div *ngIf="editForm.get('fonctionLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('fonctionLogoContentType')!.value }}, {{ byteSize(editForm.get('fonctionLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('fonctionLogo', 'fonctionLogoContentType', 'file_fonctionLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_fonctionLogo"
+              data-cy="fonctionLogo"
+              (change)="setFileData($event, 'fonctionLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="fonctionLogo"
+            id="field_fonctionLogo"
+            data-cy="fonctionLogo"
+            formControlName="fonctionLogo"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="fonctionLogoContentType"
+            id="field_fonctionLogoContentType"
+            formControlName="fonctionLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionParams" for="field_fonctionParams"
+            >Fonction Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fonctionParams"
+            id="field_fonctionParams"
+            data-cy="fonctionParams"
+            formControlName="fonctionParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionAttributs" for="field_fonctionAttributs"
+            >Fonction Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fonctionAttributs"
+            id="field_fonctionAttributs"
+            data-cy="fonctionAttributs"
+            formControlName="fonctionAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionStat" for="field_fonctionStat">Fonction Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="fonctionStat"
+            id="field_fonctionStat"
+            data-cy="fonctionStat"
+            formControlName="fonctionStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label sigmaTranslate="sigmaEventsApp.fonction.area" for="field_areas">Area</label>
+          <select
+            class="form-control"
+            id="field_areas"
+            data-cy="area"
+            multiple
+            name="areas"
+            formControlName="areas"
+            [compareWith]="compareAreaSig"
+          >
+            <option [ngValue]="areaOption" *ngFor="let areaOption of areasSharedCollection">{{ areaOption.areaId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.category" for="field_category">Category</label>
+          <select
+            class="form-control"
+            id="field_category"
+            data-cy="category"
+            name="category"
+            formControlName="category"
+            [compareWith]="compareCategorySig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">
+              {{ categoryOption.categoryId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

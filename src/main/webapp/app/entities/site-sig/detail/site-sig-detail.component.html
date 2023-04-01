@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="site">
+      <h2 data-cy="siteDetailsHeading"><span sigmaTranslate="sigmaEventsApp.site.detail.title">Site</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteId">Site Id</span></dt>
+        <dd>
+          <span>{{ site.siteId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteName">Site Name</span></dt>
+        <dd>
+          <span>{{ site.siteName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteColor">Site Color</span></dt>
+        <dd>
+          <span>{{ site.siteColor }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteAbreviation">Site Abreviation</span></dt>
+        <dd>
+          <span>{{ site.siteAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteDescription">Site Description</span></dt>
+        <dd>
+          <span>{{ site.siteDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteLogo">Site Logo</span></dt>
+        <dd>
+          <div *ngIf="site.siteLogo">
+            <a (click)="openFile(site.siteLogo, site.siteLogoContentType)">
+              <img [src]="'data:' + site.siteLogoContentType + ';base64,' + site.siteLogo" style="max-width: 100%" alt="site image" />
+            </a>
+            {{ site.siteLogoContentType }}, {{ byteSize(site.siteLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteAdresse">Site Adresse</span></dt>
+        <dd>
+          <span>{{ site.siteAdresse }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteEmail">Site Email</span></dt>
+        <dd>
+          <span>{{ site.siteEmail }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteTel">Site Tel</span></dt>
+        <dd>
+          <span>{{ site.siteTel }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteFax">Site Fax</span></dt>
+        <dd>
+          <span>{{ site.siteFax }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteResponsableName">Site Responsable Name</span></dt>
+        <dd>
+          <span>{{ site.siteResponsableName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteParams">Site Params</span></dt>
+        <dd>
+          <span>{{ site.siteParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteAttributs">Site Attributs</span></dt>
+        <dd>
+          <span>{{ site.siteAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.siteStat">Site Stat</span></dt>
+        <dd>
+          <span>{{ site.siteStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.city">City</span></dt>
+        <dd>
+          <div *ngIf="site.city">
+            <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.site.event">Event</span></dt>
+        <dd>
+          <div *ngIf="site.event">
+            <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/site-sig', site.siteId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "printingType": {
+      "home": {
+        "title": "PrintingTypes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Printing Type を追加",
+        "createOrEditLabel": "Printing Typeを追加または編集",
+        "notFound": "No Printing Types found"
+      },
+      "created": "A new Printing Type is created with identifier {{ param }}",
+      "updated": "A Printing Type is updated with identifier {{ param }}",
+      "deleted": "A Printing Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Printing Type {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Printing Type"
+      },
+      "printingTypeId": "Printing Type Id",
+      "printingTypeValue": "Printing Type Value",
+      "printingTypeDescription": "Printing Type Description",
+      "printingTypeParams": "Printing Type Params",
+      "printingTypeAttributs": "Printing Type Attributs",
+      "printingTypeStat": "Printing Type Stat",
+      "printingCentre": "Printing Centre"
+    }
+  }
+}

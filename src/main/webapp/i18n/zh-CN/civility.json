@@ -1,0 +1,30 @@
+{
+  "sigmaEventsApp": {
+    "civility": {
+      "home": {
+        "title": "Civilities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Civility",
+        "createOrEditLabel": "创建或编辑 Civility",
+        "notFound": "No Civilities found"
+      },
+      "created": "Civility {{ param }} 创建成功",
+      "updated": "Civility {{ param }} 更新成功",
+      "deleted": "Civility {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Civility {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Civility"
+      },
+      "civilityId": "Civility Id",
+      "civilityValue": "Civility Value",
+      "civilityDescription": "Civility Description",
+      "civilityCode": "Civility Code",
+      "civilityParams": "Civility Params",
+      "civilityAttributs": "Civility Attributs",
+      "civilityStat": "Civility Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

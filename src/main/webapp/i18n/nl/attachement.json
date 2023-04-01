@@ -1,0 +1,34 @@
+{
+  "sigmaEventsApp": {
+    "attachement": {
+      "home": {
+        "title": "Attachements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Attachement",
+        "createOrEditLabel": "Maak of wijzig een Attachement",
+        "notFound": "No Attachements found"
+      },
+      "created": "A new Attachement is created with identifier {{ param }}",
+      "updated": "A Attachement is updated with identifier {{ param }}",
+      "deleted": "A Attachement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Attachement {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Attachement"
+      },
+      "attachementId": "Attachement Id",
+      "attachementName": "Attachement Name",
+      "attachementPath": "Attachement Path",
+      "attachementBlob": "Attachement Blob",
+      "attachementDescription": "Attachement Description",
+      "attachementPhoto": "Attachement Photo",
+      "attachementParams": "Attachement Params",
+      "attachementAttributs": "Attachement Attributs",
+      "attachementStat": "Attachement Stat",
+      "accreditation": "Accreditation",
+      "attachementType": "Attachement Type",
+      "event": "Event"
+    }
+  }
+}

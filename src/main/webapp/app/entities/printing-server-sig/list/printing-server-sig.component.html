@@ -1,0 +1,211 @@
+<div>
+  <h2 id="page-heading" data-cy="PrintingServerHeading">
+    <span sigmaTranslate="sigmaEventsApp.printingServer.home.title">Printing Servers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingServer.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-printing-server-sig"
+        [routerLink]="['/printing-server-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingServer.home.createLabel"> Create a new Printing Server </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="printingServers?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.printingServer.home.notFound">No Printing Servers found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="printingServers && printingServers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="printingServerId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerId">Printing Server Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerName">Printing Server Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerDescription">Printing Server Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerHost">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerHost">Printing Server Host</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerPort">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerPort">Printing Server Port</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerDns">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerDns">Printing Server Dns</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerProxy">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerProxy">Printing Server Proxy</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerParam1">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerParam1">Printing Server Param 1</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerParam2">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerParam2">Printing Server Param 2</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerParam3">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerParam3">Printing Server Param 3</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerStat">Printing Server Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerParams">Printing Server Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServerAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.printingServerAttributs">Printing Server Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingServer.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let printingServer of printingServers; trackBy: trackPrintingServerId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/printing-server-sig', printingServer.printingServerId, 'view']">{{ printingServer.printingServerId }}</a>
+          </td>
+          <td>{{ printingServer.printingServerName }}</td>
+          <td>{{ printingServer.printingServerDescription }}</td>
+          <td>{{ printingServer.printingServerHost }}</td>
+          <td>{{ printingServer.printingServerPort }}</td>
+          <td>{{ printingServer.printingServerDns }}</td>
+          <td>{{ printingServer.printingServerProxy }}</td>
+          <td>{{ printingServer.printingServerParam1 }}</td>
+          <td>{{ printingServer.printingServerParam2 }}</td>
+          <td>{{ printingServer.printingServerParam3 }}</td>
+          <td>{{ printingServer.printingServerStat }}</td>
+          <td>{{ printingServer.printingServerParams }}</td>
+          <td>{{ printingServer.printingServerAttributs }}</td>
+          <td>
+            <div *ngIf="printingServer.event">
+              <a [routerLink]="['/event-sig', printingServer.event.eventId, 'view']">{{ printingServer.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/printing-centre-sig']"
+                [queryParams]="{ 'filter[printingServerId.in]': printingServer.printingServerId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.printingServer.printingCentre' | translate) }"
+                  >Show Printing Centre</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/printing-server-sig', printingServer.printingServerId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/printing-server-sig', printingServer.printingServerId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(printingServer)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="printingServers && printingServers.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

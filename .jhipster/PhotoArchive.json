@@ -1,0 +1,70 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025814",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "photo_archive",
+  "fields": [
+    {
+      "fieldName": "photoArchiveId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "photoArchiveName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "photoArchivePath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "photoArchivePhoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "photoArchiveDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "photoArchiveParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "photoArchiveAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "photoArchiveStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "PhotoArchive",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "photoArchive",
+      "relationshipName": "accreditation",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "photoArchive",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

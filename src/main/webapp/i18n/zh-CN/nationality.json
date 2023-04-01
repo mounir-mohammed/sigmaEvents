@@ -1,0 +1,31 @@
+{
+  "sigmaEventsApp": {
+    "nationality": {
+      "home": {
+        "title": "Nationalities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Nationality",
+        "createOrEditLabel": "创建或编辑 Nationality",
+        "notFound": "No Nationalities found"
+      },
+      "created": "Nationality {{ param }} 创建成功",
+      "updated": "Nationality {{ param }} 更新成功",
+      "deleted": "Nationality {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Nationality {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Nationality"
+      },
+      "nationalityId": "Nationality Id",
+      "nationalityValue": "Nationality Value",
+      "nationalityAbreviation": "Nationality Abreviation",
+      "nationalityDescription": "Nationality Description",
+      "nationalityFlag": "Nationality Flag",
+      "nationalityParams": "Nationality Params",
+      "nationalityAttributs": "Nationality Attributs",
+      "nationalityStat": "Nationality Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

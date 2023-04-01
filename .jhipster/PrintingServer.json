@@ -1,0 +1,87 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031314",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "printing_server",
+  "fields": [
+    {
+      "fieldName": "printingServerId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "printingServerName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "printingServerHost",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerPort",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerDns",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerProxy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerParam1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerParam2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerParam3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerStat",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "printingServerParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingServerAttributs",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "PrintingServer",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "printingServer",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "printingServer",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

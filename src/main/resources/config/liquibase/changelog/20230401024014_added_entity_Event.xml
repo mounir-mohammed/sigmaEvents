@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Event.
+    -->
+    <changeSet id="20230401024014-1" author="jhipster">
+        <createTable tableName="event">
+            <column name="event_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="event_name" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="event_color" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_description" type="varchar(200)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_abreviation" type="varchar(10)">
+                <constraints nullable="true" />
+            </column>
+            <column name="eventdate_start" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="eventdate_end" type="${datetimeType}">
+                <constraints nullable="false" />
+            </column>
+            <column name="event_printing_model_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_logo" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_logo_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_center" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_center_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_right" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_right_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_left" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_left_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_bas" type="${blobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_banner_bas_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_with_photo" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_no_code" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_code_no_filter" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_code_by_type_accreditation" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_code_by_type_categorie" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_code_by_type_fonction" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_code_by_type_organiz" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_default_printing_language" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_p_center_printing_language" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_imported" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_archived" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_archive_file_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_domaine" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_sous_domaine" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_cloned" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_params" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_attributs" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="event_stat" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="language_language_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="event" columnName="eventdate_start" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="event" columnName="eventdate_end" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20230401024014-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/event.csv"
+                  separator=";"
+                  tableName="event"
+                  usePreparedStatements="true">
+            <column name="event_id" type="numeric"/>
+            <column name="event_name" type="string"/>
+            <column name="event_color" type="string"/>
+            <column name="event_description" type="string"/>
+            <column name="event_abreviation" type="string"/>
+            <column name="eventdate_start" type="date"/>
+            <column name="eventdate_end" type="date"/>
+            <column name="event_printing_model_id" type="numeric"/>
+            <column name="event_logo" type="blob"/>
+            <column name="event_logo_content_type" type="string"/>
+            <column name="event_banner_center" type="blob"/>
+            <column name="event_banner_center_content_type" type="string"/>
+            <column name="event_banner_right" type="blob"/>
+            <column name="event_banner_right_content_type" type="string"/>
+            <column name="event_banner_left" type="blob"/>
+            <column name="event_banner_left_content_type" type="string"/>
+            <column name="event_banner_bas" type="blob"/>
+            <column name="event_banner_bas_content_type" type="string"/>
+            <column name="event_with_photo" type="boolean"/>
+            <column name="event_no_code" type="boolean"/>
+            <column name="event_code_no_filter" type="boolean"/>
+            <column name="event_code_by_type_accreditation" type="boolean"/>
+            <column name="event_code_by_type_categorie" type="boolean"/>
+            <column name="event_code_by_type_fonction" type="boolean"/>
+            <column name="event_code_by_type_organiz" type="boolean"/>
+            <column name="event_default_printing_language" type="boolean"/>
+            <column name="event_p_center_printing_language" type="boolean"/>
+            <column name="event_imported" type="boolean"/>
+            <column name="event_archived" type="boolean"/>
+            <column name="event_archive_file_name" type="string"/>
+            <column name="event_url" type="string"/>
+            <column name="event_domaine" type="string"/>
+            <column name="event_sous_domaine" type="string"/>
+            <column name="event_cloned" type="boolean"/>
+            <column name="event_params" type="string"/>
+            <column name="event_attributs" type="string"/>
+            <column name="event_stat" type="boolean"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

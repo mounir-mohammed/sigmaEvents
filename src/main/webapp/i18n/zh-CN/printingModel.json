@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "printingModel": {
+      "home": {
+        "title": "Printing Models",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Printing Model",
+        "createOrEditLabel": "创建或编辑 Printing Model",
+        "notFound": "No Printing Models found"
+      },
+      "created": "Printing Model {{ param }} 创建成功",
+      "updated": "Printing Model {{ param }} 更新成功",
+      "deleted": "Printing Model {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Printing Model {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Printing Model"
+      },
+      "printingModelId": "Printing Model Id",
+      "printingModelName": "Printing Model Name",
+      "printingModelFile": "Printing Model File",
+      "printingModelPath": "Printing Model Path",
+      "printingModelDescription": "Printing Model Description",
+      "printingModelData": "Printing Model Data",
+      "printingModelParams": "Printing Model Params",
+      "printingModelAttributs": "Printing Model Attributs",
+      "printingModelStat": "Printing Model Stat",
+      "printingCentre": "Printing Centre",
+      "accreditationType": "Accreditation Type",
+      "category": "Category",
+      "event": "Event"
+    }
+  }
+}

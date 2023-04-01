@@ -1,0 +1,38 @@
+{
+  "sigmaEventsApp": {
+    "setting": {
+      "home": {
+        "title": "Settings",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Setting erstellen",
+        "createOrEditLabel": "Setting erstellen oder bearbeiten",
+        "notFound": "Keine Settings gefunden"
+      },
+      "created": "Setting erstellt mit ID {{ param }}",
+      "updated": "Setting aktualisiert mit ID {{ param }}",
+      "deleted": "Setting gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Setting {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Setting"
+      },
+      "settingId": "Setting Id",
+      "settingParentId": "Setting Parent Id",
+      "settingType": "Setting Type",
+      "settingNameClass": "Setting Name Class",
+      "settingDataType": "Setting Data Type",
+      "settingDescription": "Setting Description",
+      "settingValueString": "Setting Value String",
+      "settingValueLong": "Setting Value Long",
+      "settingValueDate": "Setting Value Date",
+      "settingValueBoolean": "Setting Value Boolean",
+      "settingValueBlob": "Setting Value Blob",
+      "settingParams": "Setting Params",
+      "settingAttributs": "Setting Attributs",
+      "settingStat": "Setting Stat",
+      "language": "Language",
+      "event": "Event"
+    }
+  }
+}

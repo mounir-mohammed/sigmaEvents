@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sexe">
+      <h2 data-cy="sexeDetailsHeading"><span sigmaTranslate="sigmaEventsApp.sexe.detail.title">Sexe</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.sexe.sexeId">Sexe Id</span></dt>
+        <dd>
+          <span>{{ sexe.sexeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.sexe.sexeValue">Sexe Value</span></dt>
+        <dd>
+          <span>{{ sexe.sexeValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.sexe.sexeDescription">Sexe Description</span></dt>
+        <dd>
+          <span>{{ sexe.sexeDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.sexe.sexeTypeParams">Sexe Type Params</span></dt>
+        <dd>
+          <span>{{ sexe.sexeTypeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.sexe.sexeTypeAttributs">Sexe Type Attributs</span></dt>
+        <dd>
+          <span>{{ sexe.sexeTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.sexe.sexeStat">Sexe Stat</span></dt>
+        <dd>
+          <span>{{ sexe.sexeStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sexe-sig', sexe.sexeId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

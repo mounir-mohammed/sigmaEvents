@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "category": {
+      "home": {
+        "title": "Categories",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Category erstellen",
+        "createOrEditLabel": "Category erstellen oder bearbeiten",
+        "notFound": "Keine Categories gefunden"
+      },
+      "created": "Category erstellt mit ID {{ param }}",
+      "updated": "Category aktualisiert mit ID {{ param }}",
+      "deleted": "Category gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Category {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Category"
+      },
+      "categoryId": "Category Id",
+      "categoryName": "Category Name",
+      "categoryAbreviation": "Category Abreviation",
+      "categoryColor": "Category Color",
+      "categoryDescription": "Category Description",
+      "categoryLogo": "Category Logo",
+      "categoryParams": "Category Params",
+      "categoryAttributs": "Category Attributs",
+      "categoryStat": "Category Stat",
+      "fonction": "Fonction",
+      "accreditation": "Accreditation",
+      "printingModel": "Printing Model",
+      "event": "Event"
+    }
+  }
+}

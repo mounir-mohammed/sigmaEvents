@@ -1,0 +1,88 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030414",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "day_pass_info",
+  "fields": [
+    {
+      "fieldName": "dayPassInfoId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "dayPassInfoName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dayPassDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "dayPassLogo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "dayPassInfoCreationDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "dayPassInfoUpdateDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "dayPassInfoCreatedByuser",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dayPassInfoDateStart",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "dayPassInfoDateEnd",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "dayPassInfoNumber",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "dayPassParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dayPassAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dayPassInfoStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "DayPassInfo",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "dayPassInfo",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "dayPassInfo",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

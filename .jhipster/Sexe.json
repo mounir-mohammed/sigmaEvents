@@ -1,0 +1,55 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030614",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "sexe",
+  "fields": [
+    {
+      "fieldName": "sexeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "sexeValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "sexeDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "sexeTypeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexeTypeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sexeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Sexe",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "sexe",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="cloning">
+      <h2 data-cy="cloningDetailsHeading"><span sigmaTranslate="sigmaEventsApp.cloning.detail.title">Cloning</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.cloningId">Cloning Id</span></dt>
+        <dd>
+          <span>{{ cloning.cloningId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.cloningDescription">Cloning Description</span></dt>
+        <dd>
+          <span>{{ cloning.cloningDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.cloningOldEventId">Cloning Old Event Id</span></dt>
+        <dd>
+          <span>{{ cloning.cloningOldEventId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.cloningNewEventId">Cloning New Event Id</span></dt>
+        <dd>
+          <span>{{ cloning.cloningNewEventId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.cloningUserId">Cloning User Id</span></dt>
+        <dd>
+          <span>{{ cloning.cloningUserId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.cloningDate">Cloning Date</span></dt>
+        <dd>
+          <span>{{ cloning.cloningDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.clonedEntitys">Cloned Entitys</span></dt>
+        <dd>
+          <span>{{ cloning.clonedEntitys }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.clonedParams">Cloned Params</span></dt>
+        <dd>
+          <span>{{ cloning.clonedParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.clonedAttributs">Cloned Attributs</span></dt>
+        <dd>
+          <span>{{ cloning.clonedAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.cloning.clonedStat">Cloned Stat</span></dt>
+        <dd>
+          <span>{{ cloning.clonedStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/cloning-sig', cloning.cloningId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

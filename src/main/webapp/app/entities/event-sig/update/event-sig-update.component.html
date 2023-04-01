@@ -1,0 +1,726 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sigma-event-sig-heading" data-cy="EventCreateUpdateHeading" sigmaTranslate="sigmaEventsApp.event.home.createOrEditLabel">
+        Create or edit a Event
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.eventId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventId" for="field_eventId">Event Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="eventId"
+            id="field_eventId"
+            data-cy="eventId"
+            formControlName="eventId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventName" for="field_eventName">Event Name</label>
+          <input type="text" class="form-control" name="eventName" id="field_eventName" data-cy="eventName" formControlName="eventName" />
+          <div *ngIf="editForm.get('eventName')!.invalid && (editForm.get('eventName')!.dirty || editForm.get('eventName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventName')?.errors?.minlength"
+              sigmaTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 5 }"
+            >
+              This field is required to be at least 5 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventColor" for="field_eventColor">Event Color</label>
+          <input
+            type="text"
+            class="form-control"
+            name="eventColor"
+            id="field_eventColor"
+            data-cy="eventColor"
+            formControlName="eventColor"
+          />
+          <div *ngIf="editForm.get('eventColor')!.invalid && (editForm.get('eventColor')!.dirty || editForm.get('eventColor')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventColor')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventDescription" for="field_eventDescription"
+            >Event Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="eventDescription"
+            id="field_eventDescription"
+            data-cy="eventDescription"
+            formControlName="eventDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('eventDescription')!.invalid &&
+              (editForm.get('eventDescription')!.dirty || editForm.get('eventDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventAbreviation" for="field_eventAbreviation"
+            >Event Abreviation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="eventAbreviation"
+            id="field_eventAbreviation"
+            data-cy="eventAbreviation"
+            formControlName="eventAbreviation"
+          />
+          <div
+            *ngIf="
+              editForm.get('eventAbreviation')!.invalid &&
+              (editForm.get('eventAbreviation')!.dirty || editForm.get('eventAbreviation')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventAbreviation')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventdateStart" for="field_eventdateStart">Eventdate Start</label>
+          <div class="d-flex">
+            <input
+              id="field_eventdateStart"
+              data-cy="eventdateStart"
+              type="datetime-local"
+              class="form-control"
+              name="eventdateStart"
+              formControlName="eventdateStart"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('eventdateStart')!.invalid && (editForm.get('eventdateStart')!.dirty || editForm.get('eventdateStart')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventdateStart')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('eventdateStart')?.errors?.datetimelocal"
+              sigmaTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventdateEnd" for="field_eventdateEnd">Eventdate End</label>
+          <div class="d-flex">
+            <input
+              id="field_eventdateEnd"
+              data-cy="eventdateEnd"
+              type="datetime-local"
+              class="form-control"
+              name="eventdateEnd"
+              formControlName="eventdateEnd"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="editForm.get('eventdateEnd')!.invalid && (editForm.get('eventdateEnd')!.dirty || editForm.get('eventdateEnd')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('eventdateEnd')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('eventdateEnd')?.errors?.datetimelocal"
+              sigmaTranslate="entity.validation.datetimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventPrintingModelId" for="field_eventPrintingModelId"
+            >Event Printing Model Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="eventPrintingModelId"
+            id="field_eventPrintingModelId"
+            data-cy="eventPrintingModelId"
+            formControlName="eventPrintingModelId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventLogo" for="field_eventLogo">Event Logo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('eventLogoContentType')!.value + ';base64,' + editForm.get('eventLogo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('eventLogo')!.value"
+              alt="event image"
+            />
+            <div *ngIf="editForm.get('eventLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('eventLogoContentType')!.value }}, {{ byteSize(editForm.get('eventLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('eventLogo', 'eventLogoContentType', 'file_eventLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_eventLogo"
+              data-cy="eventLogo"
+              (change)="setFileData($event, 'eventLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="eventLogo" id="field_eventLogo" data-cy="eventLogo" formControlName="eventLogo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventLogoContentType"
+            id="field_eventLogoContentType"
+            formControlName="eventLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventBannerCenter" for="field_eventBannerCenter"
+            >Event Banner Center</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('eventBannerCenterContentType')!.value + ';base64,' + editForm.get('eventBannerCenter')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('eventBannerCenter')!.value"
+              alt="event image"
+            />
+            <div *ngIf="editForm.get('eventBannerCenter')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('eventBannerCenterContentType')!.value }}, {{ byteSize(editForm.get('eventBannerCenter')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('eventBannerCenter', 'eventBannerCenterContentType', 'file_eventBannerCenter')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_eventBannerCenter"
+              data-cy="eventBannerCenter"
+              (change)="setFileData($event, 'eventBannerCenter', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerCenter"
+            id="field_eventBannerCenter"
+            data-cy="eventBannerCenter"
+            formControlName="eventBannerCenter"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerCenterContentType"
+            id="field_eventBannerCenterContentType"
+            formControlName="eventBannerCenterContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventBannerRight" for="field_eventBannerRight"
+            >Event Banner Right</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('eventBannerRightContentType')!.value + ';base64,' + editForm.get('eventBannerRight')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('eventBannerRight')!.value"
+              alt="event image"
+            />
+            <div *ngIf="editForm.get('eventBannerRight')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('eventBannerRightContentType')!.value }}, {{ byteSize(editForm.get('eventBannerRight')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('eventBannerRight', 'eventBannerRightContentType', 'file_eventBannerRight')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_eventBannerRight"
+              data-cy="eventBannerRight"
+              (change)="setFileData($event, 'eventBannerRight', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerRight"
+            id="field_eventBannerRight"
+            data-cy="eventBannerRight"
+            formControlName="eventBannerRight"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerRightContentType"
+            id="field_eventBannerRightContentType"
+            formControlName="eventBannerRightContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventBannerLeft" for="field_eventBannerLeft"
+            >Event Banner Left</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('eventBannerLeftContentType')!.value + ';base64,' + editForm.get('eventBannerLeft')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('eventBannerLeft')!.value"
+              alt="event image"
+            />
+            <div *ngIf="editForm.get('eventBannerLeft')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('eventBannerLeftContentType')!.value }}, {{ byteSize(editForm.get('eventBannerLeft')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('eventBannerLeft', 'eventBannerLeftContentType', 'file_eventBannerLeft')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_eventBannerLeft"
+              data-cy="eventBannerLeft"
+              (change)="setFileData($event, 'eventBannerLeft', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerLeft"
+            id="field_eventBannerLeft"
+            data-cy="eventBannerLeft"
+            formControlName="eventBannerLeft"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerLeftContentType"
+            id="field_eventBannerLeftContentType"
+            formControlName="eventBannerLeftContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventBannerBas" for="field_eventBannerBas">Event Banner Bas</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('eventBannerBasContentType')!.value + ';base64,' + editForm.get('eventBannerBas')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('eventBannerBas')!.value"
+              alt="event image"
+            />
+            <div *ngIf="editForm.get('eventBannerBas')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('eventBannerBasContentType')!.value }}, {{ byteSize(editForm.get('eventBannerBas')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('eventBannerBas', 'eventBannerBasContentType', 'file_eventBannerBas')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_eventBannerBas"
+              data-cy="eventBannerBas"
+              (change)="setFileData($event, 'eventBannerBas', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerBas"
+            id="field_eventBannerBas"
+            data-cy="eventBannerBas"
+            formControlName="eventBannerBas"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="eventBannerBasContentType"
+            id="field_eventBannerBasContentType"
+            formControlName="eventBannerBasContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventWithPhoto" for="field_eventWithPhoto">Event With Photo</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventWithPhoto"
+            id="field_eventWithPhoto"
+            data-cy="eventWithPhoto"
+            formControlName="eventWithPhoto"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventNoCode" for="field_eventNoCode">Event No Code</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventNoCode"
+            id="field_eventNoCode"
+            data-cy="eventNoCode"
+            formControlName="eventNoCode"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventCodeNoFilter" for="field_eventCodeNoFilter"
+            >Event Code No Filter</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventCodeNoFilter"
+            id="field_eventCodeNoFilter"
+            data-cy="eventCodeNoFilter"
+            formControlName="eventCodeNoFilter"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeAccreditation"
+            for="field_eventCodeByTypeAccreditation"
+            >Event Code By Type Accreditation</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventCodeByTypeAccreditation"
+            id="field_eventCodeByTypeAccreditation"
+            data-cy="eventCodeByTypeAccreditation"
+            formControlName="eventCodeByTypeAccreditation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeCategorie" for="field_eventCodeByTypeCategorie"
+            >Event Code By Type Categorie</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventCodeByTypeCategorie"
+            id="field_eventCodeByTypeCategorie"
+            data-cy="eventCodeByTypeCategorie"
+            formControlName="eventCodeByTypeCategorie"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeFonction" for="field_eventCodeByTypeFonction"
+            >Event Code By Type Fonction</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventCodeByTypeFonction"
+            id="field_eventCodeByTypeFonction"
+            data-cy="eventCodeByTypeFonction"
+            formControlName="eventCodeByTypeFonction"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeOrganiz" for="field_eventCodeByTypeOrganiz"
+            >Event Code By Type Organiz</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventCodeByTypeOrganiz"
+            id="field_eventCodeByTypeOrganiz"
+            data-cy="eventCodeByTypeOrganiz"
+            formControlName="eventCodeByTypeOrganiz"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.event.eventDefaultPrintingLanguage"
+            for="field_eventDefaultPrintingLanguage"
+            >Event Default Printing Language</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventDefaultPrintingLanguage"
+            id="field_eventDefaultPrintingLanguage"
+            data-cy="eventDefaultPrintingLanguage"
+            formControlName="eventDefaultPrintingLanguage"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.event.eventPCenterPrintingLanguage"
+            for="field_eventPCenterPrintingLanguage"
+            >Event P Center Printing Language</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventPCenterPrintingLanguage"
+            id="field_eventPCenterPrintingLanguage"
+            data-cy="eventPCenterPrintingLanguage"
+            formControlName="eventPCenterPrintingLanguage"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventImported" for="field_eventImported">Event Imported</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventImported"
+            id="field_eventImported"
+            data-cy="eventImported"
+            formControlName="eventImported"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventArchived" for="field_eventArchived">Event Archived</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventArchived"
+            id="field_eventArchived"
+            data-cy="eventArchived"
+            formControlName="eventArchived"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventArchiveFileName" for="field_eventArchiveFileName"
+            >Event Archive File Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="eventArchiveFileName"
+            id="field_eventArchiveFileName"
+            data-cy="eventArchiveFileName"
+            formControlName="eventArchiveFileName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventURL" for="field_eventURL">Event URL</label>
+          <input type="text" class="form-control" name="eventURL" id="field_eventURL" data-cy="eventURL" formControlName="eventURL" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventDomaine" for="field_eventDomaine">Event Domaine</label>
+          <input
+            type="text"
+            class="form-control"
+            name="eventDomaine"
+            id="field_eventDomaine"
+            data-cy="eventDomaine"
+            formControlName="eventDomaine"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventSousDomaine" for="field_eventSousDomaine"
+            >Event Sous Domaine</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="eventSousDomaine"
+            id="field_eventSousDomaine"
+            data-cy="eventSousDomaine"
+            formControlName="eventSousDomaine"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventCloned" for="field_eventCloned">Event Cloned</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="eventCloned"
+            id="field_eventCloned"
+            data-cy="eventCloned"
+            formControlName="eventCloned"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventParams" for="field_eventParams">Event Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="eventParams"
+            id="field_eventParams"
+            data-cy="eventParams"
+            formControlName="eventParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventAttributs" for="field_eventAttributs">Event Attributs</label>
+          <input
+            type="text"
+            class="form-control"
+            name="eventAttributs"
+            id="field_eventAttributs"
+            data-cy="eventAttributs"
+            formControlName="eventAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.eventStat" for="field_eventStat">Event Stat</label>
+          <input type="checkbox" class="form-check" name="eventStat" id="field_eventStat" data-cy="eventStat" formControlName="eventStat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.event.language" for="field_language">Language</label>
+          <select
+            class="form-control"
+            id="field_language"
+            data-cy="language"
+            name="language"
+            formControlName="language"
+            [compareWith]="compareLanguageSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="languageOption" *ngFor="let languageOption of languagesSharedCollection">
+              {{ languageOption.languageId }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

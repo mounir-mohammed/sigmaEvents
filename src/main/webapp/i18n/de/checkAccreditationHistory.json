@@ -1,0 +1,36 @@
+{
+  "sigmaEventsApp": {
+    "checkAccreditationHistory": {
+      "home": {
+        "title": "Check Accreditation Histories",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Check Accreditation History erstellen",
+        "createOrEditLabel": "Check Accreditation History erstellen oder bearbeiten",
+        "notFound": "Keine Check Accreditation Histories gefunden"
+      },
+      "created": "Check Accreditation History erstellt mit ID {{ param }}",
+      "updated": "Check Accreditation History aktualisiert mit ID {{ param }}",
+      "deleted": "Check Accreditation History gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Check Accreditation History {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Check Accreditation History"
+      },
+      "checkAccreditationHistoryId": "Check Accreditation History Id",
+      "checkAccreditationHistoryReadedCode": "Check Accreditation History Readed Code",
+      "checkAccreditationHistoryUserId": "Check Accreditation History User Id",
+      "checkAccreditationHistoryResult": "Check Accreditation History Result",
+      "checkAccreditationHistoryError": "Check Accreditation History Error",
+      "checkAccreditationHistoryDate": "Check Accreditation History Date",
+      "checkAccreditationHistoryLocalisation": "Check Accreditation History Localisation",
+      "checkAccreditationHistoryIpAdresse": "Check Accreditation History Ip Adresse",
+      "checkAccreditationParams": "Check Accreditation Params",
+      "checkAccreditationAttributs": "Check Accreditation Attributs",
+      "checkAccreditationHistoryStat": "Check Accreditation History Stat",
+      "checkAccreditationReport": "Check Accreditation Report",
+      "event": "Event",
+      "accreditation": "Accreditation"
+    }
+  }
+}

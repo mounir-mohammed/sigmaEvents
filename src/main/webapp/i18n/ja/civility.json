@@ -1,0 +1,30 @@
+{
+  "sigmaEventsApp": {
+    "civility": {
+      "home": {
+        "title": "Civilities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Civility を追加",
+        "createOrEditLabel": "Civilityを追加または編集",
+        "notFound": "No Civilities found"
+      },
+      "created": "A new Civility is created with identifier {{ param }}",
+      "updated": "A Civility is updated with identifier {{ param }}",
+      "deleted": "A Civility is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Civility {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Civility"
+      },
+      "civilityId": "Civility Id",
+      "civilityValue": "Civility Value",
+      "civilityDescription": "Civility Description",
+      "civilityCode": "Civility Code",
+      "civilityParams": "Civility Params",
+      "civilityAttributs": "Civility Attributs",
+      "civilityStat": "Civility Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

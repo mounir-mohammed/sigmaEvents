@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="code">
+      <h2 data-cy="codeDetailsHeading"><span sigmaTranslate="sigmaEventsApp.code.detail.title">Code</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeId">Code Id</span></dt>
+        <dd>
+          <span>{{ code.codeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeForEntity">Code For Entity</span></dt>
+        <dd>
+          <span>{{ code.codeForEntity }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeEntityValue">Code Entity Value</span></dt>
+        <dd>
+          <span>{{ code.codeEntityValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeValue">Code Value</span></dt>
+        <dd>
+          <span>{{ code.codeValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeUsed">Code Used</span></dt>
+        <dd>
+          <span>{{ code.codeUsed }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeParams">Code Params</span></dt>
+        <dd>
+          <span>{{ code.codeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeAttributs">Code Attributs</span></dt>
+        <dd>
+          <span>{{ code.codeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeStat">Code Stat</span></dt>
+        <dd>
+          <span>{{ code.codeStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.codeType">Code Type</span></dt>
+        <dd>
+          <div *ngIf="code.codeType">
+            <a [routerLink]="['/code-type-sig', code.codeType.codeTypeId, 'view']">{{ code.codeType.codeTypeId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.code.event">Event</span></dt>
+        <dd>
+          <div *ngIf="code.event">
+            <a [routerLink]="['/event-sig', code.event.eventId, 'view']">{{ code.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/code-sig', code.codeId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

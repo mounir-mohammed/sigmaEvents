@@ -1,0 +1,233 @@
+<div>
+  <h2 id="page-heading" data-cy="CountryHeading">
+    <span sigmaTranslate="sigmaEventsApp.country.home.title">Countries</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.country.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-country-sig"
+        [routerLink]="['/country-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.country.home.createLabel"> Create a new Country </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="countries?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.country.home.notFound">No Countries found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="countries && countries.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="countryId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryId">Country Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryName">Country Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryCodeAlpha2">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryCodeAlpha2">Country Code Alpha 2</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryCodeAlpha3">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryCodeAlpha3">Country Code Alpha 3</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryTelCode">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryTelCode">Country Tel Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryDescription">Country Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryFlag">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryFlag">Country Flag</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryParams">Country Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryAttributs">Country Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="countryStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.country.countryStat">Country Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let country of countries; trackBy: trackCountryId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/country-sig', country.countryId, 'view']">{{ country.countryId }}</a>
+          </td>
+          <td>{{ country.countryName }}</td>
+          <td>{{ country.countryCodeAlpha2 }}</td>
+          <td>{{ country.countryCodeAlpha3 }}</td>
+          <td>{{ country.countryTelCode }}</td>
+          <td>{{ country.countryDescription }}</td>
+          <td>
+            <a *ngIf="country.countryFlag" (click)="openFile(country.countryFlag, country.countryFlagContentType)">
+              <img
+                [src]="'data:' + country.countryFlagContentType + ';base64,' + country.countryFlag"
+                style="max-height: 30px"
+                alt="country image"
+              />
+            </a>
+            <span *ngIf="country.countryFlag">{{ country.countryFlagContentType }}, {{ byteSize(country.countryFlag) }}</span>
+          </td>
+          <td>{{ country.countryParams }}</td>
+          <td>{{ country.countryAttributs }}</td>
+          <td>{{ country.countryStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/printing-centre-sig']"
+                [queryParams]="{ 'filter[countryId.in]': country.countryId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.country.printingCentre' | translate) }"
+                  >Show Printing Centre</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/city-sig']"
+                [queryParams]="{ 'filter[countryId.in]': country.countryId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.country.city' | translate) }"
+                  >Show City</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/organiz-sig']"
+                [queryParams]="{ 'filter[countryId.in]': country.countryId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.country.organiz' | translate) }"
+                  >Show Organiz</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[countryId.in]': country.countryId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.country.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/country-sig', country.countryId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/country-sig', country.countryId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(country)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="countries && countries.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "attachementType": {
+      "home": {
+        "title": "AttachementTypes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Attachement Type を追加",
+        "createOrEditLabel": "Attachement Typeを追加または編集",
+        "notFound": "No Attachement Types found"
+      },
+      "created": "A new Attachement Type is created with identifier {{ param }}",
+      "updated": "A Attachement Type is updated with identifier {{ param }}",
+      "deleted": "A Attachement Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Attachement Type {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Attachement Type"
+      },
+      "attachementTypeId": "Attachement Type Id",
+      "attachementTypeName": "Attachement Type Name",
+      "attachementTypeDescription": "Attachement Type Description",
+      "attachementTypeParams": "Attachement Type Params",
+      "attachementTypeAttributs": "Attachement Type Attributs",
+      "attachementTypeStat": "Attachement Type Stat",
+      "attachement": "Attachement"
+    }
+  }
+}

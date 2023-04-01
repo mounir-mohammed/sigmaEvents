@@ -1,0 +1,42 @@
+{
+  "sigmaEventsApp": {
+    "printingCentre": {
+      "home": {
+        "title": "Printing Centres",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Printing Centre",
+        "createOrEditLabel": "创建或编辑 Printing Centre",
+        "notFound": "No Printing Centres found"
+      },
+      "created": "Printing Centre {{ param }} 创建成功",
+      "updated": "Printing Centre {{ param }} 更新成功",
+      "deleted": "Printing Centre {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Printing Centre {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Printing Centre"
+      },
+      "printingCentreId": "Printing Centre Id",
+      "printingCentreDescription": "Printing Centre Description",
+      "printingCentreName": "Printing Centre Name",
+      "printingCentreLogo": "Printing Centre Logo",
+      "printingCentreAdresse": "Printing Centre Adresse",
+      "printingCentreEmail": "Printing Centre Email",
+      "printingCentreTel": "Printing Centre Tel",
+      "printingCentreFax": "Printing Centre Fax",
+      "printingCentreResponsableName": "Printing Centre Responsable Name",
+      "printingParams": "Printing Params",
+      "printingAttributs": "Printing Attributs",
+      "printingCentreStat": "Printing Centre Stat",
+      "city": "City",
+      "country": "Country",
+      "organiz": "Organiz",
+      "printingType": "Printing Type",
+      "printingServer": "Printing Server",
+      "printingModel": "Printing Model",
+      "language": "Language",
+      "event": "Event"
+    }
+  }
+}

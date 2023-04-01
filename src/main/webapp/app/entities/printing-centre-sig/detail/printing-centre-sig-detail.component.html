@@ -1,0 +1,137 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="printingCentre">
+      <h2 data-cy="printingCentreDetailsHeading">
+        <span sigmaTranslate="sigmaEventsApp.printingCentre.detail.title">Printing Centre</span>
+      </h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreId">Printing Centre Id</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreDescription">Printing Centre Description</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreName">Printing Centre Name</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreLogo">Printing Centre Logo</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.printingCentreLogo">
+            <a (click)="openFile(printingCentre.printingCentreLogo, printingCentre.printingCentreLogoContentType)">
+              <img
+                [src]="'data:' + printingCentre.printingCentreLogoContentType + ';base64,' + printingCentre.printingCentreLogo"
+                style="max-width: 100%"
+                alt="printingCentre image"
+              />
+            </a>
+            {{ printingCentre.printingCentreLogoContentType }}, {{ byteSize(printingCentre.printingCentreLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreAdresse">Printing Centre Adresse</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreAdresse }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreEmail">Printing Centre Email</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreEmail }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreTel">Printing Centre Tel</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreTel }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreFax">Printing Centre Fax</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreFax }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreResponsableName">Printing Centre Responsable Name</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreResponsableName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingParams">Printing Params</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingAttributs">Printing Attributs</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreStat">Printing Centre Stat</span></dt>
+        <dd>
+          <span>{{ printingCentre.printingCentreStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.city">City</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.city">
+            <a [routerLink]="['/city-sig', printingCentre.city.cityId, 'view']">{{ printingCentre.city.cityId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.country">Country</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.country">
+            <a [routerLink]="['/country-sig', printingCentre.country.countryId, 'view']">{{ printingCentre.country.countryId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.organiz">Organiz</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.organiz">
+            <a [routerLink]="['/organiz-sig', printingCentre.organiz.organizId, 'view']">{{ printingCentre.organiz.organizId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingType">Printing Type</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.printingType">
+            <a [routerLink]="['/printing-type-sig', printingCentre.printingType.printingTypeId, 'view']">{{
+              printingCentre.printingType.printingTypeId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingServer">Printing Server</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.printingServer">
+            <a [routerLink]="['/printing-server-sig', printingCentre.printingServer.printingServerId, 'view']">{{
+              printingCentre.printingServer.printingServerId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.printingModel">Printing Model</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.printingModel">
+            <a [routerLink]="['/printing-model-sig', printingCentre.printingModel.printingModelId, 'view']">{{
+              printingCentre.printingModel.printingModelId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.language">Language</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.language">
+            <a [routerLink]="['/language-sig', printingCentre.language.languageId, 'view']">{{ printingCentre.language.languageId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingCentre.event">Event</span></dt>
+        <dd>
+          <div *ngIf="printingCentre.event">
+            <a [routerLink]="['/event-sig', printingCentre.event.eventId, 'view']">{{ printingCentre.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/printing-centre-sig', printingCentre.printingCentreId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

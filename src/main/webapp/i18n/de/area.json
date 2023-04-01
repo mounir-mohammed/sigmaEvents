@@ -1,0 +1,33 @@
+{
+  "sigmaEventsApp": {
+    "area": {
+      "home": {
+        "title": "Areas",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Area erstellen",
+        "createOrEditLabel": "Area erstellen oder bearbeiten",
+        "notFound": "Keine Areas gefunden"
+      },
+      "created": "Area erstellt mit ID {{ param }}",
+      "updated": "Area aktualisiert mit ID {{ param }}",
+      "deleted": "Area gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Area {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Area"
+      },
+      "areaId": "Area Id",
+      "areaName": "Area Name",
+      "areaAbreviation": "Area Abreviation",
+      "areaColor": "Area Color",
+      "areaDescription": "Area Description",
+      "areaLogo": "Area Logo",
+      "areaParams": "Area Params",
+      "areaAttributs": "Area Attributs",
+      "areaStat": "Area Stat",
+      "event": "Event",
+      "fonction": "Fonction"
+    }
+  }
+}

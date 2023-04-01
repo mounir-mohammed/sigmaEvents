@@ -1,0 +1,88 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401024614",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "printing_model",
+  "fields": [
+    {
+      "fieldName": "printingModelId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "printingModelName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "printingModelFile",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "printingModelPath",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "printingModelDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "printingModelData",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "printingModelParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingModelAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingModelStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "PrintingModel",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "printingModel",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "accreditationType",
+      "otherEntityRelationshipName": "printingModel",
+      "relationshipName": "accreditationType",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "printingModel",
+      "relationshipName": "category",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "printingModel",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

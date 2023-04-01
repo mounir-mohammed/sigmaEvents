@@ -1,0 +1,57 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031614",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "event_form",
+  "fields": [
+    {
+      "fieldName": "formId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "formName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "formDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "formParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "formAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "formStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "EventForm",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "eventField",
+      "otherEntityRelationshipName": "eventForm",
+      "relationshipName": "eventField",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "eventForm",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

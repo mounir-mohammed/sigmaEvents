@@ -1,0 +1,55 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025314",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "info_supp_type",
+  "fields": [
+    {
+      "fieldName": "infoSuppTypeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "infoSuppTypeName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "infoSuppTypeDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "infoSuppTypeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "infoSuppTypeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "infoSuppTypeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "InfoSuppType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "infoSupp",
+      "otherEntityRelationshipName": "infoSuppType",
+      "relationshipName": "infoSupp",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

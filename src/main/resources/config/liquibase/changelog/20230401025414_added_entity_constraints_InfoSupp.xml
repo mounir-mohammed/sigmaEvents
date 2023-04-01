@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity InfoSupp.
+    -->
+    <changeSet id="20230401025414-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="info_supp_type_info_supp_type_id"
+                                 baseTableName="info_supp"
+                                 constraintName="fk_info_supp__info_supp_type_id"
+                                 referencedColumnNames="info_supp_type_id"
+                                 referencedTableName="info_supp_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="accreditation_accreditation_id"
+                                 baseTableName="info_supp"
+                                 constraintName="fk_info_supp__accreditation_id"
+                                 referencedColumnNames="accreditation_id"
+                                 referencedTableName="accreditation"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="info_supp"
+                                 constraintName="fk_info_supp__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

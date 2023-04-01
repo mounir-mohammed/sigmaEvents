@@ -1,0 +1,410 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-printing-centre-sig-heading"
+        data-cy="PrintingCentreCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.printingCentre.home.createOrEditLabel"
+      >
+        Create or edit a Printing Centre
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.printingCentreId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreId" for="field_printingCentreId"
+            >Printing Centre Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="printingCentreId"
+            id="field_printingCentreId"
+            data-cy="printingCentreId"
+            formControlName="printingCentreId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreDescription"
+            for="field_printingCentreDescription"
+            >Printing Centre Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingCentreDescription"
+            id="field_printingCentreDescription"
+            data-cy="printingCentreDescription"
+            formControlName="printingCentreDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingCentreDescription')!.invalid &&
+              (editForm.get('printingCentreDescription')!.dirty || editForm.get('printingCentreDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingCentreDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreName" for="field_printingCentreName"
+            >Printing Centre Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingCentreName"
+            id="field_printingCentreName"
+            data-cy="printingCentreName"
+            formControlName="printingCentreName"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingCentreName')!.invalid &&
+              (editForm.get('printingCentreName')!.dirty || editForm.get('printingCentreName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingCentreName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingCentreName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreLogo" for="field_printingCentreLogo"
+            >Printing Centre Logo</label
+          >
+          <div>
+            <img
+              [src]="
+                'data:' + editForm.get('printingCentreLogoContentType')!.value + ';base64,' + editForm.get('printingCentreLogo')!.value
+              "
+              style="max-height: 100px"
+              *ngIf="editForm.get('printingCentreLogo')!.value"
+              alt="printingCentre image"
+            />
+            <div *ngIf="editForm.get('printingCentreLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('printingCentreLogoContentType')!.value }},
+                {{ byteSize(editForm.get('printingCentreLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('printingCentreLogo', 'printingCentreLogoContentType', 'file_printingCentreLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_printingCentreLogo"
+              data-cy="printingCentreLogo"
+              (change)="setFileData($event, 'printingCentreLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="printingCentreLogo"
+            id="field_printingCentreLogo"
+            data-cy="printingCentreLogo"
+            formControlName="printingCentreLogo"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="printingCentreLogoContentType"
+            id="field_printingCentreLogoContentType"
+            formControlName="printingCentreLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreAdresse" for="field_printingCentreAdresse"
+            >Printing Centre Adresse</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingCentreAdresse"
+            id="field_printingCentreAdresse"
+            data-cy="printingCentreAdresse"
+            formControlName="printingCentreAdresse"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreEmail" for="field_printingCentreEmail"
+            >Printing Centre Email</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingCentreEmail"
+            id="field_printingCentreEmail"
+            data-cy="printingCentreEmail"
+            formControlName="printingCentreEmail"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreTel" for="field_printingCentreTel"
+            >Printing Centre Tel</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingCentreTel"
+            id="field_printingCentreTel"
+            data-cy="printingCentreTel"
+            formControlName="printingCentreTel"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreFax" for="field_printingCentreFax"
+            >Printing Centre Fax</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingCentreFax"
+            id="field_printingCentreFax"
+            data-cy="printingCentreFax"
+            formControlName="printingCentreFax"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreResponsableName"
+            for="field_printingCentreResponsableName"
+            >Printing Centre Responsable Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingCentreResponsableName"
+            id="field_printingCentreResponsableName"
+            data-cy="printingCentreResponsableName"
+            formControlName="printingCentreResponsableName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingParams" for="field_printingParams"
+            >Printing Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingParams"
+            id="field_printingParams"
+            data-cy="printingParams"
+            formControlName="printingParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingAttributs" for="field_printingAttributs"
+            >Printing Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingAttributs"
+            id="field_printingAttributs"
+            data-cy="printingAttributs"
+            formControlName="printingAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreStat" for="field_printingCentreStat"
+            >Printing Centre Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="printingCentreStat"
+            id="field_printingCentreStat"
+            data-cy="printingCentreStat"
+            formControlName="printingCentreStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.city" for="field_city">City</label>
+          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.country" for="field_country">Country</label>
+          <select
+            class="form-control"
+            id="field_country"
+            data-cy="country"
+            name="country"
+            formControlName="country"
+            [compareWith]="compareCountrySig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">{{ countryOption.countryId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.organiz" for="field_organiz">Organiz</label>
+          <select
+            class="form-control"
+            id="field_organiz"
+            data-cy="organiz"
+            name="organiz"
+            formControlName="organiz"
+            [compareWith]="compareOrganizSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="organizOption" *ngFor="let organizOption of organizsSharedCollection">{{ organizOption.organizId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingType" for="field_printingType"
+            >Printing Type</label
+          >
+          <select
+            class="form-control"
+            id="field_printingType"
+            data-cy="printingType"
+            name="printingType"
+            formControlName="printingType"
+            [compareWith]="comparePrintingTypeSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="printingTypeOption" *ngFor="let printingTypeOption of printingTypesSharedCollection">
+              {{ printingTypeOption.printingTypeId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingServer" for="field_printingServer"
+            >Printing Server</label
+          >
+          <select
+            class="form-control"
+            id="field_printingServer"
+            data-cy="printingServer"
+            name="printingServer"
+            formControlName="printingServer"
+            [compareWith]="comparePrintingServerSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="printingServerOption" *ngFor="let printingServerOption of printingServersSharedCollection">
+              {{ printingServerOption.printingServerId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.printingModel" for="field_printingModel"
+            >Printing Model</label
+          >
+          <select
+            class="form-control"
+            id="field_printingModel"
+            data-cy="printingModel"
+            name="printingModel"
+            formControlName="printingModel"
+            [compareWith]="comparePrintingModelSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="printingModelOption" *ngFor="let printingModelOption of printingModelsSharedCollection">
+              {{ printingModelOption.printingModelId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.language" for="field_language">Language</label>
+          <select
+            class="form-control"
+            id="field_language"
+            data-cy="language"
+            name="language"
+            formControlName="language"
+            [compareWith]="compareLanguageSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="languageOption" *ngFor="let languageOption of languagesSharedCollection">
+              {{ languageOption.languageId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

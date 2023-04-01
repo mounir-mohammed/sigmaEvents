@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "printingModel": {
+      "home": {
+        "title": "Printing Models",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Printing Model erstellen",
+        "createOrEditLabel": "Printing Model erstellen oder bearbeiten",
+        "notFound": "Keine Printing Models gefunden"
+      },
+      "created": "Printing Model erstellt mit ID {{ param }}",
+      "updated": "Printing Model aktualisiert mit ID {{ param }}",
+      "deleted": "Printing Model gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Printing Model {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Printing Model"
+      },
+      "printingModelId": "Printing Model Id",
+      "printingModelName": "Printing Model Name",
+      "printingModelFile": "Printing Model File",
+      "printingModelPath": "Printing Model Path",
+      "printingModelDescription": "Printing Model Description",
+      "printingModelData": "Printing Model Data",
+      "printingModelParams": "Printing Model Params",
+      "printingModelAttributs": "Printing Model Attributs",
+      "printingModelStat": "Printing Model Stat",
+      "printingCentre": "Printing Centre",
+      "accreditationType": "Accreditation Type",
+      "category": "Category",
+      "event": "Event"
+    }
+  }
+}

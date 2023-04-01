@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="note">
+      <h2 data-cy="noteDetailsHeading"><span sigmaTranslate="sigmaEventsApp.note.detail.title">Note</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.note.noteId">Note Id</span></dt>
+        <dd>
+          <span>{{ note.noteId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.note.noteValue">Note Value</span></dt>
+        <dd>
+          <span>{{ note.noteValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.note.noteDescription">Note Description</span></dt>
+        <dd>
+          <span>{{ note.noteDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.note.noteTypeParams">Note Type Params</span></dt>
+        <dd>
+          <span>{{ note.noteTypeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.note.noteTypeAttributs">Note Type Attributs</span></dt>
+        <dd>
+          <span>{{ note.noteTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.note.noteStat">Note Stat</span></dt>
+        <dd>
+          <span>{{ note.noteStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.note.accreditation">Accreditation</span></dt>
+        <dd>
+          <div *ngIf="note.accreditation">
+            <a [routerLink]="['/accreditation-sig', note.accreditation.accreditationId, 'view']">{{
+              note.accreditation.accreditationId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.note.event">Event</span></dt>
+        <dd>
+          <div *ngIf="note.event">
+            <a [routerLink]="['/event-sig', note.event.eventId, 'view']">{{ note.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/note-sig', note.noteId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

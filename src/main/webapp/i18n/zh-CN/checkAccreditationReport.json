@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "checkAccreditationReport": {
+      "home": {
+        "title": "Check Accreditation Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Check Accreditation Report",
+        "createOrEditLabel": "创建或编辑 Check Accreditation Report",
+        "notFound": "No Check Accreditation Reports found"
+      },
+      "created": "Check Accreditation Report {{ param }} 创建成功",
+      "updated": "Check Accreditation Report {{ param }} 更新成功",
+      "deleted": "Check Accreditation Report {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Check Accreditation Report {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Check Accreditation Report"
+      },
+      "checkAccreditationReportId": "Check Accreditation Report Id",
+      "checkAccreditationReportDescription": "Check Accreditation Report Description",
+      "checkAccreditationReportPersonPhoto": "Check Accreditation Report Person Photo",
+      "checkAccreditationReportCINPhoto": "Check Accreditation Report CIN Photo",
+      "checkAccreditationReportAttachment": "Check Accreditation Report Attachment",
+      "checkAccreditationReportParams": "Check Accreditation Report Params",
+      "checkAccreditationReportAttributs": "Check Accreditation Report Attributs",
+      "checkAccreditationReportStat": "Check Accreditation Report Stat",
+      "event": "Event",
+      "checkAccreditationHistory": "Check Accreditation History"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "sexe": {
+      "home": {
+        "title": "Sexes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Sexe",
+        "createOrEditLabel": "创建或编辑 Sexe",
+        "notFound": "No Sexes found"
+      },
+      "created": "Sexe {{ param }} 创建成功",
+      "updated": "Sexe {{ param }} 更新成功",
+      "deleted": "Sexe {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Sexe {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Sexe"
+      },
+      "sexeId": "Sexe Id",
+      "sexeValue": "Sexe Value",
+      "sexeDescription": "Sexe Description",
+      "sexeTypeParams": "Sexe Type Params",
+      "sexeTypeAttributs": "Sexe Type Attributs",
+      "sexeStat": "Sexe Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

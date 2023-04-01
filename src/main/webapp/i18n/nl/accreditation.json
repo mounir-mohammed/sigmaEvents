@@ -1,0 +1,66 @@
+{
+  "sigmaEventsApp": {
+    "accreditation": {
+      "home": {
+        "title": "Accreditations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Accreditation",
+        "createOrEditLabel": "Maak of wijzig een Accreditation",
+        "notFound": "No Accreditations found"
+      },
+      "created": "A new Accreditation is created with identifier {{ param }}",
+      "updated": "A Accreditation is updated with identifier {{ param }}",
+      "deleted": "A Accreditation is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Accreditation {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Accreditation"
+      },
+      "accreditationId": "Accreditation Id",
+      "accreditationFirstName": "Accreditation First Name",
+      "accreditationSecondName": "Accreditation Second Name",
+      "accreditationLastName": "Accreditation Last Name",
+      "accreditationBirthDay": "Accreditation Birth Day",
+      "accreditationSexe": "Accreditation Sexe",
+      "accreditationOccupation": "Accreditation Occupation",
+      "accreditationDescription": "Accreditation Description",
+      "accreditationEmail": "Accreditation Email",
+      "accreditationTel": "Accreditation Tel",
+      "accreditationPhoto": "Accreditation Photo",
+      "accreditationCinId": "Accreditation Cin Id",
+      "accreditationPasseportId": "Accreditation Passeport Id",
+      "accreditationCartePresseId": "Accreditation Carte Presse Id",
+      "accreditationCarteProfessionnelleId": "Accreditation Carte Professionnelle Id",
+      "accreditationCreationDate": "Accreditation Creation Date",
+      "accreditationUpdateDate": "Accreditation Update Date",
+      "accreditationCreatedByuser": "Accreditation Created Byuser",
+      "accreditationDateStart": "Accreditation Date Start",
+      "accreditationDateEnd": "Accreditation Date End",
+      "accreditationPrintStat": "Accreditation Print Stat",
+      "accreditationPrintNumber": "Accreditation Print Number",
+      "accreditationParams": "Accreditation Params",
+      "accreditationAttributs": "Accreditation Attributs",
+      "accreditationStat": "Accreditation Stat",
+      "photoArchive": "Photo Archive",
+      "infoSupp": "Info Supp",
+      "note": "Note",
+      "checkAccreditationHistory": "Check Accreditation History",
+      "site": "Site",
+      "event": "Event",
+      "civility": "Civility",
+      "sexe": "Sexe",
+      "nationality": "Nationality",
+      "country": "Country",
+      "city": "City",
+      "category": "Category",
+      "fonction": "Fonction",
+      "organiz": "Organiz",
+      "accreditationType": "Accreditation Type",
+      "status": "Status",
+      "attachement": "Attachement",
+      "code": "Code",
+      "dayPassInfo": "Day Pass Info"
+    }
+  }
+}

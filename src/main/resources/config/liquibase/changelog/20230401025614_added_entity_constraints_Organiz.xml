@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Organiz.
+    -->
+    <changeSet id="20230401025614-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="country_country_id"
+                                 baseTableName="organiz"
+                                 constraintName="fk_organiz__country_id"
+                                 referencedColumnNames="country_id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="city_city_id"
+                                 baseTableName="organiz"
+                                 constraintName="fk_organiz__city_id"
+                                 referencedColumnNames="city_id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="organiz"
+                                 constraintName="fk_organiz__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+    </changeSet>
+</databaseChangeLog>

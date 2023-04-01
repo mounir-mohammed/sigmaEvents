@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="infoSuppType">
+      <h2 data-cy="infoSuppTypeDetailsHeading"><span sigmaTranslate="sigmaEventsApp.infoSuppType.detail.title">Info Supp Type</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeId">Info Supp Type Id</span></dt>
+        <dd>
+          <span>{{ infoSuppType.infoSuppTypeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeName">Info Supp Type Name</span></dt>
+        <dd>
+          <span>{{ infoSuppType.infoSuppTypeName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeDescription">Info Supp Type Description</span></dt>
+        <dd>
+          <span>{{ infoSuppType.infoSuppTypeDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeParams">Info Supp Type Params</span></dt>
+        <dd>
+          <span>{{ infoSuppType.infoSuppTypeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeAttributs">Info Supp Type Attributs</span></dt>
+        <dd>
+          <span>{{ infoSuppType.infoSuppTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSuppType.infoSuppTypeStat">Info Supp Type Stat</span></dt>
+        <dd>
+          <span>{{ infoSuppType.infoSuppTypeStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/info-supp-type-sig', infoSuppType.infoSuppTypeId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+Area Fonction Category PrintingModel Code InfoSupp Attachement Organization PhotoArchive Site Accreditation Note OperationHistory  PrintingCentre Setting PrintingServer
+relationship OneToMany {
+	Event{printingCentre} to PrintingCentre{event}
+}
+relationship OneToMany {
+	Event{setting} to Setting{event}
+}
+relationship OneToMany {
+	Event{operationHistory} to OperationHistory{event}
+}

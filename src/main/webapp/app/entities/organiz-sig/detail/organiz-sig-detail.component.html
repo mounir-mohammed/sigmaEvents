@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="organiz">
+      <h2 data-cy="organizDetailsHeading"><span sigmaTranslate="sigmaEventsApp.organiz.detail.title">Organiz</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizId">Organiz Id</span></dt>
+        <dd>
+          <span>{{ organiz.organizId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizName">Organiz Name</span></dt>
+        <dd>
+          <span>{{ organiz.organizName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizDescription">Organiz Description</span></dt>
+        <dd>
+          <span>{{ organiz.organizDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizLogo">Organiz Logo</span></dt>
+        <dd>
+          <div *ngIf="organiz.organizLogo">
+            <a (click)="openFile(organiz.organizLogo, organiz.organizLogoContentType)">
+              <img
+                [src]="'data:' + organiz.organizLogoContentType + ';base64,' + organiz.organizLogo"
+                style="max-width: 100%"
+                alt="organiz image"
+              />
+            </a>
+            {{ organiz.organizLogoContentType }}, {{ byteSize(organiz.organizLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizTel">Organiz Tel</span></dt>
+        <dd>
+          <span>{{ organiz.organizTel }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizFax">Organiz Fax</span></dt>
+        <dd>
+          <span>{{ organiz.organizFax }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizEmail">Organiz Email</span></dt>
+        <dd>
+          <span>{{ organiz.organizEmail }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizAdresse">Organiz Adresse</span></dt>
+        <dd>
+          <span>{{ organiz.organizAdresse }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizParams">Organiz Params</span></dt>
+        <dd>
+          <span>{{ organiz.organizParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizAttributs">Organiz Attributs</span></dt>
+        <dd>
+          <span>{{ organiz.organizAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizStat">Organiz Stat</span></dt>
+        <dd>
+          <span>{{ organiz.organizStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.country">Country</span></dt>
+        <dd>
+          <div *ngIf="organiz.country">
+            <a [routerLink]="['/country-sig', organiz.country.countryId, 'view']">{{ organiz.country.countryId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.city">City</span></dt>
+        <dd>
+          <div *ngIf="organiz.city">
+            <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.organiz.event">Event</span></dt>
+        <dd>
+          <div *ngIf="organiz.event">
+            <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/organiz-sig', organiz.organizId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

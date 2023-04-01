@@ -1,0 +1,275 @@
+<div>
+  <h2 id="page-heading" data-cy="CheckAccreditationReportHeading">
+    <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.home.title">Check Accreditation Reports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-check-accreditation-report-sig"
+        [routerLink]="['/check-accreditation-report-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.home.createLabel"> Create a new Check Accreditation Report </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="checkAccreditationReports?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.home.notFound">No Check Accreditation Reports found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="checkAccreditationReports && checkAccreditationReports.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="checkAccreditationReportId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportId">Check Accreditation Report Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationReportDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportDescription"
+                >Check Accreditation Report Description</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationReportPersonPhoto">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportPersonPhoto"
+                >Check Accreditation Report Person Photo</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationReportCINPhoto">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportCINPhoto"
+                >Check Accreditation Report CIN Photo</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationReportAttachment">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportAttachment"
+                >Check Accreditation Report Attachment</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationReportParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportParams"
+                >Check Accreditation Report Params</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationReportAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportAttributs"
+                >Check Accreditation Report Attributs</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationReportStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportStat"
+                >Check Accreditation Report Stat</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="checkAccreditationHistory.checkAccreditationHistoryId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationHistory">Check Accreditation History</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let checkAccreditationReport of checkAccreditationReports; trackBy: trackCheckAccreditationReportId"
+          data-cy="entityTable"
+        >
+          <td>
+            <a [routerLink]="['/check-accreditation-report-sig', checkAccreditationReport.checkAccreditationReportId, 'view']">{{
+              checkAccreditationReport.checkAccreditationReportId
+            }}</a>
+          </td>
+          <td>{{ checkAccreditationReport.checkAccreditationReportDescription }}</td>
+          <td>
+            <a
+              *ngIf="checkAccreditationReport.checkAccreditationReportPersonPhoto"
+              (click)="
+                openFile(
+                  checkAccreditationReport.checkAccreditationReportPersonPhoto,
+                  checkAccreditationReport.checkAccreditationReportPersonPhotoContentType
+                )
+              "
+            >
+              <img
+                [src]="
+                  'data:' +
+                  checkAccreditationReport.checkAccreditationReportPersonPhotoContentType +
+                  ';base64,' +
+                  checkAccreditationReport.checkAccreditationReportPersonPhoto
+                "
+                style="max-height: 30px"
+                alt="checkAccreditationReport image"
+              />
+            </a>
+            <span *ngIf="checkAccreditationReport.checkAccreditationReportPersonPhoto"
+              >{{ checkAccreditationReport.checkAccreditationReportPersonPhotoContentType }},
+              {{ byteSize(checkAccreditationReport.checkAccreditationReportPersonPhoto) }}</span
+            >
+          </td>
+          <td>
+            <a
+              *ngIf="checkAccreditationReport.checkAccreditationReportCINPhoto"
+              (click)="
+                openFile(
+                  checkAccreditationReport.checkAccreditationReportCINPhoto,
+                  checkAccreditationReport.checkAccreditationReportCINPhotoContentType
+                )
+              "
+            >
+              <img
+                [src]="
+                  'data:' +
+                  checkAccreditationReport.checkAccreditationReportCINPhotoContentType +
+                  ';base64,' +
+                  checkAccreditationReport.checkAccreditationReportCINPhoto
+                "
+                style="max-height: 30px"
+                alt="checkAccreditationReport image"
+              />
+            </a>
+            <span *ngIf="checkAccreditationReport.checkAccreditationReportCINPhoto"
+              >{{ checkAccreditationReport.checkAccreditationReportCINPhotoContentType }},
+              {{ byteSize(checkAccreditationReport.checkAccreditationReportCINPhoto) }}</span
+            >
+          </td>
+          <td>
+            <a
+              *ngIf="checkAccreditationReport.checkAccreditationReportAttachment"
+              (click)="
+                openFile(
+                  checkAccreditationReport.checkAccreditationReportAttachment,
+                  checkAccreditationReport.checkAccreditationReportAttachmentContentType
+                )
+              "
+            >
+              <img
+                [src]="
+                  'data:' +
+                  checkAccreditationReport.checkAccreditationReportAttachmentContentType +
+                  ';base64,' +
+                  checkAccreditationReport.checkAccreditationReportAttachment
+                "
+                style="max-height: 30px"
+                alt="checkAccreditationReport image"
+              />
+            </a>
+            <span *ngIf="checkAccreditationReport.checkAccreditationReportAttachment"
+              >{{ checkAccreditationReport.checkAccreditationReportAttachmentContentType }},
+              {{ byteSize(checkAccreditationReport.checkAccreditationReportAttachment) }}</span
+            >
+          </td>
+          <td>{{ checkAccreditationReport.checkAccreditationReportParams }}</td>
+          <td>{{ checkAccreditationReport.checkAccreditationReportAttributs }}</td>
+          <td>{{ checkAccreditationReport.checkAccreditationReportStat }}</td>
+          <td>
+            <div *ngIf="checkAccreditationReport.event">
+              <a [routerLink]="['/event-sig', checkAccreditationReport.event.eventId, 'view']">{{
+                checkAccreditationReport.event.eventId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="checkAccreditationReport.checkAccreditationHistory">
+              <a
+                [routerLink]="[
+                  '/check-accreditation-history-sig',
+                  checkAccreditationReport.checkAccreditationHistory.checkAccreditationHistoryId,
+                  'view'
+                ]"
+                >{{ checkAccreditationReport.checkAccreditationHistory.checkAccreditationHistoryId }}</a
+              >
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/check-accreditation-report-sig', checkAccreditationReport.checkAccreditationReportId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/check-accreditation-report-sig', checkAccreditationReport.checkAccreditationReportId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(checkAccreditationReport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="checkAccreditationReports && checkAccreditationReports.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

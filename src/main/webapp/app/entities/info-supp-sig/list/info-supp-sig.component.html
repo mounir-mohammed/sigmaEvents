@@ -1,0 +1,173 @@
+<div>
+  <h2 id="page-heading" data-cy="InfoSuppHeading">
+    <span sigmaTranslate="sigmaEventsApp.infoSupp.home.title">Info Supps</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.infoSupp.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-info-supp-sig"
+        [routerLink]="['/info-supp-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.infoSupp.home.createLabel"> Create a new Info Supp </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="infoSupps?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.infoSupp.home.notFound">No Info Supps found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="infoSupps && infoSupps.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="infoSuppId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppId">Info Supp Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppName">Info Supp Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppDescription">Info Supp Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppParams">Info Supp Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppAttributs">Info Supp Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppStat">Info Supp Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="infoSuppType.infoSuppTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppType">Info Supp Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditation.accreditationId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.accreditation">Accreditation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.infoSupp.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let infoSupp of infoSupps; trackBy: trackInfoSuppId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/info-supp-sig', infoSupp.infoSuppId, 'view']">{{ infoSupp.infoSuppId }}</a>
+          </td>
+          <td>{{ infoSupp.infoSuppName }}</td>
+          <td>{{ infoSupp.infoSuppDescription }}</td>
+          <td>{{ infoSupp.infoSuppParams }}</td>
+          <td>{{ infoSupp.infoSuppAttributs }}</td>
+          <td>{{ infoSupp.infoSuppStat }}</td>
+          <td>
+            <div *ngIf="infoSupp.infoSuppType">
+              <a [routerLink]="['/info-supp-type-sig', infoSupp.infoSuppType.infoSuppTypeId, 'view']">{{
+                infoSupp.infoSuppType.infoSuppTypeId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="infoSupp.accreditation">
+              <a [routerLink]="['/accreditation-sig', infoSupp.accreditation.accreditationId, 'view']">{{
+                infoSupp.accreditation.accreditationId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="infoSupp.event">
+              <a [routerLink]="['/event-sig', infoSupp.event.eventId, 'view']">{{ infoSupp.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/info-supp-sig', infoSupp.infoSuppId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/info-supp-sig', infoSupp.infoSuppId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(infoSupp)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="infoSupps && infoSupps.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

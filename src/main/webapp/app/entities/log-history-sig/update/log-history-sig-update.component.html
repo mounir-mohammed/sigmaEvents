@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-log-history-sig-heading"
+        data-cy="LogHistoryCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.logHistory.home.createOrEditLabel"
+      >
+        Create or edit a Log History
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.logHistory.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.logHistory.logHistory" for="field_logHistory">Log History</label>
+          <input
+            type="number"
+            class="form-control"
+            name="logHistory"
+            id="field_logHistory"
+            data-cy="logHistory"
+            formControlName="logHistory"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.logHistory.logHistoryDescription" for="field_logHistoryDescription"
+            >Log History Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="logHistoryDescription"
+            id="field_logHistoryDescription"
+            data-cy="logHistoryDescription"
+            formControlName="logHistoryDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.logHistory.logHistoryParams" for="field_logHistoryParams"
+            >Log History Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="logHistoryParams"
+            id="field_logHistoryParams"
+            data-cy="logHistoryParams"
+            formControlName="logHistoryParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.logHistory.logHistoryAttributs" for="field_logHistoryAttributs"
+            >Log History Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="logHistoryAttributs"
+            id="field_logHistoryAttributs"
+            data-cy="logHistoryAttributs"
+            formControlName="logHistoryAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.logHistory.logHistoryStat" for="field_logHistoryStat"
+            >Log History Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="logHistoryStat"
+            id="field_logHistoryStat"
+            data-cy="logHistoryStat"
+            formControlName="logHistoryStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

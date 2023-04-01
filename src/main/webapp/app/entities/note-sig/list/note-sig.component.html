@@ -1,0 +1,160 @@
+<div>
+  <h2 id="page-heading" data-cy="NoteHeading">
+    <span sigmaTranslate="sigmaEventsApp.note.home.title">Notes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.note.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-note-sig"
+        [routerLink]="['/note-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.note.home.createLabel"> Create a new Note </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="notes?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.note.home.notFound">No Notes found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="notes && notes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="noteId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.noteId">Note Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="noteValue">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.noteValue">Note Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="noteDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.noteDescription">Note Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="noteTypeParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.noteTypeParams">Note Type Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="noteTypeAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.noteTypeAttributs">Note Type Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="noteStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.noteStat">Note Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditation.accreditationId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.accreditation">Accreditation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.note.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let note of notes; trackBy: trackNoteId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/note-sig', note.noteId, 'view']">{{ note.noteId }}</a>
+          </td>
+          <td>{{ note.noteValue }}</td>
+          <td>{{ note.noteDescription }}</td>
+          <td>{{ note.noteTypeParams }}</td>
+          <td>{{ note.noteTypeAttributs }}</td>
+          <td>{{ note.noteStat }}</td>
+          <td>
+            <div *ngIf="note.accreditation">
+              <a [routerLink]="['/accreditation-sig', note.accreditation.accreditationId, 'view']">{{
+                note.accreditation.accreditationId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="note.event">
+              <a [routerLink]="['/event-sig', note.event.eventId, 'view']">{{ note.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/note-sig', note.noteId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/note-sig', note.noteId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(note)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="notes && notes.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

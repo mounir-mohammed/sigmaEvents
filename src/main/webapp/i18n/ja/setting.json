@@ -1,0 +1,38 @@
+{
+  "sigmaEventsApp": {
+    "setting": {
+      "home": {
+        "title": "Settings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Setting を追加",
+        "createOrEditLabel": "Settingを追加または編集",
+        "notFound": "No Settings found"
+      },
+      "created": "A new Setting is created with identifier {{ param }}",
+      "updated": "A Setting is updated with identifier {{ param }}",
+      "deleted": "A Setting is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Setting {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Setting"
+      },
+      "settingId": "Setting Id",
+      "settingParentId": "Setting Parent Id",
+      "settingType": "Setting Type",
+      "settingNameClass": "Setting Name Class",
+      "settingDataType": "Setting Data Type",
+      "settingDescription": "Setting Description",
+      "settingValueString": "Setting Value String",
+      "settingValueLong": "Setting Value Long",
+      "settingValueDate": "Setting Value Date",
+      "settingValueBoolean": "Setting Value Boolean",
+      "settingValueBlob": "Setting Value Blob",
+      "settingParams": "Setting Params",
+      "settingAttributs": "Setting Attributs",
+      "settingStat": "Setting Stat",
+      "language": "Language",
+      "event": "Event"
+    }
+  }
+}

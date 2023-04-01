@@ -1,0 +1,36 @@
+{
+  "sigmaEventsApp": {
+    "checkAccreditationHistory": {
+      "home": {
+        "title": "Check Accreditation Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Check Accreditation History",
+        "createOrEditLabel": "创建或编辑 Check Accreditation History",
+        "notFound": "No Check Accreditation Histories found"
+      },
+      "created": "Check Accreditation History {{ param }} 创建成功",
+      "updated": "Check Accreditation History {{ param }} 更新成功",
+      "deleted": "Check Accreditation History {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Check Accreditation History {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Check Accreditation History"
+      },
+      "checkAccreditationHistoryId": "Check Accreditation History Id",
+      "checkAccreditationHistoryReadedCode": "Check Accreditation History Readed Code",
+      "checkAccreditationHistoryUserId": "Check Accreditation History User Id",
+      "checkAccreditationHistoryResult": "Check Accreditation History Result",
+      "checkAccreditationHistoryError": "Check Accreditation History Error",
+      "checkAccreditationHistoryDate": "Check Accreditation History Date",
+      "checkAccreditationHistoryLocalisation": "Check Accreditation History Localisation",
+      "checkAccreditationHistoryIpAdresse": "Check Accreditation History Ip Adresse",
+      "checkAccreditationParams": "Check Accreditation Params",
+      "checkAccreditationAttributs": "Check Accreditation Attributs",
+      "checkAccreditationHistoryStat": "Check Accreditation History Stat",
+      "checkAccreditationReport": "Check Accreditation Report",
+      "event": "Event",
+      "accreditation": "Accreditation"
+    }
+  }
+}

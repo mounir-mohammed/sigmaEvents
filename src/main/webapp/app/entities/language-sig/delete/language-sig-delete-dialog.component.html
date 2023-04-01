@@ -1,0 +1,28 @@
+<form *ngIf="language" name="deleteForm" (ngSubmit)="confirmDelete(language.languageId!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="languageDeleteDialogHeading" sigmaTranslate="entity.delete.title">Confirm delete operation</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <sigma-alert-error></sigma-alert-error>
+    <p
+      id="sigma-delete-language-heading"
+      sigmaTranslate="sigmaEventsApp.language.delete.question"
+      [translateValues]="{ id: language.languageId }"
+    >
+      Are you sure you want to delete Language {{ language.languageId }}?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="sigma-confirm-delete-language" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.delete">Delete</span>
+    </button>
+  </div>
+</form>

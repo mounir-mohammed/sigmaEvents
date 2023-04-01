@@ -1,0 +1,62 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031214",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "cloning",
+  "fields": [
+    {
+      "fieldName": "cloningId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "cloningDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "cloningOldEventId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "cloningNewEventId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "cloningUserId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "cloningDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "clonedEntitys",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clonedParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clonedAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clonedStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Cloning",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

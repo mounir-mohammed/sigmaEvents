@@ -1,0 +1,126 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="checkAccreditationHistory">
+      <h2 data-cy="checkAccreditationHistoryDetailsHeading">
+        <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.detail.title">Check Accreditation History</span>
+      </h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryId">Check Accreditation History Id</span>
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryId }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryReadedCode"
+            >Check Accreditation History Readed Code</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryReadedCode }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryUserId"
+            >Check Accreditation History User Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryUserId }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryResult"
+            >Check Accreditation History Result</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryResult }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryError"
+            >Check Accreditation History Error</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryError }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryDate"
+            >Check Accreditation History Date</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryLocalisation"
+            >Check Accreditation History Localisation</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryLocalisation }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryIpAdresse"
+            >Check Accreditation History Ip Adresse</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryIpAdresse }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationParams">Check Accreditation Params</span></dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationParams }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationAttributs">Check Accreditation Attributs</span>
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationAttributs }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryStat"
+            >Check Accreditation History Stat</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.event">Event</span></dt>
+        <dd>
+          <div *ngIf="checkAccreditationHistory.event">
+            <a [routerLink]="['/event-sig', checkAccreditationHistory.event.eventId, 'view']">{{
+              checkAccreditationHistory.event.eventId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.accreditation">Accreditation</span></dt>
+        <dd>
+          <div *ngIf="checkAccreditationHistory.accreditation">
+            <a [routerLink]="['/accreditation-sig', checkAccreditationHistory.accreditation.accreditationId, 'view']">{{
+              checkAccreditationHistory.accreditation.accreditationId
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/check-accreditation-history-sig', checkAccreditationHistory.checkAccreditationHistoryId, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

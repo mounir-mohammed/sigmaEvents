@@ -1,0 +1,64 @@
+//ManyToMany EventTo...
+
+entity AccreditationEventRelation{
+    accreditationEventRelationDate ZonedDateTime
+}
+
+relationship ManyToOne {
+  AccreditationEventRelation{accreditation} to Accreditation{events}
+  AccreditationEventRelation{event} to Event{accreditations}
+}
+
+entity FonctionEventRelation{
+    fonctionEventRelation ZonedDateTime
+}
+
+relationship ManyToOne {
+  FonctionEventRelation{fonction} to Fonction{events}
+  FonctionEventRelation{event} to Event{fonctions}
+}
+
+entity CategoryEventRelation{
+    categoryEventRelation ZonedDateTime
+}
+
+relationship ManyToOne {
+  CategoryEventRelation{category} to Category{events}
+  CategoryEventRelation{event} to Event{categorys}
+}
+
+entity AreaEventRelation{
+    areaEventRelation ZonedDateTime
+}
+
+relationship ManyToOne {
+  AreaEventRelation{area} to Area{events}
+  AreaEventRelation{event} to Event{areas}
+}
+
+entity SiteEventRelation{
+    siteEventRelation ZonedDateTime
+}
+
+relationship ManyToOne {
+  SiteEventRelation{site} to Site{events}
+  SiteEventRelation{event} to Event{sites}
+}
+
+entity CodeEventRelation{
+    codeEventRelation ZonedDateTime
+}
+
+relationship ManyToOne {
+  CodeEventRelation{code} to Code{events}
+  CodeEventRelation{event} to Event{codes}
+}
+
+entity OrganizationEventRelation{
+    organizationEventRelation ZonedDateTime
+}
+
+relationship ManyToOne {
+  OrganizationEventRelation{organization} to Organization{events}
+  OrganizationEventRelation{event} to Event{organizations}
+}

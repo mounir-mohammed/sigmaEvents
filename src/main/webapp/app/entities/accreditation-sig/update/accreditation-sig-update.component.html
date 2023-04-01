@@ -1,0 +1,780 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-accreditation-sig-heading"
+        data-cy="AccreditationCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.accreditation.home.createOrEditLabel"
+      >
+        Create or edit a Accreditation
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.accreditationId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationId" for="field_accreditationId"
+            >Accreditation Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accreditationId"
+            id="field_accreditationId"
+            data-cy="accreditationId"
+            formControlName="accreditationId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName" for="field_accreditationFirstName"
+            >Accreditation First Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationFirstName"
+            id="field_accreditationFirstName"
+            data-cy="accreditationFirstName"
+            formControlName="accreditationFirstName"
+          />
+          <div
+            *ngIf="
+              editForm.get('accreditationFirstName')!.invalid &&
+              (editForm.get('accreditationFirstName')!.dirty || editForm.get('accreditationFirstName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationFirstName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationFirstName')?.errors?.minlength"
+              sigmaTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationFirstName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationSecondName"
+            for="field_accreditationSecondName"
+            >Accreditation Second Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationSecondName"
+            id="field_accreditationSecondName"
+            data-cy="accreditationSecondName"
+            formControlName="accreditationSecondName"
+          />
+          <div
+            *ngIf="
+              editForm.get('accreditationSecondName')!.invalid &&
+              (editForm.get('accreditationSecondName')!.dirty || editForm.get('accreditationSecondName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationSecondName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName" for="field_accreditationLastName"
+            >Accreditation Last Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationLastName"
+            id="field_accreditationLastName"
+            data-cy="accreditationLastName"
+            formControlName="accreditationLastName"
+          />
+          <div
+            *ngIf="
+              editForm.get('accreditationLastName')!.invalid &&
+              (editForm.get('accreditationLastName')!.dirty || editForm.get('accreditationLastName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationLastName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationLastName')?.errors?.minlength"
+              sigmaTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationLastName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationBirthDay" for="field_accreditationBirthDay"
+            >Accreditation Birth Day</label
+          >
+          <div class="input-group">
+            <input
+              id="field_accreditationBirthDay"
+              data-cy="accreditationBirthDay"
+              type="text"
+              class="form-control"
+              name="accreditationBirthDay"
+              ngbDatepicker
+              #accreditationBirthDayDp="ngbDatepicker"
+              formControlName="accreditationBirthDay"
+            />
+            <button type="button" class="btn btn-secondary" (click)="accreditationBirthDayDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="
+              editForm.get('accreditationBirthDay')!.invalid &&
+              (editForm.get('accreditationBirthDay')!.dirty || editForm.get('accreditationBirthDay')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationBirthDay')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe" for="field_accreditationSexe"
+            >Accreditation Sexe</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationSexe"
+            id="field_accreditationSexe"
+            data-cy="accreditationSexe"
+            formControlName="accreditationSexe"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation"
+            for="field_accreditationOccupation"
+            >Accreditation Occupation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationOccupation"
+            id="field_accreditationOccupation"
+            data-cy="accreditationOccupation"
+            formControlName="accreditationOccupation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription"
+            for="field_accreditationDescription"
+            >Accreditation Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationDescription"
+            id="field_accreditationDescription"
+            data-cy="accreditationDescription"
+            formControlName="accreditationDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationEmail" for="field_accreditationEmail"
+            >Accreditation Email</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationEmail"
+            id="field_accreditationEmail"
+            data-cy="accreditationEmail"
+            formControlName="accreditationEmail"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationTel" for="field_accreditationTel"
+            >Accreditation Tel</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationTel"
+            id="field_accreditationTel"
+            data-cy="accreditationTel"
+            formControlName="accreditationTel"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationPhoto" for="field_accreditationPhoto"
+            >Accreditation Photo</label
+          >
+          <div>
+            <img
+              [src]="
+                'data:' + editForm.get('accreditationPhotoContentType')!.value + ';base64,' + editForm.get('accreditationPhoto')!.value
+              "
+              style="max-height: 100px"
+              *ngIf="editForm.get('accreditationPhoto')!.value"
+              alt="accreditation image"
+            />
+            <div *ngIf="editForm.get('accreditationPhoto')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('accreditationPhotoContentType')!.value }},
+                {{ byteSize(editForm.get('accreditationPhoto')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('accreditationPhoto', 'accreditationPhotoContentType', 'file_accreditationPhoto')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_accreditationPhoto"
+              data-cy="accreditationPhoto"
+              (change)="setFileData($event, 'accreditationPhoto', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="accreditationPhoto"
+            id="field_accreditationPhoto"
+            data-cy="accreditationPhoto"
+            formControlName="accreditationPhoto"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="accreditationPhotoContentType"
+            id="field_accreditationPhotoContentType"
+            formControlName="accreditationPhotoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationCinId" for="field_accreditationCinId"
+            >Accreditation Cin Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationCinId"
+            id="field_accreditationCinId"
+            data-cy="accreditationCinId"
+            formControlName="accreditationCinId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationPasseportId"
+            for="field_accreditationPasseportId"
+            >Accreditation Passeport Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationPasseportId"
+            id="field_accreditationPasseportId"
+            data-cy="accreditationPasseportId"
+            formControlName="accreditationPasseportId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCartePresseId"
+            for="field_accreditationCartePresseId"
+            >Accreditation Carte Presse Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationCartePresseId"
+            id="field_accreditationCartePresseId"
+            data-cy="accreditationCartePresseId"
+            formControlName="accreditationCartePresseId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCarteProfessionnelleId"
+            for="field_accreditationCarteProfessionnelleId"
+            >Accreditation Carte Professionnelle Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationCarteProfessionnelleId"
+            id="field_accreditationCarteProfessionnelleId"
+            data-cy="accreditationCarteProfessionnelleId"
+            formControlName="accreditationCarteProfessionnelleId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreationDate"
+            for="field_accreditationCreationDate"
+            >Accreditation Creation Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_accreditationCreationDate"
+              data-cy="accreditationCreationDate"
+              type="datetime-local"
+              class="form-control"
+              name="accreditationCreationDate"
+              formControlName="accreditationCreationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdateDate"
+            for="field_accreditationUpdateDate"
+            >Accreditation Update Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_accreditationUpdateDate"
+              data-cy="accreditationUpdateDate"
+              type="datetime-local"
+              class="form-control"
+              name="accreditationUpdateDate"
+              formControlName="accreditationUpdateDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser"
+            for="field_accreditationCreatedByuser"
+            >Accreditation Created Byuser</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationCreatedByuser"
+            id="field_accreditationCreatedByuser"
+            data-cy="accreditationCreatedByuser"
+            formControlName="accreditationCreatedByuser"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateStart" for="field_accreditationDateStart"
+            >Accreditation Date Start</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_accreditationDateStart"
+              data-cy="accreditationDateStart"
+              type="datetime-local"
+              class="form-control"
+              name="accreditationDateStart"
+              formControlName="accreditationDateStart"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateEnd" for="field_accreditationDateEnd"
+            >Accreditation Date End</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_accreditationDateEnd"
+              data-cy="accreditationDateEnd"
+              type="datetime-local"
+              class="form-control"
+              name="accreditationDateEnd"
+              formControlName="accreditationDateEnd"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat" for="field_accreditationPrintStat"
+            >Accreditation Print Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="accreditationPrintStat"
+            id="field_accreditationPrintStat"
+            data-cy="accreditationPrintStat"
+            formControlName="accreditationPrintStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber"
+            for="field_accreditationPrintNumber"
+            >Accreditation Print Number</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accreditationPrintNumber"
+            id="field_accreditationPrintNumber"
+            data-cy="accreditationPrintNumber"
+            formControlName="accreditationPrintNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams" for="field_accreditationParams"
+            >Accreditation Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationParams"
+            id="field_accreditationParams"
+            data-cy="accreditationParams"
+            formControlName="accreditationParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs" for="field_accreditationAttributs"
+            >Accreditation Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationAttributs"
+            id="field_accreditationAttributs"
+            data-cy="accreditationAttributs"
+            formControlName="accreditationAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
+            >Accreditation Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="accreditationStat"
+            id="field_accreditationStat"
+            data-cy="accreditationStat"
+            formControlName="accreditationStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label sigmaTranslate="sigmaEventsApp.accreditation.site" for="field_sites">Site</label>
+          <select
+            class="form-control"
+            id="field_sites"
+            data-cy="site"
+            multiple
+            name="sites"
+            formControlName="sites"
+            [compareWith]="compareSiteSig"
+          >
+            <option [ngValue]="siteOption" *ngFor="let siteOption of sitesSharedCollection">{{ siteOption.siteId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.civility" for="field_civility">Civility</label>
+          <select
+            class="form-control"
+            id="field_civility"
+            data-cy="civility"
+            name="civility"
+            formControlName="civility"
+            [compareWith]="compareCivilitySig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="civilityOption" *ngFor="let civilityOption of civilitiesSharedCollection">
+              {{ civilityOption.civilityId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.sexe" for="field_sexe">Sexe</label>
+          <select class="form-control" id="field_sexe" data-cy="sexe" name="sexe" formControlName="sexe" [compareWith]="compareSexeSig">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="sexeOption" *ngFor="let sexeOption of sexesSharedCollection">{{ sexeOption.sexeId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.nationality" for="field_nationality">Nationality</label>
+          <select
+            class="form-control"
+            id="field_nationality"
+            data-cy="nationality"
+            name="nationality"
+            formControlName="nationality"
+            [compareWith]="compareNationalitySig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="nationalityOption" *ngFor="let nationalityOption of nationalitiesSharedCollection">
+              {{ nationalityOption.nationalityId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.country" for="field_country">Country</label>
+          <select
+            class="form-control"
+            id="field_country"
+            data-cy="country"
+            name="country"
+            formControlName="country"
+            [compareWith]="compareCountrySig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">{{ countryOption.countryId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
+          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.category" for="field_category">Category</label>
+          <select
+            class="form-control"
+            id="field_category"
+            data-cy="category"
+            name="category"
+            formControlName="category"
+            [compareWith]="compareCategorySig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">
+              {{ categoryOption.categoryId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.fonction" for="field_fonction">Fonction</label>
+          <select
+            class="form-control"
+            id="field_fonction"
+            data-cy="fonction"
+            name="fonction"
+            formControlName="fonction"
+            [compareWith]="compareFonctionSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="fonctionOption" *ngFor="let fonctionOption of fonctionsSharedCollection">
+              {{ fonctionOption.fonctionId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.organiz" for="field_organiz">Organiz</label>
+          <select
+            class="form-control"
+            id="field_organiz"
+            data-cy="organiz"
+            name="organiz"
+            formControlName="organiz"
+            [compareWith]="compareOrganizSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="organizOption" *ngFor="let organizOption of organizsSharedCollection">{{ organizOption.organizId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationType" for="field_accreditationType"
+            >Accreditation Type</label
+          >
+          <select
+            class="form-control"
+            id="field_accreditationType"
+            data-cy="accreditationType"
+            name="accreditationType"
+            formControlName="accreditationType"
+            [compareWith]="compareAccreditationTypeSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="accreditationTypeOption" *ngFor="let accreditationTypeOption of accreditationTypesSharedCollection">
+              {{ accreditationTypeOption.accreditationTypeId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.status" for="field_status">Status</label>
+          <select
+            class="form-control"
+            id="field_status"
+            data-cy="status"
+            name="status"
+            formControlName="status"
+            [compareWith]="compareStatusSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="statusOption" *ngFor="let statusOption of statusesSharedCollection">{{ statusOption.statusId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.attachement" for="field_attachement">Attachement</label>
+          <select
+            class="form-control"
+            id="field_attachement"
+            data-cy="attachement"
+            name="attachement"
+            formControlName="attachement"
+            [compareWith]="compareAttachementSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="attachementOption" *ngFor="let attachementOption of attachementsSharedCollection">
+              {{ attachementOption.attachementId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
+          <select class="form-control" id="field_code" data-cy="code" name="code" formControlName="code" [compareWith]="compareCodeSig">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="codeOption" *ngFor="let codeOption of codesSharedCollection">{{ codeOption.codeId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo" for="field_dayPassInfo">Day Pass Info</label>
+          <select
+            class="form-control"
+            id="field_dayPassInfo"
+            data-cy="dayPassInfo"
+            name="dayPassInfo"
+            formControlName="dayPassInfo"
+            [compareWith]="compareDayPassInfoSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="dayPassInfoOption" *ngFor="let dayPassInfoOption of dayPassInfosSharedCollection">
+              {{ dayPassInfoOption.dayPassInfoId }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

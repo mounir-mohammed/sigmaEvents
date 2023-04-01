@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "cloning": {
+      "home": {
+        "title": "Clonings",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Cloning",
+        "createOrEditLabel": "Crear o editar Cloning",
+        "notFound": "Ningún Clonings encontrado"
+      },
+      "created": "Un nuevo Cloning ha sido creado con el identificador {{ param }}",
+      "updated": "Un Cloning ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Cloning ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Cloning {{ id }}?"
+      },
+      "detail": {
+        "title": "Cloning"
+      },
+      "cloningId": "Cloning Id",
+      "cloningDescription": "Cloning Description",
+      "cloningOldEventId": "Cloning Old Event Id",
+      "cloningNewEventId": "Cloning New Event Id",
+      "cloningUserId": "Cloning User Id",
+      "cloningDate": "Cloning Date",
+      "clonedEntitys": "Cloned Entitys",
+      "clonedParams": "Cloned Params",
+      "clonedAttributs": "Cloned Attributs",
+      "clonedStat": "Cloned Stat"
+    }
+  }
+}

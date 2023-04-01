@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "fonction": {
+      "home": {
+        "title": "Fonctions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Fonction",
+        "createOrEditLabel": "创建或编辑 Fonction",
+        "notFound": "No Fonctions found"
+      },
+      "created": "Fonction {{ param }} 创建成功",
+      "updated": "Fonction {{ param }} 更新成功",
+      "deleted": "Fonction {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Fonction {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Fonction"
+      },
+      "fonctionId": "Fonction Id",
+      "fonctionName": "Fonction Name",
+      "fonctionAbreviation": "Fonction Abreviation",
+      "fonctionColor": "Fonction Color",
+      "fonctionDescription": "Fonction Description",
+      "fonctionLogo": "Fonction Logo",
+      "fonctionParams": "Fonction Params",
+      "fonctionAttributs": "Fonction Attributs",
+      "fonctionStat": "Fonction Stat",
+      "accreditation": "Accreditation",
+      "area": "Area",
+      "category": "Category",
+      "event": "Event"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401024814",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "code",
+  "fields": [
+    {
+      "fieldName": "codeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "codeForEntity",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeEntityValue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "codeUsed",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "codeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Code",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "code",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "codeType",
+      "otherEntityRelationshipName": "code",
+      "relationshipName": "codeType",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "code",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

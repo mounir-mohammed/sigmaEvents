@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eventField">
+      <h2 data-cy="eventFieldDetailsHeading"><span sigmaTranslate="sigmaEventsApp.eventField.detail.title">Event Field</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldId">Field Id</span></dt>
+        <dd>
+          <span>{{ eventField.fieldId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldName">Field Name</span></dt>
+        <dd>
+          <span>{{ eventField.fieldName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldCategorie">Field Categorie</span></dt>
+        <dd>
+          <span>{{ eventField.fieldCategorie }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldDescription">Field Description</span></dt>
+        <dd>
+          <span>{{ eventField.fieldDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldType">Field Type</span></dt>
+        <dd>
+          <span>{{ eventField.fieldType }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldParams">Field Params</span></dt>
+        <dd>
+          <span>{{ eventField.fieldParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldAttributs">Field Attributs</span></dt>
+        <dd>
+          <span>{{ eventField.fieldAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.fieldStat">Field Stat</span></dt>
+        <dd>
+          <span>{{ eventField.fieldStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.event">Event</span></dt>
+        <dd>
+          <div *ngIf="eventField.event">
+            <a [routerLink]="['/event-sig', eventField.event.eventId, 'view']">{{ eventField.event.eventId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventField.eventForm">Event Form</span></dt>
+        <dd>
+          <div *ngIf="eventField.eventForm">
+            <a [routerLink]="['/event-form-sig', eventField.eventForm.formId, 'view']">{{ eventField.eventForm.formId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event-field-sig', eventField.fieldId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

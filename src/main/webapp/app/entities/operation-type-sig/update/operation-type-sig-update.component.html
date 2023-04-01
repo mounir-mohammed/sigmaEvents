@@ -1,0 +1,158 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-operation-type-sig-heading"
+        data-cy="OperationTypeCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.operationType.home.createOrEditLabel"
+      >
+        Create or edit a Operation Type
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.operationTypeId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationType.operationTypeId" for="field_operationTypeId"
+            >Operation Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="operationTypeId"
+            id="field_operationTypeId"
+            data-cy="operationTypeId"
+            formControlName="operationTypeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationType.operationTypeValue" for="field_operationTypeValue"
+            >Operation Type Value</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationTypeValue"
+            id="field_operationTypeValue"
+            data-cy="operationTypeValue"
+            formControlName="operationTypeValue"
+          />
+          <div
+            *ngIf="
+              editForm.get('operationTypeValue')!.invalid &&
+              (editForm.get('operationTypeValue')!.dirty || editForm.get('operationTypeValue')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('operationTypeValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('operationTypeValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationType.operationTypeDescription"
+            for="field_operationTypeDescription"
+            >Operation Type Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationTypeDescription"
+            id="field_operationTypeDescription"
+            data-cy="operationTypeDescription"
+            formControlName="operationTypeDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('operationTypeDescription')!.invalid &&
+              (editForm.get('operationTypeDescription')!.dirty || editForm.get('operationTypeDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('operationTypeDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationType.operationTypeParams" for="field_operationTypeParams"
+            >Operation Type Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationTypeParams"
+            id="field_operationTypeParams"
+            data-cy="operationTypeParams"
+            formControlName="operationTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationType.operationTypeAttributs" for="field_operationTypeAttributs"
+            >Operation Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationTypeAttributs"
+            id="field_operationTypeAttributs"
+            data-cy="operationTypeAttributs"
+            formControlName="operationTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationType.operationTypeStat" for="field_operationTypeStat"
+            >Operation Type Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="operationTypeStat"
+            id="field_operationTypeStat"
+            data-cy="operationTypeStat"
+            formControlName="operationTypeStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

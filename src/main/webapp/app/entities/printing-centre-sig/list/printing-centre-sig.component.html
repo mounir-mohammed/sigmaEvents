@@ -1,0 +1,286 @@
+<div>
+  <h2 id="page-heading" data-cy="PrintingCentreHeading">
+    <span sigmaTranslate="sigmaEventsApp.printingCentre.home.title">Printing Centres</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingCentre.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-printing-centre-sig"
+        [routerLink]="['/printing-centre-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingCentre.home.createLabel"> Create a new Printing Centre </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="printingCentres?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.printingCentre.home.notFound">No Printing Centres found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="printingCentres && printingCentres.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="printingCentreId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreId">Printing Centre Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreDescription">Printing Centre Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreName">Printing Centre Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreLogo">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreLogo">Printing Centre Logo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreAdresse">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreAdresse">Printing Centre Adresse</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreEmail">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreEmail">Printing Centre Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreTel">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreTel">Printing Centre Tel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreFax">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreFax">Printing Centre Fax</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreResponsableName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreResponsableName">Printing Centre Responsable Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingParams">Printing Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingAttributs">Printing Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingCentreStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingCentreStat">Printing Centre Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="city.cityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.city">City</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="country.countryId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.country">Country</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organiz.organizId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.organiz">Organiz</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingType.printingTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingType">Printing Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingServer.printingServerId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingServer">Printing Server</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModel.printingModelId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.printingModel">Printing Model</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="language.languageId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.language">Language</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingCentre.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let printingCentre of printingCentres; trackBy: trackPrintingCentreId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/printing-centre-sig', printingCentre.printingCentreId, 'view']">{{ printingCentre.printingCentreId }}</a>
+          </td>
+          <td>{{ printingCentre.printingCentreDescription }}</td>
+          <td>{{ printingCentre.printingCentreName }}</td>
+          <td>
+            <a
+              *ngIf="printingCentre.printingCentreLogo"
+              (click)="openFile(printingCentre.printingCentreLogo, printingCentre.printingCentreLogoContentType)"
+            >
+              <img
+                [src]="'data:' + printingCentre.printingCentreLogoContentType + ';base64,' + printingCentre.printingCentreLogo"
+                style="max-height: 30px"
+                alt="printingCentre image"
+              />
+            </a>
+            <span *ngIf="printingCentre.printingCentreLogo"
+              >{{ printingCentre.printingCentreLogoContentType }}, {{ byteSize(printingCentre.printingCentreLogo) }}</span
+            >
+          </td>
+          <td>{{ printingCentre.printingCentreAdresse }}</td>
+          <td>{{ printingCentre.printingCentreEmail }}</td>
+          <td>{{ printingCentre.printingCentreTel }}</td>
+          <td>{{ printingCentre.printingCentreFax }}</td>
+          <td>{{ printingCentre.printingCentreResponsableName }}</td>
+          <td>{{ printingCentre.printingParams }}</td>
+          <td>{{ printingCentre.printingAttributs }}</td>
+          <td>{{ printingCentre.printingCentreStat }}</td>
+          <td>
+            <div *ngIf="printingCentre.city">
+              <a [routerLink]="['/city-sig', printingCentre.city.cityId, 'view']">{{ printingCentre.city.cityId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="printingCentre.country">
+              <a [routerLink]="['/country-sig', printingCentre.country.countryId, 'view']">{{ printingCentre.country.countryId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="printingCentre.organiz">
+              <a [routerLink]="['/organiz-sig', printingCentre.organiz.organizId, 'view']">{{ printingCentre.organiz.organizId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="printingCentre.printingType">
+              <a [routerLink]="['/printing-type-sig', printingCentre.printingType.printingTypeId, 'view']">{{
+                printingCentre.printingType.printingTypeId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="printingCentre.printingServer">
+              <a [routerLink]="['/printing-server-sig', printingCentre.printingServer.printingServerId, 'view']">{{
+                printingCentre.printingServer.printingServerId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="printingCentre.printingModel">
+              <a [routerLink]="['/printing-model-sig', printingCentre.printingModel.printingModelId, 'view']">{{
+                printingCentre.printingModel.printingModelId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="printingCentre.language">
+              <a [routerLink]="['/language-sig', printingCentre.language.languageId, 'view']">{{ printingCentre.language.languageId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="printingCentre.event">
+              <a [routerLink]="['/event-sig', printingCentre.event.eventId, 'view']">{{ printingCentre.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/printing-centre-sig', printingCentre.printingCentreId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/printing-centre-sig', printingCentre.printingCentreId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(printingCentre)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="printingCentres && printingCentres.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

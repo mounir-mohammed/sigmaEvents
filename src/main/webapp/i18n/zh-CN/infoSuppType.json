@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "infoSuppType": {
+      "home": {
+        "title": "Info Supp Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Info Supp Type",
+        "createOrEditLabel": "创建或编辑 Info Supp Type",
+        "notFound": "No Info Supp Types found"
+      },
+      "created": "Info Supp Type {{ param }} 创建成功",
+      "updated": "Info Supp Type {{ param }} 更新成功",
+      "deleted": "Info Supp Type {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Info Supp Type {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Info Supp Type"
+      },
+      "infoSuppTypeId": "Info Supp Type Id",
+      "infoSuppTypeName": "Info Supp Type Name",
+      "infoSuppTypeDescription": "Info Supp Type Description",
+      "infoSuppTypeParams": "Info Supp Type Params",
+      "infoSuppTypeAttributs": "Info Supp Type Attributs",
+      "infoSuppTypeStat": "Info Supp Type Stat",
+      "infoSupp": "Info Supp"
+    }
+  }
+}

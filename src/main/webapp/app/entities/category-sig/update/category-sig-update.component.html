@@ -1,0 +1,280 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-category-sig-heading"
+        data-cy="CategoryCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.category.home.createOrEditLabel"
+      >
+        Create or edit a Category
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.categoryId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryId" for="field_categoryId">Category Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="categoryId"
+            id="field_categoryId"
+            data-cy="categoryId"
+            formControlName="categoryId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryName" for="field_categoryName">Category Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="categoryName"
+            id="field_categoryName"
+            data-cy="categoryName"
+            formControlName="categoryName"
+          />
+          <div
+            *ngIf="editForm.get('categoryName')!.invalid && (editForm.get('categoryName')!.dirty || editForm.get('categoryName')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('categoryName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('categoryName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryAbreviation" for="field_categoryAbreviation"
+            >Category Abreviation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="categoryAbreviation"
+            id="field_categoryAbreviation"
+            data-cy="categoryAbreviation"
+            formControlName="categoryAbreviation"
+          />
+          <div
+            *ngIf="
+              editForm.get('categoryAbreviation')!.invalid &&
+              (editForm.get('categoryAbreviation')!.dirty || editForm.get('categoryAbreviation')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('categoryAbreviation')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryColor" for="field_categoryColor">Category Color</label>
+          <input
+            type="text"
+            class="form-control"
+            name="categoryColor"
+            id="field_categoryColor"
+            data-cy="categoryColor"
+            formControlName="categoryColor"
+          />
+          <div
+            *ngIf="
+              editForm.get('categoryColor')!.invalid && (editForm.get('categoryColor')!.dirty || editForm.get('categoryColor')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('categoryColor')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryDescription" for="field_categoryDescription"
+            >Category Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="categoryDescription"
+            id="field_categoryDescription"
+            data-cy="categoryDescription"
+            formControlName="categoryDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('categoryDescription')!.invalid &&
+              (editForm.get('categoryDescription')!.dirty || editForm.get('categoryDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('categoryDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryLogo" for="field_categoryLogo">Category Logo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('categoryLogoContentType')!.value + ';base64,' + editForm.get('categoryLogo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('categoryLogo')!.value"
+              alt="category image"
+            />
+            <div *ngIf="editForm.get('categoryLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('categoryLogoContentType')!.value }}, {{ byteSize(editForm.get('categoryLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('categoryLogo', 'categoryLogoContentType', 'file_categoryLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_categoryLogo"
+              data-cy="categoryLogo"
+              (change)="setFileData($event, 'categoryLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="categoryLogo"
+            id="field_categoryLogo"
+            data-cy="categoryLogo"
+            formControlName="categoryLogo"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="categoryLogoContentType"
+            id="field_categoryLogoContentType"
+            formControlName="categoryLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryParams" for="field_categoryParams"
+            >Category Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="categoryParams"
+            id="field_categoryParams"
+            data-cy="categoryParams"
+            formControlName="categoryParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryAttributs" for="field_categoryAttributs"
+            >Category Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="categoryAttributs"
+            id="field_categoryAttributs"
+            data-cy="categoryAttributs"
+            formControlName="categoryAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryStat" for="field_categoryStat">Category Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="categoryStat"
+            id="field_categoryStat"
+            data-cy="categoryStat"
+            formControlName="categoryStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.printingModel" for="field_printingModel">Printing Model</label>
+          <select
+            class="form-control"
+            id="field_printingModel"
+            data-cy="printingModel"
+            name="printingModel"
+            formControlName="printingModel"
+            [compareWith]="comparePrintingModelSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="printingModelOption" *ngFor="let printingModelOption of printingModelsSharedCollection">
+              {{ printingModelOption.printingModelId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.category.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

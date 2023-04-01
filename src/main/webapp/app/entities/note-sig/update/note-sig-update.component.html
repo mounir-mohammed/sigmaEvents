@@ -1,0 +1,156 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sigma-note-sig-heading" data-cy="NoteCreateUpdateHeading" sigmaTranslate="sigmaEventsApp.note.home.createOrEditLabel">
+        Create or edit a Note
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.noteId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteId" for="field_noteId">Note Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="noteId"
+            id="field_noteId"
+            data-cy="noteId"
+            formControlName="noteId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteValue" for="field_noteValue">Note Value</label>
+          <input type="text" class="form-control" name="noteValue" id="field_noteValue" data-cy="noteValue" formControlName="noteValue" />
+          <div *ngIf="editForm.get('noteValue')!.invalid && (editForm.get('noteValue')!.dirty || editForm.get('noteValue')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('noteValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('noteValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteDescription" for="field_noteDescription"
+            >Note Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="noteDescription"
+            id="field_noteDescription"
+            data-cy="noteDescription"
+            formControlName="noteDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('noteDescription')!.invalid &&
+              (editForm.get('noteDescription')!.dirty || editForm.get('noteDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('noteDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteTypeParams" for="field_noteTypeParams">Note Type Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="noteTypeParams"
+            id="field_noteTypeParams"
+            data-cy="noteTypeParams"
+            formControlName="noteTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteTypeAttributs" for="field_noteTypeAttributs"
+            >Note Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="noteTypeAttributs"
+            id="field_noteTypeAttributs"
+            data-cy="noteTypeAttributs"
+            formControlName="noteTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteStat" for="field_noteStat">Note Stat</label>
+          <input type="checkbox" class="form-check" name="noteStat" id="field_noteStat" data-cy="noteStat" formControlName="noteStat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.accreditation" for="field_accreditation">Accreditation</label>
+          <select
+            class="form-control"
+            id="field_accreditation"
+            data-cy="accreditation"
+            name="accreditation"
+            formControlName="accreditation"
+            [compareWith]="compareAccreditationSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="accreditationOption" *ngFor="let accreditationOption of accreditationsSharedCollection">
+              {{ accreditationOption.accreditationId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.note.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,203 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-event-control-sig-heading"
+        data-cy="EventControlCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.eventControl.home.createOrEditLabel"
+      >
+        Create or edit a Event Control
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.controlId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlId" for="field_controlId">Control Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="controlId"
+            id="field_controlId"
+            data-cy="controlId"
+            formControlName="controlId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlName" for="field_controlName">Control Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="controlName"
+            id="field_controlName"
+            data-cy="controlName"
+            formControlName="controlName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlDescription" for="field_controlDescription"
+            >Control Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="controlDescription"
+            id="field_controlDescription"
+            data-cy="controlDescription"
+            formControlName="controlDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlType" for="field_controlType">Control Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="controlType"
+            id="field_controlType"
+            data-cy="controlType"
+            formControlName="controlType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlValueString" for="field_controlValueString"
+            >Control Value String</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="controlValueString"
+            id="field_controlValueString"
+            data-cy="controlValueString"
+            formControlName="controlValueString"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlValueLong" for="field_controlValueLong"
+            >Control Value Long</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="controlValueLong"
+            id="field_controlValueLong"
+            data-cy="controlValueLong"
+            formControlName="controlValueLong"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlValueDate" for="field_controlValueDate"
+            >Control Value Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_controlValueDate"
+              data-cy="controlValueDate"
+              type="datetime-local"
+              class="form-control"
+              name="controlValueDate"
+              formControlName="controlValueDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlParams" for="field_controlParams"
+            >Control Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="controlParams"
+            id="field_controlParams"
+            data-cy="controlParams"
+            formControlName="controlParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlAttributs" for="field_controlAttributs"
+            >Control Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="controlAttributs"
+            id="field_controlAttributs"
+            data-cy="controlAttributs"
+            formControlName="controlAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.controlValueStat" for="field_controlValueStat"
+            >Control Value Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="controlValueStat"
+            id="field_controlValueStat"
+            data-cy="controlValueStat"
+            formControlName="controlValueStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.eventControl.eventField" for="field_eventField">Event Field</label>
+          <select
+            class="form-control"
+            id="field_eventField"
+            data-cy="eventField"
+            name="eventField"
+            formControlName="eventField"
+            [compareWith]="compareEventFieldSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventFieldOption" *ngFor="let eventFieldOption of eventFieldsSharedCollection">
+              {{ eventFieldOption.fieldId }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

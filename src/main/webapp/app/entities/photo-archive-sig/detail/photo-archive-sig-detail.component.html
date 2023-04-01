@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="photoArchive">
+      <h2 data-cy="photoArchiveDetailsHeading"><span sigmaTranslate="sigmaEventsApp.photoArchive.detail.title">Photo Archive</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveId">Photo Archive Id</span></dt>
+        <dd>
+          <span>{{ photoArchive.photoArchiveId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveName">Photo Archive Name</span></dt>
+        <dd>
+          <span>{{ photoArchive.photoArchiveName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchivePath">Photo Archive Path</span></dt>
+        <dd>
+          <span>{{ photoArchive.photoArchivePath }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchivePhoto">Photo Archive Photo</span></dt>
+        <dd>
+          <div *ngIf="photoArchive.photoArchivePhoto">
+            <a (click)="openFile(photoArchive.photoArchivePhoto, photoArchive.photoArchivePhotoContentType)">
+              <img
+                [src]="'data:' + photoArchive.photoArchivePhotoContentType + ';base64,' + photoArchive.photoArchivePhoto"
+                style="max-width: 100%"
+                alt="photoArchive image"
+              />
+            </a>
+            {{ photoArchive.photoArchivePhotoContentType }}, {{ byteSize(photoArchive.photoArchivePhoto) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveDescription">Photo Archive Description</span></dt>
+        <dd>
+          <span>{{ photoArchive.photoArchiveDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveParams">Photo Archive Params</span></dt>
+        <dd>
+          <span>{{ photoArchive.photoArchiveParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveAttributs">Photo Archive Attributs</span></dt>
+        <dd>
+          <span>{{ photoArchive.photoArchiveAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveStat">Photo Archive Stat</span></dt>
+        <dd>
+          <span>{{ photoArchive.photoArchiveStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.accreditation">Accreditation</span></dt>
+        <dd>
+          <div *ngIf="photoArchive.accreditation">
+            <a [routerLink]="['/accreditation-sig', photoArchive.accreditation.accreditationId, 'view']">{{
+              photoArchive.accreditation.accreditationId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.event">Event</span></dt>
+        <dd>
+          <div *ngIf="photoArchive.event">
+            <a [routerLink]="['/event-sig', photoArchive.event.eventId, 'view']">{{ photoArchive.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/photo-archive-sig', photoArchive.photoArchiveId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

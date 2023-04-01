@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="attachementType">
+      <h2 data-cy="attachementTypeDetailsHeading">
+        <span sigmaTranslate="sigmaEventsApp.attachementType.detail.title">Attachement Type</span>
+      </h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeId">Attachement Type Id</span></dt>
+        <dd>
+          <span>{{ attachementType.attachementTypeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeName">Attachement Type Name</span></dt>
+        <dd>
+          <span>{{ attachementType.attachementTypeName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeDescription">Attachement Type Description</span></dt>
+        <dd>
+          <span>{{ attachementType.attachementTypeDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeParams">Attachement Type Params</span></dt>
+        <dd>
+          <span>{{ attachementType.attachementTypeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeAttributs">Attachement Type Attributs</span></dt>
+        <dd>
+          <span>{{ attachementType.attachementTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachementType.attachementTypeStat">Attachement Type Stat</span></dt>
+        <dd>
+          <span>{{ attachementType.attachementTypeStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/attachement-type-sig', attachementType.attachementTypeId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

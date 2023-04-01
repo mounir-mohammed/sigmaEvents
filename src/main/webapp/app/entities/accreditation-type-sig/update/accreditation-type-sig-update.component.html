@@ -1,0 +1,236 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-accreditation-type-sig-heading"
+        data-cy="AccreditationTypeCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.accreditationType.home.createOrEditLabel"
+      >
+        Create or edit a Accreditation Type
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.accreditationTypeId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeId" for="field_accreditationTypeId"
+            >Accreditation Type Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accreditationTypeId"
+            id="field_accreditationTypeId"
+            data-cy="accreditationTypeId"
+            formControlName="accreditationTypeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeValue"
+            for="field_accreditationTypeValue"
+            >Accreditation Type Value</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationTypeValue"
+            id="field_accreditationTypeValue"
+            data-cy="accreditationTypeValue"
+            formControlName="accreditationTypeValue"
+          />
+          <div
+            *ngIf="
+              editForm.get('accreditationTypeValue')!.invalid &&
+              (editForm.get('accreditationTypeValue')!.dirty || editForm.get('accreditationTypeValue')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationTypeValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationTypeValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeAbreviation"
+            for="field_accreditationTypeAbreviation"
+            >Accreditation Type Abreviation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationTypeAbreviation"
+            id="field_accreditationTypeAbreviation"
+            data-cy="accreditationTypeAbreviation"
+            formControlName="accreditationTypeAbreviation"
+          />
+          <div
+            *ngIf="
+              editForm.get('accreditationTypeAbreviation')!.invalid &&
+              (editForm.get('accreditationTypeAbreviation')!.dirty || editForm.get('accreditationTypeAbreviation')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationTypeAbreviation')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeDescription"
+            for="field_accreditationTypeDescription"
+            >Accreditation Type Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationTypeDescription"
+            id="field_accreditationTypeDescription"
+            data-cy="accreditationTypeDescription"
+            formControlName="accreditationTypeDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('accreditationTypeDescription')!.invalid &&
+              (editForm.get('accreditationTypeDescription')!.dirty || editForm.get('accreditationTypeDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('accreditationTypeDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeParams"
+            for="field_accreditationTypeParams"
+            >Accreditation Type Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationTypeParams"
+            id="field_accreditationTypeParams"
+            data-cy="accreditationTypeParams"
+            formControlName="accreditationTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeAttributs"
+            for="field_accreditationTypeAttributs"
+            >Accreditation Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationTypeAttributs"
+            id="field_accreditationTypeAttributs"
+            data-cy="accreditationTypeAttributs"
+            formControlName="accreditationTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeStat"
+            for="field_accreditationTypeStat"
+            >Accreditation Type Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="accreditationTypeStat"
+            id="field_accreditationTypeStat"
+            data-cy="accreditationTypeStat"
+            formControlName="accreditationTypeStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditationType.printingModel" for="field_printingModel"
+            >Printing Model</label
+          >
+          <select
+            class="form-control"
+            id="field_printingModel"
+            data-cy="printingModel"
+            name="printingModel"
+            formControlName="printingModel"
+            [compareWith]="comparePrintingModelSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="printingModelOption" *ngFor="let printingModelOption of printingModelsSharedCollection">
+              {{ printingModelOption.printingModelId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditationType.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

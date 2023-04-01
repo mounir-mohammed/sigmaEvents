@@ -1,0 +1,55 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401024114",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "printing_type",
+  "fields": [
+    {
+      "fieldName": "printingTypeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "printingTypeValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "printingTypeDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "printingTypeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingTypeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingTypeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "PrintingType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "printingType",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

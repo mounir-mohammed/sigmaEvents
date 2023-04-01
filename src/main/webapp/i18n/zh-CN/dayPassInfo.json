@@ -1,0 +1,37 @@
+{
+  "sigmaEventsApp": {
+    "dayPassInfo": {
+      "home": {
+        "title": "Day Pass Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Day Pass Info",
+        "createOrEditLabel": "创建或编辑 Day Pass Info",
+        "notFound": "No Day Pass Infos found"
+      },
+      "created": "Day Pass Info {{ param }} 创建成功",
+      "updated": "Day Pass Info {{ param }} 更新成功",
+      "deleted": "Day Pass Info {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Day Pass Info {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Day Pass Info"
+      },
+      "dayPassInfoId": "Day Pass Info Id",
+      "dayPassInfoName": "Day Pass Info Name",
+      "dayPassDescription": "Day Pass Description",
+      "dayPassLogo": "Day Pass Logo",
+      "dayPassInfoCreationDate": "Day Pass Info Creation Date",
+      "dayPassInfoUpdateDate": "Day Pass Info Update Date",
+      "dayPassInfoCreatedByuser": "Day Pass Info Created Byuser",
+      "dayPassInfoDateStart": "Day Pass Info Date Start",
+      "dayPassInfoDateEnd": "Day Pass Info Date End",
+      "dayPassInfoNumber": "Day Pass Info Number",
+      "dayPassParams": "Day Pass Params",
+      "dayPassAttributs": "Day Pass Attributs",
+      "dayPassInfoStat": "Day Pass Info Stat",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

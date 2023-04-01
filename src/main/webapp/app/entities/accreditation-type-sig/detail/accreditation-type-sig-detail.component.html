@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="accreditationType">
+      <h2 data-cy="accreditationTypeDetailsHeading">
+        <span sigmaTranslate="sigmaEventsApp.accreditationType.detail.title">Accreditation Type</span>
+      </h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeId">Accreditation Type Id</span></dt>
+        <dd>
+          <span>{{ accreditationType.accreditationTypeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeValue">Accreditation Type Value</span></dt>
+        <dd>
+          <span>{{ accreditationType.accreditationTypeValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeAbreviation">Accreditation Type Abreviation</span></dt>
+        <dd>
+          <span>{{ accreditationType.accreditationTypeAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeDescription">Accreditation Type Description</span></dt>
+        <dd>
+          <span>{{ accreditationType.accreditationTypeDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeParams">Accreditation Type Params</span></dt>
+        <dd>
+          <span>{{ accreditationType.accreditationTypeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeAttributs">Accreditation Type Attributs</span></dt>
+        <dd>
+          <span>{{ accreditationType.accreditationTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.accreditationTypeStat">Accreditation Type Stat</span></dt>
+        <dd>
+          <span>{{ accreditationType.accreditationTypeStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.printingModel">Printing Model</span></dt>
+        <dd>
+          <div *ngIf="accreditationType.printingModel">
+            <a [routerLink]="['/printing-model-sig', accreditationType.printingModel.printingModelId, 'view']">{{
+              accreditationType.printingModel.printingModelId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.event">Event</span></dt>
+        <dd>
+          <div *ngIf="accreditationType.event">
+            <a [routerLink]="['/event-sig', accreditationType.event.eventId, 'view']">{{ accreditationType.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/accreditation-type-sig', accreditationType.accreditationTypeId, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

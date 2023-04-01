@@ -1,0 +1,187 @@
+<div>
+  <h2 id="page-heading" data-cy="CodeHeading">
+    <span sigmaTranslate="sigmaEventsApp.code.home.title">Codes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.code.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-code-sig"
+        [routerLink]="['/code-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.code.home.createLabel"> Create a new Code </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="codes?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.code.home.notFound">No Codes found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="codes && codes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="codeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeId">Code Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeForEntity">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeForEntity">Code For Entity</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeEntityValue">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeEntityValue">Code Entity Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeValue">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeValue">Code Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeUsed">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeUsed">Code Used</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeParams">Code Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeAttributs">Code Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeStat">Code Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeType.codeTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.codeType">Code Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.code.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let code of codes; trackBy: trackCodeId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/code-sig', code.codeId, 'view']">{{ code.codeId }}</a>
+          </td>
+          <td>{{ code.codeForEntity }}</td>
+          <td>{{ code.codeEntityValue }}</td>
+          <td>{{ code.codeValue }}</td>
+          <td>{{ code.codeUsed }}</td>
+          <td>{{ code.codeParams }}</td>
+          <td>{{ code.codeAttributs }}</td>
+          <td>{{ code.codeStat }}</td>
+          <td>
+            <div *ngIf="code.codeType">
+              <a [routerLink]="['/code-type-sig', code.codeType.codeTypeId, 'view']">{{ code.codeType.codeTypeId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="code.event">
+              <a [routerLink]="['/event-sig', code.event.eventId, 'view']">{{ code.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[codeId.in]': code.codeId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.code.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/code-sig', code.codeId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/code-sig', code.codeId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(code)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="codes && codes.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

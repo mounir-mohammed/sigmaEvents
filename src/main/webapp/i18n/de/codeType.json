@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "codeType": {
+      "home": {
+        "title": "Code Types",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Code Type erstellen",
+        "createOrEditLabel": "Code Type erstellen oder bearbeiten",
+        "notFound": "Keine Code Types gefunden"
+      },
+      "created": "Code Type erstellt mit ID {{ param }}",
+      "updated": "Code Type aktualisiert mit ID {{ param }}",
+      "deleted": "Code Type gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Code Type {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Code Type"
+      },
+      "codeTypeId": "Code Type Id",
+      "codeTypeValue": "Code Type Value",
+      "codeTypeDescription": "Code Type Description",
+      "codeTypeParams": "Code Type Params",
+      "codeTypeAttributs": "Code Type Attributs",
+      "codeTypeStat": "Code Type Stat",
+      "code": "Code"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="printingModel">
+      <h2 data-cy="printingModelDetailsHeading"><span sigmaTranslate="sigmaEventsApp.printingModel.detail.title">Printing Model</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelId">Printing Model Id</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelName">Printing Model Name</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelFile">Printing Model File</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelFile }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelPath">Printing Model Path</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelPath }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelDescription">Printing Model Description</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelData">Printing Model Data</span></dt>
+        <dd>
+          <div *ngIf="printingModel.printingModelData">
+            <a
+              (click)="openFile(printingModel.printingModelData, printingModel.printingModelDataContentType)"
+              sigmaTranslate="entity.action.open"
+              >Open</a
+            >
+            {{ printingModel.printingModelDataContentType }}, {{ byteSize(printingModel.printingModelData) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelParams">Printing Model Params</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelAttributs">Printing Model Attributs</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.printingModelStat">Printing Model Stat</span></dt>
+        <dd>
+          <span>{{ printingModel.printingModelStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.printingModel.event">Event</span></dt>
+        <dd>
+          <div *ngIf="printingModel.event">
+            <a [routerLink]="['/event-sig', printingModel.event.eventId, 'view']">{{ printingModel.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/printing-model-sig', printingModel.printingModelId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

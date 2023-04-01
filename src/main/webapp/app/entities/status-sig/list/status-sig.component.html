@@ -1,0 +1,186 @@
+<div>
+  <h2 id="page-heading" data-cy="StatusHeading">
+    <span sigmaTranslate="sigmaEventsApp.status.home.title">Statuses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.status.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-status-sig"
+        [routerLink]="['/status-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.status.home.createLabel"> Create a new Status </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="statuses?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.status.home.notFound">No Statuses found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="statuses && statuses.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="statusId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusId">Status Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusName">Status Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusAbreviation">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusAbreviation">Status Abreviation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusColor">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusColor">Status Color</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusDescription">Status Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusUserCanPrint">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusUserCanPrint">Status User Can Print</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusUserCanUpdate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusUserCanUpdate">Status User Can Update</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusUserCanValidate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusUserCanValidate">Status User Can Validate</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusParams">Status Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusAttributs">Status Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="statusStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.status.statusStat">Status Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let status of statuses; trackBy: trackStatusId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/status-sig', status.statusId, 'view']">{{ status.statusId }}</a>
+          </td>
+          <td>{{ status.statusName }}</td>
+          <td>{{ status.statusAbreviation }}</td>
+          <td>{{ status.statusColor }}</td>
+          <td>{{ status.statusDescription }}</td>
+          <td>{{ status.statusUserCanPrint }}</td>
+          <td>{{ status.statusUserCanUpdate }}</td>
+          <td>{{ status.statusUserCanValidate }}</td>
+          <td>{{ status.statusParams }}</td>
+          <td>{{ status.statusAttributs }}</td>
+          <td>{{ status.statusStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[statusId.in]': status.statusId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.status.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/status-sig', status.statusId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/status-sig', status.statusId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(status)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="statuses && statuses.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "fonction": {
+      "home": {
+        "title": "Fonctions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Fonction を追加",
+        "createOrEditLabel": "Fonctionを追加または編集",
+        "notFound": "No Fonctions found"
+      },
+      "created": "A new Fonction is created with identifier {{ param }}",
+      "updated": "A Fonction is updated with identifier {{ param }}",
+      "deleted": "A Fonction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Fonction {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Fonction"
+      },
+      "fonctionId": "Fonction Id",
+      "fonctionName": "Fonction Name",
+      "fonctionAbreviation": "Fonction Abreviation",
+      "fonctionColor": "Fonction Color",
+      "fonctionDescription": "Fonction Description",
+      "fonctionLogo": "Fonction Logo",
+      "fonctionParams": "Fonction Params",
+      "fonctionAttributs": "Fonction Attributs",
+      "fonctionStat": "Fonction Stat",
+      "accreditation": "Accreditation",
+      "area": "Area",
+      "category": "Category",
+      "event": "Event"
+    }
+  }
+}

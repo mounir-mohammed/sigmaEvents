@@ -1,0 +1,199 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="event">
+      <h2 data-cy="eventDetailsHeading"><span sigmaTranslate="sigmaEventsApp.event.detail.title">Event</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventId">Event Id</span></dt>
+        <dd>
+          <span>{{ event.eventId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventName">Event Name</span></dt>
+        <dd>
+          <span>{{ event.eventName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventColor">Event Color</span></dt>
+        <dd>
+          <span>{{ event.eventColor }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventDescription">Event Description</span></dt>
+        <dd>
+          <span>{{ event.eventDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventAbreviation">Event Abreviation</span></dt>
+        <dd>
+          <span>{{ event.eventAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventdateStart">Eventdate Start</span></dt>
+        <dd>
+          <span>{{ event.eventdateStart | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventdateEnd">Eventdate End</span></dt>
+        <dd>
+          <span>{{ event.eventdateEnd | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventPrintingModelId">Event Printing Model Id</span></dt>
+        <dd>
+          <span>{{ event.eventPrintingModelId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventLogo">Event Logo</span></dt>
+        <dd>
+          <div *ngIf="event.eventLogo">
+            <a (click)="openFile(event.eventLogo, event.eventLogoContentType)">
+              <img [src]="'data:' + event.eventLogoContentType + ';base64,' + event.eventLogo" style="max-width: 100%" alt="event image" />
+            </a>
+            {{ event.eventLogoContentType }}, {{ byteSize(event.eventLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventBannerCenter">Event Banner Center</span></dt>
+        <dd>
+          <div *ngIf="event.eventBannerCenter">
+            <a (click)="openFile(event.eventBannerCenter, event.eventBannerCenterContentType)">
+              <img
+                [src]="'data:' + event.eventBannerCenterContentType + ';base64,' + event.eventBannerCenter"
+                style="max-width: 100%"
+                alt="event image"
+              />
+            </a>
+            {{ event.eventBannerCenterContentType }}, {{ byteSize(event.eventBannerCenter) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventBannerRight">Event Banner Right</span></dt>
+        <dd>
+          <div *ngIf="event.eventBannerRight">
+            <a (click)="openFile(event.eventBannerRight, event.eventBannerRightContentType)">
+              <img
+                [src]="'data:' + event.eventBannerRightContentType + ';base64,' + event.eventBannerRight"
+                style="max-width: 100%"
+                alt="event image"
+              />
+            </a>
+            {{ event.eventBannerRightContentType }}, {{ byteSize(event.eventBannerRight) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventBannerLeft">Event Banner Left</span></dt>
+        <dd>
+          <div *ngIf="event.eventBannerLeft">
+            <a (click)="openFile(event.eventBannerLeft, event.eventBannerLeftContentType)">
+              <img
+                [src]="'data:' + event.eventBannerLeftContentType + ';base64,' + event.eventBannerLeft"
+                style="max-width: 100%"
+                alt="event image"
+              />
+            </a>
+            {{ event.eventBannerLeftContentType }}, {{ byteSize(event.eventBannerLeft) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventBannerBas">Event Banner Bas</span></dt>
+        <dd>
+          <div *ngIf="event.eventBannerBas">
+            <a (click)="openFile(event.eventBannerBas, event.eventBannerBasContentType)">
+              <img
+                [src]="'data:' + event.eventBannerBasContentType + ';base64,' + event.eventBannerBas"
+                style="max-width: 100%"
+                alt="event image"
+              />
+            </a>
+            {{ event.eventBannerBasContentType }}, {{ byteSize(event.eventBannerBas) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventWithPhoto">Event With Photo</span></dt>
+        <dd>
+          <span>{{ event.eventWithPhoto }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventNoCode">Event No Code</span></dt>
+        <dd>
+          <span>{{ event.eventNoCode }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventCodeNoFilter">Event Code No Filter</span></dt>
+        <dd>
+          <span>{{ event.eventCodeNoFilter }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeAccreditation">Event Code By Type Accreditation</span></dt>
+        <dd>
+          <span>{{ event.eventCodeByTypeAccreditation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeCategorie">Event Code By Type Categorie</span></dt>
+        <dd>
+          <span>{{ event.eventCodeByTypeCategorie }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeFonction">Event Code By Type Fonction</span></dt>
+        <dd>
+          <span>{{ event.eventCodeByTypeFonction }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventCodeByTypeOrganiz">Event Code By Type Organiz</span></dt>
+        <dd>
+          <span>{{ event.eventCodeByTypeOrganiz }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventDefaultPrintingLanguage">Event Default Printing Language</span></dt>
+        <dd>
+          <span>{{ event.eventDefaultPrintingLanguage }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventPCenterPrintingLanguage">Event P Center Printing Language</span></dt>
+        <dd>
+          <span>{{ event.eventPCenterPrintingLanguage }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventImported">Event Imported</span></dt>
+        <dd>
+          <span>{{ event.eventImported }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventArchived">Event Archived</span></dt>
+        <dd>
+          <span>{{ event.eventArchived }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventArchiveFileName">Event Archive File Name</span></dt>
+        <dd>
+          <span>{{ event.eventArchiveFileName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventURL">Event URL</span></dt>
+        <dd>
+          <span>{{ event.eventURL }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventDomaine">Event Domaine</span></dt>
+        <dd>
+          <span>{{ event.eventDomaine }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventSousDomaine">Event Sous Domaine</span></dt>
+        <dd>
+          <span>{{ event.eventSousDomaine }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventCloned">Event Cloned</span></dt>
+        <dd>
+          <span>{{ event.eventCloned }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventParams">Event Params</span></dt>
+        <dd>
+          <span>{{ event.eventParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventAttributs">Event Attributs</span></dt>
+        <dd>
+          <span>{{ event.eventAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.eventStat">Event Stat</span></dt>
+        <dd>
+          <span>{{ event.eventStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.event.language">Language</span></dt>
+        <dd>
+          <div *ngIf="event.language">
+            <a [routerLink]="['/language-sig', event.language.languageId, 'view']">{{ event.language.languageId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event-sig', event.eventId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

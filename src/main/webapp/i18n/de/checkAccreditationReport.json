@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "checkAccreditationReport": {
+      "home": {
+        "title": "Check Accreditation Reports",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Check Accreditation Report erstellen",
+        "createOrEditLabel": "Check Accreditation Report erstellen oder bearbeiten",
+        "notFound": "Keine Check Accreditation Reports gefunden"
+      },
+      "created": "Check Accreditation Report erstellt mit ID {{ param }}",
+      "updated": "Check Accreditation Report aktualisiert mit ID {{ param }}",
+      "deleted": "Check Accreditation Report gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Check Accreditation Report {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Check Accreditation Report"
+      },
+      "checkAccreditationReportId": "Check Accreditation Report Id",
+      "checkAccreditationReportDescription": "Check Accreditation Report Description",
+      "checkAccreditationReportPersonPhoto": "Check Accreditation Report Person Photo",
+      "checkAccreditationReportCINPhoto": "Check Accreditation Report CIN Photo",
+      "checkAccreditationReportAttachment": "Check Accreditation Report Attachment",
+      "checkAccreditationReportParams": "Check Accreditation Report Params",
+      "checkAccreditationReportAttributs": "Check Accreditation Report Attributs",
+      "checkAccreditationReportStat": "Check Accreditation Report Stat",
+      "event": "Event",
+      "checkAccreditationHistory": "Check Accreditation History"
+    }
+  }
+}

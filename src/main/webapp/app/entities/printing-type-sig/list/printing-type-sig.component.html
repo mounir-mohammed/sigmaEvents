@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="PrintingTypeHeading">
+    <span sigmaTranslate="sigmaEventsApp.printingType.home.title">Printing Types</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingType.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-printing-type-sig"
+        [routerLink]="['/printing-type-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingType.home.createLabel"> Create a new Printing Type </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="printingTypes?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.printingType.home.notFound">No Printing Types found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="printingTypes && printingTypes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="printingTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingType.printingTypeId">Printing Type Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingTypeValue">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingType.printingTypeValue">Printing Type Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingTypeDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingType.printingTypeDescription">Printing Type Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingTypeParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingType.printingTypeParams">Printing Type Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingTypeAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingType.printingTypeAttributs">Printing Type Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingTypeStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingType.printingTypeStat">Printing Type Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let printingType of printingTypes; trackBy: trackPrintingTypeId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/printing-type-sig', printingType.printingTypeId, 'view']">{{ printingType.printingTypeId }}</a>
+          </td>
+          <td>{{ printingType.printingTypeValue }}</td>
+          <td>{{ printingType.printingTypeDescription }}</td>
+          <td>{{ printingType.printingTypeParams }}</td>
+          <td>{{ printingType.printingTypeAttributs }}</td>
+          <td>{{ printingType.printingTypeStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/printing-centre-sig']"
+                [queryParams]="{ 'filter[printingTypeId.in]': printingType.printingTypeId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.printingType.printingCentre' | translate) }"
+                  >Show Printing Centre</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/printing-type-sig', printingType.printingTypeId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/printing-type-sig', printingType.printingTypeId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(printingType)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="printingTypes && printingTypes.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

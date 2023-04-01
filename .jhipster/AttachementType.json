@@ -1,0 +1,55 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025214",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "attachement_type",
+  "fields": [
+    {
+      "fieldName": "attachementTypeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "attachementTypeName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "attachementTypeDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "attachementTypeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attachementTypeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attachementTypeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "AttachementType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "attachement",
+      "otherEntityRelationshipName": "attachementType",
+      "relationshipName": "attachement",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

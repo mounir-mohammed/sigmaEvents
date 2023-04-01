@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="SexeHeading">
+    <span sigmaTranslate="sigmaEventsApp.sexe.home.title">Sexes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.sexe.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sexe-sig"
+        [routerLink]="['/sexe-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.sexe.home.createLabel"> Create a new Sexe </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="sexes?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.sexe.home.notFound">No Sexes found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="sexes && sexes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="sexeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.sexe.sexeId">Sexe Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="sexeValue">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.sexe.sexeValue">Sexe Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="sexeDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.sexe.sexeDescription">Sexe Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="sexeTypeParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.sexe.sexeTypeParams">Sexe Type Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="sexeTypeAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.sexe.sexeTypeAttributs">Sexe Type Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="sexeStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.sexe.sexeStat">Sexe Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sexe of sexes; trackBy: trackSexeId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/sexe-sig', sexe.sexeId, 'view']">{{ sexe.sexeId }}</a>
+          </td>
+          <td>{{ sexe.sexeValue }}</td>
+          <td>{{ sexe.sexeDescription }}</td>
+          <td>{{ sexe.sexeTypeParams }}</td>
+          <td>{{ sexe.sexeTypeAttributs }}</td>
+          <td>{{ sexe.sexeStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[sexeId.in]': sexe.sexeId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.sexe.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/sexe-sig', sexe.sexeId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/sexe-sig', sexe.sexeId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(sexe)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="sexes && sexes.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,164 @@
+<div>
+  <h2 id="page-heading" data-cy="CloningHeading">
+    <span sigmaTranslate="sigmaEventsApp.cloning.home.title">Clonings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.cloning.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-cloning-sig"
+        [routerLink]="['/cloning-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.cloning.home.createLabel"> Create a new Cloning </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="clonings?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.cloning.home.notFound">No Clonings found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="clonings && clonings.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="cloningId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.cloningId">Cloning Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="cloningDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.cloningDescription">Cloning Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="cloningOldEventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.cloningOldEventId">Cloning Old Event Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="cloningNewEventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.cloningNewEventId">Cloning New Event Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="cloningUserId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.cloningUserId">Cloning User Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="cloningDate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.cloningDate">Cloning Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="clonedEntitys">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.clonedEntitys">Cloned Entitys</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="clonedParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.clonedParams">Cloned Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="clonedAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.clonedAttributs">Cloned Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="clonedStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.cloning.clonedStat">Cloned Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cloning of clonings; trackBy: trackCloningId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/cloning-sig', cloning.cloningId, 'view']">{{ cloning.cloningId }}</a>
+          </td>
+          <td>{{ cloning.cloningDescription }}</td>
+          <td>{{ cloning.cloningOldEventId }}</td>
+          <td>{{ cloning.cloningNewEventId }}</td>
+          <td>{{ cloning.cloningUserId }}</td>
+          <td>{{ cloning.cloningDate | formatMediumDatetime }}</td>
+          <td>{{ cloning.clonedEntitys }}</td>
+          <td>{{ cloning.clonedParams }}</td>
+          <td>{{ cloning.clonedAttributs }}</td>
+          <td>{{ cloning.clonedStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/cloning-sig', cloning.cloningId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/cloning-sig', cloning.cloningId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(cloning)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="clonings && clonings.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

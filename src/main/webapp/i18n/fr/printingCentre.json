@@ -1,0 +1,42 @@
+{
+  "sigmaEventsApp": {
+    "printingCentre": {
+      "home": {
+        "title": "PrintingCentres",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Printing Centre",
+        "createOrEditLabel": "Créer ou éditer un Printing Centre",
+        "notFound": "Aucun Printing Centre trouvé"
+      },
+      "created": "Un nouveau Printing Centre a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Printing Centre avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Printing Centre avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Printing Centre {{ id }} ?"
+      },
+      "detail": {
+        "title": "Printing Centre"
+      },
+      "printingCentreId": "Printing Centre Id",
+      "printingCentreDescription": "Printing Centre Description",
+      "printingCentreName": "Printing Centre Name",
+      "printingCentreLogo": "Printing Centre Logo",
+      "printingCentreAdresse": "Printing Centre Adresse",
+      "printingCentreEmail": "Printing Centre Email",
+      "printingCentreTel": "Printing Centre Tel",
+      "printingCentreFax": "Printing Centre Fax",
+      "printingCentreResponsableName": "Printing Centre Responsable Name",
+      "printingParams": "Printing Params",
+      "printingAttributs": "Printing Attributs",
+      "printingCentreStat": "Printing Centre Stat",
+      "city": "City",
+      "country": "Country",
+      "organiz": "Organiz",
+      "printingType": "Printing Type",
+      "printingServer": "Printing Server",
+      "printingModel": "Printing Model",
+      "language": "Language",
+      "event": "Event"
+    }
+  }
+}

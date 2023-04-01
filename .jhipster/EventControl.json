@@ -1,0 +1,73 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031814",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "event_control",
+  "fields": [
+    {
+      "fieldName": "controlId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "controlName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "controlDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "controlType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "controlValueString",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "controlValueLong",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "controlValueDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "controlParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "controlAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "controlValueStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "EventControl",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "eventControl",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "eventField",
+      "otherEntityRelationshipName": "eventControl",
+      "relationshipName": "eventField",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

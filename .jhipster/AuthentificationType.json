@@ -1,0 +1,48 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025014",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "authentification_type",
+  "fields": [
+    {
+      "fieldName": "authentificationTypeId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "authentificationTypeValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "authentificationTypeDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "authentificationTypeParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "authentificationTypeAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "authentificationTypeStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "AuthentificationType",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="codeType">
+      <h2 data-cy="codeTypeDetailsHeading"><span sigmaTranslate="sigmaEventsApp.codeType.detail.title">Code Type</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.codeType.codeTypeId">Code Type Id</span></dt>
+        <dd>
+          <span>{{ codeType.codeTypeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.codeType.codeTypeValue">Code Type Value</span></dt>
+        <dd>
+          <span>{{ codeType.codeTypeValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.codeType.codeTypeDescription">Code Type Description</span></dt>
+        <dd>
+          <span>{{ codeType.codeTypeDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.codeType.codeTypeParams">Code Type Params</span></dt>
+        <dd>
+          <span>{{ codeType.codeTypeParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.codeType.codeTypeAttributs">Code Type Attributs</span></dt>
+        <dd>
+          <span>{{ codeType.codeTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.codeType.codeTypeStat">Code Type Stat</span></dt>
+        <dd>
+          <span>{{ codeType.codeTypeStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/code-type-sig', codeType.codeTypeId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

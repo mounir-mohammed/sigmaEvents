@@ -1,0 +1,33 @@
+{
+  "sigmaEventsApp": {
+    "code": {
+      "home": {
+        "title": "Codes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Genera un nuovo Code",
+        "createOrEditLabel": "Genera o modifica un Code",
+        "notFound": "No Codes found"
+      },
+      "created": "&Egrave; stato generato un nuovo Code con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Code identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Code con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Code {{ id }}?"
+      },
+      "detail": {
+        "title": "Code"
+      },
+      "codeId": "Code Id",
+      "codeForEntity": "Code For Entity",
+      "codeEntityValue": "Code Entity Value",
+      "codeValue": "Code Value",
+      "codeUsed": "Code Used",
+      "codeParams": "Code Params",
+      "codeAttributs": "Code Attributs",
+      "codeStat": "Code Stat",
+      "accreditation": "Accreditation",
+      "codeType": "Code Type",
+      "event": "Event"
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031114",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "setting",
+  "fields": [
+    {
+      "fieldName": "settingId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "settingParentId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "settingType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "settingNameClass",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "settingDataType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "settingDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "settingValueString",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "settingValueLong",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "settingValueDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "settingValueBoolean",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "settingValueBlob",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "settingParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "settingAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "settingStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Setting",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "language",
+      "otherEntityRelationshipName": "setting",
+      "relationshipName": "language",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "setting",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

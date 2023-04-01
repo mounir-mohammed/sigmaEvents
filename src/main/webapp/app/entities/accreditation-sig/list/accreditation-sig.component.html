@@ -1,0 +1,507 @@
+<div>
+  <h2 id="page-heading" data-cy="AccreditationHeading">
+    <span sigmaTranslate="sigmaEventsApp.accreditation.home.title">Accreditations</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.accreditation.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-accreditation-sig"
+        [routerLink]="['/accreditation-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.accreditation.home.createLabel"> Create a new Accreditation </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="accreditations?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.accreditation.home.notFound">No Accreditations found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="accreditations && accreditations.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="accreditationId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Accreditation Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationFirstName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">Accreditation First Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationSecondName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSecondName">Accreditation Second Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationLastName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName">Accreditation Last Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationBirthDay">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationBirthDay">Accreditation Birth Day</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationSexe">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationOccupation">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Accreditation Occupation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription">Accreditation Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationEmail">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationEmail">Accreditation Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationTel">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationTel">Accreditation Tel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationPhoto">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPhoto">Accreditation Photo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationCinId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCinId">Accreditation Cin Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationPasseportId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPasseportId">Accreditation Passeport Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationCartePresseId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCartePresseId">Accreditation Carte Presse Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationCarteProfessionnelleId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCarteProfessionnelleId"
+                >Accreditation Carte Professionnelle Id</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationCreationDate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreationDate">Accreditation Creation Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationUpdateDate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdateDate">Accreditation Update Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationCreatedByuser">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser">Accreditation Created Byuser</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationDateStart">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateStart">Accreditation Date Start</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationDateEnd">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateEnd">Accreditation Date End</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationPrintStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat">Accreditation Print Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationPrintNumber">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber">Accreditation Print Number</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams">Accreditation Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs">Accreditation Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="civility.civilityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="sexe.sexeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="nationality.nationalityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="country.countryId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="city.cityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="category.categoryId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fonction.fonctionId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organiz.organizId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationType.accreditationTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="status.statusId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="attachement.attachementId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.attachement">Attachement</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="code.codeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.code">Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="dayPassInfo.dayPassInfoId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo">Day Pass Info</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let accreditation of accreditations; trackBy: trackAccreditationId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
+          </td>
+          <td>{{ accreditation.accreditationFirstName }}</td>
+          <td>{{ accreditation.accreditationSecondName }}</td>
+          <td>{{ accreditation.accreditationLastName }}</td>
+          <td>{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
+          <td>{{ accreditation.accreditationSexe }}</td>
+          <td>{{ accreditation.accreditationOccupation }}</td>
+          <td>{{ accreditation.accreditationDescription }}</td>
+          <td>{{ accreditation.accreditationEmail }}</td>
+          <td>{{ accreditation.accreditationTel }}</td>
+          <td>
+            <a
+              *ngIf="accreditation.accreditationPhoto"
+              (click)="openFile(accreditation.accreditationPhoto, accreditation.accreditationPhotoContentType)"
+            >
+              <img
+                [src]="'data:' + accreditation.accreditationPhotoContentType + ';base64,' + accreditation.accreditationPhoto"
+                style="max-height: 30px"
+                alt="accreditation image"
+              />
+            </a>
+            <span *ngIf="accreditation.accreditationPhoto"
+              >{{ accreditation.accreditationPhotoContentType }}, {{ byteSize(accreditation.accreditationPhoto) }}</span
+            >
+          </td>
+          <td>{{ accreditation.accreditationCinId }}</td>
+          <td>{{ accreditation.accreditationPasseportId }}</td>
+          <td>{{ accreditation.accreditationCartePresseId }}</td>
+          <td>{{ accreditation.accreditationCarteProfessionnelleId }}</td>
+          <td>{{ accreditation.accreditationCreationDate | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationCreatedByuser }}</td>
+          <td>{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationPrintStat }}</td>
+          <td>{{ accreditation.accreditationPrintNumber }}</td>
+          <td>{{ accreditation.accreditationParams }}</td>
+          <td>{{ accreditation.accreditationAttributs }}</td>
+          <td>{{ accreditation.accreditationStat }}</td>
+          <td>
+            <div *ngIf="accreditation.event">
+              <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.civility">
+              <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.sexe">
+              <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.nationality">
+              <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
+                accreditation.nationality.nationalityId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.country">
+              <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.city">
+              <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.category">
+              <a [routerLink]="['/category-sig', accreditation.category.categoryId, 'view']">{{ accreditation.category.categoryId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.fonction">
+              <a [routerLink]="['/fonction-sig', accreditation.fonction.fonctionId, 'view']">{{ accreditation.fonction.fonctionId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.organiz">
+              <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.accreditationType">
+              <a [routerLink]="['/accreditation-type-sig', accreditation.accreditationType.accreditationTypeId, 'view']">{{
+                accreditation.accreditationType.accreditationTypeId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.status">
+              <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.attachement">
+              <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
+                accreditation.attachement.attachementId
+              }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.code">
+              <a [routerLink]="['/code-sig', accreditation.code.codeId, 'view']">{{ accreditation.code.codeId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="accreditation.dayPassInfo">
+              <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
+                accreditation.dayPassInfo.dayPassInfoId
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/photo-archive-sig']"
+                [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.photoArchive' | translate) }"
+                  >Show Photo Archive</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/info-supp-sig']"
+                [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.infoSupp' | translate) }"
+                  >Show Info Supp</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/note-sig']"
+                [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.note' | translate) }"
+                  >Show Note</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/check-accreditation-history-sig']"
+                [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.checkAccreditationHistory' | translate) }"
+                  >Show Check Accreditation History</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(accreditation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="accreditations && accreditations.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025414",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "info_supp",
+  "fields": [
+    {
+      "fieldName": "infoSuppId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "infoSuppName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "infoSuppDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "infoSuppParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "infoSuppAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "infoSuppStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "InfoSupp",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "infoSuppType",
+      "otherEntityRelationshipName": "infoSupp",
+      "relationshipName": "infoSuppType",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "infoSupp",
+      "relationshipName": "accreditation",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "infoSupp",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

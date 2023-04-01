@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "printingModel": {
+      "home": {
+        "title": "PrintingModels",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Genera un nuovo Printing Model",
+        "createOrEditLabel": "Genera o modifica un Printing Model",
+        "notFound": "No Printing Models found"
+      },
+      "created": "&Egrave; stato generato un nuovo Printing Model con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Printing Model identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Printing Model con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Printing Model {{ id }}?"
+      },
+      "detail": {
+        "title": "Printing Model"
+      },
+      "printingModelId": "Printing Model Id",
+      "printingModelName": "Printing Model Name",
+      "printingModelFile": "Printing Model File",
+      "printingModelPath": "Printing Model Path",
+      "printingModelDescription": "Printing Model Description",
+      "printingModelData": "Printing Model Data",
+      "printingModelParams": "Printing Model Params",
+      "printingModelAttributs": "Printing Model Attributs",
+      "printingModelStat": "Printing Model Stat",
+      "printingCentre": "Printing Centre",
+      "accreditationType": "Accreditation Type",
+      "category": "Category",
+      "event": "Event"
+    }
+  }
+}

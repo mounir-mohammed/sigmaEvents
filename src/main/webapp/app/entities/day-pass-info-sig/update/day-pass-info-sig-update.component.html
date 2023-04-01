@@ -1,0 +1,294 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-day-pass-info-sig-heading"
+        data-cy="DayPassInfoCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.dayPassInfo.home.createOrEditLabel"
+      >
+        Create or edit a Day Pass Info
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.dayPassInfoId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoId" for="field_dayPassInfoId"
+            >Day Pass Info Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="dayPassInfoId"
+            id="field_dayPassInfoId"
+            data-cy="dayPassInfoId"
+            formControlName="dayPassInfoId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoName" for="field_dayPassInfoName"
+            >Day Pass Info Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dayPassInfoName"
+            id="field_dayPassInfoName"
+            data-cy="dayPassInfoName"
+            formControlName="dayPassInfoName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassDescription" for="field_dayPassDescription"
+            >Day Pass Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dayPassDescription"
+            id="field_dayPassDescription"
+            data-cy="dayPassDescription"
+            formControlName="dayPassDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('dayPassDescription')!.invalid &&
+              (editForm.get('dayPassDescription')!.dirty || editForm.get('dayPassDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dayPassDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassLogo" for="field_dayPassLogo">Day Pass Logo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('dayPassLogoContentType')!.value + ';base64,' + editForm.get('dayPassLogo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('dayPassLogo')!.value"
+              alt="dayPassInfo image"
+            />
+            <div *ngIf="editForm.get('dayPassLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('dayPassLogoContentType')!.value }}, {{ byteSize(editForm.get('dayPassLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('dayPassLogo', 'dayPassLogoContentType', 'file_dayPassLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_dayPassLogo"
+              data-cy="dayPassLogo"
+              (change)="setFileData($event, 'dayPassLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="dayPassLogo"
+            id="field_dayPassLogo"
+            data-cy="dayPassLogo"
+            formControlName="dayPassLogo"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="dayPassLogoContentType"
+            id="field_dayPassLogoContentType"
+            formControlName="dayPassLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoCreationDate" for="field_dayPassInfoCreationDate"
+            >Day Pass Info Creation Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dayPassInfoCreationDate"
+              data-cy="dayPassInfoCreationDate"
+              type="datetime-local"
+              class="form-control"
+              name="dayPassInfoCreationDate"
+              formControlName="dayPassInfoCreationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoUpdateDate" for="field_dayPassInfoUpdateDate"
+            >Day Pass Info Update Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dayPassInfoUpdateDate"
+              data-cy="dayPassInfoUpdateDate"
+              type="datetime-local"
+              class="form-control"
+              name="dayPassInfoUpdateDate"
+              formControlName="dayPassInfoUpdateDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoCreatedByuser"
+            for="field_dayPassInfoCreatedByuser"
+            >Day Pass Info Created Byuser</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dayPassInfoCreatedByuser"
+            id="field_dayPassInfoCreatedByuser"
+            data-cy="dayPassInfoCreatedByuser"
+            formControlName="dayPassInfoCreatedByuser"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoDateStart" for="field_dayPassInfoDateStart"
+            >Day Pass Info Date Start</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dayPassInfoDateStart"
+              data-cy="dayPassInfoDateStart"
+              type="datetime-local"
+              class="form-control"
+              name="dayPassInfoDateStart"
+              formControlName="dayPassInfoDateStart"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoDateEnd" for="field_dayPassInfoDateEnd"
+            >Day Pass Info Date End</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dayPassInfoDateEnd"
+              data-cy="dayPassInfoDateEnd"
+              type="datetime-local"
+              class="form-control"
+              name="dayPassInfoDateEnd"
+              formControlName="dayPassInfoDateEnd"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoNumber" for="field_dayPassInfoNumber"
+            >Day Pass Info Number</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="dayPassInfoNumber"
+            id="field_dayPassInfoNumber"
+            data-cy="dayPassInfoNumber"
+            formControlName="dayPassInfoNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassParams" for="field_dayPassParams"
+            >Day Pass Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dayPassParams"
+            id="field_dayPassParams"
+            data-cy="dayPassParams"
+            formControlName="dayPassParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassAttributs" for="field_dayPassAttributs"
+            >Day Pass Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dayPassAttributs"
+            id="field_dayPassAttributs"
+            data-cy="dayPassAttributs"
+            formControlName="dayPassAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoStat" for="field_dayPassInfoStat"
+            >Day Pass Info Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="dayPassInfoStat"
+            id="field_dayPassInfoStat"
+            data-cy="dayPassInfoStat"
+            formControlName="dayPassInfoStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+{
+  "sigmaEventsApp": {
+    "status": {
+      "home": {
+        "title": "Statuses",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Status",
+        "createOrEditLabel": "Crear o editar Status",
+        "notFound": "Ningún Statuses encontrado"
+      },
+      "created": "Un nuevo Status ha sido creado con el identificador {{ param }}",
+      "updated": "Un Status ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Status ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Status"
+      },
+      "statusId": "Status Id",
+      "statusName": "Status Name",
+      "statusAbreviation": "Status Abreviation",
+      "statusColor": "Status Color",
+      "statusDescription": "Status Description",
+      "statusUserCanPrint": "Status User Can Print",
+      "statusUserCanUpdate": "Status User Can Update",
+      "statusUserCanValidate": "Status User Can Validate",
+      "statusParams": "Status Params",
+      "statusAttributs": "Status Attributs",
+      "statusStat": "Status Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

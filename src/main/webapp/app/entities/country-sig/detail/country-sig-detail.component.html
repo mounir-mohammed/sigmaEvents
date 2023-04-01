@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="country">
+      <h2 data-cy="countryDetailsHeading"><span sigmaTranslate="sigmaEventsApp.country.detail.title">Country</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryId">Country Id</span></dt>
+        <dd>
+          <span>{{ country.countryId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryName">Country Name</span></dt>
+        <dd>
+          <span>{{ country.countryName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryCodeAlpha2">Country Code Alpha 2</span></dt>
+        <dd>
+          <span>{{ country.countryCodeAlpha2 }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryCodeAlpha3">Country Code Alpha 3</span></dt>
+        <dd>
+          <span>{{ country.countryCodeAlpha3 }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryTelCode">Country Tel Code</span></dt>
+        <dd>
+          <span>{{ country.countryTelCode }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryDescription">Country Description</span></dt>
+        <dd>
+          <span>{{ country.countryDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryFlag">Country Flag</span></dt>
+        <dd>
+          <div *ngIf="country.countryFlag">
+            <a (click)="openFile(country.countryFlag, country.countryFlagContentType)">
+              <img
+                [src]="'data:' + country.countryFlagContentType + ';base64,' + country.countryFlag"
+                style="max-width: 100%"
+                alt="country image"
+              />
+            </a>
+            {{ country.countryFlagContentType }}, {{ byteSize(country.countryFlag) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryParams">Country Params</span></dt>
+        <dd>
+          <span>{{ country.countryParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryAttributs">Country Attributs</span></dt>
+        <dd>
+          <span>{{ country.countryAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.country.countryStat">Country Stat</span></dt>
+        <dd>
+          <span>{{ country.countryStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/country-sig', country.countryId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

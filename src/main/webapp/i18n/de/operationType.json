@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "operationType": {
+      "home": {
+        "title": "Operation Types",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Operation Type erstellen",
+        "createOrEditLabel": "Operation Type erstellen oder bearbeiten",
+        "notFound": "Keine Operation Types gefunden"
+      },
+      "created": "Operation Type erstellt mit ID {{ param }}",
+      "updated": "Operation Type aktualisiert mit ID {{ param }}",
+      "deleted": "Operation Type gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Operation Type {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Operation Type"
+      },
+      "operationTypeId": "Operation Type Id",
+      "operationTypeValue": "Operation Type Value",
+      "operationTypeDescription": "Operation Type Description",
+      "operationTypeParams": "Operation Type Params",
+      "operationTypeAttributs": "Operation Type Attributs",
+      "operationTypeStat": "Operation Type Stat",
+      "operationHistory": "Operation History"
+    }
+  }
+}

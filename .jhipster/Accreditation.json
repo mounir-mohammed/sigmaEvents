@@ -1,0 +1,246 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030314",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "accreditation",
+  "fields": [
+    {
+      "fieldName": "accreditationId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "accreditationFirstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "accreditationSecondName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "accreditationLastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "50",
+      "fieldValidateRulesMinlength": "2"
+    },
+    {
+      "fieldName": "accreditationBirthDay",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "accreditationSexe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationOccupation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationEmail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationTel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationPhoto",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "accreditationCinId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationPasseportId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationCartePresseId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationCarteProfessionnelleId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationCreationDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "accreditationUpdateDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "accreditationCreatedByuser",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationDateStart",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "accreditationDateEnd",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "accreditationPrintStat",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "accreditationPrintNumber",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "accreditationParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accreditationStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Accreditation",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "photoArchive",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "photoArchive",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "infoSupp",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "infoSupp",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "note",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "checkAccreditationHistory",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "checkAccreditationHistory",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "site",
+      "otherEntityRelationshipName": "accreditation",
+      "ownerSide": true,
+      "relationshipName": "site",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "civility",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "civility",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "sexe",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "sexe",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "nationality",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "nationality",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "country",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "country",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "category",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "fonction",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "fonction",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "organiz",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "organiz",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "accreditationType",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "accreditationType",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "status",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "status",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "attachement",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "attachement",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "code",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "code",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "dayPassInfo",
+      "otherEntityRelationshipName": "accreditation",
+      "relationshipName": "dayPassInfo",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,245 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-country-sig-heading"
+        data-cy="CountryCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.country.home.createOrEditLabel"
+      >
+        Create or edit a Country
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.countryId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryId" for="field_countryId">Country Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="countryId"
+            id="field_countryId"
+            data-cy="countryId"
+            formControlName="countryId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryName" for="field_countryName">Country Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="countryName"
+            id="field_countryName"
+            data-cy="countryName"
+            formControlName="countryName"
+          />
+          <div *ngIf="editForm.get('countryName')!.invalid && (editForm.get('countryName')!.dirty || editForm.get('countryName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('countryName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('countryName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryCodeAlpha2" for="field_countryCodeAlpha2"
+            >Country Code Alpha 2</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="countryCodeAlpha2"
+            id="field_countryCodeAlpha2"
+            data-cy="countryCodeAlpha2"
+            formControlName="countryCodeAlpha2"
+          />
+          <div
+            *ngIf="
+              editForm.get('countryCodeAlpha2')!.invalid &&
+              (editForm.get('countryCodeAlpha2')!.dirty || editForm.get('countryCodeAlpha2')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('countryCodeAlpha2')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryCodeAlpha3" for="field_countryCodeAlpha3"
+            >Country Code Alpha 3</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="countryCodeAlpha3"
+            id="field_countryCodeAlpha3"
+            data-cy="countryCodeAlpha3"
+            formControlName="countryCodeAlpha3"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryTelCode" for="field_countryTelCode"
+            >Country Tel Code</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="countryTelCode"
+            id="field_countryTelCode"
+            data-cy="countryTelCode"
+            formControlName="countryTelCode"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryDescription" for="field_countryDescription"
+            >Country Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="countryDescription"
+            id="field_countryDescription"
+            data-cy="countryDescription"
+            formControlName="countryDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('countryDescription')!.invalid &&
+              (editForm.get('countryDescription')!.dirty || editForm.get('countryDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('countryDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryFlag" for="field_countryFlag">Country Flag</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('countryFlagContentType')!.value + ';base64,' + editForm.get('countryFlag')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('countryFlag')!.value"
+              alt="country image"
+            />
+            <div *ngIf="editForm.get('countryFlag')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('countryFlagContentType')!.value }}, {{ byteSize(editForm.get('countryFlag')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('countryFlag', 'countryFlagContentType', 'file_countryFlag')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_countryFlag"
+              data-cy="countryFlag"
+              (change)="setFileData($event, 'countryFlag', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="countryFlag"
+            id="field_countryFlag"
+            data-cy="countryFlag"
+            formControlName="countryFlag"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="countryFlagContentType"
+            id="field_countryFlagContentType"
+            formControlName="countryFlagContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryParams" for="field_countryParams">Country Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="countryParams"
+            id="field_countryParams"
+            data-cy="countryParams"
+            formControlName="countryParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryAttributs" for="field_countryAttributs"
+            >Country Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="countryAttributs"
+            id="field_countryAttributs"
+            data-cy="countryAttributs"
+            formControlName="countryAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.country.countryStat" for="field_countryStat">Country Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="countryStat"
+            id="field_countryStat"
+            data-cy="countryStat"
+            formControlName="countryStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

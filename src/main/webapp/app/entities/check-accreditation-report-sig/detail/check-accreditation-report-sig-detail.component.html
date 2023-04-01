@@ -1,0 +1,177 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="checkAccreditationReport">
+      <h2 data-cy="checkAccreditationReportDetailsHeading">
+        <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.detail.title">Check Accreditation Report</span>
+      </h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportId">Check Accreditation Report Id</span>
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationReport.checkAccreditationReportId }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportDescription"
+            >Check Accreditation Report Description</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationReport.checkAccreditationReportDescription }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportPersonPhoto"
+            >Check Accreditation Report Person Photo</span
+          >
+        </dt>
+        <dd>
+          <div *ngIf="checkAccreditationReport.checkAccreditationReportPersonPhoto">
+            <a
+              (click)="
+                openFile(
+                  checkAccreditationReport.checkAccreditationReportPersonPhoto,
+                  checkAccreditationReport.checkAccreditationReportPersonPhotoContentType
+                )
+              "
+            >
+              <img
+                [src]="
+                  'data:' +
+                  checkAccreditationReport.checkAccreditationReportPersonPhotoContentType +
+                  ';base64,' +
+                  checkAccreditationReport.checkAccreditationReportPersonPhoto
+                "
+                style="max-width: 100%"
+                alt="checkAccreditationReport image"
+              />
+            </a>
+            {{ checkAccreditationReport.checkAccreditationReportPersonPhotoContentType }},
+            {{ byteSize(checkAccreditationReport.checkAccreditationReportPersonPhoto) }}
+          </div>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportCINPhoto"
+            >Check Accreditation Report CIN Photo</span
+          >
+        </dt>
+        <dd>
+          <div *ngIf="checkAccreditationReport.checkAccreditationReportCINPhoto">
+            <a
+              (click)="
+                openFile(
+                  checkAccreditationReport.checkAccreditationReportCINPhoto,
+                  checkAccreditationReport.checkAccreditationReportCINPhotoContentType
+                )
+              "
+            >
+              <img
+                [src]="
+                  'data:' +
+                  checkAccreditationReport.checkAccreditationReportCINPhotoContentType +
+                  ';base64,' +
+                  checkAccreditationReport.checkAccreditationReportCINPhoto
+                "
+                style="max-width: 100%"
+                alt="checkAccreditationReport image"
+              />
+            </a>
+            {{ checkAccreditationReport.checkAccreditationReportCINPhotoContentType }},
+            {{ byteSize(checkAccreditationReport.checkAccreditationReportCINPhoto) }}
+          </div>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportAttachment"
+            >Check Accreditation Report Attachment</span
+          >
+        </dt>
+        <dd>
+          <div *ngIf="checkAccreditationReport.checkAccreditationReportAttachment">
+            <a
+              (click)="
+                openFile(
+                  checkAccreditationReport.checkAccreditationReportAttachment,
+                  checkAccreditationReport.checkAccreditationReportAttachmentContentType
+                )
+              "
+            >
+              <img
+                [src]="
+                  'data:' +
+                  checkAccreditationReport.checkAccreditationReportAttachmentContentType +
+                  ';base64,' +
+                  checkAccreditationReport.checkAccreditationReportAttachment
+                "
+                style="max-width: 100%"
+                alt="checkAccreditationReport image"
+              />
+            </a>
+            {{ checkAccreditationReport.checkAccreditationReportAttachmentContentType }},
+            {{ byteSize(checkAccreditationReport.checkAccreditationReportAttachment) }}
+          </div>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportParams"
+            >Check Accreditation Report Params</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationReport.checkAccreditationReportParams }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportAttributs"
+            >Check Accreditation Report Attributs</span
+          >
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationReport.checkAccreditationReportAttributs }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportStat">Check Accreditation Report Stat</span>
+        </dt>
+        <dd>
+          <span>{{ checkAccreditationReport.checkAccreditationReportStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.event">Event</span></dt>
+        <dd>
+          <div *ngIf="checkAccreditationReport.event">
+            <a [routerLink]="['/event-sig', checkAccreditationReport.event.eventId, 'view']">{{
+              checkAccreditationReport.event.eventId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationHistory">Check Accreditation History</span></dt>
+        <dd>
+          <div *ngIf="checkAccreditationReport.checkAccreditationHistory">
+            <a
+              [routerLink]="[
+                '/check-accreditation-history-sig',
+                checkAccreditationReport.checkAccreditationHistory.checkAccreditationHistoryId,
+                'view'
+              ]"
+              >{{ checkAccreditationReport.checkAccreditationHistory.checkAccreditationHistoryId }}</a
+            >
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/check-accreditation-report-sig', checkAccreditationReport.checkAccreditationReportId, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

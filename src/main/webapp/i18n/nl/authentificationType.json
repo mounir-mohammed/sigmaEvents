@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "authentificationType": {
+      "home": {
+        "title": "Authentification Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Maak een nieuwe Authentification Type",
+        "createOrEditLabel": "Maak of wijzig een Authentification Type",
+        "notFound": "No Authentification Types found"
+      },
+      "created": "A new Authentification Type is created with identifier {{ param }}",
+      "updated": "A Authentification Type is updated with identifier {{ param }}",
+      "deleted": "A Authentification Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Bent u zeker dat u Authentification Type {{ id }} wilt verwijderen?"
+      },
+      "detail": {
+        "title": "Authentification Type"
+      },
+      "authentificationTypeId": "Authentification Type Id",
+      "authentificationTypeValue": "Authentification Type Value",
+      "authentificationTypeDescription": "Authentification Type Description",
+      "authentificationTypeParams": "Authentification Type Params",
+      "authentificationTypeAttributs": "Authentification Type Attributs",
+      "authentificationTypeStat": "Authentification Type Stat"
+    }
+  }
+}

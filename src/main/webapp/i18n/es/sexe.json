@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "sexe": {
+      "home": {
+        "title": "Sexes",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Sexe",
+        "createOrEditLabel": "Crear o editar Sexe",
+        "notFound": "Ningún Sexes encontrado"
+      },
+      "created": "Un nuevo Sexe ha sido creado con el identificador {{ param }}",
+      "updated": "Un Sexe ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Sexe ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Sexe {{ id }}?"
+      },
+      "detail": {
+        "title": "Sexe"
+      },
+      "sexeId": "Sexe Id",
+      "sexeValue": "Sexe Value",
+      "sexeDescription": "Sexe Description",
+      "sexeTypeParams": "Sexe Type Params",
+      "sexeTypeAttributs": "Sexe Type Attributs",
+      "sexeStat": "Sexe Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

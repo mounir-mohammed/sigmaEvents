@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="infoSupp">
+      <h2 data-cy="infoSuppDetailsHeading"><span sigmaTranslate="sigmaEventsApp.infoSupp.detail.title">Info Supp</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppId">Info Supp Id</span></dt>
+        <dd>
+          <span>{{ infoSupp.infoSuppId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppName">Info Supp Name</span></dt>
+        <dd>
+          <span>{{ infoSupp.infoSuppName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppDescription">Info Supp Description</span></dt>
+        <dd>
+          <span>{{ infoSupp.infoSuppDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppParams">Info Supp Params</span></dt>
+        <dd>
+          <span>{{ infoSupp.infoSuppParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppAttributs">Info Supp Attributs</span></dt>
+        <dd>
+          <span>{{ infoSupp.infoSuppAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppStat">Info Supp Stat</span></dt>
+        <dd>
+          <span>{{ infoSupp.infoSuppStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppType">Info Supp Type</span></dt>
+        <dd>
+          <div *ngIf="infoSupp.infoSuppType">
+            <a [routerLink]="['/info-supp-type-sig', infoSupp.infoSuppType.infoSuppTypeId, 'view']">{{
+              infoSupp.infoSuppType.infoSuppTypeId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.accreditation">Accreditation</span></dt>
+        <dd>
+          <div *ngIf="infoSupp.accreditation">
+            <a [routerLink]="['/accreditation-sig', infoSupp.accreditation.accreditationId, 'view']">{{
+              infoSupp.accreditation.accreditationId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.event">Event</span></dt>
+        <dd>
+          <div *ngIf="infoSupp.event">
+            <a [routerLink]="['/event-sig', infoSupp.event.eventId, 'view']">{{ infoSupp.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/info-supp-sig', infoSupp.infoSuppId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

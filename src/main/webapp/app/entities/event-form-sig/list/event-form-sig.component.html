@@ -1,0 +1,162 @@
+<div>
+  <h2 id="page-heading" data-cy="EventFormHeading">
+    <span sigmaTranslate="sigmaEventsApp.eventForm.home.title">Event Forms</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.eventForm.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-event-form-sig"
+        [routerLink]="['/event-form-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.eventForm.home.createLabel"> Create a new Event Form </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="eventForms?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.eventForm.home.notFound">No Event Forms found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="eventForms && eventForms.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="formId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventForm.formId">Form Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="formName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventForm.formName">Form Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="formDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventForm.formDescription">Form Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="formParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventForm.formParams">Form Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="formAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventForm.formAttributs">Form Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="formStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventForm.formStat">Form Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventForm.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eventForm of eventForms; trackBy: trackFormId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/event-form-sig', eventForm.formId, 'view']">{{ eventForm.formId }}</a>
+          </td>
+          <td>{{ eventForm.formName }}</td>
+          <td>{{ eventForm.formDescription }}</td>
+          <td>{{ eventForm.formParams }}</td>
+          <td>{{ eventForm.formAttributs }}</td>
+          <td>{{ eventForm.formStat }}</td>
+          <td>
+            <div *ngIf="eventForm.event">
+              <a [routerLink]="['/event-sig', eventForm.event.eventId, 'view']">{{ eventForm.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/event-field-sig']"
+                [queryParams]="{ 'filter[eventFormId.in]': eventForm.formId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.eventForm.eventField' | translate) }"
+                  >Show Event Field</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/event-form-sig', eventForm.formId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/event-form-sig', eventForm.formId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(eventForm)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="eventForms && eventForms.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

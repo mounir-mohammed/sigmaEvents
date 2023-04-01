@@ -1,0 +1,223 @@
+<div>
+  <h2 id="page-heading" data-cy="PrintingModelHeading">
+    <span sigmaTranslate="sigmaEventsApp.printingModel.home.title">Printing Models</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingModel.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-printing-model-sig"
+        [routerLink]="['/printing-model-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.printingModel.home.createLabel"> Create a new Printing Model </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="printingModels?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.printingModel.home.notFound">No Printing Models found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="printingModels && printingModels.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="printingModelId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelId">Printing Model Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelName">Printing Model Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelFile">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelFile">Printing Model File</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelPath">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelPath">Printing Model Path</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelDescription">Printing Model Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelData">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelData">Printing Model Data</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelParams">Printing Model Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelAttributs">Printing Model Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="printingModelStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.printingModelStat">Printing Model Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.printingModel.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let printingModel of printingModels; trackBy: trackPrintingModelId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/printing-model-sig', printingModel.printingModelId, 'view']">{{ printingModel.printingModelId }}</a>
+          </td>
+          <td>{{ printingModel.printingModelName }}</td>
+          <td>{{ printingModel.printingModelFile }}</td>
+          <td>{{ printingModel.printingModelPath }}</td>
+          <td>{{ printingModel.printingModelDescription }}</td>
+          <td>
+            <a
+              *ngIf="printingModel.printingModelData"
+              (click)="openFile(printingModel.printingModelData, printingModel.printingModelDataContentType)"
+              sigmaTranslate="entity.action.open"
+              >Open</a
+            >
+            <span *ngIf="printingModel.printingModelData"
+              >{{ printingModel.printingModelDataContentType }}, {{ byteSize(printingModel.printingModelData) }}</span
+            >
+          </td>
+          <td>{{ printingModel.printingModelParams }}</td>
+          <td>{{ printingModel.printingModelAttributs }}</td>
+          <td>{{ printingModel.printingModelStat }}</td>
+          <td>
+            <div *ngIf="printingModel.event">
+              <a [routerLink]="['/event-sig', printingModel.event.eventId, 'view']">{{ printingModel.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/printing-centre-sig']"
+                [queryParams]="{ 'filter[printingModelId.in]': printingModel.printingModelId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.printingModel.printingCentre' | translate) }"
+                  >Show Printing Centre</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-type-sig']"
+                [queryParams]="{ 'filter[printingModelId.in]': printingModel.printingModelId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.printingModel.accreditationType' | translate) }"
+                  >Show Accreditation Type</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/category-sig']"
+                [queryParams]="{ 'filter[printingModelId.in]': printingModel.printingModelId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.printingModel.category' | translate) }"
+                  >Show Category</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/printing-model-sig', printingModel.printingModelId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/printing-model-sig', printingModel.printingModelId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(printingModel)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="printingModels && printingModels.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

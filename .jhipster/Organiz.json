@@ -1,0 +1,100 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025614",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "organiz",
+  "fields": [
+    {
+      "fieldName": "organizId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "organizName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "organizDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "organizLogo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "organizTel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organizFax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organizEmail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organizAdresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organizParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organizAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organizStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Organiz",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "organiz",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "organiz",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "country",
+      "otherEntityRelationshipName": "organiz",
+      "relationshipName": "country",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "organiz",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "organiz",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

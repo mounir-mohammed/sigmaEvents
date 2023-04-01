@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="eventControl">
+      <h2 data-cy="eventControlDetailsHeading"><span sigmaTranslate="sigmaEventsApp.eventControl.detail.title">Event Control</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlId">Control Id</span></dt>
+        <dd>
+          <span>{{ eventControl.controlId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlName">Control Name</span></dt>
+        <dd>
+          <span>{{ eventControl.controlName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlDescription">Control Description</span></dt>
+        <dd>
+          <span>{{ eventControl.controlDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlType">Control Type</span></dt>
+        <dd>
+          <span>{{ eventControl.controlType }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlValueString">Control Value String</span></dt>
+        <dd>
+          <span>{{ eventControl.controlValueString }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlValueLong">Control Value Long</span></dt>
+        <dd>
+          <span>{{ eventControl.controlValueLong }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlValueDate">Control Value Date</span></dt>
+        <dd>
+          <span>{{ eventControl.controlValueDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlParams">Control Params</span></dt>
+        <dd>
+          <span>{{ eventControl.controlParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlAttributs">Control Attributs</span></dt>
+        <dd>
+          <span>{{ eventControl.controlAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.controlValueStat">Control Value Stat</span></dt>
+        <dd>
+          <span>{{ eventControl.controlValueStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.event">Event</span></dt>
+        <dd>
+          <div *ngIf="eventControl.event">
+            <a [routerLink]="['/event-sig', eventControl.event.eventId, 'view']">{{ eventControl.event.eventId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.eventControl.eventField">Event Field</span></dt>
+        <dd>
+          <div *ngIf="eventControl.eventField">
+            <a [routerLink]="['/event-field-sig', eventControl.eventField.fieldId, 'view']">{{ eventControl.eventField.fieldId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/event-control-sig', eventControl.controlId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

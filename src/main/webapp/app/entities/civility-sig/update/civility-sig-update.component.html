@@ -1,0 +1,160 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-civility-sig-heading"
+        data-cy="CivilityCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.civility.home.createOrEditLabel"
+      >
+        Create or edit a Civility
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.civilityId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.civility.civilityId" for="field_civilityId">Civility Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="civilityId"
+            id="field_civilityId"
+            data-cy="civilityId"
+            formControlName="civilityId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.civility.civilityValue" for="field_civilityValue">Civility Value</label>
+          <input
+            type="text"
+            class="form-control"
+            name="civilityValue"
+            id="field_civilityValue"
+            data-cy="civilityValue"
+            formControlName="civilityValue"
+          />
+          <div
+            *ngIf="
+              editForm.get('civilityValue')!.invalid && (editForm.get('civilityValue')!.dirty || editForm.get('civilityValue')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('civilityValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('civilityValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.civility.civilityDescription" for="field_civilityDescription"
+            >Civility Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="civilityDescription"
+            id="field_civilityDescription"
+            data-cy="civilityDescription"
+            formControlName="civilityDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('civilityDescription')!.invalid &&
+              (editForm.get('civilityDescription')!.dirty || editForm.get('civilityDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('civilityDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.civility.civilityCode" for="field_civilityCode">Civility Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="civilityCode"
+            id="field_civilityCode"
+            data-cy="civilityCode"
+            formControlName="civilityCode"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.civility.civilityParams" for="field_civilityParams"
+            >Civility Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="civilityParams"
+            id="field_civilityParams"
+            data-cy="civilityParams"
+            formControlName="civilityParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.civility.civilityAttributs" for="field_civilityAttributs"
+            >Civility Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="civilityAttributs"
+            id="field_civilityAttributs"
+            data-cy="civilityAttributs"
+            formControlName="civilityAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.civility.civilityStat" for="field_civilityStat">Civility Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="civilityStat"
+            id="field_civilityStat"
+            data-cy="civilityStat"
+            formControlName="civilityStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

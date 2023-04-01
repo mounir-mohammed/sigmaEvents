@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "city": {
+      "home": {
+        "title": "Cities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "City を追加",
+        "createOrEditLabel": "Cityを追加または編集",
+        "notFound": "No Cities found"
+      },
+      "created": "A new City is created with identifier {{ param }}",
+      "updated": "A City is updated with identifier {{ param }}",
+      "deleted": "A City is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "City {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "City"
+      },
+      "cityId": "City Id",
+      "cityName": "City Name",
+      "cityZipCode": "City Zip Code",
+      "cityAbreviation": "City Abreviation",
+      "cityDescription": "City Description",
+      "cityParams": "City Params",
+      "cityAttributs": "City Attributs",
+      "cityStat": "City Stat",
+      "printingCentre": "Printing Centre",
+      "site": "Site",
+      "organiz": "Organiz",
+      "accreditation": "Accreditation",
+      "country": "Country"
+    }
+  }
+}

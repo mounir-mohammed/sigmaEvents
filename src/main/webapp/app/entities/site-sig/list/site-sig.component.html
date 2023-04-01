@@ -1,0 +1,234 @@
+<div>
+  <h2 id="page-heading" data-cy="SiteHeading">
+    <span sigmaTranslate="sigmaEventsApp.site.home.title">Sites</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.site.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-site-sig"
+        [routerLink]="['/site-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.site.home.createLabel"> Create a new Site </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="sites?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.site.home.notFound">No Sites found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="sites && sites.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="siteId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteId">Site Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteName">Site Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteColor">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteColor">Site Color</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteAbreviation">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteAbreviation">Site Abreviation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteDescription">Site Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteLogo">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteLogo">Site Logo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteAdresse">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteAdresse">Site Adresse</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteEmail">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteEmail">Site Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteTel">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteTel">Site Tel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteFax">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteFax">Site Fax</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteResponsableName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteResponsableName">Site Responsable Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteParams">Site Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteAttributs">Site Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="siteStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.siteStat">Site Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="city.cityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.city">City</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.site.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let site of sites; trackBy: trackSiteId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/site-sig', site.siteId, 'view']">{{ site.siteId }}</a>
+          </td>
+          <td>{{ site.siteName }}</td>
+          <td>{{ site.siteColor }}</td>
+          <td>{{ site.siteAbreviation }}</td>
+          <td>{{ site.siteDescription }}</td>
+          <td>
+            <a *ngIf="site.siteLogo" (click)="openFile(site.siteLogo, site.siteLogoContentType)">
+              <img [src]="'data:' + site.siteLogoContentType + ';base64,' + site.siteLogo" style="max-height: 30px" alt="site image" />
+            </a>
+            <span *ngIf="site.siteLogo">{{ site.siteLogoContentType }}, {{ byteSize(site.siteLogo) }}</span>
+          </td>
+          <td>{{ site.siteAdresse }}</td>
+          <td>{{ site.siteEmail }}</td>
+          <td>{{ site.siteTel }}</td>
+          <td>{{ site.siteFax }}</td>
+          <td>{{ site.siteResponsableName }}</td>
+          <td>{{ site.siteParams }}</td>
+          <td>{{ site.siteAttributs }}</td>
+          <td>{{ site.siteStat }}</td>
+          <td>
+            <div *ngIf="site.city">
+              <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="site.event">
+              <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[siteId.in]': site.siteId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.site.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/site-sig', site.siteId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/site-sig', site.siteId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(site)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="sites && sites.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

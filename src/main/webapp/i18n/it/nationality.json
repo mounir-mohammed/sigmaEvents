@@ -1,0 +1,31 @@
+{
+  "sigmaEventsApp": {
+    "nationality": {
+      "home": {
+        "title": "Nationalities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Genera un nuovo Nationality",
+        "createOrEditLabel": "Genera o modifica un Nationality",
+        "notFound": "No Nationalities found"
+      },
+      "created": "&Egrave; stato generato un nuovo Nationality con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Nationality identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Nationality con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Nationality {{ id }}?"
+      },
+      "detail": {
+        "title": "Nationality"
+      },
+      "nationalityId": "Nationality Id",
+      "nationalityValue": "Nationality Value",
+      "nationalityAbreviation": "Nationality Abreviation",
+      "nationalityDescription": "Nationality Description",
+      "nationalityFlag": "Nationality Flag",
+      "nationalityParams": "Nationality Params",
+      "nationalityAttributs": "Nationality Attributs",
+      "nationalityStat": "Nationality Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "sigmaEventsApp": {
+    "area": {
+      "home": {
+        "title": "Areas",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Area を追加",
+        "createOrEditLabel": "Areaを追加または編集",
+        "notFound": "No Areas found"
+      },
+      "created": "A new Area is created with identifier {{ param }}",
+      "updated": "A Area is updated with identifier {{ param }}",
+      "deleted": "A Area is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Area {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Area"
+      },
+      "areaId": "Area Id",
+      "areaName": "Area Name",
+      "areaAbreviation": "Area Abreviation",
+      "areaColor": "Area Color",
+      "areaDescription": "Area Description",
+      "areaLogo": "Area Logo",
+      "areaParams": "Area Params",
+      "areaAttributs": "Area Attributs",
+      "areaStat": "Area Stat",
+      "event": "Event",
+      "fonction": "Fonction"
+    }
+  }
+}

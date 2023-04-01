@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "language": {
+      "home": {
+        "title": "Languages",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Language",
+        "createOrEditLabel": "Crear o editar Language",
+        "notFound": "Ningún Languages encontrado"
+      },
+      "created": "Un nuevo Language ha sido creado con el identificador {{ param }}",
+      "updated": "Un Language ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Language ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Language {{ id }}?"
+      },
+      "detail": {
+        "title": "Language"
+      },
+      "languageId": "Language Id",
+      "languageCode": "Language Code",
+      "languageName": "Language Name",
+      "languageDescription": "Language Description",
+      "languageParams": "Language Params",
+      "languageAttributs": "Language Attributs",
+      "languageStat": "Language Stat",
+      "event": "Event",
+      "setting": "Setting",
+      "printingCentre": "Printing Centre"
+    }
+  }
+}

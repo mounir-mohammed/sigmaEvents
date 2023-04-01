@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="status">
+      <h2 data-cy="statusDetailsHeading"><span sigmaTranslate="sigmaEventsApp.status.detail.title">Status</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusId">Status Id</span></dt>
+        <dd>
+          <span>{{ status.statusId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusName">Status Name</span></dt>
+        <dd>
+          <span>{{ status.statusName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusAbreviation">Status Abreviation</span></dt>
+        <dd>
+          <span>{{ status.statusAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusColor">Status Color</span></dt>
+        <dd>
+          <span>{{ status.statusColor }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusDescription">Status Description</span></dt>
+        <dd>
+          <span>{{ status.statusDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusUserCanPrint">Status User Can Print</span></dt>
+        <dd>
+          <span>{{ status.statusUserCanPrint }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusUserCanUpdate">Status User Can Update</span></dt>
+        <dd>
+          <span>{{ status.statusUserCanUpdate }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusUserCanValidate">Status User Can Validate</span></dt>
+        <dd>
+          <span>{{ status.statusUserCanValidate }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusParams">Status Params</span></dt>
+        <dd>
+          <span>{{ status.statusParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusAttributs">Status Attributs</span></dt>
+        <dd>
+          <span>{{ status.statusAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.status.statusStat">Status Stat</span></dt>
+        <dd>
+          <span>{{ status.statusStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/status-sig', status.statusId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

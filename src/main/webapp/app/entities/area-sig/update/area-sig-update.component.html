@@ -1,0 +1,221 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sigma-area-sig-heading" data-cy="AreaCreateUpdateHeading" sigmaTranslate="sigmaEventsApp.area.home.createOrEditLabel">
+        Create or edit a Area
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.areaId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaId" for="field_areaId">Area Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="areaId"
+            id="field_areaId"
+            data-cy="areaId"
+            formControlName="areaId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaName" for="field_areaName">Area Name</label>
+          <input type="text" class="form-control" name="areaName" id="field_areaName" data-cy="areaName" formControlName="areaName" />
+          <div *ngIf="editForm.get('areaName')!.invalid && (editForm.get('areaName')!.dirty || editForm.get('areaName')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('areaName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('areaName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaAbreviation" for="field_areaAbreviation"
+            >Area Abreviation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="areaAbreviation"
+            id="field_areaAbreviation"
+            data-cy="areaAbreviation"
+            formControlName="areaAbreviation"
+          />
+          <div
+            *ngIf="
+              editForm.get('areaAbreviation')!.invalid &&
+              (editForm.get('areaAbreviation')!.dirty || editForm.get('areaAbreviation')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('areaAbreviation')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaColor" for="field_areaColor">Area Color</label>
+          <input type="text" class="form-control" name="areaColor" id="field_areaColor" data-cy="areaColor" formControlName="areaColor" />
+          <div *ngIf="editForm.get('areaColor')!.invalid && (editForm.get('areaColor')!.dirty || editForm.get('areaColor')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('areaColor')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 100 }"
+            >
+              This field cannot be longer than 100 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaDescription" for="field_areaDescription"
+            >Area Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="areaDescription"
+            id="field_areaDescription"
+            data-cy="areaDescription"
+            formControlName="areaDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('areaDescription')!.invalid &&
+              (editForm.get('areaDescription')!.dirty || editForm.get('areaDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('areaDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaLogo" for="field_areaLogo">Area Logo</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('areaLogoContentType')!.value + ';base64,' + editForm.get('areaLogo')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('areaLogo')!.value"
+              alt="area image"
+            />
+            <div *ngIf="editForm.get('areaLogo')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('areaLogoContentType')!.value }}, {{ byteSize(editForm.get('areaLogo')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('areaLogo', 'areaLogoContentType', 'file_areaLogo')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_areaLogo"
+              data-cy="areaLogo"
+              (change)="setFileData($event, 'areaLogo', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="areaLogo" id="field_areaLogo" data-cy="areaLogo" formControlName="areaLogo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="areaLogoContentType"
+            id="field_areaLogoContentType"
+            formControlName="areaLogoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaParams" for="field_areaParams">Area Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="areaParams"
+            id="field_areaParams"
+            data-cy="areaParams"
+            formControlName="areaParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaAttributs" for="field_areaAttributs">Area Attributs</label>
+          <input
+            type="text"
+            class="form-control"
+            name="areaAttributs"
+            id="field_areaAttributs"
+            data-cy="areaAttributs"
+            formControlName="areaAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaStat" for="field_areaStat">Area Stat</label>
+          <input type="checkbox" class="form-check" name="areaStat" id="field_areaStat" data-cy="areaStat" formControlName="areaStat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.area.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

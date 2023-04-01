@@ -1,0 +1,366 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-check-accreditation-report-sig-heading"
+        data-cy="CheckAccreditationReportCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.checkAccreditationReport.home.createOrEditLabel"
+      >
+        Create or edit a Check Accreditation Report
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.checkAccreditationReportId.value !== null">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportId"
+            for="field_checkAccreditationReportId"
+            >Check Accreditation Report Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="checkAccreditationReportId"
+            id="field_checkAccreditationReportId"
+            data-cy="checkAccreditationReportId"
+            formControlName="checkAccreditationReportId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportDescription"
+            for="field_checkAccreditationReportDescription"
+            >Check Accreditation Report Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationReportDescription"
+            id="field_checkAccreditationReportDescription"
+            data-cy="checkAccreditationReportDescription"
+            formControlName="checkAccreditationReportDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('checkAccreditationReportDescription')!.invalid &&
+              (editForm.get('checkAccreditationReportDescription')!.dirty || editForm.get('checkAccreditationReportDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('checkAccreditationReportDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportPersonPhoto"
+            for="field_checkAccreditationReportPersonPhoto"
+            >Check Accreditation Report Person Photo</label
+          >
+          <div>
+            <img
+              [src]="
+                'data:' +
+                editForm.get('checkAccreditationReportPersonPhotoContentType')!.value +
+                ';base64,' +
+                editForm.get('checkAccreditationReportPersonPhoto')!.value
+              "
+              style="max-height: 100px"
+              *ngIf="editForm.get('checkAccreditationReportPersonPhoto')!.value"
+              alt="checkAccreditationReport image"
+            />
+            <div *ngIf="editForm.get('checkAccreditationReportPersonPhoto')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('checkAccreditationReportPersonPhotoContentType')!.value }},
+                {{ byteSize(editForm.get('checkAccreditationReportPersonPhoto')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="
+                  clearInputImage(
+                    'checkAccreditationReportPersonPhoto',
+                    'checkAccreditationReportPersonPhotoContentType',
+                    'file_checkAccreditationReportPersonPhoto'
+                  )
+                "
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_checkAccreditationReportPersonPhoto"
+              data-cy="checkAccreditationReportPersonPhoto"
+              (change)="setFileData($event, 'checkAccreditationReportPersonPhoto', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="checkAccreditationReportPersonPhoto"
+            id="field_checkAccreditationReportPersonPhoto"
+            data-cy="checkAccreditationReportPersonPhoto"
+            formControlName="checkAccreditationReportPersonPhoto"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="checkAccreditationReportPersonPhotoContentType"
+            id="field_checkAccreditationReportPersonPhotoContentType"
+            formControlName="checkAccreditationReportPersonPhotoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportCINPhoto"
+            for="field_checkAccreditationReportCINPhoto"
+            >Check Accreditation Report CIN Photo</label
+          >
+          <div>
+            <img
+              [src]="
+                'data:' +
+                editForm.get('checkAccreditationReportCINPhotoContentType')!.value +
+                ';base64,' +
+                editForm.get('checkAccreditationReportCINPhoto')!.value
+              "
+              style="max-height: 100px"
+              *ngIf="editForm.get('checkAccreditationReportCINPhoto')!.value"
+              alt="checkAccreditationReport image"
+            />
+            <div *ngIf="editForm.get('checkAccreditationReportCINPhoto')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('checkAccreditationReportCINPhotoContentType')!.value }},
+                {{ byteSize(editForm.get('checkAccreditationReportCINPhoto')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="
+                  clearInputImage(
+                    'checkAccreditationReportCINPhoto',
+                    'checkAccreditationReportCINPhotoContentType',
+                    'file_checkAccreditationReportCINPhoto'
+                  )
+                "
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_checkAccreditationReportCINPhoto"
+              data-cy="checkAccreditationReportCINPhoto"
+              (change)="setFileData($event, 'checkAccreditationReportCINPhoto', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="checkAccreditationReportCINPhoto"
+            id="field_checkAccreditationReportCINPhoto"
+            data-cy="checkAccreditationReportCINPhoto"
+            formControlName="checkAccreditationReportCINPhoto"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="checkAccreditationReportCINPhotoContentType"
+            id="field_checkAccreditationReportCINPhotoContentType"
+            formControlName="checkAccreditationReportCINPhotoContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportAttachment"
+            for="field_checkAccreditationReportAttachment"
+            >Check Accreditation Report Attachment</label
+          >
+          <div>
+            <img
+              [src]="
+                'data:' +
+                editForm.get('checkAccreditationReportAttachmentContentType')!.value +
+                ';base64,' +
+                editForm.get('checkAccreditationReportAttachment')!.value
+              "
+              style="max-height: 100px"
+              *ngIf="editForm.get('checkAccreditationReportAttachment')!.value"
+              alt="checkAccreditationReport image"
+            />
+            <div *ngIf="editForm.get('checkAccreditationReportAttachment')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('checkAccreditationReportAttachmentContentType')!.value }},
+                {{ byteSize(editForm.get('checkAccreditationReportAttachment')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="
+                  clearInputImage(
+                    'checkAccreditationReportAttachment',
+                    'checkAccreditationReportAttachmentContentType',
+                    'file_checkAccreditationReportAttachment'
+                  )
+                "
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_checkAccreditationReportAttachment"
+              data-cy="checkAccreditationReportAttachment"
+              (change)="setFileData($event, 'checkAccreditationReportAttachment', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="checkAccreditationReportAttachment"
+            id="field_checkAccreditationReportAttachment"
+            data-cy="checkAccreditationReportAttachment"
+            formControlName="checkAccreditationReportAttachment"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="checkAccreditationReportAttachmentContentType"
+            id="field_checkAccreditationReportAttachmentContentType"
+            formControlName="checkAccreditationReportAttachmentContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportParams"
+            for="field_checkAccreditationReportParams"
+            >Check Accreditation Report Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationReportParams"
+            id="field_checkAccreditationReportParams"
+            data-cy="checkAccreditationReportParams"
+            formControlName="checkAccreditationReportParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportAttributs"
+            for="field_checkAccreditationReportAttributs"
+            >Check Accreditation Report Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="checkAccreditationReportAttributs"
+            id="field_checkAccreditationReportAttributs"
+            data-cy="checkAccreditationReportAttributs"
+            formControlName="checkAccreditationReportAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationReportStat"
+            for="field_checkAccreditationReportStat"
+            >Check Accreditation Report Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="checkAccreditationReportStat"
+            id="field_checkAccreditationReportStat"
+            data-cy="checkAccreditationReportStat"
+            formControlName="checkAccreditationReportStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.checkAccreditationReport.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.checkAccreditationReport.checkAccreditationHistory"
+            for="field_checkAccreditationHistory"
+            >Check Accreditation History</label
+          >
+          <select
+            class="form-control"
+            id="field_checkAccreditationHistory"
+            data-cy="checkAccreditationHistory"
+            name="checkAccreditationHistory"
+            formControlName="checkAccreditationHistory"
+            [compareWith]="compareCheckAccreditationHistorySig"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="checkAccreditationHistoryOption"
+              *ngFor="let checkAccreditationHistoryOption of checkAccreditationHistoriesSharedCollection"
+            >
+              {{ checkAccreditationHistoryOption.checkAccreditationHistoryId }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

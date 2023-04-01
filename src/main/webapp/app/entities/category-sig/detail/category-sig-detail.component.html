@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="category">
+      <h2 data-cy="categoryDetailsHeading"><span sigmaTranslate="sigmaEventsApp.category.detail.title">Category</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryId">Category Id</span></dt>
+        <dd>
+          <span>{{ category.categoryId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryName">Category Name</span></dt>
+        <dd>
+          <span>{{ category.categoryName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryAbreviation">Category Abreviation</span></dt>
+        <dd>
+          <span>{{ category.categoryAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryColor">Category Color</span></dt>
+        <dd>
+          <span>{{ category.categoryColor }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryDescription">Category Description</span></dt>
+        <dd>
+          <span>{{ category.categoryDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryLogo">Category Logo</span></dt>
+        <dd>
+          <div *ngIf="category.categoryLogo">
+            <a (click)="openFile(category.categoryLogo, category.categoryLogoContentType)">
+              <img
+                [src]="'data:' + category.categoryLogoContentType + ';base64,' + category.categoryLogo"
+                style="max-width: 100%"
+                alt="category image"
+              />
+            </a>
+            {{ category.categoryLogoContentType }}, {{ byteSize(category.categoryLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryParams">Category Params</span></dt>
+        <dd>
+          <span>{{ category.categoryParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryAttributs">Category Attributs</span></dt>
+        <dd>
+          <span>{{ category.categoryAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryStat">Category Stat</span></dt>
+        <dd>
+          <span>{{ category.categoryStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.printingModel">Printing Model</span></dt>
+        <dd>
+          <div *ngIf="category.printingModel">
+            <a [routerLink]="['/printing-model-sig', category.printingModel.printingModelId, 'view']">{{
+              category.printingModel.printingModelId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.category.event">Event</span></dt>
+        <dd>
+          <div *ngIf="category.event">
+            <a [routerLink]="['/event-sig', category.event.eventId, 'view']">{{ category.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/category-sig', category.categoryId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

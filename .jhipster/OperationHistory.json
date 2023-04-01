@@ -1,0 +1,87 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030814",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "operation_history",
+  "fields": [
+    {
+      "fieldName": "operationHistoryId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "operationHistoryDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "operationHistoryDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "operationHistoryUserID",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "operationHistoryOldValue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationHistoryNewValue",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationHistoryOldId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "operationHistoryNewId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "operationHistoryImportedFile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationHistoryImportedFilePath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationHistoryParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationHistoryAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "operationHistoryStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "OperationHistory",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "operationType",
+      "otherEntityRelationshipName": "operationHistory",
+      "relationshipName": "typeoperation",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "operationHistory",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

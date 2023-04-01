@@ -1,0 +1,71 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031714",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "event_field",
+  "fields": [
+    {
+      "fieldName": "fieldId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "fieldName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fieldCategorie",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fieldDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fieldType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fieldParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fieldAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fieldStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "EventField",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "eventControl",
+      "otherEntityRelationshipName": "eventField",
+      "relationshipName": "eventControl",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "eventField",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "eventForm",
+      "otherEntityRelationshipName": "eventField",
+      "relationshipName": "eventForm",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

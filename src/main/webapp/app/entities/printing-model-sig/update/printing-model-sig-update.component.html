@@ -1,0 +1,277 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-printing-model-sig-heading"
+        data-cy="PrintingModelCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.printingModel.home.createOrEditLabel"
+      >
+        Create or edit a Printing Model
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.printingModelId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelId" for="field_printingModelId"
+            >Printing Model Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="printingModelId"
+            id="field_printingModelId"
+            data-cy="printingModelId"
+            formControlName="printingModelId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelName" for="field_printingModelName"
+            >Printing Model Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingModelName"
+            id="field_printingModelName"
+            data-cy="printingModelName"
+            formControlName="printingModelName"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingModelName')!.invalid &&
+              (editForm.get('printingModelName')!.dirty || editForm.get('printingModelName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingModelName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingModelName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelFile" for="field_printingModelFile"
+            >Printing Model File</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingModelFile"
+            id="field_printingModelFile"
+            data-cy="printingModelFile"
+            formControlName="printingModelFile"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingModelFile')!.invalid &&
+              (editForm.get('printingModelFile')!.dirty || editForm.get('printingModelFile')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingModelFile')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelPath" for="field_printingModelPath"
+            >Printing Model Path</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingModelPath"
+            id="field_printingModelPath"
+            data-cy="printingModelPath"
+            formControlName="printingModelPath"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingModelPath')!.invalid &&
+              (editForm.get('printingModelPath')!.dirty || editForm.get('printingModelPath')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingModelPath')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.printingModel.printingModelDescription"
+            for="field_printingModelDescription"
+            >Printing Model Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingModelDescription"
+            id="field_printingModelDescription"
+            data-cy="printingModelDescription"
+            formControlName="printingModelDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('printingModelDescription')!.invalid &&
+              (editForm.get('printingModelDescription')!.dirty || editForm.get('printingModelDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('printingModelDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelData" for="field_printingModelData"
+            >Printing Model Data</label
+          >
+          <div>
+            <div *ngIf="editForm.get('printingModelData')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('printingModelData')!.value!, editForm.get('printingModelDataContentType')!.value!)"
+                sigmaTranslate="entity.action.open"
+                >Open</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('printingModelDataContentType')!.value }}, {{ byteSize(editForm.get('printingModelData')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ printingModelData: undefined, printingModelDataContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_printingModelData"
+              data-cy="printingModelData"
+              (change)="setFileData($event, 'printingModelData', false)"
+              sigmaTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="printingModelData"
+            id="field_printingModelData"
+            data-cy="printingModelData"
+            formControlName="printingModelData"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="printingModelDataContentType"
+            id="field_printingModelDataContentType"
+            formControlName="printingModelDataContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelParams" for="field_printingModelParams"
+            >Printing Model Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingModelParams"
+            id="field_printingModelParams"
+            data-cy="printingModelParams"
+            formControlName="printingModelParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelAttributs" for="field_printingModelAttributs"
+            >Printing Model Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="printingModelAttributs"
+            id="field_printingModelAttributs"
+            data-cy="printingModelAttributs"
+            formControlName="printingModelAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.printingModelStat" for="field_printingModelStat"
+            >Printing Model Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="printingModelStat"
+            id="field_printingModelStat"
+            data-cy="printingModelStat"
+            formControlName="printingModelStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.printingModel.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

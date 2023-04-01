@@ -1,0 +1,309 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401024014",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "event",
+  "fields": [
+    {
+      "fieldName": "eventId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "eventName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMaxlength": "100",
+      "fieldValidateRulesMinlength": "5"
+    },
+    {
+      "fieldName": "eventColor",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "eventDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "eventAbreviation",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "eventdateStart",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "eventdateEnd",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "eventPrintingModelId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "eventLogo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "eventBannerCenter",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "eventBannerRight",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "eventBannerLeft",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "eventBannerBas",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "eventWithPhoto",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventNoCode",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventCodeNoFilter",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventCodeByTypeAccreditation",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventCodeByTypeCategorie",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventCodeByTypeFonction",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventCodeByTypeOrganiz",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventDefaultPrintingLanguage",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventPCenterPrintingLanguage",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventImported",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventArchived",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventArchiveFileName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventURL",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventDomaine",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventSousDomaine",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventCloned",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "eventParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "eventStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Event",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "eventForm",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "eventForm",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "eventField",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "eventField",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "eventControl",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "eventControl",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "area",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "area",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "fonction",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "fonction",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "category",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "printingModel",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "printingModel",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "code",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "code",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "infoSupp",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "infoSupp",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "attachement",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "attachement",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "organiz",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "organiz",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "photoArchive",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "photoArchive",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "site",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "site",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "note",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "note",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "operationHistory",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "operationHistory",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "setting",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "setting",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "printingServer",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "printingServer",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "checkAccreditationHistory",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "checkAccreditationHistory",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "checkAccreditationReport",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "checkAccreditationReport",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "accreditationType",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "accreditationType",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "dayPassInfo",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "dayPassInfo",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "language",
+      "otherEntityRelationshipName": "event",
+      "relationshipName": "language",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

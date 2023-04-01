@@ -1,0 +1,177 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-language-sig-heading"
+        data-cy="LanguageCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.language.home.createOrEditLabel"
+      >
+        Create or edit a Language
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.languageId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.language.languageId" for="field_languageId">Language Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="languageId"
+            id="field_languageId"
+            data-cy="languageId"
+            formControlName="languageId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.language.languageCode" for="field_languageCode">Language Code</label>
+          <input
+            type="text"
+            class="form-control"
+            name="languageCode"
+            id="field_languageCode"
+            data-cy="languageCode"
+            formControlName="languageCode"
+          />
+          <div
+            *ngIf="editForm.get('languageCode')!.invalid && (editForm.get('languageCode')!.dirty || editForm.get('languageCode')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('languageCode')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('languageCode')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.language.languageName" for="field_languageName">Language Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="languageName"
+            id="field_languageName"
+            data-cy="languageName"
+            formControlName="languageName"
+          />
+          <div
+            *ngIf="editForm.get('languageName')!.invalid && (editForm.get('languageName')!.dirty || editForm.get('languageName')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('languageName')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('languageName')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.language.languageDescription" for="field_languageDescription"
+            >Language Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="languageDescription"
+            id="field_languageDescription"
+            data-cy="languageDescription"
+            formControlName="languageDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('languageDescription')!.invalid &&
+              (editForm.get('languageDescription')!.dirty || editForm.get('languageDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('languageDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.language.languageParams" for="field_languageParams"
+            >Language Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="languageParams"
+            id="field_languageParams"
+            data-cy="languageParams"
+            formControlName="languageParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.language.languageAttributs" for="field_languageAttributs"
+            >Language Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="languageAttributs"
+            id="field_languageAttributs"
+            data-cy="languageAttributs"
+            formControlName="languageAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.language.languageStat" for="field_languageStat">Language Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="languageStat"
+            id="field_languageStat"
+            data-cy="languageStat"
+            formControlName="languageStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

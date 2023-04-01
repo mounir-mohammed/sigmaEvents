@@ -1,0 +1,30 @@
+{
+  "sigmaEventsApp": {
+    "note": {
+      "home": {
+        "title": "Notes",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Note erstellen",
+        "createOrEditLabel": "Note erstellen oder bearbeiten",
+        "notFound": "Keine Notes gefunden"
+      },
+      "created": "Note erstellt mit ID {{ param }}",
+      "updated": "Note aktualisiert mit ID {{ param }}",
+      "deleted": "Note gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Note {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Note"
+      },
+      "noteId": "Note Id",
+      "noteValue": "Note Value",
+      "noteDescription": "Note Description",
+      "noteTypeParams": "Note Type Params",
+      "noteTypeAttributs": "Note Type Attributs",
+      "noteStat": "Note Stat",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

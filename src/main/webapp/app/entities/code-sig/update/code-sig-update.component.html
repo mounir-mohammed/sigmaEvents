@@ -1,0 +1,148 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sigma-code-sig-heading" data-cy="CodeCreateUpdateHeading" sigmaTranslate="sigmaEventsApp.code.home.createOrEditLabel">
+        Create or edit a Code
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.codeId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeId" for="field_codeId">Code Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="codeId"
+            id="field_codeId"
+            data-cy="codeId"
+            formControlName="codeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeForEntity" for="field_codeForEntity">Code For Entity</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codeForEntity"
+            id="field_codeForEntity"
+            data-cy="codeForEntity"
+            formControlName="codeForEntity"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeEntityValue" for="field_codeEntityValue"
+            >Code Entity Value</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codeEntityValue"
+            id="field_codeEntityValue"
+            data-cy="codeEntityValue"
+            formControlName="codeEntityValue"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeValue" for="field_codeValue">Code Value</label>
+          <input type="text" class="form-control" name="codeValue" id="field_codeValue" data-cy="codeValue" formControlName="codeValue" />
+          <div *ngIf="editForm.get('codeValue')!.invalid && (editForm.get('codeValue')!.dirty || editForm.get('codeValue')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codeValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeUsed" for="field_codeUsed">Code Used</label>
+          <input type="checkbox" class="form-check" name="codeUsed" id="field_codeUsed" data-cy="codeUsed" formControlName="codeUsed" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeParams" for="field_codeParams">Code Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codeParams"
+            id="field_codeParams"
+            data-cy="codeParams"
+            formControlName="codeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeAttributs" for="field_codeAttributs">Code Attributs</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codeAttributs"
+            id="field_codeAttributs"
+            data-cy="codeAttributs"
+            formControlName="codeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeStat" for="field_codeStat">Code Stat</label>
+          <input type="checkbox" class="form-check" name="codeStat" id="field_codeStat" data-cy="codeStat" formControlName="codeStat" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeType" for="field_codeType">Code Type</label>
+          <select
+            class="form-control"
+            id="field_codeType"
+            data-cy="codeType"
+            name="codeType"
+            formControlName="codeType"
+            [compareWith]="compareCodeTypeSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="codeTypeOption" *ngFor="let codeTypeOption of codeTypesSharedCollection">
+              {{ codeTypeOption.codeTypeId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.code.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

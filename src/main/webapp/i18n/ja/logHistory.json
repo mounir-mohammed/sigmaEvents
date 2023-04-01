@@ -1,0 +1,27 @@
+{
+  "sigmaEventsApp": {
+    "logHistory": {
+      "home": {
+        "title": "LogHistories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Log History を追加",
+        "createOrEditLabel": "Log Historyを追加または編集",
+        "notFound": "No Log Histories found"
+      },
+      "created": "A new Log History is created with identifier {{ param }}",
+      "updated": "A Log History is updated with identifier {{ param }}",
+      "deleted": "A Log History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Log History {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Log History"
+      },
+      "logHistory": "Log History",
+      "logHistoryDescription": "Log History Description",
+      "logHistoryParams": "Log History Params",
+      "logHistoryAttributs": "Log History Attributs",
+      "logHistoryStat": "Log History Stat"
+    }
+  }
+}

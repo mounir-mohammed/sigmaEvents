@@ -1,0 +1,30 @@
+{
+  "sigmaEventsApp": {
+    "note": {
+      "home": {
+        "title": "Notes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Note を追加",
+        "createOrEditLabel": "Noteを追加または編集",
+        "notFound": "No Notes found"
+      },
+      "created": "A new Note is created with identifier {{ param }}",
+      "updated": "A Note is updated with identifier {{ param }}",
+      "deleted": "A Note is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Note {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Note"
+      },
+      "noteId": "Note Id",
+      "noteValue": "Note Value",
+      "noteDescription": "Note Description",
+      "noteTypeParams": "Note Type Params",
+      "noteTypeAttributs": "Note Type Attributs",
+      "noteStat": "Note Stat",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

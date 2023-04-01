@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="fonction">
+      <h2 data-cy="fonctionDetailsHeading"><span sigmaTranslate="sigmaEventsApp.fonction.detail.title">Fonction</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionId">Fonction Id</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionName">Fonction Name</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionAbreviation">Fonction Abreviation</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionColor">Fonction Color</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionColor }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionDescription">Fonction Description</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionLogo">Fonction Logo</span></dt>
+        <dd>
+          <div *ngIf="fonction.fonctionLogo">
+            <a (click)="openFile(fonction.fonctionLogo, fonction.fonctionLogoContentType)">
+              <img
+                [src]="'data:' + fonction.fonctionLogoContentType + ';base64,' + fonction.fonctionLogo"
+                style="max-width: 100%"
+                alt="fonction image"
+              />
+            </a>
+            {{ fonction.fonctionLogoContentType }}, {{ byteSize(fonction.fonctionLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionParams">Fonction Params</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionAttributs">Fonction Attributs</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionStat">Fonction Stat</span></dt>
+        <dd>
+          <span>{{ fonction.fonctionStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.area">Area</span></dt>
+        <dd>
+          <span *ngFor="let area of fonction.areas; let last = last">
+            <a [routerLink]="['/area-sig', area.areaId, 'view']">{{ area.areaId }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.category">Category</span></dt>
+        <dd>
+          <div *ngIf="fonction.category">
+            <a [routerLink]="['/category-sig', fonction.category.categoryId, 'view']">{{ fonction.category.categoryId }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.event">Event</span></dt>
+        <dd>
+          <div *ngIf="fonction.event">
+            <a [routerLink]="['/event-sig', fonction.event.eventId, 'view']">{{ fonction.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/fonction-sig', fonction.fonctionId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

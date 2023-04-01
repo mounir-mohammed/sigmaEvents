@@ -1,0 +1,34 @@
+{
+  "sigmaEventsApp": {
+    "status": {
+      "home": {
+        "title": "Statuses",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Status",
+        "createOrEditLabel": "创建或编辑 Status",
+        "notFound": "No Statuses found"
+      },
+      "created": "Status {{ param }} 创建成功",
+      "updated": "Status {{ param }} 更新成功",
+      "deleted": "Status {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Status {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Status"
+      },
+      "statusId": "Status Id",
+      "statusName": "Status Name",
+      "statusAbreviation": "Status Abreviation",
+      "statusColor": "Status Color",
+      "statusDescription": "Status Description",
+      "statusUserCanPrint": "Status User Can Print",
+      "statusUserCanUpdate": "Status User Can Update",
+      "statusUserCanValidate": "Status User Can Validate",
+      "statusParams": "Status Params",
+      "statusAttributs": "Status Attributs",
+      "statusStat": "Status Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "sigmaEventsApp": {
+    "checkAccreditationHistory": {
+      "home": {
+        "title": "CheckAccreditationHistories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Genera un nuovo Check Accreditation History",
+        "createOrEditLabel": "Genera o modifica un Check Accreditation History",
+        "notFound": "No Check Accreditation Histories found"
+      },
+      "created": "&Egrave; stato generato un nuovo Check Accreditation History con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Check Accreditation History identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Check Accreditation History con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Check Accreditation History {{ id }}?"
+      },
+      "detail": {
+        "title": "Check Accreditation History"
+      },
+      "checkAccreditationHistoryId": "Check Accreditation History Id",
+      "checkAccreditationHistoryReadedCode": "Check Accreditation History Readed Code",
+      "checkAccreditationHistoryUserId": "Check Accreditation History User Id",
+      "checkAccreditationHistoryResult": "Check Accreditation History Result",
+      "checkAccreditationHistoryError": "Check Accreditation History Error",
+      "checkAccreditationHistoryDate": "Check Accreditation History Date",
+      "checkAccreditationHistoryLocalisation": "Check Accreditation History Localisation",
+      "checkAccreditationHistoryIpAdresse": "Check Accreditation History Ip Adresse",
+      "checkAccreditationParams": "Check Accreditation Params",
+      "checkAccreditationAttributs": "Check Accreditation Attributs",
+      "checkAccreditationHistoryStat": "Check Accreditation History Stat",
+      "checkAccreditationReport": "Check Accreditation Report",
+      "event": "Event",
+      "accreditation": "Accreditation"
+    }
+  }
+}

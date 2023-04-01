@@ -1,0 +1,30 @@
+{
+  "sigmaEventsApp": {
+    "civility": {
+      "home": {
+        "title": "Civilities",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Civility",
+        "createOrEditLabel": "Crear o editar Civility",
+        "notFound": "Ningún Civilities encontrado"
+      },
+      "created": "Un nuevo Civility ha sido creado con el identificador {{ param }}",
+      "updated": "Un Civility ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Civility ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Civility {{ id }}?"
+      },
+      "detail": {
+        "title": "Civility"
+      },
+      "civilityId": "Civility Id",
+      "civilityValue": "Civility Value",
+      "civilityDescription": "Civility Description",
+      "civilityCode": "Civility Code",
+      "civilityParams": "Civility Params",
+      "civilityAttributs": "Civility Attributs",
+      "civilityStat": "Civility Stat",
+      "accreditation": "Accreditation"
+    }
+  }
+}

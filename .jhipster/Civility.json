@@ -1,0 +1,59 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025714",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "civility",
+  "fields": [
+    {
+      "fieldName": "civilityId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "civilityValue",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "civilityDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "civilityCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "civilityParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "civilityAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "civilityStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Civility",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "civility",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

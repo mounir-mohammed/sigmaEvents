@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dayPassInfo">
+      <h2 data-cy="dayPassInfoDetailsHeading"><span sigmaTranslate="sigmaEventsApp.dayPassInfo.detail.title">Day Pass Info</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoId">Day Pass Info Id</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoName">Day Pass Info Name</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassDescription">Day Pass Description</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassLogo">Day Pass Logo</span></dt>
+        <dd>
+          <div *ngIf="dayPassInfo.dayPassLogo">
+            <a (click)="openFile(dayPassInfo.dayPassLogo, dayPassInfo.dayPassLogoContentType)">
+              <img
+                [src]="'data:' + dayPassInfo.dayPassLogoContentType + ';base64,' + dayPassInfo.dayPassLogo"
+                style="max-width: 100%"
+                alt="dayPassInfo image"
+              />
+            </a>
+            {{ dayPassInfo.dayPassLogoContentType }}, {{ byteSize(dayPassInfo.dayPassLogo) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoCreationDate">Day Pass Info Creation Date</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoCreationDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoUpdateDate">Day Pass Info Update Date</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoUpdateDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoCreatedByuser">Day Pass Info Created Byuser</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoCreatedByuser }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoDateStart">Day Pass Info Date Start</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoDateStart | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoDateEnd">Day Pass Info Date End</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoDateEnd | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoNumber">Day Pass Info Number</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoNumber }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassParams">Day Pass Params</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassAttributs">Day Pass Attributs</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoStat">Day Pass Info Stat</span></dt>
+        <dd>
+          <span>{{ dayPassInfo.dayPassInfoStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.event">Event</span></dt>
+        <dd>
+          <div *ngIf="dayPassInfo.event">
+            <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/day-pass-info-sig', dayPassInfo.dayPassInfoId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

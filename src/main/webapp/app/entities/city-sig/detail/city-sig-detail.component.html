@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="city">
+      <h2 data-cy="cityDetailsHeading"><span sigmaTranslate="sigmaEventsApp.city.detail.title">City</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityId">City Id</span></dt>
+        <dd>
+          <span>{{ city.cityId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityName">City Name</span></dt>
+        <dd>
+          <span>{{ city.cityName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityZipCode">City Zip Code</span></dt>
+        <dd>
+          <span>{{ city.cityZipCode }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityAbreviation">City Abreviation</span></dt>
+        <dd>
+          <span>{{ city.cityAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityDescription">City Description</span></dt>
+        <dd>
+          <span>{{ city.cityDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityParams">City Params</span></dt>
+        <dd>
+          <span>{{ city.cityParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityAttributs">City Attributs</span></dt>
+        <dd>
+          <span>{{ city.cityAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.cityStat">City Stat</span></dt>
+        <dd>
+          <span>{{ city.cityStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.city.country">Country</span></dt>
+        <dd>
+          <div *ngIf="city.country">
+            <a [routerLink]="['/country-sig', city.country.countryId, 'view']">{{ city.country.countryId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/city-sig', city.cityId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

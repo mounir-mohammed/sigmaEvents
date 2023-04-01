@@ -1,0 +1,37 @@
+{
+  "sigmaEventsApp": {
+    "operationHistory": {
+      "home": {
+        "title": "Operation Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Operation History",
+        "createOrEditLabel": "创建或编辑 Operation History",
+        "notFound": "No Operation Histories found"
+      },
+      "created": "Operation History {{ param }} 创建成功",
+      "updated": "Operation History {{ param }} 更新成功",
+      "deleted": "Operation History {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Operation History {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Operation History"
+      },
+      "operationHistoryId": "Operation History Id",
+      "operationHistoryDescription": "Operation History Description",
+      "operationHistoryDate": "Operation History Date",
+      "operationHistoryUserID": "Operation History User ID",
+      "operationHistoryOldValue": "Operation History Old Value",
+      "operationHistoryNewValue": "Operation History New Value",
+      "operationHistoryOldId": "Operation History Old Id",
+      "operationHistoryNewId": "Operation History New Id",
+      "operationHistoryImportedFile": "Operation History Imported File",
+      "operationHistoryImportedFilePath": "Operation History Imported File Path",
+      "operationHistoryParams": "Operation History Params",
+      "operationHistoryAttributs": "Operation History Attributs",
+      "operationHistoryStat": "Operation History Stat",
+      "typeoperation": "Typeoperation",
+      "event": "Event"
+    }
+  }
+}

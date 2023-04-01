@@ -1,0 +1,29 @@
+{
+  "sigmaEventsApp": {
+    "operationType": {
+      "home": {
+        "title": "OperationTypes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Operation Type を追加",
+        "createOrEditLabel": "Operation Typeを追加または編集",
+        "notFound": "No Operation Types found"
+      },
+      "created": "A new Operation Type is created with identifier {{ param }}",
+      "updated": "A Operation Type is updated with identifier {{ param }}",
+      "deleted": "A Operation Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Operation Type {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Operation Type"
+      },
+      "operationTypeId": "Operation Type Id",
+      "operationTypeValue": "Operation Type Value",
+      "operationTypeDescription": "Operation Type Description",
+      "operationTypeParams": "Operation Type Params",
+      "operationTypeAttributs": "Operation Type Attributs",
+      "operationTypeStat": "Operation Type Stat",
+      "operationHistory": "Operation History"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "sigmaEventsApp": {
+    "accreditation": {
+      "home": {
+        "title": "Accreditations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Accreditation",
+        "createOrEditLabel": "创建或编辑 Accreditation",
+        "notFound": "No Accreditations found"
+      },
+      "created": "Accreditation {{ param }} 创建成功",
+      "updated": "Accreditation {{ param }} 更新成功",
+      "deleted": "Accreditation {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Accreditation {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Accreditation"
+      },
+      "accreditationId": "Accreditation Id",
+      "accreditationFirstName": "Accreditation First Name",
+      "accreditationSecondName": "Accreditation Second Name",
+      "accreditationLastName": "Accreditation Last Name",
+      "accreditationBirthDay": "Accreditation Birth Day",
+      "accreditationSexe": "Accreditation Sexe",
+      "accreditationOccupation": "Accreditation Occupation",
+      "accreditationDescription": "Accreditation Description",
+      "accreditationEmail": "Accreditation Email",
+      "accreditationTel": "Accreditation Tel",
+      "accreditationPhoto": "Accreditation Photo",
+      "accreditationCinId": "Accreditation Cin Id",
+      "accreditationPasseportId": "Accreditation Passeport Id",
+      "accreditationCartePresseId": "Accreditation Carte Presse Id",
+      "accreditationCarteProfessionnelleId": "Accreditation Carte Professionnelle Id",
+      "accreditationCreationDate": "Accreditation Creation Date",
+      "accreditationUpdateDate": "Accreditation Update Date",
+      "accreditationCreatedByuser": "Accreditation Created Byuser",
+      "accreditationDateStart": "Accreditation Date Start",
+      "accreditationDateEnd": "Accreditation Date End",
+      "accreditationPrintStat": "Accreditation Print Stat",
+      "accreditationPrintNumber": "Accreditation Print Number",
+      "accreditationParams": "Accreditation Params",
+      "accreditationAttributs": "Accreditation Attributs",
+      "accreditationStat": "Accreditation Stat",
+      "photoArchive": "Photo Archive",
+      "infoSupp": "Info Supp",
+      "note": "Note",
+      "checkAccreditationHistory": "Check Accreditation History",
+      "site": "Site",
+      "event": "Event",
+      "civility": "Civility",
+      "sexe": "Sexe",
+      "nationality": "Nationality",
+      "country": "Country",
+      "city": "City",
+      "category": "Category",
+      "fonction": "Fonction",
+      "organiz": "Organiz",
+      "accreditationType": "Accreditation Type",
+      "status": "Status",
+      "attachement": "Attachement",
+      "code": "Code",
+      "dayPassInfo": "Day Pass Info"
+    }
+  }
+}

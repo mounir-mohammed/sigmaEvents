@@ -1,0 +1,122 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030914",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "printing_centre",
+  "fields": [
+    {
+      "fieldName": "printingCentreId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "printingCentreDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "printingCentreName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "printingCentreLogo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "printingCentreAdresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingCentreEmail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingCentreTel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingCentreFax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingCentreResponsableName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "printingCentreStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "PrintingCentre",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "country",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "country",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "organiz",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "organiz",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "printingType",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "printingType",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "printingServer",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "printingServer",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "printingModel",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "printingModel",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "language",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "language",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "printingCentre",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

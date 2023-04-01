@@ -1,0 +1,243 @@
+<div>
+  <h2 id="page-heading" data-cy="OrganizHeading">
+    <span sigmaTranslate="sigmaEventsApp.organiz.home.title">Organizs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.organiz.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-organiz-sig"
+        [routerLink]="['/organiz-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.organiz.home.createLabel"> Create a new Organiz </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="organizs?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.organiz.home.notFound">No Organizs found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="organizs && organizs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="organizId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizId">Organiz Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizName">Organiz Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizDescription">Organiz Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizLogo">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizLogo">Organiz Logo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizTel">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizTel">Organiz Tel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizFax">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizFax">Organiz Fax</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizEmail">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizEmail">Organiz Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizAdresse">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizAdresse">Organiz Adresse</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizParams">Organiz Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizAttributs">Organiz Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organizStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.organizStat">Organiz Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="country.countryId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.country">Country</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="city.cityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.city">City</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.organiz.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let organiz of organizs; trackBy: trackOrganizId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/organiz-sig', organiz.organizId, 'view']">{{ organiz.organizId }}</a>
+          </td>
+          <td>{{ organiz.organizName }}</td>
+          <td>{{ organiz.organizDescription }}</td>
+          <td>
+            <a *ngIf="organiz.organizLogo" (click)="openFile(organiz.organizLogo, organiz.organizLogoContentType)">
+              <img
+                [src]="'data:' + organiz.organizLogoContentType + ';base64,' + organiz.organizLogo"
+                style="max-height: 30px"
+                alt="organiz image"
+              />
+            </a>
+            <span *ngIf="organiz.organizLogo">{{ organiz.organizLogoContentType }}, {{ byteSize(organiz.organizLogo) }}</span>
+          </td>
+          <td>{{ organiz.organizTel }}</td>
+          <td>{{ organiz.organizFax }}</td>
+          <td>{{ organiz.organizEmail }}</td>
+          <td>{{ organiz.organizAdresse }}</td>
+          <td>{{ organiz.organizParams }}</td>
+          <td>{{ organiz.organizAttributs }}</td>
+          <td>{{ organiz.organizStat }}</td>
+          <td>
+            <div *ngIf="organiz.country">
+              <a [routerLink]="['/country-sig', organiz.country.countryId, 'view']">{{ organiz.country.countryId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="organiz.city">
+              <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="organiz.event">
+              <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/printing-centre-sig']"
+                [queryParams]="{ 'filter[organizId.in]': organiz.organizId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.organiz.printingCentre' | translate) }"
+                  >Show Printing Centre</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[organizId.in]': organiz.organizId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.organiz.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/organiz-sig', organiz.organizId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/organiz-sig', organiz.organizId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(organiz)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="organizs && organizs.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

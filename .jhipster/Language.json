@@ -1,0 +1,73 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401031014",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "language",
+  "fields": [
+    {
+      "fieldName": "languageId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "languageCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "languageName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "languageDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "languageParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "languageAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "languageStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Language",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "language",
+      "relationshipName": "event",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "setting",
+      "otherEntityRelationshipName": "language",
+      "relationshipName": "setting",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "printingCentre",
+      "otherEntityRelationshipName": "language",
+      "relationshipName": "printingCentre",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

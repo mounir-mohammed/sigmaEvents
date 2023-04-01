@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "photoArchive": {
+      "home": {
+        "title": "PhotoArchives",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Genera un nuovo Photo Archive",
+        "createOrEditLabel": "Genera o modifica un Photo Archive",
+        "notFound": "No Photo Archives found"
+      },
+      "created": "&Egrave; stato generato un nuovo Photo Archive con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato Photo Archive identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato Photo Archive con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare Photo Archive {{ id }}?"
+      },
+      "detail": {
+        "title": "Photo Archive"
+      },
+      "photoArchiveId": "Photo Archive Id",
+      "photoArchiveName": "Photo Archive Name",
+      "photoArchivePath": "Photo Archive Path",
+      "photoArchivePhoto": "Photo Archive Photo",
+      "photoArchiveDescription": "Photo Archive Description",
+      "photoArchiveParams": "Photo Archive Params",
+      "photoArchiveAttributs": "Photo Archive Attributs",
+      "photoArchiveStat": "Photo Archive Stat",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

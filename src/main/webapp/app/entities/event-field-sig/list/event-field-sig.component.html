@@ -1,0 +1,187 @@
+<div>
+  <h2 id="page-heading" data-cy="EventFieldHeading">
+    <span sigmaTranslate="sigmaEventsApp.eventField.home.title">Event Fields</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.eventField.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-event-field-sig"
+        [routerLink]="['/event-field-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.eventField.home.createLabel"> Create a new Event Field </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="eventFields?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.eventField.home.notFound">No Event Fields found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="eventFields && eventFields.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="fieldId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldId">Field Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fieldName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldName">Field Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fieldCategorie">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldCategorie">Field Categorie</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fieldDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldDescription">Field Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fieldType">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldType">Field Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fieldParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldParams">Field Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fieldAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldAttributs">Field Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fieldStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.fieldStat">Field Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="eventForm.formId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.eventField.eventForm">Event Form</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let eventField of eventFields; trackBy: trackFieldId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/event-field-sig', eventField.fieldId, 'view']">{{ eventField.fieldId }}</a>
+          </td>
+          <td>{{ eventField.fieldName }}</td>
+          <td>{{ eventField.fieldCategorie }}</td>
+          <td>{{ eventField.fieldDescription }}</td>
+          <td>{{ eventField.fieldType }}</td>
+          <td>{{ eventField.fieldParams }}</td>
+          <td>{{ eventField.fieldAttributs }}</td>
+          <td>{{ eventField.fieldStat }}</td>
+          <td>
+            <div *ngIf="eventField.event">
+              <a [routerLink]="['/event-sig', eventField.event.eventId, 'view']">{{ eventField.event.eventId }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="eventField.eventForm">
+              <a [routerLink]="['/event-form-sig', eventField.eventForm.formId, 'view']">{{ eventField.eventForm.formId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/event-control-sig']"
+                [queryParams]="{ 'filter[eventFieldId.in]': eventField.fieldId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.eventField.eventControl' | translate) }"
+                  >Show Event Control</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/event-field-sig', eventField.fieldId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/event-field-sig', eventField.fieldId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(eventField)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="eventFields && eventFields.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

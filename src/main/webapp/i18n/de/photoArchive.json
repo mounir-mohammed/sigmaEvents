@@ -1,0 +1,32 @@
+{
+  "sigmaEventsApp": {
+    "photoArchive": {
+      "home": {
+        "title": "Photo Archives",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Photo Archive erstellen",
+        "createOrEditLabel": "Photo Archive erstellen oder bearbeiten",
+        "notFound": "Keine Photo Archives gefunden"
+      },
+      "created": "Photo Archive erstellt mit ID {{ param }}",
+      "updated": "Photo Archive aktualisiert mit ID {{ param }}",
+      "deleted": "Photo Archive gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Photo Archive {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Photo Archive"
+      },
+      "photoArchiveId": "Photo Archive Id",
+      "photoArchiveName": "Photo Archive Name",
+      "photoArchivePath": "Photo Archive Path",
+      "photoArchivePhoto": "Photo Archive Photo",
+      "photoArchiveDescription": "Photo Archive Description",
+      "photoArchiveParams": "Photo Archive Params",
+      "photoArchiveAttributs": "Photo Archive Attributs",
+      "photoArchiveStat": "Photo Archive Stat",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

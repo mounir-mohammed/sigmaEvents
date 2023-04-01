@@ -1,0 +1,28 @@
+<form *ngIf="printingServer" name="deleteForm" (ngSubmit)="confirmDelete(printingServer.printingServerId!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="printingServerDeleteDialogHeading" sigmaTranslate="entity.delete.title">Confirm delete operation</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <sigma-alert-error></sigma-alert-error>
+    <p
+      id="sigma-delete-printingServer-heading"
+      sigmaTranslate="sigmaEventsApp.printingServer.delete.question"
+      [translateValues]="{ id: printingServer.printingServerId }"
+    >
+      Are you sure you want to delete Printing Server {{ printingServer.printingServerId }}?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="sigma-confirm-delete-printingServer" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.delete">Delete</span>
+    </button>
+  </div>
+</form>

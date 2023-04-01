@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="attachement">
+      <h2 data-cy="attachementDetailsHeading"><span sigmaTranslate="sigmaEventsApp.attachement.detail.title">Attachement</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementId">Attachement Id</span></dt>
+        <dd>
+          <span>{{ attachement.attachementId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementName">Attachement Name</span></dt>
+        <dd>
+          <span>{{ attachement.attachementName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementPath">Attachement Path</span></dt>
+        <dd>
+          <span>{{ attachement.attachementPath }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementBlob">Attachement Blob</span></dt>
+        <dd>
+          <div *ngIf="attachement.attachementBlob">
+            <a (click)="openFile(attachement.attachementBlob, attachement.attachementBlobContentType)" sigmaTranslate="entity.action.open"
+              >Open</a
+            >
+            {{ attachement.attachementBlobContentType }}, {{ byteSize(attachement.attachementBlob) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementDescription">Attachement Description</span></dt>
+        <dd>
+          <span>{{ attachement.attachementDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementPhoto">Attachement Photo</span></dt>
+        <dd>
+          <div *ngIf="attachement.attachementPhoto">
+            <a (click)="openFile(attachement.attachementPhoto, attachement.attachementPhotoContentType)">
+              <img
+                [src]="'data:' + attachement.attachementPhotoContentType + ';base64,' + attachement.attachementPhoto"
+                style="max-width: 100%"
+                alt="attachement image"
+              />
+            </a>
+            {{ attachement.attachementPhotoContentType }}, {{ byteSize(attachement.attachementPhoto) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementParams">Attachement Params</span></dt>
+        <dd>
+          <span>{{ attachement.attachementParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementAttributs">Attachement Attributs</span></dt>
+        <dd>
+          <span>{{ attachement.attachementAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementStat">Attachement Stat</span></dt>
+        <dd>
+          <span>{{ attachement.attachementStat }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementType">Attachement Type</span></dt>
+        <dd>
+          <div *ngIf="attachement.attachementType">
+            <a [routerLink]="['/attachement-type-sig', attachement.attachementType.attachementTypeId, 'view']">{{
+              attachement.attachementType.attachementTypeId
+            }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.attachement.event">Event</span></dt>
+        <dd>
+          <div *ngIf="attachement.event">
+            <a [routerLink]="['/event-sig', attachement.event.eventId, 'view']">{{ attachement.event.eventId }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/attachement-sig', attachement.attachementId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

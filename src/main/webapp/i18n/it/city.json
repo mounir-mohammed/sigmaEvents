@@ -1,0 +1,35 @@
+{
+  "sigmaEventsApp": {
+    "city": {
+      "home": {
+        "title": "Cities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Genera un nuovo City",
+        "createOrEditLabel": "Genera o modifica un City",
+        "notFound": "No Cities found"
+      },
+      "created": "&Egrave; stato generato un nuovo City con identificatore {{ param }}",
+      "updated": "&Egrave; stato aggiornato City identificato da {{ param }}",
+      "deleted": "&Egrave; stato eliminato City con identificatore {{ param }}",
+      "delete": {
+        "question": "Sei sicuro di volere eliminare City {{ id }}?"
+      },
+      "detail": {
+        "title": "City"
+      },
+      "cityId": "City Id",
+      "cityName": "City Name",
+      "cityZipCode": "City Zip Code",
+      "cityAbreviation": "City Abreviation",
+      "cityDescription": "City Description",
+      "cityParams": "City Params",
+      "cityAttributs": "City Attributs",
+      "cityStat": "City Stat",
+      "printingCentre": "Printing Centre",
+      "site": "Site",
+      "organiz": "Organiz",
+      "accreditation": "Accreditation",
+      "country": "Country"
+    }
+  }
+}

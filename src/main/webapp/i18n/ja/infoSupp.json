@@ -1,0 +1,31 @@
+{
+  "sigmaEventsApp": {
+    "infoSupp": {
+      "home": {
+        "title": "InfoSupps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Info Supp を追加",
+        "createOrEditLabel": "Info Suppを追加または編集",
+        "notFound": "No Info Supps found"
+      },
+      "created": "A new Info Supp is created with identifier {{ param }}",
+      "updated": "A Info Supp is updated with identifier {{ param }}",
+      "deleted": "A Info Supp is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Info Supp {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Info Supp"
+      },
+      "infoSuppId": "Info Supp Id",
+      "infoSuppName": "Info Supp Name",
+      "infoSuppDescription": "Info Supp Description",
+      "infoSuppParams": "Info Supp Params",
+      "infoSuppAttributs": "Info Supp Attributs",
+      "infoSuppStat": "Info Supp Stat",
+      "infoSuppType": "Info Supp Type",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "sigmaEventsApp": {
+    "area": {
+      "home": {
+        "title": "Areas",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Area",
+        "createOrEditLabel": "Créer ou éditer un Area",
+        "notFound": "Aucun Area trouvé"
+      },
+      "created": "Un nouveau Area a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Area avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Area avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Area {{ id }} ?"
+      },
+      "detail": {
+        "title": "Area"
+      },
+      "areaId": "Area Id",
+      "areaName": "Area Name",
+      "areaAbreviation": "Area Abreviation",
+      "areaColor": "Area Color",
+      "areaDescription": "Area Description",
+      "areaLogo": "Area Logo",
+      "areaParams": "Area Params",
+      "areaAttributs": "Area Attributs",
+      "areaStat": "Area Stat",
+      "event": "Event",
+      "fonction": "Fonction"
+    }
+  }
+}

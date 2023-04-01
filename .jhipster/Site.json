@@ -1,0 +1,105 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401030214",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "site",
+  "fields": [
+    {
+      "fieldName": "siteId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "siteName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "siteColor",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "siteAbreviation",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "siteDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "siteLogo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "siteAdresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteEmail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteTel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteFax",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteResponsableName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "siteStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Site",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "city",
+      "otherEntityRelationshipName": "site",
+      "relationshipName": "city",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "site",
+      "relationshipName": "event",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "site",
+      "ownerSide": false,
+      "relationshipName": "accreditation",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

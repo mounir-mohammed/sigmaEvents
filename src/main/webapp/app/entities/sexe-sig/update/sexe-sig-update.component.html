@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sigma-sexe-sig-heading" data-cy="SexeCreateUpdateHeading" sigmaTranslate="sigmaEventsApp.sexe.home.createOrEditLabel">
+        Create or edit a Sexe
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.sexeId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.sexe.sexeId" for="field_sexeId">Sexe Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="sexeId"
+            id="field_sexeId"
+            data-cy="sexeId"
+            formControlName="sexeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.sexe.sexeValue" for="field_sexeValue">Sexe Value</label>
+          <input type="text" class="form-control" name="sexeValue" id="field_sexeValue" data-cy="sexeValue" formControlName="sexeValue" />
+          <div *ngIf="editForm.get('sexeValue')!.invalid && (editForm.get('sexeValue')!.dirty || editForm.get('sexeValue')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sexeValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sexeValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.sexe.sexeDescription" for="field_sexeDescription"
+            >Sexe Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sexeDescription"
+            id="field_sexeDescription"
+            data-cy="sexeDescription"
+            formControlName="sexeDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('sexeDescription')!.invalid &&
+              (editForm.get('sexeDescription')!.dirty || editForm.get('sexeDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('sexeDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.sexe.sexeTypeParams" for="field_sexeTypeParams">Sexe Type Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="sexeTypeParams"
+            id="field_sexeTypeParams"
+            data-cy="sexeTypeParams"
+            formControlName="sexeTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.sexe.sexeTypeAttributs" for="field_sexeTypeAttributs"
+            >Sexe Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="sexeTypeAttributs"
+            id="field_sexeTypeAttributs"
+            data-cy="sexeTypeAttributs"
+            formControlName="sexeTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.sexe.sexeStat" for="field_sexeStat">Sexe Stat</label>
+          <input type="checkbox" class="form-check" name="sexeStat" id="field_sexeStat" data-cy="sexeStat" formControlName="sexeStat" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

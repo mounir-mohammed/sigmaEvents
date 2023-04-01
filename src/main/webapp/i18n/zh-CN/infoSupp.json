@@ -1,0 +1,31 @@
+{
+  "sigmaEventsApp": {
+    "infoSupp": {
+      "home": {
+        "title": "Info Supps",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Info Supp",
+        "createOrEditLabel": "创建或编辑 Info Supp",
+        "notFound": "No Info Supps found"
+      },
+      "created": "Info Supp {{ param }} 创建成功",
+      "updated": "Info Supp {{ param }} 更新成功",
+      "deleted": "Info Supp {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Info Supp {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Info Supp"
+      },
+      "infoSuppId": "Info Supp Id",
+      "infoSuppName": "Info Supp Name",
+      "infoSuppDescription": "Info Supp Description",
+      "infoSuppParams": "Info Supp Params",
+      "infoSuppAttributs": "Info Supp Attributs",
+      "infoSuppStat": "Info Supp Stat",
+      "infoSuppType": "Info Supp Type",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

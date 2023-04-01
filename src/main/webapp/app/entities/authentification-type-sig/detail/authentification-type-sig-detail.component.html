@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="authentificationType">
+      <h2 data-cy="authentificationTypeDetailsHeading">
+        <span sigmaTranslate="sigmaEventsApp.authentificationType.detail.title">Authentification Type</span>
+      </h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeId">Authentification Type Id</span></dt>
+        <dd>
+          <span>{{ authentificationType.authentificationTypeId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeValue">Authentification Type Value</span></dt>
+        <dd>
+          <span>{{ authentificationType.authentificationTypeValue }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeDescription"
+            >Authentification Type Description</span
+          >
+        </dt>
+        <dd>
+          <span>{{ authentificationType.authentificationTypeDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeParams">Authentification Type Params</span></dt>
+        <dd>
+          <span>{{ authentificationType.authentificationTypeParams }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeAttributs">Authentification Type Attributs</span>
+        </dt>
+        <dd>
+          <span>{{ authentificationType.authentificationTypeAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.authentificationType.authentificationTypeStat">Authentification Type Stat</span></dt>
+        <dd>
+          <span>{{ authentificationType.authentificationTypeStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/authentification-type-sig', authentificationType.authentificationTypeId, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

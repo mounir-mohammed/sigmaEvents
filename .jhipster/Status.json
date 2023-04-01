@@ -1,0 +1,79 @@
+{
+  "angularJSSuffix": "sig",
+  "applications": ["sigmaEvents"],
+  "changelogDate": "20230401025114",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "status",
+  "fields": [
+    {
+      "fieldName": "statusId",
+      "fieldType": "Long",
+      "options": {
+        "id": true
+      }
+    },
+    {
+      "fieldName": "statusName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "50"
+    },
+    {
+      "fieldName": "statusAbreviation",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "10"
+    },
+    {
+      "fieldName": "statusColor",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    },
+    {
+      "fieldName": "statusDescription",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200"
+    },
+    {
+      "fieldName": "statusUserCanPrint",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "statusUserCanUpdate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "statusUserCanValidate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "statusParams",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "statusAttributs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "statusStat",
+      "fieldType": "Boolean"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Status",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "accreditation",
+      "otherEntityRelationshipName": "status",
+      "relationshipName": "accreditation",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

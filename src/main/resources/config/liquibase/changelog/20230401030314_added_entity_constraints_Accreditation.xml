@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Accreditation.
+    -->
+    <changeSet id="20230401030314-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="accreditation_accreditation_id"
+                                 baseTableName="rel_accreditation__site"
+                                 constraintName="fk_rel_accreditation__site__accreditation_id"
+                                 referencedColumnNames="accreditation_id"
+                                 referencedTableName="accreditation"/>
+
+        <addForeignKeyConstraint baseColumnNames="site_site_id"
+                                 baseTableName="rel_accreditation__site"
+                                 constraintName="fk_rel_accreditation__site__site_id"
+                                 referencedColumnNames="site_id"
+                                 referencedTableName="site"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="civility_civility_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__civility_id"
+                                 referencedColumnNames="civility_id"
+                                 referencedTableName="civility"/>
+
+        <addForeignKeyConstraint baseColumnNames="sexe_sexe_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__sexe_id"
+                                 referencedColumnNames="sexe_id"
+                                 referencedTableName="sexe"/>
+
+        <addForeignKeyConstraint baseColumnNames="nationality_nationality_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__nationality_id"
+                                 referencedColumnNames="nationality_id"
+                                 referencedTableName="nationality"/>
+
+        <addForeignKeyConstraint baseColumnNames="country_country_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__country_id"
+                                 referencedColumnNames="country_id"
+                                 referencedTableName="country"/>
+
+        <addForeignKeyConstraint baseColumnNames="city_city_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__city_id"
+                                 referencedColumnNames="city_id"
+                                 referencedTableName="city"/>
+
+        <addForeignKeyConstraint baseColumnNames="category_category_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__category_id"
+                                 referencedColumnNames="category_id"
+                                 referencedTableName="category"/>
+
+        <addForeignKeyConstraint baseColumnNames="fonction_fonction_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__fonction_id"
+                                 referencedColumnNames="fonction_id"
+                                 referencedTableName="fonction"/>
+
+        <addForeignKeyConstraint baseColumnNames="organiz_organiz_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__organiz_id"
+                                 referencedColumnNames="organiz_id"
+                                 referencedTableName="organiz"/>
+
+        <addForeignKeyConstraint baseColumnNames="accreditation_type_accreditation_type_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__accreditation_type_id"
+                                 referencedColumnNames="accreditation_type_id"
+                                 referencedTableName="accreditation_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_status_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__status_id"
+                                 referencedColumnNames="status_id"
+                                 referencedTableName="status"/>
+
+        <addForeignKeyConstraint baseColumnNames="attachement_attachement_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__attachement_id"
+                                 referencedColumnNames="attachement_id"
+                                 referencedTableName="attachement"/>
+
+        <addForeignKeyConstraint baseColumnNames="code_code_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__code_id"
+                                 referencedColumnNames="code_id"
+                                 referencedTableName="code"/>
+
+        <addForeignKeyConstraint baseColumnNames="day_pass_info_day_pass_info_id"
+                                 baseTableName="accreditation"
+                                 constraintName="fk_accreditation__day_pass_info_id"
+                                 referencedColumnNames="day_pass_info_id"
+                                 referencedTableName="day_pass_info"/>
+    </changeSet>
+</databaseChangeLog>

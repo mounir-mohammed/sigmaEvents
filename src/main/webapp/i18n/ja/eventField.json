@@ -1,0 +1,33 @@
+{
+  "sigmaEventsApp": {
+    "eventField": {
+      "home": {
+        "title": "EventFields",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Event Field を追加",
+        "createOrEditLabel": "Event Fieldを追加または編集",
+        "notFound": "No Event Fields found"
+      },
+      "created": "A new Event Field is created with identifier {{ param }}",
+      "updated": "A Event Field is updated with identifier {{ param }}",
+      "deleted": "A Event Field is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Event Field {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Event Field"
+      },
+      "fieldId": "Field Id",
+      "fieldName": "Field Name",
+      "fieldCategorie": "Field Categorie",
+      "fieldDescription": "Field Description",
+      "fieldType": "Field Type",
+      "fieldParams": "Field Params",
+      "fieldAttributs": "Field Attributs",
+      "fieldStat": "Field Stat",
+      "eventControl": "Event Control",
+      "event": "Event",
+      "eventForm": "Event Form"
+    }
+  }
+}

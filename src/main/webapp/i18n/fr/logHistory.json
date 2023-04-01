@@ -1,0 +1,27 @@
+{
+  "sigmaEventsApp": {
+    "logHistory": {
+      "home": {
+        "title": "LogHistories",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Log History",
+        "createOrEditLabel": "Créer ou éditer un Log History",
+        "notFound": "Aucun Log History trouvé"
+      },
+      "created": "Un nouveau Log History a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Log History avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Log History avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Log History {{ id }} ?"
+      },
+      "detail": {
+        "title": "Log History"
+      },
+      "logHistory": "Log History",
+      "logHistoryDescription": "Log History Description",
+      "logHistoryParams": "Log History Params",
+      "logHistoryAttributs": "Log History Attributs",
+      "logHistoryStat": "Log History Stat"
+    }
+  }
+}

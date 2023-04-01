@@ -1,0 +1,37 @@
+{
+  "sigmaEventsApp": {
+    "dayPassInfo": {
+      "home": {
+        "title": "DayPassInfos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Day Pass Info を追加",
+        "createOrEditLabel": "Day Pass Infoを追加または編集",
+        "notFound": "No Day Pass Infos found"
+      },
+      "created": "A new Day Pass Info is created with identifier {{ param }}",
+      "updated": "A Day Pass Info is updated with identifier {{ param }}",
+      "deleted": "A Day Pass Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Day Pass Info {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Day Pass Info"
+      },
+      "dayPassInfoId": "Day Pass Info Id",
+      "dayPassInfoName": "Day Pass Info Name",
+      "dayPassDescription": "Day Pass Description",
+      "dayPassLogo": "Day Pass Logo",
+      "dayPassInfoCreationDate": "Day Pass Info Creation Date",
+      "dayPassInfoUpdateDate": "Day Pass Info Update Date",
+      "dayPassInfoCreatedByuser": "Day Pass Info Created Byuser",
+      "dayPassInfoDateStart": "Day Pass Info Date Start",
+      "dayPassInfoDateEnd": "Day Pass Info Date End",
+      "dayPassInfoNumber": "Day Pass Info Number",
+      "dayPassParams": "Day Pass Params",
+      "dayPassAttributs": "Day Pass Attributs",
+      "dayPassInfoStat": "Day Pass Info Stat",
+      "accreditation": "Accreditation",
+      "event": "Event"
+    }
+  }
+}

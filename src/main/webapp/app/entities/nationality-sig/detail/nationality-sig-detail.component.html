@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="nationality">
+      <h2 data-cy="nationalityDetailsHeading"><span sigmaTranslate="sigmaEventsApp.nationality.detail.title">Nationality</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityId">Nationality Id</span></dt>
+        <dd>
+          <span>{{ nationality.nationalityId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityValue">Nationality Value</span></dt>
+        <dd>
+          <span>{{ nationality.nationalityValue }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityAbreviation">Nationality Abreviation</span></dt>
+        <dd>
+          <span>{{ nationality.nationalityAbreviation }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityDescription">Nationality Description</span></dt>
+        <dd>
+          <span>{{ nationality.nationalityDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityFlag">Nationality Flag</span></dt>
+        <dd>
+          <div *ngIf="nationality.nationalityFlag">
+            <a (click)="openFile(nationality.nationalityFlag, nationality.nationalityFlagContentType)">
+              <img
+                [src]="'data:' + nationality.nationalityFlagContentType + ';base64,' + nationality.nationalityFlag"
+                style="max-width: 100%"
+                alt="nationality image"
+              />
+            </a>
+            {{ nationality.nationalityFlagContentType }}, {{ byteSize(nationality.nationalityFlag) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityParams">Nationality Params</span></dt>
+        <dd>
+          <span>{{ nationality.nationalityParams }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityAttributs">Nationality Attributs</span></dt>
+        <dd>
+          <span>{{ nationality.nationalityAttributs }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.nationality.nationalityStat">Nationality Stat</span></dt>
+        <dd>
+          <span>{{ nationality.nationalityStat }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/nationality-sig', nationality.nationalityId, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

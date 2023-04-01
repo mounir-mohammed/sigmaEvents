@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="CodeTypeHeading">
+    <span sigmaTranslate="sigmaEventsApp.codeType.home.title">Code Types</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.codeType.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-code-type-sig"
+        [routerLink]="['/code-type-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.codeType.home.createLabel"> Create a new Code Type </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="codeTypes?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.codeType.home.notFound">No Code Types found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="codeTypes && codeTypes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="codeTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.codeType.codeTypeId">Code Type Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeTypeValue">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.codeType.codeTypeValue">Code Type Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeTypeDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.codeType.codeTypeDescription">Code Type Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeTypeParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.codeType.codeTypeParams">Code Type Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeTypeAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.codeType.codeTypeAttributs">Code Type Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="codeTypeStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.codeType.codeTypeStat">Code Type Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let codeType of codeTypes; trackBy: trackCodeTypeId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/code-type-sig', codeType.codeTypeId, 'view']">{{ codeType.codeTypeId }}</a>
+          </td>
+          <td>{{ codeType.codeTypeValue }}</td>
+          <td>{{ codeType.codeTypeDescription }}</td>
+          <td>{{ codeType.codeTypeParams }}</td>
+          <td>{{ codeType.codeTypeAttributs }}</td>
+          <td>{{ codeType.codeTypeStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/code-sig']"
+                [queryParams]="{ 'filter[codeTypeId.in]': codeType.codeTypeId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.codeType.code' | translate) }"
+                  >Show Code</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/code-type-sig', codeType.codeTypeId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/code-type-sig', codeType.codeTypeId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(codeType)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="codeTypes && codeTypes.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

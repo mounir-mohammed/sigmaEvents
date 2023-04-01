@@ -1,0 +1,42 @@
+{
+  "sigmaEventsApp": {
+    "printingCentre": {
+      "home": {
+        "title": "PrintingCentres",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Printing Centre を追加",
+        "createOrEditLabel": "Printing Centreを追加または編集",
+        "notFound": "No Printing Centres found"
+      },
+      "created": "A new Printing Centre is created with identifier {{ param }}",
+      "updated": "A Printing Centre is updated with identifier {{ param }}",
+      "deleted": "A Printing Centre is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Printing Centre {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Printing Centre"
+      },
+      "printingCentreId": "Printing Centre Id",
+      "printingCentreDescription": "Printing Centre Description",
+      "printingCentreName": "Printing Centre Name",
+      "printingCentreLogo": "Printing Centre Logo",
+      "printingCentreAdresse": "Printing Centre Adresse",
+      "printingCentreEmail": "Printing Centre Email",
+      "printingCentreTel": "Printing Centre Tel",
+      "printingCentreFax": "Printing Centre Fax",
+      "printingCentreResponsableName": "Printing Centre Responsable Name",
+      "printingParams": "Printing Params",
+      "printingAttributs": "Printing Attributs",
+      "printingCentreStat": "Printing Centre Stat",
+      "city": "City",
+      "country": "Country",
+      "organiz": "Organiz",
+      "printingType": "Printing Type",
+      "printingServer": "Printing Server",
+      "printingModel": "Printing Model",
+      "language": "Language",
+      "event": "Event"
+    }
+  }
+}

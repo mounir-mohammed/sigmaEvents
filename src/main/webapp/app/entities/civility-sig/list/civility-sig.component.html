@@ -1,0 +1,158 @@
+<div>
+  <h2 id="page-heading" data-cy="CivilityHeading">
+    <span sigmaTranslate="sigmaEventsApp.civility.home.title">Civilities</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.civility.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-civility-sig"
+        [routerLink]="['/civility-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.civility.home.createLabel"> Create a new Civility </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="civilities?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.civility.home.notFound">No Civilities found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="civilities && civilities.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="civilityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.civility.civilityId">Civility Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="civilityValue">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.civility.civilityValue">Civility Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="civilityDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.civility.civilityDescription">Civility Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="civilityCode">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.civility.civilityCode">Civility Code</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="civilityParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.civility.civilityParams">Civility Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="civilityAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.civility.civilityAttributs">Civility Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="civilityStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.civility.civilityStat">Civility Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let civility of civilities; trackBy: trackCivilityId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/civility-sig', civility.civilityId, 'view']">{{ civility.civilityId }}</a>
+          </td>
+          <td>{{ civility.civilityValue }}</td>
+          <td>{{ civility.civilityDescription }}</td>
+          <td>{{ civility.civilityCode }}</td>
+          <td>{{ civility.civilityParams }}</td>
+          <td>{{ civility.civilityAttributs }}</td>
+          <td>{{ civility.civilityStat }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig']"
+                [queryParams]="{ 'filter[civilityId.in]': civility.civilityId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.civility.accreditation' | translate) }"
+                  >Show Accreditation</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/civility-sig', civility.civilityId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/civility-sig', civility.civilityId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(civility)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="civilities && civilities.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

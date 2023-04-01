@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity CheckAccreditationReport.
+    -->
+    <changeSet id="20230401031514-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="event_event_id"
+                                 baseTableName="check_accreditation_report"
+                                 constraintName="fk_check_accreditation_report__event_id"
+                                 referencedColumnNames="event_id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="check_accreditation_history_check_accreditation_history_id"
+                                 baseTableName="check_accreditation_report"
+                                 constraintName="fk_check_accreditation_report__check_accreditation_history_id"
+                                 referencedColumnNames="check_accreditation_history_id"
+                                 referencedTableName="check_accreditation_history"/>
+    </changeSet>
+</databaseChangeLog>

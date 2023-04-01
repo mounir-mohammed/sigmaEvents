@@ -1,0 +1,148 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-code-type-sig-heading"
+        data-cy="CodeTypeCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.codeType.home.createOrEditLabel"
+      >
+        Create or edit a Code Type
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.codeTypeId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.codeType.codeTypeId" for="field_codeTypeId">Code Type Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="codeTypeId"
+            id="field_codeTypeId"
+            data-cy="codeTypeId"
+            formControlName="codeTypeId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.codeType.codeTypeValue" for="field_codeTypeValue">Code Type Value</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codeTypeValue"
+            id="field_codeTypeValue"
+            data-cy="codeTypeValue"
+            formControlName="codeTypeValue"
+          />
+          <div
+            *ngIf="
+              editForm.get('codeTypeValue')!.invalid && (editForm.get('codeTypeValue')!.dirty || editForm.get('codeTypeValue')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codeTypeValue')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codeTypeValue')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.codeType.codeTypeDescription" for="field_codeTypeDescription"
+            >Code Type Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codeTypeDescription"
+            id="field_codeTypeDescription"
+            data-cy="codeTypeDescription"
+            formControlName="codeTypeDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('codeTypeDescription')!.invalid &&
+              (editForm.get('codeTypeDescription')!.dirty || editForm.get('codeTypeDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codeTypeDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.codeType.codeTypeParams" for="field_codeTypeParams"
+            >Code Type Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codeTypeParams"
+            id="field_codeTypeParams"
+            data-cy="codeTypeParams"
+            formControlName="codeTypeParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.codeType.codeTypeAttributs" for="field_codeTypeAttributs"
+            >Code Type Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="codeTypeAttributs"
+            id="field_codeTypeAttributs"
+            data-cy="codeTypeAttributs"
+            formControlName="codeTypeAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.codeType.codeTypeStat" for="field_codeTypeStat">Code Type Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="codeTypeStat"
+            id="field_codeTypeStat"
+            data-cy="codeTypeStat"
+            formControlName="codeTypeStat"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,392 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sigma-setting-sig-heading"
+        data-cy="SettingCreateUpdateHeading"
+        sigmaTranslate="sigmaEventsApp.setting.home.createOrEditLabel"
+      >
+        Create or edit a Setting
+      </h2>
+
+      <div>
+        <sigma-alert-error></sigma-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.settingId.value !== null">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingId" for="field_settingId">Setting Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="settingId"
+            id="field_settingId"
+            data-cy="settingId"
+            formControlName="settingId"
+            [readonly]="true"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingParentId" for="field_settingParentId"
+            >Setting Parent Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="settingParentId"
+            id="field_settingParentId"
+            data-cy="settingParentId"
+            formControlName="settingParentId"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingType" for="field_settingType">Setting Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="settingType"
+            id="field_settingType"
+            data-cy="settingType"
+            formControlName="settingType"
+          />
+          <div *ngIf="editForm.get('settingType')!.invalid && (editForm.get('settingType')!.dirty || editForm.get('settingType')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingType')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingType')?.errors?.minlength"
+              sigmaTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingType')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingNameClass" for="field_settingNameClass"
+            >Setting Name Class</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="settingNameClass"
+            id="field_settingNameClass"
+            data-cy="settingNameClass"
+            formControlName="settingNameClass"
+          />
+          <div
+            *ngIf="
+              editForm.get('settingNameClass')!.invalid &&
+              (editForm.get('settingNameClass')!.dirty || editForm.get('settingNameClass')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingNameClass')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingNameClass')?.errors?.minlength"
+              sigmaTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingNameClass')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingDataType" for="field_settingDataType"
+            >Setting Data Type</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="settingDataType"
+            id="field_settingDataType"
+            data-cy="settingDataType"
+            formControlName="settingDataType"
+          />
+          <div
+            *ngIf="
+              editForm.get('settingDataType')!.invalid &&
+              (editForm.get('settingDataType')!.dirty || editForm.get('settingDataType')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingDataType')?.errors?.required"
+              sigmaTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingDataType')?.errors?.minlength"
+              sigmaTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 2 }"
+            >
+              This field is required to be at least 2 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingDataType')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 50 }"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingDescription" for="field_settingDescription"
+            >Setting Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="settingDescription"
+            id="field_settingDescription"
+            data-cy="settingDescription"
+            formControlName="settingDescription"
+          />
+          <div
+            *ngIf="
+              editForm.get('settingDescription')!.invalid &&
+              (editForm.get('settingDescription')!.dirty || editForm.get('settingDescription')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('settingDescription')?.errors?.maxlength"
+              sigmaTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 200 }"
+            >
+              This field cannot be longer than 200 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingValueString" for="field_settingValueString"
+            >Setting Value String</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="settingValueString"
+            id="field_settingValueString"
+            data-cy="settingValueString"
+            formControlName="settingValueString"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingValueLong" for="field_settingValueLong"
+            >Setting Value Long</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="settingValueLong"
+            id="field_settingValueLong"
+            data-cy="settingValueLong"
+            formControlName="settingValueLong"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingValueDate" for="field_settingValueDate"
+            >Setting Value Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_settingValueDate"
+              data-cy="settingValueDate"
+              type="datetime-local"
+              class="form-control"
+              name="settingValueDate"
+              formControlName="settingValueDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingValueBoolean" for="field_settingValueBoolean"
+            >Setting Value Boolean</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="settingValueBoolean"
+            id="field_settingValueBoolean"
+            data-cy="settingValueBoolean"
+            formControlName="settingValueBoolean"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingValueBlob" for="field_settingValueBlob"
+            >Setting Value Blob</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('settingValueBlobContentType')!.value + ';base64,' + editForm.get('settingValueBlob')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('settingValueBlob')!.value"
+              alt="setting image"
+            />
+            <div *ngIf="editForm.get('settingValueBlob')!.value" class="form-text text-danger clearfix">
+              <span class="pull-start"
+                >{{ editForm.get('settingValueBlobContentType')!.value }}, {{ byteSize(editForm.get('settingValueBlob')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('settingValueBlob', 'settingValueBlobContentType', 'file_settingValueBlob')"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_settingValueBlob"
+              data-cy="settingValueBlob"
+              (change)="setFileData($event, 'settingValueBlob', true)"
+              accept="image/*"
+              sigmaTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="settingValueBlob"
+            id="field_settingValueBlob"
+            data-cy="settingValueBlob"
+            formControlName="settingValueBlob"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="settingValueBlobContentType"
+            id="field_settingValueBlobContentType"
+            formControlName="settingValueBlobContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingParams" for="field_settingParams">Setting Params</label>
+          <input
+            type="text"
+            class="form-control"
+            name="settingParams"
+            id="field_settingParams"
+            data-cy="settingParams"
+            formControlName="settingParams"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingAttributs" for="field_settingAttributs"
+            >Setting Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="settingAttributs"
+            id="field_settingAttributs"
+            data-cy="settingAttributs"
+            formControlName="settingAttributs"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.settingStat" for="field_settingStat">Setting Stat</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="settingStat"
+            id="field_settingStat"
+            data-cy="settingStat"
+            formControlName="settingStat"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.language" for="field_language">Language</label>
+          <select
+            class="form-control"
+            id="field_language"
+            data-cy="language"
+            name="language"
+            formControlName="language"
+            [compareWith]="compareLanguageSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="languageOption" *ngFor="let languageOption of languagesSharedCollection">
+              {{ languageOption.languageId }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.setting.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

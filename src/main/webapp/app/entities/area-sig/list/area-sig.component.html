@@ -1,0 +1,188 @@
+<div>
+  <h2 id="page-heading" data-cy="AreaHeading">
+    <span sigmaTranslate="sigmaEventsApp.area.home.title">Areas</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.area.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-area-sig"
+        [routerLink]="['/area-sig/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sigmaTranslate="sigmaEventsApp.area.home.createLabel"> Create a new Area </span>
+      </button>
+    </div>
+  </h2>
+
+  <sigma-alert-error></sigma-alert-error>
+
+  <sigma-alert></sigma-alert>
+
+  <sigma-filter [filters]="filters"></sigma-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="areas?.length === 0">
+    <span sigmaTranslate="sigmaEventsApp.area.home.notFound">No Areas found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="areas && areas.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" sigmaSortBy="areaId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaId">Area Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaName">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaName">Area Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaAbreviation">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaAbreviation">Area Abreviation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaColor">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaColor">Area Color</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaDescription">Area Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaLogo">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaLogo">Area Logo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaParams">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaParams">Area Params</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaAttributs">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaAttributs">Area Attributs</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="areaStat">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.areaStat">Area Stat</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="event.eventId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.area.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let area of areas; trackBy: trackAreaId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/area-sig', area.areaId, 'view']">{{ area.areaId }}</a>
+          </td>
+          <td>{{ area.areaName }}</td>
+          <td>{{ area.areaAbreviation }}</td>
+          <td>{{ area.areaColor }}</td>
+          <td>{{ area.areaDescription }}</td>
+          <td>
+            <a *ngIf="area.areaLogo" (click)="openFile(area.areaLogo, area.areaLogoContentType)">
+              <img [src]="'data:' + area.areaLogoContentType + ';base64,' + area.areaLogo" style="max-height: 30px" alt="area image" />
+            </a>
+            <span *ngIf="area.areaLogo">{{ area.areaLogoContentType }}, {{ byteSize(area.areaLogo) }}</span>
+          </td>
+          <td>{{ area.areaParams }}</td>
+          <td>{{ area.areaAttributs }}</td>
+          <td>{{ area.areaStat }}</td>
+          <td>
+            <div *ngIf="area.event">
+              <a [routerLink]="['/event-sig', area.event.eventId, 'view']">{{ area.event.eventId }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/fonction-sig']"
+                [queryParams]="{ 'filter[areaId.in]': area.areaId }"
+                class="btn btn-info btn-sm"
+                data-cy="filterOtherEntityButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span
+                  class="d-none d-md-inline"
+                  sigmaTranslate="entity.action.show"
+                  [translateValues]="{ otherEntity: ('sigmaEventsApp.area.fonction' | translate) }"
+                  >Show Fonction</span
+                >
+              </button>
+              <button
+                type="submit"
+                [routerLink]="['/area-sig', area.areaId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/area-sig', area.areaId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(area)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="areas && areas.length > 0">
+    <div class="d-flex justify-content-center">
+      <sigma-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sigma-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

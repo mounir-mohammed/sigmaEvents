@@ -1,0 +1,39 @@
+{
+  "sigmaEventsApp": {
+    "site": {
+      "home": {
+        "title": "Sites",
+        "refreshListLabel": "Liste aktualisieren",
+        "createLabel": "Site erstellen",
+        "createOrEditLabel": "Site erstellen oder bearbeiten",
+        "notFound": "Keine Sites gefunden"
+      },
+      "created": "Site erstellt mit ID {{ param }}",
+      "updated": "Site aktualisiert mit ID {{ param }}",
+      "deleted": "Site gelöscht mit ID {{ param }}",
+      "delete": {
+        "question": "Soll Site {{ id }} wirklich dauerhaft gelöscht werden?"
+      },
+      "detail": {
+        "title": "Site"
+      },
+      "siteId": "Site Id",
+      "siteName": "Site Name",
+      "siteColor": "Site Color",
+      "siteAbreviation": "Site Abreviation",
+      "siteDescription": "Site Description",
+      "siteLogo": "Site Logo",
+      "siteAdresse": "Site Adresse",
+      "siteEmail": "Site Email",
+      "siteTel": "Site Tel",
+      "siteFax": "Site Fax",
+      "siteResponsableName": "Site Responsable Name",
+      "siteParams": "Site Params",
+      "siteAttributs": "Site Attributs",
+      "siteStat": "Site Stat",
+      "city": "City",
+      "event": "Event",
+      "accreditation": "Accreditation"
+    }
+  }
+}
