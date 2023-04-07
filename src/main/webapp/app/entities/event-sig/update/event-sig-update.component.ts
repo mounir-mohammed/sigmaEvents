@@ -24,6 +24,7 @@ export class EventSigUpdateComponent implements OnInit {
   languagesSharedCollection: ILanguageSig[] = [];
 
   editForm: EventSigFormGroup = this.eventFormService.createEventSigFormGroup();
+  public color = '#cccccc';
 
   constructor(
     protected dataUtils: DataUtils,
@@ -41,6 +42,7 @@ export class EventSigUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ event }) => {
       this.event = event;
       if (event) {
+        this.color = this.event?.eventColor!;
         this.updateForm(event);
       }
 
@@ -126,5 +128,10 @@ export class EventSigUpdateComponent implements OnInit {
         )
       )
       .subscribe((languages: ILanguageSig[]) => (this.languagesSharedCollection = languages));
+  }
+
+  public onChangeColor(color: string): void {
+    this.color = color;
+    this.editForm.patchValue({ eventColor: color });
   }
 }

@@ -30,6 +30,7 @@ export class FonctionSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: FonctionSigFormGroup = this.fonctionFormService.createFonctionSigFormGroup();
+  public color = '#cccccc';
 
   constructor(
     protected dataUtils: DataUtils,
@@ -53,6 +54,7 @@ export class FonctionSigUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ fonction }) => {
       this.fonction = fonction;
       if (fonction) {
+        this.color = this.fonction?.fonctionColor!;
         this.updateForm(fonction);
       }
 
@@ -158,5 +160,10 @@ export class FonctionSigUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.fonction?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+  }
+
+  public onChangeColor(color: string): void {
+    this.color = color;
+    this.editForm.patchValue({ fonctionColor: color });
   }
 }

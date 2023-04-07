@@ -74,7 +74,17 @@
 
         <div class="row mb-3">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaColor" for="field_areaColor">Area Color</label>
-          <input type="text" class="form-control" name="areaColor" id="field_areaColor" data-cy="areaColor" formControlName="areaColor" />
+          <input
+            [(colorPicker)]="color"
+            [style.background]="color"
+            [value]="color"
+            (colorPickerChange)="onChangeColor($event)"
+            type="text"
+            class="form-control"
+            id="field_areaColor"
+            name="areaColor"
+            formControlName="areaColor"
+          />
           <div *ngIf="editForm.get('areaColor')!.invalid && (editForm.get('areaColor')!.dirty || editForm.get('areaColor')!.touched)">
             <small
               class="form-text text-danger"

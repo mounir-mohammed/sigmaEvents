@@ -17,6 +17,7 @@ export class StatusSigUpdateComponent implements OnInit {
   status: IStatusSig | null = null;
 
   editForm: StatusSigFormGroup = this.statusFormService.createStatusSigFormGroup();
+  public color = '#cccccc';
 
   constructor(
     protected statusService: StatusSigService,
@@ -28,6 +29,7 @@ export class StatusSigUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ status }) => {
       this.status = status;
       if (status) {
+        this.color = this.status?.statusColor!;
         this.updateForm(status);
       }
     });
@@ -69,5 +71,10 @@ export class StatusSigUpdateComponent implements OnInit {
   protected updateForm(status: IStatusSig): void {
     this.status = status;
     this.statusFormService.resetForm(this.editForm, status);
+  }
+
+  public onChangeColor(color: string): void {
+    this.color = color;
+    this.editForm.patchValue({ statusColor: color });
   }
 }

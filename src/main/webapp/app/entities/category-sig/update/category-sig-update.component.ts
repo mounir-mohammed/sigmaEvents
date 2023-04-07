@@ -22,10 +22,10 @@ import { EventSigService } from 'app/entities/event-sig/service/event-sig.servic
 export class CategorySigUpdateComponent implements OnInit {
   isSaving = false;
   category: ICategorySig | null = null;
+  public color = '#cccccc';
 
   printingModelsSharedCollection: IPrintingModelSig[] = [];
   eventsSharedCollection: IEventSig[] = [];
-
   editForm: CategorySigFormGroup = this.categoryFormService.createCategorySigFormGroup();
 
   constructor(
@@ -48,6 +48,7 @@ export class CategorySigUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ category }) => {
       this.category = category;
       if (category) {
+        this.color = this.category?.categoryColor!;
         this.updateForm(category);
       }
 
@@ -146,5 +147,10 @@ export class CategorySigUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.category?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+  }
+
+  public onChangeColor(color: string): void {
+    this.color = color;
+    this.editForm.patchValue({ categoryColor: color });
   }
 }

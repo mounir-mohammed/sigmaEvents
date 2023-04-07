@@ -23,7 +23,7 @@
           <span>{{ status.statusAbreviation }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.status.statusColor">Status Color</span></dt>
-        <dd>
+        <dd [style.background]="status.statusColor">
           <span>{{ status.statusColor }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.status.statusDescription">Status Description</span></dt>

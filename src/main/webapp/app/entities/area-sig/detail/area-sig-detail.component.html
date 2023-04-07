@@ -23,7 +23,7 @@
           <span>{{ area.areaAbreviation }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.area.areaColor">Area Color</span></dt>
-        <dd>
+        <dd [style.background]="area.areaColor">
           <span>{{ area.areaColor }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.area.areaDescription">Area Description</span></dt>

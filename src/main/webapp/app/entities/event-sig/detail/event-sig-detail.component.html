@@ -19,7 +19,7 @@
           <span>{{ event.eventName }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.event.eventColor">Event Color</span></dt>
-        <dd>
+        <dd [style.background]="event.eventColor">
           <span>{{ event.eventColor }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.event.eventDescription">Event Description</span></dt>

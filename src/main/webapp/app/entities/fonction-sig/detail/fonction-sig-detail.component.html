@@ -23,7 +23,7 @@
           <span>{{ fonction.fonctionAbreviation }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionColor">Fonction Color</span></dt>
-        <dd>
+        <dd [style.background]="fonction.fonctionColor">
           <span>{{ fonction.fonctionColor }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionDescription">Fonction Description</span></dt>

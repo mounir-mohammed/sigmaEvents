@@ -82,11 +82,14 @@
         <div class="row mb-3">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.status.statusColor" for="field_statusColor">Status Color</label>
           <input
+            [(colorPicker)]="color"
+            [style.background]="color"
+            [value]="color"
+            (colorPickerChange)="onChangeColor($event)"
             type="text"
             class="form-control"
-            name="statusColor"
             id="field_statusColor"
-            data-cy="statusColor"
+            name="statusColor"
             formControlName="statusColor"
           />
           <div *ngIf="editForm.get('statusColor')!.invalid && (editForm.get('statusColor')!.dirty || editForm.get('statusColor')!.touched)">

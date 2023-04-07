@@ -23,7 +23,7 @@
           <span>{{ category.categoryAbreviation }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.category.categoryColor">Category Color</span></dt>
-        <dd>
+        <dd [style.background]="category.categoryColor">
           <span>{{ category.categoryColor }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.category.categoryDescription">Category Description</span></dt>

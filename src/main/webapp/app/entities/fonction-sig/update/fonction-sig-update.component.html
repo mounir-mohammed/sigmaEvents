@@ -88,11 +88,14 @@
         <div class="row mb-3">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.fonction.fonctionColor" for="field_fonctionColor">Fonction Color</label>
           <input
+            [(colorPicker)]="color"
+            [style.background]="color"
+            [value]="color"
+            (colorPickerChange)="onChangeColor($event)"
             type="text"
             class="form-control"
-            name="fonctionColor"
             id="field_fonctionColor"
-            data-cy="fonctionColor"
+            name="fonctionColor"
             formControlName="fonctionColor"
           />
           <div

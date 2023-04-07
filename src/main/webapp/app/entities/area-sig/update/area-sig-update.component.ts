@@ -24,6 +24,7 @@ export class AreaSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: AreaSigFormGroup = this.areaFormService.createAreaSigFormGroup();
+  public color = '#cccccc';
 
   constructor(
     protected dataUtils: DataUtils,
@@ -41,6 +42,7 @@ export class AreaSigUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ area }) => {
       this.area = area;
       if (area) {
+        this.color = this.area?.areaColor!;
         this.updateForm(area);
       }
 
@@ -119,5 +121,10 @@ export class AreaSigUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.area?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+  }
+
+  public onChangeColor(color: string): void {
+    this.color = color;
+    this.editForm.patchValue({ areaColor: color });
   }
 }

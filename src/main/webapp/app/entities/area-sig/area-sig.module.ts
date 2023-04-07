@@ -5,9 +5,10 @@ import { AreaSigDetailComponent } from './detail/area-sig-detail.component';
 import { AreaSigUpdateComponent } from './update/area-sig-update.component';
 import { AreaSigDeleteDialogComponent } from './delete/area-sig-delete-dialog.component';
 import { AreaSigRoutingModule } from './route/area-sig-routing.module';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
-  imports: [SharedModule, AreaSigRoutingModule],
+  imports: [SharedModule, AreaSigRoutingModule, ColorPickerModule],
   declarations: [AreaSigComponent, AreaSigDetailComponent, AreaSigUpdateComponent, AreaSigDeleteDialogComponent],
 })
 export class AreaSigModule {}

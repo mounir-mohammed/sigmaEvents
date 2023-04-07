@@ -110,7 +110,7 @@
           </td>
           <td>{{ status.statusName }}</td>
           <td>{{ status.statusAbreviation }}</td>
-          <td>{{ status.statusColor }}</td>
+          <td [style.background]="status.statusColor">{{ status.statusColor }}</td>
           <td>{{ status.statusDescription }}</td>
           <td>{{ status.statusUserCanPrint }}</td>
           <td>{{ status.statusUserCanUpdate }}</td>

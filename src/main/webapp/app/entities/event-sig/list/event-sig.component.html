@@ -241,7 +241,7 @@
             <a [routerLink]="['/event-sig', event.eventId, 'view']">{{ event.eventId }}</a>
           </td>
           <td>{{ event.eventName }}</td>
-          <td>{{ event.eventColor }}</td>
+          <td [style.background]="event.eventColor">{{ event.eventColor }}</td>
           <td>{{ event.eventDescription }}</td>
           <td>{{ event.eventAbreviation }}</td>
           <td>{{ event.eventdateStart | formatMediumDatetime }}</td>

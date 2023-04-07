@@ -19,7 +19,7 @@
           <span>{{ site.siteName }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.site.siteColor">Site Color</span></dt>
-        <dd>
+        <dd [style.background]="site.siteColor">
           <span>{{ site.siteColor }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.site.siteAbreviation">Site Abreviation</span></dt>

@@ -110,7 +110,7 @@
           </td>
           <td>{{ category.categoryName }}</td>
           <td>{{ category.categoryAbreviation }}</td>
-          <td>{{ category.categoryColor }}</td>
+          <td [style.background]="category.categoryColor">{{ category.categoryColor }}</td>
           <td>{{ category.categoryDescription }}</td>
           <td>
             <a *ngIf="category.categoryLogo" (click)="openFile(category.categoryLogo, category.categoryLogoContentType)">

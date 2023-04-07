@@ -110,7 +110,7 @@
           </td>
           <td>{{ fonction.fonctionName }}</td>
           <td>{{ fonction.fonctionAbreviation }}</td>
-          <td>{{ fonction.fonctionColor }}</td>
+          <td [style.background]="fonction.fonctionColor">{{ fonction.fonctionColor }}</td>
           <td>{{ fonction.fonctionDescription }}</td>
           <td>
             <a *ngIf="fonction.fonctionLogo" (click)="openFile(fonction.fonctionLogo, fonction.fonctionLogoContentType)">

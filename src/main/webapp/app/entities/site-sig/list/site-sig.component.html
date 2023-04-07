@@ -139,7 +139,7 @@
             <a [routerLink]="['/site-sig', site.siteId, 'view']">{{ site.siteId }}</a>
           </td>
           <td>{{ site.siteName }}</td>
-          <td>{{ site.siteColor }}</td>
+          <td [style.background]="site.siteColor">{{ site.siteColor }}</td>
           <td>{{ site.siteAbreviation }}</td>
           <td>{{ site.siteDescription }}</td>
           <td>

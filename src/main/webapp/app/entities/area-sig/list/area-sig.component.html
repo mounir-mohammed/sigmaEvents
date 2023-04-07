@@ -104,7 +104,7 @@
           </td>
           <td>{{ area.areaName }}</td>
           <td>{{ area.areaAbreviation }}</td>
-          <td>{{ area.areaColor }}</td>
+          <td [style.background]="area.areaColor">{{ area.areaColor }}</td>
           <td>{{ area.areaDescription }}</td>
           <td>
             <a *ngIf="area.areaLogo" (click)="openFile(area.areaLogo, area.areaLogoContentType)">

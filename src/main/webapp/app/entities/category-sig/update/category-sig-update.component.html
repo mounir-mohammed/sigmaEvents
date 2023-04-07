@@ -87,12 +87,16 @@
 
         <div class="row mb-3">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.category.categoryColor" for="field_categoryColor">Category Color</label>
+
           <input
+            [(colorPicker)]="color"
+            [style.background]="color"
+            [value]="color"
+            (colorPickerChange)="onChangeColor($event)"
             type="text"
             class="form-control"
-            name="categoryColor"
             id="field_categoryColor"
-            data-cy="categoryColor"
+            name="categoryColor"
             formControlName="categoryColor"
           />
           <div

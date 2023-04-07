@@ -27,6 +27,7 @@ export class SiteSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: SiteSigFormGroup = this.siteFormService.createSiteSigFormGroup();
+  public color = '#cccccc';
 
   constructor(
     protected dataUtils: DataUtils,
@@ -47,6 +48,7 @@ export class SiteSigUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ site }) => {
       this.site = site;
       if (site) {
+        this.color = this.site?.siteColor!;
         this.updateForm(site);
       }
 
@@ -132,5 +134,10 @@ export class SiteSigUpdateComponent implements OnInit {
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.site?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+  }
+
+  public onChangeColor(color: string): void {
+    this.color = color;
+    this.editForm.patchValue({ siteColor: color });
   }
 }
