@@ -53,7 +53,7 @@ export interface IAccreditationSig {
   fonction?: Pick<IFonctionSig, 'fonctionId'> | null;
   organiz?: Pick<IOrganizSig, 'organizId'> | null;
   accreditationType?: Pick<IAccreditationTypeSig, 'accreditationTypeId'> | null;
-  status?: Pick<IStatusSig, 'statusId'> | null;
+  status?: Pick<IStatusSig, 'statusId' | 'statusName' | 'statusColor'> | null;
   attachement?: Pick<IAttachementSig, 'attachementId'> | null;
   code?: Pick<ICodeSig, 'codeId'> | null;
   dayPassInfo?: Pick<IDayPassInfoSig, 'dayPassInfoId'> | null;

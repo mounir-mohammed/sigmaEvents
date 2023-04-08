@@ -124,6 +124,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Named("statusStatusId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "statusId", source = "statusId")
+    @Mapping(target = "statusName", source = "statusName")
+    @Mapping(target = "statusColor", source = "statusColor")
     StatusDTO toDtoStatusStatusId(Status status);
 
     @Named("attachementAttachementId")

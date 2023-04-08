@@ -274,7 +274,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let accreditation of accreditations; trackBy: trackAccreditationId" data-cy="entityTable">
+        <tr
+          *ngFor="let accreditation of accreditations; trackBy: trackAccreditationId"
+          data-cy="entityTable"
+          [style.background]="accreditation.status?.statusColor"
+        >
           <td>
             <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
           </td>
