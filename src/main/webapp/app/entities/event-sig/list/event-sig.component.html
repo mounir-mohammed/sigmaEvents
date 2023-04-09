@@ -314,7 +314,7 @@
           <td>{{ event.eventStat }}</td>
           <td>
             <div *ngIf="event.language">
-              <a [routerLink]="['/language-sig', event.language.languageId, 'view']">{{ event.language.languageId }}</a>
+              <a [routerLink]="['/language-sig', event.language.languageId, 'view']">{{ event.language.languageName }}</a>
             </div>
           </td>
           <td class="text-end">

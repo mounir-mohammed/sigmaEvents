@@ -39,7 +39,7 @@ export interface IEventSig {
   eventParams?: string | null;
   eventAttributs?: string | null;
   eventStat?: boolean | null;
-  language?: Pick<ILanguageSig, 'languageId'> | null;
+  language?: Pick<ILanguageSig, 'languageId' | 'languageCode' | 'languageName' | 'languageStat'> | null;
 }
 
 export type NewEventSig = Omit<IEventSig, 'eventId'> & { eventId: null };

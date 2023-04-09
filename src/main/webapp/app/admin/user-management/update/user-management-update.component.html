@@ -146,7 +146,11 @@
           [compareWith]="printingCentreSig"
         >
           <option [ngValue]="null"></option>
-          <option [ngValue]="printingCentreOption" *ngFor="let printingCentreOption of printingCentreSharedCollection">
+          <option
+            [ngValue]="printingCentreOption"
+            *ngFor="let printingCentreOption of printingCentreSharedCollection"
+            [disabled]="printingCentreOption.printingCentreStat === false"
+          >
             {{ printingCentreOption.printingCentreName }}
           </option>
         </select>

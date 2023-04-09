@@ -702,8 +702,12 @@
             [compareWith]="compareLanguageSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="languageOption" *ngFor="let languageOption of languagesSharedCollection">
-              {{ languageOption.languageId }}
+            <option
+              [ngValue]="languageOption"
+              *ngFor="let languageOption of languagesSharedCollection"
+              [disabled]="languageOption.languageStat === false"
+            >
+              {{ languageOption.languageName }}
             </option>
           </select>
         </div>

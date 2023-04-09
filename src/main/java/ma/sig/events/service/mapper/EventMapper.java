@@ -17,5 +17,8 @@ public interface EventMapper extends EntityMapper<EventDTO, Event> {
     @Named("languageLanguageId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "languageId", source = "languageId")
+    @Mapping(target = "languageCode", source = "languageCode")
+    @Mapping(target = "languageName", source = "languageName")
+    @Mapping(target = "languageStat", source = "languageStat")
     LanguageDTO toDtoLanguageLanguageId(Language language);
 }

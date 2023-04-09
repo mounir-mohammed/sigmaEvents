@@ -182,7 +182,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.event.language">Language</span></dt>
         <dd>
           <div *ngIf="event.language">
-            <a [routerLink]="['/language-sig', event.language.languageId, 'view']">{{ event.language.languageId }}</a>
+            <a [routerLink]="['/language-sig', event.language.languageId, 'view']">{{ event.language.languageName }}</a>
           </div>
         </dd>
       </dl>
