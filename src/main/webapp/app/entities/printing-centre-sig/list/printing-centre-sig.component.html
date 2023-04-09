@@ -189,48 +189,48 @@
           <td>{{ printingCentre.printingCentreStat }}</td>
           <td>
             <div *ngIf="printingCentre.city">
-              <a [routerLink]="['/city-sig', printingCentre.city.cityId, 'view']">{{ printingCentre.city.cityId }}</a>
+              <a [routerLink]="['/city-sig', printingCentre.city.cityId, 'view']">{{ printingCentre.city.cityName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="printingCentre.country">
-              <a [routerLink]="['/country-sig', printingCentre.country.countryId, 'view']">{{ printingCentre.country.countryId }}</a>
+              <a [routerLink]="['/country-sig', printingCentre.country.countryId, 'view']">{{ printingCentre.country.countryName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="printingCentre.organiz">
-              <a [routerLink]="['/organiz-sig', printingCentre.organiz.organizId, 'view']">{{ printingCentre.organiz.organizId }}</a>
+              <a [routerLink]="['/organiz-sig', printingCentre.organiz.organizId, 'view']">{{ printingCentre.organiz.organizName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="printingCentre.printingType">
               <a [routerLink]="['/printing-type-sig', printingCentre.printingType.printingTypeId, 'view']">{{
-                printingCentre.printingType.printingTypeId
+                printingCentre.printingType.printingTypeValue
               }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="printingCentre.printingServer">
               <a [routerLink]="['/printing-server-sig', printingCentre.printingServer.printingServerId, 'view']">{{
-                printingCentre.printingServer.printingServerId
+                printingCentre.printingServer.printingServerName
               }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="printingCentre.printingModel">
               <a [routerLink]="['/printing-model-sig', printingCentre.printingModel.printingModelId, 'view']">{{
-                printingCentre.printingModel.printingModelId
+                printingCentre.printingModel.printingModelName
               }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="printingCentre.language">
-              <a [routerLink]="['/language-sig', printingCentre.language.languageId, 'view']">{{ printingCentre.language.languageId }}</a>
+              <a [routerLink]="['/language-sig', printingCentre.language.languageId, 'view']">{{ printingCentre.language.languageName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="printingCentre.event">
-              <a [routerLink]="['/event-sig', printingCentre.event.eventId, 'view']">{{ printingCentre.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', printingCentre.event.eventId, 'view']">{{ printingCentre.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

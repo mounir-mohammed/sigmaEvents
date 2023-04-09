@@ -266,7 +266,9 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.printingCentre.city" for="field_city">City</label>
           <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityId }}</option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection" [disabled]="cityOption.cityStat === false">
+              {{ cityOption.cityName }}
+            </option>
           </select>
         </div>
 
@@ -281,7 +283,13 @@
             [compareWith]="compareCountrySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">{{ countryOption.countryId }}</option>
+            <option
+              [ngValue]="countryOption"
+              *ngFor="let countryOption of countriesSharedCollection"
+              [disabled]="countryOption.countryStat === false"
+            >
+              {{ countryOption.countryName }}
+            </option>
           </select>
         </div>
 
@@ -296,7 +304,13 @@
             [compareWith]="compareOrganizSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="organizOption" *ngFor="let organizOption of organizsSharedCollection">{{ organizOption.organizId }}</option>
+            <option
+              [ngValue]="organizOption"
+              *ngFor="let organizOption of organizsSharedCollection"
+              [disabled]="organizOption.organizStat === false"
+            >
+              {{ organizOption.organizName }}
+            </option>
           </select>
         </div>
 
@@ -313,8 +327,12 @@
             [compareWith]="comparePrintingTypeSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="printingTypeOption" *ngFor="let printingTypeOption of printingTypesSharedCollection">
-              {{ printingTypeOption.printingTypeId }}
+            <option
+              [ngValue]="printingTypeOption"
+              *ngFor="let printingTypeOption of printingTypesSharedCollection"
+              [disabled]="printingTypeOption.printingTypeStat === false"
+            >
+              {{ printingTypeOption.printingTypeValue }}
             </option>
           </select>
         </div>
@@ -332,8 +350,12 @@
             [compareWith]="comparePrintingServerSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="printingServerOption" *ngFor="let printingServerOption of printingServersSharedCollection">
-              {{ printingServerOption.printingServerId }}
+            <option
+              [ngValue]="printingServerOption"
+              *ngFor="let printingServerOption of printingServersSharedCollection"
+              [disabled]="printingServerOption.printingServerStat === false"
+            >
+              {{ printingServerOption.printingServerName }}
             </option>
           </select>
         </div>
@@ -351,8 +373,12 @@
             [compareWith]="comparePrintingModelSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="printingModelOption" *ngFor="let printingModelOption of printingModelsSharedCollection">
-              {{ printingModelOption.printingModelId }}
+            <option
+              [ngValue]="printingModelOption"
+              *ngFor="let printingModelOption of printingModelsSharedCollection"
+              [disabled]="printingModelOption.printingModelStat === false"
+            >
+              {{ printingModelOption.printingModelName }}
             </option>
           </select>
         </div>
@@ -368,8 +394,12 @@
             [compareWith]="compareLanguageSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="languageOption" *ngFor="let languageOption of languagesSharedCollection">
-              {{ languageOption.languageId }}
+            <option
+              [ngValue]="languageOption"
+              *ngFor="let languageOption of languagesSharedCollection"
+              [disabled]="languageOption.languageStat === false"
+            >
+              {{ languageOption.languageName }}
             </option>
           </select>
         </div>
@@ -385,7 +415,9 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection" [disabled]="eventOption.eventStat === false">
+              {{ eventOption.eventName }}
+            </option>
           </select>
         </div>
       </div>

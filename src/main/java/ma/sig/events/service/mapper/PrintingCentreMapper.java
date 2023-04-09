@@ -38,40 +38,56 @@ public interface PrintingCentreMapper extends EntityMapper<PrintingCentreDTO, Pr
     @Named("cityCityId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "cityId", source = "cityId")
+    @Mapping(target = "cityName", source = "cityName")
+    @Mapping(target = "cityStat", source = "cityStat")
     CityDTO toDtoCityCityId(City city);
 
     @Named("countryCountryId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "countryId", source = "countryId")
+    @Mapping(target = "countryName", source = "countryName")
+    @Mapping(target = "countryStat", source = "countryStat")
     CountryDTO toDtoCountryCountryId(Country country);
 
     @Named("organizOrganizId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "organizId", source = "organizId")
+    @Mapping(target = "organizName", source = "organizName")
+    @Mapping(target = "organizStat", source = "organizStat")
     OrganizDTO toDtoOrganizOrganizId(Organiz organiz);
 
     @Named("printingTypePrintingTypeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "printingTypeId", source = "printingTypeId")
+    @Mapping(target = "printingTypeValue", source = "printingTypeValue")
+    @Mapping(target = "printingTypeStat", source = "printingTypeStat")
     PrintingTypeDTO toDtoPrintingTypePrintingTypeId(PrintingType printingType);
 
     @Named("printingServerPrintingServerId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "printingServerId", source = "printingServerId")
+    @Mapping(target = "printingServerName", source = "printingServerName")
+    @Mapping(target = "printingServerStat", source = "printingServerStat")
     PrintingServerDTO toDtoPrintingServerPrintingServerId(PrintingServer printingServer);
 
     @Named("printingModelPrintingModelId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "printingModelId", source = "printingModelId")
+    @Mapping(target = "printingModelName", source = "printingModelName")
+    @Mapping(target = "printingModelStat", source = "printingModelStat")
     PrintingModelDTO toDtoPrintingModelPrintingModelId(PrintingModel printingModel);
 
     @Named("languageLanguageId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "languageId", source = "languageId")
+    @Mapping(target = "languageName", source = "languageName")
+    @Mapping(target = "languageStat", source = "languageStat")
     LanguageDTO toDtoLanguageLanguageId(Language language);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

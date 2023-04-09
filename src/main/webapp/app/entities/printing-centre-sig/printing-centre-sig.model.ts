@@ -21,14 +21,14 @@ export interface IPrintingCentreSig {
   printingParams?: string | null;
   printingAttributs?: string | null;
   printingCentreStat?: boolean | null;
-  city?: Pick<ICitySig, 'cityId'> | null;
-  country?: Pick<ICountrySig, 'countryId'> | null;
-  organiz?: Pick<IOrganizSig, 'organizId'> | null;
-  printingType?: Pick<IPrintingTypeSig, 'printingTypeId'> | null;
-  printingServer?: Pick<IPrintingServerSig, 'printingServerId'> | null;
-  printingModel?: Pick<IPrintingModelSig, 'printingModelId'> | null;
-  language?: Pick<ILanguageSig, 'languageId'> | null;
-  event?: Pick<IEventSig, 'eventId' | 'eventName'> | null;
+  city?: Pick<ICitySig, 'cityId' | 'cityName' | 'cityStat'> | null;
+  country?: Pick<ICountrySig, 'countryId' | 'countryName' | 'countryStat'> | null;
+  organiz?: Pick<IOrganizSig, 'organizId' | 'organizName' | 'organizStat'> | null;
+  printingType?: Pick<IPrintingTypeSig, 'printingTypeId' | 'printingTypeValue' | 'printingTypeStat'> | null;
+  printingServer?: Pick<IPrintingServerSig, 'printingServerId' | 'printingServerName' | 'printingServerStat'> | null;
+  printingModel?: Pick<IPrintingModelSig, 'printingModelId' | 'printingModelName' | 'printingModelStat'> | null;
+  language?: Pick<ILanguageSig, 'languageId' | 'languageName' | 'languageStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewPrintingCentreSig = Omit<IPrintingCentreSig, 'printingCentreId'> & { printingCentreId: null };
