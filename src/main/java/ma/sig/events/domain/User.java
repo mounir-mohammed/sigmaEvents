@@ -1,6 +1,7 @@
 package ma.sig.events.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -91,6 +92,10 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @ManyToOne
+    @JsonIgnoreProperties
+    private PrintingCentre printingCentre;
 
     public Long getId() {
         return id;
@@ -195,6 +200,19 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public PrintingCentre getPrintingCentre() {
+        return this.printingCentre;
+    }
+
+    public void setPrintingCentre(PrintingCentre printingCentre) {
+        this.printingCentre = printingCentre;
+    }
+
+    public User printingCentre(PrintingCentre printingCentre) {
+        this.setPrintingCentre(printingCentre);
+        return this;
     }
 
     @Override

@@ -38,6 +38,12 @@
           <th scope="col" sigmaSortBy="lastModifiedDate">
             <span sigmaTranslate="userManagement.lastModifiedDate">Modified date</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" sigmaSortBy="lastModifiedDate">
+            <span sigmaTranslate="userManagement.printingCenterId">Printing center</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" sigmaSortBy="lastModifiedDate">
+            <span sigmaTranslate="userManagement.eventId">Event</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -76,6 +82,8 @@
           <td>{{ user.createdDate | date: 'dd/MM/yy HH:mm' }}</td>
           <td>{{ user.lastModifiedBy }}</td>
           <td>{{ user.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</td>
+          <td>{{ user.printingCentre?.printingCentreName }}</td>
+          <td>{{ user.printingCentre?.event?.eventName }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-info btn-sm">

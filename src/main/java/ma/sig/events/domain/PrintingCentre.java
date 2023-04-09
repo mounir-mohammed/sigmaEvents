@@ -2,6 +2,8 @@ package ma.sig.events.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -90,6 +92,11 @@ public class PrintingCentre implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "events", "settings", "printingCentres" }, allowSetters = true)
     private Language language;
+
+    @OneToMany(mappedBy = "printingCentre")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(allowSetters = true)
+    private Set<User> users = new HashSet<>();
 
     @ManyToOne
     @JsonIgnoreProperties(
@@ -395,6 +402,37 @@ public class PrintingCentre implements Serializable {
 
     public PrintingCentre event(Event event) {
         this.setEvent(event);
+        return this;
+    }
+
+    public Set<User> getUsers() {
+        return this.users;
+    }
+
+    public void setUsers(Set<User> users) {
+        if (this.users != null) {
+            this.users.forEach(i -> i.setPrintingCentre(null));
+        }
+        if (users != null) {
+            users.forEach(i -> i.setPrintingCentre(this));
+        }
+        this.users = users;
+    }
+
+    public PrintingCentre users(Set<User> users) {
+        this.setUsers(users);
+        return this;
+    }
+
+    public PrintingCentre addUser(User user) {
+        this.users.add(user);
+        user.setPrintingCentre(this);
+        return this;
+    }
+
+    public PrintingCentre removeUser(User user) {
+        this.users.remove(user);
+        user.setPrintingCentre(null);
         return this;
     }
 

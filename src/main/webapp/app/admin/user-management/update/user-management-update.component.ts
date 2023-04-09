@@ -5,6 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { LANGUAGES } from 'app/config/language.constants';
 import { IUser } from '../user-management.model';
 import { UserManagementService } from '../service/user-management.service';
+import { PrintingCentreSigService } from 'app/entities/printing-centre-sig/service/printing-centre-sig.service';
+import { IPrintingCentreSig } from 'app/entities/printing-centre-sig/printing-centre-sig.model';
+import { HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs';
 
 const userTemplate = {} as IUser;
 
@@ -20,6 +24,7 @@ const newUser: IUser = {
 export class UserManagementUpdateComponent implements OnInit {
   languages = LANGUAGES;
   authorities: string[] = [];
+  printingCentreSharedCollection: IPrintingCentreSig[] = [];
   isSaving = false;
 
   editForm = new FormGroup({
@@ -42,9 +47,17 @@ export class UserManagementUpdateComponent implements OnInit {
     activated: new FormControl(userTemplate.activated, { nonNullable: true }),
     langKey: new FormControl(userTemplate.langKey, { nonNullable: true }),
     authorities: new FormControl(userTemplate.authorities, { nonNullable: true }),
+    printingCentre: new FormControl(userTemplate.printingCentre, { nonNullable: true }),
   });
 
-  constructor(private userService: UserManagementService, private route: ActivatedRoute) {}
+  constructor(
+    private userService: UserManagementService,
+    private route: ActivatedRoute,
+    private printingCentreSigService: PrintingCentreSigService
+  ) {}
+
+  printingCentreSig = (o1: IPrintingCentreSig | null, o2: IPrintingCentreSig | null): boolean =>
+    this.printingCentreSigService.comparePrintingCentreSig(o1, o2);
 
   ngOnInit(): void {
     this.route.data.subscribe(({ user }) => {
@@ -55,6 +68,11 @@ export class UserManagementUpdateComponent implements OnInit {
       }
     });
     this.userService.authorities().subscribe(authorities => (this.authorities = authorities));
+
+    this.printingCentreSigService
+      .query()
+      .pipe(map((res: HttpResponse<IPrintingCentreSig[]>) => res.body ?? []))
+      .subscribe((printingCenters: IPrintingCentreSig[]) => (this.printingCentreSharedCollection = printingCenters));
   }
 
   previousState(): void {
@@ -64,6 +82,7 @@ export class UserManagementUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const user = this.editForm.getRawValue();
+    console.log(user);
     if (user.id !== null) {
       this.userService.update(user).subscribe({
         next: () => this.onSaveSuccess(),

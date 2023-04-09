@@ -46,6 +46,11 @@
             </li>
           </ul>
         </dd>
+        <dt><span sigmaTranslate="userManagement.printingCenterId">Printing center</span></dt>
+        <dd>{{ user.printingCentre?.printingCentreName }}</dd>
+
+        <dt><span sigmaTranslate="userManagement.eventId">Event</span></dt>
+        <dd>{{ user.printingCentre?.event?.eventName }}</dd>
       </dl>
 
       <button type="submit" routerLink="../../" class="btn btn-info">

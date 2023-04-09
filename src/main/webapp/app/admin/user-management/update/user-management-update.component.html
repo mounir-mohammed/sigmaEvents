@@ -134,6 +134,24 @@
           <option *ngFor="let authority of authorities" [value]="authority">{{ authority }}</option>
         </select>
       </div>
+
+      <div class="row mb-3">
+        <label class="form-label" for="field_printingCentre" sigmaTranslate="userManagement.printingCenterId">Printing Center</label>
+        <select
+          class="form-control"
+          id="field_printingCentre"
+          data-cy="printingCentre"
+          name="printingCentre"
+          formControlName="printingCentre"
+          [compareWith]="printingCentreSig"
+        >
+          <option [ngValue]="null"></option>
+          <option [ngValue]="printingCentreOption" *ngFor="let printingCentreOption of printingCentreSharedCollection">
+            {{ printingCentreOption.printingCentreName }}
+          </option>
+        </select>
+      </div>
+
       <button type="button" class="btn btn-secondary" (click)="previousState()">
         <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
       </button>

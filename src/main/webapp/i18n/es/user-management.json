@@ -26,6 +26,8 @@
     "createdBy": "Creado por",
     "createdDate": "Fecha de creación",
     "lastModifiedBy": "Modificado por",
-    "lastModifiedDate": "Fecha de modificación"
+    "lastModifiedDate": "Fecha de modificación",
+    "printingCenterId": "Printing center",
+    "eventId": "Event"
   }
 }

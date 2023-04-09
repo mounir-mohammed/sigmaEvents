@@ -25,6 +25,8 @@
     "createdBy": "تم إنشاؤها بواسطة",
     "createdDate": "تاريخ الإنشاء",
     "lastModifiedBy": "عدل من قبل",
-    "lastModifiedDate": "تاريخ التعديل"
+    "lastModifiedDate": "تاريخ التعديل",
+    "printingCenterId": "Printing center",
+    "eventId": "Event"
   }
 }

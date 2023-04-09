@@ -26,6 +26,8 @@
     "createdBy": "Aangemaakt door",
     "createdDate": "Aanmaak datum",
     "lastModifiedBy": "Laatst aangepast door",
-    "lastModifiedDate": "Laatst aangepast datum"
+    "lastModifiedDate": "Laatst aangepast datum",
+    "printingCenterId": "Printing center",
+    "eventId": "Event"
   }
 }

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.*;
 import ma.sig.events.config.Constants;
 import ma.sig.events.domain.Authority;
+import ma.sig.events.domain.PrintingCentre;
 import ma.sig.events.domain.User;
 
 /**
@@ -51,6 +52,8 @@ public class AdminUserDTO implements Serializable {
 
     private Set<String> authorities;
 
+    private PrintingCentre printingCentre;
+
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -69,6 +72,7 @@ public class AdminUserDTO implements Serializable {
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
         this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());
+        this.printingCentre = user.getPrintingCentre();
     }
 
     public Long getId() {
@@ -175,6 +179,14 @@ public class AdminUserDTO implements Serializable {
         this.authorities = authorities;
     }
 
+    public PrintingCentre getPrintingCentre() {
+        return printingCentre;
+    }
+
+    public void setPrintingCentre(PrintingCentre printingCentre) {
+        this.printingCentre = printingCentre;
+    }
+
     // prettier-ignore
     @Override
     public String toString() {
@@ -191,6 +203,7 @@ public class AdminUserDTO implements Serializable {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", printingCentre=" + printingCentre +
             "}";
     }
 }

@@ -28,7 +28,7 @@ export interface IPrintingCentreSig {
   printingServer?: Pick<IPrintingServerSig, 'printingServerId'> | null;
   printingModel?: Pick<IPrintingModelSig, 'printingModelId'> | null;
   language?: Pick<ILanguageSig, 'languageId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName'> | null;
 }
 
 export type NewPrintingCentreSig = Omit<IPrintingCentreSig, 'printingCentreId'> & { printingCentreId: null };

@@ -202,6 +202,7 @@ public class UserService {
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
+                user.setPrintingCentre(userDTO.getPrintingCentre());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO
@@ -283,12 +284,22 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
-        return userRepository.findOneWithAuthoritiesByLogin(login);
+        Optional<User> user = userRepository.findOneByLogin(login);
+        Optional<User> userWithAuthorities = userRepository.findOneWithAuthoritiesByLogin(login);
+        if (user.get() != null && userWithAuthorities.get() != null) {
+            user.get().setAuthorities(userWithAuthorities.get().getAuthorities());
+        }
+        return user;
     }
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities() {
-        return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin);
+        Optional<User> user = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin);
+        Optional<User> userWithAuthorities = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneWithAuthoritiesByLogin);
+        if (user.get() != null && userWithAuthorities.get() != null) {
+            user.get().setAuthorities(userWithAuthorities.get().getAuthorities());
+        }
+        return user;
     }
 
     /**

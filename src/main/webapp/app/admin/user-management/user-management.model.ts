@@ -1,3 +1,5 @@
+import { IPrintingCentreSig } from 'app/entities/printing-centre-sig/printing-centre-sig.model';
+
 export interface IUser {
   id: number | null;
   login?: string;
@@ -11,6 +13,7 @@ export interface IUser {
   createdDate?: Date;
   lastModifiedBy?: string;
   lastModifiedDate?: Date;
+  printingCentre?: Pick<IPrintingCentreSig, 'printingCentreId' | 'printingCentreName' | 'event'> | null;
 }
 
 export class User implements IUser {
@@ -26,6 +29,7 @@ export class User implements IUser {
     public createdBy?: string,
     public createdDate?: Date,
     public lastModifiedBy?: string,
-    public lastModifiedDate?: Date
+    public lastModifiedDate?: Date,
+    public printingCentre?: Pick<IPrintingCentreSig, 'printingCentreId' | 'printingCentreName' | 'event'> | null
   ) {}
 }
