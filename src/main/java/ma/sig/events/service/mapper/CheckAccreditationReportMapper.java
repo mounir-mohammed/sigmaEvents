@@ -24,6 +24,8 @@ public interface CheckAccreditationReportMapper extends EntityMapper<CheckAccred
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 
     @Named("checkAccreditationHistoryCheckAccreditationHistoryId")

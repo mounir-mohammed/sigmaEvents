@@ -28,6 +28,8 @@ public interface FonctionMapper extends EntityMapper<FonctionDTO, Fonction> {
     @Named("areaAreaId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "areaId", source = "areaId")
+    @Mapping(target = "areaName", source = "areaName")
+    @Mapping(target = "areaStat", source = "areaStat")
     AreaDTO toDtoAreaAreaId(Area area);
 
     @Named("areaAreaIdSet")
@@ -38,10 +40,14 @@ public interface FonctionMapper extends EntityMapper<FonctionDTO, Fonction> {
     @Named("categoryCategoryId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "categoryId", source = "categoryId")
+    @Mapping(target = "categoryName", source = "categoryName")
+    @Mapping(target = "categoryStat", source = "categoryStat")
     CategoryDTO toDtoCategoryCategoryId(Category category);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

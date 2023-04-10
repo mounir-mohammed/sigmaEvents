@@ -20,10 +20,14 @@ public interface SiteMapper extends EntityMapper<SiteDTO, Site> {
     @Named("cityCityId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "cityId", source = "cityId")
+    @Mapping(target = "cityName", source = "cityName")
+    @Mapping(target = "cityStat", source = "cityStat")
     CityDTO toDtoCityCityId(City city);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

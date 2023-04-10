@@ -20,10 +20,14 @@ public interface OperationHistoryMapper extends EntityMapper<OperationHistoryDTO
     @Named("operationTypeOperationTypeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "operationTypeId", source = "operationTypeId")
+    @Mapping(target = "operationTypeValue", source = "operationTypeValue")
+    @Mapping(target = "operationTypeStat", source = "operationTypeStat")
     OperationTypeDTO toDtoOperationTypeOperationTypeId(OperationType operationType);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

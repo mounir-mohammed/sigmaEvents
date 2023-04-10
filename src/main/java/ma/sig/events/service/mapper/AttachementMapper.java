@@ -20,10 +20,14 @@ public interface AttachementMapper extends EntityMapper<AttachementDTO, Attachem
     @Named("attachementTypeAttachementTypeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "attachementTypeId", source = "attachementTypeId")
+    @Mapping(target = "attachementTypeName", source = "attachementTypeName")
+    @Mapping(target = "attachementTypeStat", source = "attachementTypeStat")
     AttachementTypeDTO toDtoAttachementTypeAttachementTypeId(AttachementType attachementType);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

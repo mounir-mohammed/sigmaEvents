@@ -17,5 +17,7 @@ public interface CityMapper extends EntityMapper<CityDTO, City> {
     @Named("countryCountryId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "countryId", source = "countryId")
+    @Mapping(target = "countryName", source = "countryName")
+    @Mapping(target = "countryStat", source = "countryStat")
     CountryDTO toDtoCountryCountryId(Country country);
 }

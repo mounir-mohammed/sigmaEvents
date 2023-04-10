@@ -126,99 +126,99 @@
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.site">Site</span></dt>
         <dd>
           <span *ngFor="let site of accreditation.sites; let last = last">
-            <a [routerLink]="['/site-sig', site.siteId, 'view']">{{ site.siteId }}</a
+            <a [routerLink]="['/site-sig', site.siteId, 'view']">{{ site.siteName }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span></dt>
         <dd>
           <div *ngIf="accreditation.event">
-            <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span></dt>
         <dd>
           <div *ngIf="accreditation.civility">
-            <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityId }}</a>
+            <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityValue }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span></dt>
         <dd>
           <div *ngIf="accreditation.sexe">
-            <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeId }}</a>
+            <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span></dt>
         <dd>
           <div *ngIf="accreditation.nationality">
             <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
-              accreditation.nationality.nationalityId
+              accreditation.nationality.nationalityValue
             }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span></dt>
         <dd>
           <div *ngIf="accreditation.country">
-            <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryId }}</a>
+            <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span></dt>
         <dd>
           <div *ngIf="accreditation.city">
-            <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityId }}</a>
+            <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span></dt>
         <dd>
           <div *ngIf="accreditation.category">
-            <a [routerLink]="['/category-sig', accreditation.category.categoryId, 'view']">{{ accreditation.category.categoryId }}</a>
+            <a [routerLink]="['/category-sig', accreditation.category.categoryId, 'view']">{{ accreditation.category.categoryName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span></dt>
         <dd>
           <div *ngIf="accreditation.fonction">
-            <a [routerLink]="['/fonction-sig', accreditation.fonction.fonctionId, 'view']">{{ accreditation.fonction.fonctionId }}</a>
+            <a [routerLink]="['/fonction-sig', accreditation.fonction.fonctionId, 'view']">{{ accreditation.fonction.fonctionName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span></dt>
         <dd>
           <div *ngIf="accreditation.organiz">
-            <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizId }}</a>
+            <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span></dt>
         <dd>
           <div *ngIf="accreditation.accreditationType">
             <a [routerLink]="['/accreditation-type-sig', accreditation.accreditationType.accreditationTypeId, 'view']">{{
-              accreditation.accreditationType.accreditationTypeId
+              accreditation.accreditationType.accreditationTypeValue
             }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span></dt>
         <dd>
           <div *ngIf="accreditation.status">
-            <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusId }}</a>
+            <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.attachement">Attachement</span></dt>
         <dd>
           <div *ngIf="accreditation.attachement">
             <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
-              accreditation.attachement.attachementId
+              accreditation.attachement.attachementName
             }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.code">Code</span></dt>
         <dd>
           <div *ngIf="accreditation.code">
-            <a [routerLink]="['/code-sig', accreditation.code.codeId, 'view']">{{ accreditation.code.codeId }}</a>
+            <a [routerLink]="['/code-sig', accreditation.code.codeId, 'view']">{{ accreditation.code.codeValue }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo">Day Pass Info</span></dt>
         <dd>
           <div *ngIf="accreditation.dayPassInfo">
             <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
-              accreditation.dayPassInfo.dayPassInfoId
+              accreditation.dayPassInfo.dayPassInfoName
             }}</a>
           </div>
         </dd>

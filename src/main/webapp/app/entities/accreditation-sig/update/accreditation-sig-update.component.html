@@ -550,7 +550,7 @@
             formControlName="sites"
             [compareWith]="compareSiteSig"
           >
-            <option [ngValue]="siteOption" *ngFor="let siteOption of sitesSharedCollection">{{ siteOption.siteId }}</option>
+            <option [ngValue]="siteOption" *ngFor="let siteOption of sitesSharedCollection">{{ siteOption.siteName }}</option>
           </select>
         </div>
 
@@ -565,7 +565,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
 
@@ -581,7 +581,7 @@
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="civilityOption" *ngFor="let civilityOption of civilitiesSharedCollection">
-              {{ civilityOption.civilityId }}
+              {{ civilityOption.civilityValue }}
             </option>
           </select>
         </div>
@@ -590,7 +590,7 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.sexe" for="field_sexe">Sexe</label>
           <select class="form-control" id="field_sexe" data-cy="sexe" name="sexe" formControlName="sexe" [compareWith]="compareSexeSig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="sexeOption" *ngFor="let sexeOption of sexesSharedCollection">{{ sexeOption.sexeId }}</option>
+            <option [ngValue]="sexeOption" *ngFor="let sexeOption of sexesSharedCollection">{{ sexeOption.sexeValue }}</option>
           </select>
         </div>
 
@@ -606,7 +606,7 @@
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="nationalityOption" *ngFor="let nationalityOption of nationalitiesSharedCollection">
-              {{ nationalityOption.nationalityId }}
+              {{ nationalityOption.nationalityValue }}
             </option>
           </select>
         </div>
@@ -622,7 +622,9 @@
             [compareWith]="compareCountrySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">{{ countryOption.countryId }}</option>
+            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">
+              {{ countryOption.countryName }}
+            </option>
           </select>
         </div>
 
@@ -630,7 +632,7 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
           <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityId }}</option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityName }}</option>
           </select>
         </div>
 
@@ -646,7 +648,7 @@
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">
-              {{ categoryOption.categoryId }}
+              {{ categoryOption.categoryName }}
             </option>
           </select>
         </div>
@@ -663,7 +665,7 @@
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="fonctionOption" *ngFor="let fonctionOption of fonctionsSharedCollection">
-              {{ fonctionOption.fonctionId }}
+              {{ fonctionOption.fonctionName }}
             </option>
           </select>
         </div>
@@ -679,7 +681,9 @@
             [compareWith]="compareOrganizSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="organizOption" *ngFor="let organizOption of organizsSharedCollection">{{ organizOption.organizId }}</option>
+            <option [ngValue]="organizOption" *ngFor="let organizOption of organizsSharedCollection">
+              {{ organizOption.organizName }}
+            </option>
           </select>
         </div>
 
@@ -697,7 +701,7 @@
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="accreditationTypeOption" *ngFor="let accreditationTypeOption of accreditationTypesSharedCollection">
-              {{ accreditationTypeOption.accreditationTypeId }}
+              {{ accreditationTypeOption.accreditationTypeValue }}
             </option>
           </select>
         </div>
@@ -713,7 +717,7 @@
             [compareWith]="compareStatusSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="statusOption" *ngFor="let statusOption of statusesSharedCollection">{{ statusOption.statusId }}</option>
+            <option [ngValue]="statusOption" *ngFor="let statusOption of statusesSharedCollection">{{ statusOption.statusName }}</option>
           </select>
         </div>
 
@@ -729,7 +733,7 @@
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="attachementOption" *ngFor="let attachementOption of attachementsSharedCollection">
-              {{ attachementOption.attachementId }}
+              {{ attachementOption.attachementName }}
             </option>
           </select>
         </div>
@@ -738,7 +742,7 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
           <select class="form-control" id="field_code" data-cy="code" name="code" formControlName="code" [compareWith]="compareCodeSig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="codeOption" *ngFor="let codeOption of codesSharedCollection">{{ codeOption.codeId }}</option>
+            <option [ngValue]="codeOption" *ngFor="let codeOption of codesSharedCollection">{{ codeOption.codeValue }}</option>
           </select>
         </div>
 
@@ -754,7 +758,7 @@
           >
             <option [ngValue]="null"></option>
             <option [ngValue]="dayPassInfoOption" *ngFor="let dayPassInfoOption of dayPassInfosSharedCollection">
-              {{ dayPassInfoOption.dayPassInfoId }}
+              {{ dayPassInfoOption.dayPassInfoName }}
             </option>
           </select>
         </div>

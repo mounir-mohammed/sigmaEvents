@@ -42,21 +42,21 @@ export interface IAccreditationSig {
   accreditationParams?: string | null;
   accreditationAttributs?: string | null;
   accreditationStat?: boolean | null;
-  sites?: Pick<ISiteSig, 'siteId'>[] | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
-  civility?: Pick<ICivilitySig, 'civilityId'> | null;
-  sexe?: Pick<ISexeSig, 'sexeId'> | null;
-  nationality?: Pick<INationalitySig, 'nationalityId'> | null;
-  country?: Pick<ICountrySig, 'countryId'> | null;
-  city?: Pick<ICitySig, 'cityId'> | null;
-  category?: Pick<ICategorySig, 'categoryId'> | null;
-  fonction?: Pick<IFonctionSig, 'fonctionId'> | null;
-  organiz?: Pick<IOrganizSig, 'organizId'> | null;
-  accreditationType?: Pick<IAccreditationTypeSig, 'accreditationTypeId'> | null;
+  sites?: Pick<ISiteSig, 'siteId' | 'siteName' | 'siteStat'>[] | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
+  civility?: Pick<ICivilitySig, 'civilityId' | 'civilityValue' | 'civilityStat'> | null;
+  sexe?: Pick<ISexeSig, 'sexeId' | 'sexeValue' | 'sexeStat'> | null;
+  nationality?: Pick<INationalitySig, 'nationalityId' | 'nationalityValue' | 'nationalityStat'> | null;
+  country?: Pick<ICountrySig, 'countryId' | 'countryName' | 'countryStat'> | null;
+  city?: Pick<ICitySig, 'cityId' | 'cityName' | 'cityStat'> | null;
+  category?: Pick<ICategorySig, 'categoryId' | 'categoryName' | 'categoryStat'> | null;
+  fonction?: Pick<IFonctionSig, 'fonctionId' | 'fonctionName' | 'fonctionStat'> | null;
+  organiz?: Pick<IOrganizSig, 'organizId' | 'organizName' | 'organizStat'> | null;
+  accreditationType?: Pick<IAccreditationTypeSig, 'accreditationTypeId' | 'accreditationTypeValue' | 'accreditationTypeStat'> | null;
   status?: Pick<IStatusSig, 'statusId' | 'statusName' | 'statusColor'> | null;
-  attachement?: Pick<IAttachementSig, 'attachementId'> | null;
-  code?: Pick<ICodeSig, 'codeId'> | null;
-  dayPassInfo?: Pick<IDayPassInfoSig, 'dayPassInfoId'> | null;
+  attachement?: Pick<IAttachementSig, 'attachementId' | 'attachementName' | 'attachementStat'> | null;
+  code?: Pick<ICodeSig, 'codeId' | 'codeValue' | 'codeStat'> | null;
+  dayPassInfo?: Pick<IDayPassInfoSig, 'dayPassInfoId' | 'dayPassInfoName' | 'dayPassInfoStat'> | null;
 }
 
 export type NewAccreditationSig = Omit<IAccreditationSig, 'accreditationId'> & { accreditationId: null };

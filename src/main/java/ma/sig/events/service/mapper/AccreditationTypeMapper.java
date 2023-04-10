@@ -20,10 +20,14 @@ public interface AccreditationTypeMapper extends EntityMapper<AccreditationTypeD
     @Named("printingModelPrintingModelId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "printingModelId", source = "printingModelId")
+    @Mapping(target = "printingModelName", source = "printingModelName")
+    @Mapping(target = "printingModelStat", source = "printingModelStat")
     PrintingModelDTO toDtoPrintingModelPrintingModelId(PrintingModel printingModel);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

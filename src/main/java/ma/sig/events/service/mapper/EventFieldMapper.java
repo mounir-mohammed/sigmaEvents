@@ -20,10 +20,14 @@ public interface EventFieldMapper extends EntityMapper<EventFieldDTO, EventField
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 
     @Named("eventFormFormId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "formId", source = "formId")
+    @Mapping(target = "formName", source = "formName")
+    @Mapping(target = "formStat", source = "formStat")
     EventFormDTO toDtoEventFormFormId(EventForm eventForm);
 }

@@ -23,6 +23,8 @@ public interface InfoSuppMapper extends EntityMapper<InfoSuppDTO, InfoSupp> {
     @Named("infoSuppTypeInfoSuppTypeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "infoSuppTypeId", source = "infoSuppTypeId")
+    @Mapping(target = "infoSuppTypeName", source = "infoSuppTypeName")
+    @Mapping(target = "infoSuppTypeStat", source = "infoSuppTypeStat")
     InfoSuppTypeDTO toDtoInfoSuppTypeInfoSuppTypeId(InfoSuppType infoSuppType);
 
     @Named("accreditationAccreditationId")
@@ -33,5 +35,7 @@ public interface InfoSuppMapper extends EntityMapper<InfoSuppDTO, InfoSupp> {
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

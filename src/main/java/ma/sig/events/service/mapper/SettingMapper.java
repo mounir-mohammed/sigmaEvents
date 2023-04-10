@@ -20,10 +20,14 @@ public interface SettingMapper extends EntityMapper<SettingDTO, Setting> {
     @Named("languageLanguageId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "languageId", source = "languageId")
+    @Mapping(target = "languageName", source = "languageName")
+    @Mapping(target = "languageStat", source = "languageStat")
     LanguageDTO toDtoLanguageLanguageId(Language language);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }

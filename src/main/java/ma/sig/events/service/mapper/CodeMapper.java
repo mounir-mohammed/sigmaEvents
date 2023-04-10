@@ -20,10 +20,14 @@ public interface CodeMapper extends EntityMapper<CodeDTO, Code> {
     @Named("codeTypeCodeTypeId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "codeTypeId", source = "codeTypeId")
+    @Mapping(target = "codeTypeValue", source = "codeTypeValue")
+    @Mapping(target = "codeTypeStat", source = "codeTypeStat")
     CodeTypeDTO toDtoCodeTypeCodeTypeId(CodeType codeType);
 
     @Named("eventEventId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
+    @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventStat", source = "eventStat")
     EventDTO toDtoEventEventId(Event event);
 }
