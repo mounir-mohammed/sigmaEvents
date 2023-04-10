@@ -117,7 +117,7 @@
           <td>{{ area.areaStat }}</td>
           <td>
             <div *ngIf="area.event">
-              <a [routerLink]="['/event-sig', area.event.eventId, 'view']">{{ area.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', area.event.eventId, 'view']">{{ area.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

@@ -111,12 +111,12 @@
           <td>{{ eventField.fieldStat }}</td>
           <td>
             <div *ngIf="eventField.event">
-              <a [routerLink]="['/event-sig', eventField.event.eventId, 'view']">{{ eventField.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', eventField.event.eventId, 'view']">{{ eventField.event.eventName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="eventField.eventForm">
-              <a [routerLink]="['/event-form-sig', eventField.eventForm.formId, 'view']">{{ eventField.eventForm.formId }}</a>
+              <a [routerLink]="['/event-form-sig', eventField.eventForm.formId, 'view']">{{ eventField.eventForm.formName }}</a>
             </div>
           </td>
           <td class="text-end">

@@ -45,7 +45,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.city.country">Country</span></dt>
         <dd>
           <div *ngIf="city.country">
-            <a [routerLink]="['/country-sig', city.country.countryId, 'view']">{{ city.country.countryId }}</a>
+            <a [routerLink]="['/country-sig', city.country.countryId, 'view']">{{ city.country.countryName }}</a>
           </div>
         </dd>
       </dl>

@@ -10,8 +10,8 @@ export interface IEventFieldSig {
   fieldParams?: string | null;
   fieldAttributs?: string | null;
   fieldStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
-  eventForm?: Pick<IEventFormSig, 'formId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
+  eventForm?: Pick<IEventFormSig, 'formId' | 'formName' | 'formStat'> | null;
 }
 
 export type NewEventFieldSig = Omit<IEventFieldSig, 'fieldId'> & { fieldId: null };

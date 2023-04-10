@@ -147,17 +147,17 @@
           <td>{{ organiz.organizStat }}</td>
           <td>
             <div *ngIf="organiz.country">
-              <a [routerLink]="['/country-sig', organiz.country.countryId, 'view']">{{ organiz.country.countryId }}</a>
+              <a [routerLink]="['/country-sig', organiz.country.countryId, 'view']">{{ organiz.country.countryName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="organiz.city">
-              <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityId }}</a>
+              <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="organiz.event">
-              <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

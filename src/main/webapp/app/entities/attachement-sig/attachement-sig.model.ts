@@ -13,8 +13,8 @@ export interface IAttachementSig {
   attachementParams?: string | null;
   attachementAttributs?: string | null;
   attachementStat?: boolean | null;
-  attachementType?: Pick<IAttachementTypeSig, 'attachementTypeId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  attachementType?: Pick<IAttachementTypeSig, 'attachementTypeId' | 'attachementTypeName' | 'attachementTypeStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewAttachementSig = Omit<IAttachementSig, 'attachementId'> & { attachementId: null };

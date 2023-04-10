@@ -128,13 +128,13 @@
           <td>
             <div *ngIf="category.printingModel">
               <a [routerLink]="['/printing-model-sig', category.printingModel.printingModelId, 'view']">{{
-                category.printingModel.printingModelId
+                category.printingModel.printingModelName
               }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="category.event">
-              <a [routerLink]="['/event-sig', category.event.eventId, 'view']">{{ category.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', category.event.eventId, 'view']">{{ category.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

@@ -38,7 +38,7 @@
         <dd>
           <div *ngIf="infoSupp.infoSuppType">
             <a [routerLink]="['/info-supp-type-sig', infoSupp.infoSuppType.infoSuppTypeId, 'view']">{{
-              infoSupp.infoSuppType.infoSuppTypeId
+              infoSupp.infoSuppType.infoSuppTypeName
             }}</a>
           </div>
         </dd>
@@ -53,7 +53,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.event">Event</span></dt>
         <dd>
           <div *ngIf="infoSupp.event">
-            <a [routerLink]="['/event-sig', infoSupp.event.eventId, 'view']">{{ infoSupp.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', infoSupp.event.eventId, 'view']">{{ infoSupp.event.eventName }}</a>
           </div>
         </dd>
       </dl>

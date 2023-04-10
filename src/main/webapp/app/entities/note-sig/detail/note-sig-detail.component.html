@@ -45,7 +45,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.note.event">Event</span></dt>
         <dd>
           <div *ngIf="note.event">
-            <a [routerLink]="['/event-sig', note.event.eventId, 'view']">{{ note.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', note.event.eventId, 'view']">{{ note.event.eventName }}</a>
           </div>
         </dd>
       </dl>

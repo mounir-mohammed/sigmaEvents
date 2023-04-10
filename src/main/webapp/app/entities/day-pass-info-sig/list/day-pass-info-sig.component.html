@@ -149,7 +149,7 @@
           <td>{{ dayPassInfo.dayPassInfoStat }}</td>
           <td>
             <div *ngIf="dayPassInfo.event">
-              <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

@@ -241,7 +241,9 @@
             formControlName="areas"
             [compareWith]="compareAreaSig"
           >
-            <option [ngValue]="areaOption" *ngFor="let areaOption of areasSharedCollection">{{ areaOption.areaId }}</option>
+            <option [ngValue]="areaOption" *ngFor="let areaOption of areasSharedCollection" [disabled]="areaOption.areaStat === false">
+              {{ areaOption.areaName }}
+            </option>
           </select>
         </div>
 
@@ -256,8 +258,12 @@
             [compareWith]="compareCategorySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">
-              {{ categoryOption.categoryId }}
+            <option
+              [ngValue]="categoryOption"
+              *ngFor="let categoryOption of categoriesSharedCollection"
+              [disabled]="categoryOption.categoryStat === false"
+            >
+              {{ categoryOption.categoryName }}
             </option>
           </select>
         </div>
@@ -273,7 +279,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

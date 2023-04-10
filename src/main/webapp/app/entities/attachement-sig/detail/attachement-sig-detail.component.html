@@ -64,14 +64,14 @@
         <dd>
           <div *ngIf="attachement.attachementType">
             <a [routerLink]="['/attachement-type-sig', attachement.attachementType.attachementTypeId, 'view']">{{
-              attachement.attachementType.attachementTypeId
+              attachement.attachementType.attachementTypeName
             }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.attachement.event">Event</span></dt>
         <dd>
           <div *ngIf="attachement.event">
-            <a [routerLink]="['/event-sig', attachement.event.eventId, 'view']">{{ attachement.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', attachement.event.eventId, 'view']">{{ attachement.event.eventName }}</a>
           </div>
         </dd>
       </dl>

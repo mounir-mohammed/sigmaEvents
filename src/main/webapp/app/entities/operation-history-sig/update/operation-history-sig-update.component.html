@@ -250,8 +250,12 @@
             [compareWith]="compareOperationTypeSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="operationTypeOption" *ngFor="let operationTypeOption of operationTypesSharedCollection">
-              {{ operationTypeOption.operationTypeId }}
+            <option
+              [ngValue]="operationTypeOption"
+              *ngFor="let operationTypeOption of operationTypesSharedCollection"
+              [disabled]="operationTypeOption.operationTypeStat === false"
+            >
+              {{ operationTypeOption.operationTypeValue }}
             </option>
           </select>
         </div>
@@ -267,7 +271,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

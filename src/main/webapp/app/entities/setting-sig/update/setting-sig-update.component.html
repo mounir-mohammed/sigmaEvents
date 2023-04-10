@@ -350,8 +350,12 @@
             [compareWith]="compareLanguageSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="languageOption" *ngFor="let languageOption of languagesSharedCollection">
-              {{ languageOption.languageId }}
+            <option
+              [ngValue]="languageOption"
+              *ngFor="let languageOption of languagesSharedCollection"
+              [disabled]="languageOption.languageStat === false"
+            >
+              {{ languageOption.languageName }}
             </option>
           </select>
         </div>
@@ -367,7 +371,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

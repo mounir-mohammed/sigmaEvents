@@ -11,7 +11,7 @@ export interface IPrintingModelSig {
   printingModelParams?: string | null;
   printingModelAttributs?: string | null;
   printingModelStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewPrintingModelSig = Omit<IPrintingModelSig, 'printingModelId'> & { printingModelId: null };

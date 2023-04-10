@@ -122,7 +122,7 @@
           <td>{{ printingModel.printingModelStat }}</td>
           <td>
             <div *ngIf="printingModel.event">
-              <a [routerLink]="['/event-sig', printingModel.event.eventId, 'view']">{{ printingModel.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', printingModel.event.eventId, 'view']">{{ printingModel.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

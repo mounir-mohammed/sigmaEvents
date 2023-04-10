@@ -9,7 +9,7 @@ export interface INoteSig {
   noteTypeAttributs?: string | null;
   noteStat?: boolean | null;
   accreditation?: Pick<IAccreditationSig, 'accreditationId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewNoteSig = Omit<INoteSig, 'noteId'> & { noteId: null };

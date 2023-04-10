@@ -136,8 +136,12 @@
             [compareWith]="compareInfoSuppTypeSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="infoSuppTypeOption" *ngFor="let infoSuppTypeOption of infoSuppTypesSharedCollection">
-              {{ infoSuppTypeOption.infoSuppTypeId }}
+            <option
+              [ngValue]="infoSuppTypeOption"
+              *ngFor="let infoSuppTypeOption of infoSuppTypesSharedCollection"
+              [disabled]="infoSuppTypeOption.infoSuppTypeStat === false"
+            >
+              {{ infoSuppTypeOption.infoSuppTypeName }}
             </option>
           </select>
         </div>
@@ -170,7 +174,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

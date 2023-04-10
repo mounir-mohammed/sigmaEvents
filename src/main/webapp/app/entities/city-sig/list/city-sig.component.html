@@ -105,7 +105,7 @@
           <td>{{ city.cityStat }}</td>
           <td>
             <div *ngIf="city.country">
-              <a [routerLink]="['/country-sig', city.country.countryId, 'view']">{{ city.country.countryId }}</a>
+              <a [routerLink]="['/country-sig', city.country.countryId, 'view']">{{ city.country.countryName }}</a>
             </div>
           </td>
           <td class="text-end">

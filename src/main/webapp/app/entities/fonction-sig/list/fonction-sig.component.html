@@ -127,12 +127,12 @@
           <td>{{ fonction.fonctionStat }}</td>
           <td>
             <div *ngIf="fonction.category">
-              <a [routerLink]="['/category-sig', fonction.category.categoryId, 'view']">{{ fonction.category.categoryId }}</a>
+              <a [routerLink]="['/category-sig', fonction.category.categoryId, 'view']">{{ fonction.category.categoryName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="fonction.event">
-              <a [routerLink]="['/event-sig', fonction.event.eventId, 'view']">{{ fonction.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', fonction.event.eventId, 'view']">{{ fonction.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

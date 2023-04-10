@@ -104,7 +104,7 @@
           <td>
             <div *ngIf="infoSupp.infoSuppType">
               <a [routerLink]="['/info-supp-type-sig', infoSupp.infoSuppType.infoSuppTypeId, 'view']">{{
-                infoSupp.infoSuppType.infoSuppTypeId
+                infoSupp.infoSuppType.infoSuppTypeName
               }}</a>
             </div>
           </td>
@@ -117,7 +117,7 @@
           </td>
           <td>
             <div *ngIf="infoSupp.event">
-              <a [routerLink]="['/event-sig', infoSupp.event.eventId, 'view']">{{ infoSupp.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', infoSupp.event.eventId, 'view']">{{ infoSupp.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

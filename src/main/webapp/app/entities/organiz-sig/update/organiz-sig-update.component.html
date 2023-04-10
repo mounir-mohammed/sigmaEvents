@@ -229,7 +229,13 @@
             [compareWith]="compareCountrySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">{{ countryOption.countryId }}</option>
+            <option
+              [ngValue]="countryOption"
+              *ngFor="let countryOption of countriesSharedCollection"
+              [disabled]="countryOption.countryStat === false"
+            >
+              {{ countryOption.countryName }}
+            </option>
           </select>
         </div>
 
@@ -237,7 +243,9 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.city" for="field_city">City</label>
           <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityId }}</option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection" [disabled]="cityOption.cityStat === false">
+              {{ cityOption.cityName }}
+            </option>
           </select>
         </div>
 
@@ -252,7 +260,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

@@ -18,8 +18,8 @@ export interface ISiteSig {
   siteParams?: string | null;
   siteAttributs?: string | null;
   siteStat?: boolean | null;
-  city?: Pick<ICitySig, 'cityId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  city?: Pick<ICitySig, 'cityId' | 'cityName' | 'cityStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
   accreditations?: Pick<IAccreditationSig, 'accreditationId'>[] | null;
 }
 

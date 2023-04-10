@@ -550,7 +550,9 @@
             formControlName="sites"
             [compareWith]="compareSiteSig"
           >
-            <option [ngValue]="siteOption" *ngFor="let siteOption of sitesSharedCollection">{{ siteOption.siteName }}</option>
+            <option [ngValue]="siteOption" *ngFor="let siteOption of sitesSharedCollection" [disabled]="siteOption.siteStat === false">
+              {{ siteOption.siteName }}
+            </option>
           </select>
         </div>
 
@@ -580,7 +582,11 @@
             [compareWith]="compareCivilitySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="civilityOption" *ngFor="let civilityOption of civilitiesSharedCollection">
+            <option
+              [ngValue]="civilityOption"
+              *ngFor="let civilityOption of civilitiesSharedCollection"
+              [disabled]="civilityOption.civilityStat === false"
+            >
               {{ civilityOption.civilityValue }}
             </option>
           </select>
@@ -605,7 +611,11 @@
             [compareWith]="compareNationalitySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="nationalityOption" *ngFor="let nationalityOption of nationalitiesSharedCollection">
+            <option
+              [ngValue]="nationalityOption"
+              *ngFor="let nationalityOption of nationalitiesSharedCollection"
+              [disabled]="nationalityOption.nationalityStat === false"
+            >
               {{ nationalityOption.nationalityValue }}
             </option>
           </select>
@@ -622,7 +632,11 @@
             [compareWith]="compareCountrySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">
+            <option
+              [ngValue]="countryOption"
+              *ngFor="let countryOption of countriesSharedCollection"
+              [disabled]="countryOption.countryStat === false"
+            >
               {{ countryOption.countryName }}
             </option>
           </select>
@@ -632,7 +646,9 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
           <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection">{{ cityOption.cityName }}</option>
+            <option [ngValue]="cityOption" *ngFor="let cityOption of citiesSharedCollection" [disabled]="cityOption.cityStat === false">
+              {{ cityOption.cityName }}
+            </option>
           </select>
         </div>
 
@@ -647,7 +663,11 @@
             [compareWith]="compareCategorySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">
+            <option
+              [ngValue]="categoryOption"
+              *ngFor="let categoryOption of categoriesSharedCollection"
+              [disabled]="categoryOption.categoryStat === false"
+            >
               {{ categoryOption.categoryName }}
             </option>
           </select>
@@ -664,7 +684,11 @@
             [compareWith]="compareFonctionSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="fonctionOption" *ngFor="let fonctionOption of fonctionsSharedCollection">
+            <option
+              [ngValue]="fonctionOption"
+              *ngFor="let fonctionOption of fonctionsSharedCollection"
+              [disabled]="fonctionOption.fonctionStat === false"
+            >
               {{ fonctionOption.fonctionName }}
             </option>
           </select>
@@ -681,7 +705,11 @@
             [compareWith]="compareOrganizSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="organizOption" *ngFor="let organizOption of organizsSharedCollection">
+            <option
+              [ngValue]="organizOption"
+              *ngFor="let organizOption of organizsSharedCollection"
+              [disabled]="organizOption.organizStat === false"
+            >
               {{ organizOption.organizName }}
             </option>
           </select>
@@ -700,7 +728,11 @@
             [compareWith]="compareAccreditationTypeSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="accreditationTypeOption" *ngFor="let accreditationTypeOption of accreditationTypesSharedCollection">
+            <option
+              [ngValue]="accreditationTypeOption"
+              *ngFor="let accreditationTypeOption of accreditationTypesSharedCollection"
+              [disabled]="accreditationTypeOption.accreditationTypeStat === false"
+            >
               {{ accreditationTypeOption.accreditationTypeValue }}
             </option>
           </select>
@@ -717,7 +749,13 @@
             [compareWith]="compareStatusSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="statusOption" *ngFor="let statusOption of statusesSharedCollection">{{ statusOption.statusName }}</option>
+            <option
+              [ngValue]="statusOption"
+              *ngFor="let statusOption of statusesSharedCollection"
+              [disabled]="statusOption.statusStat === false"
+            >
+              {{ statusOption.statusName }}
+            </option>
           </select>
         </div>
 
@@ -732,7 +770,11 @@
             [compareWith]="compareAttachementSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="attachementOption" *ngFor="let attachementOption of attachementsSharedCollection">
+            <option
+              [ngValue]="attachementOption"
+              *ngFor="let attachementOption of attachementsSharedCollection"
+              [disabled]="attachementOption.attachementStat === false"
+            >
               {{ attachementOption.attachementName }}
             </option>
           </select>
@@ -742,7 +784,9 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
           <select class="form-control" id="field_code" data-cy="code" name="code" formControlName="code" [compareWith]="compareCodeSig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="codeOption" *ngFor="let codeOption of codesSharedCollection">{{ codeOption.codeValue }}</option>
+            <option [ngValue]="codeOption" *ngFor="let codeOption of codesSharedCollection" [disabled]="codeOption.codeStat === false">
+              {{ codeOption.codeValue }}
+            </option>
           </select>
         </div>
 
@@ -757,7 +801,11 @@
             [compareWith]="compareDayPassInfoSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="dayPassInfoOption" *ngFor="let dayPassInfoOption of dayPassInfosSharedCollection">
+            <option
+              [ngValue]="dayPassInfoOption"
+              *ngFor="let dayPassInfoOption of dayPassInfosSharedCollection"
+              [disabled]="dayPassInfoOption.dayPassInfoStat === false"
+            >
               {{ dayPassInfoOption.dayPassInfoName }}
             </option>
           </select>

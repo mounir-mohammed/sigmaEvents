@@ -13,8 +13,8 @@ export interface IEventControlSig {
   controlParams?: string | null;
   controlAttributs?: string | null;
   controlValueStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
-  eventField?: Pick<IEventFieldSig, 'fieldId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
+  eventField?: Pick<IEventFieldSig, 'fieldId' | 'fieldName' | 'fieldStat'> | null;
 }
 
 export type NewEventControlSig = Omit<IEventControlSig, 'controlId'> & { controlId: null };

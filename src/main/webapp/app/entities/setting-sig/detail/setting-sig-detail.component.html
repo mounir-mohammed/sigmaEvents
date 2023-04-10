@@ -78,13 +78,13 @@
         <dt><span sigmaTranslate="sigmaEventsApp.setting.language">Language</span></dt>
         <dd>
           <div *ngIf="setting.language">
-            <a [routerLink]="['/language-sig', setting.language.languageId, 'view']">{{ setting.language.languageId }}</a>
+            <a [routerLink]="['/language-sig', setting.language.languageId, 'view']">{{ setting.language.languageName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.setting.event">Event</span></dt>
         <dd>
           <div *ngIf="setting.event">
-            <a [routerLink]="['/event-sig', setting.event.eventId, 'view']">{{ setting.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', setting.event.eventId, 'view']">{{ setting.event.eventName }}</a>
           </div>
         </dd>
       </dl>

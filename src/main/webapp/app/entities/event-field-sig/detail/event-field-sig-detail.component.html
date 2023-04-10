@@ -45,13 +45,13 @@
         <dt><span sigmaTranslate="sigmaEventsApp.eventField.event">Event</span></dt>
         <dd>
           <div *ngIf="eventField.event">
-            <a [routerLink]="['/event-sig', eventField.event.eventId, 'view']">{{ eventField.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', eventField.event.eventId, 'view']">{{ eventField.event.eventName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.eventField.eventForm">Event Form</span></dt>
         <dd>
           <div *ngIf="eventField.eventForm">
-            <a [routerLink]="['/event-form-sig', eventField.eventForm.formId, 'view']">{{ eventField.eventForm.formId }}</a>
+            <a [routerLink]="['/event-form-sig', eventField.eventForm.formId, 'view']">{{ eventField.eventForm.formName }}</a>
           </div>
         </dd>
       </dl>

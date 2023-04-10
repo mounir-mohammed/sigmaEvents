@@ -16,7 +16,7 @@ export interface IDayPassInfoSig {
   dayPassParams?: string | null;
   dayPassAttributs?: string | null;
   dayPassInfoStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewDayPassInfoSig = Omit<IDayPassInfoSig, 'dayPassInfoId'> & { dayPassInfoId: null };

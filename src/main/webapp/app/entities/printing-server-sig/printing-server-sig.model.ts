@@ -14,7 +14,7 @@ export interface IPrintingServerSig {
   printingServerStat?: boolean | null;
   printingServerParams?: string | null;
   printingServerAttributs?: string | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewPrintingServerSig = Omit<IPrintingServerSig, 'printingServerId'> & { printingServerId: null };

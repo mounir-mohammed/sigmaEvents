@@ -66,19 +66,19 @@
         <dt><span sigmaTranslate="sigmaEventsApp.organiz.country">Country</span></dt>
         <dd>
           <div *ngIf="organiz.country">
-            <a [routerLink]="['/country-sig', organiz.country.countryId, 'view']">{{ organiz.country.countryId }}</a>
+            <a [routerLink]="['/country-sig', organiz.country.countryId, 'view']">{{ organiz.country.countryName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.organiz.city">City</span></dt>
         <dd>
           <div *ngIf="organiz.city">
-            <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityId }}</a>
+            <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.organiz.event">Event</span></dt>
         <dd>
           <div *ngIf="organiz.event">
-            <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventName }}</a>
           </div>
         </dd>
       </dl>

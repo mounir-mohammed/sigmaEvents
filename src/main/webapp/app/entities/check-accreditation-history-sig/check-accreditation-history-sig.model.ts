@@ -14,7 +14,7 @@ export interface ICheckAccreditationHistorySig {
   checkAccreditationParams?: string | null;
   checkAccreditationAttributs?: string | null;
   checkAccreditationHistoryStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
   accreditation?: Pick<IAccreditationSig, 'accreditationId'> | null;
 }
 

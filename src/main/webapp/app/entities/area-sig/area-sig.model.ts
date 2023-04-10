@@ -12,8 +12,8 @@ export interface IAreaSig {
   areaParams?: string | null;
   areaAttributs?: string | null;
   areaStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
-  fonctions?: Pick<IFonctionSig, 'fonctionId'>[] | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
+  fonctions?: Pick<IFonctionSig, 'fonctionId' | 'fonctionName' | 'fonctionStat'>[] | null;
 }
 
 export type NewAreaSig = Omit<IAreaSig, 'areaId'> & { areaId: null };

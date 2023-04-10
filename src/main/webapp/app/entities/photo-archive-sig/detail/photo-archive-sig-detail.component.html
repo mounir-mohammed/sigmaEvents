@@ -62,7 +62,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.event">Event</span></dt>
         <dd>
           <div *ngIf="photoArchive.event">
-            <a [routerLink]="['/event-sig', photoArchive.event.eventId, 'view']">{{ photoArchive.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', photoArchive.event.eventId, 'view']">{{ photoArchive.event.eventName }}</a>
           </div>
         </dd>
       </dl>

@@ -13,7 +13,7 @@ export interface ICheckAccreditationReportSig {
   checkAccreditationReportParams?: string | null;
   checkAccreditationReportAttributs?: string | null;
   checkAccreditationReportStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
   checkAccreditationHistory?: Pick<ICheckAccreditationHistorySig, 'checkAccreditationHistoryId'> | null;
 }
 

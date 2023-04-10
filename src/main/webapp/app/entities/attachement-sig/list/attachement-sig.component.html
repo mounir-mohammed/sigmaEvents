@@ -143,13 +143,13 @@
           <td>
             <div *ngIf="attachement.attachementType">
               <a [routerLink]="['/attachement-type-sig', attachement.attachementType.attachementTypeId, 'view']">{{
-                attachement.attachementType.attachementTypeId
+                attachement.attachementType.attachementTypeName
               }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="attachement.event">
-              <a [routerLink]="['/event-sig', attachement.event.eventId, 'view']">{{ attachement.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', attachement.event.eventId, 'view']">{{ attachement.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

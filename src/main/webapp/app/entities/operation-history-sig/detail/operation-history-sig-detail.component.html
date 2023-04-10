@@ -72,14 +72,14 @@
         <dd>
           <div *ngIf="operationHistory.typeoperation">
             <a [routerLink]="['/operation-type-sig', operationHistory.typeoperation.operationTypeId, 'view']">{{
-              operationHistory.typeoperation.operationTypeId
+              operationHistory.typeoperation.operationTypeValue
             }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.operationHistory.event">Event</span></dt>
         <dd>
           <div *ngIf="operationHistory.event">
-            <a [routerLink]="['/event-sig', operationHistory.event.eventId, 'view']">{{ operationHistory.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', operationHistory.event.eventId, 'view']">{{ operationHistory.event.eventName }}</a>
           </div>
         </dd>
       </dl>

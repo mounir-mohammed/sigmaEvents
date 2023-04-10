@@ -7,7 +7,7 @@ export interface IEventFormSig {
   formParams?: string | null;
   formAttributs?: string | null;
   formStat?: boolean | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewEventFormSig = Omit<IEventFormSig, 'formId'> & { formId: null };

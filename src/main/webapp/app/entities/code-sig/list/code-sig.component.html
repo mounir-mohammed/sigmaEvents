@@ -111,12 +111,12 @@
           <td>{{ code.codeStat }}</td>
           <td>
             <div *ngIf="code.codeType">
-              <a [routerLink]="['/code-type-sig', code.codeType.codeTypeId, 'view']">{{ code.codeType.codeTypeId }}</a>
+              <a [routerLink]="['/code-type-sig', code.codeType.codeTypeId, 'view']">{{ code.codeType.codeTypeValue }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="code.event">
-              <a [routerLink]="['/event-sig', code.event.eventId, 'view']">{{ code.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', code.event.eventId, 'view']">{{ code.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

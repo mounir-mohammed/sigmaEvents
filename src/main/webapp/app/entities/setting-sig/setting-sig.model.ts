@@ -18,8 +18,8 @@ export interface ISettingSig {
   settingParams?: string | null;
   settingAttributs?: string | null;
   settingStat?: boolean | null;
-  language?: Pick<ILanguageSig, 'languageId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  language?: Pick<ILanguageSig, 'languageId' | 'languageName' | 'languageStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewSettingSig = Omit<ISettingSig, 'settingId'> & { settingId: null };

@@ -258,8 +258,12 @@
             [compareWith]="compareAttachementTypeSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="attachementTypeOption" *ngFor="let attachementTypeOption of attachementTypesSharedCollection">
-              {{ attachementTypeOption.attachementTypeId }}
+            <option
+              [ngValue]="attachementTypeOption"
+              *ngFor="let attachementTypeOption of attachementTypesSharedCollection"
+              [disabled]="attachementTypeOption.attachementTypeStat === false"
+            >
+              {{ attachementTypeOption.attachementTypeName }}
             </option>
           </select>
         </div>
@@ -275,7 +279,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

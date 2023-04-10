@@ -9,9 +9,9 @@ export interface IInfoSuppSig {
   infoSuppParams?: string | null;
   infoSuppAttributs?: string | null;
   infoSuppStat?: boolean | null;
-  infoSuppType?: Pick<IInfoSuppTypeSig, 'infoSuppTypeId'> | null;
+  infoSuppType?: Pick<IInfoSuppTypeSig, 'infoSuppTypeId' | 'infoSuppTypeName' | 'infoSuppTypeStat'> | null;
   accreditation?: Pick<IAccreditationSig, 'accreditationId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewInfoSuppSig = Omit<IInfoSuppSig, 'infoSuppId'> & { infoSuppId: null };

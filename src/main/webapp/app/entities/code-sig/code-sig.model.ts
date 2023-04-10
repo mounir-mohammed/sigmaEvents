@@ -10,8 +10,8 @@ export interface ICodeSig {
   codeParams?: string | null;
   codeAttributs?: string | null;
   codeStat?: boolean | null;
-  codeType?: Pick<ICodeTypeSig, 'codeTypeId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  codeType?: Pick<ICodeTypeSig, 'codeTypeId' | 'codeTypeValue' | 'codeTypeStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewCodeSig = Omit<ICodeSig, 'codeId'> & { codeId: null };

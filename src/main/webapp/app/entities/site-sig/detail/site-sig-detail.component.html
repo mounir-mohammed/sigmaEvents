@@ -74,13 +74,13 @@
         <dt><span sigmaTranslate="sigmaEventsApp.site.city">City</span></dt>
         <dd>
           <div *ngIf="site.city">
-            <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityId }}</a>
+            <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.site.event">Event</span></dt>
         <dd>
           <div *ngIf="site.event">
-            <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventName }}</a>
           </div>
         </dd>
       </dl>

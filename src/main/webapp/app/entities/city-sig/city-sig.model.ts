@@ -9,7 +9,7 @@ export interface ICitySig {
   cityParams?: string | null;
   cityAttributs?: string | null;
   cityStat?: boolean | null;
-  country?: Pick<ICountrySig, 'countryId'> | null;
+  country?: Pick<ICountrySig, 'countryId' | 'countryName' | 'countryStat'> | null;
 }
 
 export type NewCitySig = Omit<ICitySig, 'cityId'> & { cityId: null };

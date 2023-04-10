@@ -106,8 +106,12 @@
             [compareWith]="compareCodeTypeSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="codeTypeOption" *ngFor="let codeTypeOption of codeTypesSharedCollection">
-              {{ codeTypeOption.codeTypeId }}
+            <option
+              [ngValue]="codeTypeOption"
+              *ngFor="let codeTypeOption of codeTypesSharedCollection"
+              [disabled]="codeTypeOption.codeTypeStat === false"
+            >
+              {{ codeTypeOption.codeTypeValue }}
             </option>
           </select>
         </div>
@@ -123,7 +127,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

@@ -12,8 +12,8 @@ export interface ICategorySig {
   categoryParams?: string | null;
   categoryAttributs?: string | null;
   categoryStat?: boolean | null;
-  printingModel?: Pick<IPrintingModelSig, 'printingModelId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  printingModel?: Pick<IPrintingModelSig, 'printingModelId' | 'printingModelName' | 'printingModelStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewCategorySig = Omit<ICategorySig, 'categoryId'> & { categoryId: null };

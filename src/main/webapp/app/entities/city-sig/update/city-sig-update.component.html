@@ -162,7 +162,13 @@
             [compareWith]="compareCountrySig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="countryOption" *ngFor="let countryOption of countriesSharedCollection">{{ countryOption.countryId }}</option>
+            <option
+              [ngValue]="countryOption"
+              *ngFor="let countryOption of countriesSharedCollection"
+              [disabled]="countryOption.countryStat === false"
+            >
+              {{ countryOption.countryName }}
+            </option>
           </select>
         </div>
       </div>

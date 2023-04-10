@@ -9,8 +9,8 @@ export interface IAccreditationTypeSig {
   accreditationTypeParams?: string | null;
   accreditationTypeAttributs?: string | null;
   accreditationTypeStat?: boolean | null;
-  printingModel?: Pick<IPrintingModelSig, 'printingModelId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  printingModel?: Pick<IPrintingModelSig, 'printingModelId' | 'printingModelName' | 'printingModelStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewAccreditationTypeSig = Omit<IAccreditationTypeSig, 'accreditationTypeId'> & { accreditationTypeId: null };

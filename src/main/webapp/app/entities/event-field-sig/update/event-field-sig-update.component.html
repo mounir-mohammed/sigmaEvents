@@ -105,7 +105,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
 
@@ -120,8 +120,12 @@
             [compareWith]="compareEventFormSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventFormOption" *ngFor="let eventFormOption of eventFormsSharedCollection">
-              {{ eventFormOption.formId }}
+            <option
+              [ngValue]="eventFormOption"
+              *ngFor="let eventFormOption of eventFormsSharedCollection"
+              [disabled]="eventFormOption.formStat === false"
+            >
+              {{ eventFormOption.formName }}
             </option>
           </select>
         </div>

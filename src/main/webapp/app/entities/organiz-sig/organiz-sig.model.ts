@@ -15,9 +15,9 @@ export interface IOrganizSig {
   organizParams?: string | null;
   organizAttributs?: string | null;
   organizStat?: boolean | null;
-  country?: Pick<ICountrySig, 'countryId'> | null;
-  city?: Pick<ICitySig, 'cityId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  country?: Pick<ICountrySig, 'countryId' | 'countryName' | 'countryStat'> | null;
+  city?: Pick<ICitySig, 'cityId' | 'cityName' | 'cityStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewOrganizSig = Omit<IOrganizSig, 'organizId'> & { organizId: null };

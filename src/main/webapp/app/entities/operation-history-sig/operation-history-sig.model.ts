@@ -16,8 +16,8 @@ export interface IOperationHistorySig {
   operationHistoryParams?: string | null;
   operationHistoryAttributs?: string | null;
   operationHistoryStat?: boolean | null;
-  typeoperation?: Pick<IOperationTypeSig, 'operationTypeId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  typeoperation?: Pick<IOperationTypeSig, 'operationTypeId' | 'operationTypeValue' | 'operationTypeStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewOperationHistorySig = Omit<IOperationHistorySig, 'operationHistoryId'> & { operationHistoryId: null };

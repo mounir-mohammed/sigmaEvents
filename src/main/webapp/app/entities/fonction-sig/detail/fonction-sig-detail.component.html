@@ -58,20 +58,20 @@
         <dt><span sigmaTranslate="sigmaEventsApp.fonction.area">Area</span></dt>
         <dd>
           <span *ngFor="let area of fonction.areas; let last = last">
-            <a [routerLink]="['/area-sig', area.areaId, 'view']">{{ area.areaId }}</a
+            <a [routerLink]="['/area-sig', area.areaId, 'view']">{{ area.areaName }}</a
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.fonction.category">Category</span></dt>
         <dd>
           <div *ngIf="fonction.category">
-            <a [routerLink]="['/category-sig', fonction.category.categoryId, 'view']">{{ fonction.category.categoryId }}</a>
+            <a [routerLink]="['/category-sig', fonction.category.categoryId, 'view']">{{ fonction.category.categoryName }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.fonction.event">Event</span></dt>
         <dd>
           <div *ngIf="fonction.event">
-            <a [routerLink]="['/event-sig', fonction.event.eventId, 'view']">{{ fonction.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', fonction.event.eventId, 'view']">{{ fonction.event.eventName }}</a>
           </div>
         </dd>
       </dl>

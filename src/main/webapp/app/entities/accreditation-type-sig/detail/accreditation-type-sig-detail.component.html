@@ -44,14 +44,14 @@
         <dd>
           <div *ngIf="accreditationType.printingModel">
             <a [routerLink]="['/printing-model-sig', accreditationType.printingModel.printingModelId, 'view']">{{
-              accreditationType.printingModel.printingModelId
+              accreditationType.printingModel.printingModelName
             }}</a>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditationType.event">Event</span></dt>
         <dd>
           <div *ngIf="accreditationType.event">
-            <a [routerLink]="['/event-sig', accreditationType.event.eventId, 'view']">{{ accreditationType.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', accreditationType.event.eventId, 'view']">{{ accreditationType.event.eventName }}</a>
           </div>
         </dd>
       </dl>

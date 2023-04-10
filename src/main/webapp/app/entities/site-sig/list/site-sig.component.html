@@ -158,12 +158,12 @@
           <td>{{ site.siteStat }}</td>
           <td>
             <div *ngIf="site.city">
-              <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityId }}</a>
+              <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityName }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="site.event">
-              <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

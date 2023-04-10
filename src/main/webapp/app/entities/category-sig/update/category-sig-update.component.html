@@ -242,8 +242,12 @@
             [compareWith]="comparePrintingModelSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="printingModelOption" *ngFor="let printingModelOption of printingModelsSharedCollection">
-              {{ printingModelOption.printingModelId }}
+            <option
+              [ngValue]="printingModelOption"
+              *ngFor="let printingModelOption of printingModelsSharedCollection"
+              [disabled]="printingModelOption.printingModelStat === false"
+            >
+              {{ printingModelOption.printingModelName }}
             </option>
           </select>
         </div>
@@ -259,7 +263,7 @@
             [compareWith]="compareEventSig"
           >
             <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventId }}</option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

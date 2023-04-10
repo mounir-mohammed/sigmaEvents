@@ -91,7 +91,7 @@
           <td>{{ eventForm.formStat }}</td>
           <td>
             <div *ngIf="eventForm.event">
-              <a [routerLink]="['/event-sig', eventForm.event.eventId, 'view']">{{ eventForm.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', eventForm.event.eventId, 'view']">{{ eventForm.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

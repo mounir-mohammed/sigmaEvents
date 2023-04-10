@@ -74,7 +74,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.event">Event</span></dt>
         <dd>
           <div *ngIf="dayPassInfo.event">
-            <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventName }}</a>
           </div>
         </dd>
       </dl>

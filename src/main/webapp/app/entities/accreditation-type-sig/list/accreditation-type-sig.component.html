@@ -107,13 +107,13 @@
           <td>
             <div *ngIf="accreditationType.printingModel">
               <a [routerLink]="['/printing-model-sig', accreditationType.printingModel.printingModelId, 'view']">{{
-                accreditationType.printingModel.printingModelId
+                accreditationType.printingModel.printingModelName
               }}</a>
             </div>
           </td>
           <td>
             <div *ngIf="accreditationType.event">
-              <a [routerLink]="['/event-sig', accreditationType.event.eventId, 'view']">{{ accreditationType.event.eventId }}</a>
+              <a [routerLink]="['/event-sig', accreditationType.event.eventId, 'view']">{{ accreditationType.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

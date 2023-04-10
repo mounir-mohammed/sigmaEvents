@@ -56,7 +56,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.printingModel.event">Event</span></dt>
         <dd>
           <div *ngIf="printingModel.event">
-            <a [routerLink]="['/event-sig', printingModel.event.eventId, 'view']">{{ printingModel.event.eventId }}</a>
+            <a [routerLink]="['/event-sig', printingModel.event.eventId, 'view']">{{ printingModel.event.eventName }}</a>
           </div>
         </dd>
       </dl>

@@ -13,9 +13,9 @@ export interface IFonctionSig {
   fonctionParams?: string | null;
   fonctionAttributs?: string | null;
   fonctionStat?: boolean | null;
-  areas?: Pick<IAreaSig, 'areaId'>[] | null;
-  category?: Pick<ICategorySig, 'categoryId'> | null;
-  event?: Pick<IEventSig, 'eventId'> | null;
+  areas?: Pick<IAreaSig, 'areaId' | 'areaName' | 'areaStat'>[] | null;
+  category?: Pick<ICategorySig, 'categoryId' | 'categoryName' | 'categoryStat'> | null;
+  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }
 
 export type NewFonctionSig = Omit<IFonctionSig, 'fonctionId'> & { fonctionId: null };
