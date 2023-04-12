@@ -136,6 +136,7 @@
       "edit": "تعديل",
       "open": "فتح",
       "save": "حفظ",
+      "saveAndPrint": "Save And Print",
       "view": "عرض",
       "show": "Show {{otherEntity}}"
     },

@@ -136,6 +136,7 @@
       "edit": "Bearbeiten",
       "open": "Öffnen",
       "save": "Speichern",
+      "saveAndPrint": "Save And Print",
       "view": "Details",
       "show": "Zeige {{otherEntity}}"
     },

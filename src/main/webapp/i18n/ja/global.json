@@ -136,6 +136,7 @@
       "edit": "編集",
       "open": "Open",
       "save": "保存",
+      "saveAndPrint": "Save And Print",
       "view": "表示",
       "show": "Show {{otherEntity}}"
     },

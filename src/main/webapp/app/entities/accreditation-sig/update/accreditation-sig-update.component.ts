@@ -165,13 +165,17 @@ export class AccreditationSigUpdateComponent implements OnInit {
     window.history.back();
   }
 
-  save(): void {
-    this.isSaving = true;
-    const accreditation = this.accreditationFormService.getAccreditationSig(this.editForm);
-    if (accreditation.accreditationId !== null) {
-      this.subscribeToSaveResponse(this.accreditationService.update(accreditation));
+  save(event: any): void {
+    if (event.submitter.name == 'Save') {
+      this.isSaving = true;
+      const accreditation = this.accreditationFormService.getAccreditationSig(this.editForm);
+      if (accreditation.accreditationId !== null) {
+        this.subscribeToSaveResponse(this.accreditationService.update(accreditation));
+      } else {
+        this.subscribeToSaveResponse(this.accreditationService.create(accreditation));
+      }
     } else {
-      this.subscribeToSaveResponse(this.accreditationService.create(accreditation));
+      console.log('TODO SAVE AND PRINT');
     }
   }
 

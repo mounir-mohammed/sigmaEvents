@@ -136,6 +136,7 @@
       "edit": "Editar",
       "open": "Abrir",
       "save": "Guardar",
+      "saveAndPrint": "Save And Print",
       "view": "Vista",
       "show": "Show {{otherEntity}}"
     },

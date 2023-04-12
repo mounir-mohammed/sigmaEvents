@@ -134,6 +134,7 @@
       "edit": "Wijzigen",
       "open": "Open",
       "save": "Opslaan",
+      "saveAndPrint": "Save And Print",
       "view": "View",
       "show": "Show {{otherEntity}}"
     },

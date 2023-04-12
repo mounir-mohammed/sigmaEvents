@@ -136,6 +136,7 @@
       "delete": "Supprimer",
       "open": "Ouvrir",
       "save": "Sauvegarder",
+      "saveAndPrint": "Save And Print",
       "view": "Voir",
       "show": "Show {{otherEntity}}"
     },

@@ -136,6 +136,7 @@
       "edit": "编辑",
       "open": "Open",
       "save": "保存",
+      "saveAndPrint": "Save And Print",
       "view": "查看",
       "show": "Show {{otherEntity}}"
     },
