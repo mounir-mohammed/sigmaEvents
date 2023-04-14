@@ -163,6 +163,7 @@
           <td class="text-end">
             <div class="btn-group">
               <button
+                *sigmaHasAnyAuthority="['ROLE_ADMIN']"
                 type="submit"
                 [routerLink]="['/printing-centre-sig']"
                 [queryParams]="{ 'filter[organizId.in]': organiz.organizId }"

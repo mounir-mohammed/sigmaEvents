@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-md-9">
-    <h1 class="display-4"><span sigmaTranslate="home.title">Welcome, Java Hipster!</span> (Sigma Events)</h1>
+    <h1 class="display-4"><span sigmaTranslate="home.title">Welcome, </span> (Sigma Events)</h1>
 
     <p class="lead" sigmaTranslate="home.subtitle">This is your homepage</p>
 
@@ -13,15 +13,18 @@
         <span id="home-logged-message" *ngIf="account" sigmaTranslate="home.logged.message" [translateValues]="{ username: account.login }"
           >You are logged in as user "{{ account.login }}".</span
         >
+        <span id="home-logged-message" *ngIf="account"
+          >You are logged in as user "{{ account.login }}" to event {{ account.printingCentre?.event?.eventId }}.</span
+        >
       </div>
 
       <div class="alert alert-warning" *ngSwitchCase="false">
         <span sigmaTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-        <a class="alert-link" (click)="login()" sigmaTranslate="global.messages.info.authenticated.link">sign in</a
-        ><span sigmaTranslate="global.messages.info.authenticated.suffix"
+        <a class="alert-link" (click)="login()" sigmaTranslate="global.messages.info.authenticated.link">sign in</a>
+        <!-- <span sigmaTranslate="global.messages.info.authenticated.suffix"
           >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
           password="user").</span
-        >
+        > -->
       </div>
 
       <div class="alert alert-warning" *ngSwitchCase="false">
@@ -30,7 +33,7 @@
       </div>
     </div>
 
-    <p sigmaTranslate="home.question">If you have any question on JHipster:</p>
+    <!-- <p sigmaTranslate="home.question">If you have any question on JHipster:</p>
 
     <ul>
       <li>
@@ -73,6 +76,6 @@
       <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" sigmaTranslate="home.github"
         >GitHub</a
       >!
-    </p>
+    </p> -->
   </div>
 </div>

@@ -401,6 +401,7 @@
           <td class="text-end">
             <div class="btn-group">
               <button
+                *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']"
                 type="submit"
                 [routerLink]="['/photo-archive-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
@@ -446,6 +447,7 @@
                 >
               </button>
               <button
+                *sigmaHasAnyAuthority="['ROLE_ADMIN']"
                 type="submit"
                 [routerLink]="['/check-accreditation-history-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
