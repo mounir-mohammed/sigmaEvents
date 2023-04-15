@@ -39,20 +39,20 @@
             {{ area.areaLogoContentType }}, {{ byteSize(area.areaLogo) }}
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.area.areaParams">Area Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.area.areaParams">Area Params</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ area.areaParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.area.areaAttributs">Area Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.area.areaAttributs">Area Attributs</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ area.areaAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.area.areaStat">Area Stat</span></dt>
         <dd>
           <span>{{ area.areaStat }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.area.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.area.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="area.event">
             <a [routerLink]="['/event-sig', area.event.eventId, 'view']">{{ area.event.eventName }}</a>
           </div>

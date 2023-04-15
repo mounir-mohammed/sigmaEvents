@@ -111,12 +111,16 @@
         <dd>
           <span>{{ accreditation.accreditationPrintNumber }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams">Accreditation Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams">Accreditation Params</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ accreditation.accreditationParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs">Accreditation Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs">Accreditation Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ accreditation.accreditationAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span></dt>

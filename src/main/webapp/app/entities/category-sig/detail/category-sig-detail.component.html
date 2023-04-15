@@ -43,28 +43,30 @@
             {{ category.categoryLogoContentType }}, {{ byteSize(category.categoryLogo) }}
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryParams">Category Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.category.categoryParams">Category Params</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ category.categoryParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.category.categoryAttributs">Category Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.category.categoryAttributs">Category Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ category.categoryAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.category.categoryStat">Category Stat</span></dt>
         <dd>
           <span>{{ category.categoryStat }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.category.printingModel">Printing Model</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.category.printingModel">Printing Model</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="category.printingModel">
             <a [routerLink]="['/printing-model-sig', category.printingModel.printingModelId, 'view']">{{
               category.printingModel.printingModelName
             }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.category.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.category.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="category.event">
             <a [routerLink]="['/event-sig', category.event.eventId, 'view']">{{ category.event.eventName }}</a>
           </div>

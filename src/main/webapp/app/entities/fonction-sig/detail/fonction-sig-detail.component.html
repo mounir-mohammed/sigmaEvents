@@ -43,12 +43,14 @@
             {{ fonction.fonctionLogoContentType }}, {{ byteSize(fonction.fonctionLogo) }}
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionParams">Fonction Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.fonction.fonctionParams">Fonction Params</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ fonction.fonctionParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionAttributs">Fonction Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.fonction.fonctionAttributs">Fonction Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ fonction.fonctionAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.fonction.fonctionStat">Fonction Stat</span></dt>
@@ -68,8 +70,8 @@
             <a [routerLink]="['/category-sig', fonction.category.categoryId, 'view']">{{ fonction.category.categoryName }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.fonction.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.fonction.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="fonction.event">
             <a [routerLink]="['/event-sig', fonction.event.eventId, 'view']">{{ fonction.event.eventName }}</a>
           </div>

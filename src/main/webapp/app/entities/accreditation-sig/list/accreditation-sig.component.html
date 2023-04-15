@@ -168,13 +168,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationParams">
+          <th scope="col" sigmaSortBy="accreditationParams" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams">Accreditation Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationAttributs">
+          <th scope="col" sigmaSortBy="accreditationAttributs" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs">Accreditation Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -317,8 +317,8 @@
           <td>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
           <td>{{ accreditation.accreditationPrintStat }}</td>
           <td>{{ accreditation.accreditationPrintNumber }}</td>
-          <td>{{ accreditation.accreditationParams }}</td>
-          <td>{{ accreditation.accreditationAttributs }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ accreditation.accreditationParams }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ accreditation.accreditationAttributs }}</td>
           <td>{{ accreditation.accreditationStat }}</td>
           <td>
             <div *ngIf="accreditation.civility">

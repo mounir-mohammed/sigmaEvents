@@ -16,12 +16,15 @@ import { ICategorySig } from 'app/entities/category-sig/category-sig.model';
 import { CategorySigService } from 'app/entities/category-sig/service/category-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-fonction-sig-update',
   templateUrl: './fonction-sig-update.component.html',
 })
 export class FonctionSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   fonction: IFonctionSig | null = null;
 
@@ -41,7 +44,8 @@ export class FonctionSigUpdateComponent implements OnInit {
     protected categoryService: CategorySigService,
     protected eventService: EventSigService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareAreaSig = (o1: IAreaSig | null, o2: IAreaSig | null): boolean => this.areaService.compareAreaSig(o1, o2);
@@ -51,6 +55,7 @@ export class FonctionSigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ fonction }) => {
       this.fonction = fonction;
       if (fonction) {
@@ -94,6 +99,9 @@ export class FonctionSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const fonction = this.fonctionFormService.getFonctionSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      fonction.event = this.currentAccount?.printingCentre?.event;
+    }
     if (fonction.fonctionId !== null) {
       this.subscribeToSaveResponse(this.fonctionService.update(fonction));
     } else {

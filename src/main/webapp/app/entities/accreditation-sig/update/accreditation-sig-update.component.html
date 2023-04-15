@@ -497,7 +497,7 @@
           />
         </div> -->
 
-        <!-- <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams" for="field_accreditationParams"
             >Accreditation Params</label
           >
@@ -509,9 +509,9 @@
             data-cy="accreditationParams"
             formControlName="accreditationParams"
           />
-        </div> -->
+        </div>
 
-        <!-- <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs" for="field_accreditationAttributs"
             >Accreditation Attributs</label
           >
@@ -523,7 +523,7 @@
             data-cy="accreditationAttributs"
             formControlName="accreditationAttributs"
           />
-        </div> -->
+        </div>
 
         <div class="row mb-3">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"

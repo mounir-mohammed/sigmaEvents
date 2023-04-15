@@ -105,7 +105,7 @@ export class AccreditationSigComponent implements OnInit {
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
     if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
-      this.filters.addFilter('eventId.in', this.currentAccount!.printingCentre!.event!.eventId!.toString());
+      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
     }
   }
 

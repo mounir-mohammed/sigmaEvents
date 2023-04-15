@@ -14,12 +14,15 @@ import { IPrintingModelSig } from 'app/entities/printing-model-sig/printing-mode
 import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-category-sig-update',
   templateUrl: './category-sig-update.component.html',
 })
 export class CategorySigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   category: ICategorySig | null = null;
   public color = '#cccccc';
@@ -36,7 +39,8 @@ export class CategorySigUpdateComponent implements OnInit {
     protected printingModelService: PrintingModelSigService,
     protected eventService: EventSigService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   comparePrintingModelSig = (o1: IPrintingModelSig | null, o2: IPrintingModelSig | null): boolean =>
@@ -45,6 +49,7 @@ export class CategorySigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ category }) => {
       this.category = category;
       if (category) {
@@ -88,6 +93,9 @@ export class CategorySigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const category = this.categoryFormService.getCategorySig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      category.event = this.currentAccount?.printingCentre?.event;
+    }
     if (category.categoryId !== null) {
       this.subscribeToSaveResponse(this.categoryService.update(category));
     } else {
