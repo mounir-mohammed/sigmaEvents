@@ -189,7 +189,7 @@
           />
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryParams"
@@ -206,7 +206,7 @@
           />
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryAttributs"
@@ -260,7 +260,7 @@
           </select>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.operationHistory.event" for="field_event">Event</label>
           <select
             class="form-control"

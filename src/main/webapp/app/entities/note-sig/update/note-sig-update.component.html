@@ -72,7 +72,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteTypeParams" for="field_noteTypeParams">Note Type Params</label>
           <input
             type="text"
@@ -84,7 +84,7 @@
           />
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.note.noteTypeAttributs" for="field_noteTypeAttributs"
             >Note Type Attributs</label
           >
@@ -120,7 +120,7 @@
           </select>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.note.event" for="field_event">Event</label>
           <select
             class="form-control"

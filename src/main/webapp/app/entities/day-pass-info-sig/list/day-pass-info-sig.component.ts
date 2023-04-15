@@ -12,12 +12,15 @@ import { EntityArrayResponseType, DayPassInfoSigService } from '../service/day-p
 import { DayPassInfoSigDeleteDialogComponent } from '../delete/day-pass-info-sig-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-day-pass-info-sig',
   templateUrl: './day-pass-info-sig.component.html',
 })
 export class DayPassInfoSigComponent implements OnInit {
+  currentAccount: Account | null = null;
   dayPassInfos?: IDayPassInfoSig[];
   isLoading = false;
 
@@ -34,12 +37,14 @@ export class DayPassInfoSigComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   trackDayPassInfoId = (_index: number, item: IDayPassInfoSig): number => this.dayPassInfoService.getDayPassInfoSigIdentifier(item);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
@@ -99,6 +104,9 @@ export class DayPassInfoSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
+    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {

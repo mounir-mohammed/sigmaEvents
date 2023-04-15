@@ -11,12 +11,15 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, NoteSigService } from '../service/note-sig.service';
 import { NoteSigDeleteDialogComponent } from '../delete/note-sig-delete-dialog.component';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-note-sig',
   templateUrl: './note-sig.component.html',
 })
 export class NoteSigComponent implements OnInit {
+  currentAccount: Account | null = null;
   notes?: INoteSig[];
   isLoading = false;
 
@@ -32,12 +35,14 @@ export class NoteSigComponent implements OnInit {
     protected noteService: NoteSigService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   trackNoteId = (_index: number, item: INoteSig): number => this.noteService.getNoteSigIdentifier(item);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
@@ -89,6 +94,9 @@ export class NoteSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
+    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {

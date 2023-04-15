@@ -52,13 +52,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="noteTypeParams">
+          <th scope="col" sigmaSortBy="noteTypeParams" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.note.noteTypeParams">Note Type Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="noteTypeAttributs">
+          <th scope="col" sigmaSortBy="noteTypeAttributs" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.note.noteTypeAttributs">Note Type Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -76,7 +76,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId">
+          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.note.event">Event</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -92,8 +92,8 @@
           </td>
           <td>{{ note.noteValue }}</td>
           <td>{{ note.noteDescription }}</td>
-          <td>{{ note.noteTypeParams }}</td>
-          <td>{{ note.noteTypeAttributs }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ note.noteTypeParams }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ note.noteTypeAttributs }}</td>
           <td>{{ note.noteStat }}</td>
           <td>
             <div *ngIf="note.accreditation">
@@ -102,7 +102,7 @@
               }}</a>
             </div>
           </td>
-          <td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div *ngIf="note.event">
               <a [routerLink]="['/event-sig', note.event.eventId, 'view']">{{ note.event.eventName }}</a>
             </div>

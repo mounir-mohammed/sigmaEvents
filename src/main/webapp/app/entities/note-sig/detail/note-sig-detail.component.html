@@ -22,12 +22,14 @@
         <dd>
           <span>{{ note.noteDescription }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.note.noteTypeParams">Note Type Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.note.noteTypeParams">Note Type Params</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ note.noteTypeParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.note.noteTypeAttributs">Note Type Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.note.noteTypeAttributs">Note Type Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ note.noteTypeAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.note.noteStat">Note Stat</span></dt>
@@ -42,8 +44,8 @@
             }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.note.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.note.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="note.event">
             <a [routerLink]="['/event-sig', note.event.eventId, 'view']">{{ note.event.eventName }}</a>
           </div>

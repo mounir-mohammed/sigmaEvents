@@ -56,12 +56,16 @@
         <dd>
           <span>{{ operationHistory.operationHistoryImportedFilePath }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryParams">Operation History Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryParams">Operation History Params</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ operationHistory.operationHistoryParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryAttributs">Operation History Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryAttributs">Operation History Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ operationHistory.operationHistoryAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryStat">Operation History Stat</span></dt>
@@ -76,8 +80,8 @@
             }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.operationHistory.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.operationHistory.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="operationHistory.event">
             <a [routerLink]="['/event-sig', operationHistory.event.eventId, 'view']">{{ operationHistory.event.eventName }}</a>
           </div>

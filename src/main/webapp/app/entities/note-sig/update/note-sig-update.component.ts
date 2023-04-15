@@ -11,12 +11,15 @@ import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-
 import { AccreditationSigService } from 'app/entities/accreditation-sig/service/accreditation-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-note-sig-update',
   templateUrl: './note-sig-update.component.html',
 })
 export class NoteSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   note: INoteSig | null = null;
 
@@ -30,7 +33,8 @@ export class NoteSigUpdateComponent implements OnInit {
     protected noteFormService: NoteSigFormService,
     protected accreditationService: AccreditationSigService,
     protected eventService: EventSigService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareAccreditationSig = (o1: IAccreditationSig | null, o2: IAccreditationSig | null): boolean =>
@@ -39,6 +43,7 @@ export class NoteSigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ note }) => {
       this.note = note;
       if (note) {
@@ -56,6 +61,9 @@ export class NoteSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const note = this.noteFormService.getNoteSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      note.event = this.currentAccount?.printingCentre?.event;
+    }
     if (note.noteId !== null) {
       this.subscribeToSaveResponse(this.noteService.update(note));
     } else {

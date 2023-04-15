@@ -96,13 +96,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="operationHistoryParams">
+          <th scope="col" sigmaSortBy="operationHistoryParams" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryParams">Operation History Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="operationHistoryAttributs">
+          <th scope="col" sigmaSortBy="operationHistoryAttributs" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryAttributs">Operation History Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -120,13 +120,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId">
+          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.event">Event</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col"></th>
+          <th scope="col" *sigmaHasAnyAuthority="['ROLE_ADMIN']"></th>
         </tr>
       </thead>
       <tbody>
@@ -145,8 +145,8 @@
           <td>{{ operationHistory.operationHistoryNewId }}</td>
           <td>{{ operationHistory.operationHistoryImportedFile }}</td>
           <td>{{ operationHistory.operationHistoryImportedFilePath }}</td>
-          <td>{{ operationHistory.operationHistoryParams }}</td>
-          <td>{{ operationHistory.operationHistoryAttributs }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ operationHistory.operationHistoryParams }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ operationHistory.operationHistoryAttributs }}</td>
           <td>{{ operationHistory.operationHistoryStat }}</td>
           <td>
             <div *ngIf="operationHistory.typeoperation">
@@ -155,12 +155,12 @@
               }}</a>
             </div>
           </td>
-          <td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div *ngIf="operationHistory.event">
               <a [routerLink]="['/event-sig', operationHistory.event.eventId, 'view']">{{ operationHistory.event.eventName }}</a>
             </div>
           </td>
-          <td class="text-end">
+          <td class="text-end" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="btn-group">
               <button
                 type="submit"

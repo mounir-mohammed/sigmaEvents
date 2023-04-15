@@ -11,12 +11,15 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, OperationHistorySigService } from '../service/operation-history-sig.service';
 import { OperationHistorySigDeleteDialogComponent } from '../delete/operation-history-sig-delete-dialog.component';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-operation-history-sig',
   templateUrl: './operation-history-sig.component.html',
 })
 export class OperationHistorySigComponent implements OnInit {
+  currentAccount: Account | null = null;
   operationHistories?: IOperationHistorySig[];
   isLoading = false;
 
@@ -32,13 +35,15 @@ export class OperationHistorySigComponent implements OnInit {
     protected operationHistoryService: OperationHistorySigService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   trackOperationHistoryId = (_index: number, item: IOperationHistorySig): number =>
     this.operationHistoryService.getOperationHistorySigIdentifier(item);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
@@ -90,6 +95,9 @@ export class OperationHistorySigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
+    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
