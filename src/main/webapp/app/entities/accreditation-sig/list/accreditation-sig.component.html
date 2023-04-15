@@ -186,12 +186,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" sigmaSortBy="civility.civilityId">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span>
@@ -270,6 +264,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -320,11 +320,6 @@
           <td>{{ accreditation.accreditationParams }}</td>
           <td>{{ accreditation.accreditationAttributs }}</td>
           <td>{{ accreditation.accreditationStat }}</td>
-          <td>
-            <div *ngIf="accreditation.event">
-              <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventName }}</a>
-            </div>
-          </td>
           <td>
             <div *ngIf="accreditation.civility">
               <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityValue }}</a>
@@ -396,6 +391,11 @@
               <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
                 accreditation.dayPassInfo.dayPassInfoName
               }}</a>
+            </div>
+          </td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <div *ngIf="accreditation.event">
+              <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventName }}</a>
             </div>
           </td>
           <td class="text-end">

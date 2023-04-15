@@ -40,12 +40,15 @@ import { ICodeSig } from 'app/entities/code-sig/code-sig.model';
 import { CodeSigService } from 'app/entities/code-sig/service/code-sig.service';
 import { IDayPassInfoSig } from 'app/entities/day-pass-info-sig/day-pass-info-sig.model';
 import { DayPassInfoSigService } from 'app/entities/day-pass-info-sig/service/day-pass-info-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
   templateUrl: './accreditation-sig-update.component.html',
 })
 export class AccreditationSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   accreditation: IAccreditationSig | null = null;
 
@@ -88,7 +91,8 @@ export class AccreditationSigUpdateComponent implements OnInit {
     protected codeService: CodeSigService,
     protected dayPassInfoService: DayPassInfoSigService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareSiteSig = (o1: ISiteSig | null, o2: ISiteSig | null): boolean => this.siteService.compareSiteSig(o1, o2);
@@ -126,6 +130,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
     this.dayPassInfoService.compareDayPassInfoSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ accreditation }) => {
       this.accreditation = accreditation;
       if (accreditation) {
@@ -169,6 +174,9 @@ export class AccreditationSigUpdateComponent implements OnInit {
     if (event.submitter.name == 'Save') {
       this.isSaving = true;
       const accreditation = this.accreditationFormService.getAccreditationSig(this.editForm);
+      if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+        accreditation.event = this.currentAccount?.printingCentre?.event;
+      }
       if (accreditation.accreditationId !== null) {
         this.subscribeToSaveResponse(this.accreditationService.update(accreditation));
       } else {

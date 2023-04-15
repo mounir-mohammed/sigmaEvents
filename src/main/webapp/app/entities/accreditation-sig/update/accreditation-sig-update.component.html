@@ -557,21 +557,6 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
-          <select
-            class="form-control"
-            id="field_event"
-            data-cy="event"
-            name="event"
-            formControlName="event"
-            [compareWith]="compareEventSig"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.civility" for="field_civility">Civility</label>
           <select
             class="form-control"
@@ -808,6 +793,21 @@
             >
               {{ dayPassInfoOption.dayPassInfoName }}
             </option>
+          </select>
+        </div>
+
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            [compareWith]="compareEventSig"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
       </div>

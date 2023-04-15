@@ -12,12 +12,15 @@ import { EntityArrayResponseType, AccreditationSigService } from '../service/acc
 import { AccreditationSigDeleteDialogComponent } from '../delete/accreditation-sig-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-accreditation-sig',
   templateUrl: './accreditation-sig.component.html',
 })
 export class AccreditationSigComponent implements OnInit {
+  currentAccount: Account | null = null;
   accreditations?: IAccreditationSig[];
   isLoading = false;
 
@@ -31,6 +34,7 @@ export class AccreditationSigComponent implements OnInit {
 
   constructor(
     protected accreditationService: AccreditationSigService,
+    private accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected dataUtils: DataUtils,
@@ -40,6 +44,7 @@ export class AccreditationSigComponent implements OnInit {
   trackAccreditationId = (_index: number, item: IAccreditationSig): number => this.accreditationService.getAccreditationSigIdentifier(item);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
@@ -99,6 +104,9 @@ export class AccreditationSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      this.filters.addFilter('eventId.in', this.currentAccount!.printingCentre!.event!.eventId!.toString());
+    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
@@ -121,6 +129,7 @@ export class AccreditationSigComponent implements OnInit {
     ascending?: boolean,
     filterOptions?: IFilterOption[]
   ): Observable<EntityArrayResponseType> {
+    console.log('TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST');
     this.isLoading = true;
     const pageToLoad: number = page ?? 1;
     const queryObject: any = {
@@ -131,6 +140,8 @@ export class AccreditationSigComponent implements OnInit {
     };
     filterOptions?.forEach(filterOption => {
       queryObject[filterOption.name] = filterOption.values;
+      console.log(filterOption.name);
+      console.log(filterOption.values);
     });
     return this.accreditationService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }

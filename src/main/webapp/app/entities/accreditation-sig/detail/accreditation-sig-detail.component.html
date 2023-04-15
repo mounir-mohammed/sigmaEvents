@@ -130,12 +130,6 @@
             >{{ last ? '' : ', ' }}
           </span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span></dt>
-        <dd>
-          <div *ngIf="accreditation.event">
-            <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventName }}</a>
-          </div>
-        </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span></dt>
         <dd>
           <div *ngIf="accreditation.civility">
@@ -220,6 +214,12 @@
             <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
               accreditation.dayPassInfo.dayPassInfoName
             }}</a>
+          </div>
+        </dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <div *ngIf="accreditation.event">
+            <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventName }}</a>
           </div>
         </dd>
       </dl>
