@@ -64,13 +64,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="codeParams">
+          <th scope="col" sigmaSortBy="codeParams" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.code.codeParams">Code Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="codeAttributs">
+          <th scope="col" sigmaSortBy="codeAttributs" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.code.codeAttributs">Code Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -88,7 +88,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId">
+          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.code.event">Event</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -106,15 +106,15 @@
           <td>{{ code.codeEntityValue }}</td>
           <td>{{ code.codeValue }}</td>
           <td>{{ code.codeUsed }}</td>
-          <td>{{ code.codeParams }}</td>
-          <td>{{ code.codeAttributs }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ code.codeParams }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ code.codeAttributs }}</td>
           <td>{{ code.codeStat }}</td>
           <td>
             <div *ngIf="code.codeType">
               <a [routerLink]="['/code-type-sig', code.codeType.codeTypeId, 'view']">{{ code.codeType.codeTypeValue }}</a>
             </div>
           </td>
-          <td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div *ngIf="code.event">
               <a [routerLink]="['/event-sig', code.event.eventId, 'view']">{{ code.event.eventName }}</a>
             </div>

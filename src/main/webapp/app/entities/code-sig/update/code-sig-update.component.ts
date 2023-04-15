@@ -11,12 +11,15 @@ import { ICodeTypeSig } from 'app/entities/code-type-sig/code-type-sig.model';
 import { CodeTypeSigService } from 'app/entities/code-type-sig/service/code-type-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-code-sig-update',
   templateUrl: './code-sig-update.component.html',
 })
 export class CodeSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   code: ICodeSig | null = null;
 
@@ -30,7 +33,8 @@ export class CodeSigUpdateComponent implements OnInit {
     protected codeFormService: CodeSigFormService,
     protected codeTypeService: CodeTypeSigService,
     protected eventService: EventSigService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareCodeTypeSig = (o1: ICodeTypeSig | null, o2: ICodeTypeSig | null): boolean => this.codeTypeService.compareCodeTypeSig(o1, o2);
@@ -38,6 +42,7 @@ export class CodeSigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ code }) => {
       this.code = code;
       if (code) {
@@ -55,6 +60,9 @@ export class CodeSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const code = this.codeFormService.getCodeSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      code.event = this.currentAccount?.printingCentre?.event;
+    }
     if (code.codeId !== null) {
       this.subscribeToSaveResponse(this.codeService.update(code));
     } else {

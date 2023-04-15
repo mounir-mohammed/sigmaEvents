@@ -85,7 +85,7 @@
           </div>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppParams" for="field_infoSuppParams"
             >Info Supp Params</label
           >
@@ -99,7 +99,7 @@
           />
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppAttributs" for="field_infoSuppAttributs"
             >Info Supp Attributs</label
           >
@@ -163,7 +163,7 @@
           </select>
         </div>
 
-        <div class="row mb-3">
+        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.infoSupp.event" for="field_event">Event</label>
           <select
             class="form-control"

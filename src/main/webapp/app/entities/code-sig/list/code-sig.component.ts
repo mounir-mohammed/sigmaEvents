@@ -11,12 +11,15 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, CodeSigService } from '../service/code-sig.service';
 import { CodeSigDeleteDialogComponent } from '../delete/code-sig-delete-dialog.component';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-code-sig',
   templateUrl: './code-sig.component.html',
 })
 export class CodeSigComponent implements OnInit {
+  currentAccount: Account | null = null;
   codes?: ICodeSig[];
   isLoading = false;
 
@@ -32,12 +35,14 @@ export class CodeSigComponent implements OnInit {
     protected codeService: CodeSigService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   trackCodeId = (_index: number, item: ICodeSig): number => this.codeService.getCodeSigIdentifier(item);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
@@ -89,6 +94,9 @@ export class CodeSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
+    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {

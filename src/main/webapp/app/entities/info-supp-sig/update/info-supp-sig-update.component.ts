@@ -13,12 +13,15 @@ import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-
 import { AccreditationSigService } from 'app/entities/accreditation-sig/service/accreditation-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-info-supp-sig-update',
   templateUrl: './info-supp-sig-update.component.html',
 })
 export class InfoSuppSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   infoSupp: IInfoSuppSig | null = null;
 
@@ -34,7 +37,8 @@ export class InfoSuppSigUpdateComponent implements OnInit {
     protected infoSuppTypeService: InfoSuppTypeSigService,
     protected accreditationService: AccreditationSigService,
     protected eventService: EventSigService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareInfoSuppTypeSig = (o1: IInfoSuppTypeSig | null, o2: IInfoSuppTypeSig | null): boolean =>
@@ -46,6 +50,7 @@ export class InfoSuppSigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ infoSupp }) => {
       this.infoSupp = infoSupp;
       if (infoSupp) {
@@ -63,6 +68,9 @@ export class InfoSuppSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const infoSupp = this.infoSuppFormService.getInfoSuppSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      infoSupp.event = this.currentAccount?.printingCentre?.event;
+    }
     if (infoSupp.infoSuppId !== null) {
       this.subscribeToSaveResponse(this.infoSuppService.update(infoSupp));
     } else {

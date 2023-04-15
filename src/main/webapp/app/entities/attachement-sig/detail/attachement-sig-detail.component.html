@@ -48,12 +48,16 @@
             {{ attachement.attachementPhotoContentType }}, {{ byteSize(attachement.attachementPhoto) }}
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementParams">Attachement Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.attachement.attachementParams">Attachement Params</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ attachement.attachementParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementAttributs">Attachement Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.attachement.attachementAttributs">Attachement Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ attachement.attachementAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.attachement.attachementStat">Attachement Stat</span></dt>
@@ -68,8 +72,8 @@
             }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.attachement.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.attachement.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="attachement.event">
             <a [routerLink]="['/event-sig', attachement.event.eventId, 'view']">{{ attachement.event.eventName }}</a>
           </div>

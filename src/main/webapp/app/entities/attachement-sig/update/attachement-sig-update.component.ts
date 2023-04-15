@@ -14,12 +14,15 @@ import { IAttachementTypeSig } from 'app/entities/attachement-type-sig/attacheme
 import { AttachementTypeSigService } from 'app/entities/attachement-type-sig/service/attachement-type-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-attachement-sig-update',
   templateUrl: './attachement-sig-update.component.html',
 })
 export class AttachementSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   attachement: IAttachementSig | null = null;
 
@@ -36,7 +39,8 @@ export class AttachementSigUpdateComponent implements OnInit {
     protected attachementTypeService: AttachementTypeSigService,
     protected eventService: EventSigService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareAttachementTypeSig = (o1: IAttachementTypeSig | null, o2: IAttachementTypeSig | null): boolean =>
@@ -45,6 +49,7 @@ export class AttachementSigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ attachement }) => {
       this.attachement = attachement;
       if (attachement) {
@@ -87,6 +92,9 @@ export class AttachementSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const attachement = this.attachementFormService.getAttachementSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      attachement.event = this.currentAccount?.printingCentre?.event;
+    }
     if (attachement.attachementId !== null) {
       this.subscribeToSaveResponse(this.attachementService.update(attachement));
     } else {
