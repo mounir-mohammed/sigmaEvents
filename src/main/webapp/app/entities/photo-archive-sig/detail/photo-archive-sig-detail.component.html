@@ -39,12 +39,16 @@
         <dd>
           <span>{{ photoArchive.photoArchiveDescription }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveParams">Photo Archive Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveParams">Photo Archive Params</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ photoArchive.photoArchiveParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveAttributs">Photo Archive Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveAttributs">Photo Archive Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ photoArchive.photoArchiveAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveStat">Photo Archive Stat</span></dt>
@@ -59,8 +63,8 @@
             }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.photoArchive.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.photoArchive.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="photoArchive.event">
             <a [routerLink]="['/event-sig', photoArchive.event.eventId, 'view']">{{ photoArchive.event.eventName }}</a>
           </div>

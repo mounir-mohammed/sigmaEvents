@@ -14,12 +14,15 @@ import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-
 import { AccreditationSigService } from 'app/entities/accreditation-sig/service/accreditation-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-photo-archive-sig-update',
   templateUrl: './photo-archive-sig-update.component.html',
 })
 export class PhotoArchiveSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   photoArchive: IPhotoArchiveSig | null = null;
 
@@ -36,7 +39,8 @@ export class PhotoArchiveSigUpdateComponent implements OnInit {
     protected accreditationService: AccreditationSigService,
     protected eventService: EventSigService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareAccreditationSig = (o1: IAccreditationSig | null, o2: IAccreditationSig | null): boolean =>
@@ -45,6 +49,7 @@ export class PhotoArchiveSigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ photoArchive }) => {
       this.photoArchive = photoArchive;
       if (photoArchive) {
@@ -87,6 +92,9 @@ export class PhotoArchiveSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const photoArchive = this.photoArchiveFormService.getPhotoArchiveSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      photoArchive.event = this.currentAccount?.printingCentre?.event;
+    }
     if (photoArchive.photoArchiveId !== null) {
       this.subscribeToSaveResponse(this.photoArchiveService.update(photoArchive));
     } else {

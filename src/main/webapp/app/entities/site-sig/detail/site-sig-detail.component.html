@@ -59,12 +59,12 @@
         <dd>
           <span>{{ site.siteResponsableName }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.site.siteParams">Site Params</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.site.siteParams">Site Params</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ site.siteParams }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.site.siteAttributs">Site Attributs</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.site.siteAttributs">Site Attributs</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ site.siteAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.site.siteStat">Site Stat</span></dt>
@@ -77,8 +77,8 @@
             <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityName }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.site.event">Event</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.site.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="site.event">
             <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventName }}</a>
           </div>

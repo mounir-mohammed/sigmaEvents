@@ -12,12 +12,15 @@ import { EntityArrayResponseType, OrganizSigService } from '../service/organiz-s
 import { OrganizSigDeleteDialogComponent } from '../delete/organiz-sig-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-organiz-sig',
   templateUrl: './organiz-sig.component.html',
 })
 export class OrganizSigComponent implements OnInit {
+  currentAccount: Account | null = null;
   organizs?: IOrganizSig[];
   isLoading = false;
 
@@ -34,12 +37,14 @@ export class OrganizSigComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   trackOrganizId = (_index: number, item: IOrganizSig): number => this.organizService.getOrganizSigIdentifier(item);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
@@ -99,6 +104,9 @@ export class OrganizSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
+    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {

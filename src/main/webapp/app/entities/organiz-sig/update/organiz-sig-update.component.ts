@@ -16,12 +16,15 @@ import { ICitySig } from 'app/entities/city-sig/city-sig.model';
 import { CitySigService } from 'app/entities/city-sig/service/city-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-organiz-sig-update',
   templateUrl: './organiz-sig-update.component.html',
 })
 export class OrganizSigUpdateComponent implements OnInit {
+  currentAccount: Account | null = null;
   isSaving = false;
   organiz: IOrganizSig | null = null;
 
@@ -40,7 +43,8 @@ export class OrganizSigUpdateComponent implements OnInit {
     protected cityService: CitySigService,
     protected eventService: EventSigService,
     protected elementRef: ElementRef,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareCountrySig = (o1: ICountrySig | null, o2: ICountrySig | null): boolean => this.countryService.compareCountrySig(o1, o2);
@@ -50,6 +54,7 @@ export class OrganizSigUpdateComponent implements OnInit {
   compareEventSig = (o1: IEventSig | null, o2: IEventSig | null): boolean => this.eventService.compareEventSig(o1, o2);
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.data.subscribe(({ organiz }) => {
       this.organiz = organiz;
       if (organiz) {
@@ -92,6 +97,9 @@ export class OrganizSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const organiz = this.organizFormService.getOrganizSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      organiz.event = this.currentAccount?.printingCentre?.event;
+    }
     if (organiz.organizId !== null) {
       this.subscribeToSaveResponse(this.organizService.update(organiz));
     } else {

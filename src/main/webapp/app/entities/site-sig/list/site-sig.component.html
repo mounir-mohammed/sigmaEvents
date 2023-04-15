@@ -100,13 +100,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="siteParams">
+          <th scope="col" sigmaSortBy="siteParams" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.site.siteParams">Site Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="siteAttributs">
+          <th scope="col" sigmaSortBy="siteAttributs" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.site.siteAttributs">Site Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -124,7 +124,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId">
+          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.site.event">Event</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -153,15 +153,15 @@
           <td>{{ site.siteTel }}</td>
           <td>{{ site.siteFax }}</td>
           <td>{{ site.siteResponsableName }}</td>
-          <td>{{ site.siteParams }}</td>
-          <td>{{ site.siteAttributs }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ site.siteParams }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ site.siteAttributs }}</td>
           <td>{{ site.siteStat }}</td>
           <td>
             <div *ngIf="site.city">
               <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityName }}</a>
             </div>
           </td>
-          <td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div *ngIf="site.event">
               <a [routerLink]="['/event-sig', site.event.eventId, 'view']">{{ site.event.eventName }}</a>
             </div>
