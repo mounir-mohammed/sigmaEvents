@@ -30,16 +30,20 @@
         <dd>
           <span>{{ accreditation.accreditationBirthDay | formatMediumDate }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ accreditation.accreditationSexe }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Accreditation Occupation</span></dt>
         <dd>
           <span>{{ accreditation.accreditationOccupation }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription">Accreditation Description</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription">Accreditation Description</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ accreditation.accreditationDescription }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationEmail">Accreditation Email</span></dt>
@@ -107,8 +111,10 @@
         <dd>
           <span>{{ accreditation.accreditationPrintStat }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber">Accreditation Print Number</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber">Accreditation Print Number</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <span>{{ accreditation.accreditationPrintNumber }}</span>
         </dd>
         <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
@@ -140,8 +146,8 @@
             <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityValue }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="accreditation.sexe">
             <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
           </div>
@@ -154,14 +160,14 @@
             }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="accreditation.country">
             <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryName }}</a>
           </div>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span></dt>
+        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
           <div *ngIf="accreditation.city">
             <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityName }}</a>
           </div>

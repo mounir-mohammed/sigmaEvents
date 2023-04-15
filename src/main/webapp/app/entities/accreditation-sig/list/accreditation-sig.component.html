@@ -64,7 +64,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationSexe">
+          <th scope="col" sigmaSortBy="accreditationSexe" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -76,7 +76,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationDescription">
+          <th scope="col" sigmaSortBy="accreditationDescription" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription">Accreditation Description</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -162,7 +162,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationPrintNumber">
+          <th scope="col" sigmaSortBy="accreditationPrintNumber" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber">Accreditation Print Number</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -192,7 +192,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="sexe.sexeId">
+          <th scope="col" sigmaSortBy="sexe.sexeId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -204,13 +204,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="country.countryId">
+          <th scope="col" sigmaSortBy="country.countryId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="city.cityId">
+          <th scope="col" sigmaSortBy="city.cityId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -286,9 +286,9 @@
           <td>{{ accreditation.accreditationSecondName }}</td>
           <td>{{ accreditation.accreditationLastName }}</td>
           <td>{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
-          <td>{{ accreditation.accreditationSexe }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ accreditation.accreditationSexe }}</td>
           <td>{{ accreditation.accreditationOccupation }}</td>
-          <td>{{ accreditation.accreditationDescription }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ accreditation.accreditationDescription }}</td>
           <td>{{ accreditation.accreditationEmail }}</td>
           <td>{{ accreditation.accreditationTel }}</td>
           <td>
@@ -316,7 +316,7 @@
           <td>{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
           <td>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
           <td>{{ accreditation.accreditationPrintStat }}</td>
-          <td>{{ accreditation.accreditationPrintNumber }}</td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ accreditation.accreditationPrintNumber }}</td>
           <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ accreditation.accreditationParams }}</td>
           <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ accreditation.accreditationAttributs }}</td>
           <td>{{ accreditation.accreditationStat }}</td>
@@ -325,7 +325,7 @@
               <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityValue }}</a>
             </div>
           </td>
-          <td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div *ngIf="accreditation.sexe">
               <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
             </div>
@@ -337,12 +337,12 @@
               }}</a>
             </div>
           </td>
-          <td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div *ngIf="accreditation.country">
               <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryName }}</a>
             </div>
           </td>
-          <td>
+          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
             <div *ngIf="accreditation.city">
               <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityName }}</a>
             </div>
