@@ -13,6 +13,7 @@ import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-operation-history-sig-update',
@@ -61,7 +62,7 @@ export class OperationHistorySigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const operationHistory = this.operationHistoryFormService.getOperationHistorySig(this.editForm);
-    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+    if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
       operationHistory.event = this.currentAccount?.printingCentre?.event;
     }
     if (operationHistory.operationHistoryId !== null) {

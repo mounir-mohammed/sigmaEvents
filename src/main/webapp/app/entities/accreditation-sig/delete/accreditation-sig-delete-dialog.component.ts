@@ -5,6 +5,7 @@ import { IAccreditationSig } from '../accreditation-sig.model';
 import { AccreditationSigService } from '../service/accreditation-sig.service';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
 import { AccountService } from 'app/core/auth/account.service';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   templateUrl: './accreditation-sig-delete-dialog.component.html',
@@ -23,7 +24,7 @@ export class AccreditationSigDeleteDialogComponent {
   }
 
   confirmDelete(accreditation?: IAccreditationSig): void {
-    if (this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])) {
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
       this.confirmDeleteAdmin(accreditation);
     } else {
       this.confirmDeleteUser(accreditation);

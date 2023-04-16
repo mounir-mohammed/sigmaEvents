@@ -14,6 +14,7 @@ import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-area-sig-update',
@@ -87,7 +88,7 @@ export class AreaSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const area = this.areaFormService.getAreaSig(this.editForm);
-    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+    if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
       area.event = this.currentAccount?.printingCentre?.event;
     }
     if (area.areaId !== null) {

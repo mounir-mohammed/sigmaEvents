@@ -14,6 +14,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-organiz-sig',
@@ -104,7 +105,7 @@ export class OrganizSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
-    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+    if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
       this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
     }
   }

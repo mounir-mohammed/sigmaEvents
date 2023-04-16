@@ -13,6 +13,7 @@ import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-code-sig-update',
@@ -60,7 +61,7 @@ export class CodeSigUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const code = this.codeFormService.getCodeSig(this.editForm);
-    if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+    if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
       code.event = this.currentAccount?.printingCentre?.event;
     }
     if (code.codeId !== null) {

@@ -42,6 +42,7 @@ import { IDayPassInfoSig } from 'app/entities/day-pass-info-sig/day-pass-info-si
 import { DayPassInfoSigService } from 'app/entities/day-pass-info-sig/service/day-pass-info-sig.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -174,7 +175,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
     if (event.submitter.name == 'Save') {
       this.isSaving = true;
       const accreditation = this.accreditationFormService.getAccreditationSig(this.editForm);
-      if (!this.accountService.hasAnyAuthority('ROLE_ADMIN')) {
+      if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
         accreditation.event = this.currentAccount?.printingCentre?.event;
       }
       if (accreditation.accreditationId !== null) {
