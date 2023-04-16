@@ -113,6 +113,9 @@ export class AccreditationSigComponent implements OnInit {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.accreditations = dataFromBody;
+    if (!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])) {
+      this.accreditations = this.accreditations?.filter(accreditation => accreditation.accreditationStat);
+    }
   }
 
   protected fillComponentAttributesFromResponseBody(data: IAccreditationSig[] | null): IAccreditationSig[] {
@@ -129,7 +132,6 @@ export class AccreditationSigComponent implements OnInit {
     ascending?: boolean,
     filterOptions?: IFilterOption[]
   ): Observable<EntityArrayResponseType> {
-    console.log('TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST');
     this.isLoading = true;
     const pageToLoad: number = page ?? 1;
     const queryObject: any = {
@@ -140,8 +142,6 @@ export class AccreditationSigComponent implements OnInit {
     };
     filterOptions?.forEach(filterOption => {
       queryObject[filterOption.name] = filterOption.values;
-      console.log(filterOption.name);
-      console.log(filterOption.values);
     });
     return this.accreditationService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }

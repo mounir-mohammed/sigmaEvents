@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAccreditationSig } from '../accreditation-sig.model';
 import { AccreditationSigService } from '../service/accreditation-sig.service';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   templateUrl: './accreditation-sig-delete-dialog.component.html',
@@ -11,15 +12,39 @@ import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
 export class AccreditationSigDeleteDialogComponent {
   accreditation?: IAccreditationSig;
 
-  constructor(protected accreditationService: AccreditationSigService, protected activeModal: NgbActiveModal) {}
+  constructor(
+    protected accreditationService: AccreditationSigService,
+    protected activeModal: NgbActiveModal,
+    protected accountService: AccountService
+  ) {}
 
   cancel(): void {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: number): void {
-    this.accreditationService.delete(id).subscribe(() => {
-      this.activeModal.close(ITEM_DELETED_EVENT);
-    });
+  confirmDelete(accreditation?: IAccreditationSig): void {
+    if (this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])) {
+      this.confirmDeleteAdmin(accreditation);
+    } else {
+      this.confirmDeleteUser(accreditation);
+    }
+  }
+
+  confirmDeleteUser(accreditation?: IAccreditationSig): void {
+    if (accreditation) {
+      accreditation!.accreditationStat = false;
+      this.accreditationService.update(accreditation).subscribe(() => {
+        this.activeModal.close(ITEM_DELETED_EVENT);
+      });
+    }
+  }
+
+  confirmDeleteAdmin(accreditation?: IAccreditationSig): void {
+    if (accreditation) {
+      accreditation!.accreditationStat = false;
+      this.accreditationService.delete(accreditation.accreditationId).subscribe(() => {
+        this.activeModal.close(ITEM_DELETED_EVENT);
+      });
+    }
   }
 }
