@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IInfoSuppSig } from '../info-supp-sig.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-info-supp-sig-detail',
@@ -9,6 +10,7 @@ import { IInfoSuppSig } from '../info-supp-sig.model';
 })
 export class InfoSuppSigDetailComponent implements OnInit {
   infoSupp: IInfoSuppSig | null = null;
+  authority = Authority;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

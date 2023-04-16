@@ -203,7 +203,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.attachement.attachementParams" for="field_attachementParams"
             >Attachement Params</label
           >
@@ -217,7 +217,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.attachement.attachementAttributs" for="field_attachementAttributs"
             >Attachement Attributs</label
           >
@@ -268,7 +268,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.attachement.event" for="field_event">Event</label>
           <select
             class="form-control"

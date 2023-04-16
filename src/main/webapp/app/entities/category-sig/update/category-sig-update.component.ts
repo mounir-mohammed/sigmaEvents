@@ -27,6 +27,7 @@ export class CategorySigUpdateComponent implements OnInit {
   isSaving = false;
   category: ICategorySig | null = null;
   public color = '#cccccc';
+  authority = Authority;
 
   printingModelsSharedCollection: IPrintingModelSig[] = [];
   eventsSharedCollection: IEventSig[] = [];

@@ -180,7 +180,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizParams" for="field_organizParams">Organiz Params</label>
           <input
             type="text"
@@ -192,7 +192,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizAttributs" for="field_organizAttributs"
             >Organiz Attributs</label
           >
@@ -249,7 +249,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.event" for="field_event">Event</label>
           <select
             class="form-control"

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IDayPassInfoSig } from '../day-pass-info-sig.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-day-pass-info-sig-detail',
@@ -10,6 +11,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 })
 export class DayPassInfoSigDetailComponent implements OnInit {
   dayPassInfo: IDayPassInfoSig | null = null;
+  authority = Authority;
 
   constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
 

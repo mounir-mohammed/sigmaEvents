@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IAccreditationSig } from '../accreditation-sig.model';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { AccountService } from 'app/core/auth/account.service';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-accreditation-sig-detail',
@@ -11,6 +12,7 @@ import { AccountService } from 'app/core/auth/account.service';
 })
 export class AccreditationSigDetailComponent implements OnInit {
   accreditation: IAccreditationSig | null = null;
+  authority = Authority;
 
   constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute, protected accountService: AccountService) {}
 

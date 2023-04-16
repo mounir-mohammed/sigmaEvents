@@ -216,7 +216,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassParams" for="field_dayPassParams"
             >Day Pass Params</label
           >
@@ -230,7 +230,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassAttributs" for="field_dayPassAttributs"
             >Day Pass Attributs</label
           >
@@ -258,7 +258,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.dayPassInfo.event" for="field_event">Event</label>
           <select
             class="form-control"

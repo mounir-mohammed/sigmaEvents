@@ -32,6 +32,7 @@ export class SiteSigUpdateComponent implements OnInit {
 
   editForm: SiteSigFormGroup = this.siteFormService.createSiteSigFormGroup();
   public color = '#cccccc';
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

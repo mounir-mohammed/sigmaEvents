@@ -82,13 +82,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="organizParams" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <th scope="col" sigmaSortBy="organizParams" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.organiz.organizParams">Organiz Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="organizAttributs" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <th scope="col" sigmaSortBy="organizAttributs" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.organiz.organizAttributs">Organiz Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -112,7 +112,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.organiz.event">Event</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -142,8 +142,8 @@
           <td>{{ organiz.organizFax }}</td>
           <td>{{ organiz.organizEmail }}</td>
           <td>{{ organiz.organizAdresse }}</td>
-          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ organiz.organizParams }}</td>
-          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ organiz.organizAttributs }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ organiz.organizParams }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ organiz.organizAttributs }}</td>
           <td>{{ organiz.organizStat }}</td>
           <td>
             <div *ngIf="organiz.country">
@@ -155,7 +155,7 @@
               <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityName }}</a>
             </div>
           </td>
-          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div *ngIf="organiz.event">
               <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventName }}</a>
             </div>
@@ -163,7 +163,7 @@
           <td class="text-end">
             <div class="btn-group">
               <button
-                *sigmaHasAnyAuthority="['ROLE_ADMIN']"
+                *sigmaHasAnyAuthority="[authority.ADMIN]"
                 type="submit"
                 [routerLink]="['/printing-centre-sig']"
                 [queryParams]="{ 'filter[organizId.in]': organiz.organizId }"

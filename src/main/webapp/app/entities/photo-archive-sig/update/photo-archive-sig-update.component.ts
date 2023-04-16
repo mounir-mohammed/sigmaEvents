@@ -31,6 +31,7 @@ export class PhotoArchiveSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: PhotoArchiveSigFormGroup = this.photoArchiveFormService.createPhotoArchiveSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

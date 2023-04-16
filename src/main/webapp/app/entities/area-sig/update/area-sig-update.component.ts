@@ -29,6 +29,7 @@ export class AreaSigUpdateComponent implements OnInit {
 
   editForm: AreaSigFormGroup = this.areaFormService.createAreaSigFormGroup();
   public color = '#cccccc';
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

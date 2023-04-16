@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IOperationHistorySig } from '../operation-history-sig.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-operation-history-sig-detail',
@@ -9,6 +10,7 @@ import { IOperationHistorySig } from '../operation-history-sig.model';
 })
 export class OperationHistorySigDetailComponent implements OnInit {
   operationHistory: IOperationHistorySig | null = null;
+  authority = Authority;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

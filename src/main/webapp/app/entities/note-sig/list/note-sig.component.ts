@@ -31,6 +31,7 @@ export class NoteSigComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  authority = Authority;
 
   constructor(
     protected noteService: NoteSigService,

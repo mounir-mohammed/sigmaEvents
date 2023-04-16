@@ -51,14 +51,14 @@
         <dd>
           <span>{{ organiz.organizAdresse }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.organiz.organizParams">Organiz Params</span></dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.organiz.organizParams">Organiz Params</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ organiz.organizParams }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.organiz.organizAttributs">Organiz Attributs</span>
         </dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ organiz.organizAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.organiz.organizStat">Organiz Stat</span></dt>
@@ -77,8 +77,8 @@
             <a [routerLink]="['/city-sig', organiz.city.cityId, 'view']">{{ organiz.city.cityName }}</a>
           </div>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.organiz.event">Event</span></dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.organiz.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <div *ngIf="organiz.event">
             <a [routerLink]="['/event-sig', organiz.event.eventId, 'view']">{{ organiz.event.eventName }}</a>
           </div>

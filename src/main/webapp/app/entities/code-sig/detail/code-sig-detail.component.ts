@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ICodeSig } from '../code-sig.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-code-sig-detail',
@@ -9,6 +10,7 @@ import { ICodeSig } from '../code-sig.model';
 })
 export class CodeSigDetailComponent implements OnInit {
   code: ICodeSig | null = null;
+  authority = Authority;
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

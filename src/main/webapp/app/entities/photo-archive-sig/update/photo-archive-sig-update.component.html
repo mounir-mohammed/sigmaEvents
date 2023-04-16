@@ -155,7 +155,7 @@
           </div>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveParams" for="field_photoArchiveParams"
             >Photo Archive Params</label
           >
@@ -169,7 +169,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.photoArchiveAttributs" for="field_photoArchiveAttributs"
             >Photo Archive Attributs</label
           >
@@ -216,7 +216,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.photoArchive.event" for="field_event">Event</label>
           <select
             class="form-control"

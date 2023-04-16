@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IFonctionSig } from '../fonction-sig.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-fonction-sig-detail',
@@ -10,6 +11,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 })
 export class FonctionSigDetailComponent implements OnInit {
   fonction: IFonctionSig | null = null;
+  authority = Authority;
 
   constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
 

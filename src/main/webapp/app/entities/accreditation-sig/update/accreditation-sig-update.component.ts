@@ -70,6 +70,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
   dayPassInfosSharedCollection: IDayPassInfoSig[] = [];
 
   editForm: AccreditationSigFormGroup = this.accreditationFormService.createAccreditationSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

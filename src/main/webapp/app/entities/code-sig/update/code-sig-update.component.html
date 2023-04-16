@@ -66,7 +66,7 @@
           <input type="checkbox" class="form-check" name="codeUsed" id="field_codeUsed" data-cy="codeUsed" formControlName="codeUsed" />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeParams" for="field_codeParams">Code Params</label>
           <input
             type="text"
@@ -78,7 +78,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeAttributs" for="field_codeAttributs">Code Attributs</label>
           <input
             type="text"
@@ -116,7 +116,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.code.event" for="field_event">Event</label>
           <select
             class="form-control"

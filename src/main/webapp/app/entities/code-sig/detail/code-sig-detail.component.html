@@ -30,12 +30,12 @@
         <dd>
           <span>{{ code.codeUsed }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.code.codeParams">Code Params</span></dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.code.codeParams">Code Params</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ code.codeParams }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.code.codeAttributs">Code Attributs</span></dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.code.codeAttributs">Code Attributs</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ code.codeAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.code.codeStat">Code Stat</span></dt>
@@ -48,8 +48,8 @@
             <a [routerLink]="['/code-type-sig', code.codeType.codeTypeId, 'view']">{{ code.codeType.codeTypeValue }}</a>
           </div>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.code.event">Event</span></dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.code.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <div *ngIf="code.event">
             <a [routerLink]="['/event-sig', code.event.eventId, 'view']">{{ code.event.eventName }}</a>
           </div>

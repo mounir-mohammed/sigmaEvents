@@ -182,7 +182,7 @@
           </div>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe" for="field_accreditationSexe"
             >Accreditation Sexe</label
           >
@@ -213,7 +213,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription"
@@ -375,7 +375,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreationDate"
@@ -395,7 +395,7 @@
           </div>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdateDate"
@@ -415,7 +415,7 @@
           </div>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser"
@@ -432,7 +432,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateStart" for="field_accreditationDateStart"
             >Accreditation Date Start</label
           >
@@ -449,7 +449,7 @@
           </div>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateEnd" for="field_accreditationDateEnd"
             >Accreditation Date End</label
           >
@@ -466,7 +466,7 @@
           </div>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat" for="field_accreditationPrintStat"
             >Accreditation Print Stat</label
           >
@@ -480,7 +480,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber"
@@ -497,7 +497,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams" for="field_accreditationParams"
             >Accreditation Params</label
           >
@@ -511,7 +511,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs" for="field_accreditationAttributs"
             >Accreditation Attributs</label
           >
@@ -525,7 +525,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
             >Accreditation Stat</label
           >
@@ -577,7 +577,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.sexe" for="field_sexe">Sexe</label>
           <select class="form-control" id="field_sexe" data-cy="sexe" name="sexe" formControlName="sexe" [compareWith]="compareSexeSig">
             <option [ngValue]="null"></option>
@@ -606,7 +606,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.country" for="field_country">Country</label>
           <select
             class="form-control"
@@ -627,7 +627,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
           <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
             <option [ngValue]="null"></option>
@@ -723,7 +723,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.status" for="field_status">Status</label>
           <select
             class="form-control"
@@ -744,7 +744,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.attachement" for="field_attachement">Attachement</label>
           <select
             class="form-control"
@@ -765,7 +765,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
           <select class="form-control" id="field_code" data-cy="code" name="code" formControlName="code" [compareWith]="compareCodeSig">
             <option [ngValue]="null"></option>
@@ -775,7 +775,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo" for="field_dayPassInfo">Day Pass Info</label>
           <select
             class="form-control"
@@ -796,7 +796,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
           <select
             class="form-control"

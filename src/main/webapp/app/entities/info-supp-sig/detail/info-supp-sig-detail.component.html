@@ -22,16 +22,16 @@
         <dd>
           <span>{{ infoSupp.infoSuppDescription }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppParams">Info Supp Params</span>
         </dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ infoSupp.infoSuppParams }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppAttributs">Info Supp Attributs</span>
         </dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ infoSupp.infoSuppAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.infoSupp.infoSuppStat">Info Supp Stat</span></dt>
@@ -54,8 +54,8 @@
             }}</a>
           </div>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.infoSupp.event">Event</span></dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.infoSupp.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <div *ngIf="infoSupp.event">
             <a [routerLink]="['/event-sig', infoSupp.event.eventId, 'view']">{{ infoSupp.event.eventName }}</a>
           </div>

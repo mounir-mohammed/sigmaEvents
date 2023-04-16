@@ -34,6 +34,7 @@ export class OrganizSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: OrganizSigFormGroup = this.organizFormService.createOrganizSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

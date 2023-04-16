@@ -35,6 +35,7 @@ export class FonctionSigUpdateComponent implements OnInit {
 
   editForm: FonctionSigFormGroup = this.fonctionFormService.createFonctionSigFormGroup();
   public color = '#cccccc';
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

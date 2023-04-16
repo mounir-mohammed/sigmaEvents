@@ -10,6 +10,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-navbar',
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  authority = Authority;
 
   constructor(
     private loginService: LoginService,

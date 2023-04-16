@@ -43,7 +43,7 @@
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="event-sig"
@@ -55,7 +55,7 @@
                 <span sigmaTranslate="global.menu.entities.eventSig">Event</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="printing-type-sig"
@@ -67,7 +67,7 @@
                 <span sigmaTranslate="global.menu.entities.printingTypeSig">Printing Type</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="log-history-sig"
@@ -79,7 +79,7 @@
                 <span sigmaTranslate="global.menu.entities.logHistorySig">Log History</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="area-sig"
@@ -91,7 +91,7 @@
                 <span sigmaTranslate="global.menu.entities.areaSig">Area</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="fonction-sig"
@@ -103,7 +103,7 @@
                 <span sigmaTranslate="global.menu.entities.fonctionSig">Fonction</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="category-sig"
@@ -115,7 +115,7 @@
                 <span sigmaTranslate="global.menu.entities.categorySig">Category</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="printing-model-sig"
@@ -127,7 +127,7 @@
                 <span sigmaTranslate="global.menu.entities.printingModelSig">Printing Model</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="code-type-sig"
@@ -139,7 +139,7 @@
                 <span sigmaTranslate="global.menu.entities.codeTypeSig">Code Type</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="code-sig"
@@ -151,7 +151,7 @@
                 <span sigmaTranslate="global.menu.entities.codeSig">Code</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="accreditation-type-sig"
@@ -163,7 +163,7 @@
                 <span sigmaTranslate="global.menu.entities.accreditationTypeSig">Accreditation Type</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="authentification-type-sig"
@@ -175,7 +175,7 @@
                 <span sigmaTranslate="global.menu.entities.authentificationTypeSig">Authentification Type</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="status-sig"
@@ -187,7 +187,7 @@
                 <span sigmaTranslate="global.menu.entities.statusSig">Status</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="attachement-type-sig"
@@ -199,7 +199,7 @@
                 <span sigmaTranslate="global.menu.entities.attachementTypeSig">Attachement Type</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="info-supp-type-sig"
@@ -211,7 +211,7 @@
                 <span sigmaTranslate="global.menu.entities.infoSuppTypeSig">Info Supp Type</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="info-supp-sig"
@@ -223,7 +223,7 @@
                 <span sigmaTranslate="global.menu.entities.infoSuppSig">Info Supp</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="attachement-sig"
@@ -235,7 +235,7 @@
                 <span sigmaTranslate="global.menu.entities.attachementSig">Attachement</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="organiz-sig"
@@ -247,7 +247,7 @@
                 <span sigmaTranslate="global.menu.entities.organizSig">Organiz</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="civility-sig"
@@ -259,7 +259,7 @@
                 <span sigmaTranslate="global.menu.entities.civilitySig">Civility</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="photo-archive-sig"
@@ -271,7 +271,7 @@
                 <span sigmaTranslate="global.menu.entities.photoArchiveSig">Photo Archive</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="nationality-sig"
@@ -283,7 +283,7 @@
                 <span sigmaTranslate="global.menu.entities.nationalitySig">Nationality</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="country-sig"
@@ -295,7 +295,7 @@
                 <span sigmaTranslate="global.menu.entities.countrySig">Country</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="city-sig"
@@ -307,7 +307,7 @@
                 <span sigmaTranslate="global.menu.entities.citySig">City</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="site-sig"
@@ -319,7 +319,7 @@
                 <span sigmaTranslate="global.menu.entities.siteSig">Site</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN', 'EVENT_USER']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, 'EVENT_USER']">
               <a
                 class="dropdown-item"
                 routerLink="accreditation-sig"
@@ -331,7 +331,7 @@
                 <span sigmaTranslate="global.menu.entities.accreditationSig">Accreditation</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="day-pass-info-sig"
@@ -343,7 +343,7 @@
                 <span sigmaTranslate="global.menu.entities.dayPassInfoSig">Day Pass Info</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="operation-type-sig"
@@ -355,7 +355,7 @@
                 <span sigmaTranslate="global.menu.entities.operationTypeSig">Operation Type</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="sexe-sig"
@@ -367,7 +367,7 @@
                 <span sigmaTranslate="global.menu.entities.sexeSig">Sexe</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="note-sig"
@@ -379,7 +379,7 @@
                 <span sigmaTranslate="global.menu.entities.noteSig">Note</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN', 'EVENT_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="operation-history-sig"
@@ -391,7 +391,7 @@
                 <span sigmaTranslate="global.menu.entities.operationHistorySig">Operation History</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="printing-centre-sig"
@@ -403,7 +403,7 @@
                 <span sigmaTranslate="global.menu.entities.printingCentreSig">Printing Centre</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="language-sig"
@@ -415,7 +415,7 @@
                 <span sigmaTranslate="global.menu.entities.languageSig">Language</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="setting-sig"
@@ -427,7 +427,7 @@
                 <span sigmaTranslate="global.menu.entities.settingSig">Setting</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="cloning-sig"
@@ -439,7 +439,7 @@
                 <span sigmaTranslate="global.menu.entities.cloningSig">Cloning</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="printing-server-sig"
@@ -451,7 +451,7 @@
                 <span sigmaTranslate="global.menu.entities.printingServerSig">Printing Server</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="check-accreditation-history-sig"
@@ -463,7 +463,7 @@
                 <span sigmaTranslate="global.menu.entities.checkAccreditationHistorySig">Check Accreditation History</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="check-accreditation-report-sig"
@@ -475,7 +475,7 @@
                 <span sigmaTranslate="global.menu.entities.checkAccreditationReportSig">Check Accreditation Report</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="event-form-sig"
@@ -487,7 +487,7 @@
                 <span sigmaTranslate="global.menu.entities.eventFormSig">Event Form</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="event-field-sig"
@@ -499,7 +499,7 @@
                 <span sigmaTranslate="global.menu.entities.eventFieldSig">Event Field</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a
                 class="dropdown-item"
                 routerLink="event-control-sig"
@@ -515,7 +515,7 @@
           </ul>
         </li>
         <li
-          *sigmaHasAnyAuthority="['ROLE_ADMIN']"
+          *sigmaHasAnyAuthority="[authority.ADMIN]"
           ngbDropdown
           class="nav-item dropdown pointer"
           display="dynamic"
@@ -529,37 +529,37 @@
             </span>
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="admin-menu">
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
                 <span sigmaTranslate="global.menu.admin.userManagement">User management</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
                 <span sigmaTranslate="global.menu.admin.metrics">Metrics</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
                 <span sigmaTranslate="global.menu.admin.health">Health</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
                 <span sigmaTranslate="global.menu.admin.configuration">Configuration</span>
               </a>
             </li>
-            <li *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
               <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
                 <span sigmaTranslate="global.menu.admin.logs">Logs</span>
               </a>
             </li>
-            <ng-container *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <ng-container *sigmaHasAnyAuthority="[authority.ADMIN]">
               <li *ngIf="openAPIEnabled">
                 <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
                   <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
@@ -568,7 +568,7 @@
               </li>
             </ng-container>
             <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-            <ng-container *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+            <ng-container *sigmaHasAnyAuthority="[authority.ADMIN]">
               <li *ngIf="!inProduction">
                 <a class="dropdown-item" href="./h2-console/" target="_tab" (click)="collapseNavbar()">
                   <fa-icon icon="database" [fixedWidth]="true"></fa-icon>

@@ -31,6 +31,7 @@ export class AttachementSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: AttachementSigFormGroup = this.attachementFormService.createAttachementSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

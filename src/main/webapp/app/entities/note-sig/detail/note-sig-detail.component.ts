@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { INoteSig } from '../note-sig.model';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-note-sig-detail',
@@ -9,7 +10,7 @@ import { INoteSig } from '../note-sig.model';
 })
 export class NoteSigDetailComponent implements OnInit {
   note: INoteSig | null = null;
-
+  authority = Authority;
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {

@@ -32,6 +32,7 @@ export class AccreditationSigComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  authority = Authority;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -114,7 +115,7 @@ export class AccreditationSigComponent implements OnInit {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.accreditations = dataFromBody;
-    if (!this.accountService.hasAnyAuthority([Authority.ADMIN, Authority.EVENT_ADMIN])) {
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
       this.accreditations = this.accreditations?.filter(accreditation => accreditation.accreditationStat);
     }
   }

@@ -28,6 +28,7 @@ export class CodeSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: CodeSigFormGroup = this.codeFormService.createCodeSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected codeService: CodeSigService,

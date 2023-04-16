@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IAreaSig } from '../area-sig.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-area-sig-detail',
@@ -10,6 +11,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 })
 export class AreaSigDetailComponent implements OnInit {
   area: IAreaSig | null = null;
+  authority = Authority;
 
   constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
 

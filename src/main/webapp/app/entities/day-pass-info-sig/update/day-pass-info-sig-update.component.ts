@@ -28,6 +28,7 @@ export class DayPassInfoSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: DayPassInfoSigFormGroup = this.dayPassInfoFormService.createDayPassInfoSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected dataUtils: DataUtils,

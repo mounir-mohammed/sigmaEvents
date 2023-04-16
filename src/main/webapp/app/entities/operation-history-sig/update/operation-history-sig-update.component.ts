@@ -28,6 +28,7 @@ export class OperationHistorySigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: OperationHistorySigFormGroup = this.operationHistoryFormService.createOperationHistorySigFormGroup();
+  authority = Authority;
 
   constructor(
     protected operationHistoryService: OperationHistorySigService,

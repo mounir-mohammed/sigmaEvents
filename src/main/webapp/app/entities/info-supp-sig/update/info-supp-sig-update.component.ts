@@ -31,6 +31,7 @@ export class InfoSuppSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: InfoSuppSigFormGroup = this.infoSuppFormService.createInfoSuppSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected infoSuppService: InfoSuppSigService,

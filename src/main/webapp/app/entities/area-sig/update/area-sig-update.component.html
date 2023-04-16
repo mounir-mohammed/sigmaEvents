@@ -166,7 +166,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaParams" for="field_areaParams">Area Params</label>
           <input
             type="text"
@@ -178,7 +178,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.area.areaAttributs" for="field_areaAttributs">Area Attributs</label>
           <input
             type="text"
@@ -195,7 +195,7 @@
           <input type="checkbox" class="form-check" name="areaStat" id="field_areaStat" data-cy="areaStat" formControlName="areaStat" />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.area.event" for="field_event">Event</label>
           <select
             class="form-control"

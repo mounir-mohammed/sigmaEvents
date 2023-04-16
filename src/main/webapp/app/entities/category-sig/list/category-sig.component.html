@@ -70,13 +70,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="categoryParams" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <th scope="col" sigmaSortBy="categoryParams" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.category.categoryParams">Category Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="categoryAttributs" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <th scope="col" sigmaSortBy="categoryAttributs" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.category.categoryAttributs">Category Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -88,13 +88,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="printingModel.printingModelId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <th scope="col" sigmaSortBy="printingModel.printingModelId" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.category.printingModel">Printing Model</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.category.event">Event</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -122,17 +122,17 @@
             </a>
             <span *ngIf="category.categoryLogo">{{ category.categoryLogoContentType }}, {{ byteSize(category.categoryLogo) }}</span>
           </td>
-          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ category.categoryParams }}</td>
-          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">{{ category.categoryAttributs }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ category.categoryParams }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ category.categoryAttributs }}</td>
           <td>{{ category.categoryStat }}</td>
-          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div *ngIf="category.printingModel">
               <a [routerLink]="['/printing-model-sig', category.printingModel.printingModelId, 'view']">{{
                 category.printingModel.printingModelName
               }}</a>
             </div>
           </td>
-          <td *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div *ngIf="category.event">
               <a [routerLink]="['/event-sig', category.event.eventId, 'view']">{{ category.event.eventName }}</a>
             </div>

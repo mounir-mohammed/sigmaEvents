@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ISiteSig } from '../site-sig.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Authority } from 'app/config/authority.constants';
 
 @Component({
   selector: 'sigma-site-sig-detail',
@@ -10,6 +11,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 })
 export class SiteSigDetailComponent implements OnInit {
   site: ISiteSig | null = null;
+  authority = Authority;
 
   constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
 

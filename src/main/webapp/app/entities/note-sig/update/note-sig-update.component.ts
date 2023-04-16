@@ -28,6 +28,7 @@ export class NoteSigUpdateComponent implements OnInit {
   eventsSharedCollection: IEventSig[] = [];
 
   editForm: NoteSigFormGroup = this.noteFormService.createNoteSigFormGroup();
+  authority = Authority;
 
   constructor(
     protected noteService: NoteSigService,

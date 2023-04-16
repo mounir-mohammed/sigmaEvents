@@ -59,24 +59,24 @@
         <dd>
           <span>{{ dayPassInfo.dayPassInfoNumber }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassParams">Day Pass Params</span>
         </dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ dayPassInfo.dayPassParams }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassAttributs">Day Pass Attributs</span>
         </dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ dayPassInfo.dayPassAttributs }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoStat">Day Pass Info Stat</span></dt>
         <dd>
           <span>{{ dayPassInfo.dayPassInfoStat }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.dayPassInfo.event">Event</span></dt>
-        <dd *sigmaHasAnyAuthority="['ROLE_ADMIN']">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.dayPassInfo.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <div *ngIf="dayPassInfo.event">
             <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventName }}</a>
           </div>
