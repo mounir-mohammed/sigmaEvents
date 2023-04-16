@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IAccreditationSig } from '../accreditation-sig.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'sigma-accreditation-sig-detail',
@@ -11,7 +12,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 export class AccreditationSigDetailComponent implements OnInit {
   accreditation: IAccreditationSig | null = null;
 
-  constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute) {}
+  constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute, protected accountService: AccountService) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ accreditation }) => {

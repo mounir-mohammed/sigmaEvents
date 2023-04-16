@@ -34,7 +34,7 @@ export class AccreditationSigComponent implements OnInit {
 
   constructor(
     protected accreditationService: AccreditationSigService,
-    private accountService: AccountService,
+    protected accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected dataUtils: DataUtils,

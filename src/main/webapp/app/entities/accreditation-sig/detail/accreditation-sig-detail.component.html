@@ -143,7 +143,10 @@
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span></dt>
         <dd>
           <div *ngIf="accreditation.civility">
-            <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityValue }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority('ROLE_ADMIN')">
+              <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityValue }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority('ROLE_ADMIN')">{{ accreditation.civility.civilityValue }}</div>
           </div>
         </dd>
         <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span></dt>
@@ -155,9 +158,12 @@
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span></dt>
         <dd>
           <div *ngIf="accreditation.nationality">
-            <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
-              accreditation.nationality.nationalityValue
-            }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority('ROLE_ADMIN')">
+              <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
+                accreditation.nationality.nationalityValue
+              }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority('ROLE_ADMIN')">{{ accreditation.nationality.nationalityValue }}</div>
           </div>
         </dd>
         <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span></dt>
@@ -175,55 +181,89 @@
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span></dt>
         <dd>
           <div *ngIf="accreditation.category">
-            <a [routerLink]="['/category-sig', accreditation.category.categoryId, 'view']">{{ accreditation.category.categoryName }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/category-sig', accreditation.category.categoryId, 'view']">{{ accreditation.category.categoryName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">{{ accreditation.category.categoryName }}</div>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span></dt>
         <dd>
           <div *ngIf="accreditation.fonction">
-            <a [routerLink]="['/fonction-sig', accreditation.fonction.fonctionId, 'view']">{{ accreditation.fonction.fonctionName }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/fonction-sig', accreditation.fonction.fonctionId, 'view']">{{ accreditation.fonction.fonctionName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">{{ accreditation.fonction.fonctionName }}</div>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span></dt>
         <dd>
           <div *ngIf="accreditation.organiz">
-            <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizName }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">{{ accreditation.organiz.organizName }}</div>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span></dt>
         <dd>
           <div *ngIf="accreditation.accreditationType">
-            <a [routerLink]="['/accreditation-type-sig', accreditation.accreditationType.accreditationTypeId, 'view']">{{
-              accreditation.accreditationType.accreditationTypeValue
-            }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority('ROLE_ADMIN')">
+              <a [routerLink]="['/accreditation-type-sig', accreditation.accreditationType.accreditationTypeId, 'view']">{{
+                accreditation.accreditationType.accreditationTypeValue
+              }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority('ROLE_ADMIN')">
+              {{ accreditation.accreditationType.accreditationTypeValue }}
+            </div>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span></dt>
         <dd>
           <div *ngIf="accreditation.status">
-            <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority('ROLE_ADMIN')">
+              <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority('ROLE_ADMIN')">{{ accreditation.status.statusName }}</div>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.attachement">Attachement</span></dt>
         <dd>
           <div *ngIf="accreditation.attachement">
-            <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
-              accreditation.attachement.attachementName
-            }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
+                accreditation.attachement.attachementName
+              }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
+                accreditation.attachement.attachementName
+              }}</a>
+            </div>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.code">Code</span></dt>
         <dd>
           <div *ngIf="accreditation.code">
-            <a [routerLink]="['/code-sig', accreditation.code.codeId, 'view']">{{ accreditation.code.codeValue }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/code-sig', accreditation.code.codeId, 'view']">{{ accreditation.code.codeValue }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">{{ accreditation.code.codeValue }}</div>
           </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo">Day Pass Info</span></dt>
         <dd>
           <div *ngIf="accreditation.dayPassInfo">
-            <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
-              accreditation.dayPassInfo.dayPassInfoName
-            }}</a>
+            <div *ngIf="this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
+                accreditation.dayPassInfo.dayPassInfoName
+              }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(['ROLE_ADMIN', 'EVENT_ADMIN'])">
+              <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
+                accreditation.dayPassInfo.dayPassInfoName
+              }}</a>
+            </div>
           </div>
         </dd>
         <dt *sigmaHasAnyAuthority="['ROLE_ADMIN']"><span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span></dt>
