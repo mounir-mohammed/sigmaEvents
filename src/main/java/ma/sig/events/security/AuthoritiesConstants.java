@@ -15,6 +15,7 @@ public final class AuthoritiesConstants {
     public static final String CAN_ACC_AV_SEARCH = "CAN_ACC_AV_SEARCH";
     public static final String CAN_ACC_MASS_UPDATE = "CAN_ACC_MASS_UPDATE";
     public static final String CAN_ACC_IMPORT = "CAN_ACC_IMPORT";
+    public static final String CAN_ACC_ACTIVAT = "CAN_ACC_ACTIVAT";
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";
 
     private AuthoritiesConstants() {}

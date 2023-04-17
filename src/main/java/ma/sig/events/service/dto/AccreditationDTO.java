@@ -73,6 +73,8 @@ public class AccreditationDTO implements Serializable {
 
     private Boolean accreditationStat;
 
+    private Boolean accreditationActivated;
+
     private Set<SiteDTO> sites = new HashSet<>();
 
     private EventDTO event;
@@ -311,6 +313,14 @@ public class AccreditationDTO implements Serializable {
         this.accreditationStat = accreditationStat;
     }
 
+    public Boolean getAccreditationActivated() {
+        return accreditationActivated;
+    }
+
+    public void setAccreditationActivated(Boolean accreditationActivated) {
+        this.accreditationActivated = accreditationActivated;
+    }
+
     public Set<SiteDTO> getSites() {
         return sites;
     }
@@ -481,6 +491,7 @@ public class AccreditationDTO implements Serializable {
             ", accreditationParams='" + getAccreditationParams() + "'" +
             ", accreditationAttributs='" + getAccreditationAttributs() + "'" +
             ", accreditationStat='" + getAccreditationStat() + "'" +
+            ", accreditationActivated='" + getAccreditationActivated() + "'" +
             ", sites=" + getSites() +
             ", event=" + getEvent() +
             ", civility=" + getCivility() +

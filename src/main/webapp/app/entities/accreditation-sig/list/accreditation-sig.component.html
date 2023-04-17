@@ -186,6 +186,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" sigmaSortBy="accreditationActivated">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated">Accreditation Activated</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" sigmaSortBy="civility.civilityId">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span>
@@ -320,6 +326,7 @@
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationAttributs }}</td>
           <td>{{ accreditation.accreditationStat }}</td>
+          <td>{{ accreditation.accreditationActivated }}</td>
           <td>
             <div *ngIf="accreditation.civility">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">

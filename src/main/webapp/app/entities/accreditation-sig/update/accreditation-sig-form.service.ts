@@ -44,6 +44,7 @@ type AccreditationSigFormDefaults = Pick<
   | 'accreditationDateEnd'
   | 'accreditationPrintStat'
   | 'accreditationStat'
+  | 'accreditationActivated'
   | 'sites'
 >;
 
@@ -74,6 +75,7 @@ type AccreditationSigFormGroupContent = {
   accreditationParams: FormControl<AccreditationSigFormRawValue['accreditationParams']>;
   accreditationAttributs: FormControl<AccreditationSigFormRawValue['accreditationAttributs']>;
   accreditationStat: FormControl<AccreditationSigFormRawValue['accreditationStat']>;
+  accreditationActivated: FormControl<AccreditationSigFormRawValue['accreditationActivated']>;
   sites: FormControl<AccreditationSigFormRawValue['sites']>;
   event: FormControl<AccreditationSigFormRawValue['event']>;
   civility: FormControl<AccreditationSigFormRawValue['civility']>;
@@ -141,6 +143,7 @@ export class AccreditationSigFormService {
       accreditationParams: new FormControl(accreditationRawValue.accreditationParams),
       accreditationAttributs: new FormControl(accreditationRawValue.accreditationAttributs),
       accreditationStat: new FormControl(accreditationRawValue.accreditationStat),
+      accreditationActivated: new FormControl(accreditationRawValue.accreditationActivated),
       sites: new FormControl(accreditationRawValue.sites ?? []),
       event: new FormControl(accreditationRawValue.event),
       civility: new FormControl(accreditationRawValue.civility),
@@ -186,6 +189,7 @@ export class AccreditationSigFormService {
       accreditationDateEnd: currentTime,
       accreditationPrintStat: false,
       accreditationStat: false,
+      accreditationActivated: false,
       sites: [],
     };
   }

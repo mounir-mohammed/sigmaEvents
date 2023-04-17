@@ -42,6 +42,7 @@ export interface IAccreditationSig {
   accreditationParams?: string | null;
   accreditationAttributs?: string | null;
   accreditationStat?: boolean | null;
+  accreditationActivated?: boolean | null;
   sites?: Pick<ISiteSig, 'siteId' | 'siteName' | 'siteStat'>[] | null;
   event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
   civility?: Pick<ICivilitySig, 'civilityId' | 'civilityValue' | 'civilityStat'> | null;

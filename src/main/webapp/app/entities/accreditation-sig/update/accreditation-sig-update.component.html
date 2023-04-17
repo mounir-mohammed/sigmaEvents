@@ -525,7 +525,7 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
             >Accreditation Stat</label
           >
@@ -536,6 +536,20 @@
             id="field_accreditationStat"
             data-cy="accreditationStat"
             formControlName="accreditationStat"
+          />
+        </div>
+
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated" for="field_accreditationActivated"
+            >Accreditation Stat</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="accreditationActivated"
+            id="field_accreditationActivated"
+            data-cy="accreditationActivated"
+            formControlName="accreditationActivated"
           />
         </div>
 

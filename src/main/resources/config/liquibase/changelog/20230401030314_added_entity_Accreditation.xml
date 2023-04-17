@@ -89,6 +89,9 @@
             <column name="accreditation_stat" type="boolean">
                 <constraints nullable="true" />
             </column>
+            <column name="accreditation_activated" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="event_event_id" type="bigint">
                 <constraints nullable="true" />
             </column>

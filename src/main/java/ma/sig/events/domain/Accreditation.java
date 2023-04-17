@@ -109,6 +109,9 @@ public class Accreditation implements Serializable {
     @Column(name = "accreditation_stat")
     private Boolean accreditationStat;
 
+    @Column(name = "accreditation_activated")
+    private Boolean accreditationActivated;
+
     @OneToMany(mappedBy = "accreditation")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "accreditation", "event" }, allowSetters = true)
@@ -559,6 +562,19 @@ public class Accreditation implements Serializable {
         return this;
     }
 
+    public void setAccreditationActivated(Boolean accreditationActivated) {
+        this.accreditationActivated = accreditationActivated;
+    }
+
+    public Boolean getAccreditationActivated() {
+        return this.accreditationActivated;
+    }
+
+    public Accreditation accreditationActivated(Boolean accreditationActivated) {
+        this.setAccreditationActivated(accreditationActivated);
+        return this;
+    }
+
     public void setAccreditationStat(Boolean accreditationStat) {
         this.accreditationStat = accreditationStat;
     }
@@ -943,6 +959,7 @@ public class Accreditation implements Serializable {
             ", accreditationParams='" + getAccreditationParams() + "'" +
             ", accreditationAttributs='" + getAccreditationAttributs() + "'" +
             ", accreditationStat='" + getAccreditationStat() + "'" +
+            ", accreditationActivated='" + getAccreditationActivated() + "'" +
             "}";
     }
 }

@@ -133,6 +133,10 @@
         <dd>
           <span>{{ accreditation.accreditationStat }}</span>
         </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated">Accreditation Activated</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationActivated }}</span>
+        </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.site">Site</span></dt>
         <dd>
           <span *ngFor="let site of accreditation.sites; let last = last">
