@@ -122,7 +122,7 @@
           <td>{{ photoArchive.photoArchiveDescription }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ photoArchive.photoArchiveParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ photoArchive.photoArchiveAttributs }}</td>
-          <td>{{ photoArchive.photoArchiveStat }}</td>
+          <td>{{ photoArchive.photoArchiveStat | yesNo }}</td>
           <td>
             <div *ngIf="photoArchive.accreditation">
               <a [routerLink]="['/accreditation-sig', photoArchive.accreditation.accreditationId, 'view']">{{

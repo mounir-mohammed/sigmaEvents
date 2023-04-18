@@ -146,7 +146,7 @@
           <td>{{ dayPassInfo.dayPassInfoNumber }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ dayPassInfo.dayPassParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ dayPassInfo.dayPassAttributs }}</td>
-          <td>{{ dayPassInfo.dayPassInfoStat }}</td>
+          <td>{{ dayPassInfo.dayPassInfoStat | yesNo }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div *ngIf="dayPassInfo.event">
               <a [routerLink]="['/event-sig', dayPassInfo.event.eventId, 'view']">{{ dayPassInfo.event.eventName }}</a>

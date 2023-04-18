@@ -57,7 +57,7 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.category.categoryStat">Category Stat</span></dt>
         <dd>
-          <span>{{ category.categoryStat }}</span>
+          <span>{{ category.categoryStat | yesNo }}</span>
         </dd>
         <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.category.printingModel">Printing Model</span>

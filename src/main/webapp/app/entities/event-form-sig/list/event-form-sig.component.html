@@ -88,7 +88,7 @@
           <td>{{ eventForm.formDescription }}</td>
           <td>{{ eventForm.formParams }}</td>
           <td>{{ eventForm.formAttributs }}</td>
-          <td>{{ eventForm.formStat }}</td>
+          <td>{{ eventForm.formStat | yesNo }}</td>
           <td>
             <div *ngIf="eventForm.event">
               <a [routerLink]="['/event-sig', eventForm.event.eventId, 'view']">{{ eventForm.event.eventName }}</a>

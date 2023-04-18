@@ -155,7 +155,7 @@
           <td>{{ site.siteResponsableName }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ site.siteParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ site.siteAttributs }}</td>
-          <td>{{ site.siteStat }}</td>
+          <td>{{ site.siteStat | yesNo }}</td>
           <td>
             <div *ngIf="site.city">
               <a [routerLink]="['/city-sig', site.city.cityId, 'view']">{{ site.city.cityName }}</a>

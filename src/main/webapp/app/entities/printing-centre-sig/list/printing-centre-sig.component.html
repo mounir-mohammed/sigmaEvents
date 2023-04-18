@@ -186,7 +186,7 @@
           <td>{{ printingCentre.printingCentreResponsableName }}</td>
           <td>{{ printingCentre.printingParams }}</td>
           <td>{{ printingCentre.printingAttributs }}</td>
-          <td>{{ printingCentre.printingCentreStat }}</td>
+          <td>{{ printingCentre.printingCentreStat | yesNo }}</td>
           <td>
             <div *ngIf="printingCentre.city">
               <a [routerLink]="['/city-sig', printingCentre.city.cityId, 'view']">{{ printingCentre.city.cityName }}</a>

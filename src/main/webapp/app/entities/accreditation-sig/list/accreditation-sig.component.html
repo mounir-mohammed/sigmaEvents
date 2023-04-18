@@ -338,12 +338,12 @@
           <td>{{ accreditation.accreditationCreatedByuser }}</td>
           <td>{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
           <td>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
-          <td>{{ accreditation.accreditationPrintStat }}</td>
+          <td>{{ accreditation.accreditationPrintStat | yesNo }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationPrintNumber }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationAttributs }}</td>
-          <td>{{ accreditation.accreditationStat }}</td>
-          <td>{{ accreditation.accreditationActivated }}</td>
+          <td>{{ accreditation.accreditationStat | yesNo }}</td>
+          <td>{{ accreditation.accreditationActivated | yesNo }}</td>
           <td>
             <div *ngIf="accreditation.civility">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">

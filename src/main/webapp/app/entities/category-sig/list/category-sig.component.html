@@ -124,7 +124,7 @@
           </td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ category.categoryParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ category.categoryAttributs }}</td>
-          <td>{{ category.categoryStat }}</td>
+          <td>{{ category.categoryStat | yesNo }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div *ngIf="category.printingModel">
               <a [routerLink]="['/printing-model-sig', category.printingModel.printingModelId, 'view']">{{

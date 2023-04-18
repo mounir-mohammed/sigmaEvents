@@ -100,7 +100,7 @@
           <td>{{ infoSupp.infoSuppDescription }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ infoSupp.infoSuppParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ infoSupp.infoSuppAttributs }}</td>
-          <td>{{ infoSupp.infoSuppStat }}</td>
+          <td>{{ infoSupp.infoSuppStat | yesNo }}</td>
           <td>
             <div *ngIf="infoSupp.infoSuppType">
               <a [routerLink]="['/info-supp-type-sig', infoSupp.infoSuppType.infoSuppTypeId, 'view']">{{

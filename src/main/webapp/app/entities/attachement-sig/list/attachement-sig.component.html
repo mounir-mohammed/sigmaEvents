@@ -139,7 +139,7 @@
           </td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ attachement.attachementParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ attachement.attachementAttributs }}</td>
-          <td>{{ attachement.attachementStat }}</td>
+          <td>{{ attachement.attachementStat | yesNo }}</td>
           <td>
             <div *ngIf="attachement.attachementType">
               <a [routerLink]="['/attachement-type-sig', attachement.attachementType.attachementTypeId, 'view']">{{

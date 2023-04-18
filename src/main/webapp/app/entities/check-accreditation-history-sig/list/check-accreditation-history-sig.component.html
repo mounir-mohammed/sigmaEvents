@@ -147,14 +147,14 @@
           </td>
           <td>{{ checkAccreditationHistory.checkAccreditationHistoryReadedCode }}</td>
           <td>{{ checkAccreditationHistory.checkAccreditationHistoryUserId }}</td>
-          <td>{{ checkAccreditationHistory.checkAccreditationHistoryResult }}</td>
+          <td>{{ checkAccreditationHistory.checkAccreditationHistoryResult | yesNo }}</td>
           <td>{{ checkAccreditationHistory.checkAccreditationHistoryError }}</td>
           <td>{{ checkAccreditationHistory.checkAccreditationHistoryDate | formatMediumDatetime }}</td>
           <td>{{ checkAccreditationHistory.checkAccreditationHistoryLocalisation }}</td>
           <td>{{ checkAccreditationHistory.checkAccreditationHistoryIpAdresse }}</td>
           <td>{{ checkAccreditationHistory.checkAccreditationParams }}</td>
           <td>{{ checkAccreditationHistory.checkAccreditationAttributs }}</td>
-          <td>{{ checkAccreditationHistory.checkAccreditationHistoryStat }}</td>
+          <td>{{ checkAccreditationHistory.checkAccreditationHistoryStat | yesNo }}</td>
           <td>
             <div *ngIf="checkAccreditationHistory.event">
               <a [routerLink]="['/event-sig', checkAccreditationHistory.event.eventId, 'view']">{{

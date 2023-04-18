@@ -32,15 +32,15 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.status.statusUserCanPrint">Status User Can Print</span></dt>
         <dd>
-          <span>{{ status.statusUserCanPrint }}</span>
+          <span>{{ status.statusUserCanPrint | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.status.statusUserCanUpdate">Status User Can Update</span></dt>
         <dd>
-          <span>{{ status.statusUserCanUpdate }}</span>
+          <span>{{ status.statusUserCanUpdate | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.status.statusUserCanValidate">Status User Can Validate</span></dt>
         <dd>
-          <span>{{ status.statusUserCanValidate }}</span>
+          <span>{{ status.statusUserCanValidate | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.status.statusParams">Status Params</span></dt>
         <dd>
@@ -52,7 +52,7 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.status.statusStat">Status Stat</span></dt>
         <dd>
-          <span>{{ status.statusStat }}</span>
+          <span>{{ status.statusStat | yesNo }}</span>
         </dd>
       </dl>
 

@@ -293,25 +293,25 @@
             </a>
             <span *ngIf="event.eventBannerBas">{{ event.eventBannerBasContentType }}, {{ byteSize(event.eventBannerBas) }}</span>
           </td>
-          <td>{{ event.eventWithPhoto }}</td>
-          <td>{{ event.eventNoCode }}</td>
-          <td>{{ event.eventCodeNoFilter }}</td>
-          <td>{{ event.eventCodeByTypeAccreditation }}</td>
-          <td>{{ event.eventCodeByTypeCategorie }}</td>
-          <td>{{ event.eventCodeByTypeFonction }}</td>
-          <td>{{ event.eventCodeByTypeOrganiz }}</td>
-          <td>{{ event.eventDefaultPrintingLanguage }}</td>
-          <td>{{ event.eventPCenterPrintingLanguage }}</td>
-          <td>{{ event.eventImported }}</td>
-          <td>{{ event.eventArchived }}</td>
+          <td>{{ event.eventWithPhoto | yesNo }}</td>
+          <td>{{ event.eventNoCode | yesNo }}</td>
+          <td>{{ event.eventCodeNoFilter | yesNo }}</td>
+          <td>{{ event.eventCodeByTypeAccreditation | yesNo }}</td>
+          <td>{{ event.eventCodeByTypeCategorie | yesNo }}</td>
+          <td>{{ event.eventCodeByTypeFonction | yesNo }}</td>
+          <td>{{ event.eventCodeByTypeOrganiz | yesNo }}</td>
+          <td>{{ event.eventDefaultPrintingLanguage | yesNo }}</td>
+          <td>{{ event.eventPCenterPrintingLanguage | yesNo }}</td>
+          <td>{{ event.eventImported | yesNo }}</td>
+          <td>{{ event.eventArchived | yesNo }}</td>
           <td>{{ event.eventArchiveFileName }}</td>
           <td>{{ event.eventURL }}</td>
           <td>{{ event.eventDomaine }}</td>
           <td>{{ event.eventSousDomaine }}</td>
-          <td>{{ event.eventCloned }}</td>
+          <td>{{ event.eventCloned | yesNo }}</td>
           <td>{{ event.eventParams }}</td>
           <td>{{ event.eventAttributs }}</td>
-          <td>{{ event.eventStat }}</td>
+          <td>{{ event.eventStat | yesNo }}</td>
           <td>
             <div *ngIf="event.language">
               <a [routerLink]="['/language-sig', event.language.languageId, 'view']">{{ event.language.languageName }}</a>

@@ -112,12 +112,12 @@
           <td>{{ status.statusAbreviation }}</td>
           <td [style.background]="status.statusColor">{{ status.statusColor }}</td>
           <td>{{ status.statusDescription }}</td>
-          <td>{{ status.statusUserCanPrint }}</td>
-          <td>{{ status.statusUserCanUpdate }}</td>
-          <td>{{ status.statusUserCanValidate }}</td>
+          <td>{{ status.statusUserCanPrint | yesNo }}</td>
+          <td>{{ status.statusUserCanUpdate | yesNo }}</td>
+          <td>{{ status.statusUserCanValidate | yesNo }}</td>
           <td>{{ status.statusParams }}</td>
           <td>{{ status.statusAttributs }}</td>
-          <td>{{ status.statusStat }}</td>
+          <td>{{ status.statusStat | yesNo }}</td>
           <td class="text-end">
             <div class="btn-group">
               <button

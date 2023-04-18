@@ -147,7 +147,7 @@
           <td>{{ operationHistory.operationHistoryImportedFilePath }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ operationHistory.operationHistoryParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ operationHistory.operationHistoryAttributs }}</td>
-          <td>{{ operationHistory.operationHistoryStat }}</td>
+          <td>{{ operationHistory.operationHistoryStat | yesNo }}</td>
           <td>
             <div *ngIf="operationHistory.typeoperation">
               <a [routerLink]="['/operation-type-sig', operationHistory.typeoperation.operationTypeId, 'view']">{{

@@ -202,7 +202,7 @@
           </td>
           <td>{{ checkAccreditationReport.checkAccreditationReportParams }}</td>
           <td>{{ checkAccreditationReport.checkAccreditationReportAttributs }}</td>
-          <td>{{ checkAccreditationReport.checkAccreditationReportStat }}</td>
+          <td>{{ checkAccreditationReport.checkAccreditationReportStat | yesNo }}</td>
           <td>
             <div *ngIf="checkAccreditationReport.event">
               <a [routerLink]="['/event-sig', checkAccreditationReport.event.eventId, 'view']">{{

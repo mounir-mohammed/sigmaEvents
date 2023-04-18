@@ -94,7 +94,7 @@
           <td>{{ note.noteDescription }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ note.noteTypeParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ note.noteTypeAttributs }}</td>
-          <td>{{ note.noteStat }}</td>
+          <td>{{ note.noteStat | yesNo }}</td>
           <td>
             <div *ngIf="note.accreditation">
               <a [routerLink]="['/accreditation-sig', note.accreditation.accreditationId, 'view']">{{

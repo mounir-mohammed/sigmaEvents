@@ -126,6 +126,8 @@
     },
     "item-count": "Affichage {{first}} - {{second}} de {{total}} items."
   },
+  "yes": "Oui",
+  "no": "Non",
   "entity": {
     "action": {
       "addblob": "Ajouter blob",

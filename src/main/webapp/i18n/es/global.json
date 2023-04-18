@@ -126,6 +126,8 @@
     },
     "item-count": "Mostrando {{first}} - {{second}} de {{total}} elementos."
   },
+  "yes": "Yes",
+  "no": "No",
   "entity": {
     "action": {
       "addblob": "Añadir fichero",

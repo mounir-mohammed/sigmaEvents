@@ -161,7 +161,7 @@
           </td>
           <td>{{ setting.settingParams }}</td>
           <td>{{ setting.settingAttributs }}</td>
-          <td>{{ setting.settingStat }}</td>
+          <td>{{ setting.settingStat | yesNo }}</td>
           <td>
             <div *ngIf="setting.language">
               <a [routerLink]="['/language-sig', setting.language.languageId, 'view']">{{ setting.language.languageName }}</a>

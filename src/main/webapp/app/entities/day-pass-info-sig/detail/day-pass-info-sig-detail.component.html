@@ -73,7 +73,7 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.dayPassInfo.dayPassInfoStat">Day Pass Info Stat</span></dt>
         <dd>
-          <span>{{ dayPassInfo.dayPassInfoStat }}</span>
+          <span>{{ dayPassInfo.dayPassInfoStat | yesNo }}</span>
         </dd>
         <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.dayPassInfo.event">Event</span></dt>
         <dd *sigmaHasAnyAuthority="[authority.ADMIN]">

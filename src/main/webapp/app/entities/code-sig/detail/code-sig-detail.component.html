@@ -28,7 +28,7 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.code.codeUsed">Code Used</span></dt>
         <dd>
-          <span>{{ code.codeUsed }}</span>
+          <span>{{ code.codeUsed | yesNo }}</span>
         </dd>
         <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.code.codeParams">Code Params</span></dt>
         <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
@@ -40,7 +40,7 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.code.codeStat">Code Stat</span></dt>
         <dd>
-          <span>{{ code.codeStat }}</span>
+          <span>{{ code.codeStat | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.code.codeType">Code Type</span></dt>
         <dd>

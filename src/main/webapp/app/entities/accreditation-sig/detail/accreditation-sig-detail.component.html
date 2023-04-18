@@ -109,7 +109,7 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat">Accreditation Print Stat</span></dt>
         <dd>
-          <span>{{ accreditation.accreditationPrintStat }}</span>
+          <span>{{ accreditation.accreditationPrintStat | yesNo }}</span>
         </dd>
         <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber">Accreditation Print Number</span>
@@ -131,11 +131,11 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span></dt>
         <dd>
-          <span>{{ accreditation.accreditationStat }}</span>
+          <span>{{ accreditation.accreditationStat | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated">Accreditation Activated</span></dt>
         <dd>
-          <span>{{ accreditation.accreditationActivated }}</span>
+          <span>{{ accreditation.accreditationActivated | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.site">Site</span></dt>
         <dd>

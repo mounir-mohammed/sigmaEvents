@@ -103,7 +103,7 @@
           <td>{{ accreditationType.accreditationTypeDescription }}</td>
           <td>{{ accreditationType.accreditationTypeParams }}</td>
           <td>{{ accreditationType.accreditationTypeAttributs }}</td>
-          <td>{{ accreditationType.accreditationTypeStat }}</td>
+          <td>{{ accreditationType.accreditationTypeStat | yesNo }}</td>
           <td>
             <div *ngIf="accreditationType.printingModel">
               <a [routerLink]="['/printing-model-sig', accreditationType.printingModel.printingModelId, 'view']">{{

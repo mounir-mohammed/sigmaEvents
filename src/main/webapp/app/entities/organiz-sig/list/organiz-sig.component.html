@@ -144,7 +144,7 @@
           <td>{{ organiz.organizAdresse }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ organiz.organizParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ organiz.organizAttributs }}</td>
-          <td>{{ organiz.organizStat }}</td>
+          <td>{{ organiz.organizStat | yesNo }}</td>
           <td>
             <div *ngIf="organiz.country">
               <a [routerLink]="['/country-sig', organiz.country.countryId, 'view']">{{ organiz.country.countryName }}</a>

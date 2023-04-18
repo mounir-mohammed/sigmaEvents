@@ -114,7 +114,7 @@
           </td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ area.areaParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ area.areaAttributs }}</td>
-          <td>{{ area.areaStat }}</td>
+          <td>{{ area.areaStat | yesNo }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div *ngIf="area.event">
               <a [routerLink]="['/event-sig', area.event.eventId, 'view']">{{ area.event.eventName }}</a>

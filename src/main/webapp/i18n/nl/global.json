@@ -126,6 +126,8 @@
     },
     "item-count": "Resultaat {{first}} - {{second}} van {{total}} items."
   },
+  "yes": "Yes",
+  "no": "No",
   "entity": {
     "action": {
       "back": "Terug",

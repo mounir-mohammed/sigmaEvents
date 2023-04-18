@@ -126,6 +126,8 @@
     },
     "item-count": "يعرض {{first}} - {{second}} من {{total}} البيانات."
   },
+  "yes": "نعم",
+  "no": "لا",
   "entity": {
     "action": {
       "addblob": "اضف ملف",

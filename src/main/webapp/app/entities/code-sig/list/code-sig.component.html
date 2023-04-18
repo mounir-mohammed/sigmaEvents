@@ -105,10 +105,10 @@
           <td>{{ code.codeForEntity }}</td>
           <td>{{ code.codeEntityValue }}</td>
           <td>{{ code.codeValue }}</td>
-          <td>{{ code.codeUsed }}</td>
+          <td>{{ code.codeUsed | yesNo }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ code.codeParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ code.codeAttributs }}</td>
-          <td>{{ code.codeStat }}</td>
+          <td>{{ code.codeStat | yesNo }}</td>
           <td>
             <div *ngIf="code.codeType">
               <a [routerLink]="['/code-type-sig', code.codeType.codeTypeId, 'view']">{{ code.codeType.codeTypeValue }}</a>

@@ -49,7 +49,7 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.area.areaStat">Area Stat</span></dt>
         <dd>
-          <span>{{ area.areaStat }}</span>
+          <span>{{ area.areaStat | yesNo }}</span>
         </dd>
         <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.area.event">Event</span></dt>
         <dd *sigmaHasAnyAuthority="[authority.ADMIN]">

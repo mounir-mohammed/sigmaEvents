@@ -122,7 +122,7 @@
           <td>{{ eventControl.controlValueDate | formatMediumDatetime }}</td>
           <td>{{ eventControl.controlParams }}</td>
           <td>{{ eventControl.controlAttributs }}</td>
-          <td>{{ eventControl.controlValueStat }}</td>
+          <td>{{ eventControl.controlValueStat | yesNo }}</td>
           <td>
             <div *ngIf="eventControl.event">
               <a [routerLink]="['/event-sig', eventControl.event.eventId, 'view']">{{ eventControl.event.eventName }}</a>

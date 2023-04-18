@@ -124,7 +124,7 @@
           </td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ fonction.fonctionParams }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ fonction.fonctionAttributs }}</td>
-          <td>{{ fonction.fonctionStat }}</td>
+          <td>{{ fonction.fonctionStat | yesNo }}</td>
           <td>
             <div *ngIf="fonction.category">
               <a [routerLink]="['/category-sig', fonction.category.categoryId, 'view']">{{ fonction.category.categoryName }}</a>

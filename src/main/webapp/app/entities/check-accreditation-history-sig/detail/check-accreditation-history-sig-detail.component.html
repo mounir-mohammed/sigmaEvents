@@ -40,7 +40,7 @@
           >
         </dt>
         <dd>
-          <span>{{ checkAccreditationHistory.checkAccreditationHistoryResult }}</span>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryResult | yesNo }}</span>
         </dd>
         <dt>
           <span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.checkAccreditationHistoryError"
@@ -90,7 +90,7 @@
           >
         </dt>
         <dd>
-          <span>{{ checkAccreditationHistory.checkAccreditationHistoryStat }}</span>
+          <span>{{ checkAccreditationHistory.checkAccreditationHistoryStat | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.checkAccreditationHistory.event">Event</span></dt>
         <dd>

@@ -10,6 +10,8 @@ export class FindLanguageFromKeyPipe implements PipeTransform {
     it: { name: 'Italiano' },
     ja: { name: '日本語' },
     es: { name: 'Español' },
+    'ar-LY': { name: 'العربية' },
+    'zh-CN': { name: 'Chinese ' },
     // jhipster-needle-i18n-language-key-pipe - JHipster will add/remove languages in this object
   };
 

@@ -108,7 +108,7 @@
           <td>{{ eventField.fieldType }}</td>
           <td>{{ eventField.fieldParams }}</td>
           <td>{{ eventField.fieldAttributs }}</td>
-          <td>{{ eventField.fieldStat }}</td>
+          <td>{{ eventField.fieldStat | yesNo }}</td>
           <td>
             <div *ngIf="eventField.event">
               <a [routerLink]="['/event-sig', eventField.event.eventId, 'view']">{{ eventField.event.eventName }}</a>
