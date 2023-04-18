@@ -19,7 +19,7 @@ import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
 import { Status } from 'app/config/status.contants';
 import { StatusSigService } from 'app/entities/status-sig/service/status-sig.service';
 import { HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -88,10 +88,27 @@ export class AccreditationSigComponent implements OnInit {
   }
 
   validate(accreditation: IAccreditationSig): void {
-    this.accreditationService.validate(
-      accreditation,
-      this.statusesSharedCollection.filter(status => (status.statusAbreviation = Status.VALIDATED)).shift()
-    );
+    const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.VALIDATED).shift();
+    this.subscribeToValidateResponse(this.accreditationService.validate(accreditation, status));
+  }
+
+  protected subscribeToValidateResponse(result: Observable<HttpResponse<IAccreditationSig>>): void {
+    result.pipe(finalize(() => this.onValidateFinalize())).subscribe({
+      next: () => this.onSaveSuccess(),
+      error: () => this.onSaveError(),
+    });
+  }
+
+  protected onSaveSuccess(): void {
+    console.log('onSaveSuccess');
+  }
+
+  protected onSaveError(): void {
+    // Api for inheritance.
+  }
+
+  protected onValidateFinalize(): void {
+    console.log('onValidateFinalize');
   }
 
   load(): void {

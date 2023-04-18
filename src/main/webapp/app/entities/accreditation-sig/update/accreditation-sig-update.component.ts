@@ -183,7 +183,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
       if (accreditation.accreditationId !== null) {
         this.subscribeToSaveResponse(this.accreditationService.update(accreditation));
       } else {
-        accreditation.status = this.statusesSharedCollection.filter(status => (status.statusAbreviation = Status.INPROGRESS)).shift();
+        accreditation.status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.INPROGRESS).shift();
         this.subscribeToSaveResponse(this.accreditationService.create(accreditation));
       }
     } else {

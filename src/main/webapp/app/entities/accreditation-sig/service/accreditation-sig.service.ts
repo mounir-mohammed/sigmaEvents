@@ -168,12 +168,7 @@ export class AccreditationSigService {
   }
 
   validate(accreditation: IAccreditationSig, statusValidated: IStatusSig | null | undefined): Observable<EntityResponseType> {
-    console.log(statusValidated);
     accreditation.status = statusValidated;
-    accreditation.accreditationUpdateDate = dayjs();
-    const copy = this.convertDateFromClient(accreditation);
-    return this.http
-      .put<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.update(accreditation);
   }
 }
