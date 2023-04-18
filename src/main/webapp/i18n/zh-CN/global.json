@@ -152,6 +152,9 @@
     "validate": {
       "title": "Confirm validate operation"
     },
+    "print": {
+      "title": "Confirm print operation"
+    },
     "validation": {
       "required": "本字段不能为空.",
       "minlength": "本字段最短长度为 {{min}} 个字符.",

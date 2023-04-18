@@ -17,6 +17,9 @@
       "validate": {
         "question": "Are you sure you want to validate Accreditation {{ id }}?"
       },
+      "print": {
+        "question": "Are you sure you want to print Accreditation {{ id }}?"
+      },
       "detail": {
         "title": "Accreditation"
       },

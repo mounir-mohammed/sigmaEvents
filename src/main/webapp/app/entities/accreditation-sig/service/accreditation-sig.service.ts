@@ -68,6 +68,15 @@ export class AccreditationSigService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
+  print(accreditation: IAccreditationSig): Observable<EntityResponseType> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
+    accreditation.accreditationUpdateDate = dayjs();
+    const copy = this.convertDateFromClient(accreditation);
+    return this.http
+      .put<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
+  }
+
   partialUpdate(accreditation: PartialUpdateAccreditationSig): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(accreditation);
     return this.http

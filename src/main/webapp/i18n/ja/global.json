@@ -152,6 +152,9 @@
     "validate": {
       "title": "Confirm validate operation"
     },
+    "print": {
+      "title": "Confirm print operation"
+    },
     "validation": {
       "required": "This field is required.",
       "minlength": "This field is required to be at least {{min}} characters.",

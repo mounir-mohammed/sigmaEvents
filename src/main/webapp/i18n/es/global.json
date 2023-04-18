@@ -152,6 +152,9 @@
     "validate": {
       "title": "Confirm validate operation"
     },
+    "print": {
+      "title": "Confirm print operation"
+    },
     "validation": {
       "required": "Este campo es obligatorio.",
       "minlength": "Este campo requiere al menos {{min}} caracteres.",

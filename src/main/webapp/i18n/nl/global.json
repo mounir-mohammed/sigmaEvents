@@ -150,6 +150,9 @@
     "validate": {
       "title": "Confirm validate operation"
     },
+    "print": {
+      "title": "Confirm print operation"
+    },
     "validation": {
       "required": "Dit veld is vereist.",
       "minlength": "Dit veld moet minstens {{min}} tekens lang zijn.",

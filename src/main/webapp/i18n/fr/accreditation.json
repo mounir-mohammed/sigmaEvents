@@ -12,10 +12,13 @@
       "updated": "Le Accreditation avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Accreditation avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Accreditation {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'accreditation {{ id }} ?"
       },
       "validate": {
-        "question": "Are you sure you want to validate Accreditation {{ id }}?"
+        "question": "Êtes-vous certain de vouloir valider l'accreditation {{ id }}?"
+      },
+      "print": {
+        "question": "Êtes-vous certain de vouloir imprimer l'accreditation {{ id }}?"
       },
       "detail": {
         "title": "Accreditation"

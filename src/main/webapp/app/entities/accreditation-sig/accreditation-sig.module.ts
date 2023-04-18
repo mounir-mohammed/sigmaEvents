@@ -5,6 +5,7 @@ import { AccreditationSigDetailComponent } from './detail/accreditation-sig-deta
 import { AccreditationSigUpdateComponent } from './update/accreditation-sig-update.component';
 import { AccreditationSigDeleteDialogComponent } from './delete/accreditation-sig-delete-dialog.component';
 import { AccreditationSigValidateDialogComponent } from './validate/accreditation-sig-validate-dialog.component';
+import { AccreditationSigPrintDialogComponent } from './print/accreditation-sig-print-dialog.component';
 import { AccreditationSigRoutingModule } from './route/accreditation-sig-routing.module';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { AccreditationSigRoutingModule } from './route/accreditation-sig-routing
     AccreditationSigUpdateComponent,
     AccreditationSigDeleteDialogComponent,
     AccreditationSigValidateDialogComponent,
+    AccreditationSigPrintDialogComponent,
   ],
 })
 export class AccreditationSigModule {}

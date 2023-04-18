@@ -7,7 +7,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAccreditationSig } from '../accreditation-sig.model';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, ITEM_VALIDATED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import {
+  ASC,
+  DESC,
+  SORT,
+  ITEM_DELETED_EVENT,
+  ITEM_VALIDATED_EVENT,
+  DEFAULT_SORT_DATA,
+  ITEM_PRINTED_EVENT,
+} from 'app/config/navigation.constants';
 import { EntityArrayResponseType, AccreditationSigService } from '../service/accreditation-sig.service';
 import { AccreditationSigDeleteDialogComponent } from '../delete/accreditation-sig-delete-dialog.component';
 import { AccreditationSigValidateDialogComponent } from '../validate/accreditation-sig-validate-dialog.component';
@@ -21,6 +29,8 @@ import { Status } from 'app/config/status.contants';
 import { StatusSigService } from 'app/entities/status-sig/service/status-sig.service';
 import { HttpResponse } from '@angular/common/http';
 import { finalize, map } from 'rxjs/operators';
+import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
+import { Util } from 'app/shared/util/util.shred';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -92,11 +102,30 @@ export class AccreditationSigComponent implements OnInit {
     const modalRef = this.modalService.open(AccreditationSigValidateDialogComponent, { size: 'lg', backdrop: 'static' });
     const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.VALIDATED).shift();
     accreditation.status = status;
+    console.log(accreditation);
     modalRef.componentInstance.accreditation = accreditation;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(
         filter(reason => reason === ITEM_VALIDATED_EVENT),
+        switchMap(() => this.loadFromBackendWithRouteInformations())
+      )
+      .subscribe({
+        next: (res: EntityArrayResponseType) => {
+          this.onResponseSuccess(res);
+        },
+      });
+  }
+
+  print(accreditation: IAccreditationSig): void {
+    const modalRef = this.modalService.open(AccreditationSigPrintDialogComponent, { size: 'lg', backdrop: 'static' });
+    const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.PRINTED).shift();
+    accreditation.status = status;
+    modalRef.componentInstance.accreditation = accreditation;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed
+      .pipe(
+        filter(reason => reason === ITEM_PRINTED_EVENT),
         switchMap(() => this.loadFromBackendWithRouteInformations())
       )
       .subscribe({
