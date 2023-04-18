@@ -14,6 +14,9 @@
       "delete": {
         "question": "Bent u zeker dat u Accreditation {{ id }} wilt verwijderen?"
       },
+      "validate": {
+        "question": "Are you sure you want to validate Accreditation {{ id }}?"
+      },
       "detail": {
         "title": "Accreditation"
       },

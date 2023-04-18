@@ -146,6 +146,9 @@
     "delete": {
       "title": "Bevestig wisbewerking"
     },
+    "validate": {
+      "title": "Confirm validate operation"
+    },
     "validation": {
       "required": "Dit veld is vereist.",
       "minlength": "Dit veld moet minstens {{min}} tekens lang zijn.",

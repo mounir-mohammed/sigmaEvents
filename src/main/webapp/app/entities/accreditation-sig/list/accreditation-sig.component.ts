@@ -7,9 +7,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAccreditationSig } from '../accreditation-sig.model';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import { ASC, DESC, SORT, ITEM_DELETED_EVENT, ITEM_VALIDATED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, AccreditationSigService } from '../service/accreditation-sig.service';
 import { AccreditationSigDeleteDialogComponent } from '../delete/accreditation-sig-delete-dialog.component';
+import { AccreditationSigValidateDialogComponent } from '../validate/accreditation-sig-validate-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/filter.model';
 import { AccountService } from 'app/core/auth/account.service';
@@ -88,27 +89,21 @@ export class AccreditationSigComponent implements OnInit {
   }
 
   validate(accreditation: IAccreditationSig): void {
+    const modalRef = this.modalService.open(AccreditationSigValidateDialogComponent, { size: 'lg', backdrop: 'static' });
     const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.VALIDATED).shift();
-    this.subscribeToValidateResponse(this.accreditationService.validate(accreditation, status));
-  }
-
-  protected subscribeToValidateResponse(result: Observable<HttpResponse<IAccreditationSig>>): void {
-    result.pipe(finalize(() => this.onValidateFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
-      error: () => this.onSaveError(),
-    });
-  }
-
-  protected onSaveSuccess(): void {
-    console.log('onSaveSuccess');
-  }
-
-  protected onSaveError(): void {
-    // Api for inheritance.
-  }
-
-  protected onValidateFinalize(): void {
-    console.log('onValidateFinalize');
+    accreditation.status = status;
+    modalRef.componentInstance.accreditation = accreditation;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed
+      .pipe(
+        filter(reason => reason === ITEM_VALIDATED_EVENT),
+        switchMap(() => this.loadFromBackendWithRouteInformations())
+      )
+      .subscribe({
+        next: (res: EntityArrayResponseType) => {
+          this.onResponseSuccess(res);
+        },
+      });
   }
 
   load(): void {

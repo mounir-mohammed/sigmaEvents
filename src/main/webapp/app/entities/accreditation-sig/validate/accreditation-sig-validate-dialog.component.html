@@ -1,0 +1,30 @@
+<form *ngIf="accreditation" name="validateForm" (ngSubmit)="confirmValidate(accreditation)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="accreditationValidateDialogHeading" sigmaTranslate="entity.validate.title">
+      Confirm validate operation
+    </h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <sigma-alert-error></sigma-alert-error>
+    <p
+      id="sigma-validate-accreditation-heading"
+      sigmaTranslate="sigmaEventsApp.accreditation.validate.question"
+      [translateValues]="{ id: accreditation.accreditationId }"
+    >
+      Are you sure you want to validate Accreditation {{ accreditation.accreditationId }}?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="sigma-confirm-validate-accreditation" data-cy="entityConfirmValidateButton" type="submit" class="btn btn-success">
+      <fa-icon class="fa-check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
+    </button>
+  </div>
+</form>

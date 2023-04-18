@@ -148,6 +148,9 @@
     "delete": {
       "title": "Confirmar operación de borrado"
     },
+    "validate": {
+      "title": "Confirm validate operation"
+    },
     "validation": {
       "required": "Este campo es obligatorio.",
       "minlength": "Este campo requiere al menos {{min}} caracteres.",

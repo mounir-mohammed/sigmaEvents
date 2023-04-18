@@ -148,6 +148,9 @@
     "delete": {
       "title": "تأكيد عملية الحذف"
     },
+    "validate": {
+      "title": "Confirm validate operation"
+    },
     "validation": {
       "required": "هذا الحقل مطلوب.",
       "minlength": "هذا الحقل مطلوب أن يكون على الأقل {{ min }} احرف.",

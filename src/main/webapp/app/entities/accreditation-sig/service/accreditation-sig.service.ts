@@ -167,8 +167,7 @@ export class AccreditationSigService {
     });
   }
 
-  validate(accreditation: IAccreditationSig, statusValidated: IStatusSig | null | undefined): Observable<EntityResponseType> {
-    accreditation.status = statusValidated;
+  validate(accreditation: IAccreditationSig): Observable<EntityResponseType> {
     return this.update(accreditation);
   }
 }

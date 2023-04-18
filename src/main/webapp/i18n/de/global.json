@@ -148,6 +148,9 @@
     "delete": {
       "title": "Löschen bestätigen"
     },
+    "validate": {
+      "title": "Confirm validate operation"
+    },
     "validation": {
       "required": "Dieses Feld wird benötigt.",
       "minlength": "Dieses Feld muss mind. {{min}} Zeichen lang sein.",
