@@ -139,7 +139,8 @@
       "saveAndPrint": "Save And Print",
       "view": "عرض",
       "show": "Show {{otherEntity}}",
-      "validate": "Validate"
+      "validate": "Validate",
+      "print": "Print"
     },
     "detail": {
       "field": "حقل",

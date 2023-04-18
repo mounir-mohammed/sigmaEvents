@@ -139,7 +139,8 @@
       "saveAndPrint": "Save And Print",
       "view": "Visualizza",
       "show": "Show {{otherEntity}}",
-      "validate": "Validate"
+      "validate": "Validate",
+      "print": "Print"
     },
     "detail": {
       "field": "Campo",

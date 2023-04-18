@@ -137,7 +137,8 @@
       "saveAndPrint": "Save And Print",
       "view": "View",
       "show": "Show {{otherEntity}}",
-      "validate": "Validate"
+      "validate": "Validate",
+      "print": "Print"
     },
     "detail": {
       "field": "Veld",

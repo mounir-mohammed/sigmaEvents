@@ -556,6 +556,17 @@
 
               <button
                 type="submit"
+                (click)="validate(accreditation)"
+                class="btn btn-info btn-sm"
+                data-cy="entityPrintButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_PRINT]"
+              >
+                <fa-icon icon="print"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.print">Print</span>
+              </button>
+
+              <button
+                type="submit"
                 (click)="delete(accreditation)"
                 class="btn btn-danger btn-sm"
                 data-cy="entityDeleteButton"

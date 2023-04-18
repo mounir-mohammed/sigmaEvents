@@ -139,7 +139,8 @@
       "saveAndPrint": "Save And Print",
       "view": "查看",
       "show": "Show {{otherEntity}}",
-      "validate": "Validate"
+      "validate": "Validate",
+      "print": "Print"
     },
     "detail": {
       "field": "字段",

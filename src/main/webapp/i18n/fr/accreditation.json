@@ -4,11 +4,11 @@
       "home": {
         "title": "Accreditations",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Accreditation",
+        "createLabel": "Créer une nouvelle Accreditation",
         "createOrEditLabel": "Créer ou éditer un Accreditation",
         "notFound": "Aucun Accreditation trouvé"
       },
-      "created": "Un nouveau Accreditation a été créé avec l'identifiant {{ param }}",
+      "created": "Une nouvelle Accreditation a été créé avec l'identifiant {{ param }}",
       "updated": "Le Accreditation avec l'identifiant {{ param }} a été mis à jour",
       "deleted": "Le Accreditation avec l'identifiant {{ param }} a été supprimé",
       "delete": {
