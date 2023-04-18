@@ -414,12 +414,14 @@
           </td>
           <td>
             <div *ngIf="accreditation.attachement">
-              <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO])">
                 <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
                   accreditation.attachement.attachementName
                 }}</a>
               </div>
-              <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              <div
+                *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO])"
+              >
                 <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
                   accreditation.attachement.attachementName
                 }}</a>
@@ -458,7 +460,7 @@
           <td class="text-end">
             <div class="btn-group">
               <button
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO]"
                 type="submit"
                 [routerLink]="['/photo-archive-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
@@ -474,6 +476,7 @@
                 >
               </button>
               <button
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_INFOSUP]"
                 type="submit"
                 [routerLink]="['/info-supp-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
@@ -489,6 +492,7 @@
                 >
               </button>
               <button
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_NOTES]"
                 type="submit"
                 [routerLink]="['/note-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
@@ -539,7 +543,24 @@
                 <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
               </button>
 
-              <button type="submit" (click)="delete(accreditation)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button
+                type="submit"
+                (click)="validate(accreditation)"
+                class="btn btn-success btn-sm"
+                data-cy="entityValidateButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_VALIDATE]"
+              >
+                <fa-icon class="fa-check"></fa-icon>
+                <span class="d-none d-md-inline" sigmaTranslate="entity.action.validate">Validate</span>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(accreditation)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_DELETE]"
+              >
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
               </button>

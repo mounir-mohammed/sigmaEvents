@@ -539,9 +539,9 @@
           />
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_ACTIVAT]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated" for="field_accreditationActivated"
-            >Accreditation Stat</label
+            >Accreditation Activated</label
           >
           <input
             type="checkbox"
@@ -737,7 +737,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_UPD_STATUS]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.status" for="field_status">Status</label>
           <select
             class="form-control"
@@ -842,6 +842,7 @@
           <fa-icon icon="save"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.save">Save</span>
         </button>
         <button
+          *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_PRINT]"
           type="submit"
           name="SaveAndPrint"
           id="save-and-print-entity"

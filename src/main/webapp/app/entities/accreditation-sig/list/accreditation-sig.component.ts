@@ -15,6 +15,11 @@ import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
+import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
+import { Status } from 'app/config/status.contants';
+import { StatusSigService } from 'app/entities/status-sig/service/status-sig.service';
+import { HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -24,6 +29,7 @@ export class AccreditationSigComponent implements OnInit {
   currentAccount: Account | null = null;
   accreditations?: IAccreditationSig[];
   isLoading = false;
+  statusesSharedCollection: IStatusSig[] = [];
 
   predicate = 'accreditationId';
   ascending = true;
@@ -40,7 +46,8 @@ export class AccreditationSigComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    protected statusService: StatusSigService
   ) {}
 
   trackAccreditationId = (_index: number, item: IAccreditationSig): number => this.accreditationService.getAccreditationSigIdentifier(item);
@@ -50,6 +57,10 @@ export class AccreditationSigComponent implements OnInit {
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
+    this.statusService
+      .query()
+      .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
+      .subscribe((statuses: IStatusSig[]) => (this.statusesSharedCollection = statuses));
   }
 
   byteSize(base64String: string): string {
@@ -74,6 +85,13 @@ export class AccreditationSigComponent implements OnInit {
           this.onResponseSuccess(res);
         },
       });
+  }
+
+  validate(accreditation: IAccreditationSig): void {
+    this.accreditationService.validate(
+      accreditation,
+      this.statusesSharedCollection.filter(status => (status.statusAbreviation = Status.VALIDATED)).shift()
+    );
   }
 
   load(): void {

@@ -43,6 +43,7 @@ import { DayPassInfoSigService } from 'app/entities/day-pass-info-sig/service/da
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
+import { Status } from 'app/config/status.contants';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -182,6 +183,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
       if (accreditation.accreditationId !== null) {
         this.subscribeToSaveResponse(this.accreditationService.update(accreditation));
       } else {
+        accreditation.status = this.statusesSharedCollection.filter(status => (status.statusAbreviation = Status.INPROGRESS)).shift();
         this.subscribeToSaveResponse(this.accreditationService.create(accreditation));
       }
     } else {

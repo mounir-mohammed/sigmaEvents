@@ -138,7 +138,8 @@
       "save": "Guardar",
       "saveAndPrint": "Save And Print",
       "view": "Vista",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "validate": "Validate"
     },
     "detail": {
       "field": "Campo",

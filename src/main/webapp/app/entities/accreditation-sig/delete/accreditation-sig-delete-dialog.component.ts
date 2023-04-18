@@ -34,6 +34,7 @@ export class AccreditationSigDeleteDialogComponent {
   confirmDeleteUser(accreditation?: IAccreditationSig): void {
     if (accreditation) {
       accreditation!.accreditationStat = false;
+      accreditation!.accreditationActivated = false;
       this.accreditationService.update(accreditation).subscribe(() => {
         this.activeModal.close(ITEM_DELETED_EVENT);
       });
@@ -43,6 +44,7 @@ export class AccreditationSigDeleteDialogComponent {
   confirmDeleteAdmin(accreditation?: IAccreditationSig): void {
     if (accreditation) {
       accreditation!.accreditationStat = false;
+      accreditation!.accreditationActivated = false;
       this.accreditationService.delete(accreditation.accreditationId).subscribe(() => {
         this.activeModal.close(ITEM_DELETED_EVENT);
       });

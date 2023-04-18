@@ -138,7 +138,8 @@
       "save": "Speichern",
       "saveAndPrint": "Save And Print",
       "view": "Details",
-      "show": "Zeige {{otherEntity}}"
+      "show": "Zeige {{otherEntity}}",
+      "validate": "Validate"
     },
     "detail": {
       "field": "Feld",

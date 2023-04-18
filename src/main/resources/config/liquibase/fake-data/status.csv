@@ -4,3 +4,4 @@ status_id;status_name;status_abreviation;status_color;status_description;status_
 3;Validated;VAL;;;true;true;false;;;true
 4;Printed;PRI;;;false;false;false;;;true
 5;Imported;IMP;;;false;true;false;;;true
+6;REJECTED;RJC;;;false;true;false;;;true

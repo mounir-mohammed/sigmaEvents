@@ -240,12 +240,12 @@
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.attachement">Attachement</span></dt>
         <dd>
           <div *ngIf="accreditation.attachement">
-            <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+            <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO])">
               <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
                 accreditation.attachement.attachementName
               }}</a>
             </div>
-            <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+            <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO])">
               <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
                 accreditation.attachement.attachementName
               }}</a>

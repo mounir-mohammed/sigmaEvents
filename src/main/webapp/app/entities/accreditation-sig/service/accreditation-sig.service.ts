@@ -9,6 +9,9 @@ import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IAccreditationSig, NewAccreditationSig } from '../accreditation-sig.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
 
 export type PartialUpdateAccreditationSig = Partial<IAccreditationSig> & Pick<IAccreditationSig, 'accreditationId'>;
 
@@ -35,10 +38,21 @@ export type EntityArrayResponseType = HttpResponse<IAccreditationSig[]>;
 @Injectable({ providedIn: 'root' })
 export class AccreditationSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/accreditations');
+  currentAccount: Account | null = null;
 
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected applicationConfigService: ApplicationConfigService,
+    private accountService: AccountService
+  ) {}
 
   create(accreditation: NewAccreditationSig): Observable<EntityResponseType> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
+    accreditation.accreditationActivated = true;
+    accreditation.accreditationStat = true;
+    accreditation.accreditationCreatedByuser = this.currentAccount?.login;
+    accreditation.accreditationCreationDate = dayjs();
+    accreditation.accreditationUpdateDate = null;
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .post<RestAccreditationSig>(this.resourceUrl, copy, { observe: 'response' })
@@ -46,6 +60,8 @@ export class AccreditationSigService {
   }
 
   update(accreditation: IAccreditationSig): Observable<EntityResponseType> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
+    accreditation.accreditationUpdateDate = dayjs();
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, { observe: 'response' })
@@ -149,5 +165,15 @@ export class AccreditationSigService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+
+  validate(accreditation: IAccreditationSig, statusValidated: IStatusSig | null | undefined): Observable<EntityResponseType> {
+    console.log(statusValidated);
+    accreditation.status = statusValidated;
+    accreditation.accreditationUpdateDate = dayjs();
+    const copy = this.convertDateFromClient(accreditation);
+    return this.http
+      .put<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 }

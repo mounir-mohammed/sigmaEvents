@@ -136,7 +136,8 @@
       "save": "Opslaan",
       "saveAndPrint": "Save And Print",
       "view": "View",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "validate": "Validate"
     },
     "detail": {
       "field": "Veld",

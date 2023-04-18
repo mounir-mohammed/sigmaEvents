@@ -502,7 +502,7 @@ describe('AccreditationSig Management Update Component', () => {
       comp.ngOnInit();
 
       // WHEN
-      comp.save();
+      comp.save(event);
       expect(comp.isSaving).toEqual(true);
       saveSubject.next(new HttpResponse({ body: accreditation }));
       saveSubject.complete();
@@ -525,7 +525,7 @@ describe('AccreditationSig Management Update Component', () => {
       comp.ngOnInit();
 
       // WHEN
-      comp.save();
+      comp.save(event);
       expect(comp.isSaving).toEqual(true);
       saveSubject.next(new HttpResponse({ body: accreditation }));
       saveSubject.complete();
@@ -547,7 +547,7 @@ describe('AccreditationSig Management Update Component', () => {
       comp.ngOnInit();
 
       // WHEN
-      comp.save();
+      comp.save(event);
       expect(comp.isSaving).toEqual(true);
       saveSubject.error('This is an error!');
 

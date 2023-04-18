@@ -138,7 +138,8 @@
       "save": "حفظ",
       "saveAndPrint": "Save And Print",
       "view": "عرض",
-      "show": "Show {{otherEntity}}"
+      "show": "Show {{otherEntity}}",
+      "validate": "Validate"
     },
     "detail": {
       "field": "حقل",
