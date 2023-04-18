@@ -26,6 +26,23 @@
 
   <sigma-filter [filters]="filters"></sigma-filter>
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <form class="mt-4 mb-2">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Search By ID / Last Name / Second Name / First Name / Birth Day"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="alert alert-warning" id="no-result" *ngIf="accreditations?.length === 0">
     <span sigmaTranslate="sigmaEventsApp.accreditation.home.notFound">No Accreditations found</span>
   </div>
