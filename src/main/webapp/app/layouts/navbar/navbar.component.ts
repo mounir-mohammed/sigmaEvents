@@ -74,4 +74,11 @@ export class NavbarComponent implements OnInit {
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
+
+  canShowEntities(): boolean {
+    if (this.account?.printingCentre?.event?.eventId != null || this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      return true;
+    }
+    return false;
+  }
 }
