@@ -1,10 +1,14 @@
 package ma.sig.events.service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 import javax.persistence.criteria.JoinType;
 import ma.sig.events.domain.*; // for static metamodels
 import ma.sig.events.domain.Accreditation;
 import ma.sig.events.repository.AccreditationRepository;
+import ma.sig.events.security.AuthoritiesConstants;
+import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.criteria.AccreditationCriteria;
 import ma.sig.events.service.dto.AccreditationDTO;
 import ma.sig.events.service.mapper.AccreditationMapper;
@@ -16,6 +20,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+import tech.jhipster.service.filter.BooleanFilter;
+import tech.jhipster.service.filter.LongFilter;
 
 /**
  * Service for executing complex queries for {@link Accreditation} entities in the database.
@@ -33,9 +39,16 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
 
     private final AccreditationMapper accreditationMapper;
 
-    public AccreditationQueryService(AccreditationRepository accreditationRepository, AccreditationMapper accreditationMapper) {
+    private final UserService userService;
+
+    public AccreditationQueryService(
+        AccreditationRepository accreditationRepository,
+        AccreditationMapper accreditationMapper,
+        UserService userService
+    ) {
         this.accreditationRepository = accreditationRepository;
         this.accreditationMapper = accreditationMapper;
+        this.userService = userService;
     }
 
     /**
@@ -82,6 +95,34 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
      */
     protected Specification<Accreditation> createSpecification(AccreditationCriteria criteria) {
         Specification<Accreditation> specification = Specification.where(null);
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Accreditation_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                    specification =
+                        specification.and(buildSpecification(new BooleanFilter().setEquals(true), Accreditation_.accreditationStat));
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(Accreditation_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+        //ADD FILTER END
+
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             if (criteria.getDistinct() != null) {

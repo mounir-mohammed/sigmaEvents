@@ -1,10 +1,13 @@
 package ma.sig.events.service;
 
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.criteria.JoinType;
 import ma.sig.events.domain.*; // for static metamodels
 import ma.sig.events.domain.Area;
 import ma.sig.events.repository.AreaRepository;
+import ma.sig.events.security.AuthoritiesConstants;
+import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.criteria.AreaCriteria;
 import ma.sig.events.service.dto.AreaDTO;
 import ma.sig.events.service.mapper.AreaMapper;
@@ -16,6 +19,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+import tech.jhipster.service.filter.BooleanFilter;
+import tech.jhipster.service.filter.LongFilter;
 
 /**
  * Service for executing complex queries for {@link Area} entities in the database.
@@ -33,9 +38,12 @@ public class AreaQueryService extends QueryService<Area> {
 
     private final AreaMapper areaMapper;
 
-    public AreaQueryService(AreaRepository areaRepository, AreaMapper areaMapper) {
+    private final UserService userService;
+
+    public AreaQueryService(AreaRepository areaRepository, AreaMapper areaMapper, UserService userService) {
         this.areaRepository = areaRepository;
         this.areaMapper = areaMapper;
+        this.userService = userService;
     }
 
     /**
@@ -82,6 +90,28 @@ public class AreaQueryService extends QueryService<Area> {
      */
     protected Specification<Area> createSpecification(AreaCriteria criteria) {
         Specification<Area> specification = Specification.where(null);
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Area_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(new LongFilter().setEquals(0L), root -> root.join(Area_.event, JoinType.LEFT).get(Event_.eventId))
+                );
+        }
+        //ADD FILTER END
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             if (criteria.getDistinct() != null) {

@@ -1,10 +1,13 @@
 package ma.sig.events.service;
 
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.criteria.JoinType;
 import ma.sig.events.domain.*; // for static metamodels
 import ma.sig.events.domain.OperationHistory;
 import ma.sig.events.repository.OperationHistoryRepository;
+import ma.sig.events.security.AuthoritiesConstants;
+import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.criteria.OperationHistoryCriteria;
 import ma.sig.events.service.dto.OperationHistoryDTO;
 import ma.sig.events.service.mapper.OperationHistoryMapper;
@@ -16,6 +19,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+import tech.jhipster.service.filter.LongFilter;
 
 /**
  * Service for executing complex queries for {@link OperationHistory} entities in the database.
@@ -33,12 +37,16 @@ public class OperationHistoryQueryService extends QueryService<OperationHistory>
 
     private final OperationHistoryMapper operationHistoryMapper;
 
+    private final UserService userService;
+
     public OperationHistoryQueryService(
         OperationHistoryRepository operationHistoryRepository,
-        OperationHistoryMapper operationHistoryMapper
+        OperationHistoryMapper operationHistoryMapper,
+        UserService userService
     ) {
         this.operationHistoryRepository = operationHistoryRepository;
         this.operationHistoryMapper = operationHistoryMapper;
+        this.userService = userService;
     }
 
     /**
@@ -85,6 +93,31 @@ public class OperationHistoryQueryService extends QueryService<OperationHistory>
      */
     protected Specification<OperationHistory> createSpecification(OperationHistoryCriteria criteria) {
         Specification<OperationHistory> specification = Specification.where(null);
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(OperationHistory_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(OperationHistory_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+        //ADD FILTER END
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             if (criteria.getDistinct() != null) {

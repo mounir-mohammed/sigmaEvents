@@ -82,8 +82,14 @@
           <td>{{ user.createdDate | date: 'dd/MM/yy HH:mm' }}</td>
           <td>{{ user.lastModifiedBy }}</td>
           <td>{{ user.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</td>
-          <td>{{ user.printingCentre?.printingCentreName }}</td>
-          <td>{{ user.printingCentre?.event?.eventName }}</td>
+          <td>
+            <a [routerLink]="['/printing-centre-sig', user.printingCentre?.printingCentreId, 'view']">{{
+              user.printingCentre?.printingCentreName
+            }}</a>
+          </td>
+          <td>
+            <a [routerLink]="['/event-sig', user.printingCentre?.event?.eventId, 'view']">{{ user.printingCentre?.event?.eventName }}</a>
+          </td>
           <td class="text-end">
             <div class="btn-group">
               <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-info btn-sm">

@@ -106,9 +106,6 @@ export class DayPassInfoSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
-    if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
-      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
-    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {

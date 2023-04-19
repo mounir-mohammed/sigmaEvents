@@ -47,10 +47,16 @@
           </ul>
         </dd>
         <dt><span sigmaTranslate="userManagement.printingCenterId">Printing center</span></dt>
-        <dd>{{ user.printingCentre?.printingCentreName }}</dd>
+        <dd>
+          <a [routerLink]="['/printing-centre-sig', user.printingCentre?.printingCentreId, 'view']">{{
+            user.printingCentre?.printingCentreName
+          }}</a>
+        </dd>
 
         <dt><span sigmaTranslate="userManagement.eventId">Event</span></dt>
-        <dd>{{ user.printingCentre?.event?.eventName }}</dd>
+        <dd>
+          <a [routerLink]="['/event-sig', user.printingCentre?.event?.eventId, 'view']">{{ user.printingCentre?.event?.eventName }}</a>
+        </dd>
       </dl>
 
       <button type="submit" routerLink="../../" class="btn btn-info">

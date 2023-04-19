@@ -1,10 +1,13 @@
 package ma.sig.events.service;
 
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.criteria.JoinType;
 import ma.sig.events.domain.*; // for static metamodels
 import ma.sig.events.domain.Code;
 import ma.sig.events.repository.CodeRepository;
+import ma.sig.events.security.AuthoritiesConstants;
+import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.criteria.CodeCriteria;
 import ma.sig.events.service.dto.CodeDTO;
 import ma.sig.events.service.mapper.CodeMapper;
@@ -16,6 +19,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+import tech.jhipster.service.filter.LongFilter;
 
 /**
  * Service for executing complex queries for {@link Code} entities in the database.
@@ -33,9 +37,12 @@ public class CodeQueryService extends QueryService<Code> {
 
     private final CodeMapper codeMapper;
 
-    public CodeQueryService(CodeRepository codeRepository, CodeMapper codeMapper) {
+    private final UserService userService;
+
+    public CodeQueryService(CodeRepository codeRepository, CodeMapper codeMapper, UserService userService) {
         this.codeRepository = codeRepository;
         this.codeMapper = codeMapper;
+        this.userService = userService;
     }
 
     /**
@@ -82,6 +89,28 @@ public class CodeQueryService extends QueryService<Code> {
      */
     protected Specification<Code> createSpecification(CodeCriteria criteria) {
         Specification<Code> specification = Specification.where(null);
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Code_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(new LongFilter().setEquals(0L), root -> root.join(Code_.event, JoinType.LEFT).get(Event_.eventId))
+                );
+        }
+        //ADD FILTER END
         if (criteria != null) {
             // This has to be called first, because the distinct method returns null
             if (criteria.getDistinct() != null) {

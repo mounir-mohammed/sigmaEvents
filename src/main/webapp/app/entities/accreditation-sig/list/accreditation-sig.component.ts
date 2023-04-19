@@ -165,18 +165,12 @@ export class AccreditationSigComponent implements OnInit {
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
-    if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
-      this.filters.addFilter('eventId.equals', this.currentAccount!.printingCentre!.event!.eventId!.toString());
-    }
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.accreditations = dataFromBody;
-    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
-      this.accreditations = this.accreditations?.filter(accreditation => accreditation.accreditationStat);
-    }
   }
 
   protected fillComponentAttributesFromResponseBody(data: IAccreditationSig[] | null): IAccreditationSig[] {
