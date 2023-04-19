@@ -149,15 +149,33 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" sigmaSortBy="accreditationCreatedByuser">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser">Accreditation Created Byuser</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" sigmaSortBy="accreditationUpdateDate">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdateDate">Accreditation Update Date</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationCreatedByuser">
+          <th scope="col" sigmaSortBy="accreditationUpdatedByuser">
             <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser">Accreditation Created Byuser</span>
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdatedByuser">Accreditation Updated Byuser</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationPrintDate">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintDate">Accreditation Print Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationPrintedByuser">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintedByuser">Accreditation Printed Byuser</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -334,8 +352,11 @@
           <td>{{ accreditation.accreditationCartePresseId }}</td>
           <td>{{ accreditation.accreditationCarteProfessionnelleId }}</td>
           <td>{{ accreditation.accreditationCreationDate | formatMediumDatetime }}</td>
-          <td>{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</td>
           <td>{{ accreditation.accreditationCreatedByuser }}</td>
+          <td>{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationUpdatedByuser }}</td>
+          <td>{{ accreditation.accreditationPrintDate | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationPrintedByuser }}</td>
           <td>{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
           <td>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
           <td>{{ accreditation.accreditationPrintStat | yesNo }}</td>

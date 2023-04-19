@@ -17,11 +17,17 @@ export type PartialUpdateAccreditationSig = Partial<IAccreditationSig> & Pick<IA
 
 type RestOf<T extends IAccreditationSig | NewAccreditationSig> = Omit<
   T,
-  'accreditationBirthDay' | 'accreditationCreationDate' | 'accreditationUpdateDate' | 'accreditationDateStart' | 'accreditationDateEnd'
+  | 'accreditationBirthDay'
+  | 'accreditationCreationDate'
+  | 'accreditationUpdateDate'
+  | 'accreditationDateStart'
+  | 'accreditationDateEnd'
+  | 'accreditationPrintDate'
 > & {
   accreditationBirthDay?: string | null;
   accreditationCreationDate?: string | null;
   accreditationUpdateDate?: string | null;
+  accreditationPrintDate?: string | null;
   accreditationDateStart?: string | null;
   accreditationDateEnd?: string | null;
 };
@@ -53,6 +59,7 @@ export class AccreditationSigService {
     accreditation.accreditationCreatedByuser = this.currentAccount?.login;
     accreditation.accreditationCreationDate = dayjs();
     accreditation.accreditationUpdateDate = null;
+    accreditation.accreditationPrintDate = null;
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .post<RestAccreditationSig>(this.resourceUrl, copy, { observe: 'response' })
@@ -62,15 +69,7 @@ export class AccreditationSigService {
   update(accreditation: IAccreditationSig): Observable<EntityResponseType> {
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     accreditation.accreditationUpdateDate = dayjs();
-    const copy = this.convertDateFromClient(accreditation);
-    return this.http
-      .put<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
-  }
-
-  print(accreditation: IAccreditationSig): Observable<EntityResponseType> {
-    this.accountService.identity().subscribe(account => (this.currentAccount = account));
-    accreditation.accreditationUpdateDate = dayjs();
+    accreditation.accreditationUpdatedByuser = this.currentAccount?.login;
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, { observe: 'response' })
@@ -144,6 +143,7 @@ export class AccreditationSigService {
       accreditationBirthDay: accreditation.accreditationBirthDay?.format(DATE_FORMAT) ?? null,
       accreditationCreationDate: accreditation.accreditationCreationDate?.toJSON() ?? null,
       accreditationUpdateDate: accreditation.accreditationUpdateDate?.toJSON() ?? null,
+      accreditationPrintDate: accreditation.accreditationPrintDate?.toJSON() ?? null,
       accreditationDateStart: accreditation.accreditationDateStart?.toJSON() ?? null,
       accreditationDateEnd: accreditation.accreditationDateEnd?.toJSON() ?? null,
     };
@@ -159,6 +159,7 @@ export class AccreditationSigService {
       accreditationUpdateDate: restAccreditationSig.accreditationUpdateDate
         ? dayjs(restAccreditationSig.accreditationUpdateDate)
         : undefined,
+      accreditationPrintDate: restAccreditationSig.accreditationPrintDate ? dayjs(restAccreditationSig.accreditationPrintDate) : undefined,
       accreditationDateStart: restAccreditationSig.accreditationDateStart ? dayjs(restAccreditationSig.accreditationDateStart) : undefined,
       accreditationDateEnd: restAccreditationSig.accreditationDateEnd ? dayjs(restAccreditationSig.accreditationDateEnd) : undefined,
     };

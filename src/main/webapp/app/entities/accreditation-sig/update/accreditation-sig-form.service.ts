@@ -23,10 +23,11 @@ type AccreditationSigFormGroupInput = IAccreditationSig | PartialWithRequiredKey
  */
 type FormValueOf<T extends IAccreditationSig | NewAccreditationSig> = Omit<
   T,
-  'accreditationCreationDate' | 'accreditationUpdateDate' | 'accreditationDateStart' | 'accreditationDateEnd'
+  'accreditationCreationDate' | 'accreditationUpdateDate' | 'accreditationDateStart' | 'accreditationDateEnd' | 'accreditationPrintDate'
 > & {
   accreditationCreationDate?: string | null;
   accreditationUpdateDate?: string | null;
+  accreditationPrintDate?: string | null;
   accreditationDateStart?: string | null;
   accreditationDateEnd?: string | null;
 };
@@ -40,6 +41,7 @@ type AccreditationSigFormDefaults = Pick<
   | 'accreditationId'
   | 'accreditationCreationDate'
   | 'accreditationUpdateDate'
+  | 'accreditationPrintDate'
   | 'accreditationDateStart'
   | 'accreditationDateEnd'
   | 'accreditationPrintStat'
@@ -67,7 +69,10 @@ type AccreditationSigFormGroupContent = {
   accreditationCarteProfessionnelleId: FormControl<AccreditationSigFormRawValue['accreditationCarteProfessionnelleId']>;
   accreditationCreationDate: FormControl<AccreditationSigFormRawValue['accreditationCreationDate']>;
   accreditationUpdateDate: FormControl<AccreditationSigFormRawValue['accreditationUpdateDate']>;
+  accreditationPrintDate: FormControl<AccreditationSigFormRawValue['accreditationPrintDate']>;
   accreditationCreatedByuser: FormControl<AccreditationSigFormRawValue['accreditationCreatedByuser']>;
+  accreditationUpdatedByuser: FormControl<AccreditationSigFormRawValue['accreditationUpdatedByuser']>;
+  accreditationPrintedByuser: FormControl<AccreditationSigFormRawValue['accreditationPrintedByuser']>;
   accreditationDateStart: FormControl<AccreditationSigFormRawValue['accreditationDateStart']>;
   accreditationDateEnd: FormControl<AccreditationSigFormRawValue['accreditationDateEnd']>;
   accreditationPrintStat: FormControl<AccreditationSigFormRawValue['accreditationPrintStat']>;
@@ -135,7 +140,10 @@ export class AccreditationSigFormService {
       accreditationCarteProfessionnelleId: new FormControl(accreditationRawValue.accreditationCarteProfessionnelleId),
       accreditationCreationDate: new FormControl(accreditationRawValue.accreditationCreationDate),
       accreditationUpdateDate: new FormControl(accreditationRawValue.accreditationUpdateDate),
+      accreditationPrintDate: new FormControl(accreditationRawValue.accreditationPrintDate),
       accreditationCreatedByuser: new FormControl(accreditationRawValue.accreditationCreatedByuser),
+      accreditationUpdatedByuser: new FormControl(accreditationRawValue.accreditationUpdatedByuser),
+      accreditationPrintedByuser: new FormControl(accreditationRawValue.accreditationPrintedByuser),
       accreditationDateStart: new FormControl(accreditationRawValue.accreditationDateStart),
       accreditationDateEnd: new FormControl(accreditationRawValue.accreditationDateEnd),
       accreditationPrintStat: new FormControl(accreditationRawValue.accreditationPrintStat),
@@ -187,6 +195,7 @@ export class AccreditationSigFormService {
       accreditationUpdateDate: currentTime,
       accreditationDateStart: currentTime,
       accreditationDateEnd: currentTime,
+      accreditationPrintDate: currentTime,
       accreditationPrintStat: false,
       accreditationStat: false,
       accreditationActivated: false,
@@ -201,6 +210,7 @@ export class AccreditationSigFormService {
       ...rawAccreditationSig,
       accreditationCreationDate: dayjs(rawAccreditationSig.accreditationCreationDate, DATE_TIME_FORMAT),
       accreditationUpdateDate: dayjs(rawAccreditationSig.accreditationUpdateDate, DATE_TIME_FORMAT),
+      accreditationPrintDate: dayjs(rawAccreditationSig.accreditationPrintDate, DATE_TIME_FORMAT),
       accreditationDateStart: dayjs(rawAccreditationSig.accreditationDateStart, DATE_TIME_FORMAT),
       accreditationDateEnd: dayjs(rawAccreditationSig.accreditationDateEnd, DATE_TIME_FORMAT),
     };
@@ -219,6 +229,9 @@ export class AccreditationSigFormService {
         : undefined,
       accreditationDateStart: accreditation.accreditationDateStart
         ? accreditation.accreditationDateStart.format(DATE_TIME_FORMAT)
+        : undefined,
+      accreditationPrintDate: accreditation.accreditationPrintDate
+        ? accreditation.accreditationPrintDate.format(DATE_TIME_FORMAT)
         : undefined,
       accreditationDateEnd: accreditation.accreditationDateEnd ? accreditation.accreditationDateEnd.format(DATE_TIME_FORMAT) : undefined,
       sites: accreditation.sites ?? [],

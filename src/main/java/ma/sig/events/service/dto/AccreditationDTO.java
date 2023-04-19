@@ -57,7 +57,13 @@ public class AccreditationDTO implements Serializable {
 
     private ZonedDateTime accreditationUpdateDate;
 
+    private ZonedDateTime accreditationPrintDate;
+
     private String accreditationCreatedByuser;
+
+    private String accreditationUpdatedByuser;
+
+    private String accreditationPrintedByuser;
 
     private ZonedDateTime accreditationDateStart;
 
@@ -255,6 +261,30 @@ public class AccreditationDTO implements Serializable {
 
     public void setAccreditationCreatedByuser(String accreditationCreatedByuser) {
         this.accreditationCreatedByuser = accreditationCreatedByuser;
+    }
+
+    public ZonedDateTime getAccreditationPrintDate() {
+        return accreditationPrintDate;
+    }
+
+    public void setAccreditationPrintDate(ZonedDateTime accreditationPrintDate) {
+        this.accreditationPrintDate = accreditationPrintDate;
+    }
+
+    public String getAccreditationUpdatedByuser() {
+        return accreditationUpdatedByuser;
+    }
+
+    public void setAccreditationUpdatedByuser(String accreditationUpdatedByuser) {
+        this.accreditationUpdatedByuser = accreditationUpdatedByuser;
+    }
+
+    public String getAccreditationPrintedByuser() {
+        return accreditationPrintedByuser;
+    }
+
+    public void setAccreditationPrintedByuser(String accreditationPrintedByuser) {
+        this.accreditationPrintedByuser = accreditationPrintedByuser;
     }
 
     public ZonedDateTime getAccreditationDateStart() {
@@ -484,6 +514,9 @@ public class AccreditationDTO implements Serializable {
             ", accreditationCreationDate='" + getAccreditationCreationDate() + "'" +
             ", accreditationUpdateDate='" + getAccreditationUpdateDate() + "'" +
             ", accreditationCreatedByuser='" + getAccreditationCreatedByuser() + "'" +
+            ", accreditationUpdatedByuser='" + getAccreditationUpdatedByuser() + "'" +
+            ", accreditationPrintedByuser='" + getAccreditationPrintedByuser() + "'" +
+            ", accreditationPrintDate='" + getAccreditationPrintDate() + "'" +
             ", accreditationDateStart='" + getAccreditationDateStart() + "'" +
             ", accreditationDateEnd='" + getAccreditationDateEnd() + "'" +
             ", accreditationPrintStat='" + getAccreditationPrintStat() + "'" +

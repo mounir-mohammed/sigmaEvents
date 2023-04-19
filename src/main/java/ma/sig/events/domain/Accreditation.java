@@ -88,6 +88,15 @@ public class Accreditation implements Serializable {
     @Column(name = "accreditation_created_byuser")
     private String accreditationCreatedByuser;
 
+    @Column(name = "accreditation_updated_byuser")
+    private String accreditationUpdatedByuser;
+
+    @Column(name = "accreditation_printed_byuser")
+    private String accreditationPrintedByuser;
+
+    @Column(name = "accreditation_print_date")
+    private ZonedDateTime accreditationPrintDate;
+
     @Column(name = "accreditation_date_start")
     private ZonedDateTime accreditationDateStart;
 
@@ -473,6 +482,45 @@ public class Accreditation implements Serializable {
 
     public void setAccreditationCreatedByuser(String accreditationCreatedByuser) {
         this.accreditationCreatedByuser = accreditationCreatedByuser;
+    }
+
+    public String getAccreditationUpdatedByuser() {
+        return accreditationUpdatedByuser;
+    }
+
+    public void setAccreditationUpdatedByuser(String accreditationUpdatedByuser) {
+        this.accreditationUpdatedByuser = accreditationUpdatedByuser;
+    }
+
+    public String getAccreditationPrintedByuser() {
+        return accreditationPrintedByuser;
+    }
+
+    public void setAccreditationPrintedByuser(String accreditationPrintedByuser) {
+        this.accreditationPrintedByuser = accreditationPrintedByuser;
+    }
+
+    public ZonedDateTime getAccreditationPrintDate() {
+        return accreditationPrintDate;
+    }
+
+    public void setAccreditationPrintDate(ZonedDateTime accreditationPrintDate) {
+        this.accreditationPrintDate = accreditationPrintDate;
+    }
+
+    public Accreditation accreditationPrintedByuser(String accreditationPrintedByuser) {
+        this.setAccreditationPrintedByuser(accreditationPrintedByuser);
+        return this;
+    }
+
+    public Accreditation accreditationUpdatedByuser(String accreditationUpdatedByuser) {
+        this.setAccreditationUpdatedByuser(accreditationUpdatedByuser);
+        return this;
+    }
+
+    public Accreditation accreditationPrintDate(ZonedDateTime accreditationPrintDate) {
+        this.setAccreditationPrintDate(accreditationPrintDate);
+        return this;
     }
 
     public ZonedDateTime getAccreditationDateStart() {
@@ -951,7 +999,10 @@ public class Accreditation implements Serializable {
             ", accreditationCarteProfessionnelleId='" + getAccreditationCarteProfessionnelleId() + "'" +
             ", accreditationCreationDate='" + getAccreditationCreationDate() + "'" +
             ", accreditationUpdateDate='" + getAccreditationUpdateDate() + "'" +
+            ", accreditationPrintDate='" + getAccreditationPrintDate() + "'" +
             ", accreditationCreatedByuser='" + getAccreditationCreatedByuser() + "'" +
+            ", accreditationUpdatedByuser='" + getAccreditationUpdatedByuser() + "'" +
+            ", accreditationPrintedByuser='" + getAccreditationPrintedByuser() + "'" +
             ", accreditationDateStart='" + getAccreditationDateStart() + "'" +
             ", accreditationDateEnd='" + getAccreditationDateEnd() + "'" +
             ", accreditationPrintStat='" + getAccreditationPrintStat() + "'" +

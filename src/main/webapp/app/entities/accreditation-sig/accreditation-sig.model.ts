@@ -35,6 +35,9 @@ export interface IAccreditationSig {
   accreditationCreationDate?: dayjs.Dayjs | null;
   accreditationUpdateDate?: dayjs.Dayjs | null;
   accreditationCreatedByuser?: string | null;
+  accreditationUpdatedByuser?: string | null;
+  accreditationPrintedByuser?: string | null;
+  accreditationPrintDate?: dayjs.Dayjs | null;
   accreditationDateStart?: dayjs.Dayjs | null;
   accreditationDateEnd?: dayjs.Dayjs | null;
   accreditationPrintStat?: boolean | null;

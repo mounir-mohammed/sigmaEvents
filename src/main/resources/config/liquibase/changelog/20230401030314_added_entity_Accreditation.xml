@@ -65,7 +65,16 @@
             <column name="accreditation_update_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="accreditation_print_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
             <column name="accreditation_created_byuser" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="accreditation_updated_byuser" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="accreditation_printed_byuser" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="accreditation_date_start" type="${datetimeType}">

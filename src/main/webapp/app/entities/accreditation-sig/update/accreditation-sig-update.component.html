@@ -398,6 +398,23 @@
         <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label
             class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser"
+            for="field_accreditationCreatedByuser"
+            >Accreditation Created Byuser</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationCreatedByuser"
+            id="field_accreditationCreatedByuser"
+            data-cy="accreditationCreatedByuser"
+            formControlName="accreditationCreatedByuser"
+          />
+        </div>
+
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <label
+            class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdateDate"
             for="field_accreditationUpdateDate"
             >Accreditation Update Date</label
@@ -418,17 +435,51 @@
         <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label
             class="form-label"
-            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser"
-            for="field_accreditationCreatedByuser"
-            >Accreditation Created Byuser</label
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdatedByuser"
+            for="field_accreditationUpdatedByuser"
+            >Accreditation Updated Byuser</label
           >
           <input
             type="text"
             class="form-control"
-            name="accreditationCreatedByuser"
-            id="field_accreditationCreatedByuser"
-            data-cy="accreditationCreatedByuser"
-            formControlName="accreditationCreatedByuser"
+            name="accreditationUpdatedByuser"
+            id="field_accreditationUpdatedByuser"
+            data-cy="accreditationUpdatedByuser"
+            formControlName="accreditationUpdatedByuser"
+          />
+        </div>
+
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintDate" for="field_accreditationPrintDate"
+            >Accreditation Print Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_accreditationPrintDate"
+              data-cy="accreditationPrintDate"
+              type="datetime-local"
+              class="form-control"
+              name="accreditationPrintDate"
+              formControlName="accreditationPrintDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintedByuser"
+            for="field_accreditationPrintedByuser"
+            >Accreditation Printed Byuser</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationPrintedByuser"
+            id="field_accreditationPrintedByuser"
+            data-cy="accreditationPrintedByuser"
+            formControlName="accreditationPrintedByuser"
           />
         </div>
 
