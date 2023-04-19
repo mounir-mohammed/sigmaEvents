@@ -176,6 +176,8 @@ export class AccreditationSigUpdateComponent implements OnInit {
   save(event: any): void {
     if (event.submitter.name == 'Save') {
       this.isSaving = true;
+      this.editForm.patchValue({ accreditationDateStart: this.currentAccount?.printingCentre?.event?.eventdateStart?.toString() });
+      this.editForm.patchValue({ accreditationDateEnd: this.currentAccount?.printingCentre?.event?.eventdateEnd?.toString() });
       const accreditation = this.accreditationFormService.getAccreditationSig(this.editForm);
       if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
         accreditation.event = this.currentAccount?.printingCentre?.event;
