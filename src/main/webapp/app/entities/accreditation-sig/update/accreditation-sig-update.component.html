@@ -595,7 +595,9 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.sexe" for="field_sexe">Sexe</label>
           <select class="form-control" id="field_sexe" data-cy="sexe" name="sexe" formControlName="sexe" [compareWith]="compareSexeSig">
             <option [ngValue]="null"></option>
-            <option [ngValue]="sexeOption" *ngFor="let sexeOption of sexesSharedCollection">{{ sexeOption.sexeValue }}</option>
+            <option [ngValue]="sexeOption" *ngFor="let sexeOption of sexesSharedCollection" [disabled]="sexeOption.sexeStat === false">
+              {{ sexeOption.sexeValue }}
+            </option>
           </select>
         </div>
 
