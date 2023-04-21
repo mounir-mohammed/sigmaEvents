@@ -28,492 +28,494 @@
           </a>
         </li>
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-        <li
-          *ngSwitchCase="true && this.canShowEntities()"
-          ngbDropdown
-          class="nav-item dropdown pointer"
-          display="dynamic"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
-            <span>
-              <fa-icon icon="th-list"></fa-icon>
-              <span sigmaTranslate="global.menu.entities.main">Entities</span>
-            </span>
-          </a>
-          <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="event-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.eventSig">Event</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="printing-type-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.printingTypeSig">Printing Type</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="log-history-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.logHistorySig">Log History</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="area-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.areaSig">Area</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="fonction-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.fonctionSig">Fonction</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="category-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.categorySig">Category</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="printing-model-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.printingModelSig">Printing Model</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="code-type-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.codeTypeSig">Code Type</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="code-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.codeSig">Code</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="accreditation-type-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.accreditationTypeSig">Accreditation Type</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="authentification-type-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.authentificationTypeSig">Authentification Type</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="status-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.statusSig">Status</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="attachement-type-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.attachementTypeSig">Attachement Type</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="info-supp-type-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.infoSuppTypeSig">Info Supp Type</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="info-supp-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.infoSuppSig">Info Supp</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="attachement-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.attachementSig">Attachement</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="organiz-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.organizSig">Organiz</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="civility-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.civilitySig">Civility</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="photo-archive-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.photoArchiveSig">Photo Archive</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="nationality-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.nationalitySig">Nationality</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="country-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.countrySig">Country</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="city-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.citySig">City</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="site-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.siteSig">Site</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, 'EVENT_USER']">
-              <a
-                class="dropdown-item"
-                routerLink="accreditation-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.accreditationSig">Accreditation</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="day-pass-info-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.dayPassInfoSig">Day Pass Info</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="operation-type-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.operationTypeSig">Operation Type</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="sexe-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.sexeSig">Sexe</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="note-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.noteSig">Note</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="operation-history-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.operationHistorySig">Operation History</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="printing-centre-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.printingCentreSig">Printing Centre</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="language-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.languageSig">Language</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="setting-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.settingSig">Setting</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="cloning-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.cloningSig">Cloning</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="printing-server-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.printingServerSig">Printing Server</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="check-accreditation-history-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.checkAccreditationHistorySig">Check Accreditation History</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="check-accreditation-report-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.checkAccreditationReportSig">Check Accreditation Report</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="event-form-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.eventFormSig">Event Form</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="event-field-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.eventFieldSig">Event Field</span>
-              </a>
-            </li>
-            <li *sigmaHasAnyAuthority="[authority.ADMIN]">
-              <a
-                class="dropdown-item"
-                routerLink="event-control-sig"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (click)="collapseNavbar()"
-              >
-                <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
-                <span sigmaTranslate="global.menu.entities.eventControlSig">Event Control</span>
-              </a>
-            </li>
-            <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-          </ul>
-        </li>
+        <ng-container *ngIf="this.canShowEntities()">
+          <li
+            *ngSwitchCase="true"
+            ngbDropdown
+            class="nav-item dropdown pointer"
+            display="dynamic"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
+              <span>
+                <fa-icon icon="th-list"></fa-icon>
+                <span sigmaTranslate="global.menu.entities.main">Entities</span>
+              </span>
+            </a>
+            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="event-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.eventSig">Event</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="printing-type-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.printingTypeSig">Printing Type</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="log-history-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.logHistorySig">Log History</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="area-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.areaSig">Area</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="fonction-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.fonctionSig">Fonction</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="category-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.categorySig">Category</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="printing-model-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.printingModelSig">Printing Model</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="code-type-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.codeTypeSig">Code Type</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="code-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.codeSig">Code</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="accreditation-type-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.accreditationTypeSig">Accreditation Type</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="authentification-type-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.authentificationTypeSig">Authentification Type</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="status-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.statusSig">Status</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="attachement-type-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.attachementTypeSig">Attachement Type</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="info-supp-type-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.infoSuppTypeSig">Info Supp Type</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="info-supp-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.infoSuppSig">Info Supp</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="attachement-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.attachementSig">Attachement</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="organiz-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.organizSig">Organiz</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="civility-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.civilitySig">Civility</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="photo-archive-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.photoArchiveSig">Photo Archive</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="nationality-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.nationalitySig">Nationality</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="country-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.countrySig">Country</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="city-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.citySig">City</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="site-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.siteSig">Site</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, 'EVENT_USER']">
+                <a
+                  class="dropdown-item"
+                  routerLink="accreditation-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.accreditationSig">Accreditation</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="day-pass-info-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.dayPassInfoSig">Day Pass Info</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="operation-type-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.operationTypeSig">Operation Type</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="sexe-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.sexeSig">Sexe</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="note-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.noteSig">Note</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="operation-history-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.operationHistorySig">Operation History</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="printing-centre-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.printingCentreSig">Printing Centre</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="language-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.languageSig">Language</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="setting-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.settingSig">Setting</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="cloning-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.cloningSig">Cloning</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="printing-server-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.printingServerSig">Printing Server</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="check-accreditation-history-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.checkAccreditationHistorySig">Check Accreditation History</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="check-accreditation-report-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.checkAccreditationReportSig">Check Accreditation Report</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="event-form-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.eventFormSig">Event Form</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="event-field-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.eventFieldSig">Event Field</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="event-control-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.eventControlSig">Event Control</span>
+                </a>
+              </li>
+              <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+            </ul>
+          </li>
+        </ng-container>
         <li
           *sigmaHasAnyAuthority="[authority.ADMIN]"
           ngbDropdown

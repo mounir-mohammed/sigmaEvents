@@ -76,8 +76,10 @@ export class NavbarComponent implements OnInit {
   }
 
   canShowEntities(): boolean {
-    if (this.account?.printingCentre?.event?.eventId != null || this.accountService.hasAnyAuthority([Authority.ADMIN])) {
-      return true;
+    if (this.account) {
+      if (this.account?.printingCentre?.event?.eventId != null || this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+        return true;
+      }
     }
     return false;
   }
