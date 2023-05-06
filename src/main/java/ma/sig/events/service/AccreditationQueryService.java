@@ -1,6 +1,9 @@
 package ma.sig.events.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 import javax.persistence.criteria.JoinType;
@@ -12,6 +15,7 @@ import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.criteria.AccreditationCriteria;
 import ma.sig.events.service.dto.AccreditationDTO;
 import ma.sig.events.service.mapper.AccreditationMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,8 +24,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
-import tech.jhipster.service.filter.BooleanFilter;
-import tech.jhipster.service.filter.LongFilter;
+import tech.jhipster.service.filter.*;
 
 /**
  * Service for executing complex queries for {@link Accreditation} entities in the database.
@@ -73,6 +76,19 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
     public Page<AccreditationDTO> findByCriteria(AccreditationCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Accreditation> specification = createSpecification(criteria);
+        return accreditationRepository.findAll(specification, page).map(accreditationMapper::toDto);
+    }
+
+    /**
+     * Return a {@link Page} of {@link AccreditationDTO} which matches the criteria from the database for search.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<AccreditationDTO> findByCriteriaForSearch(AccreditationCriteria criteria, Pageable page, String searchText) {
+        log.debug("find by criteria : {}, page: {}", criteria, page);
+        final Specification<Accreditation> specification = createSpecificationForSearchOneField(criteria, searchText);
         return accreditationRepository.findAll(specification, page).map(accreditationMapper::toDto);
     }
 
@@ -409,6 +425,95 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
                     );
             }
         }
+        return specification;
+    }
+
+    /**
+     * Function to convert {@link AccreditationCriteria} to a {@link Specification} with or conditions used for search by multiple fields
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching {@link Specification} of the entity.
+     */
+    protected Specification<Accreditation> createSpecificationForSearchOneField(AccreditationCriteria criteria, String searchText) {
+        Specification<Accreditation> specification = Specification.where(null);
+
+        if (StringUtils.isNotBlank(searchText)) {
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationFirstName)
+                );
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationSecondName)
+                );
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationLastName)
+                );
+
+            if (searchText.length() >= 3) {
+                try {
+                    Long id = Long.valueOf(searchText);
+                    specification = specification.or(buildSpecification(new LongFilter().setEquals(id), Accreditation_.accreditationId));
+                } catch (Exception e) {
+                    log.debug(e.getMessage());
+                }
+            }
+
+            if (searchText.length() >= 9 && searchText.length() <= 10) {
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    formatter = formatter.withLocale(Locale.ENGLISH);
+                    LocalDate date = LocalDate.parse(searchText, formatter);
+                    specification =
+                        specification.or(buildSpecification(new LocalDateFilter().setEquals(date), Accreditation_.accreditationBirthDay));
+                } catch (Exception e) {
+                    log.debug(e.getMessage());
+                }
+            }
+
+            specification =
+                specification.or(buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationCinId));
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationPasseportId)
+                );
+
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationCartePresseId)
+                );
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationCarteProfessionnelleId)
+                );
+        }
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Accreditation_.event, JoinType.INNER).get(Event_.eventId)
+                            )
+                        );
+                    specification =
+                        specification.and(buildSpecification(new BooleanFilter().setEquals(true), Accreditation_.accreditationStat));
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(Accreditation_.event, JoinType.INNER).get(Event_.eventId)
+                    )
+                );
+        }
+        //ADD FILTER END
         return specification;
     }
 }

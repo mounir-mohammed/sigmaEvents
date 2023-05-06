@@ -13,6 +13,7 @@ import ma.sig.events.service.AccreditationService;
 import ma.sig.events.service.criteria.AccreditationCriteria;
 import ma.sig.events.service.dto.AccreditationDTO;
 import ma.sig.events.web.rest.errors.BadRequestAlertException;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -159,10 +160,17 @@ public class AccreditationResource {
     @GetMapping("/accreditations")
     public ResponseEntity<List<AccreditationDTO>> getAllAccreditations(
         AccreditationCriteria criteria,
-        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
+        String searchText
     ) {
+        log.debug(searchText);
+        Page<AccreditationDTO> page;
         log.debug("REST request to get Accreditations by criteria: {}", criteria);
-        Page<AccreditationDTO> page = accreditationQueryService.findByCriteria(criteria, pageable);
+        if (StringUtils.isNotBlank(searchText)) {
+            page = accreditationQueryService.findByCriteriaForSearch(criteria, pageable, searchText);
+        } else {
+            page = accreditationQueryService.findByCriteria(criteria, pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

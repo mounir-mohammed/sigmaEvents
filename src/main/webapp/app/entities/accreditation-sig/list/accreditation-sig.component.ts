@@ -15,6 +15,7 @@ import {
   ITEM_VALIDATED_EVENT,
   DEFAULT_SORT_DATA,
   ITEM_PRINTED_EVENT,
+  SEARCH_TEXT,
 } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, AccreditationSigService } from '../service/accreditation-sig.service';
 import { AccreditationSigDeleteDialogComponent } from '../delete/accreditation-sig-delete-dialog.component';
@@ -28,9 +29,8 @@ import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
 import { Status } from 'app/config/status.contants';
 import { StatusSigService } from 'app/entities/status-sig/service/status-sig.service';
 import { HttpResponse } from '@angular/common/http';
-import { finalize, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
-import { Util } from 'app/shared/util/util.shred';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -50,6 +50,7 @@ export class AccreditationSigComponent implements OnInit {
   totalItems = 0;
   page = 1;
   authority = Authority;
+  searchText = null;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -164,6 +165,7 @@ export class AccreditationSigComponent implements OnInit {
     const page = params.get(PAGE_HEADER);
     this.page = +(page ?? 1);
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
+    const searchText = params.get(SEARCH_TEXT) ?? '';
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
     this.filters.initializeFromParams(params);
@@ -196,6 +198,7 @@ export class AccreditationSigComponent implements OnInit {
       size: this.itemsPerPage,
       eagerload: true,
       sort: this.getSortQueryParam(predicate, ascending),
+      searchText: this.searchText,
     };
     filterOptions?.forEach(filterOption => {
       queryObject[filterOption.name] = filterOption.values;
@@ -227,5 +230,9 @@ export class AccreditationSigComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  search(): void {
+    this.load();
   }
 }
