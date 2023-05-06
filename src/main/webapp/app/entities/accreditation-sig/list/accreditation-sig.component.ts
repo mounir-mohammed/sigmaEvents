@@ -235,6 +235,7 @@ export class AccreditationSigComponent implements OnInit {
   }
 
   search(): void {
+    this.navigateToPage(0);
     this.load();
   }
 }
