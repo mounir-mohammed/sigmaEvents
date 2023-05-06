@@ -23,6 +23,9 @@
       "detail": {
         "title": "Accreditation"
       },
+      "search": {
+        "placeHolder": "Search By ID / Last Name / Second Name / First Name / Birth Day"
+      },
       "accreditationId": "Id",
       "accreditationFirstName": "Name",
       "accreditationSecondName": "Second Name",

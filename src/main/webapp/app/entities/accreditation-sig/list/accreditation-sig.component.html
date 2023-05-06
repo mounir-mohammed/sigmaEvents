@@ -35,7 +35,7 @@
           name="search"
           [(ngModel)]="searchText"
           autocomplete="off"
-          placeholder="Search By ID / Last Name / Second Name / First Name / Birth Day"
+          placeholder="{{ 'sigmaEventsApp.accreditation.search.placeHolder' | translate }}"
           (keyup)="search()"
         />
       </div>
