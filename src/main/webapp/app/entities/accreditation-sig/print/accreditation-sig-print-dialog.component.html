@@ -1,4 +1,4 @@
-<form *ngIf="accreditation" name="printForm" (ngSubmit)="confirmPrint(accreditation)">
+<form *ngIf="accreditation" name="printForm" (ngSubmit)="confirmPrint(accreditation, status)">
   <div class="modal-header">
     <h4 class="modal-title" data-cy="accreditationPrintDialogHeading" sigmaTranslate="entity.print.title">Confirm print operation</h4>
 

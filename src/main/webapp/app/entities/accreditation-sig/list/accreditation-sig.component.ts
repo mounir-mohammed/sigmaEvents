@@ -102,9 +102,10 @@ export class AccreditationSigComponent implements OnInit {
   validate(accreditation: IAccreditationSig): void {
     const modalRef = this.modalService.open(AccreditationSigValidateDialogComponent, { size: 'lg', backdrop: 'static' });
     const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.VALIDATED).shift();
-    accreditation.status = status;
+    //accreditation.status = status;
     console.log(accreditation);
     modalRef.componentInstance.accreditation = accreditation;
+    modalRef.componentInstance.status = status;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(
@@ -121,10 +122,11 @@ export class AccreditationSigComponent implements OnInit {
   print(accreditation: IAccreditationSig): void {
     const modalRef = this.modalService.open(AccreditationSigPrintDialogComponent, { size: 'lg', backdrop: 'static' });
     const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.PRINTED).shift();
-    accreditation.status = status;
+    //accreditation.status = status;
     accreditation.accreditationPrintStat = true;
     accreditation.accreditationPrintNumber = accreditation.accreditationPrintNumber! + 1;
     modalRef.componentInstance.accreditation = accreditation;
+    modalRef.componentInstance.status = status;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed
       .pipe(

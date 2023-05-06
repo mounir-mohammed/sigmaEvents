@@ -7,6 +7,7 @@ import { ITEM_PRINTED_EVENT } from 'app/config/navigation.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import dayjs from 'dayjs/esm';
+import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
 
 @Component({
   templateUrl: './accreditation-sig-print-dialog.component.html',
@@ -14,6 +15,7 @@ import dayjs from 'dayjs/esm';
 export class AccreditationSigPrintDialogComponent {
   accreditation?: IAccreditationSig;
   currentAccount: Account | null = null;
+  status?: IStatusSig;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -25,10 +27,11 @@ export class AccreditationSigPrintDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmPrint(accreditation: IAccreditationSig): void {
+  confirmPrint(accreditation: IAccreditationSig, status?: IStatusSig): void {
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     accreditation.accreditationPrintedByuser = this.currentAccount?.login;
     accreditation.accreditationPrintDate = dayjs();
+    accreditation.status = status;
     this.accreditationService.update(accreditation).subscribe(() => {
       this.activeModal.close(ITEM_PRINTED_EVENT);
     });
