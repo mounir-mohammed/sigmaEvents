@@ -8,6 +8,8 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import dayjs from 'dayjs/esm';
 import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   templateUrl: './accreditation-sig-print-dialog.component.html',
@@ -34,6 +36,23 @@ export class AccreditationSigPrintDialogComponent {
     accreditation.status = status;
     this.accreditationService.update(accreditation).subscribe(() => {
       this.activeModal.close(ITEM_PRINTED_EVENT);
+      this.exportAsPDF('ACC-' + accreditation.event?.eventId + '-' + accreditation.accreditationId);
     });
+  }
+
+  exportAsPDF(divId: string) {
+    let data = document.getElementById(divId);
+    if (data) {
+      html2canvas(data).then(canvas => {
+        const contentDataURL = canvas.toDataURL('image/jpeg', 1.0); // 'image/jpeg' for lower quality output.
+        let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+        //let pdf = new jspdf('p', 'cm', 'a4');
+        pdf.addImage(contentDataURL, 'jpeg', 0, 0, 29.7, 21.0);
+        pdf.autoPrint();
+        //This is a key for printing
+        pdf.output('dataurlnewwindow');
+        //pdf.save(divId+'.pdf');
+      });
+    }
   }
 }
