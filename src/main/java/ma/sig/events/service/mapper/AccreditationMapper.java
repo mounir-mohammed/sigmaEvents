@@ -78,6 +78,16 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "eventId", source = "eventId")
     @Mapping(target = "eventName", source = "eventName")
     @Mapping(target = "eventStat", source = "eventStat")
+    @Mapping(target = "eventPrintingModelId", source = "eventPrintingModelId")
+    @Mapping(target = "eventWithPhoto", source = "eventWithPhoto")
+    @Mapping(target = "eventNoCode", source = "eventNoCode")
+    @Mapping(target = "eventCodeNoFilter", source = "eventCodeNoFilter")
+    @Mapping(target = "eventCodeByTypeAccreditation", source = "eventCodeByTypeAccreditation")
+    @Mapping(target = "eventCodeByTypeCategorie", source = "eventCodeByTypeCategorie")
+    @Mapping(target = "eventCodeByTypeFonction", source = "eventCodeByTypeFonction")
+    @Mapping(target = "eventCodeByTypeOrganiz", source = "eventCodeByTypeOrganiz")
+    @Mapping(target = "eventDefaultPrintingLanguage", source = "eventDefaultPrintingLanguage")
+    @Mapping(target = "eventPCenterPrintingLanguage", source = "eventPCenterPrintingLanguage")
     EventDTO toDtoEventEventId(Event event);
 
     @Named("civilityCivilityId")

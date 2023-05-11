@@ -126,4 +126,14 @@ export class DataUtils {
   private formatAsBytes(size: number): string {
     return size.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' bytes'; // NOSONAR
   }
+
+  base64ToJson(base64String: string) {
+    const json = atob(base64String);
+    return JSON.parse(json);
+  }
+
+  jsonToBase64(object: any) {
+    const json = JSON.stringify(object);
+    return btoa(json);
+  }
 }

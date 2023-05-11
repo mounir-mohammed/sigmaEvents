@@ -47,7 +47,22 @@ export interface IAccreditationSig {
   accreditationStat?: boolean | null;
   accreditationActivated?: boolean | null;
   sites?: Pick<ISiteSig, 'siteId' | 'siteName' | 'siteStat'>[] | null;
-  event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
+  event?: Pick<
+    IEventSig,
+    | 'eventId'
+    | 'eventName'
+    | 'eventStat'
+    | 'eventPrintingModelId'
+    | 'eventWithPhoto'
+    | 'eventNoCode'
+    | 'eventCodeNoFilter'
+    | 'eventCodeByTypeAccreditation'
+    | 'eventCodeByTypeCategorie'
+    | 'eventCodeByTypeFonction'
+    | 'eventCodeByTypeOrganiz'
+    | 'eventDefaultPrintingLanguage'
+    | 'eventPCenterPrintingLanguage'
+  > | null;
   civility?: Pick<ICivilitySig, 'civilityId' | 'civilityValue' | 'civilityStat'> | null;
   sexe?: Pick<ISexeSig, 'sexeId' | 'sexeValue' | 'sexeStat'> | null;
   nationality?: Pick<INationalitySig, 'nationalityId' | 'nationalityValue' | 'nationalityStat'> | null;

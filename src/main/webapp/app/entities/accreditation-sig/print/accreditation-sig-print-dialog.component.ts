@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IAccreditationSig } from '../accreditation-sig.model';
@@ -10,20 +10,38 @@ import dayjs from 'dayjs/esm';
 import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { IPrintingModelSig } from 'app/entities/printing-model-sig/printing-model-sig.model';
+import { ActivatedRoute } from '@angular/router';
+import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
   templateUrl: './accreditation-sig-print-dialog.component.html',
 })
-export class AccreditationSigPrintDialogComponent {
+export class AccreditationSigPrintDialogComponent implements OnInit {
   accreditation?: IAccreditationSig;
   currentAccount: Account | null = null;
   status?: IStatusSig;
+  printingModel: IPrintingModelSig | null = null;
+  dataLoaded: boolean = false;
+  modelData: any;
 
   constructor(
     protected accreditationService: AccreditationSigService,
     protected activeModal: NgbActiveModal,
-    protected accountService: AccountService
+    protected accountService: AccountService,
+    protected activatedRoute: ActivatedRoute,
+    protected printingModelSigService: PrintingModelSigService,
+    protected dataUtils: DataUtils
   ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe(() => {
+      this.getConfig(this.accreditation?.event?.eventPrintingModelId!).finally(() => {
+        console.log(this.modelData);
+      });
+    });
+  }
 
   cancel(): void {
     this.activeModal.dismiss();
@@ -55,5 +73,15 @@ export class AccreditationSigPrintDialogComponent {
         //pdf.save(divId+'.pdf');
       });
     }
+  }
+
+  getConfig(modelId: number): Promise<Boolean> {
+    return new Promise(resolve => {
+      this.printingModelSigService.find(modelId).subscribe(resp => {
+        this.printingModel = resp.body;
+        this.modelData = this.dataUtils.base64ToJson(this.printingModel?.printingModelData!);
+        resolve(true);
+      });
+    });
   }
 }
