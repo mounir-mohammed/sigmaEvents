@@ -42,8 +42,9 @@ export class AccreditationSigPrintDialogComponent {
 
   exportAsPDF(divId: string) {
     let data = document.getElementById(divId);
+    console.log(divId);
     if (data) {
-      html2canvas(data).then(canvas => {
+      html2canvas(data, { scale: 4 }).then(canvas => {
         const contentDataURL = canvas.toDataURL('image/jpeg', 1.0); // 'image/jpeg' for lower quality output.
         let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
         //let pdf = new jspdf('p', 'cm', 'a4');

@@ -237,3 +237,28 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+.model {
+  width: 29.7cm;
+  height: 21cm;
+  margin: 30mm 45mm 30mm 45mm;
+  /* change the margins as you want them to be. */
+}
+
+body .modal-dialog {
+  /* Width */
+  max-width: 100%;
+  width: auto !important;
+  display: inline-block;
+}
+
+.modal {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal img {
+  max-width: 26%;
+  max-height: 26%;
+}

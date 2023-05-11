@@ -14,17 +14,16 @@
     >
       Are you sure you want to print Accreditation {{ accreditation.accreditationId }}?
     </p>
-    <div id="ACC-{{ accreditation.event?.eventId }}-{{ accreditation.accreditationId }}" style="overflow: scroll" class="ng-container">
-      {{ accreditation.accreditationId }} <br />
-      {{ accreditation.accreditationFirstName }}<br />
-      {{ accreditation.accreditationLastName }}<br />
-      {{ accreditation.category!.categoryName! }}<br />
-      <!-- {{accreditation.fonction!.fonctionName!}}<br/>
-        {{accreditation.organiz!.organizName!}}<br/> -->
+    <div id="ACC-{{ accreditation.event?.eventId }}-{{ accreditation.accreditationId }}" class="model">
+      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationId }} <br />
+      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationFirstName }}<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationLastName }}<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.category?.categoryName }}<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.fonction?.fonctionName }}<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.organiz?.organizName }}<br />
       <div *ngIf="accreditation.accreditationPhoto">
         <img
           [src]="'data:' + accreditation.accreditationPhotoContentType + ';base64,' + accreditation.accreditationPhoto"
-          style="max-width: 20%; max-height: 20%"
           alt="accreditation image"
         />
       </div>
