@@ -92,7 +92,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
     accreditation.status = status;
     this.accreditationService.update(accreditation).subscribe(() => {
       this.activeModal.close(ITEM_PRINTED_EVENT);
-      this.exportAsPDF('ACC-' + accreditation.event?.eventId + '-' + accreditation.accreditationId);
+      this.exportAsPDF(accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!);
     });
   }
 
@@ -120,7 +120,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         if (this.modelData.printingModel.model.autoPrint == true) {
           pdf.output('dataurlnewwindow');
         } else {
-          pdf.save(divId + '.pdf');
+          let fileName = divId + '_' + new Date().toUTCString();
+          console.log(fileName);
+          pdf.save(fileName);
         }
       });
     }

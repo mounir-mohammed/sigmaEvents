@@ -15,7 +15,10 @@
       Are you sure you want to print Accreditation {{ accreditation.accreditationId }}?
     </p>
     <div id="badge-container" class="badge-container" *ngIf="this.dataLoaded">
-      <div id="ACC-{{ accreditation.event?.eventId }}-{{ accreditation.accreditationId }}" class="badge-model">
+      <div
+        id="{{ accreditation.event?.eventAbreviation }}_{{ accreditation.event?.eventId }}_{{ accreditation.accreditationId }}"
+        class="badge-model"
+      >
         &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationId }} <br />
         &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationFirstName }}<br />
         &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationLastName }}<br />

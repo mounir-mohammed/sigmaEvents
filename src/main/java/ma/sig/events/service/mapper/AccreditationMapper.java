@@ -77,6 +77,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
     @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventAbreviation", source = "eventAbreviation")
     @Mapping(target = "eventStat", source = "eventStat")
     @Mapping(target = "eventPrintingModelId", source = "eventPrintingModelId")
     @Mapping(target = "eventWithPhoto", source = "eventWithPhoto")
