@@ -18,7 +18,8 @@
         "question": "Êtes-vous certain de vouloir valider l'accreditation {{ id }}?"
       },
       "print": {
-        "question": "Êtes-vous certain de vouloir imprimer l'accreditation {{ id }}?"
+        "question": "Êtes-vous certain de vouloir imprimer l'accreditation {{ id }}?",
+        "modelError": "Erreur de chargement du model d'impréssion"
       },
       "detail": {
         "title": "Accreditation"

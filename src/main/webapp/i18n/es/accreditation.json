@@ -12,7 +12,8 @@
       "updated": "Un Accreditation ha sido actualizado con el identificador {{ param }}",
       "deleted": "Un Accreditation ha sido eliminado con el identificador {{ param }}",
       "delete": {
-        "question": "¿Seguro que quiere eliminar Accreditation {{ id }}?"
+        "question": "¿Seguro que quiere eliminar Accreditation {{ id }}?",
+        "modelError": "Error on loading printing model"
       },
       "validate": {
         "question": "Are you sure you want to validate Accreditation {{ id }}?"

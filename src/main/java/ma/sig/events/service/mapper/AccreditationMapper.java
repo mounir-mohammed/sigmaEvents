@@ -130,6 +130,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "categoryId", source = "categoryId")
     @Mapping(target = "categoryName", source = "categoryName")
     @Mapping(target = "categoryStat", source = "categoryStat")
+    @Mapping(target = "printingModel", source = "printingModel")
     CategoryDTO toDtoCategoryCategoryId(Category category);
 
     @Named("fonctionFonctionId")

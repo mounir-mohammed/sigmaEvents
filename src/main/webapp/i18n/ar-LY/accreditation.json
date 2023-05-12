@@ -18,7 +18,8 @@
         "question": "Are you sure you want to validate Accreditation {{ id }}?"
       },
       "print": {
-        "question": "Are you sure you want to print Accreditation {{ id }}?"
+        "question": "Are you sure you want to print Accreditation {{ id }}?",
+        "modelError": "Error on loading printing model"
       },
       "detail": {
         "title": "Accreditation"

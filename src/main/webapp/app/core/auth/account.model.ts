@@ -9,6 +9,9 @@ export class Account {
     public lastName: string | null,
     public login: string,
     public imageUrl: string | null,
-    public printingCentre?: Pick<IPrintingCentreSig, 'printingCentreId' | 'printingCentreName' | 'event'> | null
+    public printingCentre?: Pick<
+      IPrintingCentreSig,
+      'printingCentreId' | 'printingCentreName' | 'event' | 'printingType' | 'printingModel'
+    > | null
   ) {}
 }

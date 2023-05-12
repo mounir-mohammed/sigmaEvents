@@ -14,18 +14,20 @@
     >
       Are you sure you want to print Accreditation {{ accreditation.accreditationId }}?
     </p>
-    <div id="ACC-{{ accreditation.event?.eventId }}-{{ accreditation.accreditationId }}" class="model">
-      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationId }} <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationFirstName }}<br />
-      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationLastName }}<br />
-      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.category?.categoryName }}<br />
-      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.fonction?.fonctionName }}<br />
-      &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.organiz?.organizName }}<br />
-      <div *ngIf="accreditation.accreditationPhoto">
-        <img
-          [src]="'data:' + accreditation.accreditationPhotoContentType + ';base64,' + accreditation.accreditationPhoto"
-          alt="accreditation image"
-        />
+    <div id="badge-container" class="badge-container" *ngIf="this.dataLoaded">
+      <div id="ACC-{{ accreditation.event?.eventId }}-{{ accreditation.accreditationId }}" class="badge-model">
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationId }} <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationFirstName }}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationLastName }}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.category?.categoryName }}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.fonction?.fonctionName }}<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.organiz?.organizName }}<br />
+        <div *ngIf="accreditation.accreditationPhoto">
+          <img
+            [src]="'data:' + accreditation.accreditationPhotoContentType + ';base64,' + accreditation.accreditationPhoto"
+            alt="accreditation image"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -35,7 +37,13 @@
       <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
     </button>
 
-    <button id="sigma-confirm-print-accreditation" data-cy="entityConfirmPrintButton" type="submit" class="btn btn-success">
+    <button
+      id="sigma-confirm-print-accreditation"
+      data-cy="entityConfirmPrintButton"
+      type="submit"
+      class="btn btn-success"
+      *ngIf="this.dataLoaded"
+    >
       <fa-icon icon="print"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.print">Validate</span>
     </button>
   </div>

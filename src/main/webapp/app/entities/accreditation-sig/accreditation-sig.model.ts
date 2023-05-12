@@ -68,7 +68,7 @@ export interface IAccreditationSig {
   nationality?: Pick<INationalitySig, 'nationalityId' | 'nationalityValue' | 'nationalityStat'> | null;
   country?: Pick<ICountrySig, 'countryId' | 'countryName' | 'countryStat'> | null;
   city?: Pick<ICitySig, 'cityId' | 'cityName' | 'cityStat'> | null;
-  category?: Pick<ICategorySig, 'categoryId' | 'categoryName' | 'categoryStat'> | null;
+  category?: Pick<ICategorySig, 'categoryId' | 'categoryName' | 'categoryStat' | 'printingModel'> | null;
   fonction?: Pick<IFonctionSig, 'fonctionId' | 'fonctionName' | 'fonctionStat'> | null;
   organiz?: Pick<IOrganizSig, 'organizId' | 'organizName' | 'organizStat'> | null;
   accreditationType?: Pick<IAccreditationTypeSig, 'accreditationTypeId' | 'accreditationTypeValue' | 'accreditationTypeStat'> | null;
