@@ -30,7 +30,17 @@
         "position": "relative",
         "x": "",
         "y": "",
-        "z": ""
+        "z": "",
+        "backgroundColor": "white",
+        "color": "blue",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "",
+        "fontFamily": "arial",
+        "fontStyle": "normal",
+        "fontSize": "30px",
+        "border": "2px solid #a6a6a6",
+        "display": "inline-block"
       },
       {
         "name": "accreditationFirstName",
@@ -41,18 +51,59 @@
         "position": "relative",
         "x": "20px",
         "y": "20px",
-        "z": ""
+        "z": "",
+        "backgroundColor": "white",
+        "color": "blue",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "",
+        "fontFamily": "arial",
+        "fontStyle": "normal",
+        "fontSize": "30px",
+        "border": "",
+        "display": "inline-block"
       },
       {
         "name": "categoryName",
-        "path": "categoryName",
+        "path": "category.categoryName",
         "type": "text",
         "format": "",
         "style": "",
         "position": "relative",
         "x": "40px",
         "y": "40px",
-        "z": ""
+        "z": "",
+        "backgroundColor": "blue",
+        "color": "",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "",
+        "fontFamily": "arial",
+        "fontStyle": "normal",
+        "fontSize": "30px",
+        "border": "",
+        "display": "inline-block"
+      },
+      {
+        "name": "fonctionName",
+        "path": "fonction.fonctionName",
+        "type": "text",
+        "format": "",
+        "style": "",
+        "position": "relative",
+        "x": "120px",
+        "y": "120px",
+        "z": "",
+        "backgroundColor": "red",
+        "color": "",
+        "DynamicBackgroundColor": "fonction.fonctionColor",
+        "DynamicColor": "",
+        "textAlign": "",
+        "fontFamily": "arial",
+        "fontStyle": "normal",
+        "fontSize": "30px",
+        "border": "",
+        "display": "inline-block"
       }
     ],
     "images": [
@@ -65,27 +116,39 @@
         "position": "relative",
         "x": "",
         "y": "",
-        "z": ""
+        "z": "",
+        "border": "",
+        "display": "inline-block"
       }
     ],
     "cadres": [
       {
         "name": "categorieCadre",
-        "colorPath": "accreditation.category?.categoryColor",
+        "backgroundColor": "white",
+        "color": "blue",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
         "style": "",
         "position": "relative",
         "x": "",
         "y": "",
-        "z": ""
+        "z": "",
+        "border": "",
+        "display": "inline-block"
       },
       {
         "name": "fonctionCadre",
-        "colorPath": "accreditation.fonction?.fonctionColor",
+        "backgroundColor": "white",
+        "color": "blue",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
         "style": "",
         "position": "relative",
         "x": "",
         "y": "",
-        "z": ""
+        "z": "",
+        "border": "",
+        "display": "inline-block"
       }
     ]
   }

@@ -136,4 +136,11 @@ export class DataUtils {
     const json = JSON.stringify(object);
     return btoa(json);
   }
+
+  searchElementFromJson(give: string, obj: any): any {
+    var res = give.split('.').reduce(function (o, k) {
+      return o && o[k];
+    }, obj);
+    return res;
+  }
 }

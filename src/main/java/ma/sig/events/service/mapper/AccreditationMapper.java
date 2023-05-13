@@ -66,6 +66,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "siteId", source = "siteId")
     @Mapping(target = "siteName", source = "siteName")
     @Mapping(target = "siteStat", source = "siteStat")
+    @Mapping(target = "siteColor", source = "siteColor")
     SiteDTO toDtoSiteSiteId(Site site);
 
     @Named("siteSiteIdSet")
@@ -131,6 +132,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "categoryId", source = "categoryId")
     @Mapping(target = "categoryName", source = "categoryName")
     @Mapping(target = "categoryStat", source = "categoryStat")
+    @Mapping(target = "categoryColor", source = "categoryColor")
     @Mapping(target = "printingModel", source = "printingModel")
     CategoryDTO toDtoCategoryCategoryId(Category category);
 
@@ -139,6 +141,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "fonctionId", source = "fonctionId")
     @Mapping(target = "fonctionName", source = "fonctionName")
     @Mapping(target = "fonctionStat", source = "fonctionStat")
+    @Mapping(target = "fonctionColor", source = "fonctionColor")
     FonctionDTO toDtoFonctionFonctionId(Fonction fonction);
 
     @Named("organizOrganizId")

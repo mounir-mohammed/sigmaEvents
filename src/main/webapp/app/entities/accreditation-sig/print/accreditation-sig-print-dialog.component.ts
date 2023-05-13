@@ -231,14 +231,23 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           this.accreditation?.accreditationId +
           '_' +
           element.name;
-        var textElement = data[element.path];
-        console.log(element.path);
-        console.log(textElement);
-        field.textContent = textElement;
+        field.textContent = this.dataUtils.searchElementFromJson(element.path, data);
+        field.style.display = element.display;
         field.style.position = element.position;
         field.style.left = element.x;
         field.style.top = element.y;
         field.style.zIndex = element.z;
+        field.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
+          ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
+          : element.backgroundColor;
+        field.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, data)
+          ? this.dataUtils.searchElementFromJson(element.DynamicColor, data)
+          : element.color;
+        field.style.textAlign = element.textAlign;
+        field.style.fontFamily = element.fontFamily;
+        field.style.fontStyle = element.fontStyle;
+        field.style.fontSize = element.fontSize;
+        field.style.border = element.border;
         badge?.appendChild(field);
       });
 
