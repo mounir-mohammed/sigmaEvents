@@ -237,15 +237,14 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   }
 }
 /* jhipster-needle-scss-add-main JHipster will add new css style */
-
+/*
 .badge-model {
   width: 29.7cm;
   height: 21cm;
   margin: 30mm 45mm 30mm 45mm;
   border: 2px dashed #a6a6a6;
-  /* change the margins as you want them to be. */
 }
-
+*/
 body .modal-dialog {
   /* Width */
   max-width: 100%;
@@ -258,8 +257,9 @@ body .modal-dialog {
   justify-content: center;
   align-items: center;
 }
-
+/*
 .modal img {
   max-width: 26%;
   max-height: 26%;
 }
+*/

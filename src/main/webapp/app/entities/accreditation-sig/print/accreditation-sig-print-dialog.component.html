@@ -14,25 +14,7 @@
     >
       Are you sure you want to print Accreditation {{ accreditation.accreditationId }}?
     </p>
-    <div id="badge-container" class="badge-container" *ngIf="this.dataLoaded">
-      <div
-        id="{{ accreditation.event?.eventAbreviation }}_{{ accreditation.event?.eventId }}_{{ accreditation.accreditationId }}"
-        class="badge-model"
-      >
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationId }} <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationFirstName }}<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.accreditationLastName }}<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.category?.categoryName }}<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.fonction?.fonctionName }}<br />
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ accreditation.organiz?.organizName }}<br />
-        <div *ngIf="accreditation.accreditationPhoto">
-          <img
-            [src]="'data:' + accreditation.accreditationPhotoContentType + ';base64,' + accreditation.accreditationPhoto"
-            alt="accreditation image"
-          />
-        </div>
-      </div>
-    </div>
+    <div id="badge-container" class="badge-container"></div>
   </div>
 
   <div class="modal-footer">
@@ -45,7 +27,7 @@
       data-cy="entityConfirmPrintButton"
       type="submit"
       class="btn btn-success"
-      *ngIf="this.dataLoaded"
+      *ngIf="this.badgeGenerated"
     >
       <fa-icon icon="print"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.print">Validate</span>
     </button>

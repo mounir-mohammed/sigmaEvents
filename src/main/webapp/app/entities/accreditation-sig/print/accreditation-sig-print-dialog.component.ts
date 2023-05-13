@@ -25,6 +25,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   status?: IStatusSig;
   printingModel: IPrintingModelSig | null = null;
   dataLoaded: boolean = false;
+  badgeGenerated: boolean = false;
   modelData: any;
 
   constructor(
@@ -38,6 +39,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('Start ngOnInit()');
     this.activatedRoute.data.subscribe(() => {
       this.accountService.identity().subscribe(account => (this.currentAccount = account));
       console.log(this.currentAccount?.printingCentre?.printingType?.printingTypeValue);
@@ -46,9 +48,11 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           if (this.accreditation?.event?.eventPrintingModelId!) {
             this.getConfig(this.accreditation?.event?.eventPrintingModelId!).finally(() => {
               this.dataLoaded = true;
+              console.log('this.dataLoaded = true;');
+              this.generateadge();
             });
           } else {
-            this.throwAlertModel();
+            this.throwAlertErrorLoadingModel();
             console.log('ngOnInit() => NO MODEL FOUND');
           }
         }
@@ -57,9 +61,24 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           if (this.currentAccount?.printingCentre?.printingModel?.printingModelId!) {
             this.getConfig(this.currentAccount?.printingCentre?.printingModel?.printingModelId!).finally(() => {
               this.dataLoaded = true;
+              console.log('this.dataLoaded = true;');
+              this.generateadge();
             });
           } else {
-            this.throwAlertModel();
+            this.throwAlertErrorLoadingModel();
+            console.log('ngOnInit() => NO MODEL FOUND');
+          }
+        }
+
+        if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == 'BY_ACCREDITATION_TYPE') {
+          if (this.accreditation?.accreditationType?.printingModel?.printingModelId!) {
+            this.getConfigFromPrintingModel(this.accreditation?.accreditationType?.printingModel).finally(() => {
+              this.dataLoaded = true;
+              console.log('this.dataLoaded = true;');
+              this.generateadge();
+            });
+          } else {
+            this.throwAlertErrorLoadingModel();
             console.log('ngOnInit() => NO MODEL FOUND');
           }
         }
@@ -68,18 +87,21 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           if (this.accreditation?.category?.printingModel?.printingModelId!) {
             this.getConfigFromPrintingModel(this.accreditation?.category?.printingModel).finally(() => {
               this.dataLoaded = true;
+              console.log('this.dataLoaded = true;');
+              this.generateadge();
             });
           } else {
-            this.throwAlertModel();
+            this.throwAlertErrorLoadingModel();
             console.log('ngOnInit() => NO MODEL FOUND');
           }
         }
         console.log(this.modelData);
       } else {
-        this.throwAlertModel();
+        this.throwAlertErrorLoadingModel();
         console.log('ngOnInit() => NO PRINTINGTYPE FOUND!');
       }
     });
+    console.log('END ngOnInit()');
   }
 
   cancel(): void {
@@ -136,7 +158,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           this.modelData = this.dataUtils.base64ToJson(this.printingModel?.printingModelData!);
           resolve(true);
         } else {
-          this.throwAlertModel();
+          this.throwAlertErrorLoadingModel();
           console.log('getConfig() => PRINTING MODEL STATE NOT ACTIVATED');
           resolve(false);
         }
@@ -152,18 +174,18 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           this.modelData = this.dataUtils.base64ToJson(this.printingModel?.printingModelData!);
           resolve(true);
         } else {
-          this.throwAlertModel();
+          this.throwAlertErrorLoadingModel();
           console.log('getConfigFromPrintingModel() => PRINTING MODEL STATE NOT ACTIVATED');
           resolve(false);
         }
       } else {
-        this.throwAlertModel();
+        this.throwAlertErrorLoadingModel();
         console.log('getConfigFromPrintingModel() => NO PRINTING MODEL DATA FOUND');
       }
     });
   }
 
-  throwAlertModel() {
+  throwAlertErrorLoadingModel() {
     this.alertService.get().push(
       this.alertService.addAlert(
         {
@@ -176,5 +198,55 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
       )
     );
     this.cancel();
+  }
+
+  generateadge(): void {
+    console.log('generate badge');
+    console.log(this.dataLoaded);
+    if (this.dataLoaded && this.accreditation) {
+      var accreditationJson = JSON.stringify(this.accreditation);
+      var data = JSON.parse(accreditationJson);
+      console.log(accreditationJson);
+      console.log('IN generateadge()');
+      var badgeContainer = document.getElementById('badge-container');
+      console.log(badgeContainer);
+      //generate badge
+      var badge = document.createElement('div');
+      badge.id =
+        this.accreditation?.event?.eventAbreviation + '_' + this.accreditation?.event?.eventId + '_' + this.accreditation?.accreditationId;
+      badge.style.width = this.modelData.printingModel.page.width;
+      badge.style.height = this.modelData.printingModel.page.height;
+      badge.style.margin = this.modelData.printingModel.page.margin;
+      badge.style.border = this.modelData.printingModel.page.border;
+
+      //fields
+      this.modelData.printingModel.fields.forEach((element: any) => {
+        console.log(element.name);
+        var field = document.createElement('div');
+        field.id =
+          this.accreditation?.event?.eventAbreviation +
+          '_' +
+          this.accreditation?.event?.eventId +
+          '_' +
+          this.accreditation?.accreditationId +
+          '_' +
+          element.name;
+        var textElement = data[element.path];
+        console.log(element.path);
+        console.log(textElement);
+        field.textContent = textElement;
+        field.style.position = element.position;
+        field.style.left = element.x;
+        field.style.top = element.y;
+        field.style.zIndex = element.z;
+        badge?.appendChild(field);
+      });
+
+      badgeContainer?.appendChild(badge);
+      this.badgeGenerated = true;
+    } else {
+      console.log('NOT generateadge()');
+      this.badgeGenerated = false;
+    }
   }
 }

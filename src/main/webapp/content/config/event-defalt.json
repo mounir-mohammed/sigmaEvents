@@ -1,0 +1,92 @@
+{
+  "printingModel": {
+    "page": {
+      "width": "29.7cm",
+      "height": "21cm",
+      "margin": "30mm 45mm 30mm 45mm",
+      "border": "2px dashed #a6a6a6"
+    },
+    "model": {
+      "scale": "4",
+      "type": "image/jpeg",
+      "quality": "1.0",
+      "typeImage": "jpeg",
+      "landScape": "l",
+      "unite": "cm",
+      "format": "a4",
+      "x": "0",
+      "y": "0",
+      "w": "29.7",
+      "h": "21.0",
+      "autoPrint": false
+    },
+    "fields": [
+      {
+        "name": "accreditationId",
+        "path": "accreditationId",
+        "type": "text",
+        "format": "",
+        "style": "",
+        "position": "relative",
+        "x": "",
+        "y": "",
+        "z": ""
+      },
+      {
+        "name": "accreditationFirstName",
+        "path": "accreditationFirstName",
+        "type": "text",
+        "format": "",
+        "style": "",
+        "position": "relative",
+        "x": "20px",
+        "y": "20px",
+        "z": ""
+      },
+      {
+        "name": "categoryName",
+        "path": "categoryName",
+        "type": "text",
+        "format": "",
+        "style": "",
+        "position": "relative",
+        "x": "40px",
+        "y": "40px",
+        "z": ""
+      }
+    ],
+    "images": [
+      {
+        "name": "accreditationPhoto",
+        "path": "accreditation.accreditationPhoto",
+        "type": "accreditation.accreditationPhotoContentType",
+        "format": "",
+        "style": "",
+        "position": "relative",
+        "x": "",
+        "y": "",
+        "z": ""
+      }
+    ],
+    "cadres": [
+      {
+        "name": "categorieCadre",
+        "colorPath": "accreditation.category?.categoryColor",
+        "style": "",
+        "position": "relative",
+        "x": "",
+        "y": "",
+        "z": ""
+      },
+      {
+        "name": "fonctionCadre",
+        "colorPath": "accreditation.fonction?.fonctionColor",
+        "style": "",
+        "position": "relative",
+        "x": "",
+        "y": "",
+        "z": ""
+      }
+    ]
+  }
+}

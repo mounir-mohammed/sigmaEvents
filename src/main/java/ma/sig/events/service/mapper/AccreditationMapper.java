@@ -153,6 +153,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "accreditationTypeId", source = "accreditationTypeId")
     @Mapping(target = "accreditationTypeValue", source = "accreditationTypeValue")
     @Mapping(target = "accreditationTypeStat", source = "accreditationTypeStat")
+    @Mapping(target = "printingModel", source = "printingModel")
     AccreditationTypeDTO toDtoAccreditationTypeAccreditationTypeId(AccreditationType accreditationType);
 
     @Named("statusStatusId")

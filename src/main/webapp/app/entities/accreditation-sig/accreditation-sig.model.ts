@@ -72,7 +72,10 @@ export interface IAccreditationSig {
   category?: Pick<ICategorySig, 'categoryId' | 'categoryName' | 'categoryStat' | 'printingModel'> | null;
   fonction?: Pick<IFonctionSig, 'fonctionId' | 'fonctionName' | 'fonctionStat'> | null;
   organiz?: Pick<IOrganizSig, 'organizId' | 'organizName' | 'organizStat'> | null;
-  accreditationType?: Pick<IAccreditationTypeSig, 'accreditationTypeId' | 'accreditationTypeValue' | 'accreditationTypeStat'> | null;
+  accreditationType?: Pick<
+    IAccreditationTypeSig,
+    'accreditationTypeId' | 'accreditationTypeValue' | 'accreditationTypeStat' | 'printingModel'
+  > | null;
   status?: Pick<IStatusSig, 'statusId' | 'statusName' | 'statusColor'> | null;
   attachement?: Pick<IAttachementSig, 'attachementId' | 'attachementName' | 'attachementStat'> | null;
   code?: Pick<ICodeSig, 'codeId' | 'codeValue' | 'codeStat'> | null;
