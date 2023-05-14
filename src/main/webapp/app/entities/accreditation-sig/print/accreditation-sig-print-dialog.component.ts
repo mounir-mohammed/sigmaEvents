@@ -72,7 +72,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == 'BY_ACCREDITATION_TYPE') {
           if (this.accreditation?.accreditationType?.printingModel?.printingModelId!) {
-            this.getConfigFromPrintingModel(this.accreditation?.accreditationType?.printingModel).finally(() => {
+            this.getConfig(this.accreditation?.accreditationType?.printingModel?.printingModelId!).finally(() => {
               this.dataLoaded = true;
               console.log('this.dataLoaded = true;');
               this.generateadge();
@@ -85,7 +85,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == 'BY_CATEGORY') {
           if (this.accreditation?.category?.printingModel?.printingModelId!) {
-            this.getConfigFromPrintingModel(this.accreditation?.category?.printingModel).finally(() => {
+            this.getConfig(this.accreditation?.category?.printingModel?.printingModelId!).finally(() => {
               this.dataLoaded = true;
               console.log('this.dataLoaded = true;');
               this.generateadge();

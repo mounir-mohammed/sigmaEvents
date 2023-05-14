@@ -138,9 +138,14 @@ export class DataUtils {
   }
 
   searchElementFromJson(give: string, obj: any): any {
-    var res = give.split('.').reduce(function (o, k) {
-      return o && o[k];
-    }, obj);
-    return res;
+    try {
+      var res = give.split('.').reduce(function (o, k) {
+        return o && o[k];
+      }, obj);
+      return res;
+    } catch (e: any) {
+      console.log(e + '/Path = ' + give);
+      return '';
+    }
   }
 }
