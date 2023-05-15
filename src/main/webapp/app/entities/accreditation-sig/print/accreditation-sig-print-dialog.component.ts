@@ -219,7 +219,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
       badge.style.margin = this.modelData.printingModel.page.margin;
       badge.style.border = this.modelData.printingModel.page.border;
 
-      //fields
+      //add fields
       this.modelData.printingModel.fields.forEach((element: any) => {
         console.log(element.name);
         var field = document.createElement('div');
@@ -248,7 +248,36 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         field.style.fontStyle = element.fontStyle;
         field.style.fontSize = element.fontSize;
         field.style.border = element.border;
+        field.style.whiteSpace = element.whiteSpace;
         badge?.appendChild(field);
+      });
+
+      // add images
+      this.modelData.printingModel.images.forEach((image: any) => {
+        console.log(image.name);
+        var img = document.createElement('img');
+        img.id =
+          this.accreditation?.event?.eventAbreviation +
+          '_' +
+          this.accreditation?.event?.eventId +
+          '_' +
+          this.accreditation?.accreditationId +
+          '_' +
+          image.name;
+        img.src =
+          'data:' +
+          this.dataUtils.searchElementFromJson(image.type, data) +
+          ';base64,' +
+          this.dataUtils.searchElementFromJson(image.path, data);
+        img.style.width = image.width;
+        img.style.height = image.height;
+        img.style.display = image.display;
+        img.style.position = image.position;
+        img.style.left = image.x;
+        img.style.top = image.y;
+        img.style.zIndex = image.z;
+        img.style.border = image.border;
+        badge?.appendChild(img);
       });
 
       badgeContainer?.appendChild(badge);

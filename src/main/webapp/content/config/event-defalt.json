@@ -18,7 +18,7 @@
       "y": "0",
       "w": "29.7",
       "h": "21.0",
-      "autoPrint": false
+      "autoPrint": true
     },
     "fields": [
       {
@@ -40,7 +40,8 @@
         "fontStyle": "normal",
         "fontSize": "30px",
         "border": "2px solid #a6a6a6",
-        "display": "inline-block"
+        "display": "inline-block",
+        "whiteSpace": "nowrap"
       },
       {
         "name": "accreditationFirstName",
@@ -61,7 +62,8 @@
         "fontStyle": "normal",
         "fontSize": "30px",
         "border": "",
-        "display": "inline-block"
+        "display": "inline-block",
+        "whiteSpace": "nowrap"
       },
       {
         "name": "categoryName",
@@ -82,7 +84,8 @@
         "fontStyle": "normal",
         "fontSize": "30px",
         "border": "",
-        "display": "inline-block"
+        "display": "inline-block",
+        "whiteSpace": "nowrap"
       },
       {
         "name": "fonctionName",
@@ -93,7 +96,7 @@
         "position": "relative",
         "x": "120px",
         "y": "120px",
-        "z": "",
+        "z": "1000",
         "backgroundColor": "red",
         "color": "",
         "DynamicBackgroundColor": "fonction.fonctionColor",
@@ -103,15 +106,18 @@
         "fontStyle": "normal",
         "fontSize": "30px",
         "border": "",
-        "display": "inline-block"
+        "display": "inline-block",
+        "whiteSpace": "nowrap"
       }
     ],
     "images": [
       {
         "name": "accreditationPhoto",
-        "path": "accreditation.accreditationPhoto",
-        "type": "accreditation.accreditationPhotoContentType",
+        "path": "accreditationPhoto",
+        "type": "accreditationPhotoContentType",
         "format": "",
+        "width": "300px",
+        "height": "360px",
         "style": "",
         "position": "relative",
         "x": "",
@@ -128,6 +134,8 @@
         "color": "blue",
         "DynamicBackgroundColor": "",
         "DynamicColor": "",
+        "width": "",
+        "height": "",
         "style": "",
         "position": "relative",
         "x": "",
@@ -142,6 +150,8 @@
         "color": "blue",
         "DynamicBackgroundColor": "",
         "DynamicColor": "",
+        "width": "",
+        "height": "",
         "style": "",
         "position": "relative",
         "x": "",
