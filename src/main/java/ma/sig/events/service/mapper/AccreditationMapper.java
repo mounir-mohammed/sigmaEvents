@@ -67,6 +67,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "siteName", source = "siteName")
     @Mapping(target = "siteStat", source = "siteStat")
     @Mapping(target = "siteColor", source = "siteColor")
+    @Mapping(target = "siteLogo", source = "siteLogo")
+    @Mapping(target = "siteLogoContentType", source = "siteLogoContentType")
     SiteDTO toDtoSiteSiteId(Site site);
 
     @Named("siteSiteIdSet")
@@ -90,6 +92,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "eventCodeByTypeOrganiz", source = "eventCodeByTypeOrganiz")
     @Mapping(target = "eventDefaultPrintingLanguage", source = "eventDefaultPrintingLanguage")
     @Mapping(target = "eventPCenterPrintingLanguage", source = "eventPCenterPrintingLanguage")
+    @Mapping(target = "eventLogo", source = "eventLogo")
+    @Mapping(target = "eventLogoContentType", source = "eventLogoContentType")
     EventDTO toDtoEventEventId(Event event);
 
     @Named("civilityCivilityId")
@@ -133,6 +137,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "categoryName", source = "categoryName")
     @Mapping(target = "categoryStat", source = "categoryStat")
     @Mapping(target = "categoryColor", source = "categoryColor")
+    @Mapping(target = "categoryLogo", source = "categoryLogo")
+    @Mapping(target = "categoryLogoContentType", source = "categoryLogoContentType")
     @Mapping(target = "printingModel", source = "printingModel")
     CategoryDTO toDtoCategoryCategoryId(Category category);
 
@@ -142,6 +148,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "fonctionName", source = "fonctionName")
     @Mapping(target = "fonctionStat", source = "fonctionStat")
     @Mapping(target = "fonctionColor", source = "fonctionColor")
+    @Mapping(target = "fonctionLogo", source = "fonctionLogo")
+    @Mapping(target = "fonctionLogoContentType", source = "fonctionLogoContentType")
     FonctionDTO toDtoFonctionFonctionId(Fonction fonction);
 
     @Named("organizOrganizId")
@@ -149,6 +157,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "organizId", source = "organizId")
     @Mapping(target = "organizName", source = "organizName")
     @Mapping(target = "organizStat", source = "organizStat")
+    @Mapping(target = "organizLogo", source = "organizLogo")
+    @Mapping(target = "organizLogoContentType", source = "organizLogoContentType")
     OrganizDTO toDtoOrganizOrganizId(Organiz organiz);
 
     @Named("accreditationTypeAccreditationTypeId")

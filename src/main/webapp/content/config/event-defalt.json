@@ -4,7 +4,8 @@
       "width": "29.7cm",
       "height": "21cm",
       "margin": "30mm 45mm 30mm 45mm",
-      "border": "2px dashed #a6a6a6"
+      "border": "2px dashed #a6a6a6",
+      "position": "relative"
     },
     "model": {
       "scale": "4",
@@ -20,50 +21,126 @@
       "h": "21.0",
       "autoPrint": true
     },
+    "groups": [
+      {
+        "name": "InformationsCenterGroup",
+        "style": "",
+        "position": "absolute",
+        "width": "",
+        "height": "",
+        "x": "200px",
+        "y": "130px",
+        "z": "",
+        "backgroundColor": "",
+        "color": "",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "border": "",
+        "display": "table"
+      }
+    ],
     "fields": [
       {
         "name": "accreditationId",
         "path": "accreditationId",
-        "type": "text",
+        "type": "concat",
         "format": "",
         "style": "",
-        "position": "relative",
-        "x": "",
-        "y": "",
+        "position": "absolute",
+        "x": "10px",
+        "y": "280px",
         "z": "",
         "backgroundColor": "white",
-        "color": "blue",
+        "color": "black",
         "DynamicBackgroundColor": "",
         "DynamicColor": "",
         "textAlign": "",
         "fontFamily": "arial",
         "fontStyle": "normal",
-        "fontSize": "30px",
-        "border": "2px solid #a6a6a6",
+        "fontSize": "20px",
+        "border": "",
         "display": "inline-block",
-        "whiteSpace": "nowrap"
+        "whiteSpace": "nowrap",
+        "toUpperCase": true,
+        "verticalAlign": "",
+        "childFields": [
+          {
+            "name": "eventAbrev",
+            "path": "event.eventAbreviation",
+            "separator": " "
+          },
+          {
+            "name": "accreditationId",
+            "path": "accreditationId",
+            "separator": " "
+          }
+        ]
       },
       {
-        "name": "accreditationFirstName",
-        "path": "accreditationFirstName",
+        "name": "accreditationPrintNumber",
+        "path": "accreditationPrintNumber",
         "type": "text",
         "format": "",
         "style": "",
-        "position": "relative",
-        "x": "20px",
-        "y": "20px",
+        "position": "absolute",
+        "x": "140px",
+        "y": "280px",
         "z": "",
         "backgroundColor": "white",
-        "color": "blue",
+        "color": "black",
         "DynamicBackgroundColor": "",
         "DynamicColor": "",
         "textAlign": "",
+        "fontFamily": "arial",
+        "fontStyle": "normal",
+        "fontSize": "20px",
+        "border": "",
+        "display": "inline-block",
+        "whiteSpace": "nowrap",
+        "toUpperCase": true,
+        "verticalAlign": ""
+      },
+      {
+        "name": "accreditationName",
+        "path": "accreditationName",
+        "type": "concat",
+        "format": "",
+        "style": "",
+        "position": "",
+        "x": "",
+        "y": "",
+        "z": "",
+        "backgroundColor": "",
+        "color": "black",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "center",
         "fontFamily": "arial",
         "fontStyle": "normal",
         "fontSize": "30px",
         "border": "",
-        "display": "inline-block",
-        "whiteSpace": "nowrap"
+        "display": "table-row",
+        "whiteSpace": "nowrap",
+        "toUpperCase": true,
+        "verticalAlign": "middle",
+        "groupName": "InformationsCenterGroup",
+        "childFields": [
+          {
+            "name": "accreditationLastName",
+            "path": "accreditationLastName",
+            "separator": " "
+          },
+          {
+            "name": "accreditationSecondName",
+            "path": "accreditationSecondName",
+            "separator": " "
+          },
+          {
+            "name": "accreditationFirstName",
+            "path": "accreditationFirstName",
+            "separator": ""
+          }
+        ]
       },
       {
         "name": "categoryName",
@@ -71,21 +148,24 @@
         "type": "text",
         "format": "",
         "style": "",
-        "position": "relative",
-        "x": "40px",
-        "y": "40px",
+        "position": "",
+        "x": "",
+        "y": "",
         "z": "",
-        "backgroundColor": "blue",
+        "backgroundColor": "",
         "color": "",
         "DynamicBackgroundColor": "",
         "DynamicColor": "",
-        "textAlign": "",
+        "textAlign": "center",
         "fontFamily": "arial",
         "fontStyle": "normal",
         "fontSize": "30px",
         "border": "",
-        "display": "inline-block",
-        "whiteSpace": "nowrap"
+        "display": "table-row",
+        "whiteSpace": "nowrap",
+        "toUpperCase": true,
+        "verticalAlign": "middle",
+        "groupName": "InformationsCenterGroup"
       },
       {
         "name": "fonctionName",
@@ -93,10 +173,10 @@
         "type": "text",
         "format": "",
         "style": "",
-        "position": "relative",
-        "x": "120px",
-        "y": "120px",
-        "z": "1000",
+        "position": "absolute",
+        "x": "10px",
+        "y": "450px",
+        "z": "",
         "backgroundColor": "red",
         "color": "",
         "DynamicBackgroundColor": "fonction.fonctionColor",
@@ -107,7 +187,34 @@
         "fontSize": "30px",
         "border": "",
         "display": "inline-block",
-        "whiteSpace": "nowrap"
+        "whiteSpace": "nowrap",
+        "toUpperCase": true,
+        "verticalAlign": ""
+      },
+      {
+        "name": "organizName",
+        "path": "organiz.organizName",
+        "type": "text",
+        "format": "",
+        "style": "",
+        "position": "",
+        "x": "",
+        "y": "",
+        "z": "",
+        "backgroundColor": "",
+        "color": "",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "center",
+        "fontFamily": "arial",
+        "fontStyle": "normal",
+        "fontSize": "30px",
+        "border": "",
+        "display": "table-row",
+        "whiteSpace": "nowrap",
+        "toUpperCase": true,
+        "verticalAlign": "middle",
+        "groupName": "InformationsCenterGroup"
       }
     ],
     "images": [
@@ -116,15 +223,16 @@
         "path": "accreditationPhoto",
         "type": "accreditationPhotoContentType",
         "format": "",
-        "width": "300px",
-        "height": "360px",
+        "width": "150px",
+        "height": "180px",
         "style": "",
-        "position": "relative",
-        "x": "",
-        "y": "",
+        "position": "absolute",
+        "x": "10px",
+        "y": "100px",
         "z": "",
         "border": "",
-        "display": "inline-block"
+        "display": "inline-block",
+        "verticalAlign": ""
       }
     ],
     "cadres": [
@@ -137,12 +245,13 @@
         "width": "",
         "height": "",
         "style": "",
-        "position": "relative",
+        "position": "absolute",
         "x": "",
         "y": "",
         "z": "",
         "border": "",
-        "display": "inline-block"
+        "display": "inline-block",
+        "verticalAlign": ""
       },
       {
         "name": "fonctionCadre",
@@ -153,12 +262,13 @@
         "width": "",
         "height": "",
         "style": "",
-        "position": "relative",
+        "position": "absolute",
         "x": "",
         "y": "",
         "z": "",
         "border": "",
-        "display": "inline-block"
+        "display": "inline-block",
+        "verticalAlign": ""
       }
     ]
   }
