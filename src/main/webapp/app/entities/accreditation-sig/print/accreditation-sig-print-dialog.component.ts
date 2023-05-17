@@ -272,7 +272,12 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
             text = text.toString().toUpperCase();
           }
         }
-        field.textContent = text;
+        if (element.code) {
+          console.log(element.name);
+          console.log(text);
+        } else {
+          field.textContent = text;
+        }
         field.style.display = element.display;
         field.style.position = element.position;
         field.style.left = element.x;

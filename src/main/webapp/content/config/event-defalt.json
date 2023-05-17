@@ -249,6 +249,48 @@
         "toUpperCase": true,
         "verticalAlign": "middle",
         "groupName": "InformationsCenterGroup"
+      },
+      {
+        "name": "accreditationIdQrCode",
+        "path": "accreditationIdQrCode",
+        "type": "concat",
+        "format": "",
+        "style": "",
+        "position": "absolute",
+        "maxWidth": "",
+        "maxHeight": "",
+        "width": "",
+        "height": "",
+        "x": "10px",
+        "y": "280px",
+        "z": "",
+        "backgroundColor": "",
+        "color": "",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "",
+        "fontFamily": "",
+        "fontStyle": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "border": "",
+        "display": "inline-block",
+        "whiteSpace": "",
+        "toUpperCase": true,
+        "verticalAlign": "",
+        "childFields": [
+          {
+            "name": "eventId",
+            "path": "event.eventId",
+            "separator": "-"
+          },
+          {
+            "name": "accreditationId",
+            "path": "accreditationId",
+            "separator": " "
+          }
+        ],
+        "code": true
       }
     ],
     "images": [
