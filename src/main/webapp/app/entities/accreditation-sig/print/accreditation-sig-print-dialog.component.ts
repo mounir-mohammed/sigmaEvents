@@ -41,16 +41,13 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('Start ngOnInit()');
     this.activatedRoute.data.subscribe(() => {
       this.accountService.identity().subscribe(account => (this.currentAccount = account));
-      console.log(this.currentAccount?.printingCentre?.printingType?.printingTypeValue);
       if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue) {
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_EVENT) {
           if (this.accreditation?.event?.eventPrintingModelId!) {
             this.getConfig(this.accreditation?.event?.eventPrintingModelId!).finally(() => {
               this.dataLoaded = true;
-              console.log('this.dataLoaded = true;');
               this.generateadge();
             });
           } else {
@@ -63,7 +60,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           if (this.currentAccount?.printingCentre?.printingModel?.printingModelId!) {
             this.getConfig(this.currentAccount?.printingCentre?.printingModel?.printingModelId!).finally(() => {
               this.dataLoaded = true;
-              console.log('this.dataLoaded = true;');
               this.generateadge();
             });
           } else {
@@ -76,7 +72,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           if (this.accreditation?.accreditationType?.printingModel?.printingModelId!) {
             this.getConfig(this.accreditation?.accreditationType?.printingModel?.printingModelId!).finally(() => {
               this.dataLoaded = true;
-              console.log('this.dataLoaded = true;');
               this.generateadge();
             });
           } else {
@@ -89,7 +84,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           if (this.accreditation?.category?.printingModel?.printingModelId!) {
             this.getConfig(this.accreditation?.category?.printingModel?.printingModelId!).finally(() => {
               this.dataLoaded = true;
-              console.log('this.dataLoaded = true;');
               this.generateadge();
             });
           } else {
@@ -97,13 +91,11 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
             console.log('ngOnInit() => NO MODEL FOUND');
           }
         }
-        console.log(this.modelData);
       } else {
         this.throwAlertErrorLoadingModel();
         console.log('ngOnInit() => NO PRINTINGTYPE FOUND!');
       }
     });
-    console.log('END ngOnInit()');
   }
 
   cancel(): void {
@@ -122,7 +114,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
   exportAsPDF(divId: string) {
     let data = document.getElementById(divId);
-    console.log(divId);
     if (data && this.modelData) {
       html2canvas(data, { scale: this.modelData.printingModel.model.scale }).then(canvas => {
         const contentDataURL = canvas.toDataURL(this.modelData.printingModel.model.type, this.modelData.printingModel.model.quality);
@@ -145,7 +136,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           pdf.output('dataurlnewwindow');
         } else {
           let fileName = divId + '_' + new Date().toUTCString();
-          console.log(fileName);
           pdf.save(fileName);
         }
       });
@@ -204,15 +194,10 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
   generateadge(): void {
     var groupDivs: Array<any> = [];
-    console.log('generate badge');
-    console.log(this.dataLoaded);
     if (this.dataLoaded && this.accreditation) {
       var accreditationJson = JSON.stringify(this.accreditation);
       var data = JSON.parse(accreditationJson);
-      console.log(accreditationJson);
-      console.log('IN generateadge()');
       var badgeContainer = document.getElementById('badge-container');
-      console.log(badgeContainer);
       //generate badge
       var badge = document.createElement('div');
       badge.id =
@@ -228,8 +213,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         var groupDiv = document.createElement('div');
         groupDiv.id = group.name;
         groupDiv.style.position = group.position;
-        groupDiv.style.width = group.width;
-        groupDiv.style.height = group.height;
         groupDiv.style.left = group.x;
         groupDiv.style.top = group.y;
         groupDiv.style.zIndex = group.z;
@@ -242,13 +225,20 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         groupDiv.style.border = group.border;
         groupDiv.style.display = group.display;
         groupDiv.style.verticalAlign = group.verticalAlign;
+        groupDiv.style.tableLayout = group.tableLayout;
+        groupDiv.style.width = group.width;
+        groupDiv.style.height = group.height;
+        groupDiv.style.maxWidth = group.maxWidth;
+        groupDiv.style.maxHeight = group.maxHeight;
+        groupDiv.style.borderSpacing = group.borderSpacing;
         groupDivs.push(groupDiv);
       });
 
       //add fields
       this.modelData.printingModel.fields.forEach((element: any) => {
         console.log(element.name);
-        var field = document.createElement('span');
+        console.log(element.fontWeight);
+        var field = document.createElement('div');
         field.id =
           this.accreditation?.event?.eventAbreviation +
           '_' +
@@ -268,9 +258,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         } else if (element.type == FieldType.CONCAT) {
           var text = '';
           element.childFields.forEach((childField: any) => {
-            console.log('childFields');
-            console.log(childField.path);
-            console.log(this.dataUtils.searchElementFromJson(childField.path, data));
             if (this.dataUtils.searchElementFromJson(childField.path, data) !== null) {
               text = text + this.dataUtils.searchElementFromJson(childField.path, data);
             }
@@ -301,19 +288,20 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         field.style.fontFamily = element.fontFamily;
         field.style.fontStyle = element.fontStyle;
         field.style.fontSize = element.fontSize;
+        field.style.fontWeight = element.fontWeight;
         field.style.border = element.border;
         field.style.whiteSpace = element.whiteSpace;
         field.style.verticalAlign = element.verticalAlign;
+        field.style.width = element.width;
+        field.style.height = element.height;
+        field.style.maxWidth = element.maxWidth;
+        field.style.maxHeight = element.maxHeight;
         if (element.groupName == null) {
           badge?.appendChild(field);
         } else {
           groupDivs.forEach((groupDiv: any) => {
-            console.log(element.groupName);
-            console.log(groupDiv.id);
             if (groupDiv.id === element.groupName) {
               groupDiv?.appendChild(field);
-            } else {
-              console.log('no equals');
             }
           });
         }
@@ -321,7 +309,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
       // add images
       this.modelData.printingModel.images.forEach((image: any) => {
-        console.log(image.name);
         var img = document.createElement('img');
         img.id =
           this.accreditation?.event?.eventAbreviation +
@@ -336,8 +323,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
           this.dataUtils.searchElementFromJson(image.type, data) +
           ';base64,' +
           this.dataUtils.searchElementFromJson(image.path, data);
-        img.style.width = image.width;
-        img.style.height = image.height;
         img.style.display = image.display;
         img.style.position = image.position;
         img.style.left = image.x;
@@ -345,6 +330,10 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         img.style.zIndex = image.z;
         img.style.border = image.border;
         img.style.verticalAlign = image.verticalAlign;
+        img.style.width = image.width;
+        img.style.height = image.height;
+        img.style.maxWidth = image.maxWidth;
+        img.style.maxHeight = image.maxHeight;
         badge?.appendChild(img);
       });
 
@@ -355,7 +344,6 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
       badgeContainer?.appendChild(badge);
       this.badgeGenerated = true;
     } else {
-      console.log('NOT generateadge()');
       this.badgeGenerated = false;
     }
   }
