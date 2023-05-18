@@ -46,7 +46,7 @@ export interface IAccreditationSig {
   accreditationAttributs?: string | null;
   accreditationStat?: boolean | null;
   accreditationActivated?: boolean | null;
-  sites?: Pick<ISiteSig, 'siteId' | 'siteName' | 'siteStat' | 'siteLogo' | 'siteLogoContentType'>[] | null;
+  sites?: Pick<ISiteSig, 'siteId' | 'siteName' | 'siteAbreviation' | 'siteStat' | 'siteLogo' | 'siteLogoContentType'>[] | null;
   event?: Pick<
     IEventSig,
     | 'eventId'
@@ -73,9 +73,12 @@ export interface IAccreditationSig {
   city?: Pick<ICitySig, 'cityId' | 'cityName' | 'cityStat'> | null;
   category?: Pick<
     ICategorySig,
-    'categoryId' | 'categoryName' | 'categoryStat' | 'categoryLogo' | 'categoryLogoContentType' | 'printingModel'
+    'categoryId' | 'categoryName' | 'categoryAbreviation' | 'categoryStat' | 'categoryLogo' | 'categoryLogoContentType' | 'printingModel'
   > | null;
-  fonction?: Pick<IFonctionSig, 'fonctionId' | 'fonctionName' | 'fonctionStat' | 'fonctionLogo' | 'fonctionLogoContentType'> | null;
+  fonction?: Pick<
+    IFonctionSig,
+    'fonctionId' | 'fonctionName' | 'fonctionAbreviation' | 'fonctionStat' | 'fonctionLogo' | 'fonctionLogoContentType'
+  > | null;
   organiz?: Pick<IOrganizSig, 'organizId' | 'organizName' | 'organizStat' | 'organizLogo' | 'organizLogoContentType'> | null;
   accreditationType?: Pick<
     IAccreditationTypeSig,

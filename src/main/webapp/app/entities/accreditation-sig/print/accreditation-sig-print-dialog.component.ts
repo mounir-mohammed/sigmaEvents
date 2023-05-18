@@ -265,6 +265,8 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
               text = text + childField.separator;
             }
           });
+        } else if (element.type == FieldType.LIST) {
+          console.log(element.name);
         }
 
         if (element.toUpperCase) {
@@ -340,6 +342,30 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         img.style.maxWidth = image.maxWidth;
         img.style.maxHeight = image.maxHeight;
         badge?.appendChild(img);
+      });
+
+      //add cadres
+      this.modelData.printingModel.cadres.forEach((cadre: any) => {
+        var cadreDiv = document.createElement('div');
+        cadreDiv.id = cadre.name;
+        cadreDiv.style.display = cadre.display;
+        cadreDiv.style.position = cadre.position;
+        cadreDiv.style.left = cadre.x;
+        cadreDiv.style.top = cadre.y;
+        cadreDiv.style.zIndex = cadre.z;
+        cadreDiv.style.backgroundColor = this.dataUtils.searchElementFromJson(cadre.DynamicBackgroundColor, data)
+          ? this.dataUtils.searchElementFromJson(cadre.DynamicBackgroundColor, data)
+          : cadre.backgroundColor;
+        cadreDiv.style.color = this.dataUtils.searchElementFromJson(cadre.DynamicColor, data)
+          ? this.dataUtils.searchElementFromJson(cadre.DynamicColor, data)
+          : cadre.color;
+        cadreDiv.style.width = cadre.width;
+        cadreDiv.style.height = cadre.height;
+        cadreDiv.style.maxWidth = cadre.maxWidth;
+        cadreDiv.style.maxHeight = cadre.maxHeight;
+        cadreDiv.style.border = cadre.border;
+        cadreDiv.style.verticalAlign = cadre.verticalAlign;
+        badge?.appendChild(cadreDiv);
       });
 
       groupDivs.forEach((groupDiv: any) => {
