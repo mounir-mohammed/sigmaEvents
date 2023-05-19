@@ -40,7 +40,7 @@
         "DynamicColor": "",
         "border": "",
         "display": "table",
-        "borderSpacing": "10px"
+        "borderSpacing": "0px 10px"
       },
       {
         "name": "sitesCenterGroup",
@@ -60,7 +60,7 @@
         "DynamicColor": "",
         "border": "",
         "display": "table",
-        "borderSpacing": "10px"
+        "borderSpacing": "0px 10px"
       }
     ],
     "fields": [
@@ -223,7 +223,7 @@
         "width": "140px",
         "height": "",
         "x": "20px",
-        "y": "380px",
+        "y": "330px",
         "z": "1",
         "backgroundColor": "",
         "color": "",
