@@ -91,17 +91,55 @@ export class BadgeUtils {
 
   addFields(parent: any, dataModel: any, groupDivs: Array<any>, data: any): void {
     dataModel.fields.forEach((element: any) => {
-      var field = document.createElement('div');
-      field.id = element.name;
-      var text = '';
       if (element.type == FieldType.TEXT) {
+        var field = document.createElement('div');
+        field.id = element.name;
+        var text = '';
         text = this.dataUtils.searchElementFromJson(element.path, data);
         if (element.toUpperCase) {
           if (text) {
             text = text.toString().toUpperCase().trim();
           }
         }
+        if (element.code) {
+          text = '';
+        }
+        field.textContent = text;
+        field.style.display = element.display;
+        field.style.position = element.position;
+        field.style.left = element.x;
+        field.style.top = element.y;
+        field.style.zIndex = element.z;
+        field.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
+          ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
+          : element.backgroundColor;
+        field.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, data)
+          ? this.dataUtils.searchElementFromJson(element.DynamicColor, data)
+          : element.color;
+        field.style.textAlign = element.textAlign;
+        field.style.fontFamily = element.fontFamily;
+        field.style.fontStyle = element.fontStyle;
+        field.style.fontSize = element.fontSize;
+        field.style.fontWeight = element.fontWeight;
+        field.style.border = element.border;
+        field.style.whiteSpace = element.whiteSpace;
+        field.style.verticalAlign = element.verticalAlign;
+        field.style.width = element.width;
+        field.style.height = element.height;
+        field.style.maxWidth = element.maxWidth;
+        field.style.maxHeight = element.maxHeight;
+        if (element.groupName == null) {
+          parent?.appendChild(field);
+        } else {
+          Array.prototype.forEach.call(groupDivs, groupDiv => {
+            if (groupDiv.id === element.groupName) {
+              groupDiv?.appendChild(field);
+            }
+          });
+        }
       } else if (element.type == FieldType.CONCAT) {
+        var field = document.createElement('div');
+        field.id = element.name;
         var text = '';
         element.childFields.forEach((childField: any) => {
           if (this.dataUtils.searchElementFromJson(childField.path, data) !== null) {
@@ -111,54 +149,95 @@ export class BadgeUtils {
             text = text + childField.separator;
           }
         });
-      } else if (element.type == FieldType.LIST) {
-        console.log(element.name);
-      }
-
-      if (element.toUpperCase) {
-        if (text) {
-          text = text.toString().toUpperCase();
-        }
-      }
-      if (element.code) {
-        console.log(element.name);
-        console.log(text);
-      } else {
-        field.textContent = text;
-      }
-      field.style.display = element.display;
-      field.style.position = element.position;
-      field.style.left = element.x;
-      field.style.top = element.y;
-      field.style.zIndex = element.z;
-      field.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
-        ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
-        : element.backgroundColor;
-      field.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, data)
-        ? this.dataUtils.searchElementFromJson(element.DynamicColor, data)
-        : element.color;
-      field.style.textAlign = element.textAlign;
-      field.style.fontFamily = element.fontFamily;
-      field.style.fontStyle = element.fontStyle;
-      field.style.fontSize = element.fontSize;
-      field.style.fontWeight = element.fontWeight;
-      field.style.border = element.border;
-      field.style.whiteSpace = element.whiteSpace;
-      field.style.verticalAlign = element.verticalAlign;
-      field.style.width = element.width;
-      field.style.height = element.height;
-      field.style.maxWidth = element.maxWidth;
-      field.style.maxHeight = element.maxHeight;
-      if (element.groupName == null) {
-        parent?.appendChild(field);
-      } else {
-        Array.prototype.forEach.call(groupDivs, groupDiv => {
-          if (groupDiv.id === element.groupName) {
-            groupDiv?.appendChild(field);
+        if (element.toUpperCase) {
+          if (text) {
+            text = text.toString().toUpperCase().trim();
           }
+        }
+
+        if (element.code) {
+          text = '';
+        }
+
+        field.textContent = text;
+        field.style.display = element.display;
+        field.style.position = element.position;
+        field.style.left = element.x;
+        field.style.top = element.y;
+        field.style.zIndex = element.z;
+        field.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
+          ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
+          : element.backgroundColor;
+        field.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, data)
+          ? this.dataUtils.searchElementFromJson(element.DynamicColor, data)
+          : element.color;
+        field.style.textAlign = element.textAlign;
+        field.style.fontFamily = element.fontFamily;
+        field.style.fontStyle = element.fontStyle;
+        field.style.fontSize = element.fontSize;
+        field.style.fontWeight = element.fontWeight;
+        field.style.border = element.border;
+        field.style.whiteSpace = element.whiteSpace;
+        field.style.verticalAlign = element.verticalAlign;
+        field.style.width = element.width;
+        field.style.height = element.height;
+        field.style.maxWidth = element.maxWidth;
+        field.style.maxHeight = element.maxHeight;
+        if (element.groupName == null) {
+          parent?.appendChild(field);
+        } else {
+          Array.prototype.forEach.call(groupDivs, groupDiv => {
+            if (groupDiv.id === element.groupName) {
+              groupDiv?.appendChild(field);
+            }
+          });
+        }
+      } else if (element.type == FieldType.LIST) {
+        var list = this.dataUtils.searchElementFromJson(element.listPath, data);
+        list.forEach((el: any) => {
+          var elJsonJson = JSON.stringify(el);
+          var elData = JSON.parse(elJsonJson);
+          var fieldEl = document.createElement('div');
+          fieldEl.id = element.name;
+          var text = this.dataUtils.searchElementFromJson(element.path, elData);
+          fieldEl.textContent = text;
+          fieldEl.style.display = element.display;
+          fieldEl.style.position = element.position;
+          fieldEl.style.left = element.x;
+          fieldEl.style.top = element.y;
+          fieldEl.style.zIndex = element.z;
+          fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+            ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+            : element.backgroundColor;
+          fieldEl.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+            ? this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+            : element.color;
+          fieldEl.style.textAlign = element.textAlign;
+          fieldEl.style.fontFamily = element.fontFamily;
+          fieldEl.style.fontStyle = element.fontStyle;
+          fieldEl.style.fontSize = element.fontSize;
+          fieldEl.style.fontWeight = element.fontWeight;
+          fieldEl.style.border = element.border;
+          fieldEl.style.whiteSpace = element.whiteSpace;
+          fieldEl.style.verticalAlign = element.verticalAlign;
+          fieldEl.style.width = element.width;
+          fieldEl.style.height = element.height;
+          fieldEl.style.maxWidth = element.maxWidth;
+          fieldEl.style.maxHeight = element.maxHeight;
+          if (element.groupName == null) {
+            parent?.appendChild(field);
+          } else {
+            Array.prototype.forEach.call(groupDivs, groupDiv => {
+              if (groupDiv.id === element.groupName) {
+                groupDiv?.appendChild(fieldEl);
+              }
+            });
+          }
+          console.log(this.dataUtils.searchElementFromJson(element.path, elData));
         });
       }
     });
+
     Array.prototype.forEach.call(groupDivs, groupDiv => {
       parent?.appendChild(groupDiv);
     });
