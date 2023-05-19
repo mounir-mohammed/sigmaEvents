@@ -153,6 +153,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "fonctionColor", source = "fonctionColor")
     @Mapping(target = "fonctionLogo", source = "fonctionLogo")
     @Mapping(target = "fonctionLogoContentType", source = "fonctionLogoContentType")
+    @Mapping(target = "areas", source = "areas")
     FonctionDTO toDtoFonctionFonctionId(Fonction fonction);
 
     @Named("organizOrganizId")
