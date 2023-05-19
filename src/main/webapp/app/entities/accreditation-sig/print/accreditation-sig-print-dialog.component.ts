@@ -46,7 +46,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_EVENT) {
           if (this.accreditation?.event?.eventPrintingModelId!) {
             this.getConfig(this.accreditation?.event?.eventPrintingModelId!).finally(() => {
-              this.badgeGenerated = this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container');
+              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+                this.badgeGenerated = true;
+              });
             });
           } else {
             this.throwAlertErrorLoadingModel();
@@ -57,7 +59,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CENTER) {
           if (this.currentAccount?.printingCentre?.printingModel?.printingModelId!) {
             this.getConfig(this.currentAccount?.printingCentre?.printingModel?.printingModelId!).finally(() => {
-              this.badgeGenerated = this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container');
+              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+                this.badgeGenerated = true;
+              });
             });
           } else {
             this.throwAlertErrorLoadingModel();
@@ -68,7 +72,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_ACCREDITATION_TYPE) {
           if (this.accreditation?.accreditationType?.printingModel?.printingModelId!) {
             this.getConfig(this.accreditation?.accreditationType?.printingModel?.printingModelId!).finally(() => {
-              this.badgeGenerated = this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container');
+              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+                this.badgeGenerated = true;
+              });
             });
           } else {
             this.throwAlertErrorLoadingModel();
@@ -79,7 +85,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CATEGORY) {
           if (this.accreditation?.category?.printingModel?.printingModelId!) {
             this.getConfig(this.accreditation?.category?.printingModel?.printingModelId!).finally(() => {
-              this.badgeGenerated = this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container');
+              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+                this.badgeGenerated = true;
+              });
             });
           } else {
             this.throwAlertErrorLoadingModel();

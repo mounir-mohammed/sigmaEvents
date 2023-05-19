@@ -279,11 +279,9 @@ export class BadgeUtils {
 
           rows[x]?.appendChild(fieldEl);
           y = y + 1;
-          console.log(element.columnNbr);
           if (y == element.columnNbr) {
             x = x + 1;
             y = 0;
-            console.log('x++');
           }
         });
         if (element.groupName == null) {
@@ -307,38 +305,40 @@ export class BadgeUtils {
     });
   }
 
-  generateadge(accreditation?: IAccreditationSig, modelData?: any, badgeContainerId?: string): boolean {
-    if (accreditation) {
-      var accreditationJson = JSON.stringify(accreditation);
-      var data = JSON.parse(accreditationJson);
-      var badgeContainer = document.getElementById(badgeContainerId!);
-      //generate badge
-      var badge = document.createElement('div');
-      var badgeId = accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
-      badge.id = badgeId;
-      badge.style.width = modelData.printingModel.page.width;
-      badge.style.height = modelData.printingModel.page.height;
-      badge.style.margin = modelData.printingModel.page.margin;
-      badge.style.border = modelData.printingModel.page.border;
-      badge.style.position = modelData.printingModel.page.position;
+  generateadge(accreditation?: IAccreditationSig, modelData?: any, badgeContainerId?: string): Promise<Boolean> {
+    return new Promise(resolve => {
+      if (accreditation) {
+        var accreditationJson = JSON.stringify(accreditation);
+        var data = JSON.parse(accreditationJson);
+        var badgeContainer = document.getElementById(badgeContainerId!);
+        //generate badge
+        var badge = document.createElement('div');
+        var badgeId = accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
+        badge.id = badgeId;
+        badge.style.width = modelData.printingModel.page.width;
+        badge.style.height = modelData.printingModel.page.height;
+        badge.style.margin = modelData.printingModel.page.margin;
+        badge.style.border = modelData.printingModel.page.border;
+        badge.style.position = modelData.printingModel.page.position;
 
-      //add groups
-      var groupDivs: Array<any> = this.createGroups(badge, modelData.printingModel, data);
+        //add groups
+        var groupDivs: Array<any> = this.createGroups(badge, modelData.printingModel, data);
 
-      //add fields
-      this.addFields(badge, modelData.printingModel, groupDivs, data);
+        //add fields
+        this.addFields(badge, modelData.printingModel, groupDivs, data);
 
-      // add images
-      this.addImages(badge, modelData.printingModel, data);
+        // add images
+        this.addImages(badge, modelData.printingModel, data);
 
-      //add cadres
-      this.addCadres(badge, modelData.printingModel, data);
+        //add cadres
+        this.addCadres(badge, modelData.printingModel, data);
 
-      badgeContainer?.appendChild(badge);
-      return true;
-    } else {
-      return false;
-    }
+        badgeContainer?.appendChild(badge);
+        return resolve(true);
+      } else {
+        return resolve(false);
+      }
+    });
   }
 
   print(badgeId: string, modelData: any) {

@@ -78,7 +78,7 @@
         "color": "",
         "DynamicBackgroundColor": "",
         "DynamicColor": "",
-        "border": "2px dotted #E6E6E6",
+        "border": "",
         "display": "table",
         "borderSpacing": "5px 5px"
       }
