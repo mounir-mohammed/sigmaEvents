@@ -4,4 +4,5 @@ export enum FieldType {
   CONCAT = 'concat',
   LIST = 'list',
   DATE = 'date',
+  TABLE = 'table',
 }

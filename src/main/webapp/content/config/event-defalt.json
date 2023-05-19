@@ -80,7 +80,7 @@
         "DynamicColor": "",
         "border": "2px dotted #E6E6E6",
         "display": "table",
-        "borderSpacing": "0px 10px"
+        "borderSpacing": "5px 5px"
       }
     ],
     "fields": [
@@ -367,14 +367,14 @@
         "name": "areaAbrev",
         "listPath": "fonction.areas",
         "path": "areaAbreviation",
-        "type": "list",
+        "type": "table",
         "format": "",
         "style": "",
         "position": "",
         "maxWidth": "40px",
-        "maxHeight": "",
+        "maxHeight": "40px",
         "width": "40px",
-        "height": "",
+        "height": "40px",
         "x": "",
         "y": "",
         "z": "",
@@ -385,13 +385,15 @@
         "textAlign": "center",
         "fontFamily": "arial",
         "fontStyle": "normal",
-        "fontSize": "20px",
+        "fontSize": "60px",
         "fontWeight": "bold",
         "border": "",
-        "display": "table-row",
+        "display": "table-cell",
         "whiteSpace": "nowrap",
         "toUpperCase": true,
         "verticalAlign": "middle",
+        "columnNbr": "3",
+        "rowNbr": "3",
         "groupName": "areaCenterGroup"
       }
     ],

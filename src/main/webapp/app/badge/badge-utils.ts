@@ -233,8 +233,72 @@ export class BadgeUtils {
               }
             });
           }
-          console.log(this.dataUtils.searchElementFromJson(element.path, elData));
         });
+      } else if (element.type == FieldType.TABLE) {
+        var list = this.dataUtils.searchElementFromJson(element.listPath, data);
+        var rows: Array<Node> = [];
+        for (var i = 0; i < element.rowNbr; i++) {
+          var row = document.createElement('div');
+          row.id = 'row-' + element.name + '-' + i;
+          row.style.display = 'table-row';
+          rows.push(row);
+        }
+
+        let x: number = 0;
+        let y: number = 0;
+        list.forEach((el: any) => {
+          var elJsonJson = JSON.stringify(el);
+          var elData = JSON.parse(elJsonJson);
+          var fieldEl = document.createElement('div');
+          fieldEl.id = element.name;
+          var text = this.dataUtils.searchElementFromJson(element.path, elData);
+          fieldEl.textContent = text;
+          fieldEl.style.display = element.display;
+          fieldEl.style.position = element.position;
+          fieldEl.style.left = element.x;
+          fieldEl.style.top = element.y;
+          fieldEl.style.zIndex = element.z;
+          fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+            ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+            : element.backgroundColor;
+          fieldEl.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+            ? this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+            : element.color;
+          fieldEl.style.textAlign = element.textAlign;
+          fieldEl.style.fontFamily = element.fontFamily;
+          fieldEl.style.fontStyle = element.fontStyle;
+          fieldEl.style.fontSize = element.fontSize;
+          fieldEl.style.fontWeight = element.fontWeight;
+          fieldEl.style.border = element.border;
+          fieldEl.style.whiteSpace = element.whiteSpace;
+          fieldEl.style.verticalAlign = element.verticalAlign;
+          fieldEl.style.width = element.width;
+          fieldEl.style.height = element.height;
+          fieldEl.style.maxWidth = element.maxWidth;
+          fieldEl.style.maxHeight = element.maxHeight;
+
+          rows[x]?.appendChild(fieldEl);
+          y = y + 1;
+          console.log(element.columnNbr);
+          if (y == element.columnNbr) {
+            x = x + 1;
+            y = 0;
+            console.log('x++');
+          }
+        });
+        if (element.groupName == null) {
+          rows.forEach(row => {
+            parent?.appendChild(row);
+          });
+        } else {
+          Array.prototype.forEach.call(groupDivs, groupDiv => {
+            if (groupDiv.id === element.groupName) {
+              rows.forEach(row => {
+                groupDiv?.appendChild(row);
+              });
+            }
+          });
+        }
       }
     });
 
