@@ -194,6 +194,21 @@ export class BadgeUtils {
         }
       } else if (element.type == FieldType.LIST) {
         var list = this.dataUtils.searchElementFromJson(element.listPath, data);
+        if (element.order) {
+          list.sort((a: any, b: any) => {
+            if (element.orderType == 'desc') {
+              return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() <
+                this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                ? 1
+                : -1;
+            } else {
+              return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() >
+                this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                ? 1
+                : -1;
+            }
+          });
+        }
         list.forEach((el: any) => {
           var elJsonJson = JSON.stringify(el);
           var elData = JSON.parse(elJsonJson);
@@ -239,6 +254,21 @@ export class BadgeUtils {
         });
       } else if (element.type == FieldType.TABLE) {
         var list = this.dataUtils.searchElementFromJson(element.listPath, data);
+        if (element.order) {
+          list.sort((a: any, b: any) => {
+            if (element.orderType == 'desc') {
+              return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() <
+                this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                ? 1
+                : -1;
+            } else {
+              return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() >
+                this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                ? 1
+                : -1;
+            }
+          });
+        }
         var rows: Array<Node> = [];
         for (var i = 0; i < element.rowNbr; i++) {
           var row = document.createElement('div');
