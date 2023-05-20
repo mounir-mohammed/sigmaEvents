@@ -200,6 +200,9 @@ export class BadgeUtils {
           var fieldEl = document.createElement('div');
           fieldEl.id = element.name;
           var text = this.dataUtils.searchElementFromJson(element.path, elData);
+          if (element.toUpperCase) {
+            text = text.toString().toUpperCase().trim();
+          }
           fieldEl.textContent = text;
           fieldEl.style.display = element.display;
           fieldEl.style.position = element.position;
@@ -252,6 +255,9 @@ export class BadgeUtils {
           var fieldEl = document.createElement('div');
           fieldEl.id = element.name;
           var text = this.dataUtils.searchElementFromJson(element.path, elData);
+          if (element.toUpperCase) {
+            text = text.toString().toUpperCase().trim();
+          }
           fieldEl.textContent = text;
           fieldEl.style.display = element.display;
           fieldEl.style.position = element.position;
