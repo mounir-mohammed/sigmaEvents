@@ -488,6 +488,10 @@ export class BadgeUtils {
         toAdd = element1! >= element2!;
       } else if (element.conditionTest == '<=') {
         toAdd = element1! <= element2!;
+      } else if (element.conditionTest == '!=') {
+        toAdd = element1! != element2!;
+      } else if (element.conditionTest == 'contain') {
+        toAdd = element1!.contain(element2!);
       }
       return toAdd;
     }
