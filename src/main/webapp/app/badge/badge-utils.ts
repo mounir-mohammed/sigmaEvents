@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { FieldType } from 'app/config/fieldType';
+import { SettingType } from 'app/config/settingType';
+import { SourceType } from 'app/config/sourceType';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-sig.model';
+import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
+import { ISettingSig } from 'app/entities/setting-sig/setting-sig.model';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
 
@@ -9,16 +13,28 @@ import jspdf from 'jspdf';
   providedIn: 'root',
 })
 export class BadgeUtils {
-  constructor(protected dataUtils: DataUtils) {}
-  addImages(parent: any, dataModel: any, data: any): void {
+  constructor(protected dataUtils: DataUtils, protected settingSigService: SettingSigService) {}
+
+  addImages(parent: any, dataModel: any, groupDivs: Array<any>, data: any): void {
     dataModel.images.forEach((image: any) => {
       var img = document.createElement('img');
       img.id = image.name;
-      img.src =
-        'data:' +
-        this.dataUtils.searchElementFromJson(image.type, data) +
-        ';base64,' +
-        this.dataUtils.searchElementFromJson(image.path, data);
+      if (image.sourceType == SourceType.ATTRIBUTE) {
+        img.src =
+          'data:' +
+          this.dataUtils.searchElementFromJson(image.contentType, data) +
+          ';base64,' +
+          this.dataUtils.searchElementFromJson(image.path, data);
+      } else if (image.sourceType == SourceType.SETTING) {
+        var setting: ISettingSig | null = null;
+        this.settingSigService.find(image.settingId).subscribe(resp => {
+          setting = resp.body;
+          if (setting?.settingType == SettingType.IMAGE) {
+            img.src = 'data:' + setting?.settingValueBlobContentType + ';base64,' + setting?.settingValueBlob;
+          }
+        });
+      }
+
       img.style.display = image.display;
       img.style.position = image.position;
       img.style.left = image.x;
@@ -30,11 +46,19 @@ export class BadgeUtils {
       img.style.height = image.height;
       img.style.maxWidth = image.maxWidth;
       img.style.maxHeight = image.maxHeight;
-      parent?.appendChild(img);
+      if (image.groupName == null) {
+        parent?.appendChild(img);
+      } else {
+        Array.prototype.forEach.call(groupDivs, groupDiv => {
+          if (groupDiv.id === image.groupName) {
+            groupDiv?.appendChild(img);
+          }
+        });
+      }
     });
   }
 
-  addCadres(parent: any, dataModel: any, data: any): void {
+  addCadres(parent: any, dataModel: any, groupDivs: Array<any>, data: any): void {
     dataModel.cadres.forEach((cadre: any) => {
       var cadreDiv = document.createElement('div');
       cadreDiv.id = cadre.name;
@@ -55,7 +79,16 @@ export class BadgeUtils {
       cadreDiv.style.maxHeight = cadre.maxHeight;
       cadreDiv.style.border = cadre.border;
       cadreDiv.style.verticalAlign = cadre.verticalAlign;
-      parent?.appendChild(cadreDiv);
+
+      if (cadre.groupName == null) {
+        parent?.appendChild(cadreDiv);
+      } else {
+        Array.prototype.forEach.call(groupDivs, groupDiv => {
+          if (groupDiv.id === cadre.groupName) {
+            groupDiv?.appendChild(cadreDiv);
+          }
+        });
+      }
     });
   }
 
@@ -364,10 +397,10 @@ export class BadgeUtils {
         this.addFields(badge, modelData.printingModel, groupDivs, data);
 
         // add images
-        this.addImages(badge, modelData.printingModel, data);
+        this.addImages(badge, modelData.printingModel, groupDivs, data);
 
         //add cadres
-        this.addCadres(badge, modelData.printingModel, data);
+        this.addCadres(badge, modelData.printingModel, groupDivs, data);
 
         badgeContainer?.appendChild(badge);
         return resolve(true);

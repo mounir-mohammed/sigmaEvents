@@ -354,7 +354,7 @@
         "textAlign": "center",
         "fontFamily": "arial",
         "fontStyle": "normal",
-        "fontSize": "20px",
+        "fontSize": "18px",
         "fontWeight": "bold",
         "border": "",
         "display": "table-row",
@@ -407,7 +407,8 @@
       {
         "name": "accreditationPhoto",
         "path": "accreditationPhoto",
-        "type": "accreditationPhotoContentType",
+        "sourceType": "attribute",
+        "contentType": "accreditationPhotoContentType",
         "format": "",
         "width": "150px",
         "height": "180px",
@@ -421,6 +422,27 @@
         "border": "",
         "display": "inline-block",
         "verticalAlign": ""
+      },
+      {
+        "name": "allSitesPhoto",
+        "path": "",
+        "sourceType": "setting",
+        "settingId": "1",
+        "contentType": "",
+        "format": "",
+        "width": "160px",
+        "height": "160px",
+        "maxWidth": "160px",
+        "maxHeight": "160px",
+        "style": "",
+        "position": "absolute",
+        "x": "0px",
+        "y": "0px",
+        "z": "2",
+        "border": "",
+        "display": "inline-block",
+        "verticalAlign": "",
+        "groupName": "sitesCenterGroup"
       }
     ],
     "cadres": [
