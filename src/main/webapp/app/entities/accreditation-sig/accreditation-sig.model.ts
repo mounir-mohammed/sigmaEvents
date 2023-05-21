@@ -70,7 +70,10 @@ export interface IAccreditationSig {
   > | null;
   civility?: Pick<ICivilitySig, 'civilityId' | 'civilityValue' | 'civilityStat'> | null;
   sexe?: Pick<ISexeSig, 'sexeId' | 'sexeValue' | 'sexeStat'> | null;
-  nationality?: Pick<INationalitySig, 'nationalityId' | 'nationalityValue' | 'nationalityStat'> | null;
+  nationality?: Pick<
+    INationalitySig,
+    'nationalityId' | 'nationalityValue' | 'nationalityFlag' | 'nationalityFlagContentType' | 'nationalityStat'
+  > | null;
   country?: Pick<ICountrySig, 'countryId' | 'countryName' | 'countryStat'> | null;
   city?: Pick<ICitySig, 'cityId' | 'cityName' | 'cityStat'> | null;
   category?: Pick<

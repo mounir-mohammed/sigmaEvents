@@ -411,6 +411,9 @@ export class BadgeUtils {
         this.addCadres(badge, modelData.printingModel, groupDivs, data);
 
         badgeContainer?.appendChild(badge);
+
+        this.deplaceGroupToParent(modelData.printingModel);
+
         return resolve(true);
       } else {
         return resolve(false);
@@ -495,5 +498,15 @@ export class BadgeUtils {
       }
       return toAdd;
     }
+  }
+
+  deplaceGroupToParent(dataModel: any): void {
+    dataModel.groups.forEach((group: any) => {
+      if (group.groupName) {
+        var childGroupe = document.getElementById(group.name);
+        var groupParent = document.getElementById(group.groupName);
+        groupParent?.appendChild(childGroupe!);
+      }
+    });
   }
 }

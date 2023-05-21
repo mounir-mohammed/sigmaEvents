@@ -115,6 +115,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "nationalityId", source = "nationalityId")
     @Mapping(target = "nationalityValue", source = "nationalityValue")
+    @Mapping(target = "nationalityFlag", source = "nationalityFlag")
+    @Mapping(target = "nationalityFlagContentType", source = "nationalityFlagContentType")
     @Mapping(target = "nationalityStat", source = "nationalityStat")
     NationalityDTO toDtoNationalityNationalityId(Nationality nationality);
 
