@@ -3,7 +3,7 @@
     "title": "أهلا وسهلا بك، !",
     "subtitle": "هذه صفحتك الرئيسية",
     "logged": {
-      "message": "قمت بتسجيل الدخول كمستخدم \"{{username}}\"."
+      "message": "قمت بتسجيل الدخول كمستخدم \"{{username}}\" إلى الموقع \"{{eventname}}\"."
     },
     "question": "إذا كان لديك أي سؤال حول JHipster:",
     "link": {

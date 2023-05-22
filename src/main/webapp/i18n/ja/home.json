@@ -3,7 +3,7 @@
     "title": "ようこそ, ",
     "subtitle": "ここはトップページです。",
     "logged": {
-      "message": "\"{{username}}\"としてログインしています。"
+      "message": "\"{{username}}\"としてログインしています。to event \"{{eventname}}\"."
     },
     "question": "JHipsterに関して質問があれば:",
     "link": {
