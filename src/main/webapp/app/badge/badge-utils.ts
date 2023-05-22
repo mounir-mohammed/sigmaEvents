@@ -4,6 +4,8 @@ import { SettingType } from 'app/config/settingType';
 import { SourceType } from 'app/config/sourceType';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-sig.model';
+import { IAreaSig } from 'app/entities/area-sig/area-sig.model';
+import { AreaSigService } from 'app/entities/area-sig/service/area-sig.service';
 import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
 import { ISettingSig } from 'app/entities/setting-sig/setting-sig.model';
 import html2canvas from 'html2canvas';
@@ -13,7 +15,7 @@ import jspdf from 'jspdf';
   providedIn: 'root',
 })
 export class BadgeUtils {
-  constructor(protected dataUtils: DataUtils, protected settingSigService: SettingSigService) {}
+  constructor(protected dataUtils: DataUtils, protected settingSigService: SettingSigService, protected areaSigService: AreaSigService) {}
 
   addImages(parent: any, dataModel: any, groupDivs: Array<any>, data: any): void {
     dataModel.images.forEach((image: any) => {
@@ -305,87 +307,180 @@ export class BadgeUtils {
             }
           });
         } else if (element.type == FieldType.TABLE) {
-          var list = this.dataUtils.searchElementFromJson(element.listPath, data);
-          if (element.order) {
-            list.sort((a: any, b: any) => {
-              if (element.orderType == 'desc') {
-                return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() <
-                  this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
-                  ? 1
-                  : -1;
-              } else {
-                return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() >
-                  this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
-                  ? 1
-                  : -1;
-              }
-            });
-          }
-          var rows: Array<Node> = [];
-          for (var i = 0; i < element.rowNbr; i++) {
-            var row = document.createElement('div');
-            row.id = 'row-' + element.name + '-' + i;
-            row.style.display = 'table-row';
-            rows.push(row);
-          }
+          if (element.fixedPosition) {
+            if (element.listPath.toString().indexOf('areas')) {
+              this.areaSigService.getAllAreas().then(allareas => {
+                var list = this.dataUtils.searchElementFromJson(element.listPath, data);
+                let allareasIds = list.map((a: { areaId: any }) => a.areaId);
+                if (element.order) {
+                  list.sort((a: any, b: any) => {
+                    if (element.orderType == 'desc') {
+                      return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() <
+                        this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                        ? 1
+                        : -1;
+                    } else {
+                      return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() >
+                        this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                        ? 1
+                        : -1;
+                    }
+                  });
+                }
+                var rows: Array<Node> = [];
+                for (var i = 0; i < element.rowNbr; i++) {
+                  var row = document.createElement('div');
+                  row.id = 'row-' + element.name + '-' + i;
+                  row.style.display = 'table-row';
+                  rows.push(row);
+                }
 
-          let x: number = 0;
-          let y: number = 0;
-          list.forEach((el: any) => {
-            var elJsonJson = JSON.stringify(el);
-            var elData = JSON.parse(elJsonJson);
-            var fieldEl = document.createElement('div');
-            fieldEl.id = element.name;
-            var text = this.dataUtils.searchElementFromJson(element.path, elData);
-            if (element.toUpperCase) {
-              text = text.toString().toUpperCase().trim();
-            }
-            fieldEl.textContent = text;
-            fieldEl.style.display = element.display;
-            fieldEl.style.position = element.position;
-            fieldEl.style.left = element.x;
-            fieldEl.style.top = element.y;
-            fieldEl.style.zIndex = element.z;
-            fieldEl.style.margin = element.margin;
-            fieldEl.style.padding = element.padding;
-            fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
-              ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
-              : element.backgroundColor;
-            fieldEl.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
-              ? this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
-              : element.color;
-            fieldEl.style.textAlign = element.textAlign;
-            fieldEl.style.fontFamily = element.fontFamily;
-            fieldEl.style.fontStyle = element.fontStyle;
-            fieldEl.style.fontSize = element.fontSize;
-            fieldEl.style.fontWeight = element.fontWeight;
-            fieldEl.style.border = element.border;
-            fieldEl.style.whiteSpace = element.whiteSpace;
-            fieldEl.style.verticalAlign = element.verticalAlign;
-            fieldEl.style.width = element.width;
-            fieldEl.style.height = element.height;
-            fieldEl.style.maxWidth = element.maxWidth;
-            fieldEl.style.maxHeight = element.maxHeight;
+                let x: number = 0;
+                let y: number = 0;
+                allareas.forEach((el: any) => {
+                  var elJsonJson = JSON.stringify(el);
+                  var elData = JSON.parse(elJsonJson);
+                  var fieldEl = document.createElement('div');
+                  fieldEl.id = element.name;
+                  fieldEl.style.display = element.display;
+                  fieldEl.style.position = element.position;
+                  fieldEl.style.left = element.x;
+                  fieldEl.style.top = element.y;
+                  fieldEl.style.zIndex = element.z;
+                  fieldEl.style.margin = element.margin;
+                  fieldEl.style.padding = element.padding;
+                  fieldEl.style.textAlign = element.textAlign;
+                  fieldEl.style.fontFamily = element.fontFamily;
+                  fieldEl.style.fontStyle = element.fontStyle;
+                  fieldEl.style.fontSize = element.fontSize;
+                  fieldEl.style.fontWeight = element.fontWeight;
+                  fieldEl.style.border = element.border;
+                  fieldEl.style.whiteSpace = element.whiteSpace;
+                  fieldEl.style.verticalAlign = element.verticalAlign;
+                  fieldEl.style.width = element.width;
+                  fieldEl.style.height = element.height;
+                  fieldEl.style.maxWidth = element.maxWidth;
+                  fieldEl.style.maxHeight = element.maxHeight;
+                  var text = this.dataUtils.searchElementFromJson(element.path, elData);
+                  if (element.toUpperCase) {
+                    text = text.toString().toUpperCase().trim();
+                  }
+                  fieldEl.textContent = text;
+                  fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+                    ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+                    : element.backgroundColor;
+                  fieldEl.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+                    ? this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+                    : element.color;
+                  if (!allareasIds.includes(this.dataUtils.searchElementFromJson('areaId', elData))) {
+                    fieldEl.style.visibility = 'hidden';
+                  }
 
-            rows[x]?.appendChild(fieldEl);
-            y = y + 1;
-            if (y == element.columnNbr) {
-              x = x + 1;
-              y = 0;
-            }
-          });
-          if (element.groupName == null) {
-            rows.forEach(row => {
-              parent?.appendChild(row);
-            });
-          } else {
-            Array.prototype.forEach.call(groupDivs, groupDiv => {
-              if (groupDiv.id === element.groupName) {
-                rows.forEach(row => {
-                  groupDiv?.appendChild(row);
+                  rows[x]?.appendChild(fieldEl);
+                  y = y + 1;
+                  if (y == element.columnNbr) {
+                    x = x + 1;
+                    y = 0;
+                  }
                 });
+                if (element.groupName == null) {
+                  rows.forEach(row => {
+                    parent?.appendChild(row);
+                  });
+                } else {
+                  Array.prototype.forEach.call(groupDivs, groupDiv => {
+                    if (groupDiv.id === element.groupName) {
+                      rows.forEach(row => {
+                        groupDiv?.appendChild(row);
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          } else {
+            var list = this.dataUtils.searchElementFromJson(element.listPath, data);
+            if (element.order) {
+              list.sort((a: any, b: any) => {
+                if (element.orderType == 'desc') {
+                  return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() <
+                    this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                    ? 1
+                    : -1;
+                } else {
+                  return this.dataUtils.searchElementFromJson(element.orderBy, a).toString() >
+                    this.dataUtils.searchElementFromJson(element.orderBy, b).toString()
+                    ? 1
+                    : -1;
+                }
+              });
+            }
+            var rows: Array<Node> = [];
+            for (var i = 0; i < element.rowNbr; i++) {
+              var row = document.createElement('div');
+              row.id = 'row-' + element.name + '-' + i;
+              row.style.display = 'table-row';
+              rows.push(row);
+            }
+
+            let x: number = 0;
+            let y: number = 0;
+            list.forEach((el: any) => {
+              var elJsonJson = JSON.stringify(el);
+              var elData = JSON.parse(elJsonJson);
+              var fieldEl = document.createElement('div');
+              fieldEl.id = element.name;
+              var text = this.dataUtils.searchElementFromJson(element.path, elData);
+              if (element.toUpperCase) {
+                text = text.toString().toUpperCase().trim();
+              }
+              fieldEl.textContent = text;
+              fieldEl.style.display = element.display;
+              fieldEl.style.position = element.position;
+              fieldEl.style.left = element.x;
+              fieldEl.style.top = element.y;
+              fieldEl.style.zIndex = element.z;
+              fieldEl.style.margin = element.margin;
+              fieldEl.style.padding = element.padding;
+              fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+                ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
+                : element.backgroundColor;
+              fieldEl.style.color = this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+                ? this.dataUtils.searchElementFromJson(element.DynamicColor, elData)
+                : element.color;
+              fieldEl.style.textAlign = element.textAlign;
+              fieldEl.style.fontFamily = element.fontFamily;
+              fieldEl.style.fontStyle = element.fontStyle;
+              fieldEl.style.fontSize = element.fontSize;
+              fieldEl.style.fontWeight = element.fontWeight;
+              fieldEl.style.border = element.border;
+              fieldEl.style.whiteSpace = element.whiteSpace;
+              fieldEl.style.verticalAlign = element.verticalAlign;
+              fieldEl.style.width = element.width;
+              fieldEl.style.height = element.height;
+              fieldEl.style.maxWidth = element.maxWidth;
+              fieldEl.style.maxHeight = element.maxHeight;
+
+              rows[x]?.appendChild(fieldEl);
+              y = y + 1;
+              if (y == element.columnNbr) {
+                x = x + 1;
+                y = 0;
               }
             });
+            if (element.groupName == null) {
+              rows.forEach(row => {
+                parent?.appendChild(row);
+              });
+            } else {
+              Array.prototype.forEach.call(groupDivs, groupDiv => {
+                if (groupDiv.id === element.groupName) {
+                  rows.forEach(row => {
+                    groupDiv?.appendChild(row);
+                  });
+                }
+              });
+            }
           }
         }
       }

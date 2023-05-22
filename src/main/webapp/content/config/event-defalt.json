@@ -425,6 +425,7 @@
         "listPath": "fonction.areas",
         "path": "areaAbreviation",
         "type": "table",
+        "fixedPosition": true,
         "format": "",
         "style": "",
         "position": "",

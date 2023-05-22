@@ -70,4 +70,12 @@ export class AreaSigService {
     }
     return areaCollection;
   }
+
+  public getAllAreas(): Promise<IAreaSig[]> {
+    return new Promise(resolve => {
+      this.http.get<IAreaSig[]>(this.resourceUrl).subscribe(response => {
+        resolve(response);
+      });
+    });
+  }
 }
