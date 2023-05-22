@@ -41,6 +41,8 @@ export class BadgeUtils {
         img.style.left = image.x;
         img.style.top = image.y;
         img.style.zIndex = image.z;
+        img.style.margin = image.margin;
+        img.style.padding = image.padding;
         img.style.border = image.border;
         img.style.verticalAlign = image.verticalAlign;
         img.style.width = image.width;
@@ -70,6 +72,8 @@ export class BadgeUtils {
         cadreDiv.style.left = cadre.x;
         cadreDiv.style.top = cadre.y;
         cadreDiv.style.zIndex = cadre.z;
+        cadreDiv.style.margin = cadre.margin;
+        cadreDiv.style.padding = cadre.padding;
         cadreDiv.style.backgroundColor = this.dataUtils.searchElementFromJson(cadre.DynamicBackgroundColor, data)
           ? this.dataUtils.searchElementFromJson(cadre.DynamicBackgroundColor, data)
           : cadre.backgroundColor;
@@ -106,6 +110,8 @@ export class BadgeUtils {
         groupDiv.style.left = group.x;
         groupDiv.style.top = group.y;
         groupDiv.style.zIndex = group.z;
+        groupDiv.style.margin = group.margin;
+        groupDiv.style.padding = group.padding;
         groupDiv.style.backgroundColor = this.dataUtils.searchElementFromJson(group.DynamicBackgroundColor, data)
           ? this.dataUtils.searchElementFromJson(group.DynamicBackgroundColor, data)
           : group.backgroundColor;
@@ -150,6 +156,8 @@ export class BadgeUtils {
           field.style.left = element.x;
           field.style.top = element.y;
           field.style.zIndex = element.z;
+          field.style.margin = element.margin;
+          field.style.padding = element.padding;
           field.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
             ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
             : element.backgroundColor;
@@ -205,6 +213,8 @@ export class BadgeUtils {
           field.style.left = element.x;
           field.style.top = element.y;
           field.style.zIndex = element.z;
+          field.style.margin = element.margin;
+          field.style.padding = element.padding;
           field.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
             ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, data)
             : element.backgroundColor;
@@ -264,6 +274,8 @@ export class BadgeUtils {
             fieldEl.style.left = element.x;
             fieldEl.style.top = element.y;
             fieldEl.style.zIndex = element.z;
+            fieldEl.style.margin = element.margin;
+            fieldEl.style.padding = element.padding;
             fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
               ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
               : element.backgroundColor;
@@ -334,6 +346,8 @@ export class BadgeUtils {
             fieldEl.style.left = element.x;
             fieldEl.style.top = element.y;
             fieldEl.style.zIndex = element.z;
+            fieldEl.style.margin = element.margin;
+            fieldEl.style.padding = element.padding;
             fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
               ? this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
               : element.backgroundColor;
