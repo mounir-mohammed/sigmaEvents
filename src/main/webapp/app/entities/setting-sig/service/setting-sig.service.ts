@@ -121,4 +121,12 @@ export class SettingSigService {
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
   }
+
+  public getSetting(id: number): Promise<ISettingSig> {
+    return new Promise(resolve => {
+      this.http.get<ISettingSig>(`${this.resourceUrl}/${id}`).subscribe(response => {
+        resolve(response);
+      });
+    });
+  }
 }

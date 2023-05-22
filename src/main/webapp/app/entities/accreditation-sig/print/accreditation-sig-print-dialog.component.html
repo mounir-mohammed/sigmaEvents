@@ -15,7 +15,7 @@
       Are you sure you want to print Accreditation {{ accreditation.accreditationId }}?
     </p>
     <img src="../../../../content/images/loading_icon.gif" *ngIf="!this.badgeGenerated" />
-    <div id="badge-container" class="badge-container"></div>
+    <div id="badge-container" class="badge-container" [hidden]="!this.badgeGenerated"></div>
   </div>
 
   <div class="modal-footer">

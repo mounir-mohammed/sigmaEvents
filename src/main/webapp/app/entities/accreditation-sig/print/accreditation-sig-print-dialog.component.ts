@@ -40,13 +40,14 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(() => {
+    console.log('START ngOnInit');
+    this.activatedRoute.data.subscribe(async () => {
       this.accountService.identity().subscribe(account => (this.currentAccount = account));
       if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue) {
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_EVENT) {
           if (this.accreditation?.event?.eventPrintingModelId!) {
-            this.getConfig(this.accreditation?.event?.eventPrintingModelId!).finally(() => {
-              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+            await this.getConfig(this.accreditation?.event?.eventPrintingModelId!).finally(async () => {
+              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
                 this.badgeGenerated = true;
               });
             });
@@ -58,8 +59,8 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CENTER) {
           if (this.currentAccount?.printingCentre?.printingModel?.printingModelId!) {
-            this.getConfig(this.currentAccount?.printingCentre?.printingModel?.printingModelId!).finally(() => {
-              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+            await this.getConfig(this.currentAccount?.printingCentre?.printingModel?.printingModelId!).finally(async () => {
+              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
                 this.badgeGenerated = true;
               });
             });
@@ -71,8 +72,8 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_ACCREDITATION_TYPE) {
           if (this.accreditation?.accreditationType?.printingModel?.printingModelId!) {
-            this.getConfig(this.accreditation?.accreditationType?.printingModel?.printingModelId!).finally(() => {
-              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+            await this.getConfig(this.accreditation?.accreditationType?.printingModel?.printingModelId!).finally(async () => {
+              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
                 this.badgeGenerated = true;
               });
             });
@@ -84,8 +85,8 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
 
         if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CATEGORY) {
           if (this.accreditation?.category?.printingModel?.printingModelId!) {
-            this.getConfig(this.accreditation?.category?.printingModel?.printingModelId!).finally(() => {
-              this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
+            await this.getConfig(this.accreditation?.category?.printingModel?.printingModelId!).finally(async () => {
+              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
                 this.badgeGenerated = true;
               });
             });
@@ -99,6 +100,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         console.log('ngOnInit() => NO PRINTINGTYPE FOUND!');
       }
     });
+    console.log('END ngOnInit');
   }
 
   cancel(): void {
