@@ -6,7 +6,6 @@ import { DataUtils } from 'app/core/util/data-util.service';
 import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-sig.model';
 import { AreaSigService } from 'app/entities/area-sig/service/area-sig.service';
 import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
-import { ISettingSig } from 'app/entities/setting-sig/setting-sig.model';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
 
@@ -533,10 +532,10 @@ export class BadgeUtils {
                 //add cadres
                 this.addCadres(badge, modelData.printingModel, groupDivs, data).then(() => {
                   badgeContainer?.appendChild(badge);
-
-                  this.deplaceGroupToParent(modelData.printingModel);
-                  console.log('END generateadge');
-                  return resolve(true);
+                  this.deplaceGroupToParent(modelData.printingModel).then(() => {
+                    console.log('END generateadge');
+                    return resolve(true);
+                  });
                 });
               });
             });
@@ -627,13 +626,16 @@ export class BadgeUtils {
     }
   }
 
-  deplaceGroupToParent(dataModel: any): void {
-    dataModel.groups.forEach((group: any) => {
-      if (group.groupName) {
-        var childGroupe = document.getElementById(group.name);
-        var groupParent = document.getElementById(group.groupName);
-        groupParent?.appendChild(childGroupe!);
-      }
+  deplaceGroupToParent(dataModel: any): Promise<Boolean> {
+    return new Promise(resolve => {
+      dataModel.groups.forEach((group: any) => {
+        if (group.groupName) {
+          var childGroupe = document.getElementById(group.name);
+          var groupParent = document.getElementById(group.groupName);
+          groupParent?.appendChild(childGroupe!);
+        }
+      });
+      resolve(true);
     });
   }
 }
