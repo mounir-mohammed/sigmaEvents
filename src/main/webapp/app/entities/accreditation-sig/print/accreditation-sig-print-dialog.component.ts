@@ -8,7 +8,6 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import dayjs from 'dayjs/esm';
 import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
-import { IPrintingModelSig } from 'app/entities/printing-model-sig/printing-model-sig.model';
 import { ActivatedRoute } from '@angular/router';
 import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
 import { DataUtils } from 'app/core/util/data-util.service';
@@ -23,10 +22,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   accreditation?: IAccreditationSig;
   currentAccount: Account | null = null;
   status?: IStatusSig;
-  printingModel: IPrintingModelSig | null = null;
-  dataLoaded: boolean = false;
   badgeGenerated: boolean = false;
-  modelData: any;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -40,67 +36,12 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('START ngOnInit');
     this.activatedRoute.data.subscribe(async () => {
       this.accountService.identity().subscribe(account => (this.currentAccount = account));
-      if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue) {
-        if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_EVENT) {
-          if (this.accreditation?.event?.eventPrintingModelId!) {
-            await this.getConfig(this.accreditation?.event?.eventPrintingModelId!).finally(async () => {
-              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
-                this.badgeGenerated = true;
-              });
-            });
-          } else {
-            this.throwAlertErrorLoadingModel();
-            console.log('ngOnInit() => NO MODEL FOUND');
-          }
-        }
-
-        if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CENTER) {
-          if (this.currentAccount?.printingCentre?.printingModel?.printingModelId!) {
-            await this.getConfig(this.currentAccount?.printingCentre?.printingModel?.printingModelId!).finally(async () => {
-              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
-                this.badgeGenerated = true;
-              });
-            });
-          } else {
-            this.throwAlertErrorLoadingModel();
-            console.log('ngOnInit() => NO MODEL FOUND');
-          }
-        }
-
-        if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_ACCREDITATION_TYPE) {
-          if (this.accreditation?.accreditationType?.printingModel?.printingModelId!) {
-            await this.getConfig(this.accreditation?.accreditationType?.printingModel?.printingModelId!).finally(async () => {
-              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
-                this.badgeGenerated = true;
-              });
-            });
-          } else {
-            this.throwAlertErrorLoadingModel();
-            console.log('ngOnInit() => NO MODEL FOUND');
-          }
-        }
-
-        if (this.currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CATEGORY) {
-          if (this.accreditation?.category?.printingModel?.printingModelId!) {
-            await this.getConfig(this.accreditation?.category?.printingModel?.printingModelId!).finally(async () => {
-              await this.badgeUtils.generateadge(this.accreditation, this.modelData, 'badge-container').finally(() => {
-                this.badgeGenerated = true;
-              });
-            });
-          } else {
-            this.throwAlertErrorLoadingModel();
-            console.log('ngOnInit() => NO MODEL FOUND');
-          }
-        }
-      } else {
-        this.throwAlertErrorLoadingModel();
-        console.log('ngOnInit() => NO PRINTINGTYPE FOUND!');
-      }
+      await this.callGenerateBadge(this.currentAccount!, this.accreditation).then(() => {
+        this.badgeGenerated = true;
+      });
     });
-    console.log('END ngOnInit');
   }
 
   cancel(): void {
@@ -114,23 +55,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
     this.accreditationService.update(accreditation).subscribe(() => {
       this.activeModal.close(ITEM_PRINTED_EVENT);
       var badgeId = accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!;
-      this.badgeUtils.print(badgeId, this.modelData);
-    });
-  }
-
-  getConfig(modelId: number): Promise<Boolean> {
-    return new Promise(resolve => {
-      this.printingModelSigService.find(modelId).subscribe(resp => {
-        this.printingModel = resp.body;
-        if (this.printingModel?.printingModelStat) {
-          this.modelData = this.dataUtils.base64ToJson(this.printingModel?.printingModelData!);
-          resolve(true);
-        } else {
-          this.throwAlertErrorLoadingModel();
-          console.log('getConfig() => PRINTING MODEL STATE NOT ACTIVATED');
-          resolve(false);
-        }
-      });
+      this.badgeUtils.print(badgeId, accreditation.accreditationPrintingModel);
     });
   }
 
@@ -147,5 +72,69 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
       )
     );
     this.cancel();
+  }
+
+  private async callGenerateBadge(currentAccount: Account, accreditation?: IAccreditationSig): Promise<Boolean> {
+    return new Promise(async resolve => {
+      if (currentAccount?.printingCentre?.printingType?.printingTypeValue) {
+        if (currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_EVENT) {
+          if (accreditation?.event?.eventPrintingModelId!) {
+            await this.badgeUtils.getConfig(accreditation?.event?.eventPrintingModelId!).then(async modelData => {
+              this.accreditation!.accreditationPrintingModel = modelData!;
+              await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                resolve(true);
+              });
+            });
+          } else {
+            resolve(false);
+            console.log('ngOnInit() => NO MODEL FOUND');
+          }
+        }
+
+        if (currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CENTER) {
+          if (currentAccount?.printingCentre?.printingModel?.printingModelId!) {
+            await this.badgeUtils.getConfig(currentAccount?.printingCentre?.printingModel?.printingModelId!).then(async modelData => {
+              this.accreditation!.accreditationPrintingModel = modelData!;
+              await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                resolve(true);
+              });
+            });
+          } else {
+            resolve(false);
+            console.log('ngOnInit() => NO MODEL FOUND');
+          }
+        }
+        if (currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_ACCREDITATION_TYPE) {
+          if (accreditation?.accreditationType?.printingModel?.printingModelId!) {
+            await this.badgeUtils.getConfig(accreditation?.accreditationType?.printingModel?.printingModelId!).then(async modelData => {
+              this.accreditation!.accreditationPrintingModel = modelData!;
+              await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                resolve(true);
+              });
+            });
+          } else {
+            resolve(false);
+            console.log('ngOnInit() => NO MODEL FOUND');
+          }
+        }
+
+        if (currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_CATEGORY) {
+          if (accreditation?.category?.printingModel?.printingModelId!) {
+            await this.badgeUtils.getConfig(accreditation?.category?.printingModel?.printingModelId!).then(async modelData => {
+              this.accreditation!.accreditationPrintingModel = modelData!;
+              await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                resolve(true);
+              });
+            });
+          } else {
+            resolve(false);
+            console.log('ngOnInit() => NO MODEL FOUND');
+          }
+        }
+      } else {
+        resolve(false);
+        console.log('ngOnInit() => NO PRINTINGTYPE FOUND!');
+      }
+    });
   }
 }

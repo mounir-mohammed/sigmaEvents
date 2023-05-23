@@ -138,13 +138,18 @@ export class DataUtils {
   }
 
   searchElementFromJson(give: string, obj: any): any {
-    try {
-      var res = give.split('.').reduce(function (o, k) {
-        return o && o[k];
-      }, obj);
-      return res;
-    } catch (e: any) {
-      console.log(e + '/Path = ' + give);
+    if (give && obj) {
+      try {
+        var res = give.split('.').reduce(function (o, k) {
+          return o && o[k];
+        }, obj);
+        return res;
+      } catch (e: any) {
+        console.log(e + '/Path = ' + give);
+        return '';
+      }
+    } else {
+      console.log('searchElementFromJson give or obj is null');
       return '';
     }
   }

@@ -46,6 +46,7 @@ export interface IAccreditationSig {
   accreditationAttributs?: string | null;
   accreditationStat?: boolean | null;
   accreditationActivated?: boolean | null;
+  accreditationPrintingModel?: any;
   sites?:
     | Pick<ISiteSig, 'siteId' | 'siteName' | 'siteAbreviation' | 'siteColor' | 'siteStat' | 'siteLogo' | 'siteLogoContentType'>[]
     | null;
