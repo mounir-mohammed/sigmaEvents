@@ -149,7 +149,7 @@ export class DataUtils {
         return '';
       }
     } else {
-      console.log('searchElementFromJson give or obj is null');
+      console.log('searchElementFromJson give or obj is null ' + '/Path = ' + give);
       return '';
     }
   }

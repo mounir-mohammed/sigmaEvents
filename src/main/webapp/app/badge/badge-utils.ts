@@ -558,9 +558,10 @@ export class BadgeUtils {
                 //add cadres
                 this.addCadres(badge, modelData.printingModel, groupDivs, data).then(() => {
                   badgeContainer?.appendChild(badge);
-                  this.deplaceGroupToParent(modelData.printingModel);
-                  console.log('END generateadge()');
-                  return resolve(true);
+                  this.deplaceGroupToParent(modelData.printingModel).then(() => {
+                    console.log('END generateadge()');
+                    return resolve(true);
+                  });
                 });
               });
             });
