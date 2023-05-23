@@ -3,7 +3,7 @@
     "page": {
       "width": "29.7cm",
       "height": "21cm",
-      "margin": "30mm 45mm 30mm 45mm",
+      "margin": "5mm 15mm 5mm 15mm",
       "padding": "",
       "border": "2px dashed #a6a6a6",
       "position": "relative"
