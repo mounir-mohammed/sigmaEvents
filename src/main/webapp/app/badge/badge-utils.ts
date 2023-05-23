@@ -202,7 +202,17 @@ export class BadgeUtils {
               field.style.textAlign = element.textAlign;
               field.style.fontFamily = element.fontFamily;
               field.style.fontStyle = element.fontStyle;
-              field.style.fontSize = element.fontSize;
+              if (element.calculatedFontSize) {
+                field.style.fontSize = this.calculateFontSize(
+                  element.maxWidth,
+                  element.minFontSize,
+                  element.maxFontSize,
+                  text,
+                  element.fontUnite
+                );
+              } else {
+                field.style.fontSize = element.fontSize;
+              }
               field.style.fontWeight = element.fontWeight;
               field.style.border = element.border;
               field.style.whiteSpace = element.whiteSpace;
@@ -259,7 +269,17 @@ export class BadgeUtils {
               field.style.textAlign = element.textAlign;
               field.style.fontFamily = element.fontFamily;
               field.style.fontStyle = element.fontStyle;
-              field.style.fontSize = element.fontSize;
+              if (element.calculatedFontSize) {
+                field.style.fontSize = this.calculateFontSize(
+                  element.maxWidth,
+                  element.minFontSize,
+                  element.maxFontSize,
+                  text,
+                  element.fontUnite
+                );
+              } else {
+                field.style.fontSize = element.fontSize;
+              }
               field.style.fontWeight = element.fontWeight;
               field.style.border = element.border;
               field.style.whiteSpace = element.whiteSpace;
@@ -320,7 +340,17 @@ export class BadgeUtils {
                 fieldEl.style.textAlign = element.textAlign;
                 fieldEl.style.fontFamily = element.fontFamily;
                 fieldEl.style.fontStyle = element.fontStyle;
-                fieldEl.style.fontSize = element.fontSize;
+                if (element.calculatedFontSize) {
+                  fieldEl.style.fontSize = this.calculateFontSize(
+                    element.maxWidth,
+                    element.minFontSize,
+                    element.maxFontSize,
+                    text,
+                    element.fontUnite
+                  );
+                } else {
+                  fieldEl.style.fontSize = element.fontSize;
+                }
                 fieldEl.style.fontWeight = element.fontWeight;
                 fieldEl.style.border = element.border;
                 fieldEl.style.whiteSpace = element.whiteSpace;
@@ -385,7 +415,6 @@ export class BadgeUtils {
                       fieldEl.style.textAlign = element.textAlign;
                       fieldEl.style.fontFamily = element.fontFamily;
                       fieldEl.style.fontStyle = element.fontStyle;
-                      fieldEl.style.fontSize = element.fontSize;
                       fieldEl.style.fontWeight = element.fontWeight;
                       fieldEl.style.border = element.border;
                       fieldEl.style.whiteSpace = element.whiteSpace;
@@ -397,6 +426,17 @@ export class BadgeUtils {
                       var text = this.dataUtils.searchElementFromJson(element.path, elData);
                       if (element.toUpperCase) {
                         text = text.toString().toUpperCase().trim();
+                      }
+                      if (element.calculatedFontSize) {
+                        fieldEl.style.fontSize = this.calculateFontSize(
+                          element.maxWidth,
+                          element.minFontSize,
+                          element.maxFontSize,
+                          text,
+                          element.fontUnite
+                        );
+                      } else {
+                        fieldEl.style.fontSize = element.fontSize;
                       }
                       fieldEl.textContent = text;
                       fieldEl.style.backgroundColor = this.dataUtils.searchElementFromJson(element.DynamicBackgroundColor, elData)
@@ -484,7 +524,17 @@ export class BadgeUtils {
                   fieldEl.style.textAlign = element.textAlign;
                   fieldEl.style.fontFamily = element.fontFamily;
                   fieldEl.style.fontStyle = element.fontStyle;
-                  fieldEl.style.fontSize = element.fontSize;
+                  if (element.calculatedFontSize) {
+                    fieldEl.style.fontSize = this.calculateFontSize(
+                      element.maxWidth,
+                      element.minFontSize,
+                      element.maxFontSize,
+                      text,
+                      element.fontUnite
+                    );
+                  } else {
+                    fieldEl.style.fontSize = element.fontSize;
+                  }
                   fieldEl.style.fontWeight = element.fontWeight;
                   fieldEl.style.border = element.border;
                   fieldEl.style.whiteSpace = element.whiteSpace;
@@ -694,5 +744,36 @@ export class BadgeUtils {
       });
       console.log('END getConfig()');
     });
+  }
+
+  calculateFontSize(
+    divWidthString: string,
+    desiredFontSizeMinString: string,
+    desiredFontSizeMaxString: string,
+    text: string,
+    unite: string
+  ): string {
+    console.log('start calculateFontSize()');
+    const textLength = text.length;
+    const divWidth = this.extractNumericValue(divWidthString, unite);
+    const desiredFontSizeMax = this.extractNumericValue(desiredFontSizeMaxString, unite);
+    const desiredFontSizeMin = this.extractNumericValue(desiredFontSizeMinString, unite);
+    // Calculate the ratio of the div width to the text length
+    const ratio = divWidth / textLength;
+
+    // Calculate the font size based on the ratio within the desired font size range
+    const calculatedFontSize = Math.max(
+      Math.min(ratio, desiredFontSizeMax), // Upper bound
+      desiredFontSizeMin // Lower bound
+    );
+    console.log('END calculateFontSize()');
+    console.log(text);
+    console.log(calculatedFontSize);
+    return calculatedFontSize.toString() + unite;
+  }
+
+  extractNumericValue(value: string, unite: string): number {
+    const numericPart = value.substring(0, value.indexOf(unite));
+    return parseInt(numericPart, 10);
   }
 }
