@@ -176,7 +176,15 @@ export class BadgeUtils {
               var field = document.createElement('div');
               field.id = element.name;
               var text = '';
-              text = this.dataUtils.searchElementFromJson(element.path, data);
+              if (element.sourceType == SourceType.SETTING) {
+                await this.settingSigService.getSetting(element.settingId).then(setting => {
+                  if (setting?.settingType == SettingType.TEXT) {
+                    text = setting.settingValueString!;
+                  }
+                });
+              } else {
+                text = this.dataUtils.searchElementFromJson(element.path, data);
+              }
               if (element.toUpperCase) {
                 if (text) {
                   text = text.toString().toUpperCase().trim();
