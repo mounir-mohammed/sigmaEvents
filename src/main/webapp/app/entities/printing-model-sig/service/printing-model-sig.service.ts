@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPrintingModelSig, NewPrintingModelSig } from '../printing-model-sig.model';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 export type PartialUpdatePrintingModelSig = Partial<IPrintingModelSig> & Pick<IPrintingModelSig, 'printingModelId'>;
 
@@ -16,7 +17,7 @@ export type EntityArrayResponseType = HttpResponse<IPrintingModelSig[]>;
 export class PrintingModelSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/printing-models');
 
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService, protected dataUtils: DataUtils) {}
 
   create(printingModel: NewPrintingModelSig): Observable<EntityResponseType> {
     return this.http.post<IPrintingModelSig>(this.resourceUrl, printingModel, { observe: 'response' });
@@ -78,5 +79,25 @@ export class PrintingModelSigService {
       return [...printingModelsToAdd, ...printingModelCollection];
     }
     return printingModelCollection;
+  }
+
+  getPrintingModelConfig(modelId: number): Promise<any> {
+    console.log('START getConfig()');
+    var printingModel: IPrintingModelSig | null = null;
+    return new Promise(resolve => {
+      this.find(modelId).subscribe(resp => {
+        printingModel = resp.body;
+        if (printingModel?.printingModelStat) {
+          var modelData = this.dataUtils.base64ToJson(printingModel?.printingModelData!);
+          if (modelData) {
+            resolve(modelData);
+          }
+        } else {
+          console.log('getConfig() => PRINTING MODEL STATE NOT ACTIVATED');
+          resolve(false);
+        }
+      });
+      console.log('END getConfig()');
+    });
   }
 }

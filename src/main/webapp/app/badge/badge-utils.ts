@@ -734,26 +734,6 @@ export class BadgeUtils {
     });
   }
 
-  getConfig(modelId: number): Promise<any> {
-    console.log('START getConfig()');
-    var printingModel: IPrintingModelSig | null = null;
-    return new Promise(resolve => {
-      this.printingModelSigService.find(modelId).subscribe(resp => {
-        printingModel = resp.body;
-        if (printingModel?.printingModelStat) {
-          var modelData = this.dataUtils.base64ToJson(printingModel?.printingModelData!);
-          if (modelData) {
-            resolve(modelData);
-          }
-        } else {
-          console.log('getConfig() => PRINTING MODEL STATE NOT ACTIVATED');
-          resolve(false);
-        }
-      });
-      console.log('END getConfig()');
-    });
-  }
-
   calculateFontSize(
     divWidthString: string,
     desiredFontSizeMinString: string,
