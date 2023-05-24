@@ -6,7 +6,6 @@ import { SourceType } from 'app/config/sourceType';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-sig.model';
 import { AreaSigService } from 'app/entities/area-sig/service/area-sig.service';
-import { IPrintingModelSig } from 'app/entities/printing-model-sig/printing-model-sig.model';
 import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
 import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
 import { CodeUtil } from 'app/shared/util/code.shared';
@@ -790,16 +789,37 @@ export class BadgeUtils {
                 }
               });
             } else {
-              if (this.dataUtils.searchElementFromJson(code.codeTypePath, data) == CodeType.BAR_CODE) {
-                img.src = CodeUtil.getBarCodeData(
-                  this.dataUtils.searchElementFromJson(code.codeValuepath, data),
-                  code.codeFormat,
-                  code.displayValue,
-                  Util.extractNumericValue(code.maxWidth, 'px'),
-                  Util.extractNumericValue(code.maxHeight, 'px')
-                );
+              if (code.type == FieldType.CONCAT) {
+                var text = '';
+                code.childFields.forEach((childField: any) => {
+                  if (this.dataUtils.searchElementFromJson(childField.path, data) !== null) {
+                    text = text + this.dataUtils.searchElementFromJson(childField.path, data);
+                  }
+                  if (childField.separator) {
+                    text = text + childField.separator;
+                  }
+                });
+                if (code.toUpperCase) {
+                  if (text) {
+                    text = text.toString().toUpperCase().trim();
+                  }
+                }
+                console.log(code.name);
+                console.log(code.type);
+                console.log(text);
+                img.src = CodeUtil.getQrCodeData(text);
               } else {
-                img.src = CodeUtil.getQrCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
+                if (this.dataUtils.searchElementFromJson(code.codeTypePath, data) == CodeType.BAR_CODE) {
+                  img.src = CodeUtil.getBarCodeData(
+                    this.dataUtils.searchElementFromJson(code.codeValuepath, data),
+                    code.codeFormat,
+                    code.displayValue,
+                    Util.extractNumericValue(code.maxWidth, 'px'),
+                    Util.extractNumericValue(code.maxHeight, 'px')
+                  );
+                } else {
+                  img.src = CodeUtil.getQrCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
+                }
               }
             }
             img.hidden = code.hidden;

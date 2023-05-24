@@ -25,7 +25,7 @@ export class CodeUtil {
     if (data) {
       data = data.toString().replace(/ /g, '');
     } else {
-      console.log('NO BAR CODE DATA');
+      console.error('NO BAR CODE DATA');
     }
     var barCode = '';
     const canvas = document.createElement('canvas');

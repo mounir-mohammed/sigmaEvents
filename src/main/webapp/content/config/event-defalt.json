@@ -645,7 +645,7 @@
         "whiteSpace": "",
         "toUpperCase": true,
         "verticalAlign": "",
-        "hidden": false
+        "hidden": true
       },
       {
         "name": "accreditationQrCode",
@@ -679,7 +679,53 @@
         "whiteSpace": "",
         "toUpperCase": true,
         "verticalAlign": "",
-        "hidden": false
+        "hidden": true
+      },
+      {
+        "name": "accreditationQrCodeURL",
+        "sourceType": "attribute",
+        "codeValuepath": "code.codeValue",
+        "codeTypePath": "code.codeType.codeTypeValue",
+        "type": "concat",
+        "format": "",
+        "style": "",
+        "position": "absolute",
+        "maxWidth": "100px",
+        "maxHeight": "100px",
+        "width": "100px",
+        "height": "100px",
+        "x": "0px",
+        "y": "0px",
+        "z": "",
+        "margin": "",
+        "padding": "",
+        "backgroundColor": "",
+        "color": "",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "",
+        "fontFamily": "",
+        "fontStyle": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "border": "",
+        "display": "inline-block",
+        "whiteSpace": "",
+        "toUpperCase": false,
+        "verticalAlign": "",
+        "hidden": false,
+        "childFields": [
+          {
+            "name": "eventURL",
+            "path": "event.eventURL",
+            "separator": ""
+          },
+          {
+            "name": "accreditationId",
+            "path": "accreditationId",
+            "separator": "/view"
+          }
+        ]
       }
     ]
   }

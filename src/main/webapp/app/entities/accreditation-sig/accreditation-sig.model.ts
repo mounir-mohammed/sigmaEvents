@@ -54,6 +54,7 @@ export interface IAccreditationSig {
     IEventSig,
     | 'eventId'
     | 'eventName'
+    | 'eventURL'
     | 'eventAbreviation'
     | 'eventStat'
     | 'eventPrintingModelId'

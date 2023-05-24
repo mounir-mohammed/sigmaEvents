@@ -145,11 +145,11 @@ export class DataUtils {
         }, obj);
         return res;
       } catch (e: any) {
-        console.log(e + '/Path = ' + give);
+        console.error(e + '/Path = ' + give);
         return '';
       }
     } else {
-      console.log('searchElementFromJson give or obj is null ' + '/Path = ' + give);
+      console.error('searchElementFromJson give or obj is null ' + '/Path = ' + give);
       return '';
     }
   }
