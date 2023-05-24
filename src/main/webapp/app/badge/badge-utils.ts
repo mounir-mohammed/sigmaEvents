@@ -61,6 +61,11 @@ export class BadgeUtils {
               img.style.maxWidth = image.maxWidth;
               img.style.maxHeight = image.maxHeight;
               img.hidden = image.hidden;
+              if (img.src.length < 30) {
+                console.log('Image DATA < 30 ! : ' + image.name);
+                img.style.visibility = 'hidden';
+              }
+
               if (image.groupName == null) {
                 parent?.appendChild(img);
               } else {
@@ -883,6 +888,12 @@ export class BadgeUtils {
               img.style.height = code.height;
               img.style.maxWidth = code.maxWidth;
               img.style.maxHeight = code.maxHeight;
+
+              if (img.src.length < 30) {
+                console.log('Image DATA < 30 ! : ' + code.name);
+                img.style.visibility = 'hidden';
+              }
+
               if (code.groupName == null) {
                 parent?.appendChild(img);
               } else {
