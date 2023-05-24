@@ -608,8 +608,9 @@
     "codes": [
       {
         "name": "accreditationQrCode",
+        "sourceType": "attribute",
         "codeValuepath": "code.codeValue",
-        "codeTypePath": "code.codeType",
+        "codeTypePath": "code.codeType.codeTypeValue",
         "type": "text",
         "format": "",
         "style": "",
@@ -618,8 +619,8 @@
         "maxHeight": "100px",
         "width": "100px",
         "height": "100px",
-        "x": "10px",
-        "y": "10px",
+        "x": "0px",
+        "y": "0px",
         "z": "",
         "margin": "",
         "padding": "",

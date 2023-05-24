@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CodeType } from 'app/config/codeType';
 import { FieldType } from 'app/config/fieldType';
 import { SettingType } from 'app/config/settingType';
 import { SourceType } from 'app/config/sourceType';
@@ -8,6 +9,7 @@ import { AreaSigService } from 'app/entities/area-sig/service/area-sig.service';
 import { IPrintingModelSig } from 'app/entities/printing-model-sig/printing-model-sig.model';
 import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
 import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
+import { CodeUtil } from 'app/shared/util/code.shared';
 import { Util } from 'app/shared/util/util.shred';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
@@ -608,10 +610,13 @@ export class BadgeUtils {
               this.addImages(badge, modelData.printingModel, groupDivs, data).then(() => {
                 //add cadres
                 this.addCadres(badge, modelData.printingModel, groupDivs, data).then(() => {
-                  badgeContainer?.appendChild(badge);
-                  this.deplaceGroupToParent(modelData.printingModel).then(() => {
-                    console.log('END generateadge()');
-                    return resolve(true);
+                  //add codes
+                  this.addCodes(badge, modelData.printingModel, groupDivs, data).then(() => {
+                    badgeContainer?.appendChild(badge);
+                    this.deplaceGroupToParent(modelData.printingModel).then(() => {
+                      console.log('END generateadge()');
+                      return resolve(true);
+                    });
                   });
                 });
               });
@@ -751,5 +756,65 @@ export class BadgeUtils {
     console.log(text);
     console.log(calculatedFontSize);
     return calculatedFontSize.toString() + unite;
+  }
+
+  addCodes(parent: any, dataModel: any, groupDivs: Array<any>, data: any): Promise<Boolean> {
+    console.log('START addCodes()');
+    return new Promise(async resolve => {
+      if (dataModel.codes) {
+        for (let code of dataModel.codes) {
+          if (this.addCondition(code, data)) {
+            var img = document.createElement('img');
+            img.id = code.name;
+
+            if (code.sourceType == SourceType.SETTING) {
+              await this.settingSigService.getSetting(code.settingId).then(setting => {
+                if (setting?.settingType == CodeType.BAR_CODE) {
+                  img.src = CodeUtil.getBarCodeData(setting.settingValueString!);
+                } else {
+                  img.src = CodeUtil.getQrCodeData(setting.settingValueString!);
+                }
+              });
+            } else {
+              console.log(code.codeTypePath);
+              console.log(this.dataUtils.searchElementFromJson(code.codeTypePath, data));
+              if (this.dataUtils.searchElementFromJson(code.codeTypePath, data) == CodeType.BAR_CODE) {
+                img.src = CodeUtil.getBarCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
+              } else {
+                img.src = CodeUtil.getQrCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
+              }
+            }
+
+            img.style.display = code.display;
+            img.style.position = code.position;
+            img.style.left = code.x;
+            img.style.top = code.y;
+            img.style.zIndex = code.z;
+            img.style.margin = code.margin;
+            img.style.padding = code.padding;
+            img.style.border = code.border;
+            img.style.verticalAlign = code.verticalAlign;
+            img.style.width = code.width;
+            img.style.height = code.height;
+            img.style.maxWidth = code.maxWidth;
+            img.style.maxHeight = code.maxHeight;
+            if (code.groupName == null) {
+              parent?.appendChild(img);
+            } else {
+              Array.prototype.forEach.call(groupDivs, groupDiv => {
+                if (groupDiv.id === code.groupName) {
+                  groupDiv?.appendChild(img);
+                }
+              });
+            }
+          }
+        }
+      } else {
+        console.log('NO CODE FOUND');
+        resolve(false);
+      }
+      console.log('END addCodes()');
+      resolve(true);
+    });
   }
 }

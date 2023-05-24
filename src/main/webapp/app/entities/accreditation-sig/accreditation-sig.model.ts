@@ -92,7 +92,7 @@ export interface IAccreditationSig {
   > | null;
   status?: Pick<IStatusSig, 'statusId' | 'statusName' | 'statusColor'> | null;
   attachement?: Pick<IAttachementSig, 'attachementId' | 'attachementName' | 'attachementStat'> | null;
-  code?: Pick<ICodeSig, 'codeId' | 'codeValue' | 'codeStat'> | null;
+  code?: Pick<ICodeSig, 'codeId' | 'codeValue' | 'codeUsed' | 'codeType' | 'codeStat'> | null;
   dayPassInfo?: Pick<IDayPassInfoSig, 'dayPassInfoId' | 'dayPassInfoName' | 'dayPassInfoStat'> | null;
 }
 

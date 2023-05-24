@@ -194,6 +194,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "codeId", source = "codeId")
     @Mapping(target = "codeValue", source = "codeValue")
+    @Mapping(target = "codeUsed", source = "codeUsed")
+    @Mapping(target = "codeType", source = "codeType")
     @Mapping(target = "codeStat", source = "codeStat")
     CodeDTO toDtoCodeCodeId(Code code);
 
