@@ -22,7 +22,12 @@ export class CodeUtil {
     console.log(displayValue);
     console.log(width);
     console.log(height);
-    var qrCode = '';
+    if (data) {
+      data = data.toString().replace(/ /g, '');
+    } else {
+      console.log('NO BAR CODE DATA');
+    }
+    var barCode = '';
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
@@ -37,10 +42,10 @@ export class CodeUtil {
     console.log(data);
     console.log(options);
     JsBarcode(canvas, data, options);
-    qrCode = canvas.toDataURL();
+    barCode = canvas.toDataURL();
 
-    console.log(qrCode);
+    console.log(barCode);
     console.log('END getBarCodeData()');
-    return qrCode;
+    return barCode;
   }
 }

@@ -645,7 +645,7 @@
         "whiteSpace": "",
         "toUpperCase": true,
         "verticalAlign": "",
-        "hidden": true
+        "hidden": false
       },
       {
         "name": "accreditationQrCode",
