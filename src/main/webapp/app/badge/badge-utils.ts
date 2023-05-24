@@ -8,6 +8,7 @@ import { AreaSigService } from 'app/entities/area-sig/service/area-sig.service';
 import { IPrintingModelSig } from 'app/entities/printing-model-sig/printing-model-sig.model';
 import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
 import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
+import { Util } from 'app/shared/util/util.shred';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
 
@@ -743,9 +744,9 @@ export class BadgeUtils {
   ): string {
     console.log('start calculateFontSize()');
     const textLength = text.length;
-    const divWidth = this.extractNumericValue(divWidthString, unite);
-    const desiredFontSizeMax = this.extractNumericValue(desiredFontSizeMaxString, unite);
-    const desiredFontSizeMin = this.extractNumericValue(desiredFontSizeMinString, unite);
+    const divWidth = Util.extractNumericValue(divWidthString, unite);
+    const desiredFontSizeMax = Util.extractNumericValue(desiredFontSizeMaxString, unite);
+    const desiredFontSizeMin = Util.extractNumericValue(desiredFontSizeMinString, unite);
     // Calculate the ratio of the div width to the text length
     const ratio = divWidth / textLength;
 
@@ -758,10 +759,5 @@ export class BadgeUtils {
     console.log(text);
     console.log(calculatedFontSize);
     return calculatedFontSize.toString() + unite;
-  }
-
-  extractNumericValue(value: string, unite: string): number {
-    const numericPart = value.substring(0, value.indexOf(unite));
-    return parseInt(numericPart, 10);
   }
 }
