@@ -156,13 +156,23 @@ export class AccreditationSigFormService {
       event: new FormControl(accreditationRawValue.event),
       civility: new FormControl(accreditationRawValue.civility),
       sexe: new FormControl(accreditationRawValue.sexe),
-      nationality: new FormControl(accreditationRawValue.nationality),
+      nationality: new FormControl(accreditationRawValue.nationality, {
+        validators: [Validators.required],
+      }),
       country: new FormControl(accreditationRawValue.country),
       city: new FormControl(accreditationRawValue.city),
-      category: new FormControl(accreditationRawValue.category),
-      fonction: new FormControl(accreditationRawValue.fonction),
-      organiz: new FormControl(accreditationRawValue.organiz),
-      accreditationType: new FormControl(accreditationRawValue.accreditationType),
+      category: new FormControl(accreditationRawValue.category, {
+        validators: [Validators.required],
+      }),
+      fonction: new FormControl(accreditationRawValue.fonction, {
+        validators: [Validators.required],
+      }),
+      organiz: new FormControl(accreditationRawValue.organiz, {
+        validators: [Validators.required],
+      }),
+      accreditationType: new FormControl(accreditationRawValue.accreditationType, {
+        validators: [Validators.required],
+      }),
       status: new FormControl(accreditationRawValue.status),
       attachement: new FormControl(accreditationRawValue.attachement),
       code: new FormControl(accreditationRawValue.code),
