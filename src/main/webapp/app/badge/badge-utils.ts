@@ -191,9 +191,6 @@ export class BadgeUtils {
                   text = text.toString().toUpperCase().trim();
                 }
               }
-              if (element.code) {
-                text = '';
-              }
               field.textContent = text;
               field.style.display = element.display;
               field.style.position = element.position;
@@ -256,11 +253,6 @@ export class BadgeUtils {
                   text = text.toString().toUpperCase().trim();
                 }
               }
-
-              if (element.code) {
-                text = '';
-              }
-
               field.textContent = text;
               field.style.display = element.display;
               field.style.position = element.position;
