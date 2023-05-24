@@ -747,7 +747,8 @@ export class BadgeUtils {
     unite: string
   ): string {
     console.log('start calculateFontSize()');
-    const textLength = text.length;
+
+    const textLength = text ? text.length : 0;
     const divWidth = Util.extractNumericValue(divWidthString, unite);
     const desiredFontSizeMax = Util.extractNumericValue(desiredFontSizeMaxString, unite);
     const desiredFontSizeMin = Util.extractNumericValue(desiredFontSizeMinString, unite);
