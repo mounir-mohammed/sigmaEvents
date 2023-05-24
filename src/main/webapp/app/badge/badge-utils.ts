@@ -60,6 +60,7 @@ export class BadgeUtils {
             img.style.height = image.height;
             img.style.maxWidth = image.maxWidth;
             img.style.maxHeight = image.maxHeight;
+            img.hidden = image.hidden;
             if (image.groupName == null) {
               parent?.appendChild(img);
             } else {
@@ -107,6 +108,7 @@ export class BadgeUtils {
             cadreDiv.style.maxHeight = cadre.maxHeight;
             cadreDiv.style.border = cadre.border;
             cadreDiv.style.verticalAlign = cadre.verticalAlign;
+            cadreDiv.hidden = cadre.hidden;
 
             if (cadre.groupName == null) {
               parent?.appendChild(cadreDiv);
@@ -158,6 +160,7 @@ export class BadgeUtils {
             groupDiv.style.maxWidth = group.maxWidth;
             groupDiv.style.maxHeight = group.maxHeight;
             groupDiv.style.borderSpacing = group.borderSpacing;
+            groupDiv.hidden = group.hidden;
             groupDivs.push(groupDiv);
           }
         }
@@ -229,6 +232,7 @@ export class BadgeUtils {
               field.style.height = element.height;
               field.style.maxWidth = element.maxWidth;
               field.style.maxHeight = element.maxHeight;
+              field.hidden = element.hidden;
               if (element.groupName == null) {
                 parent?.appendChild(field);
               } else {
@@ -291,6 +295,7 @@ export class BadgeUtils {
               field.style.height = element.height;
               field.style.maxWidth = element.maxWidth;
               field.style.maxHeight = element.maxHeight;
+              field.hidden = element.hidden;
               if (element.groupName == null) {
                 parent?.appendChild(field);
               } else {
@@ -362,6 +367,7 @@ export class BadgeUtils {
                 fieldEl.style.height = element.height;
                 fieldEl.style.maxWidth = element.maxWidth;
                 fieldEl.style.maxHeight = element.maxHeight;
+                fieldEl.hidden = element.hidden;
                 if (element.groupName == null) {
                   parent?.appendChild(field);
                 } else {
@@ -426,6 +432,7 @@ export class BadgeUtils {
                       fieldEl.style.height = element.height;
                       fieldEl.style.maxWidth = element.maxWidth;
                       fieldEl.style.maxHeight = element.maxHeight;
+                      fieldEl.hidden = element.hidden;
                       var text = this.dataUtils.searchElementFromJson(element.path, elData);
                       if (element.toUpperCase) {
                         text = text.toString().toUpperCase().trim();
@@ -546,6 +553,7 @@ export class BadgeUtils {
                   fieldEl.style.height = element.height;
                   fieldEl.style.maxWidth = element.maxWidth;
                   fieldEl.style.maxHeight = element.maxHeight;
+                  fieldEl.hidden = element.hidden;
 
                   rows[x]?.appendChild(fieldEl);
                   y = y + 1;
@@ -770,21 +778,31 @@ export class BadgeUtils {
             if (code.sourceType == SourceType.SETTING) {
               await this.settingSigService.getSetting(code.settingId).then(setting => {
                 if (setting?.settingType == CodeType.BAR_CODE) {
-                  img.src = CodeUtil.getBarCodeData(setting.settingValueString!);
+                  img.src = CodeUtil.getBarCodeData(
+                    setting.settingValueString!,
+                    code.codeFormat,
+                    code.displayValue,
+                    Util.extractNumericValue(code.maxWidth, 'px'),
+                    Util.extractNumericValue(code.maxHeight, 'px')
+                  );
                 } else {
                   img.src = CodeUtil.getQrCodeData(setting.settingValueString!);
                 }
               });
             } else {
-              console.log(code.codeTypePath);
-              console.log(this.dataUtils.searchElementFromJson(code.codeTypePath, data));
               if (this.dataUtils.searchElementFromJson(code.codeTypePath, data) == CodeType.BAR_CODE) {
-                img.src = CodeUtil.getBarCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
+                img.src = CodeUtil.getBarCodeData(
+                  this.dataUtils.searchElementFromJson(code.codeValuepath, data),
+                  code.codeFormat,
+                  code.displayValue,
+                  Util.extractNumericValue(code.maxWidth, 'px'),
+                  Util.extractNumericValue(code.maxHeight, 'px')
+                );
               } else {
                 img.src = CodeUtil.getQrCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
               }
             }
-
+            img.hidden = code.hidden;
             img.style.display = code.display;
             img.style.position = code.position;
             img.style.left = code.x;

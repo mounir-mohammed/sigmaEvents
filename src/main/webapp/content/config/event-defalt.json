@@ -110,7 +110,8 @@
         "border": "",
         "display": "table",
         "borderSpacing": "",
-        "groupName": "InformationsCenterGroup"
+        "groupName": "InformationsCenterGroup",
+        "hidden": false
       }
     ],
     "fields": [
@@ -324,7 +325,8 @@
         "whiteSpace": "nowrap",
         "toUpperCase": true,
         "verticalAlign": "middle",
-        "groupName": "InformationsCenterGroup"
+        "groupName": "InformationsCenterGroup",
+        "hidden": false
       },
       {
         "name": "siteAbrev",
@@ -581,7 +583,8 @@
         "padding": "",
         "border": "",
         "display": "inline-block",
-        "verticalAlign": ""
+        "verticalAlign": "",
+        "hidden": false
       },
       {
         "name": "fonctionCadre",
@@ -602,10 +605,48 @@
         "padding": "",
         "border": "",
         "display": "inline-block",
-        "verticalAlign": ""
+        "verticalAlign": "",
+        "hidden": false
       }
     ],
     "codes": [
+      {
+        "name": "accreditationBarCode",
+        "sourceType": "setting",
+        "settingId": "4",
+        "codeValuepath": "code.codeValue",
+        "codeTypePath": "code.codeType.codeTypeValue",
+        "codeFormat": "CODE128",
+        "displayValue": true,
+        "type": "text",
+        "format": "",
+        "style": "",
+        "position": "absolute",
+        "maxWidth": "300px",
+        "maxHeight": "80px",
+        "width": "300px",
+        "height": "80px",
+        "x": "200px",
+        "y": "10px",
+        "z": "",
+        "margin": "",
+        "padding": "",
+        "backgroundColor": "",
+        "color": "",
+        "DynamicBackgroundColor": "",
+        "DynamicColor": "",
+        "textAlign": "",
+        "fontFamily": "",
+        "fontStyle": "",
+        "fontSize": "",
+        "fontWeight": "",
+        "border": "",
+        "display": "inline-block",
+        "whiteSpace": "",
+        "toUpperCase": true,
+        "verticalAlign": "",
+        "hidden": true
+      },
       {
         "name": "accreditationQrCode",
         "sourceType": "attribute",
@@ -637,7 +678,8 @@
         "display": "inline-block",
         "whiteSpace": "",
         "toUpperCase": true,
-        "verticalAlign": ""
+        "verticalAlign": "",
+        "hidden": false
       }
     ]
   }
