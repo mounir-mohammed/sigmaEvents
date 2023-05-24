@@ -91,7 +91,7 @@ export interface IAccreditationSig {
     IAccreditationTypeSig,
     'accreditationTypeId' | 'accreditationTypeValue' | 'accreditationTypeStat' | 'printingModel'
   > | null;
-  status?: Pick<IStatusSig, 'statusId' | 'statusName' | 'statusColor'> | null;
+  status?: Pick<IStatusSig, 'statusId' | 'statusName' | 'statusColor' | 'statusUserCanPrint'> | null;
   attachement?: Pick<IAttachementSig, 'attachementId' | 'attachementName' | 'attachementStat'> | null;
   code?: Pick<ICodeSig, 'codeId' | 'codeValue' | 'codeUsed' | 'codeType' | 'codeStat'> | null;
   dayPassInfo?: Pick<IDayPassInfoSig, 'dayPassInfoId' | 'dayPassInfoName' | 'dayPassInfoStat'> | null;

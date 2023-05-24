@@ -19,7 +19,8 @@
       },
       "print": {
         "question": "Êtes-vous certain de vouloir imprimer l'accreditation {{ id }}?",
-        "modelError": "Erreur de chargement du model d'impréssion"
+        "modelError": "Erreur de chargement du model d'impression de l'accréditation {{ id }}, veuillez contacter l'administrateur",
+        "unauthorizedPrintingError": "Impression de l'accréditation {{ id }} non autorisée, veuillez contacter l'administrateur"
       },
       "detail": {
         "title": "Accreditation"

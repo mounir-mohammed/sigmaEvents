@@ -19,7 +19,8 @@
       },
       "print": {
         "question": "Are you sure you want to print Accreditation {{ id }}?",
-        "modelError": "Error on loading printing model"
+        "modelError": "Error on loading printing model for Accreditation {{ id }}, Please contact administrator",
+        "unauthorizedPrintingError": "Unauthorized Printing Accreditation {{ id }}, Please contact administrator"
       },
       "detail": {
         "title": "Accreditation"

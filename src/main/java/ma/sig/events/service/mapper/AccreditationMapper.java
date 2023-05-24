@@ -181,6 +181,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "statusId", source = "statusId")
     @Mapping(target = "statusName", source = "statusName")
     @Mapping(target = "statusColor", source = "statusColor")
+    @Mapping(target = "statusUserCanPrint", source = "statusUserCanPrint")
     @Mapping(target = "statusStat", source = "statusStat")
     StatusDTO toDtoStatusStatusId(Status status);
 
