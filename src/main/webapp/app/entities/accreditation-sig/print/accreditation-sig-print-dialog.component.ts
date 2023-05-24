@@ -15,6 +15,7 @@ import { AlertService } from 'app/core/util/alert.service';
 import { PrintingType } from 'app/config/printingType.contants';
 import { BadgeUtils } from 'app/badge/badge-utils';
 import { Authority } from 'app/config/authority.constants';
+import { ErrorModalUtil } from 'app/shared/util/errorModal.shared';
 
 @Component({
   templateUrl: './accreditation-sig-print-dialog.component.html',
@@ -32,8 +33,8 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected printingModelSigService: PrintingModelSigService,
     protected dataUtils: DataUtils,
-    protected alertService: AlertService,
-    protected badgeUtils: BadgeUtils
+    protected badgeUtils: BadgeUtils,
+    protected errorModalUtil: ErrorModalUtil
   ) {}
 
   ngOnInit(): void {
@@ -64,40 +65,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         this.badgeUtils.print(badgeId, accreditation.accreditationPrintingModel);
       });
     } else {
-      this.throwAlertErrorUnauthorizedPrinting(accreditation!.accreditationId!);
+      this.errorModalUtil.throwAlertErrorUnauthorizedPrinting(accreditation!.accreditationId!);
+      this.cancel();
     }
-  }
-
-  throwAlertErrorLoadingModel(id: number) {
-    this.alertService.get().push(
-      this.alertService.addAlert(
-        {
-          type: 'danger',
-          message: 'Error on loading printing model for Accreditation {{ id }}, Please contact administrator',
-          translationKey: 'sigmaEventsApp.accreditation.print.modelError',
-          translationParams: { id: id },
-          timeout: 1000,
-        },
-        this.alertService.get()
-      )
-    );
-    this.cancel();
-  }
-
-  throwAlertErrorUnauthorizedPrinting(id: number) {
-    this.alertService.get().push(
-      this.alertService.addAlert(
-        {
-          type: 'danger',
-          message: 'Unauthorized Printing Accreditation {{ id }}, Please contact administrator',
-          translationKey: 'sigmaEventsApp.accreditation.print.unauthorizedPrintingError',
-          translationParams: { id: id },
-          timeout: 1000,
-        },
-        this.alertService.get()
-      )
-    );
-    this.cancel();
   }
 
   private async callGenerateBadge(currentAccount: Account, accreditation?: IAccreditationSig): Promise<Boolean> {
@@ -112,8 +82,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
               });
             });
           } else {
-            this.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+            this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
             console.log('ngOnInit() => NO MODEL FOUND');
+            this.cancel();
             resolve(false);
           }
         }
@@ -129,8 +100,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
                 });
               });
           } else {
-            this.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+            this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
             console.log('ngOnInit() => NO MODEL FOUND');
+            this.cancel();
             resolve(false);
           }
         }
@@ -145,8 +117,9 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
                 });
               });
           } else {
-            this.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+            this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
             console.log('ngOnInit() => NO MODEL FOUND');
+            this.cancel();
             resolve(false);
           }
         }
@@ -162,14 +135,16 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
                 });
               });
           } else {
-            this.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+            this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
             console.log('ngOnInit() => NO MODEL FOUND');
+            this.cancel();
             resolve(false);
           }
         }
       } else {
-        this.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+        this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
         console.log('ngOnInit() => NO PRINTINGTYPE FOUND!');
+        this.cancel();
         resolve(false);
       }
     });
