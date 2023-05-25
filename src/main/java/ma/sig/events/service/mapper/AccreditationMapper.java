@@ -2,22 +2,7 @@ package ma.sig.events.service.mapper;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import ma.sig.events.domain.Accreditation;
-import ma.sig.events.domain.AccreditationType;
-import ma.sig.events.domain.Attachement;
-import ma.sig.events.domain.Category;
-import ma.sig.events.domain.City;
-import ma.sig.events.domain.Civility;
-import ma.sig.events.domain.Code;
-import ma.sig.events.domain.Country;
-import ma.sig.events.domain.DayPassInfo;
-import ma.sig.events.domain.Event;
-import ma.sig.events.domain.Fonction;
-import ma.sig.events.domain.Nationality;
-import ma.sig.events.domain.Organiz;
-import ma.sig.events.domain.Sexe;
-import ma.sig.events.domain.Site;
-import ma.sig.events.domain.Status;
+import ma.sig.events.domain.*;
 import ma.sig.events.service.dto.AccreditationDTO;
 import ma.sig.events.service.dto.AccreditationTypeDTO;
 import ma.sig.events.service.dto.AttachementDTO;
@@ -144,8 +129,14 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "categoryColor", source = "categoryColor")
     @Mapping(target = "categoryLogo", source = "categoryLogo")
     @Mapping(target = "categoryLogoContentType", source = "categoryLogoContentType")
-    @Mapping(target = "printingModel", source = "printingModel")
+    @Mapping(target = "printingModel", ignore = true)
+    @Mapping(target = "printingModel.printingModelId", source = "printingModel", qualifiedByName = "extractPrintingModelId")
     CategoryDTO toDtoCategoryCategoryId(Category category);
+
+    @Named("extractPrintingModelId")
+    default Long extractPrintingModelId(PrintingModel printingModel) {
+        return printingModel != null ? printingModel.getPrintingModelId() : null;
+    }
 
     @Named("fonctionFonctionId")
     @BeanMapping(ignoreByDefault = true)
@@ -173,7 +164,8 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @Mapping(target = "accreditationTypeId", source = "accreditationTypeId")
     @Mapping(target = "accreditationTypeValue", source = "accreditationTypeValue")
     @Mapping(target = "accreditationTypeStat", source = "accreditationTypeStat")
-    @Mapping(target = "printingModel", source = "printingModel")
+    @Mapping(target = "printingModel", ignore = true)
+    @Mapping(target = "printingModel.printingModelId", source = "printingModel", qualifiedByName = "extractPrintingModelId")
     AccreditationTypeDTO toDtoAccreditationTypeAccreditationTypeId(AccreditationType accreditationType);
 
     @Named("statusStatusId")

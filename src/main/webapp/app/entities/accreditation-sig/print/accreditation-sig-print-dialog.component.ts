@@ -73,6 +73,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   private async callGenerateBadge(currentAccount: Account, accreditation?: IAccreditationSig): Promise<Boolean> {
     return new Promise(async resolve => {
       if (currentAccount?.printingCentre?.printingType?.printingTypeValue) {
+        console.log(currentAccount?.printingCentre?.printingType?.printingTypeValue);
         if (currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_EVENT) {
           if (accreditation?.event?.eventPrintingModelId!) {
             await this.printingModelSigService.getPrintingModelConfig(accreditation?.event?.eventPrintingModelId!).then(async modelData => {
