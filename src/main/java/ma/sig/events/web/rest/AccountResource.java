@@ -3,6 +3,7 @@ package ma.sig.events.web.rest;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import ma.sig.events.domain.PrintingCentre;
 import ma.sig.events.domain.User;
 import ma.sig.events.repository.UserRepository;
 import ma.sig.events.security.SecurityUtils;
@@ -10,6 +11,7 @@ import ma.sig.events.service.MailService;
 import ma.sig.events.service.UserService;
 import ma.sig.events.service.dto.AdminUserDTO;
 import ma.sig.events.service.dto.PasswordChangeDTO;
+import ma.sig.events.service.dto.PrintingCentreDTO;
 import ma.sig.events.web.rest.errors.*;
 import ma.sig.events.web.rest.vm.KeyAndPasswordVM;
 import ma.sig.events.web.rest.vm.ManagedUserVM;
@@ -101,7 +103,7 @@ public class AccountResource {
     public AdminUserDTO getAccount() {
         return userService
             .getUserWithAuthorities()
-            .map(AdminUserDTO::new)
+            .map(this::mapToAdminUserDTO)
             .orElseThrow(() -> new AccountResourceException("User could not be found"));
     }
 
@@ -190,5 +192,26 @@ public class AccountResource {
             password.length() < ManagedUserVM.PASSWORD_MIN_LENGTH ||
             password.length() > ManagedUserVM.PASSWORD_MAX_LENGTH
         );
+    }
+
+    /**
+     * Costume Mapping
+     */
+
+    private AdminUserDTO mapToAdminUserDTO(User user) {
+        AdminUserDTO adminUserDTO = new AdminUserDTO(user);
+        // Set other properties of adminUserDTO
+        try {
+            if (adminUserDTO.getPrintingCentre() != null) {
+                if (adminUserDTO.getPrintingCentre().getPrintingModel() != null) {
+                    adminUserDTO.getPrintingCentre().getPrintingModel().setPrintingModelData(null);
+                    adminUserDTO.getPrintingCentre().getPrintingModel().setPrintingModelDataContentType(null);
+                }
+            }
+        } catch (Exception E) {
+            log.error(E.getMessage());
+            return adminUserDTO;
+        }
+        return adminUserDTO;
     }
 }
