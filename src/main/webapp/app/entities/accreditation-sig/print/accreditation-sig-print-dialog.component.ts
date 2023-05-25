@@ -76,14 +76,21 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
         if (currentAccount?.printingCentre?.printingType?.printingTypeValue == PrintingType.BY_EVENT) {
           if (accreditation?.event?.eventPrintingModelId!) {
             await this.printingModelSigService.getPrintingModelConfig(accreditation?.event?.eventPrintingModelId!).then(async modelData => {
-              this.accreditation!.accreditationPrintingModel = modelData!;
-              await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
-                resolve(true);
-              });
+              if (modelData) {
+                this.accreditation!.accreditationPrintingModel = modelData!;
+                await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                  resolve(true);
+                });
+              } else {
+                this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+                console.log('callGenerateBadge() => PRINTING MODEL IS EMPTY');
+                this.cancel();
+                resolve(false);
+              }
             });
           } else {
             this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
-            console.log('ngOnInit() => NO MODEL FOUND');
+            console.log('callGenerateBadge() => NO MODEL FOUND');
             this.cancel();
             resolve(false);
           }
@@ -94,14 +101,21 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
             await this.printingModelSigService
               .getPrintingModelConfig(currentAccount?.printingCentre?.printingModel?.printingModelId!)
               .then(async modelData => {
-                this.accreditation!.accreditationPrintingModel = modelData!;
-                await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
-                  resolve(true);
-                });
+                if (modelData) {
+                  this.accreditation!.accreditationPrintingModel = modelData!;
+                  await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                    resolve(true);
+                  });
+                } else {
+                  this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+                  console.log('callGenerateBadge() => PRINTING MODEL IS EMPTY');
+                  this.cancel();
+                  resolve(false);
+                }
               });
           } else {
             this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
-            console.log('ngOnInit() => NO MODEL FOUND');
+            console.log('callGenerateBadge() => NO MODEL FOUND');
             this.cancel();
             resolve(false);
           }
@@ -111,14 +125,21 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
             await this.printingModelSigService
               .getPrintingModelConfig(accreditation?.accreditationType?.printingModel?.printingModelId!)
               .then(async modelData => {
-                this.accreditation!.accreditationPrintingModel = modelData!;
-                await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
-                  resolve(true);
-                });
+                if (modelData) {
+                  this.accreditation!.accreditationPrintingModel = modelData!;
+                  await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                    resolve(true);
+                  });
+                } else {
+                  this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+                  console.log('callGenerateBadge() => PRINTING MODEL IS EMPTY');
+                  this.cancel();
+                  resolve(false);
+                }
               });
           } else {
             this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
-            console.log('ngOnInit() => NO MODEL FOUND');
+            console.log('callGenerateBadge() => NO MODEL FOUND');
             this.cancel();
             resolve(false);
           }
@@ -129,21 +150,28 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
             await this.printingModelSigService
               .getPrintingModelConfig(accreditation?.category?.printingModel?.printingModelId!)
               .then(async modelData => {
-                this.accreditation!.accreditationPrintingModel = modelData!;
-                await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
-                  resolve(true);
-                });
+                if (modelData) {
+                  this.accreditation!.accreditationPrintingModel = modelData!;
+                  await this.badgeUtils.generateBadge(accreditation, modelData, 'badge-container').finally(() => {
+                    resolve(true);
+                  });
+                } else {
+                  this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
+                  console.log('callGenerateBadge() => PRINTING MODEL IS EMPTY');
+                  this.cancel();
+                  resolve(false);
+                }
               });
           } else {
             this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
-            console.log('ngOnInit() => NO MODEL FOUND');
+            console.log('callGenerateBadge() => NO MODEL FOUND');
             this.cancel();
             resolve(false);
           }
         }
       } else {
         this.errorModalUtil.throwAlertErrorLoadingModel(accreditation?.accreditationId!);
-        console.log('ngOnInit() => NO PRINTINGTYPE FOUND!');
+        console.log('callGenerateBadge() => NO PRINTINGTYPE FOUND!');
         this.cancel();
         resolve(false);
       }

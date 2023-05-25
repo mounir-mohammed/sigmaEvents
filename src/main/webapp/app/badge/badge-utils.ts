@@ -619,49 +619,54 @@ export class BadgeUtils {
   generateBadge(accreditation?: IAccreditationSig, modelData?: any, badgeContainerId?: string): Promise<Boolean> {
     console.log('START generateadge()');
     return new Promise(resolve => {
-      try {
-        setTimeout(() => {
-          if (accreditation) {
-            var accreditationJson = JSON.stringify(accreditation);
-            var data = JSON.parse(accreditationJson);
-            var badgeContainer = document.getElementById(badgeContainerId!);
-            //generate badge
-            var badge = document.createElement('div');
-            var badgeId =
-              accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
-            badge.id = badgeId;
-            badge.style.width = modelData.printingModel.page.width;
-            badge.style.height = modelData.printingModel.page.height;
-            badge.style.margin = modelData.printingModel.page.margin;
-            badge.style.border = modelData.printingModel.page.border;
-            badge.style.position = modelData.printingModel.page.position;
+      if (modelData) {
+        try {
+          setTimeout(() => {
+            if (accreditation) {
+              var accreditationJson = JSON.stringify(accreditation);
+              var data = JSON.parse(accreditationJson);
+              var badgeContainer = document.getElementById(badgeContainerId!);
+              //generate badge
+              var badge = document.createElement('div');
+              var badgeId =
+                accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
+              badge.id = badgeId;
+              badge.style.width = modelData.printingModel.page.width;
+              badge.style.height = modelData.printingModel.page.height;
+              badge.style.margin = modelData.printingModel.page.margin;
+              badge.style.border = modelData.printingModel.page.border;
+              badge.style.position = modelData.printingModel.page.position;
 
-            //add groups
-            this.createGroups(badge, modelData.printingModel, data).then(groupDivs => {
-              //add fields
-              this.addFields(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                // add images
-                this.addImages(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                  //add cadres
-                  this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                    //add codes
-                    this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                      badgeContainer?.appendChild(badge);
-                      this.deplaceGroupToParent(modelData.printingModel).then(() => {
-                        console.log('END generateadge()');
-                        return resolve(true);
+              //add groups
+              this.createGroups(badge, modelData.printingModel, data).then(groupDivs => {
+                //add fields
+                this.addFields(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                  // add images
+                  this.addImages(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                    //add cadres
+                    this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                      //add codes
+                      this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                        badgeContainer?.appendChild(badge);
+                        this.deplaceGroupToParent(modelData.printingModel).then(() => {
+                          console.log('END generateadge()');
+                          return resolve(true);
+                        });
                       });
                     });
                   });
                 });
               });
-            });
-          } else {
-            return resolve(false);
-          }
-        }, 500);
-      } catch (error: any) {
-        console.error(error.message);
+            } else {
+              return resolve(false);
+            }
+          }, 500);
+        } catch (error: any) {
+          console.error(error.message);
+          resolve(false);
+        }
+      } else {
+        console.error('generateBadge() modelData IS EMPTY');
         resolve(false);
       }
     });
@@ -837,7 +842,7 @@ export class BadgeUtils {
                       Util.extractNumericValue(code.maxHeight, 'px')
                     );
                   } else {
-                    img.src = CodeUtil.getQrCodeData(setting.settingValueString!);
+                    img.src = CodeUtil.getQrCodeData(setting!.settingValueString!);
                   }
                 });
               } else {
@@ -862,15 +867,19 @@ export class BadgeUtils {
                   img.src = CodeUtil.getQrCodeData(text);
                 } else {
                   if (this.dataUtils.searchElementFromJson(code.codeTypePath, data) == CodeType.BAR_CODE) {
-                    img.src = CodeUtil.getBarCodeData(
-                      this.dataUtils.searchElementFromJson(code.codeValuepath, data),
-                      code.codeFormat,
-                      code.displayValue,
-                      Util.extractNumericValue(code.maxWidth, 'px'),
-                      Util.extractNumericValue(code.maxHeight, 'px')
-                    );
+                    if (this.dataUtils.searchElementFromJson(code.codeValuepath, data)) {
+                      img.src = CodeUtil.getBarCodeData(
+                        this.dataUtils.searchElementFromJson(code.codeValuepath, data),
+                        code.codeFormat,
+                        code.displayValue,
+                        Util.extractNumericValue(code.maxWidth, 'px'),
+                        Util.extractNumericValue(code.maxHeight, 'px')
+                      );
+                    }
                   } else {
-                    img.src = CodeUtil.getQrCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
+                    if (this.dataUtils.searchElementFromJson(code.codeValuepath, data)) {
+                      img.src = CodeUtil.getQrCodeData(this.dataUtils.searchElementFromJson(code.codeValuepath, data));
+                    }
                   }
                 }
               }

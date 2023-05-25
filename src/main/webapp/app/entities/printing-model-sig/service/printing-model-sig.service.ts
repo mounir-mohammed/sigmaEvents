@@ -82,22 +82,49 @@ export class PrintingModelSigService {
   }
 
   getPrintingModelConfig(modelId: number): Promise<any> {
-    console.log('START getConfig()');
+    console.log('START getPrintingModelConfig()');
     var printingModel: IPrintingModelSig | null = null;
     return new Promise(resolve => {
-      this.find(modelId).subscribe(resp => {
-        printingModel = resp.body;
-        if (printingModel?.printingModelStat) {
-          var modelData = this.dataUtils.base64ToJson(printingModel?.printingModelData!);
-          if (modelData) {
-            resolve(modelData);
-          }
+      try {
+        if (modelId) {
+          this.find(modelId).subscribe(resp => {
+            if (resp.status == 200) {
+              printingModel = resp.body;
+              if (printingModel) {
+                if (printingModel?.printingModelStat) {
+                  if (printingModel?.printingModelData!) {
+                    var modelData = this.dataUtils.base64ToJson(printingModel?.printingModelData!);
+                    if (modelData) {
+                      resolve(modelData);
+                    } else {
+                      console.error('getPrintingModelConfig() => PRINTING MODEL PARSING ERROR');
+                      resolve(false);
+                    }
+                  } else {
+                    console.error('getPrintingModelConfig() => PRINTING MODEL DATA IS EMPTY');
+                    resolve(false);
+                  }
+                } else {
+                  console.error('getPrintingModelConfig() => PRINTING MODEL STATE NOT ACTIVATED');
+                  resolve(false);
+                }
+              } else {
+                console.error('getPrintingModelConfig() : RESPONSE EMPTY');
+                resolve(false);
+              }
+            } else {
+              console.error('getPrintingModelConfig() : NETWORK ERROR' + resp.status);
+              resolve(false);
+            }
+          });
         } else {
-          console.log('getConfig() => PRINTING MODEL STATE NOT ACTIVATED');
+          console.error('getPrintingModelConfig() : modelId IS NULL');
           resolve(false);
         }
-      });
-      console.log('END getConfig()');
+      } catch (error: any) {
+        console.error(error!.message!);
+        resolve(false);
+      }
     });
   }
 }

@@ -128,8 +128,13 @@ export class DataUtils {
   }
 
   base64ToJson(base64String: string) {
-    const json = atob(base64String);
-    return JSON.parse(json);
+    try {
+      const json = atob(base64String);
+      return JSON.parse(json);
+    } catch (error: any) {
+      console.error(error.message);
+      return null;
+    }
   }
 
   jsonToBase64(object: any) {
@@ -149,7 +154,7 @@ export class DataUtils {
         return '';
       }
     } else {
-      console.error('searchElementFromJson give or obj is null ' + '/Path = ' + give);
+      console.warn('searchElementFromJson give or obj is null ' + '/Path = ' + give);
       return '';
     }
   }

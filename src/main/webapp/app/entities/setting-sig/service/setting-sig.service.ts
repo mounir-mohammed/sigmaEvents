@@ -122,11 +122,16 @@ export class SettingSigService {
     });
   }
 
-  public getSetting(id: number): Promise<ISettingSig> {
+  public getSetting(id: number): Promise<ISettingSig | null> {
     return new Promise(resolve => {
-      this.http.get<ISettingSig>(`${this.resourceUrl}/${id}`).subscribe(response => {
-        resolve(response);
-      });
+      if (id) {
+        this.http.get<ISettingSig>(`${this.resourceUrl}/${id}`).subscribe(response => {
+          resolve(response);
+        });
+      } else {
+        console.error('getSetting() id is null');
+        resolve(null);
+      }
     });
   }
 }
