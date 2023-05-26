@@ -44,12 +44,10 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
 import { Status } from 'app/config/status.contants';
-import { CameraPhoneDialogComponent } from 'app/camera/phone/camera-phone-dialog.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Util } from 'app/shared/util/util.shred';
 import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dialog.component';
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
-import { ITEM_PRINTED_EVENT } from 'app/config/navigation.constants';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -426,6 +424,13 @@ export class AccreditationSigUpdateComponent implements OnInit {
   openCapturePhotoDialog(): void {
     const modalRef = this.modalService.open(CameraLaptopDialogComponent, { size: 'lg', backdrop: 'static' });
     // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.pipe().subscribe(data => {
+      if (data) {
+        this.editForm.patchValue({ accreditationPhoto: data });
+        this.editForm.patchValue({ accreditationPhotoContentType: 'image/jpeg' });
+        console.log(data);
+      }
+    });
   }
 
   print(accreditation: IAccreditationSig): void {

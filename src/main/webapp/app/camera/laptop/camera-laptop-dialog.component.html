@@ -8,9 +8,16 @@
   <div class="modal-body">
     <sigma-alert-error></sigma-alert-error>
     <video #videoElement class="camera-video"></video>
-    <button id="sigma-confirm-validate-accreditation" (click)="this.capturePhoto()" class="btn btn-secondary">
-      <fa-icon icon="camera"></fa-icon>&nbsp;<span>Capture</span>
-    </button>
+    <div class="captureButtonContainer">
+      <button
+        type="button"
+        id="sigma-confirm-validate-accreditation"
+        (click)="this.capturePhoto()"
+        class="btn btn-warning btn-circle btn-xl"
+      >
+        <fa-icon icon="camera"></fa-icon>
+      </button>
+    </div>
   </div>
 
   <div class="modal-footer">
@@ -18,7 +25,7 @@
       <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
     </button>
 
-    <button id="sigma-confirm-validate-accreditation" data-cy="entityConfirmValidateButton" type="submit" class="btn btn-success">
+    <button id="sigma-confirm-validate-accreditation" data-cy="entityConfirmCapturePhoto" type="submit" class="btn btn-success">
       <fa-icon icon="check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
     </button>
   </div>

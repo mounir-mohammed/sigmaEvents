@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccountService } from 'app/core/auth/account.service';
+import { PHOTO_CAPTURED_EVENT } from 'app/config/navigation.constants';
 
 @Component({
   templateUrl: './camera-laptop-dialog.component.html',
@@ -8,6 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 export class CameraLaptopDialogComponent implements OnInit {
   @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
   private videoStream: MediaStream | undefined;
+  capturedImageData: any = null;
 
   constructor(protected activeModal: NgbActiveModal, protected accountService: AccountService) {}
 
@@ -20,7 +22,13 @@ export class CameraLaptopDialogComponent implements OnInit {
     this.activeModal.dismiss();
   }
 
-  confirmCapturePhoto(): void {}
+  confirmCapturePhoto(): void {
+    if (this.capturedImageData) {
+      this.activeModal.close(this.capturedImageData);
+    } else {
+      console.log('NO DATA FOUND');
+    }
+  }
 
   startCamera(): void {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -56,7 +64,10 @@ export class CameraLaptopDialogComponent implements OnInit {
     const context = canvas.getContext('2d');
     context?.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-    const capturedImageData = canvas.toDataURL();
-    console.log(capturedImageData);
+    const capturedImageData = canvas.toDataURL('image/jpeg', '1.0');
+    if (capturedImageData) {
+      this.capturedImageData = capturedImageData.replace('data:image/jpeg;base64,', '');
+    }
+    this.stopCamera();
   }
 }
