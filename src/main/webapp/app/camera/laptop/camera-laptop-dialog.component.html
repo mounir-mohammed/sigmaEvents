@@ -1,6 +1,6 @@
 <form name="cameraForm" (ngSubmit)="confirmCapturePhoto()">
   <div class="modal-header">
-    <h4 class="modal-title">Camera</h4>
+    <h4 class="modal-title"><fa-icon icon="camera"></fa-icon></h4>
 
     <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
@@ -9,12 +9,7 @@
     <sigma-alert-error></sigma-alert-error>
     <video #videoElement class="camera-video"></video>
     <div class="captureButtonContainer">
-      <button
-        type="button"
-        id="sigma-confirm-validate-accreditation"
-        (click)="this.capturePhoto()"
-        class="btn btn-warning btn-circle btn-xl"
-      >
+      <button type="button" id="sigma-confirm-capture-photo" (click)="this.capturePhoto()" class="btn btn-warning btn-circle btn-xl">
         <fa-icon icon="camera"></fa-icon>
       </button>
     </div>

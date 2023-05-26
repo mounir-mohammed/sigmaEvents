@@ -284,7 +284,9 @@
                 <fa-icon icon="times"></fa-icon>
               </button>
             </div>
-            <button type="button" (click)="openCapturePhotoDialog()" value="Take Photo" *ngIf="!detectMobileDevice()">Take Photo</button>
+            <button type="button" (click)="openCapturePhotoDialog()" *ngIf="!detectMobileDevice()">
+              <fa-icon icon="camera"></fa-icon>
+            </button>
             <input
               type="file"
               id="file_accreditationPhoto"
