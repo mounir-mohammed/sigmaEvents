@@ -44,6 +44,10 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
 import { Status } from 'app/config/status.contants';
+import { CameraPhoneDialogComponent } from 'app/camera/phone/camera-phone-dialog.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Util } from 'app/shared/util/util.shred';
+import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dialog.component';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -95,7 +99,8 @@ export class AccreditationSigUpdateComponent implements OnInit {
     protected dayPassInfoService: DayPassInfoSigService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
-    private accountService: AccountService
+    private accountService: AccountService,
+    protected modalService: NgbModal
   ) {}
 
   compareSiteSig = (o1: ISiteSig | null, o2: ISiteSig | null): boolean => this.siteService.compareSiteSig(o1, o2);
@@ -408,5 +413,15 @@ export class AccreditationSigUpdateComponent implements OnInit {
         )
       )
       .subscribe((dayPassInfos: IDayPassInfoSig[]) => (this.dayPassInfosSharedCollection = dayPassInfos));
+  }
+
+  openCapturePhotoDialog(): void {
+    if (Util.detectMobileDevice()) {
+      const modalRef = this.modalService.open(CameraPhoneDialogComponent, { size: 'lg', backdrop: 'static' });
+    } else {
+      const modalRef = this.modalService.open(CameraLaptopDialogComponent, { size: 'lg', backdrop: 'static' });
+    }
+
+    // unsubscribe not needed because closed completes on modal close
   }
 }

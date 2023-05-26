@@ -1,0 +1,12 @@
+<form name="cameraForm" (ngSubmit)="confirmCapturePhoto()">
+  <div class="modal-header">
+    <h4 class="modal-title">Camera</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <video #videoElement class="camera-video"></video>
+    <button (click)="capturePhoto()">Capture Photo</button>
+  </div>
+</form>
