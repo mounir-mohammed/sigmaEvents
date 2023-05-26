@@ -72,6 +72,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" sigmaSortBy="civility.civilityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" sigmaSortBy="accreditationFirstName">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">Accreditation First Name</span>
@@ -105,6 +111,54 @@
           <th scope="col" sigmaSortBy="accreditationOccupation">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Accreditation Occupation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="nationality.nationalityId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="country.countryId" *sigmaHasAnyAuthority="[authority.ADMIN]">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="city.cityId" *sigmaHasAnyAuthority="[authority.ADMIN]">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="category.categoryId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fonction.fonctionId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="organiz.organizId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="accreditationType.accreditationTypeId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="status.statusId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -236,63 +290,9 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="civility.civilityId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" sigmaSortBy="sexe.sexeId" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="nationality.nationalityId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="country.countryId" *sigmaHasAnyAuthority="[authority.ADMIN]">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="city.cityId" *sigmaHasAnyAuthority="[authority.ADMIN]">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="category.categoryId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="fonction.fonctionId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="organiz.organizId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="accreditationType.accreditationTypeId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="status.statusId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -347,48 +347,20 @@
               >{{ accreditation.accreditationPhotoContentType }}, {{ byteSize(accreditation.accreditationPhoto) }}</span
             >
           </td>
+          <td>
+            <div *ngIf="accreditation.civility">
+              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+                <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityCode }}</a>
+              </div>
+              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.civility.civilityCode }}</div>
+            </div>
+          </td>
           <td>{{ accreditation.accreditationFirstName }}</td>
           <td>{{ accreditation.accreditationSecondName }}</td>
           <td>{{ accreditation.accreditationLastName }}</td>
           <td>{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationSexe }}</td>
           <td>{{ accreditation.accreditationOccupation }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationDescription }}</td>
-          <td>{{ accreditation.accreditationEmail }}</td>
-          <td>{{ accreditation.accreditationTel }}</td>
-          <td>{{ accreditation.accreditationCinId }}</td>
-          <td>{{ accreditation.accreditationPasseportId }}</td>
-          <td>{{ accreditation.accreditationCartePresseId }}</td>
-          <td>{{ accreditation.accreditationCarteProfessionnelleId }}</td>
-          <td>{{ accreditation.accreditationCreationDate | formatMediumDatetime }}</td>
-          <td>{{ accreditation.accreditationCreatedByuser }}</td>
-          <td>{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</td>
-          <td>{{ accreditation.accreditationUpdatedByuser }}</td>
-          <td>{{ accreditation.accreditationPrintDate | formatMediumDatetime }}</td>
-          <td>{{ accreditation.accreditationPrintedByuser }}</td>
-          <td>{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
-          <td>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
-          <td>{{ accreditation.accreditationPrintStat | yesNo }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationPrintNumber }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationParams }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationAttributs }}</td>
-          <td>{{ accreditation.accreditationStat | yesNo }}</td>
-          <td>{{ accreditation.accreditationActivated | yesNo }}</td>
-          <td>
-            <div *ngIf="accreditation.civility">
-              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
-                <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{
-                  accreditation.civility.civilityValue
-                }}</a>
-              </div>
-              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.civility.civilityValue }}</div>
-            </div>
-          </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
-            <div *ngIf="accreditation.sexe">
-              <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
-            </div>
-          </td>
           <td>
             <div *ngIf="accreditation.nationality">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
@@ -457,6 +429,32 @@
                 <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
               </div>
               <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.status.statusName }}</div>
+            </div>
+          </td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationDescription }}</td>
+          <td>{{ accreditation.accreditationEmail }}</td>
+          <td>{{ accreditation.accreditationTel }}</td>
+          <td>{{ accreditation.accreditationCinId }}</td>
+          <td>{{ accreditation.accreditationPasseportId }}</td>
+          <td>{{ accreditation.accreditationCartePresseId }}</td>
+          <td>{{ accreditation.accreditationCarteProfessionnelleId }}</td>
+          <td>{{ accreditation.accreditationCreationDate | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationCreatedByuser }}</td>
+          <td>{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationUpdatedByuser }}</td>
+          <td>{{ accreditation.accreditationPrintDate | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationPrintedByuser }}</td>
+          <td>{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
+          <td>{{ accreditation.accreditationPrintStat | yesNo }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationPrintNumber }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationParams }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationAttributs }}</td>
+          <td>{{ accreditation.accreditationStat | yesNo }}</td>
+          <td>{{ accreditation.accreditationActivated | yesNo }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
+            <div *ngIf="accreditation.sexe">
+              <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
             </div>
           </td>
           <td>

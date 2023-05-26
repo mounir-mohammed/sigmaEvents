@@ -87,6 +87,7 @@ public interface AccreditationMapper extends EntityMapper<AccreditationDTO, Accr
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "civilityId", source = "civilityId")
     @Mapping(target = "civilityValue", source = "civilityValue")
+    @Mapping(target = "civilityCode", source = "civilityCode")
     @Mapping(target = "civilityStat", source = "civilityStat")
     CivilityDTO toDtoCivilityCivilityId(Civility civility);
 

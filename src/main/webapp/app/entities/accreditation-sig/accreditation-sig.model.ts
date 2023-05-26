@@ -70,7 +70,7 @@ export interface IAccreditationSig {
     | 'eventLogo'
     | 'eventLogoContentType'
   > | null;
-  civility?: Pick<ICivilitySig, 'civilityId' | 'civilityValue' | 'civilityStat'> | null;
+  civility?: Pick<ICivilitySig, 'civilityId' | 'civilityValue' | 'civilityCode' | 'civilityStat'> | null;
   sexe?: Pick<ISexeSig, 'sexeId' | 'sexeValue' | 'sexeStat'> | null;
   nationality?: Pick<
     INationalitySig,

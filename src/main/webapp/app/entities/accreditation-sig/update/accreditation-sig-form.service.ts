@@ -156,7 +156,9 @@ export class AccreditationSigFormService {
         validators: [Validators.required],
       }),
       event: new FormControl(accreditationRawValue.event),
-      civility: new FormControl(accreditationRawValue.civility),
+      civility: new FormControl(accreditationRawValue.civility, {
+        validators: [Validators.required],
+      }),
       sexe: new FormControl(accreditationRawValue.sexe),
       nationality: new FormControl(accreditationRawValue.nationality, {
         validators: [Validators.required],
