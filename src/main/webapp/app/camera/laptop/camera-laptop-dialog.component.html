@@ -6,7 +6,20 @@
   </div>
 
   <div class="modal-body">
+    <sigma-alert-error></sigma-alert-error>
     <video #videoElement class="camera-video"></video>
-    <button (click)="capturePhoto()">Capture Photo</button>
+    <button id="sigma-confirm-validate-accreditation" (click)="this.capturePhoto()" class="btn btn-secondary">
+      <fa-icon icon="camera"></fa-icon>&nbsp;<span>Capture</span>
+    </button>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="sigma-confirm-validate-accreditation" data-cy="entityConfirmValidateButton" type="submit" class="btn btn-success">
+      <fa-icon icon="check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
+    </button>
   </div>
 </form>

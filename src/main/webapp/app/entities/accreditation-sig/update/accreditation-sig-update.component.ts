@@ -76,6 +76,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
 
   editForm: AccreditationSigFormGroup = this.accreditationFormService.createAccreditationSigFormGroup();
   authority = Authority;
+  detectMobileDevice = Util.detectMobileDevice;
 
   constructor(
     protected dataUtils: DataUtils,
@@ -416,12 +417,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
   }
 
   openCapturePhotoDialog(): void {
-    if (Util.detectMobileDevice()) {
-      const modalRef = this.modalService.open(CameraPhoneDialogComponent, { size: 'lg', backdrop: 'static' });
-    } else {
-      const modalRef = this.modalService.open(CameraLaptopDialogComponent, { size: 'lg', backdrop: 'static' });
-    }
-
+    const modalRef = this.modalService.open(CameraLaptopDialogComponent, { size: 'lg', backdrop: 'static' });
     // unsubscribe not needed because closed completes on modal close
   }
 }

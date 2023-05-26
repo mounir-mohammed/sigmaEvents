@@ -284,13 +284,13 @@
                 <fa-icon icon="times"></fa-icon>
               </button>
             </div>
-            <button type="button" (click)="openCapturePhotoDialog()" value="Camera">Camera</button>
+            <button type="button" (click)="openCapturePhotoDialog()" value="Take Photo" *ngIf="!detectMobileDevice()">Take Photo</button>
             <input
               type="file"
               id="file_accreditationPhoto"
               data-cy="accreditationPhoto"
               (change)="setFileData($event, 'accreditationPhoto', true)"
-              accept="image/*"
+              accept="image/*;"
               sigmaTranslate="entity.action.addimage"
             />
           </div>

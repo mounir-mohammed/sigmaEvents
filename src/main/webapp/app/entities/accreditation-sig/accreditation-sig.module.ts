@@ -7,6 +7,7 @@ import { AccreditationSigDeleteDialogComponent } from './delete/accreditation-si
 import { AccreditationSigValidateDialogComponent } from './validate/accreditation-sig-validate-dialog.component';
 import { AccreditationSigPrintDialogComponent } from './print/accreditation-sig-print-dialog.component';
 import { AccreditationSigRoutingModule } from './route/accreditation-sig-routing.module';
+import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dialog.component';
 
 @NgModule({
   imports: [SharedModule, AccreditationSigRoutingModule],
@@ -17,6 +18,7 @@ import { AccreditationSigRoutingModule } from './route/accreditation-sig-routing
     AccreditationSigDeleteDialogComponent,
     AccreditationSigValidateDialogComponent,
     AccreditationSigPrintDialogComponent,
+    CameraLaptopDialogComponent,
   ],
 })
 export class AccreditationSigModule {}
