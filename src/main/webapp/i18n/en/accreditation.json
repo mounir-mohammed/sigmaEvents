@@ -26,8 +26,22 @@
         "title": "Accreditation"
       },
       "search": {
-        "placeHolder": "Search By ID / Last Name / Second Name / First Name / Birth Day"
+        "placeHolder": "Search"
       },
+      "groups": {
+        "id": "",
+        "registration": "Registration",
+        "organisation": "Organisation",
+        "name": "Name",
+        "personalInformations": "Personal Informations",
+        "idInformations": "ID Informations",
+        "event": "Event",
+        "status": "Status",
+        "primaryContactInformations": "Primary Contact Informations",
+        "additionalInformation": "Additional Information",
+        "photo": "Photo"
+      },
+
       "accreditationId": "Id",
       "accreditationFirstName": "Name",
       "accreditationSecondName": "Second Name",

@@ -34,7 +34,7 @@
           <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span>
         </dt>
         <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
-          <span>{{ accreditation.accreditationSexe }}</span>
+          <span>{{ accreditation.sexe!.sexeValue! }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Accreditation Occupation</span></dt>
         <dd>
