@@ -5,6 +5,7 @@ import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IAccreditationSig } from '../accreditation-sig.model';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import {
@@ -44,6 +45,8 @@ export class AccreditationSigComponent implements OnInit {
 
   predicate = 'accreditationId';
   ascending = true;
+  searchLoading = false;
+  faSpinner = faSpinner;
   filters: IFilterOptions = new FilterOptions();
 
   itemsPerPage = ITEMS_PER_PAGE;
@@ -177,6 +180,7 @@ export class AccreditationSigComponent implements OnInit {
     this.fillComponentAttributesFromResponseHeader(response.headers);
     const dataFromBody = this.fillComponentAttributesFromResponseBody(response.body);
     this.accreditations = dataFromBody;
+    this.searchLoading = false;
   }
 
   protected fillComponentAttributesFromResponseBody(data: IAccreditationSig[] | null): IAccreditationSig[] {
@@ -235,6 +239,7 @@ export class AccreditationSigComponent implements OnInit {
   }
 
   search(): void {
+    this.searchLoading = true;
     this.navigateToPage(0);
     this.load();
   }

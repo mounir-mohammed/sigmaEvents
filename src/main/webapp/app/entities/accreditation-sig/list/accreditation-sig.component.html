@@ -28,16 +28,26 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-5">
-        <input
-          class="form-control"
-          type="text"
-          name="search"
-          [(ngModel)]="searchText"
-          autocomplete="off"
-          placeholder="{{ 'sigmaEventsApp.accreditation.search.placeHolder' | translate }}"
-          (keyup)="search()"
-        />
+      <div class="col-md-4 mb-2">
+        <div class="input-group">
+          <input
+            class="form-control search-input"
+            type="text"
+            name="search"
+            [(ngModel)]="searchText"
+            autocomplete="off"
+            placeholder="{{ 'sigmaEventsApp.accreditation.search.placeHolder' | translate }}"
+            (keyup)="search()"
+          />
+          <div class="input-group-append">
+            <span class="input-group-text search-input-icon" *ngIf="searchLoading">
+              <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon>
+            </span>
+            <span class="input-group-text search-input-icon" *ngIf="!searchLoading">
+              <fa-icon [icon]="['fas', 'search']"></fa-icon>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
