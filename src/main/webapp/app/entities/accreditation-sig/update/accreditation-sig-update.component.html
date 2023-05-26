@@ -674,7 +674,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.country" for="field_country">Country</label>
           <select
             class="form-control"
@@ -695,7 +695,7 @@
           </select>
         </div>
 
-        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
           <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city" [compareWith]="compareCitySig">
             <option [ngValue]="null"></option>
