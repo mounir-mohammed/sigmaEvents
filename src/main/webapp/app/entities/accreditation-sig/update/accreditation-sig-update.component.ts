@@ -48,6 +48,8 @@ import { CameraPhoneDialogComponent } from 'app/camera/phone/camera-phone-dialog
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Util } from 'app/shared/util/util.shred';
 import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dialog.component';
+import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
+import { ITEM_PRINTED_EVENT } from 'app/config/navigation.constants';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -180,33 +182,38 @@ export class AccreditationSigUpdateComponent implements OnInit {
   }
 
   save(event: any): void {
-    if (event.submitter.name == 'Save') {
-      this.isSaving = true;
-      this.editForm.patchValue({ accreditationDateStart: this.currentAccount?.printingCentre?.event?.eventdateStart?.toString() });
-      this.editForm.patchValue({ accreditationDateEnd: this.currentAccount?.printingCentre?.event?.eventdateEnd?.toString() });
-      const accreditation = this.accreditationFormService.getAccreditationSig(this.editForm);
-      if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
-        accreditation.event = this.currentAccount?.printingCentre?.event;
-      }
-      if (accreditation.accreditationId !== null) {
-        this.subscribeToSaveResponse(this.accreditationService.update(accreditation));
-      } else {
-        accreditation.status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.INPROGRESS).shift();
-        this.subscribeToSaveResponse(this.accreditationService.create(accreditation));
-      }
+    var autoPrint = false;
+    if (event.submitter.name == 'SaveAndPrint') {
+      autoPrint = true;
     } else {
-      console.log('TODO SAVE AND PRINT');
+      autoPrint = false;
+    }
+    this.isSaving = true;
+    this.editForm.patchValue({ accreditationDateStart: this.currentAccount?.printingCentre?.event?.eventdateStart?.toString() });
+    this.editForm.patchValue({ accreditationDateEnd: this.currentAccount?.printingCentre?.event?.eventdateEnd?.toString() });
+    const accreditation = this.accreditationFormService.getAccreditationSig(this.editForm);
+    if (!this.accountService.hasAnyAuthority(Authority.ADMIN)) {
+      accreditation.event = this.currentAccount?.printingCentre?.event;
+    }
+    if (accreditation.accreditationId !== null) {
+      this.subscribeToSaveResponse(this.accreditationService.update(accreditation), autoPrint);
+    } else {
+      accreditation.status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.INPROGRESS).shift();
+      this.subscribeToSaveResponse(this.accreditationService.create(accreditation), autoPrint);
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAccreditationSig>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAccreditationSig>>, autoPrint: boolean): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      next: result => this.onSaveSuccess(result.body!, autoPrint),
       error: () => this.onSaveError(),
     });
   }
 
-  protected onSaveSuccess(): void {
+  protected onSaveSuccess(result: IAccreditationSig, autoPrint: boolean): void {
+    if (autoPrint) {
+      this.print(result);
+    }
     this.previousState();
   }
 
@@ -418,6 +425,17 @@ export class AccreditationSigUpdateComponent implements OnInit {
 
   openCapturePhotoDialog(): void {
     const modalRef = this.modalService.open(CameraLaptopDialogComponent, { size: 'lg', backdrop: 'static' });
+    // unsubscribe not needed because closed completes on modal close
+  }
+
+  print(accreditation: IAccreditationSig): void {
+    const modalRef = this.modalService.open(AccreditationSigPrintDialogComponent, { size: 'lg', backdrop: 'static' });
+    const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.PRINTED).shift();
+    //accreditation.status = status;
+    accreditation.accreditationPrintStat = true;
+    accreditation.accreditationPrintNumber = accreditation.accreditationPrintNumber! + 1;
+    modalRef.componentInstance.accreditation = accreditation;
+    modalRef.componentInstance.status = status;
     // unsubscribe not needed because closed completes on modal close
   }
 }
