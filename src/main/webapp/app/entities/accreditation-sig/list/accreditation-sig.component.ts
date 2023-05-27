@@ -342,7 +342,6 @@ export class AccreditationSigComponent implements OnInit {
   // Event listener to close the list when clicked outside
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    console.log('onDocumentClick');
     if (!document.getElementById('select-columns')!.contains(event.target as Node)) {
       // Clicked outside the box
       this.closeColumnsCheckboxes();
