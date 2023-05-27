@@ -524,7 +524,10 @@
           </div>
         </div>
 
-        <div class="group-container">
+        <div
+          class="group-container"
+          *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_ACTIVAT, authority.CAN_ACC_UPD_STATUS]"
+        >
           <div class="group-title" sigmaTranslate="sigmaEventsApp.accreditation.groups.status"></div>
           <div class="group-content">
             <!-- Field 1 -->
@@ -648,7 +651,7 @@
           </div>
         </div>
 
-        <div class="group-container">
+        <div class="group-container" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <div class="group-title" sigmaTranslate="sigmaEventsApp.accreditation.groups.additionalInformation"></div>
           <div class="group-content">
             <!-- Field 1 -->

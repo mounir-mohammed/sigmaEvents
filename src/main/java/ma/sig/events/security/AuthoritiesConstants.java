@@ -18,6 +18,7 @@ public final class AuthoritiesConstants {
     public static final String CAN_ACC_IMPORT = "CAN_ACC_IMPORT";
     public static final String CAN_ACC_ACTIVAT = "CAN_ACC_ACTIVAT";
     public static final String CAN_ACC_PRINT = "CAN_ACC_PRINT";
+    public static final String CAN_ACC_REPRINT = "CAN_ACC_REPRINT";
     public static final String CAN_ACC_UPD_STATUS = "CAN_ACC_UPD_STATUS";
     public static final String CAN_ACC_SHOW_NOTES = "CAN_ACC_SHOW_NOTES";
     public static final String CAN_ACC_SHOW_INFOSUP = "CAN_ACC_SHOW_INFOSUP";

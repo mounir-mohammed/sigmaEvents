@@ -54,7 +54,8 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
     if (
       accreditation!.status!.statusUserCanPrint ||
       this.accountService.hasAnyAuthority([Authority.ADMIN]) ||
-      this.accountService.hasAnyAuthority([Authority.EVENT_ADMIN])
+      this.accountService.hasAnyAuthority([Authority.EVENT_ADMIN]) ||
+      this.accountService.hasAnyAuthority([Authority.CAN_ACC_REPRINT])
     ) {
       accreditation.accreditationPrintStat = true;
       accreditation.accreditationPrintNumber = accreditation.accreditationPrintNumber! + 1;
