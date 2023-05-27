@@ -8,7 +8,8 @@
         "createOrEditLabel": "Accreditation erstellen oder bearbeiten",
         "notFound": "Keine Accreditations gefunden",
         "costumView": "Costum View",
-        "DefaultView": "Default View"
+        "DefaultView": "Default View",
+        "advancedSearch": "Advanced Search"
       },
       "created": "Accreditation erstellt mit ID {{ param }}",
       "updated": "Accreditation aktualisiert mit ID {{ param }}",

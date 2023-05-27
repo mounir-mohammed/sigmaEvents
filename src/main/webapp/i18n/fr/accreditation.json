@@ -8,7 +8,8 @@
         "createOrEditLabel": "Créer ou éditer un Accreditation",
         "notFound": "Aucun Accreditation trouvé",
         "costumView": "Vue personnalisée",
-        "DefaultView": "Vue par défaut"
+        "DefaultView": "Vue par défaut",
+        "advancedSearch": "Recherche avancée"
       },
       "created": "Une nouvelle Accreditation a été créé avec l'identifiant {{ param }}",
       "updated": "Le Accreditation avec l'identifiant {{ param }} a été mis à jour",
