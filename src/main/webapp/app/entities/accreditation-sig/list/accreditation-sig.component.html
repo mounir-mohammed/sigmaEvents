@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_AV_SEARCH]">
         <button type="button" class="btn btn-secondary">
           <fa-icon icon="search"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch"
             >Advanced Search</span
