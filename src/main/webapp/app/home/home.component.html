@@ -10,14 +10,34 @@
     <br />
 
     <div *ngIf="account !== null">
-      <div *ngIf="account!.printingCentre!.event!.eventDescription">
+      <div *ngIf="account?.printingCentre?.event?.eventDescription !== null">
         <p class="lead">{{ account!.printingCentre!.event!.eventDescription }}</p>
       </div>
     </div>
 
+    <div *ngIf="account !== null">
+      <div *ngIf="account?.printingCentre?.event == null">
+        <div class="alert alert-success">
+          <div>
+            <span
+              id="home-logged-message"
+              *ngIf="account"
+              sigmaTranslate="home.logged.messageNoEvent"
+              [translateValues]="{ username: account!.login }"
+            >
+              You are logged in as "{{ account!.login! }}".
+            </span>
+          </div>
+        </div>
+        <div class="alert alert-warning">
+          <span sigmaTranslate="home.logged.noEventFound">NO EVENT FOUND</span>
+        </div>
+      </div>
+    </div>
+
     <div [ngSwitch]="account !== null">
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <div *ngIf="account?.printingCentre !== null">
+      <div *ngIf="account?.printingCentre?.event !== null">
+        <div class="alert alert-success" *ngSwitchCase="true">
           <div>
             <span
               id="home-logged-message"
@@ -27,11 +47,6 @@
             >
               You are logged in as "{{ account!.login! }}" to {{ account!.printingCentre!.event!.eventName }}.
             </span>
-          </div>
-        </div>
-        <div *ngIf="account?.printingCentre === null">
-          <div>
-            <span>NOT ALLOWED</span>
           </div>
         </div>
       </div>

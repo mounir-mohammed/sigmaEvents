@@ -3,7 +3,9 @@
     "title": "欢迎, ",
     "subtitle": "这里是首页",
     "logged": {
-      "message": "您目前是以 \"{{username}}\" 账号登录 to event \"{{eventname}}\"."
+      "message": "您目前是以 \"{{username}}\" 账号登录 to event \"{{eventname}}\".",
+      "messageNoEvent": "您目前是以 \"{{username}}\" 账号登录.",
+      "noEventFound": "No event found."
     },
     "question": "如果您有任何有关 JHipster 的问题, 可以查阅下列资源:",
     "link": {

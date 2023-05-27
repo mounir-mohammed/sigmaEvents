@@ -1,9 +1,11 @@
 {
   "home": {
-    "title": "¡Bienvenido, ",
-    "subtitle": "Esta es su página de inicio",
+    "title": "¡Bienvenido a SigmaEvents Management, ",
+    "subtitle": "SigmaEvents está diseñado específicamente para la gestión de sus eventos.",
     "logged": {
-      "message": "Está conectado como \"{{username}}\" to event \"{{eventname}}\"."
+      "message": "Está conectado como \"{{username}}\" to event \"{{eventname}}\".",
+      "messageNoEvent": "Está conectado como \"{{username}}\".",
+      "noEventFound": "Ningún evento encontrado."
     },
     "question": "Si tiene preguntas sobre JHipster:",
     "link": {

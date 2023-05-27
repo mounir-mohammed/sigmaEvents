@@ -3,7 +3,9 @@
     "title": "Welkom, ",
     "subtitle": "Dit is uw startpagina",
     "logged": {
-      "message": "U bent aangemeld als gebruiker \"{{username}}\" to event \"{{eventname}}\"."
+      "message": "U bent aangemeld als gebruiker \"{{username}}\" to event \"{{eventname}}\".",
+      "messageNoEvent": "U bent aangemeld als gebruiker \"{{username}}\".",
+      "noEventFound": "No event found."
     },
     "question": "Indien u vragen hebt over JHipster:",
     "link": {

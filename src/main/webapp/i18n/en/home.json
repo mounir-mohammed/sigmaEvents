@@ -3,7 +3,9 @@
     "title": "Welcome to SigmaEvents Management",
     "subtitle": "SigmaEvents is specifically designed for managing your Events.",
     "logged": {
-      "message": "You are logged in as \"{{username}}\" to event \"{{eventname}}\"."
+      "message": "You are logged in as \"{{username}}\" to event \"{{eventname}}\".",
+      "messageNoEvent": "You are logged in as \"{{username}}\".",
+      "noEventFound": "No event found."
     },
     "question": "If you have any question on JHipster:",
     "link": {

@@ -3,7 +3,9 @@
     "title": "Benvenuto, ",
     "subtitle": "Questa è la tua home page",
     "logged": {
-      "message": "Autenticato come \"{{username}}\" to event \"{{eventname}}\"."
+      "message": "Autenticato come \"{{username}}\" to event \"{{eventname}}\".",
+      "messageNoEvent": "Autenticato come \"{{username}}\".",
+      "noEventFound": "No event found."
     },
     "question": "In caso di domande su JHipster:",
     "link": {
