@@ -1,6 +1,6 @@
 {
   "home": {
-    "title": "Bienvenue, ",
+    "title": "Bienvenue à SigmaEvents Management",
     "subtitle": "Ceci est votre page d'accueil",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\" à l'événement \"{{eventname}}\"."
