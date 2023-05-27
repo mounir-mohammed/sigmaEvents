@@ -27,7 +27,7 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: sigma-events  # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: sigmaEvents  # set this to the name of your Azure Web App
 
 on:
   push:
@@ -64,7 +64,7 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
-          file: ./docker/Dockerfile
+          file: ./Dockerfile
 
   deploy:
     permissions:
