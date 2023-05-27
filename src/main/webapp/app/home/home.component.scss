@@ -26,8 +26,10 @@ Main page styles
   display: inline-block;
   width: 347px;
   height: 497px;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-size: contain;
-  margin-left: 25%;
+  margin: 0% 20% 20% 20%;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */

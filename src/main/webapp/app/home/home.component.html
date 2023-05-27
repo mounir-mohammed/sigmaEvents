@@ -77,7 +77,7 @@
   <div class="col-md-3" *ngIf="account !== null">
     <div *ngIf="account!.printingCentre!.event!.eventLogo">
       <img
-        class="eventLogo"
+        class="eventLogo img-fluid rounded"
         [src]="'data:' + account!.printingCentre!.event!.eventLogoContentType! + ';base64,' + account!.printingCentre!.event!.eventLogo!"
         alt="accreditation image"
       />
