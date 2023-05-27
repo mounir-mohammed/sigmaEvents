@@ -126,8 +126,6 @@ export class AccreditationSigComponent implements OnInit {
     const modalRef = this.modalService.open(AccreditationSigPrintDialogComponent, { size: 'lg', backdrop: 'static' });
     const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.PRINTED).shift();
     //accreditation.status = status;
-    accreditation.accreditationPrintStat = true;
-    accreditation.accreditationPrintNumber = accreditation.accreditationPrintNumber! + 1;
     modalRef.componentInstance.accreditation = accreditation;
     modalRef.componentInstance.status = status;
     // unsubscribe not needed because closed completes on modal close

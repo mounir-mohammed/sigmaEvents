@@ -102,7 +102,7 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationSexe" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <th scope="col" sigmaSortBy="accreditationSexe">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -290,12 +290,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="sexe.sexeId" *sigmaHasAnyAuthority="[authority.ADMIN]">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th scope="col" sigmaSortBy="attachement.attachementId">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.attachement">Attachement</span>
@@ -359,7 +353,14 @@
           <td>{{ accreditation.accreditationSecondName }}</td>
           <td>{{ accreditation.accreditationLastName }}</td>
           <td>{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationSexe }}</td>
+          <td>
+            <div *ngIf="accreditation.sexe">
+              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+                <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
+              </div>
+              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.sexe.sexeValue }}</div>
+            </div>
+          </td>
           <td>{{ accreditation.accreditationOccupation }}</td>
           <td>
             <div *ngIf="accreditation.nationality">
@@ -452,11 +453,6 @@
           <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ accreditation.accreditationAttributs }}</td>
           <td>{{ accreditation.accreditationStat | yesNo }}</td>
           <td>{{ accreditation.accreditationActivated | yesNo }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
-            <div *ngIf="accreditation.sexe">
-              <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
-            </div>
-          </td>
           <td>
             <div *ngIf="accreditation.attachement">
               <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO])">

@@ -300,6 +300,7 @@ body .modal-dialog {
 
 .group-title {
   font-weight: bold;
+  font-size: 25px;
   margin-bottom: 10px;
 }
 
@@ -327,4 +328,15 @@ body .modal-dialog {
 .group-container .form-text.text-danger {
   margin-top: 5px;
   text-align: left;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: auto;
+}
+
+.button-container button:not(:last-child) {
+  margin-right: 10px; /* Adjust the value as needed */
 }

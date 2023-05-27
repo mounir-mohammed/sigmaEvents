@@ -299,7 +299,7 @@
           <div class="group-title" sigmaTranslate="sigmaEventsApp.accreditation.groups.personalInformations"></div>
           <div class="group-content">
             <!-- Field 1 -->
-            <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
+            <div class="row mb-3">
               <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe" for="field_sexe"
                 >Accreditation Sexe</label
               >
@@ -820,7 +820,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="button-container">
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
           <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
         </button>
