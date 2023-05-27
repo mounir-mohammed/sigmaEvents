@@ -18,6 +18,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private accountService: AccountService, private router: Router) {}
 
+  links = [
+    { label: 'sigmaEventsApp.accreditation.home.title', url: '/accreditation-sig' },
+    { label: 'sigmaEventsApp.accreditation.home.createLabel', url: '/accreditation-sig/new' },
+  ];
+
   ngOnInit(): void {
     this.accountService
       .getAuthenticationState()

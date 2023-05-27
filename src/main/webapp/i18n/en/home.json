@@ -1,7 +1,7 @@
 {
   "home": {
     "title": "Welcome to SigmaEvents Management",
-    "subtitle": "This is your homepage",
+    "subtitle": "SigmaEvents is specifically designed for managing your Events.",
     "logged": {
       "message": "You are logged in as \"{{username}}\" to event \"{{eventname}}\"."
     },

@@ -1,7 +1,7 @@
 {
   "home": {
     "title": "Bienvenue à SigmaEvents Management",
-    "subtitle": "Ceci est votre page d'accueil",
+    "subtitle": "SigmaEvents est spécifiquement conçu pour gérer vos événements.",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\" à l'événement \"{{eventname}}\"."
     },
