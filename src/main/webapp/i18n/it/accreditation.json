@@ -6,7 +6,9 @@
         "refreshListLabel": "Refresh list",
         "createLabel": "Genera un nuovo Accreditation",
         "createOrEditLabel": "Genera o modifica un Accreditation",
-        "notFound": "No Accreditations found"
+        "notFound": "No Accreditations found",
+        "costumView": "Costum View",
+        "DefaultView": "Default View"
       },
       "created": "&Egrave; stato generato un nuovo Accreditation con identificatore {{ param }}",
       "updated": "&Egrave; stato aggiornato Accreditation identificato da {{ param }}",

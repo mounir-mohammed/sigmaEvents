@@ -51,7 +51,9 @@
       </div>
       <div class="select-columns col-md-4" id="select-columns">
         <button type="button" class="btn btn-secondary" (click)="toggleColumnsCheckboxes()">
-          <fa-icon icon="list-ul"></fa-icon>&nbsp;&nbsp;<span> Costum View</span>
+          <fa-icon icon="list-ul"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.costumView"
+            >Costum View</span
+          >
         </button>
         <div *ngIf="showColumnsCheckboxes" class="checkbox-list" (clickOutside)="closeColumnsCheckboxes()">
           <ul>
@@ -63,7 +65,9 @@
             </li>
           </ul>
           <button type="button" class="btn btn-secondary mb-2" (click)="resetColumnVisibility()">
-            <fa-icon icon="eye"></fa-icon>&nbsp;&nbsp;<span>Default View</span>
+            <fa-icon icon="eye"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.DefaultView"
+              >Default View</span
+            >
           </button>
         </div>
       </div>

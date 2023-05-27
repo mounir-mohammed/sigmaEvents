@@ -6,7 +6,9 @@
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer une nouvelle Accreditation",
         "createOrEditLabel": "Créer ou éditer un Accreditation",
-        "notFound": "Aucun Accreditation trouvé"
+        "notFound": "Aucun Accreditation trouvé",
+        "costumView": "Vue personnalisée",
+        "DefaultView": "Vue par défaut"
       },
       "created": "Une nouvelle Accreditation a été créé avec l'identifiant {{ param }}",
       "updated": "Le Accreditation avec l'identifiant {{ param }} a été mis à jour",

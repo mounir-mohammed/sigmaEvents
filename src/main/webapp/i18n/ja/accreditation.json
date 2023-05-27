@@ -6,7 +6,9 @@
         "refreshListLabel": "Refresh list",
         "createLabel": "Accreditation を追加",
         "createOrEditLabel": "Accreditationを追加または編集",
-        "notFound": "No Accreditations found"
+        "notFound": "No Accreditations found",
+        "costumView": "Costum View",
+        "DefaultView": "Default View"
       },
       "created": "A new Accreditation is created with identifier {{ param }}",
       "updated": "A Accreditation is updated with identifier {{ param }}",

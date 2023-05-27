@@ -6,7 +6,9 @@
         "refreshListLabel": "Refresh list",
         "createLabel": "创建新 Accreditation",
         "createOrEditLabel": "创建或编辑 Accreditation",
-        "notFound": "No Accreditations found"
+        "notFound": "No Accreditations found",
+        "costumView": "Costum View",
+        "DefaultView": "Default View"
       },
       "created": "Accreditation {{ param }} 创建成功",
       "updated": "Accreditation {{ param }} 更新成功",
