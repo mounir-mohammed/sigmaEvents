@@ -340,3 +340,33 @@ body .modal-dialog {
 .button-container button:not(:last-child) {
   margin-right: 10px; /* Adjust the value as needed */
 }
+
+.select-columns {
+  margin-bottom: 20px;
+}
+
+.select-columns .checkbox-list {
+  column-count: 4; /* Set the number of columns */
+  column-gap: 20px; /* Adjust the gap between columns */
+  position: absolute;
+  z-index: 1;
+  background-color: #f0f0f0;
+  margin-top: 10px;
+}
+
+.select-columns .checkbox-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.select-columns .checkbox-list li {
+  margin-bottom: 5px;
+}
+
+.select-columns .checkbox-list button {
+  margin-top: 10px;
+}
+
+.select-columns input[type='checkbox']:checked {
+  background-color: gray; /* Change the background color to gray */
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
@@ -68,6 +68,7 @@ export class AccreditationSigComponent implements OnInit {
   trackAccreditationId = (_index: number, item: IAccreditationSig): number => this.accreditationService.getAccreditationSigIdentifier(item);
 
   ngOnInit(): void {
+    this.loadColumnVisibility();
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
@@ -240,5 +241,111 @@ export class AccreditationSigComponent implements OnInit {
     this.searchLoading = true;
     this.navigateToPage(0);
     this.load();
+  }
+
+  //Costum columns code
+
+  public columns: { name: string; visible: boolean; translationKey: string }[] = [];
+
+  public showColumnsCheckboxes: boolean = false;
+
+  public toggleColumnsCheckboxes(): void {
+    this.showColumnsCheckboxes = !this.showColumnsCheckboxes;
+  }
+
+  toggleColumnVisibility(): void {
+    this.saveColumnVisibility();
+  }
+
+  public isColumnVisible(columnName: string): boolean {
+    const column = this.columns.find(col => col.name === columnName);
+    return column ? column.visible : false;
+  }
+
+  public defaultColumnVisibility: { name: string; visible: boolean; translationKey: string }[] = [
+    { name: 'accreditationId', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationId' },
+    { name: 'accreditationPhoto', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPhoto' },
+    { name: 'civility', visible: true, translationKey: 'sigmaEventsApp.accreditation.civility' },
+    { name: 'accreditationFirstName', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationFirstName' },
+    { name: 'accreditationSecondName', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationSecondName' },
+    { name: 'accreditationLastName', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationLastName' },
+    { name: 'accreditationBirthDay', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationBirthDay' },
+    { name: 'accreditationSexe', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationSexe' },
+    { name: 'accreditationOccupation', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationOccupation' },
+    { name: 'nationality', visible: true, translationKey: 'sigmaEventsApp.accreditation.nationality' },
+    { name: 'country', visible: true, translationKey: 'sigmaEventsApp.accreditation.country' },
+    { name: 'city', visible: true, translationKey: 'sigmaEventsApp.accreditation.city' },
+    { name: 'category', visible: true, translationKey: 'sigmaEventsApp.accreditation.category' },
+    { name: 'fonction', visible: true, translationKey: 'sigmaEventsApp.accreditation.fonction' },
+    { name: 'organiz', visible: true, translationKey: 'sigmaEventsApp.accreditation.organiz' },
+    { name: 'accreditationTypeId', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationType' },
+    { name: 'status', visible: true, translationKey: 'sigmaEventsApp.accreditation.status' },
+    { name: 'accreditationDescription', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationDescription' },
+    { name: 'accreditationEmail', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationEmail' },
+    { name: 'accreditationTel', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationTel' },
+    { name: 'accreditationCinId', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationCinId' },
+    { name: 'accreditationPasseportId', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPasseportId' },
+    { name: 'accreditationCartePresseId', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationCartePresseId' },
+    {
+      name: 'accreditationCarteProfessionnelleId',
+      visible: true,
+      translationKey: 'sigmaEventsApp.accreditation.accreditationCarteProfessionnelleId',
+    },
+    { name: 'accreditationCreationDate', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationCreationDate' },
+    { name: 'accreditationCreatedByuser', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationCreatedByuser' },
+    { name: 'accreditationUpdateDate', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationUpdateDate' },
+    { name: 'accreditationUpdatedByuser', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationUpdatedByuser' },
+    { name: 'accreditationPrintDate', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPrintDate' },
+    { name: 'accreditationPrintedByuser', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPrintedByuser' },
+    { name: 'accreditationDateStart', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationDateStart' },
+    { name: 'accreditationDateEnd', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationDateEnd' },
+    { name: 'accreditationPrintStat', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPrintStat' },
+    { name: 'accreditationPrintNumber', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPrintNumber' },
+    { name: 'accreditationParams', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationParams' },
+    { name: 'accreditationAttributs', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationAttributs' },
+    { name: 'accreditationStat', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationStat' },
+    { name: 'accreditationActivated', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationActivated' },
+    { name: 'attachement', visible: true, translationKey: 'sigmaEventsApp.accreditation.attachement' },
+    { name: 'code', visible: true, translationKey: 'sigmaEventsApp.accreditation.code' },
+    { name: 'dayPassInfo', visible: true, translationKey: 'sigmaEventsApp.accreditation.dayPassInfo' },
+    { name: 'event', visible: true, translationKey: 'sigmaEventsApp.accreditation.event' },
+  ];
+
+  // Save the column visibility configuration to localStorage
+  public saveColumnVisibility(): void {
+    localStorage.setItem('columnVisibility', JSON.stringify(this.columns));
+  }
+
+  // Load the column visibility configuration from localStorage
+  public loadColumnVisibility(): void {
+    const columnVisibility = localStorage.getItem('columnVisibility');
+    if (columnVisibility) {
+      this.columns = JSON.parse(columnVisibility);
+    } else {
+      // If no configuration found in localStorage, use the default configuration
+      this.columns = JSON.parse(JSON.stringify(this.defaultColumnVisibility));
+    }
+  }
+
+  // Reset the column visibility to the default configuration and remove it from localStorage
+  public resetColumnVisibility(): void {
+    this.columns = JSON.parse(JSON.stringify(this.defaultColumnVisibility));
+    localStorage.removeItem('columnVisibility');
+    this.toggleColumnsCheckboxes();
+  }
+
+  // Method to close the list when clicked outside
+  closeColumnsCheckboxes() {
+    this.showColumnsCheckboxes = false;
+  }
+
+  // Event listener to close the list when clicked outside
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    console.log('onDocumentClick');
+    if (!document.getElementById('select-columns')!.contains(event.target as Node)) {
+      // Clicked outside the box
+      this.closeColumnsCheckboxes();
+    }
   }
 }

@@ -40,6 +40,7 @@ import {
   faPrint,
   faCamera,
   faSpinner,
+  faListUl,
   // jhipster-needle-add-icon-import
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -85,5 +86,6 @@ export const fontAwesomeIcons = [
   faPrint,
   faCamera,
   faSpinner,
+  faListUl,
   // jhipster-needle-add-icon-import
 ];
