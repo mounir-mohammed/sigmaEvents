@@ -12,6 +12,7 @@
     <div *ngIf="account !== null">
       <div *ngIf="account?.printingCentre?.event?.eventDescription !== null">
         <p class="lead">{{ account!.printingCentre!.event!.eventDescription }}</p>
+        <p class="lead">{{ account!.printingCentre!.event!.eventdateStart }} - {{ account!.printingCentre!.event!.eventdateEnd }}</p>
       </div>
     </div>
 
