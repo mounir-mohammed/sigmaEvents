@@ -25,7 +25,7 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
 # Stage 1: Build Angular app
-FROM node:${NODE_VERSION} as build-angular
+FROM node:16 as build-angular
 WORKDIR /app
 COPY . .
 RUN npm ci
@@ -38,7 +38,7 @@ COPY --from=build-angular /app .
 RUN ./mvnw package -Pprod -DskipTests
 
 # Stage 3: Create final Docker image
-FROM adoptopenjdk:${VARIANT}-jre-hotspot
+FROM adoptopenjdk:11-jre-hotspot
 WORKDIR /app
 COPY --from=build-springboot /app/target/*.jar app.jar
 EXPOSE 80
