@@ -77,7 +77,7 @@
     "prodDatabaseType": "mysql",
     "reactive": false,
     "searchEngine": false,
-    "serverPort": "8080",
+    "serverPort": "80",
     "serviceDiscoveryType": false,
     "skipCheckLengthOfIdentifier": false,
     "skipClient": false,
