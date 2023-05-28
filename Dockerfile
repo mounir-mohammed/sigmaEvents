@@ -24,20 +24,13 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
 
-# Stage 1: Build Angular app
-FROM node:16 as build-angular
-WORKDIR /app
-COPY . .
-RUN npm ci
-RUN npm run webpack:prod
-
-# Stage 2: Build Spring Boot app
+# Stage 1: Build app
 FROM adoptopenjdk:11-jdk-hotspot as build-springboot
 WORKDIR /app
-COPY --from=build-angular /app .
+COPY . .
 RUN ./mvnw package -Pprod -DskipTests
 
-# Stage 3: Create final Docker image
+# Stage 2: Create final Docker image
 FROM adoptopenjdk:11-jre-hotspot
 WORKDIR /app
 COPY --from=build-springboot /app/target/*.jar app.jar
