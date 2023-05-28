@@ -28,6 +28,7 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 FROM adoptopenjdk:11-jdk-hotspot as build-springboot
 WORKDIR /app
 COPY . .
+RUN chmod +x ./mvnw && \
 RUN ./mvnw package -Pprod -DskipTests
 
 # Stage 2: Create final Docker image
