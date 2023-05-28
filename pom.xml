@@ -102,6 +102,13 @@
                 <scope>import</scope>
             </dependency>
             <!-- jhipster-needle-maven-add-dependency-management -->
+                <dependency>
+                    <groupId>com.azure.spring</groupId>
+                    <artifactId>spring-cloud-azure-dependencies</artifactId>
+                    <version>4.8.0</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -109,6 +116,10 @@
         <dependency>
             <groupId>tech.jhipster</groupId>
             <artifactId>jhipster-framework</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-jdbc-mysql</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
@@ -1146,7 +1157,7 @@
                                 </goals>
                             </execution>
                             <!--<execution>
-                            
+
                                 <id>webapp build test</id>
                                 <goals>
                                     <goal>npm</goal>
