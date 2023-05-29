@@ -1,10 +1,9 @@
 
-  ${AnsiColor.GREEN}      ██╗${AnsiColor.RED} ██╗   ██╗ ████████╗ ███████╗   ██████╗ ████████╗ ████████╗ ███████╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ██║   ██║ ╚══██╔══╝ ██╔═══██╗ ██╔════╝ ╚══██╔══╝ ██╔═════╝ ██╔═══██╗
-  ${AnsiColor.GREEN}      ██║${AnsiColor.RED} ████████║    ██║    ███████╔╝ ╚█████╗     ██║    ██████╗   ███████╔╝
-  ${AnsiColor.GREEN}██╗   ██║${AnsiColor.RED} ██╔═══██║    ██║    ██╔════╝   ╚═══██╗    ██║    ██╔═══╝   ██╔══██║
-  ${AnsiColor.GREEN}╚██████╔╝${AnsiColor.RED} ██║   ██║ ████████╗ ██║       ██████╔╝    ██║    ████████╗ ██║  ╚██╗
-  ${AnsiColor.GREEN} ╚═════╝ ${AnsiColor.RED} ╚═╝   ╚═╝ ╚═══════╝ ╚═╝       ╚═════╝     ╚═╝    ╚═══════╝ ╚═╝   ╚═╝
-
-${AnsiColor.BRIGHT_BLUE}:: JHipster 🤓  :: Running Spring Boot ${spring-boot.version} ::
-:: https://www.jhipster.tech ::${AnsiColor.DEFAULT}
+  __  __   ___  ___  ___  ___   ____ __ __  ____ __  __ ______  __ 
+ (( \ ||  // \\ ||\\//|| // \\ ||    || || ||    ||\ || | || | (( \
+  \\  || (( ___ || \/ || ||=|| ||==  \\ // ||==  ||\\||   ||    \\ 
+ \_)) ||  \\_|| ||    || || || ||___  \V/  ||___ || \||   ||   \_))
+                                                                   
+${spring.application.name}
+Spring Boot ${spring-boot.version}
+Powered by https://www.sigmaevents.ma 
