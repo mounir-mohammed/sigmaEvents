@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Accreditation Type {{ id }}?"
       },
       "detail": {
-        "title": "Accreditation Type"
+        "title": "نوع التصديق"
       },
       "accreditationTypeId": "Accreditation Type Id",
       "accreditationTypeValue": "Accreditation Type Value",

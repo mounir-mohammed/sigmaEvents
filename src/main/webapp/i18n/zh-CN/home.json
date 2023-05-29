@@ -1,11 +1,11 @@
 {
   "home": {
-    "title": "欢迎, ",
-    "subtitle": "这里是首页",
+    "title": "欢迎来到SigmaEvents管理",
+    "subtitle": "SigmaEvents专为管理您的活动而设计。",
     "logged": {
-      "message": "您目前是以 \"{{username}}\" 账号登录 to event \"{{eventname}}\".",
-      "messageNoEvent": "您目前是以 \"{{username}}\" 账号登录.",
-      "noEventFound": "No event found."
+      "message": "您已登录为\"{{username}}\"，参与活动\"{{eventname}}\"。",
+      "messageNoEvent": "您已登录为\"{{username}}\"。",
+      "noEventFound": "未找到任何活动。"
     },
     "question": "如果您有任何有关 JHipster 的问题, 可以查阅下列资源:",
     "link": {

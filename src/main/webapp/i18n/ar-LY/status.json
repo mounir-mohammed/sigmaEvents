@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Status {{ id }}?"
       },
       "detail": {
-        "title": "Status"
+        "title": "الحالة"
       },
       "statusId": "Status Id",
       "statusName": "Status Name",

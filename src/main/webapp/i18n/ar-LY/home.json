@@ -1,11 +1,11 @@
 {
   "home": {
-    "title": "أهلا وسهلا بك في SigmaEvents Management، !",
-    "subtitle": "تم تصميم SigmaEvents خصيصًا لإدارة الأحداث الخاصة بك.",
+    "title": "مرحبًا بك في إدارة SigmaEvents",
+    "subtitle": "SigmaEvents مصمم خصيصًا لإدارة أحداثك.",
     "logged": {
-      "message": "قمت بتسجيل الدخول كمستخدم \"{{username}}\" إلى الموقع \"{{eventname}}\".",
-      "messageNoEvent": "قمت بتسجيل الدخول كمستخدم \"{{username}}\".",
-      "noEventFound": "لم يتم العثور على أحداث."
+      "message": "أنت مسجل الدخول كـ \"{{username}}\" إلى الحدث \"{{eventname}}\".",
+      "messageNoEvent": "أنت مسجل الدخول كـ \"{{username}}\".",
+      "noEventFound": "لم يتم العثور على أي حدث."
     },
     "question": "إذا كان لديك أي سؤال حول JHipster:",
     "link": {

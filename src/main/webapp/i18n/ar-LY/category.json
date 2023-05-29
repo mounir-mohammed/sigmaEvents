@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Category {{ id }}?"
       },
       "detail": {
-        "title": "Category"
+        "title": "الفئة"
       },
       "categoryId": "Category Id",
       "categoryName": "Category Name",

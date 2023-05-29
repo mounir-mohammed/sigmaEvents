@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Day Pass Info {{ id }}?"
       },
       "detail": {
-        "title": "Day Pass Info"
+        "title": "معلومات تذكرة اليوم"
       },
       "dayPassInfoId": "Day Pass Info Id",
       "dayPassInfoName": "Day Pass Info Name",

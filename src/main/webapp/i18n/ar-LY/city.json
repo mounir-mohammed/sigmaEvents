@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete City {{ id }}?"
       },
       "detail": {
-        "title": "City"
+        "title": "المدينة"
       },
       "cityId": "City Id",
       "cityName": "City Name",

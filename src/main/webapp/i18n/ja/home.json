@@ -1,11 +1,11 @@
 {
   "home": {
-    "title": "ようこそ, ",
-    "subtitle": "ここはトップページです。",
+    "title": "SigmaEvents管理へようこそ",
+    "subtitle": "SigmaEventsは、イベントの管理に特化して設計されています。",
     "logged": {
-      "message": "\"{{username}}\"としてログインしています。to event \"{{eventname}}\".",
-      "messageNoEvent": "\"{{username}}\"としてログインしています。.",
-      "noEventFound": "No event found."
+      "message": "イベント\"{{eventname}}\"へのログインユーザーは\"{{username}}\"です。",
+      "messageNoEvent": "\"{{username}}\"としてログインしています。",
+      "noEventFound": "イベントが見つかりませんでした。"
     },
     "question": "JHipsterに関して質問があれば:",
     "link": {

@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Fonction {{ id }}?"
       },
       "detail": {
-        "title": "Fonction"
+        "title": "المهمة"
       },
       "fonctionId": "Fonction Id",
       "fonctionName": "Fonction Name",

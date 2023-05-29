@@ -2,31 +2,31 @@
   "sigmaEventsApp": {
     "accreditation": {
       "home": {
-        "title": "Accreditations",
+        "title": "Accréditations",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer une nouvelle Accreditation",
-        "createOrEditLabel": "Créer ou éditer un Accreditation",
-        "notFound": "Aucun Accreditation trouvé",
+        "createLabel": "Créer une nouvelle accréditation",
+        "createOrEditLabel": "Créer ou éditer une accréditation",
+        "notFound": "Aucune accréditation trouvé",
         "costumView": "Vue personnalisée",
         "DefaultView": "Vue par défaut",
         "advancedSearch": "Recherche avancée"
       },
       "created": "Une nouvelle Accreditation a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Accreditation avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Accreditation avec l'identifiant {{ param }} a été supprimé",
+      "updated": "L'accréditation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'accréditation avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer l'accreditation {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer l'accréditation {{ id }} ?"
       },
       "validate": {
-        "question": "Êtes-vous certain de vouloir valider l'accreditation {{ id }}?"
+        "question": "Êtes-vous certain de vouloir valider l'accréditation {{ id }}?"
       },
       "print": {
-        "question": "Êtes-vous certain de vouloir imprimer l'accreditation {{ id }}?",
-        "modelError": "Erreur de chargement du model d'impression de l'accréditation {{ id }}, veuillez contacter l'administrateur",
+        "question": "Êtes-vous certain de vouloir imprimer l'accréditation {{ id }}?",
+        "modelError": "Erreur de chargement du model d'impréssion de l'accréditation {{ id }}, veuillez contacter l'administrateur",
         "unauthorizedPrintingError": "Impression de l'accréditation {{ id }} non autorisée, veuillez contacter l'administrateur"
       },
       "detail": {
-        "title": "Accreditation"
+        "title": "Accréditation"
       },
       "search": {
         "placeHolder": "Rechercher"
