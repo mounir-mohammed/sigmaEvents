@@ -1,8 +1,8 @@
 {
   "name": "sigma-events",
-  "version": "0.0.1-SNAPSHOT",
+  "version": "1.0.0",
   "private": true,
-  "description": "Description for sigmaEvents",
+  "description": "SigmaEvents Management",
   "license": "UNLICENSED",
   "scripts": {
     "app:start": "./mvnw",

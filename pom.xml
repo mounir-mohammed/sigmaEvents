@@ -7,10 +7,10 @@
 
     <groupId>ma.sig.events</groupId>
     <artifactId>sigma-events</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
-    <name>Sigma Events</name>
-    <description>Description for sigmaEvents</description>
+    <name>sigma-events</name>
+    <description>SigmaEvents Management</description>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->
