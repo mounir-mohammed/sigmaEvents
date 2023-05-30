@@ -48,10 +48,15 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: mail.sigmaevents.ma
+    port: 465
+    username: noreply@sigmaevents.ma
+    password: noreplay#noreplay
+    properties:
+      'mail.transport.protocol': smtp
+      'mail.smtp.auth': true
+      'mail.smtp.ssl.enable': true
+      'mail.smtp.starttls.enable': true
   thymeleaf:
     cache: true
 

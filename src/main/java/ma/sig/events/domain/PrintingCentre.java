@@ -94,7 +94,6 @@ public class PrintingCentre implements Serializable {
     private Language language;
 
     @OneToMany(mappedBy = "printingCentre")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(allowSetters = true)
     private Set<User> users = new HashSet<>();
 
