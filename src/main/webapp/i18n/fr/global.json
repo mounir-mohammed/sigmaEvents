@@ -115,6 +115,10 @@
           "minlength": "Votre email doit comporter au moins 5 caractères.",
           "maxlength": "Votre email ne doit pas comporter plus de 50 caractères.",
           "invalid": "Votre email n'est pas valide."
+        },
+        "phone": {
+          "required": "Votre numéro de téléphone est requis.",
+          "invalid": "Votre numéro de téléphone est invalide."
         }
       }
     },

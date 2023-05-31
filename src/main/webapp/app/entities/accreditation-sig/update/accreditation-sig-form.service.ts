@@ -130,8 +130,12 @@ export class AccreditationSigFormService {
       accreditationSexe: new FormControl(accreditationRawValue.accreditationSexe),
       accreditationOccupation: new FormControl(accreditationRawValue.accreditationOccupation),
       accreditationDescription: new FormControl(accreditationRawValue.accreditationDescription),
-      accreditationEmail: new FormControl(accreditationRawValue.accreditationEmail),
-      accreditationTel: new FormControl(accreditationRawValue.accreditationTel),
+      accreditationEmail: new FormControl(accreditationRawValue.accreditationEmail, {
+        validators: [Validators.email],
+      }),
+      accreditationTel: new FormControl(accreditationRawValue.accreditationTel, {
+        validators: [Validators.pattern('[0-9 ]{10}')],
+      }),
       accreditationPhoto: new FormControl(accreditationRawValue.accreditationPhoto),
       accreditationPhotoContentType: new FormControl(accreditationRawValue.accreditationPhotoContentType),
       accreditationCinId: new FormControl(accreditationRawValue.accreditationCinId),

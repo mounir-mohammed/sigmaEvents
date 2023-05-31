@@ -115,6 +115,10 @@
           "invalid": "Uw email is ongeldig.",
           "minlength": "Uw email moet minstens 5 tekens lang zijn.",
           "maxlength": "Uw email kan niet langer zijn dan 50 tekens."
+        },
+        "phone": {
+          "required": "Uw telefoonnummer is verplicht.",
+          "invalid": "Uw telefoonnummer is ongeldig."
         }
       }
     },
