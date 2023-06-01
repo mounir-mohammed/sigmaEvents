@@ -131,7 +131,7 @@ export class AccreditationSigFormService {
       accreditationOccupation: new FormControl(accreditationRawValue.accreditationOccupation),
       accreditationDescription: new FormControl(accreditationRawValue.accreditationDescription),
       accreditationEmail: new FormControl(accreditationRawValue.accreditationEmail, {
-        validators: [Validators.email],
+        validators: [Validators.pattern('[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}')],
       }),
       accreditationTel: new FormControl(accreditationRawValue.accreditationTel, {
         validators: [Validators.pattern('[0-9 ]{10}')],
