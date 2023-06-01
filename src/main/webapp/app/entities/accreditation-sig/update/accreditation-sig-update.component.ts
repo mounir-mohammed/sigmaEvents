@@ -48,6 +48,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Util } from 'app/shared/util/util.shred';
 import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dialog.component';
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -283,6 +284,19 @@ export class AccreditationSigUpdateComponent implements OnInit {
       accreditation.dayPassInfo
     );
   }
+  protected loadFonctionsRelationshipsOptions(): void {
+    const selectedCategory: any = (this.editForm.get('category') as FormControl).value;
+    if (selectedCategory) {
+      this.fonctionsSharedCollection = [];
+      const req = {
+        'categoryId.equals': selectedCategory.categoryId,
+      };
+      this.fonctionService
+        .query(req)
+        .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
+        .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
+    }
+  }
 
   protected loadRelationshipsOptions(): void {
     this.siteService
@@ -351,15 +365,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
       )
       .subscribe((categories: ICategorySig[]) => (this.categoriesSharedCollection = categories));
 
-    this.fonctionService
-      .query()
-      .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
-      .pipe(
-        map((fonctions: IFonctionSig[]) =>
-          this.fonctionService.addFonctionSigToCollectionIfMissing<IFonctionSig>(fonctions, this.accreditation?.fonction)
-        )
-      )
-      .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
+    this.loadFonctionsRelationshipsOptions();
 
     this.organizService
       .query()

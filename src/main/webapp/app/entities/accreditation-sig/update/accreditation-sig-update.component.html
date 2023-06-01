@@ -46,6 +46,7 @@
                 name="category"
                 formControlName="category"
                 [compareWith]="compareCategorySig"
+                (change)="this.loadFonctionsRelationshipsOptions()"
               >
                 <option [ngValue]="null"></option>
                 <option
