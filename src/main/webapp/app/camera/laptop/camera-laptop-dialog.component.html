@@ -7,12 +7,37 @@
 
   <div class="modal-body">
     <sigma-alert-error></sigma-alert-error>
-    <video #videoElement class="camera-video"></video>
-    <div class="captureButtonContainer">
-      <button type="button" id="sigma-confirm-capture-photo" (click)="this.capturePhoto()" class="btn btn-warning btn-circle btn-xl">
-        <fa-icon icon="camera"></fa-icon>
-      </button>
+    <div class="video-container" *ngIf="!error">
+      <video [class.show]="!isCaptured" [class.hide]="isCaptured" #video id="video" [width]="WIDTH" [height]="HEIGHT" autoplay></video>
+      <canvas [class.show]="isCaptured" [class.hide]="!isCaptured" #canvas id="canvas" [width]="WIDTH" [height]="HEIGHT"></canvas>
     </div>
+
+    <div class="snap-container">
+      <button
+        class="btn btn-primary"
+        *ngIf="!isCaptured"
+        (click)="capture()"
+        sigmaTranslate="sigmaEventsApp.accreditation.camera.takePhoto"
+      >
+        Take Photo
+      </button>
+      <button
+        class="btn btn-danger"
+        *ngIf="isCaptured"
+        (click)="removeCurrent()"
+        sigmaTranslate="sigmaEventsApp.accreditation.camera.reTakePhoto"
+      >
+        Take Another
+      </button>
+
+      <div *ngIf="error" class="text-danger mt-4">{{ error }}. Please click refresh</div>
+    </div>
+
+    <ul class="list-unstyled">
+      <li *ngFor="let src of captures; let idx = index" (click)="setPhoto(idx)">
+        <img [src]="src" height="50" />
+      </li>
+    </ul>
   </div>
 
   <div class="modal-footer">

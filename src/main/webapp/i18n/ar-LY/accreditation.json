@@ -31,6 +31,10 @@
       "search": {
         "placeHolder": "البحث"
       },
+      "camera": {
+        "takePhoto": "التقاط صورة",
+        "reTakePhoto": "التقاط صورة أخرى"
+      },
       "groups": {
         "id": "المعرف",
         "registration": "التسجيل",

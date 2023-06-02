@@ -31,6 +31,10 @@
       "search": {
         "placeHolder": "搜索"
       },
+      "camera": {
+        "takePhoto": "拍照",
+        "reTakePhoto": "重新拍照"
+      },
       "groups": {
         "id": "",
         "registration": "注册",

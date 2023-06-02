@@ -31,6 +31,10 @@
       "search": {
         "placeHolder": "Zoeken"
       },
+      "camera": {
+        "takePhoto": "Foto maken",
+        "reTakePhoto": "Nog een foto maken"
+      },
       "groups": {
         "id": "",
         "registration": "Registratie",

@@ -433,8 +433,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
     modalRef.closed.pipe().subscribe(data => {
       if (data) {
         this.editForm.patchValue({ accreditationPhoto: data });
-        this.editForm.patchValue({ accreditationPhotoContentType: 'image/jpeg' });
-        console.log(data);
+        this.editForm.patchValue({ accreditationPhotoContentType: 'image/png' });
       }
     });
   }

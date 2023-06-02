@@ -31,6 +31,10 @@
       "search": {
         "placeHolder": "Rechercher"
       },
+      "camera": {
+        "takePhoto": "Prendre une photo",
+        "reTakePhoto": "Prendre une autre"
+      },
       "groups": {
         "id": "",
         "registration": "Inscription",
