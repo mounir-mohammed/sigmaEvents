@@ -180,4 +180,17 @@ export class AccreditationSigService {
   validate(accreditation: IAccreditationSig): Observable<EntityResponseType> {
     return this.update(accreditation);
   }
+
+  public getAccreditation(id: number): Promise<IAccreditationSig | null> {
+    return new Promise(resolve => {
+      if (id) {
+        this.http.get<IAccreditationSig>(`${this.resourceUrl}/${id}`).subscribe(response => {
+          resolve(response);
+        });
+      } else {
+        console.error('getAccreditation() id is null');
+        resolve(null);
+      }
+    });
+  }
 }

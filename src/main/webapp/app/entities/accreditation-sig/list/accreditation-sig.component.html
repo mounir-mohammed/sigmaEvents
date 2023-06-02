@@ -97,12 +97,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationPhoto" [hidden]="!isColumnVisible('accreditationPhoto')">
+          <!-- <th scope="col" sigmaSortBy="accreditationPhoto" [hidden]="!isColumnVisible('accreditationPhoto')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPhoto">Accreditation Photo</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th> -->
           <th scope="col" sigmaSortBy="civility.civilityId" [hidden]="!isColumnVisible('civility')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span>
@@ -381,7 +381,7 @@
           <td [hidden]="!isColumnVisible('accreditationId')">
             <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
           </td>
-          <td [hidden]="!isColumnVisible('accreditationPhoto')">
+          <!-- <td [hidden]="!isColumnVisible('accreditationPhoto')">
             <a
               *ngIf="accreditation.accreditationPhoto"
               (click)="openFile(accreditation.accreditationPhoto, accreditation.accreditationPhotoContentType)"
@@ -395,7 +395,7 @@
             <span *ngIf="accreditation.accreditationPhoto"
               >{{ accreditation.accreditationPhotoContentType }}, {{ byteSize(accreditation.accreditationPhoto) }}</span
             >
-          </td>
+          </td> -->
           <td [hidden]="!isColumnVisible('civility')">
             <div *ngIf="accreditation.civility">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">

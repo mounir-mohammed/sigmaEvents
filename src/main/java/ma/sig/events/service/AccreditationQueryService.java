@@ -14,6 +14,7 @@ import ma.sig.events.security.AuthoritiesConstants;
 import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.criteria.AccreditationCriteria;
 import ma.sig.events.service.dto.AccreditationDTO;
+import ma.sig.events.service.mapper.AccreditationListMapper;
 import ma.sig.events.service.mapper.AccreditationMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -42,15 +43,19 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
 
     private final AccreditationMapper accreditationMapper;
 
+    private final AccreditationListMapper accreditationListMapper;
+
     private final UserService userService;
 
     public AccreditationQueryService(
         AccreditationRepository accreditationRepository,
         AccreditationMapper accreditationMapper,
+        AccreditationListMapper accreditationListMapper,
         UserService userService
     ) {
         this.accreditationRepository = accreditationRepository;
         this.accreditationMapper = accreditationMapper;
+        this.accreditationListMapper = accreditationListMapper;
         this.userService = userService;
     }
 
@@ -63,7 +68,7 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
     public List<AccreditationDTO> findByCriteria(AccreditationCriteria criteria) {
         log.debug("find by criteria : {}", criteria);
         final Specification<Accreditation> specification = createSpecification(criteria);
-        return accreditationMapper.toDto(accreditationRepository.findAll(specification));
+        return accreditationListMapper.toDto(accreditationRepository.findAll(specification));
     }
 
     /**
@@ -76,7 +81,7 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
     public Page<AccreditationDTO> findByCriteria(AccreditationCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Accreditation> specification = createSpecification(criteria);
-        return accreditationRepository.findAll(specification, page).map(accreditationMapper::toDto);
+        return accreditationRepository.findAll(specification, page).map(accreditationListMapper::toDto);
     }
 
     /**
@@ -89,7 +94,7 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
     public Page<AccreditationDTO> findByCriteriaForSearch(AccreditationCriteria criteria, Pageable page, String searchText) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Accreditation> specification = createSpecificationForSearchOneField(criteria, searchText);
-        return accreditationRepository.findAll(specification, page).map(accreditationMapper::toDto);
+        return accreditationRepository.findAll(specification, page).map(accreditationListMapper::toDto);
     }
 
     /**
@@ -485,6 +490,30 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
             specification =
                 specification.or(
                     buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationCarteProfessionnelleId)
+                );
+            specification =
+                specification.or(buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationEmail));
+            specification =
+                specification.or(buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationTel));
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationDescription)
+                );
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationOccupation)
+                );
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationCreatedByuser)
+                );
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationUpdatedByuser)
+                );
+            specification =
+                specification.or(
+                    buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationPrintedByuser)
                 );
         }
         //ADD FILTER START

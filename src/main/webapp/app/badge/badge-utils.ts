@@ -5,6 +5,7 @@ import { SettingType } from 'app/config/settingType';
 import { SourceType } from 'app/config/sourceType';
 import { DataUtils } from 'app/core/util/data-util.service';
 import { IAccreditationSig } from 'app/entities/accreditation-sig/accreditation-sig.model';
+import { AccreditationSigService } from 'app/entities/accreditation-sig/service/accreditation-sig.service';
 import { AreaSigService } from 'app/entities/area-sig/service/area-sig.service';
 import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
 import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
@@ -20,6 +21,7 @@ export class BadgeUtils {
   constructor(
     protected dataUtils: DataUtils,
     protected settingSigService: SettingSigService,
+    protected accreditationSigService: AccreditationSigService,
     protected areaSigService: AreaSigService,
     protected printingModelSigService: PrintingModelSigService
   ) {}
@@ -618,49 +620,57 @@ export class BadgeUtils {
 
   generateBadge(accreditation?: IAccreditationSig, modelData?: any, badgeContainerId?: string): Promise<Boolean> {
     console.log('START generateadge()');
-    return new Promise(resolve => {
+    return new Promise(async resolve => {
       if (modelData) {
         try {
-          setTimeout(() => {
-            if (accreditation) {
-              var accreditationJson = JSON.stringify(accreditation);
-              var data = JSON.parse(accreditationJson);
-              var badgeContainer = document.getElementById(badgeContainerId!);
-              //generate badge
-              var badge = document.createElement('div');
-              var badgeId =
-                accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
-              badge.id = badgeId;
-              badge.style.width = modelData.printingModel.page.width;
-              badge.style.height = modelData.printingModel.page.height;
-              badge.style.margin = modelData.printingModel.page.margin;
-              badge.style.border = modelData.printingModel.page.border;
-              badge.style.position = modelData.printingModel.page.position;
+          if (accreditation) {
+            await this.accreditationSigService.getAccreditation(accreditation?.accreditationId!).then(accreditationFullData => {
+              if (accreditationFullData) {
+                setTimeout(() => {
+                  var accreditationJson = JSON.stringify(accreditationFullData);
+                  var data = JSON.parse(accreditationJson);
+                  var badgeContainer = document.getElementById(badgeContainerId!);
+                  //generate badge
+                  var badge = document.createElement('div');
+                  var badgeId =
+                    accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
+                  badge.id = badgeId;
+                  badge.style.width = modelData.printingModel.page.width;
+                  badge.style.height = modelData.printingModel.page.height;
+                  badge.style.margin = modelData.printingModel.page.margin;
+                  badge.style.border = modelData.printingModel.page.border;
+                  badge.style.position = modelData.printingModel.page.position;
 
-              //add groups
-              this.createGroups(badge, modelData.printingModel, data).then(groupDivs => {
-                //add fields
-                this.addFields(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                  // add images
-                  this.addImages(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                    //add cadres
-                    this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                      //add codes
-                      this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                        badgeContainer?.appendChild(badge);
-                        this.deplaceGroupToParent(modelData.printingModel).then(() => {
-                          console.log('END generateadge()');
-                          return resolve(true);
+                  //add groups
+                  this.createGroups(badge, modelData.printingModel, data).then(groupDivs => {
+                    //add fields
+                    this.addFields(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                      // add images
+                      this.addImages(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                        //add cadres
+                        this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                          //add codes
+                          this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                            badgeContainer?.appendChild(badge);
+                            this.deplaceGroupToParent(modelData.printingModel).then(() => {
+                              console.log('END generateadge()');
+                              return resolve(true);
+                            });
+                          });
                         });
                       });
                     });
                   });
-                });
-              });
-            } else {
-              return resolve(false);
-            }
-          }, 500);
+                }, 500);
+              } else {
+                console.error('ERROR get Accreditation FULL DATA');
+                return resolve(false);
+              }
+            });
+          } else {
+            console.error('ERROR Accreditation ID IS NULL');
+            return resolve(false);
+          }
         } catch (error: any) {
           console.error(error.message);
           resolve(false);

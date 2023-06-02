@@ -264,7 +264,7 @@ export class AccreditationSigComponent implements OnInit {
 
   public defaultColumnVisibility: { name: string; visible: boolean; translationKey: string }[] = [
     { name: 'accreditationId', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationId' },
-    { name: 'accreditationPhoto', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPhoto' },
+    // { name: 'accreditationPhoto', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationPhoto' },
     { name: 'civility', visible: true, translationKey: 'sigmaEventsApp.accreditation.civility' },
     { name: 'accreditationFirstName', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationFirstName' },
     { name: 'accreditationSecondName', visible: true, translationKey: 'sigmaEventsApp.accreditation.accreditationSecondName' },
