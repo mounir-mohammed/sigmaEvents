@@ -7,7 +7,11 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { UserCanAccesEntities } from './core/auth/user-can-acces-entites';
+import { UserEventCanAccesEntities } from './core/auth/user-event-can-acces-entites';
+import { EventAdminEntityRoutingModule } from './entities/event-admin-entity-routing.module';
+import { AdminEntityRoutingModule } from './entities/admin-entity-routing.module';
+import { AdminEventCanAccesEntities } from './core/auth/admin-event-can-acces-entites';
+import { AdminCanAccesEntities } from './core/auth/admin-can-acces-entites';
 
 @NgModule({
   imports: [
@@ -31,8 +35,18 @@ import { UserCanAccesEntities } from './core/auth/user-can-acces-entites';
         },
         {
           path: '',
-          canActivate: [UserCanAccesEntities],
-          loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
+          canActivate: [UserEventCanAccesEntities],
+          loadChildren: () => import(`./entities/event-user-entity-routing.module`).then(m => m.EventUserEntityRoutingModule),
+        },
+        {
+          path: '',
+          canActivate: [AdminEventCanAccesEntities],
+          loadChildren: () => import(`./entities/event-admin-entity-routing.module`).then(m => m.EventAdminEntityRoutingModule),
+        },
+        {
+          path: '',
+          canActivate: [AdminCanAccesEntities],
+          loadChildren: () => import(`./entities/admin-entity-routing.module`).then(m => m.AdminEntityRoutingModule),
         },
         navbarRoute,
         ...errorRoute,

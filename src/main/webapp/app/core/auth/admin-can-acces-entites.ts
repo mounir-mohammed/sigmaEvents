@@ -8,13 +8,13 @@ import { Authority } from 'app/config/authority.constants';
 @Injectable({
   providedIn: 'root',
 })
-export class UserCanAccesEntities implements CanActivate {
+export class AdminCanAccesEntities implements CanActivate {
   constructor(private router: Router, private accountService: AccountService, private stateStorageService: StateStorageService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.accountService.identity().pipe(
       map(account => {
-        const hasProperty = this.accountService.hasAnyAuthority([Authority.ADMIN]) || account?.printingCentre?.event != null;
+        const hasProperty = this.accountService.hasAnyAuthority([Authority.ADMIN]);
         if (hasProperty) {
           return true;
         } else {

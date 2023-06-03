@@ -208,4 +208,4 @@ import { RouterModule } from '@angular/router';
     ]),
   ],
 })
-export class EntityRoutingModule {}
+export class AdminEntityRoutingModule {}
