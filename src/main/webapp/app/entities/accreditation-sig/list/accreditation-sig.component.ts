@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChildren } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
@@ -50,11 +50,12 @@ export class AccreditationSigComponent implements OnInit {
   faSpinner = faSpinner;
   filters: IFilterOptions = new FilterOptions();
 
-  itemsPerPage = ITEMS_PER_PAGE;
+  itemsPerPage = 0;
   totalItems = 0;
   page = 1;
   authority = Authority;
   searchText = null;
+  private lastTouchTime: number = 0;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -70,6 +71,7 @@ export class AccreditationSigComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadColumnVisibility();
+    this.loadListSize();
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.load();
 
@@ -135,6 +137,20 @@ export class AccreditationSigComponent implements OnInit {
       }
     });
     console.log(this.filters.filterOptions);
+  }
+
+  view(accreditationId: number): void {
+    this.router.navigate(['/accreditation-sig', accreditationId, 'view']);
+  }
+
+  onTouchStart(event: TouchEvent, accreditationId: number) {
+    const currentTime = new Date().getTime();
+    const timeSinceLastTouch = currentTime - this.lastTouchTime;
+    this.lastTouchTime = currentTime;
+
+    if (timeSinceLastTouch < 300) {
+      this.view(accreditationId);
+    }
   }
 
   print(accreditation: IAccreditationSig): void {
@@ -359,6 +375,39 @@ export class AccreditationSigComponent implements OnInit {
     if (!document.getElementById('select-columns')!.contains(event.target as Node)) {
       // Clicked outside the box
       this.closeColumnsCheckboxes();
+    }
+  }
+
+  changeListSize(listSize: any) {
+    this.itemsPerPage = listSize;
+    this.saveListSize();
+    this.load();
+  }
+
+  saveListSize(): void {
+    localStorage.setItem('listSize', JSON.stringify(this.itemsPerPage));
+  }
+
+  loadListSize(): void {
+    const listSize = localStorage.getItem('listSize');
+    if (listSize) {
+      this.itemsPerPage = JSON.parse(listSize);
+    } else {
+      this.itemsPerPage = ITEMS_PER_PAGE;
+    }
+    this.selectListSize();
+  }
+
+  selectListSize() {
+    const selectElement = document.getElementById('field_listSize') as HTMLSelectElement;
+    const valueToSelect = this.itemsPerPage.toString();
+
+    for (let i = 0; i < selectElement.options.length; i++) {
+      const option = selectElement.options[i] as HTMLOptionElement;
+      if (option.value === valueToSelect) {
+        option.selected = true;
+        break;
+      }
     }
   }
 }

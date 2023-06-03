@@ -141,12 +141,16 @@
         <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ accreditation.accreditationAttributs }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <span>{{ accreditation.accreditationStat | yesNo }}</span>
         </dd>
-        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated">Accreditation Activated</span></dt>
-        <dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated">Accreditation Activated</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ accreditation.accreditationActivated | yesNo }}</span>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.site">Site</span></dt>

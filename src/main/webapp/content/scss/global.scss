@@ -370,3 +370,13 @@ body .modal-dialog {
 .select-columns input[type='checkbox']:checked {
   background-color: gray; /* Change the background color to gray */
 }
+
+.badge-container {
+  overflow: scroll;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px; /* Adjust the margin between buttons as needed */
+}

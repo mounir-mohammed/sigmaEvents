@@ -24,7 +24,7 @@ export class AccreditationSigDeleteDialogComponent {
   }
 
   confirmDelete(accreditation?: IAccreditationSig): void {
-    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN, Authority.EVENT_ADMIN])) {
       this.confirmDeleteAdmin(accreditation);
     } else {
       this.confirmDeleteUser(accreditation);

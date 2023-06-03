@@ -27,7 +27,7 @@
   <sigma-filter [filters]="filters"></sigma-filter>
 
   <div class="container-fluid">
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-md-4">
         <div class="input-group">
           <input
@@ -49,16 +49,17 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="col-md-2" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_AV_SEARCH]">
+    <div class="d-flex button-container">
+      <div>
         <button type="button" class="btn btn-secondary" (click)="advancedSearch()">
           <fa-icon icon="search"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch"
             >Advanced Search</span
           >
         </button>
       </div>
-
-      <div class="select-columns col-md-2" id="select-columns">
+      <div class="select-columns" id="select-columns">
         <button type="button" class="btn btn-secondary" (click)="toggleColumnsCheckboxes()">
           <fa-icon icon="list-ul"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.costumView"
             >Costum View</span
@@ -79,6 +80,13 @@
             >
           </button>
         </div>
+      </div>
+      <div>
+        <select class="form-control" id="field_listSize" #listSize (change)="changeListSize(listSize.value)">
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
       </div>
     </div>
   </div>
@@ -337,7 +345,7 @@
             scope="col"
             sigmaSortBy="accreditationStat"
             [hidden]="!isColumnVisible('accreditationStat')"
-            *sigmaHasAnyAuthority="[authority.ADMIN]"
+            *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]"
           >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
@@ -382,6 +390,8 @@
           *ngFor="let accreditation of accreditations; trackBy: trackAccreditationId"
           data-cy="entityTable"
           [style.background]="accreditation.status?.statusColor"
+          (dblclick)="view(accreditation.accreditationId)"
+          (touchstart)="onTouchStart($event, accreditation.accreditationId)"
         >
           <td [hidden]="!isColumnVisible('accreditationId')">
             <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
@@ -523,7 +533,7 @@
           <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationAttributs')">
             {{ accreditation.accreditationAttributs }}
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationStat')">
+          <td *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]" [hidden]="!isColumnVisible('accreditationStat')">
             {{ accreditation.accreditationStat | yesNo }}
           </td>
           <td [hidden]="!isColumnVisible('accreditationActivated')">{{ accreditation.accreditationActivated | yesNo }}</td>
