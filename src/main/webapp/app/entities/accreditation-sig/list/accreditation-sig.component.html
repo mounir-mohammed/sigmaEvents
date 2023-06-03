@@ -51,7 +51,7 @@
       </div>
 
       <div class="col-md-2" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_AV_SEARCH]">
-        <button type="button" class="btn btn-secondary">
+        <button type="button" class="btn btn-secondary" (click)="advancedSearch()">
           <fa-icon icon="search"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch"
             >Advanced Search</span
           >
@@ -333,7 +333,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationStat" [hidden]="!isColumnVisible('accreditationStat')">
+          <th
+            scope="col"
+            sigmaSortBy="accreditationStat"
+            [hidden]="!isColumnVisible('accreditationStat')"
+            *sigmaHasAnyAuthority="[authority.ADMIN]"
+          >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -518,7 +523,9 @@
           <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationAttributs')">
             {{ accreditation.accreditationAttributs }}
           </td>
-          <td [hidden]="!isColumnVisible('accreditationStat')">{{ accreditation.accreditationStat | yesNo }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationStat')">
+            {{ accreditation.accreditationStat | yesNo }}
+          </td>
           <td [hidden]="!isColumnVisible('accreditationActivated')">{{ accreditation.accreditationActivated | yesNo }}</td>
           <td [hidden]="!isColumnVisible('attachement')">
             <div *ngIf="accreditation.attachement">

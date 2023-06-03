@@ -32,6 +32,7 @@ import { StatusSigService } from 'app/entities/status-sig/service/status-sig.ser
 import { HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
+import { AccreditationSigSearchDialogComponent } from '../search/accreditation-sig-search-dialog.component';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -121,6 +122,19 @@ export class AccreditationSigComponent implements OnInit {
           this.onResponseSuccess(res);
         },
       });
+  }
+
+  advancedSearch(): void {
+    const modalRef = this.modalService.open(AccreditationSigSearchDialogComponent, { size: 'lg', backdrop: 'static' });
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.pipe().subscribe(searchFilters => {
+      if (searchFilters) {
+        searchFilters.forEach((value: any, key: any) => {
+          this.filters.addFilter(key, value);
+        });
+      }
+    });
+    console.log(this.filters.filterOptions);
   }
 
   print(accreditation: IAccreditationSig): void {
