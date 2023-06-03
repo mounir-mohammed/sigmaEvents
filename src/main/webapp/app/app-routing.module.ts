@@ -7,6 +7,7 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/config/authority.constants';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
+import { UserCanAccesEntities } from './core/auth/user-can-acces-entites';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
         },
         {
           path: '',
+          canActivate: [UserCanAccesEntities],
           loadChildren: () => import(`./entities/entity-routing.module`).then(m => m.EntityRoutingModule),
         },
         navbarRoute,
