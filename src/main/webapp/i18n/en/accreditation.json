@@ -50,7 +50,7 @@
       },
 
       "accreditationId": "Id",
-      "accreditationFirstName": "Name",
+      "accreditationFirstName": "First Name",
       "accreditationSecondName": "Second Name",
       "accreditationLastName": "Last Name",
       "accreditationBirthDay": "Birth Day",

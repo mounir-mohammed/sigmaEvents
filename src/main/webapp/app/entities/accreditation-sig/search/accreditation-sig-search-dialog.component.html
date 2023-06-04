@@ -1,6 +1,8 @@
 <form [formGroup]="searchForm" (ngSubmit)="confirmSearch()">
   <div class="modal-header">
-    <h4 class="modal-title" data-cy="accreditationSearchDialogHeading">Advanced Search</h4>
+    <h4 class="modal-title" data-cy="accreditationSearchDialogHeading" sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch">
+      Advanced Search
+    </h4>
     <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
 
@@ -78,6 +80,9 @@
             #accreditationBirthDayDp="ngbDatepicker"
             formControlName="accreditationBirthDay"
           />
+          <button type="button" class="btn btn-secondary" (click)="accreditationBirthDayDp.toggle()">
+            <fa-icon icon="calendar-alt"></fa-icon>
+          </button>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationCinId" for="field_accreditationCinId"
@@ -97,6 +102,54 @@
         <div class="search-table-cell">
           <label
             class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationPasseportId"
+            for="field_accreditationPasseportId"
+            >Accreditation Passeport Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationPasseportId"
+            id="field_accreditationPasseportId"
+            data-cy="accreditationPasseportId"
+            formControlName="accreditationPasseportId"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCartePresseId"
+            for="field_accreditationCartePresseId"
+            >Accreditation Carte Presse Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationCartePresseId"
+            id="field_accreditationCartePresseId"
+            data-cy="accreditationCartePresseId"
+            formControlName="accreditationCartePresseId"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.accreditation.accreditationCarteProfessionnelleId"
+            for="field_accreditationCarteProfessionnelleId"
+            >Accreditation Carte Professionnelle Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationCarteProfessionnelleId"
+            id="field_accreditationCarteProfessionnelleId"
+            data-cy="accreditationCarteProfessionnelleId"
+            formControlName="accreditationCarteProfessionnelleId"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label
+            class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation"
             for="field_accreditationOccupation"
             >Accreditation Occupation</label
@@ -110,18 +163,67 @@
             formControlName="accreditationOccupation"
           />
         </div>
-        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
-            >Accreditation Stat</label
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationEmail" for="field_accreditationEmail"
+            >Accreditation Email</label
           >
           <input
-            type="checkbox"
-            class="form-check"
-            name="accreditationStat"
-            id="field_accreditationStat"
-            data-cy="accreditationStat"
-            formControlName="accreditationStat"
+            type="email"
+            class="form-control"
+            name="accreditationEmail"
+            id="field_accreditationEmail"
+            data-cy="accreditationEmail"
+            formControlName="accreditationEmail"
           />
+        </div>
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationTel" for="field_accreditationTel"
+            >Accreditation Tel</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accreditationTel"
+            id="field_accreditationTel"
+            data-cy="accreditationTel"
+            formControlName="accreditationTel"
+          />
+        </div>
+      </div>
+      <div class="search-table-row">
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.status" for="field_status">Status</label>
+          <select class="form-control" id="field_status" data-cy="status" name="status" formControlName="status">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="statusOption.statusId"
+              *ngFor="let statusOption of statusesSharedCollection"
+              [disabled]="statusOption.statusStat === false"
+            >
+              {{ statusOption.statusName }}
+            </option>
+          </select>
+        </div>
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationType" for="field_accreditationType"
+            >Accreditation Type</label
+          >
+          <select
+            class="form-control"
+            id="field_accreditationType"
+            data-cy="accreditationType"
+            name="accreditationType"
+            formControlName="accreditationType"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="accreditationTypeOption.accreditationTypeId"
+              *ngFor="let accreditationTypeOption of accreditationTypesSharedCollection"
+              [disabled]="accreditationTypeOption.accreditationTypeStat === false"
+            >
+              {{ accreditationTypeOption.accreditationTypeValue }}
+            </option>
+          </select>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated" for="field_accreditationActivated"
@@ -210,23 +312,15 @@
           </select>
         </div>
         <div class="search-table-cell">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationType" for="field_accreditationType"
-            >Accreditation Type</label
-          >
-          <select
-            class="form-control"
-            id="field_accreditationType"
-            data-cy="accreditationType"
-            name="accreditationType"
-            formControlName="accreditationType"
-          >
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.nationality" for="field_nationality">Nationality</label>
+          <select class="form-control" id="field_nationality" data-cy="nationality" name="nationality" formControlName="nationality">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="accreditationTypeOption.accreditationTypeId"
-              *ngFor="let accreditationTypeOption of accreditationTypesSharedCollection"
-              [disabled]="accreditationTypeOption.accreditationTypeStat === false"
+              [ngValue]="nationalityOption.nationalityId"
+              *ngFor="let nationalityOption of nationalitiesSharedCollection"
+              [disabled]="nationalityOption.nationalityStat === false"
             >
-              {{ accreditationTypeOption.accreditationTypeValue }}
+              {{ nationalityOption.nationalityValue }}
             </option>
           </select>
         </div>
@@ -286,67 +380,6 @@
           </select>
         </div>
         <div class="search-table-cell">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.nationality" for="field_nationality">Nationality</label>
-          <select class="form-control" id="field_nationality" data-cy="nationality" name="nationality" formControlName="nationality">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="nationalityOption.nationalityId"
-              *ngFor="let nationalityOption of nationalitiesSharedCollection"
-              [disabled]="nationalityOption.nationalityStat === false"
-            >
-              {{ nationalityOption.nationalityValue }}
-            </option>
-          </select>
-        </div>
-        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
-          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
-            <option [ngValue]="null"></option>
-            <option [ngValue]="eventOption.eventId" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
-          </select>
-        </div>
-        <div class="search-table-cell">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.status" for="field_status">Status</label>
-          <select class="form-control" id="field_status" data-cy="status" name="status" formControlName="status">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="statusOption.statusId"
-              *ngFor="let statusOption of statusesSharedCollection"
-              [disabled]="statusOption.statusStat === false"
-            >
-              {{ statusOption.statusName }}
-            </option>
-          </select>
-        </div>
-        <div class="search-table-cell">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.country" for="field_country">Country</label>
-          <select class="form-control" id="field_country" data-cy="country" name="country" formControlName="country">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="countryOption.countryId"
-              *ngFor="let countryOption of countriesSharedCollection"
-              [disabled]="countryOption.countryStat === false"
-            >
-              {{ countryOption.countryName }}
-            </option>
-          </select>
-        </div>
-        <div class="search-table-cell">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
-          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="cityOption.cityId"
-              *ngFor="let cityOption of citiesSharedCollection"
-              [disabled]="cityOption.cityStat === false"
-            >
-              {{ cityOption.cityName }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="search-table-row">
-        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.attachement" for="field_attachement">Attachement</label>
           <select class="form-control" id="field_attachement" data-cy="attachement" name="attachement" formControlName="attachement">
             <option [ngValue]="null"></option>
@@ -386,59 +419,56 @@
           </select>
         </div>
         <div class="search-table-cell">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationEmail" for="field_accreditationEmail"
-            >Accreditation Email</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            name="accreditationEmail"
-            id="field_accreditationEmail"
-            data-cy="accreditationEmail"
-            formControlName="accreditationEmail"
-          />
-          <div
-            *ngIf="
-              searchForm.get('accreditationEmail')!.invalid &&
-              (searchForm.get('accreditationEmail')!.dirty || searchForm.get('accreditationEmail')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="searchForm.get('accreditationEmail')!.invalid"
-              sigmaTranslate="global.messages.validate.email.invalid"
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.country" for="field_country">Country</label>
+          <select class="form-control" id="field_country" data-cy="country" name="country" formControlName="country">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="countryOption.countryId"
+              *ngFor="let countryOption of countriesSharedCollection"
+              [disabled]="countryOption.countryStat === false"
             >
-              Your email is invalid.
-            </small>
-          </div>
+              {{ countryOption.countryName }}
+            </option>
+          </select>
         </div>
         <div class="search-table-cell">
-          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationTel" for="field_accreditationTel"
-            >Accreditation Tel</label
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
+          <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="cityOption.cityId"
+              *ngFor="let cityOption of citiesSharedCollection"
+              [disabled]="cityOption.cityStat === false"
+            >
+              {{ cityOption.cityName }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="search-table-row" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
+            >Accreditation Stat</label
           >
           <input
-            type="text"
-            class="form-control"
-            name="accreditationTel"
-            id="field_accreditationTel"
-            data-cy="accreditationTel"
-            formControlName="accreditationTel"
+            type="checkbox"
+            class="form-check"
+            name="accreditationStat"
+            id="field_accreditationStat"
+            data-cy="accreditationStat"
+            formControlName="accreditationStat"
           />
-          <div
-            *ngIf="
-              searchForm.get('accreditationTel')!.invalid &&
-              (searchForm.get('accreditationTel')!.dirty || searchForm.get('accreditationTel')!.touched)
-            "
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="searchForm.get('accreditationTel')!.invalid"
-              sigmaTranslate="global.messages.validate.phone.invalid"
-            >
-              Your phone number is invalid.
-            </small>
-          </div>
         </div>
+        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
+          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption.eventId" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
+          </select>
+        </div>
+        <div class="search-table-cell"></div>
+        <div class="search-table-cell"></div>
+        <div class="search-table-cell"></div>
       </div>
     </div>
   </div>

@@ -37,6 +37,7 @@ import { HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Authority } from 'app/config/authority.constants';
+import dayjs from 'dayjs';
 
 @Component({
   templateUrl: './accreditation-sig-search-dialog.component.html',
@@ -52,6 +53,9 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     accreditationLastName: new FormControl(),
     accreditationBirthDay: new FormControl(),
     accreditationCinId: new FormControl(),
+    accreditationPasseportId: new FormControl(),
+    accreditationCartePresseId: new FormControl(),
+    accreditationCarteProfessionnelleId: new FormControl(),
     accreditationOccupation: new FormControl(),
     accreditationStat: new FormControl(),
     accreditationActivated: new FormControl(),
@@ -141,11 +145,25 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     }
 
     if (this.searchForm.get('accreditationBirthDay')?.value) {
-      this.filters.set('accreditationBirthDay.equals', this.searchForm.get('accreditationBirthDay')?.value);
+      console.log(this.searchForm.get('accreditationBirthDay')?.value);
+      console.log(dayjs(this.searchForm.get('accreditationBirthDay')?.value).format('YYYY-MM-DD'));
+      this.filters.set('accreditationBirthDay.equals', dayjs(this.searchForm.get('accreditationBirthDay')?.value).format('YYYY-MM-DD'));
     }
 
     if (this.searchForm.get('accreditationCinId')?.value) {
       this.filters.set('accreditationCinId.contains', this.searchForm.get('accreditationCinId')?.value);
+    }
+
+    if (this.searchForm.get('accreditationPasseportId')?.value) {
+      this.filters.set('accreditationPasseportId.contains', this.searchForm.get('accreditationPasseportId')?.value);
+    }
+
+    if (this.searchForm.get('accreditationCartePresseId')?.value) {
+      this.filters.set('accreditationCartePresseId.contains', this.searchForm.get('accreditationCartePresseId')?.value);
+    }
+
+    if (this.searchForm.get('accreditationCarteProfessionnelleId')?.value) {
+      this.filters.set('accreditationCarteProfessionnelleId.contains', this.searchForm.get('accreditationCarteProfessionnelleId')?.value);
     }
 
     if (this.searchForm.get('accreditationOccupation')?.value) {
@@ -165,23 +183,29 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     }
 
     if (this.searchForm.get('accreditationDateStart')?.value) {
-      this.filters.set('accreditationDateStart.equals', this.searchForm.get('accreditationDateStart')?.value);
+      this.filters.set(
+        'accreditationDateStart.greaterThanOrEqual',
+        dayjs(this.searchForm.get('accreditationDateStart')?.value).format('YYYY-MM-DDTHH:mm:ss.SSSZ')
+      );
     }
 
     if (this.searchForm.get('accreditationDateEnd')?.value) {
-      this.filters.set('accreditationDateEnd.equals', this.searchForm.get('accreditationDateEnd')?.value);
+      this.filters.set(
+        'accreditationDateEnd.lessThanOrEqual',
+        dayjs(this.searchForm.get('accreditationDateEnd')?.value).format('YYYY-MM-DDTHH:mm:ss.SSSZ')
+      );
     }
 
     if (this.searchForm.get('category')?.value) {
-      this.filters.set('categoryId.equals', this.searchForm.get('category')?.value);
+      this.filters.set('categoryId.in', this.searchForm.get('category')?.value);
     }
 
     if (this.searchForm.get('fonction')?.value) {
-      this.filters.set('fonctionId.equals', this.searchForm.get('fonction')?.value);
+      this.filters.set('fonctionId.in', this.searchForm.get('fonction')?.value);
     }
 
     if (this.searchForm.get('accreditationType')?.value) {
-      this.filters.set('accreditationTypeId.equals', this.searchForm.get('accreditationType')?.value);
+      this.filters.set('accreditationTypeId.in', this.searchForm.get('accreditationType')?.value);
     }
 
     if (this.searchForm.get('sites')?.value) {
@@ -189,47 +213,47 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     }
 
     if (this.searchForm.get('organiz')?.value) {
-      this.filters.set('organizId.equals', this.searchForm.get('organiz')?.value);
+      this.filters.set('organizId.in', this.searchForm.get('organiz')?.value);
     }
 
     if (this.searchForm.get('sexe')?.value) {
-      this.filters.set('sexeId.equals', this.searchForm.get('sexe')?.value);
+      this.filters.set('sexeId.in', this.searchForm.get('sexe')?.value);
     }
 
     if (this.searchForm.get('civility')?.value) {
-      this.filters.set('civilityId.equals', this.searchForm.get('civility')?.value);
+      this.filters.set('civilityId.in', this.searchForm.get('civility')?.value);
     }
 
     if (this.searchForm.get('nationality')?.value) {
-      this.filters.set('nationalityId.equals', this.searchForm.get('nationality')?.value);
+      this.filters.set('nationalityId.in', this.searchForm.get('nationality')?.value);
     }
 
     if (this.searchForm.get('event')?.value) {
-      this.filters.set('eventId.equals', this.searchForm.get('event')?.value);
+      this.filters.set('eventId.in', this.searchForm.get('event')?.value);
     }
 
     if (this.searchForm.get('status')?.value) {
-      this.filters.set('statusId.equals', this.searchForm.get('status')?.value);
+      this.filters.set('statusId.in', this.searchForm.get('status')?.value);
     }
 
     if (this.searchForm.get('country')?.value) {
-      this.filters.set('countryId.equals', this.searchForm.get('country')?.value);
+      this.filters.set('countryId.in', this.searchForm.get('country')?.value);
     }
 
     if (this.searchForm.get('city')?.value) {
-      this.filters.set('cityId.equals', this.searchForm.get('city')?.value);
+      this.filters.set('cityId.in', this.searchForm.get('city')?.value);
     }
 
     if (this.searchForm.get('attachement')?.value) {
-      this.filters.set('attachementId.equals', this.searchForm.get('attachement')?.value);
+      this.filters.set('attachementId.in', this.searchForm.get('attachement')?.value);
     }
 
     if (this.searchForm.get('code')?.value) {
-      this.filters.set('codeId.equals', this.searchForm.get('code')?.value);
+      this.filters.set('codeId.in', this.searchForm.get('code')?.value);
     }
 
     if (this.searchForm.get('dayPassInfo')?.value) {
-      this.filters.set('dayPassInfoId.equals', this.searchForm.get('dayPassInfo')?.value);
+      this.filters.set('dayPassInfoId.in', this.searchForm.get('dayPassInfo')?.value);
     }
 
     if (this.searchForm.get('accreditationEmail')?.value) {
