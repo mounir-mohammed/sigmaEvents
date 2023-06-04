@@ -68,7 +68,7 @@
         <div *ngIf="showColumnsCheckboxes" class="checkbox-list" (clickOutside)="closeColumnsCheckboxes()">
           <ul>
             <li *ngFor="let column of columns">
-              <label>
+              <label class="visibilityCheckboxes">
                 <input type="checkbox" [(ngModel)]="column.visible" (change)="toggleColumnVisibility()" />
                 {{ column.translationKey | translate }}
               </label>

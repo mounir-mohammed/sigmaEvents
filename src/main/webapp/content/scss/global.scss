@@ -350,7 +350,7 @@ body .modal-dialog {
   column-count: 4; /* Set the number of columns */
   column-gap: 20px; /* Adjust the gap between columns */
   position: absolute;
-  z-index: 1;
+  z-index: 5;
   background-color: #f0f0f0;
   margin-top: 10px;
 }
@@ -380,4 +380,8 @@ body .modal-dialog {
   display: flex;
   justify-content: flex-start;
   gap: 10px; /* Adjust the margin between buttons as needed */
+}
+
+.visibilityCheckboxes {
+  white-space: nowrap;
 }

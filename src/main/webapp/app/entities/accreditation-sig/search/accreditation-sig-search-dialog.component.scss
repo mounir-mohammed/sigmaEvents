@@ -1,14 +1,19 @@
-.table {
-  display: flex;
-  flex-direction: column;
+.search-table {
+  display: table;
+  overflow: scroll;
 }
 
-.row {
-  display: flex;
+.search-table-row {
+  display: table-row;
 }
 
-.cell {
-  flex: 1;
-  // border: 1px solid #000;
+.search-table-cell {
   padding: 10px;
+  display: table-cell;
+  min-width: 220px;
+  white-space: nowrap;
+}
+
+.scrollable {
+  overflow: scroll;
 }

@@ -4,12 +4,12 @@
     <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
   </div>
 
-  <div class="modal-body">
+  <div class="modal-body scrollable">
     <sigma-alert-error></sigma-alert-error>
 
-    <div class="table">
-      <div class="row">
-        <div class="cell">
+    <div class="search-table">
+      <div class="search-table-row">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationId" for="field_accreditationId"
             >Accreditation Id</label
           >
@@ -22,7 +22,7 @@
             formControlName="accreditationId"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName" for="field_accreditationFirstName"
             >Accreditation First Name</label
           >
@@ -35,7 +35,7 @@
             formControlName="accreditationFirstName"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationSecondName"
@@ -51,7 +51,7 @@
             formControlName="accreditationSecondName"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName" for="field_accreditationLastName"
             >Accreditation Last Name</label
           >
@@ -64,7 +64,7 @@
             formControlName="accreditationLastName"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationBirthDay" for="field_accreditationBirthDay"
             >Accreditation Birth Day</label
           >
@@ -79,7 +79,7 @@
             formControlName="accreditationBirthDay"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationCinId" for="field_accreditationCinId"
             >Accreditation Cin Id</label
           >
@@ -93,8 +93,8 @@
           />
         </div>
       </div>
-      <div class="row">
-        <div class="cell">
+      <div class="search-table-row">
+        <div class="search-table-cell">
           <label
             class="form-label"
             sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation"
@@ -110,7 +110,7 @@
             formControlName="accreditationOccupation"
           />
         </div>
-        <div class="cell" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
             >Accreditation Stat</label
           >
@@ -123,7 +123,7 @@
             formControlName="accreditationStat"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated" for="field_accreditationActivated"
             >Accreditation Activated</label
           >
@@ -136,7 +136,7 @@
             formControlName="accreditationActivated"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat" for="field_accreditationPrinted"
             >Accreditation Printed</label
           >
@@ -149,7 +149,7 @@
             formControlName="accreditationPrinted"
           />
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateStart" for="field_accreditationDateStart"
             >Accreditation Date Start</label
           >
@@ -165,7 +165,7 @@
             />
           </div>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateEnd" for="field_accreditationDateEnd"
             >Accreditation Date End</label
           >
@@ -182,8 +182,8 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="cell">
+      <div class="search-table-row">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.category" for="field_category">Category</label>
           <select class="form-control" id="field_category" data-cy="category" name="category" formControlName="category">
             <option [ngValue]="null"></option>
@@ -196,7 +196,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.fonction" for="field_fonction">Fonction</label>
           <select class="form-control" id="field_fonction" data-cy="fonction" name="fonction" formControlName="fonction">
             <option [ngValue]="null"></option>
@@ -209,7 +209,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationType" for="field_accreditationType"
             >Accreditation Type</label
           >
@@ -230,7 +230,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label sigmaTranslate="sigmaEventsApp.accreditation.site" for="field_sites">Site</label>
           <select class="form-control" id="field_sites" data-cy="site" multiple name="sites" formControlName="sites">
             <option
@@ -242,7 +242,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.organiz" for="field_organiz">Organiz</label>
           <select class="form-control" id="field_organiz" data-cy="organiz" name="organiz" formControlName="organiz">
             <option [ngValue]="null"></option>
@@ -255,7 +255,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe" for="field_sexe"
             >Accreditation Sexe</label
           >
@@ -271,8 +271,8 @@
           </select>
         </div>
       </div>
-      <div class="row">
-        <div class="cell">
+      <div class="search-table-row">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.civility" for="field_civility">Civility</label>
           <select class="form-control" id="field_civility" data-cy="civility" name="civility" formControlName="civility">
             <option [ngValue]="null"></option>
@@ -285,7 +285,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.nationality" for="field_nationality">Nationality</label>
           <select class="form-control" id="field_nationality" data-cy="nationality" name="nationality" formControlName="nationality">
             <option [ngValue]="null"></option>
@@ -298,14 +298,14 @@
             </option>
           </select>
         </div>
-        <div class="cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
+        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
           <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
             <option [ngValue]="null"></option>
             <option [ngValue]="eventOption.eventId" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.status" for="field_status">Status</label>
           <select class="form-control" id="field_status" data-cy="status" name="status" formControlName="status">
             <option [ngValue]="null"></option>
@@ -318,7 +318,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.country" for="field_country">Country</label>
           <select class="form-control" id="field_country" data-cy="country" name="country" formControlName="country">
             <option [ngValue]="null"></option>
@@ -331,7 +331,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.city" for="field_city">City</label>
           <select class="form-control" id="field_city" data-cy="city" name="city" formControlName="city">
             <option [ngValue]="null"></option>
@@ -345,8 +345,8 @@
           </select>
         </div>
       </div>
-      <div class="row">
-        <div class="cell">
+      <div class="search-table-row">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.attachement" for="field_attachement">Attachement</label>
           <select class="form-control" id="field_attachement" data-cy="attachement" name="attachement" formControlName="attachement">
             <option [ngValue]="null"></option>
@@ -359,7 +359,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
           <select class="form-control" id="field_code" data-cy="code" name="code" formControlName="code">
             <option [ngValue]="null"></option>
@@ -372,7 +372,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo" for="field_dayPassInfo">Day Pass Info</label>
           <select class="form-control" id="field_dayPassInfo" data-cy="dayPassInfo" name="dayPassInfo" formControlName="dayPassInfo">
             <option [ngValue]="null"></option>
@@ -385,7 +385,7 @@
             </option>
           </select>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationEmail" for="field_accreditationEmail"
             >Accreditation Email</label
           >
@@ -412,7 +412,7 @@
             </small>
           </div>
         </div>
-        <div class="cell">
+        <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationTel" for="field_accreditationTel"
             >Accreditation Tel</label
           >
