@@ -9,7 +9,11 @@
         "notFound": "لم يتم العثور على تصديقات",
         "costumView": "عرض مخصص",
         "DefaultView": "العرض الافتراضي",
-        "advancedSearch": "بحث متقدم"
+        "advancedSearch": "بحث متقدم",
+        "massUpdate": "تحديث جماعي",
+        "massPrint": "طباعة جماعية",
+        "upload": "تحميل",
+        "export": "تصدير"
       },
       "created": "تم إنشاء تصديق جديد بالمعرف {{ param }}",
       "updated": "تم تحديث تصديق بالمعرف {{ param }}",

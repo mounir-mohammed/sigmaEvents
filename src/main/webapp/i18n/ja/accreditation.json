@@ -9,7 +9,11 @@
         "notFound": "認定が見つかりません",
         "costumView": "カスタムビュー",
         "DefaultView": "デフォルトビュー",
-        "advancedSearch": "高度な検索"
+        "advancedSearch": "高度な検索",
+        "massUpdate": "一括更新",
+        "massPrint": "一括印刷",
+        "upload": "アップロード",
+        "export": "エクスポート"
       },
       "created": "新しい認定が識別子 {{ param }} で作成されました",
       "updated": "認定が識別子 {{ param }} で更新されました",

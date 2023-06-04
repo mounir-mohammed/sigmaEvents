@@ -9,7 +9,11 @@
         "notFound": "Nessuna Accreditazione trovata",
         "costumView": "Vista personalizzata",
         "DefaultView": "Vista predefinita",
-        "advancedSearch": "Ricerca avanzata"
+        "advancedSearch": "Ricerca avanzata",
+        "massUpdate": "Aggiornamento di massa",
+        "massPrint": "Stampa di massa",
+        "upload": "Carica",
+        "export": "Esporta"
       },
       "created": "Una nuova Accreditazione è stata creata con l'identificatore {{ param }}",
       "updated": "Un'Accreditazione è stata aggiornata con l'identificatore {{ param }}",

@@ -9,7 +9,11 @@
         "notFound": "Keine Akkreditierungen gefunden",
         "costumView": "Benutzerdefinierte Ansicht",
         "DefaultView": "Standardansicht",
-        "advancedSearch": "Erweiterte Suche"
+        "advancedSearch": "Erweiterte Suche",
+        "massUpdate": "Massenaktualisierung",
+        "massPrint": "Massendruck",
+        "upload": "Hochladen",
+        "export": "Exportieren"
       },
       "created": "Eine neue Akkreditierung wurde mit der Kennung {{ param }} erstellt",
       "updated": "Eine Akkreditierung wurde mit der Kennung {{ param }} aktualisiert",

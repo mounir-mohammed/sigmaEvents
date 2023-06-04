@@ -56,6 +56,8 @@ export class AccreditationSigComponent implements OnInit {
   authority = Authority;
   searchText = null;
   private lastTouchTime: number = 0;
+  selectAllRows: boolean = false;
+  selectedCount: number = 0;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -410,4 +412,42 @@ export class AccreditationSigComponent implements OnInit {
       }
     }
   }
+
+  onRowCheckboxChange(accreditation: IAccreditationSig) {
+    accreditation.selected = !accreditation.selected;
+    this.updateSelectedCount();
+  }
+
+  onSelectAllRowsChange() {
+    for (const accreditation of this.accreditations!) {
+      accreditation.selected = this.selectAllRows;
+    }
+    this.updateSelectedCount();
+  }
+
+  getSelectedIds(): number[] {
+    const selectedIds: number[] = [];
+    for (const accreditation of this.accreditations!) {
+      if (accreditation.selected) {
+        selectedIds.push(accreditation.accreditationId);
+      }
+    }
+    return selectedIds;
+  }
+
+  updateSelectedCount() {
+    this.selectedCount = this.accreditations!.filter(accreditation => accreditation.selected).length;
+  }
+
+  massUpdate(): void {
+    console.log(this.getSelectedIds());
+  }
+
+  massPrint(): void {
+    console.log(this.getSelectedIds());
+  }
+
+  upload(): void {}
+
+  export(): void {}
 }

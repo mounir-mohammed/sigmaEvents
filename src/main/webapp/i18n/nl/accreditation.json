@@ -9,7 +9,11 @@
         "notFound": "Geen accreditaties gevonden",
         "costumView": "Aangepaste weergave",
         "DefaultView": "Standaardweergave",
-        "advancedSearch": "Geavanceerd zoeken"
+        "advancedSearch": "Geavanceerd zoeken",
+        "massUpdate": "Massa-update",
+        "massPrint": "Massa-afdruk",
+        "upload": "Uploaden",
+        "export": "Exporteren"
       },
       "created": "Een nieuwe accreditatie is aangemaakt met identificatienummer {{ param }}",
       "updated": "Een accreditatie is bijgewerkt met identificatienummer {{ param }}",

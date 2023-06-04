@@ -83,23 +83,25 @@
       </div>
       <!--START ADD MULTI SELECTION BUTTONS-->
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <button type="button" class="btn btn-info">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;&nbsp;<span class="d-none d-md-inline">Mass Update</span>
+        <button type="button" class="btn btn-info" (click)="massUpdate()">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massUpdate"
+            >Mass Update</span
+          >
+        </button>
+      </div>
+      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <button type="button" class="btn btn-info" (click)="massPrint()">
+          <fa-icon icon="print"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massPrint">Mass Print</span>
         </button>
       </div>
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
         <button type="button" class="btn btn-info">
-          <fa-icon icon="print"></fa-icon>&nbsp;&nbsp;<span class="d-none d-md-inline">Mass Print</span>
+          <fa-icon icon="upload"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.upload">Upload</span>
         </button>
       </div>
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
         <button type="button" class="btn btn-info">
-          <fa-icon icon="upload"></fa-icon>&nbsp;&nbsp;<span class="d-none d-md-inline">Upload</span>
-        </button>
-      </div>
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <button type="button" class="btn btn-info">
-          <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span class="d-none d-md-inline">Export</span>
+          <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.export">Export</span>
         </button>
       </div>
       <!--END ADD MULTI SELECTION BUTTONS-->
@@ -121,6 +123,12 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th>
+            <div class="count-checkbox-label-container">
+              <input type="checkbox" [(ngModel)]="selectAllRows" (change)="onSelectAllRowsChange()" />
+              <label *ngIf="selectedCount" class="count-checkbox-label">({{ selectedCount }})</label>
+            </div>
+          </th>
           <th scope="col" sigmaSortBy="accreditationId" [hidden]="!isColumnVisible('accreditationId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Accreditation Id</span>
@@ -415,6 +423,9 @@
           (dblclick)="view(accreditation.accreditationId)"
           (touchstart)="onTouchStart($event, accreditation.accreditationId)"
         >
+          <td>
+            <input type="checkbox" [checked]="accreditation.selected" (change)="onRowCheckboxChange(accreditation)" />
+          </td>
           <td [hidden]="!isColumnVisible('accreditationId')">
             <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
           </td>

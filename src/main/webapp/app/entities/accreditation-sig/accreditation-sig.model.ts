@@ -95,6 +95,7 @@ export interface IAccreditationSig {
   attachement?: Pick<IAttachementSig, 'attachementId' | 'attachementName' | 'attachementStat'> | null;
   code?: Pick<ICodeSig, 'codeId' | 'codeValue' | 'codeUsed' | 'codeType' | 'codeStat'> | null;
   dayPassInfo?: Pick<IDayPassInfoSig, 'dayPassInfoId' | 'dayPassInfoName' | 'dayPassInfoStat'> | null;
+  selected?: boolean;
 }
 
 export type NewAccreditationSig = Omit<IAccreditationSig, 'accreditationId'> & { accreditationId: null };

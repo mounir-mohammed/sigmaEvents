@@ -9,7 +9,11 @@
         "notFound": "未找到认证",
         "costumView": "自定义视图",
         "DefaultView": "默认视图",
-        "advancedSearch": "高级搜索"
+        "advancedSearch": "高级搜索",
+        "massUpdate": "批量更新",
+        "massPrint": "批量打印",
+        "upload": "上传",
+        "export": "导出"
       },
       "created": "已创建新的认证，标识符为 {{ param }}",
       "updated": "已更新标识符为 {{ param }} 的认证",

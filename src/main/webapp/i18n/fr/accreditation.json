@@ -9,7 +9,11 @@
         "notFound": "Aucune accréditation trouvé",
         "costumView": "Vue personnalisée",
         "DefaultView": "Vue par défaut",
-        "advancedSearch": "Recherche avancée"
+        "advancedSearch": "Recherche avancée",
+        "massUpdate": "Mise à jour en masse",
+        "massPrint": "Impression en masse",
+        "upload": "Télécharger",
+        "export": "Exporter"
       },
       "created": "Une nouvelle Accreditation a été créé avec l'identifiant {{ param }}",
       "updated": "L'accréditation avec l'identifiant {{ param }} a été mis à jour",

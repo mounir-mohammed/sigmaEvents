@@ -9,7 +9,11 @@
         "notFound": "No se encontraron acreditaciones",
         "costumView": "Vista personalizada",
         "DefaultView": "Vista predeterminada",
-        "advancedSearch": "Búsqueda avanzada"
+        "advancedSearch": "Búsqueda avanzada",
+        "massUpdate": "Actualización masiva",
+        "massPrint": "Impresión masiva",
+        "upload": "Subir",
+        "export": "Exportar"
       },
       "created": "Se ha creado una nueva acreditación con el identificador {{ param }}",
       "updated": "Se ha actualizado una acreditación con el identificador {{ param }}",

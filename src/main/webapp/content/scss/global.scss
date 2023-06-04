@@ -385,3 +385,12 @@ body .modal-dialog {
 .visibilityCheckboxes {
   white-space: nowrap;
 }
+
+.count-checkbox-label-container {
+  display: flex;
+  align-items: center;
+}
+
+.count-checkbox-label {
+  margin-left: 5px; /* Adjust the margin as needed */
+}
