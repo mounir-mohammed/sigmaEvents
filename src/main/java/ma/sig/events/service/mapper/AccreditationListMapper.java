@@ -52,6 +52,7 @@ public interface AccreditationListMapper extends EntityMapper<AccreditationDTO, 
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "eventId", source = "eventId")
     @Mapping(target = "eventName", source = "eventName")
+    @Mapping(target = "eventAbreviation", source = "eventAbreviation")
     @Mapping(target = "eventStat", source = "eventStat")
     @Mapping(target = "eventPrintingModelId", source = "eventPrintingModelId")
     EventDTO toDtoEventEventId(Event event);

@@ -17,6 +17,7 @@ import {
   DEFAULT_SORT_DATA,
   ITEM_PRINTED_EVENT,
   SEARCH_TEXT,
+  ITEM_MASS_PRINTED_EVENT,
 } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, AccreditationSigService } from '../service/accreditation-sig.service';
 import { AccreditationSigDeleteDialogComponent } from '../delete/accreditation-sig-delete-dialog.component';
@@ -35,6 +36,7 @@ import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig
 import { AccreditationSigSearchDialogComponent } from '../search/accreditation-sig-search-dialog.component';
 import { ExportUtil } from 'app/shared/util/export.shared';
 import { TranslateService } from '@ngx-translate/core';
+import { AccreditationMassSigPrintDialogComponent } from '../print/accreditation-sig-mass-print-dialog.component';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -428,26 +430,43 @@ export class AccreditationSigComponent implements OnInit {
     this.updateSelectedCount();
   }
 
-  getSelectedIds(): number[] {
-    const selectedIds: number[] = [];
+  getSelectedAccreditations(): IAccreditationSig[] {
+    const selectedAccreditations: IAccreditationSig[] = [];
     for (const accreditation of this.accreditations!) {
       if (accreditation.selected) {
-        selectedIds.push(accreditation.accreditationId);
+        selectedAccreditations.push(accreditation);
       }
     }
-    return selectedIds;
+    return selectedAccreditations;
   }
 
   updateSelectedCount() {
     this.selectedCount = this.accreditations!.filter(accreditation => accreditation.selected).length;
   }
 
-  massUpdate(): void {
-    console.log(this.getSelectedIds());
-  }
+  massUpdate(): void {}
 
   massPrint(): void {
-    console.log(this.getSelectedIds());
+    if (this.selectedCount) {
+      const modalRef = this.modalService.open(AccreditationMassSigPrintDialogComponent, { size: 'lg', backdrop: 'static' });
+      const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.PRINTED).shift();
+      const accreditations: IAccreditationSig[] = this.getSelectedAccreditations();
+      modalRef.componentInstance.accreditations = accreditations;
+      modalRef.componentInstance.status = status;
+      // // unsubscribe not needed because closed completes on modal close
+      modalRef.closed
+        .pipe(
+          filter(reason => reason === ITEM_MASS_PRINTED_EVENT),
+          switchMap(() => this.loadFromBackendWithRouteInformations())
+        )
+        .subscribe({
+          next: (res: EntityArrayResponseType) => {
+            this.onResponseSuccess(res);
+          },
+        });
+    } else {
+      alert('NO ACCREDITATION SELECTED');
+    }
   }
 
   upload(): void {}

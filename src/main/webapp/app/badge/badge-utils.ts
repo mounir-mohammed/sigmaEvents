@@ -156,6 +156,7 @@ export class BadgeUtils {
             if (this.addCondition(group, data)) {
               var groupDiv = document.createElement('div');
               groupDiv.id = group.name;
+              groupDiv.classList.add(group.name);
               groupDiv.style.position = group.position;
               groupDiv.style.left = group.x;
               groupDiv.style.top = group.y;
@@ -651,8 +652,9 @@ export class BadgeUtils {
                         this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
                           //add codes
                           this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                            badgeContainer?.appendChild(badge);
-                            this.deplaceGroupToParent(modelData.printingModel).then(() => {
+                            console.log(badge);
+                            this.deplaceGroupToParent(badge, modelData.printingModel).then(() => {
+                              badgeContainer?.appendChild(badge);
                               console.log('END generateadge()');
                               return resolve(true);
                             });
@@ -682,40 +684,44 @@ export class BadgeUtils {
     });
   }
 
-  print(badgeId: string, modelData: any) {
-    try {
-      console.log('START print()');
-      let data = document.getElementById(badgeId);
-      if (data && modelData) {
-        html2canvas(data, { scale: modelData.printingModel.model.scale }).then(canvas => {
-          const contentDataURL = canvas.toDataURL(modelData.printingModel.model.type, modelData.printingModel.model.quality);
-          let pdf = new jspdf(
-            modelData.printingModel.model.landScape,
-            modelData.printingModel.model.unite,
-            modelData.printingModel.model.format
-          );
-          //landscape values p/l
-          pdf.addImage(
-            contentDataURL,
-            modelData.printingModel.model.typeImage,
-            modelData.printingModel.model.x,
-            modelData.printingModel.model.y,
-            modelData.printingModel.model.w,
-            modelData.printingModel.model.h
-          );
-          pdf.autoPrint();
-          if (modelData.printingModel.model.autoPrint == true) {
-            pdf.output('dataurlnewwindow', { filename: badgeId });
-          } else {
-            let fileName = badgeId + '_' + new Date().toUTCString();
-            pdf.save(fileName);
-          }
-        });
+  print(badgeId: string, modelData: any): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      try {
+        console.log('START print()');
+        let data = document.getElementById(badgeId);
+        if (data && modelData) {
+          html2canvas(data, { scale: modelData.printingModel.model.scale }).then(canvas => {
+            const contentDataURL = canvas.toDataURL(modelData.printingModel.model.type, modelData.printingModel.model.quality);
+            let pdf = new jspdf(
+              modelData.printingModel.model.landScape,
+              modelData.printingModel.model.unite,
+              modelData.printingModel.model.format
+            );
+            //landscape values p/l
+            pdf.addImage(
+              contentDataURL,
+              modelData.printingModel.model.typeImage,
+              modelData.printingModel.model.x,
+              modelData.printingModel.model.y,
+              modelData.printingModel.model.w,
+              modelData.printingModel.model.h
+            );
+            pdf.autoPrint();
+            if (modelData.printingModel.model.autoPrint == true) {
+              pdf.output('dataurlnewwindow', { filename: badgeId });
+            } else {
+              let fileName = badgeId + '_' + new Date().toUTCString();
+              pdf.save(fileName);
+            }
+          });
+          resolve();
+        }
+      } catch (error: any) {
+        reject();
+        console.error(error.message);
       }
-    } catch (error: any) {
-      console.error(error.message);
-    }
-    console.log('END print()');
+      console.log('END print()');
+    });
   }
 
   addCondition(element: any, data: any): boolean {
@@ -774,15 +780,15 @@ export class BadgeUtils {
     }
   }
 
-  deplaceGroupToParent(dataModel: any): Promise<Boolean> {
+  deplaceGroupToParent(parent: any, dataModel: any): Promise<Boolean> {
     console.log('START deplaceGroupToParent()');
     return new Promise(resolve => {
       try {
         if (dataModel.groups) {
           dataModel.groups.forEach((group: any) => {
             if (group.groupName) {
-              var childGroupe = document.getElementById(group.name);
-              var groupParent = document.getElementById(group.groupName);
+              var childGroupe = parent.getElementsByClassName(group.name)[0];
+              var groupParent = parent.getElementsByClassName(group.groupName)[0];
               groupParent?.appendChild(childGroupe!);
             }
           });

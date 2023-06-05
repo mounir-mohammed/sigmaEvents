@@ -26,4 +26,14 @@ export class ErrorModalUtil {
       timeout: 4000,
     });
   }
+
+  throwAlertErrorUnauthorizedMassPrinting(ids: number[]) {
+    this.alertService.addAlert({
+      type: 'danger',
+      message: `Unauthorized Printing Accreditation ${ids}, Please contact administrator`,
+      translationKey: 'sigmaEventsApp.accreditation.print.unauthorizedPrintingError',
+      translationParams: { id: ids },
+      timeout: 20000,
+    });
+  }
 }
