@@ -17,3 +17,8 @@
 .scrollable {
   overflow: scroll;
 }
+
+.modal-body {
+  height: 80vh;
+  overflow-y: auto;
+}

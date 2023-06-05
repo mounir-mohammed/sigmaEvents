@@ -248,19 +248,6 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
 
-body .modal-dialog {
-  /* Width */
-  max-width: 100%;
-  width: auto !important;
-  display: inline-block;
-}
-
-.modal {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
-
 .btn-circle.btn-xl {
   width: 70px;
   height: 70px;
@@ -372,10 +359,6 @@ body .modal-dialog {
   background-color: gray; /* Change the background color to gray */
 }
 
-.badge-container {
-  overflow: scroll;
-}
-
 .button-container {
   display: flex;
   justify-content: flex-start;
@@ -393,4 +376,19 @@ body .modal-dialog {
 
 .count-checkbox-label {
   margin-left: 5px; /* Adjust the margin as needed */
+}
+
+//MODAL CSS TO DO
+.modal-dialog {
+  /* Width */
+  max-width: 100%;
+  width: auto !important;
+  display: inline-block;
+  overflow-y: initial !important;
+}
+
+.modal {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }

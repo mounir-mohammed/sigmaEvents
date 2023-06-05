@@ -18,6 +18,7 @@ import { ITEM_MASS_PRINTED_EVENT } from 'app/config/navigation.constants';
 
 @Component({
   templateUrl: './accreditation-sig-mass-print-dialog.component.html',
+  styleUrls: ['./accreditation-sig-mass-print-dialog.component.scss'],
 })
 export class AccreditationMassSigPrintDialogComponent implements OnInit {
   accreditations?: IAccreditationSig[];

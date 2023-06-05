@@ -19,6 +19,7 @@ import { ErrorModalUtil } from 'app/shared/util/errorModal.shared';
 
 @Component({
   templateUrl: './accreditation-sig-print-dialog.component.html',
+  styleUrls: ['./accreditation-sig-print-dialog.component.scss'],
 })
 export class AccreditationSigPrintDialogComponent implements OnInit {
   accreditation?: IAccreditationSig;
