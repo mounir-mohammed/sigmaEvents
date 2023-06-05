@@ -430,6 +430,14 @@ export class AccreditationSigComponent implements OnInit {
     this.updateSelectedCount();
   }
 
+  unSelectAll() {
+    for (const accreditation of this.accreditations!) {
+      accreditation.selected = false;
+    }
+    this.selectAllRows = false;
+    this.updateSelectedCount();
+  }
+
   getSelectedAccreditations(): IAccreditationSig[] {
     const selectedAccreditations: IAccreditationSig[] = [];
     for (const accreditation of this.accreditations!) {
@@ -464,6 +472,7 @@ export class AccreditationSigComponent implements OnInit {
             this.onResponseSuccess(res);
           },
         });
+      this.unSelectAll();
     } else {
       alert('NO ACCREDITATION SELECTED');
     }
