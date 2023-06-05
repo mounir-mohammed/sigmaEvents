@@ -627,43 +627,41 @@ export class BadgeUtils {
           if (accreditation) {
             await this.accreditationSigService.getAccreditation(accreditation?.accreditationId!).then(accreditationFullData => {
               if (accreditationFullData) {
-                setTimeout(() => {
-                  var accreditationJson = JSON.stringify(accreditationFullData);
-                  var data = JSON.parse(accreditationJson);
-                  var badgeContainer = document.getElementById(badgeContainerId!);
-                  //generate badge
-                  var badge = document.createElement('div');
-                  var badgeId =
-                    accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
-                  badge.id = badgeId;
-                  badge.style.width = modelData.printingModel.page.width;
-                  badge.style.height = modelData.printingModel.page.height;
-                  badge.style.margin = modelData.printingModel.page.margin;
-                  badge.style.border = modelData.printingModel.page.border;
-                  badge.style.position = modelData.printingModel.page.position;
+                var accreditationJson = JSON.stringify(accreditationFullData);
+                var data = JSON.parse(accreditationJson);
+                var badgeContainer = document.getElementById(badgeContainerId!);
+                //generate badge
+                var badge = document.createElement('div');
+                var badgeId =
+                  accreditation?.event?.eventAbreviation + '_' + accreditation?.event?.eventId + '_' + accreditation?.accreditationId;
+                badge.id = badgeId;
+                badge.style.width = modelData.printingModel.page.width;
+                badge.style.height = modelData.printingModel.page.height;
+                badge.style.margin = modelData.printingModel.page.margin;
+                badge.style.border = modelData.printingModel.page.border;
+                badge.style.position = modelData.printingModel.page.position;
 
-                  //add groups
-                  this.createGroups(badge, modelData.printingModel, data).then(groupDivs => {
-                    //add fields
-                    this.addFields(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                      // add images
-                      this.addImages(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                        //add cadres
-                        this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                          //add codes
-                          this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                            console.log(badge);
-                            this.deplaceGroupToParent(badge, modelData.printingModel).then(() => {
-                              badgeContainer?.appendChild(badge);
-                              console.log('END generateadge()');
-                              return resolve(true);
-                            });
+                //add groups
+                this.createGroups(badge, modelData.printingModel, data).then(groupDivs => {
+                  //add fields
+                  this.addFields(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                    // add images
+                    this.addImages(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                      //add cadres
+                      this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                        //add codes
+                        this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
+                          console.log(badge);
+                          this.deplaceGroupToParent(badge, modelData.printingModel).then(() => {
+                            badgeContainer?.appendChild(badge);
+                            console.log('END generateadge()');
+                            return resolve(true);
                           });
                         });
                       });
                     });
                   });
-                }, 500);
+                });
               } else {
                 console.error('ERROR get Accreditation FULL DATA');
                 return resolve(false);
