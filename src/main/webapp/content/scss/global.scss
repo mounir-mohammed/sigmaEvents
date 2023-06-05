@@ -359,12 +359,6 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   background-color: gray; /* Change the background color to gray */
 }
 
-.button-container {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px; /* Adjust the margin between buttons as needed */
-}
-
 .visibilityCheckboxes {
   white-space: nowrap;
 }

@@ -51,16 +51,16 @@
       </div>
     </div>
 
-    <div class="d-flex button-container">
+    <div class="d-flex justify-content-start">
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_AV_SEARCH]">
-        <button type="button" class="btn btn-info" (click)="advancedSearch()">
+        <button type="button" class="btn btn-info me-2" (click)="advancedSearch()">
           <fa-icon icon="search"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch"
             >Advanced Search</span
           >
         </button>
       </div>
       <div class="select-columns" id="select-columns">
-        <button type="button" class="btn btn-info" (click)="toggleColumnsCheckboxes()">
+        <button type="button" class="btn btn-info me-2" (click)="toggleColumnsCheckboxes()">
           <fa-icon icon="list-ul"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.costumView"
             >Costum View</span
           >
@@ -83,24 +83,24 @@
       </div>
       <!--START ADD MULTI SELECTION BUTTONS-->
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <button type="button" class="btn btn-info" (click)="massUpdate()">
+        <button type="button" class="btn btn-info me-2" (click)="massUpdate()">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massUpdate"
             >Mass Update</span
           >
         </button>
       </div>
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <button type="button" class="btn btn-info" (click)="massPrint()">
+        <button type="button" class="btn btn-info me-2" (click)="massPrint()">
           <fa-icon icon="print"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massPrint">Mass Print</span>
         </button>
       </div>
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <button type="button" class="btn btn-info">
+        <button type="button" class="btn btn-info me-2">
           <fa-icon icon="upload"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.upload">Upload</span>
         </button>
       </div>
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <button type="button" class="btn btn-info" (click)="export()">
+        <button type="button" class="btn btn-info me-2" (click)="export()">
           <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.export">Export</span>
         </button>
       </div>
