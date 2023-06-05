@@ -100,7 +100,7 @@
         </button>
       </div>
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <button type="button" class="btn btn-info">
+        <button type="button" class="btn btn-info" (click)="export()">
           <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.export">Export</span>
         </button>
       </div>
@@ -120,7 +120,7 @@
   </div>
 
   <div class="table-responsive table-entities" id="entities" *ngIf="accreditations && accreditations.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <table class="table table-striped" aria-describedby="page-heading" id="accreditationsTable">
       <thead>
         <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
           <th>
@@ -129,103 +129,107 @@
               <label *ngIf="selectedCount" class="count-checkbox-label">({{ selectedCount }})</label>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationId" [hidden]="!isColumnVisible('accreditationId')">
+          <th scope="col" sigmaSortBy="accreditationId" *ngIf="isColumnVisible('accreditationId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Accreditation Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <!-- <th scope="col" sigmaSortBy="accreditationPhoto" [hidden]="!isColumnVisible('accreditationPhoto')">
+          <!-- <th scope="col" sigmaSortBy="accreditationPhoto" *ngIf="isColumnVisible('accreditationPhoto')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPhoto">Accreditation Photo</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th> -->
-          <th scope="col" sigmaSortBy="civility.civilityId" [hidden]="!isColumnVisible('civility')">
+          <th scope="col" sigmaSortBy="civility.civilityId" *ngIf="isColumnVisible('civility')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationFirstName" [hidden]="!isColumnVisible('accreditationFirstName')">
+          <th scope="col" sigmaSortBy="accreditationFirstName" *ngIf="isColumnVisible('accreditationFirstName')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">Accreditation First Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationSecondName" [hidden]="!isColumnVisible('accreditationSecondName')">
+          <th scope="col" sigmaSortBy="accreditationSecondName" *ngIf="isColumnVisible('accreditationSecondName')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSecondName">Accreditation Second Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationLastName" [hidden]="!isColumnVisible('accreditationLastName')">
+          <th scope="col" sigmaSortBy="accreditationLastName" *ngIf="isColumnVisible('accreditationLastName')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName">Accreditation Last Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationBirthDay" [hidden]="!isColumnVisible('accreditationBirthDay')">
+          <th scope="col" sigmaSortBy="accreditationBirthDay" *ngIf="isColumnVisible('accreditationBirthDay')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationBirthDay">Accreditation Birth Day</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationSexe" [hidden]="!isColumnVisible('accreditationSexe')">
+          <th scope="col" sigmaSortBy="accreditationSexe" *ngIf="isColumnVisible('accreditationSexe')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationOccupation" [hidden]="!isColumnVisible('accreditationOccupation')">
+          <th scope="col" sigmaSortBy="accreditationOccupation" *ngIf="isColumnVisible('accreditationOccupation')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Accreditation Occupation</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="nationality.nationalityId" [hidden]="!isColumnVisible('nationality')">
+          <th scope="col" sigmaSortBy="nationality.nationalityId" *ngIf="isColumnVisible('nationality')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="country.countryId" *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('country')">
+          <th
+            scope="col"
+            sigmaSortBy="country.countryId"
+            *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('country')"
+          >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="city.cityId" *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('city')">
+          <th scope="col" sigmaSortBy="city.cityId" *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('city')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="category.categoryId" [hidden]="!isColumnVisible('category')">
+          <th scope="col" sigmaSortBy="category.categoryId" *ngIf="isColumnVisible('category')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="fonction.fonctionId" [hidden]="!isColumnVisible('fonction')">
+          <th scope="col" sigmaSortBy="fonction.fonctionId" *ngIf="isColumnVisible('fonction')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="organiz.organizId" [hidden]="!isColumnVisible('organiz')">
+          <th scope="col" sigmaSortBy="organiz.organizId" *ngIf="isColumnVisible('organiz')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationType.accreditationTypeId" [hidden]="!isColumnVisible('accreditationTypeId')">
+          <th scope="col" sigmaSortBy="accreditationType.accreditationTypeId" *ngIf="isColumnVisible('accreditationTypeId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="status.statusId" [hidden]="!isColumnVisible('status')">
+          <th scope="col" sigmaSortBy="status.statusId" *ngIf="isColumnVisible('status')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -234,49 +238,44 @@
           <th
             scope="col"
             sigmaSortBy="accreditationDescription"
-            *sigmaHasAnyAuthority="[authority.ADMIN]"
-            [hidden]="!isColumnVisible('accreditationDescription')"
+            *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationDescription')"
           >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription">Accreditation Description</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationEmail" [hidden]="!isColumnVisible('accreditationEmail')">
+          <th scope="col" sigmaSortBy="accreditationEmail" *ngIf="isColumnVisible('accreditationEmail')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationEmail">Accreditation Email</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationTel" [hidden]="!isColumnVisible('accreditationTel')">
+          <th scope="col" sigmaSortBy="accreditationTel" *ngIf="isColumnVisible('accreditationTel')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationTel">Accreditation Tel</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationCinId" [hidden]="!isColumnVisible('accreditationCinId')">
+          <th scope="col" sigmaSortBy="accreditationCinId" *ngIf="isColumnVisible('accreditationCinId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCinId">Accreditation Cin Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationPasseportId" [hidden]="!isColumnVisible('accreditationPasseportId')">
+          <th scope="col" sigmaSortBy="accreditationPasseportId" *ngIf="isColumnVisible('accreditationPasseportId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPasseportId">Accreditation Passeport Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationCartePresseId" [hidden]="!isColumnVisible('accreditationCartePresseId')">
+          <th scope="col" sigmaSortBy="accreditationCartePresseId" *ngIf="isColumnVisible('accreditationCartePresseId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCartePresseId">Accreditation Carte Presse Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th
-            scope="col"
-            sigmaSortBy="accreditationCarteProfessionnelleId"
-            [hidden]="!isColumnVisible('accreditationCarteProfessionnelleId')"
-          >
+          <th scope="col" sigmaSortBy="accreditationCarteProfessionnelleId" *ngIf="isColumnVisible('accreditationCarteProfessionnelleId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCarteProfessionnelleId"
                 >Accreditation Carte Professionnelle Id</span
@@ -284,55 +283,55 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationCreationDate" [hidden]="!isColumnVisible('accreditationCreationDate')">
+          <th scope="col" sigmaSortBy="accreditationCreationDate" *ngIf="isColumnVisible('accreditationCreationDate')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreationDate">Accreditation Creation Date</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationCreatedByuser" [hidden]="!isColumnVisible('accreditationCreatedByuser')">
+          <th scope="col" sigmaSortBy="accreditationCreatedByuser" *ngIf="isColumnVisible('accreditationCreatedByuser')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser">Accreditation Created Byuser</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationUpdateDate" [hidden]="!isColumnVisible('accreditationUpdateDate')">
+          <th scope="col" sigmaSortBy="accreditationUpdateDate" *ngIf="isColumnVisible('accreditationUpdateDate')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdateDate">Accreditation Update Date</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationUpdatedByuser" [hidden]="!isColumnVisible('accreditationUpdatedByuser')">
+          <th scope="col" sigmaSortBy="accreditationUpdatedByuser" *ngIf="isColumnVisible('accreditationUpdatedByuser')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdatedByuser">Accreditation Updated Byuser</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationPrintDate" [hidden]="!isColumnVisible('accreditationPrintDate')">
+          <th scope="col" sigmaSortBy="accreditationPrintDate" *ngIf="isColumnVisible('accreditationPrintDate')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintDate">Accreditation Print Date</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationPrintedByuser" [hidden]="!isColumnVisible('accreditationPrintedByuser')">
+          <th scope="col" sigmaSortBy="accreditationPrintedByuser" *ngIf="isColumnVisible('accreditationPrintedByuser')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintedByuser">Accreditation Printed Byuser</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationDateStart" [hidden]="!isColumnVisible('accreditationDateStart')">
+          <th scope="col" sigmaSortBy="accreditationDateStart" *ngIf="isColumnVisible('accreditationDateStart')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateStart">Accreditation Date Start</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationDateEnd" [hidden]="!isColumnVisible('accreditationDateEnd')">
+          <th scope="col" sigmaSortBy="accreditationDateEnd" *ngIf="isColumnVisible('accreditationDateEnd')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateEnd">Accreditation Date End</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationPrintStat" [hidden]="!isColumnVisible('accreditationPrintStat')">
+          <th scope="col" sigmaSortBy="accreditationPrintStat" *ngIf="isColumnVisible('accreditationPrintStat')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat">Accreditation Print Stat</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -341,8 +340,7 @@
           <th
             scope="col"
             sigmaSortBy="accreditationPrintNumber"
-            *sigmaHasAnyAuthority="[authority.ADMIN]"
-            [hidden]="!isColumnVisible('accreditationPrintNumber')"
+            *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationPrintNumber')"
           >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber">Accreditation Print Number</span>
@@ -352,8 +350,7 @@
           <th
             scope="col"
             sigmaSortBy="accreditationParams"
-            *sigmaHasAnyAuthority="[authority.ADMIN]"
-            [hidden]="!isColumnVisible('accreditationParams')"
+            *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationParams')"
           >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams">Accreditation Params</span>
@@ -363,8 +360,7 @@
           <th
             scope="col"
             sigmaSortBy="accreditationAttributs"
-            *sigmaHasAnyAuthority="[authority.ADMIN]"
-            [hidden]="!isColumnVisible('accreditationAttributs')"
+            *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationAttributs')"
           >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs">Accreditation Attributs</span>
@@ -374,39 +370,42 @@
           <th
             scope="col"
             sigmaSortBy="accreditationStat"
-            [hidden]="!isColumnVisible('accreditationStat')"
-            *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]"
+            *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN]) && isColumnVisible('accreditationStat')"
           >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationActivated" [hidden]="!isColumnVisible('accreditationActivated')">
+          <th scope="col" sigmaSortBy="accreditationActivated" *ngIf="isColumnVisible('accreditationActivated')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated">Accreditation Activated</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="attachement.attachementId" [hidden]="!isColumnVisible('attachement')">
+          <th scope="col" sigmaSortBy="attachement.attachementId" *ngIf="isColumnVisible('attachement')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.attachement">Attachement</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="code.codeId" [hidden]="!isColumnVisible('code')">
+          <th scope="col" sigmaSortBy="code.codeId" *ngIf="isColumnVisible('code')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.code">Code</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="dayPassInfo.dayPassInfoId" [hidden]="!isColumnVisible('dayPassInfo')">
+          <th scope="col" sigmaSortBy="dayPassInfo.dayPassInfoId" *ngIf="isColumnVisible('dayPassInfo')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo">Day Pass Info</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="event.eventId" *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('event')">
+          <th
+            scope="col"
+            sigmaSortBy="event.eventId"
+            *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('event')"
+          >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -426,10 +425,10 @@
           <td>
             <input type="checkbox" [checked]="accreditation.selected" (change)="onRowCheckboxChange(accreditation)" />
           </td>
-          <td [hidden]="!isColumnVisible('accreditationId')">
+          <td *ngIf="isColumnVisible('accreditationId')">
             <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
           </td>
-          <!-- <td [hidden]="!isColumnVisible('accreditationPhoto')">
+          <!-- <td *ngIf="isColumnVisible('accreditationPhoto')">
             <a
               *ngIf="accreditation.accreditationPhoto"
               (click)="openFile(accreditation.accreditationPhoto, accreditation.accreditationPhotoContentType)"
@@ -444,7 +443,7 @@
               >{{ accreditation.accreditationPhotoContentType }}, {{ byteSize(accreditation.accreditationPhoto) }}</span
             >
           </td> -->
-          <td [hidden]="!isColumnVisible('civility')">
+          <td *ngIf="isColumnVisible('civility')">
             <div *ngIf="accreditation.civility">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
                 <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityCode }}</a>
@@ -452,11 +451,11 @@
               <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.civility.civilityCode }}</div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('accreditationFirstName')">{{ accreditation.accreditationFirstName }}</td>
-          <td [hidden]="!isColumnVisible('accreditationSecondName')">{{ accreditation.accreditationSecondName }}</td>
-          <td [hidden]="!isColumnVisible('accreditationLastName')">{{ accreditation.accreditationLastName }}</td>
-          <td [hidden]="!isColumnVisible('accreditationBirthDay')">{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
-          <td [hidden]="!isColumnVisible('accreditationSexe')">
+          <td *ngIf="isColumnVisible('accreditationFirstName')">{{ accreditation.accreditationFirstName }}</td>
+          <td *ngIf="isColumnVisible('accreditationSecondName')">{{ accreditation.accreditationSecondName }}</td>
+          <td *ngIf="isColumnVisible('accreditationLastName')">{{ accreditation.accreditationLastName }}</td>
+          <td *ngIf="isColumnVisible('accreditationBirthDay')">{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
+          <td *ngIf="isColumnVisible('accreditationSexe')">
             <div *ngIf="accreditation.sexe">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
                 <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
@@ -464,8 +463,8 @@
               <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.sexe.sexeValue }}</div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('accreditationOccupation')">{{ accreditation.accreditationOccupation }}</td>
-          <td [hidden]="!isColumnVisible('nationality')">
+          <td *ngIf="isColumnVisible('accreditationOccupation')">{{ accreditation.accreditationOccupation }}</td>
+          <td *ngIf="isColumnVisible('nationality')">
             <div *ngIf="accreditation.nationality">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
                 <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
@@ -475,17 +474,17 @@
               <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.nationality.nationalityValue }}</div>
             </div>
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('country')">
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('country')">
             <div *ngIf="accreditation.country">
               <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryName }}</a>
             </div>
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('city')">
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('city')">
             <div *ngIf="accreditation.city">
               <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityName }}</a>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('category')">
+          <td *ngIf="isColumnVisible('category')">
             <div *ngIf="accreditation.category">
               <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
                 <a [routerLink]="['/category-sig', accreditation.category.categoryId, 'view']">{{ accreditation.category.categoryName }}</a>
@@ -495,7 +494,7 @@
               </div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('fonction')">
+          <td *ngIf="isColumnVisible('fonction')">
             <div *ngIf="accreditation.fonction">
               <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
                 <a [routerLink]="['/fonction-sig', accreditation.fonction.fonctionId, 'view']">{{ accreditation.fonction.fonctionName }}</a>
@@ -505,7 +504,7 @@
               </div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('organiz')">
+          <td *ngIf="isColumnVisible('organiz')">
             <div *ngIf="accreditation.organiz">
               <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
                 <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizName }}</a>
@@ -515,7 +514,7 @@
               </div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('accreditationTypeId')">
+          <td *ngIf="isColumnVisible('accreditationTypeId')">
             <div *ngIf="accreditation.accreditationType">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
                 <a [routerLink]="['/accreditation-type-sig', accreditation.accreditationType.accreditationTypeId, 'view']">{{
@@ -527,7 +526,7 @@
               </div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('status')">
+          <td *ngIf="isColumnVisible('status')">
             <div *ngIf="accreditation.status">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
                 <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
@@ -535,42 +534,42 @@
               <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.status.statusName }}</div>
             </div>
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationDescription')">
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationDescription')">
             {{ accreditation.accreditationDescription }}
           </td>
-          <td [hidden]="!isColumnVisible('accreditationEmail')">{{ accreditation.accreditationEmail }}</td>
-          <td [hidden]="!isColumnVisible('accreditationTel')">{{ accreditation.accreditationTel }}</td>
-          <td [hidden]="!isColumnVisible('accreditationCinId')">{{ accreditation.accreditationCinId }}</td>
-          <td [hidden]="!isColumnVisible('accreditationPasseportId')">{{ accreditation.accreditationPasseportId }}</td>
-          <td [hidden]="!isColumnVisible('accreditationCartePresseId')">{{ accreditation.accreditationCartePresseId }}</td>
-          <td [hidden]="!isColumnVisible('accreditationCarteProfessionnelleId')">
+          <td *ngIf="isColumnVisible('accreditationEmail')">{{ accreditation.accreditationEmail }}</td>
+          <td *ngIf="isColumnVisible('accreditationTel')">{{ accreditation.accreditationTel }}</td>
+          <td *ngIf="isColumnVisible('accreditationCinId')">{{ accreditation.accreditationCinId }}</td>
+          <td *ngIf="isColumnVisible('accreditationPasseportId')">{{ accreditation.accreditationPasseportId }}</td>
+          <td *ngIf="isColumnVisible('accreditationCartePresseId')">{{ accreditation.accreditationCartePresseId }}</td>
+          <td *ngIf="isColumnVisible('accreditationCarteProfessionnelleId')">
             {{ accreditation.accreditationCarteProfessionnelleId }}
           </td>
-          <td [hidden]="!isColumnVisible('accreditationCreationDate')">
+          <td *ngIf="isColumnVisible('accreditationCreationDate')">
             {{ accreditation.accreditationCreationDate | formatMediumDatetime }}
           </td>
-          <td [hidden]="!isColumnVisible('accreditationCreatedByuser')">{{ accreditation.accreditationCreatedByuser }}</td>
-          <td [hidden]="!isColumnVisible('accreditationUpdateDate')">{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</td>
-          <td [hidden]="!isColumnVisible('accreditationUpdatedByuser')">{{ accreditation.accreditationUpdatedByuser }}</td>
-          <td [hidden]="!isColumnVisible('accreditationPrintDate')">{{ accreditation.accreditationPrintDate | formatMediumDatetime }}</td>
-          <td [hidden]="!isColumnVisible('accreditationPrintedByuser')">{{ accreditation.accreditationPrintedByuser }}</td>
-          <td [hidden]="!isColumnVisible('accreditationDateStart')">{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
-          <td [hidden]="!isColumnVisible('accreditationDateEnd')">{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
-          <td [hidden]="!isColumnVisible('accreditationPrintStat')">{{ accreditation.accreditationPrintStat | yesNo }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationPrintNumber')">
+          <td *ngIf="isColumnVisible('accreditationCreatedByuser')">{{ accreditation.accreditationCreatedByuser }}</td>
+          <td *ngIf="isColumnVisible('accreditationUpdateDate')">{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</td>
+          <td *ngIf="isColumnVisible('accreditationUpdatedByuser')">{{ accreditation.accreditationUpdatedByuser }}</td>
+          <td *ngIf="isColumnVisible('accreditationPrintDate')">{{ accreditation.accreditationPrintDate | formatMediumDatetime }}</td>
+          <td *ngIf="isColumnVisible('accreditationPrintedByuser')">{{ accreditation.accreditationPrintedByuser }}</td>
+          <td *ngIf="isColumnVisible('accreditationDateStart')">{{ accreditation.accreditationDateStart | formatMediumDatetime }}</td>
+          <td *ngIf="isColumnVisible('accreditationDateEnd')">{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</td>
+          <td *ngIf="isColumnVisible('accreditationPrintStat')">{{ accreditation.accreditationPrintStat | yesNo }}</td>
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationPrintNumber')">
             {{ accreditation.accreditationPrintNumber }}
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationParams')">
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationParams')">
             {{ accreditation.accreditationParams }}
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('accreditationAttributs')">
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationAttributs')">
             {{ accreditation.accreditationAttributs }}
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]" [hidden]="!isColumnVisible('accreditationStat')">
+          <td *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN]) && isColumnVisible('accreditationStat')">
             {{ accreditation.accreditationStat | yesNo }}
           </td>
-          <td [hidden]="!isColumnVisible('accreditationActivated')">{{ accreditation.accreditationActivated | yesNo }}</td>
-          <td [hidden]="!isColumnVisible('attachement')">
+          <td *ngIf="isColumnVisible('accreditationActivated')">{{ accreditation.accreditationActivated | yesNo }}</td>
+          <td *ngIf="isColumnVisible('attachement')">
             <div *ngIf="accreditation.attachement">
               <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO])">
                 <a [routerLink]="['/attachement-sig', accreditation.attachement.attachementId, 'view']">{{
@@ -586,7 +585,7 @@
               </div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('code')">
+          <td *ngIf="isColumnVisible('code')">
             <div *ngIf="accreditation.code">
               <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
                 <a [routerLink]="['/code-sig', accreditation.code.codeId, 'view']">{{ accreditation.code.codeValue }}</a>
@@ -596,7 +595,7 @@
               </div>
             </div>
           </td>
-          <td [hidden]="!isColumnVisible('dayPassInfo')">
+          <td *ngIf="isColumnVisible('dayPassInfo')">
             <div *ngIf="accreditation.dayPassInfo">
               <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
                 <a [routerLink]="['/day-pass-info-sig', accreditation.dayPassInfo.dayPassInfoId, 'view']">{{
@@ -610,7 +609,7 @@
               </div>
             </div>
           </td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]" [hidden]="!isColumnVisible('event')">
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('event')">
             <div *ngIf="accreditation.event">
               <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventName }}</a>
             </div>

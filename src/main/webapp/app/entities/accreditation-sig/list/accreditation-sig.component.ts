@@ -33,6 +33,8 @@ import { HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
 import { AccreditationSigSearchDialogComponent } from '../search/accreditation-sig-search-dialog.component';
+import { ExportUtil } from 'app/shared/util/export.shared';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -66,7 +68,8 @@ export class AccreditationSigComponent implements OnInit {
     public router: Router,
     protected dataUtils: DataUtils,
     protected modalService: NgbModal,
-    protected statusService: StatusSigService
+    protected statusService: StatusSigService,
+    protected translateService: TranslateService
   ) {}
 
   trackAccreditationId = (_index: number, item: IAccreditationSig): number => this.accreditationService.getAccreditationSigIdentifier(item);
@@ -449,5 +452,16 @@ export class AccreditationSigComponent implements OnInit {
 
   upload(): void {}
 
-  export(): void {}
+  export(): void {
+    if (this.accreditations && this.accreditations.length > 0) {
+      ExportUtil.initialize(this.translateService);
+      ExportUtil.exportTableToExcel(
+        'accreditationsTable',
+        'sigmaEventsApp.accreditation.home.title',
+        'sigmaEventsApp.accreditation.home.title'
+      );
+    } else {
+      alert('NO DATA FOUND TO EXPORT');
+    }
+  }
 }
