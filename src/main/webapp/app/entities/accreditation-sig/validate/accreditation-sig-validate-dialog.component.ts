@@ -27,7 +27,7 @@ export class AccreditationSigValidateDialogComponent {
 
   confirmValidate(accreditation: IAccreditationSig, status?: IStatusSig): void {
     accreditation.status = status;
-    this.accreditationService.update(accreditation).subscribe(() => {
+    this.accreditationService.validate(accreditation.accreditationId, status!.statusId!).subscribe(() => {
       this.activeModal.close(ITEM_VALIDATED_EVENT);
     });
   }

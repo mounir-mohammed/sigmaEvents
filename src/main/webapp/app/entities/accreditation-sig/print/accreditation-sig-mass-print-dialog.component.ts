@@ -67,13 +67,8 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
           this.accountService.hasAnyAuthority([Authority.EVENT_ADMIN]) ||
           this.accountService.hasAnyAuthority([Authority.CAN_ACC_REPRINT])
         ) {
-          accreditation.accreditationPrintStat = true;
-          accreditation.accreditationPrintNumber = accreditation.accreditationPrintNumber! + 1;
-          accreditation.accreditationPrintedByuser = this.currentAccount?.login;
-          accreditation.accreditationPrintDate = dayjs();
-          accreditation.status = status;
           const promise = new Promise<void>((resolve, reject) => {
-            this.accreditationService.update(accreditation).subscribe(async () => {
+            this.accreditationService.print(accreditation.accreditationId, status?.statusId!).subscribe(async () => {
               var badgeId =
                 accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!;
               badges.set(badgeId, accreditation.accreditationPrintingModel);

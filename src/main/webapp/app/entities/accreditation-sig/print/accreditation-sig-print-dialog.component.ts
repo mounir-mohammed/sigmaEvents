@@ -58,12 +58,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
       this.accountService.hasAnyAuthority([Authority.EVENT_ADMIN]) ||
       this.accountService.hasAnyAuthority([Authority.CAN_ACC_REPRINT])
     ) {
-      accreditation.accreditationPrintStat = true;
-      accreditation.accreditationPrintNumber = accreditation.accreditationPrintNumber! + 1;
-      accreditation.accreditationPrintedByuser = this.currentAccount?.login;
-      accreditation.accreditationPrintDate = dayjs();
-      accreditation.status = status;
-      this.accreditationService.update(accreditation).subscribe(() => {
+      this.accreditationService.print(accreditation.accreditationId, status?.statusId!).subscribe(() => {
         this.activeModal.close(ITEM_PRINTED_EVENT);
         var badgeId = accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!;
         this.badgeUtils.print(badgeId, accreditation.accreditationPrintingModel);

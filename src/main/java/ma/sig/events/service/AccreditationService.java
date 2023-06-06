@@ -63,4 +63,22 @@ public interface AccreditationService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * validate a accreditation.
+     *
+     * @param accreditationId the entity to update partially.
+     * @param statusId validation status.
+     * @return the persisted entity.
+     */
+    Optional<AccreditationDTO> validateAccreditation(Long accreditationId, Long statusId);
+
+    /**
+     * print a accreditation.
+     *
+     * @param accreditationId the entity to update partially.
+     * @param statusId validation status.
+     * @return the persisted entity.
+     */
+    Optional<AccreditationDTO> printAccreditation(Long accreditationId, Long statusId);
 }

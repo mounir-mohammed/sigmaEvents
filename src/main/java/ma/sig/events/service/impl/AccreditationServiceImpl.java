@@ -1,9 +1,14 @@
 package ma.sig.events.service.impl;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import ma.sig.events.domain.Accreditation;
+import ma.sig.events.domain.User;
 import ma.sig.events.repository.AccreditationRepository;
+import ma.sig.events.repository.StatusRepository;
+import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.AccreditationService;
+import ma.sig.events.service.UserService;
 import ma.sig.events.service.dto.AccreditationDTO;
 import ma.sig.events.service.mapper.AccreditationMapper;
 import org.slf4j.Logger;
@@ -24,11 +29,22 @@ public class AccreditationServiceImpl implements AccreditationService {
 
     private final AccreditationRepository accreditationRepository;
 
+    private final StatusRepository statusRepository;
+
     private final AccreditationMapper accreditationMapper;
 
-    public AccreditationServiceImpl(AccreditationRepository accreditationRepository, AccreditationMapper accreditationMapper) {
+    private final UserService userService;
+
+    public AccreditationServiceImpl(
+        AccreditationRepository accreditationRepository,
+        AccreditationMapper accreditationMapper,
+        StatusRepository statusRepository,
+        UserService userService
+    ) {
         this.accreditationRepository = accreditationRepository;
         this.accreditationMapper = accreditationMapper;
+        this.statusRepository = statusRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -84,5 +100,41 @@ public class AccreditationServiceImpl implements AccreditationService {
     public void delete(Long id) {
         log.debug("Request to delete Accreditation : {}", id);
         accreditationRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<AccreditationDTO> validateAccreditation(Long accreditationId, Long statusId) {
+        Optional<User> currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+        return accreditationRepository
+            .findById(accreditationId)
+            .map(accreditation -> {
+                accreditation.setStatus(statusRepository.findById(statusId).get());
+                accreditation.setAccreditationUpdateDate(ZonedDateTime.now());
+                accreditation.setAccreditationUpdatedByuser(currentUser.get().getLogin());
+                accreditationRepository.save(accreditation);
+                return Optional.of(accreditationMapper.toDto(accreditation));
+            })
+            .orElse(Optional.empty());
+    }
+
+    @Override
+    public Optional<AccreditationDTO> printAccreditation(Long accreditationId, Long statusId) {
+        Optional<User> currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+        return accreditationRepository
+            .findById(accreditationId)
+            .map(accreditation -> {
+                accreditation.setStatus(statusRepository.findById(statusId).get());
+                accreditation.setAccreditationPrintDate(ZonedDateTime.now());
+                accreditation.setAccreditationPrintStat(true);
+                accreditation.setAccreditationPrintedByuser(currentUser.get().getLogin());
+                Long printNumber = 1L;
+                if (accreditation.getAccreditationPrintNumber() != null) {
+                    printNumber = accreditation.getAccreditationPrintNumber() + 1;
+                }
+                accreditation.setAccreditationPrintNumber(printNumber);
+                accreditationRepository.save(accreditation);
+                return Optional.of(accreditationMapper.toDto(accreditation));
+            })
+            .orElse(Optional.empty());
     }
 }

@@ -11,7 +11,6 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { IAccreditationSig, NewAccreditationSig } from '../accreditation-sig.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
-import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
 
 export type PartialUpdateAccreditationSig = Partial<IAccreditationSig> & Pick<IAccreditationSig, 'accreditationId'>;
 
@@ -177,10 +176,6 @@ export class AccreditationSigService {
     });
   }
 
-  validate(accreditation: IAccreditationSig): Observable<EntityResponseType> {
-    return this.update(accreditation);
-  }
-
   public getAccreditation(id: number): Promise<IAccreditationSig | null> {
     return new Promise(resolve => {
       if (id) {
@@ -192,5 +187,17 @@ export class AccreditationSigService {
         resolve(null);
       }
     });
+  }
+
+  validate(accreditationId: number, statusId: number): Observable<EntityResponseType> {
+    return this.http
+      .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/validate`, null, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
+  }
+
+  print(accreditationId: number, statusId: number): Observable<EntityResponseType> {
+    return this.http
+      .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/print`, null, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
   }
 }

@@ -215,4 +215,64 @@ public class AccreditationResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    /**
+     * {@code PUT  /accreditations/{accreditationId}/status/{statusId}/validate}
+     *
+     * @param accreditationId the id of the accreditationDTO to save.
+     * @param statusId the id of the statusDTO to save.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated accreditationDTO,
+     * or with status {@code 400 (Bad Request)} if the accreditationDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the accreditationDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the accreditationDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping(value = "/accreditations/{accreditationId}/status/{statusId}/validate")
+    public ResponseEntity<AccreditationDTO> validate(
+        @PathVariable(value = "accreditationId") final Long accreditationId,
+        @PathVariable(value = "statusId", required = true) final Long statusId,
+        @RequestBody(required = false) AccreditationDTO accreditationDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update Accreditation partially : {}, {}", accreditationId);
+        if (accreditationId == null) {
+            throw new BadRequestAlertException("Invalid accreditationId", ENTITY_NAME, "idnull");
+        }
+        if (statusId == null) {
+            throw new BadRequestAlertException("Invalid statusId", ENTITY_NAME, "idnull");
+        }
+
+        Optional<AccreditationDTO> result = accreditationService.validateAccreditation(accreditationId, statusId);
+
+        return ResponseUtil.wrapOrNotFound(result);
+    }
+
+    /**
+     * {@code PUT  /accreditations/{accreditationId}/status/{statusId}/validate}
+     *
+     * @param accreditationId the id of the accreditationDTO to save.
+     * @param statusId the id of the statusDTO to save.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated accreditationDTO,
+     * or with status {@code 400 (Bad Request)} if the accreditationDTO is not valid,
+     * or with status {@code 404 (Not Found)} if the accreditationDTO is not found,
+     * or with status {@code 500 (Internal Server Error)} if the accreditationDTO couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping(value = "/accreditations/{accreditationId}/status/{statusId}/print")
+    public ResponseEntity<AccreditationDTO> print(
+        @PathVariable(value = "accreditationId") final Long accreditationId,
+        @PathVariable(value = "statusId", required = true) final Long statusId,
+        @RequestBody(required = false) AccreditationDTO accreditationDTO
+    ) throws URISyntaxException {
+        log.debug("REST request to partial update Accreditation partially : {}, {}", accreditationId);
+        if (accreditationId == null) {
+            throw new BadRequestAlertException("Invalid accreditationId", ENTITY_NAME, "idnull");
+        }
+        if (statusId == null) {
+            throw new BadRequestAlertException("Invalid statusId", ENTITY_NAME, "idnull");
+        }
+
+        Optional<AccreditationDTO> result = accreditationService.printAccreditation(accreditationId, statusId);
+
+        return ResponseUtil.wrapOrNotFound(result);
+    }
 }
