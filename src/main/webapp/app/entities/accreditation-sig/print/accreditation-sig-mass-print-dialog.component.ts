@@ -25,6 +25,7 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
   currentAccount: Account | null = null;
   status?: IStatusSig;
   badgeGenerated: boolean = false;
+  badgePrinting: boolean = false;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -55,8 +56,10 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
 
   confirmPrint(accreditations: IAccreditationSig[], status?: IStatusSig): void {
     if (accreditations) {
+      this.badgePrinting = true;
       const promises: Promise<void>[] = [];
       let notPrintedIds: number[] = [];
+      let badges = new Map();
       for (let accreditation of accreditations) {
         if (
           accreditation!.status!.statusUserCanPrint ||
@@ -73,10 +76,8 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
             this.accreditationService.update(accreditation).subscribe(async () => {
               var badgeId =
                 accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!;
-              this.badgeUtils
-                .print(badgeId, accreditation.accreditationPrintingModel)
-                .then(() => resolve())
-                .catch(error => reject(error));
+              badges.set(badgeId, accreditation.accreditationPrintingModel);
+              resolve();
             });
           });
           promises.push(promise);
@@ -86,12 +87,18 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
       }
       Promise.all(promises)
         .then(() => {
-          this.activeModal.close(ITEM_MASS_PRINTED_EVENT);
+          this.badgeUtils.massPrint(badges).then(() => {
+            this.badgePrinting = false;
+            this.activeModal.close(ITEM_MASS_PRINTED_EVENT);
+          });
         })
         .catch(error => {
+          this.badgePrinting = false;
           this.errorModalUtil.throwAlertErrorUnauthorizedMassPrinting(notPrintedIds);
           this.activeModal.close(ITEM_MASS_PRINTED_EVENT);
+          console.error(error);
         });
+      this.badgePrinting = false;
     }
   }
 

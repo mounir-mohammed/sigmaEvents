@@ -158,4 +158,14 @@ export class DataUtils {
       return '';
     }
   }
+
+  sortBadgeMap(badges: Map<string, any>): Promise<Map<string, any>> {
+    return new Promise<Map<string, any>>(resolve => {
+      // Convert Map to array
+      const sortedArray = Array.from(badges.entries()).sort(([keyA], [keyB]) => keyA.localeCompare(keyB));
+      // Convert sorted array back to Map
+      const sortedBadges = new Map(sortedArray);
+      resolve(sortedBadges);
+    });
+  }
 }

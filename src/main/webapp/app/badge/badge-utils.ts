@@ -10,6 +10,7 @@ import { AreaSigService } from 'app/entities/area-sig/service/area-sig.service';
 import { PrintingModelSigService } from 'app/entities/printing-model-sig/service/printing-model-sig.service';
 import { SettingSigService } from 'app/entities/setting-sig/service/setting-sig.service';
 import { CodeUtil } from 'app/shared/util/code.shared';
+import { ExportUtil } from 'app/shared/util/export.shared';
 import { Util } from 'app/shared/util/util.shred';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
@@ -705,11 +706,11 @@ export class BadgeUtils {
               modelData.printingModel.model.h
             );
             pdf.autoPrint();
+            let fileN = ExportUtil.generateFilenameWithDateTime(badgeId + '.pdf');
             if (modelData.printingModel.model.autoPrint == true) {
-              pdf.output('dataurlnewwindow', { filename: badgeId });
+              pdf.output('dataurlnewwindow', { filename: fileN });
             } else {
-              let fileName = badgeId + '_' + new Date().toUTCString();
-              pdf.save(fileName);
+              pdf.save(fileN);
             }
           });
           resolve();
@@ -719,6 +720,79 @@ export class BadgeUtils {
         console.error(error.message);
       }
       console.log('END print()');
+    });
+  }
+
+  massPrint(badges: Map<string, any>): Promise<void> {
+    return new Promise<void>(async (resolve, reject) => {
+      console.log('START massPrint()');
+      try {
+        if (badges) {
+          this.dataUtils.sortBadgeMap(badges).then(sortedBadges => {
+            const template = sortedBadges.values().next().value;
+            this.generateSelectedBadges(sortedBadges).then(pdf => {
+              let fileN = ExportUtil.generateFilenameWithDateTime('ACC_' + badges.size + '.pdf');
+              if (template.printingModel.model.autoPrint == true) {
+                pdf.output('dataurlnewwindow', { filename: fileN });
+              } else {
+                pdf.save(fileN);
+              }
+              resolve();
+            });
+          });
+        } else {
+          reject();
+          console.error('NO ACC TO PRINT');
+        }
+      } catch (error: any) {
+        reject();
+        console.error(error.message);
+      }
+      console.log('END massPrint()');
+    });
+  }
+
+  generateSelectedBadges(badges: Map<string, any>): Promise<jspdf> {
+    return new Promise<jspdf>(async (resolve, reject) => {
+      console.log('START generateSelectedBadges()');
+      if (badges) {
+        const totalBadges = badges.size;
+        let currentIndex = 1;
+        const template = badges.values().next().value;
+        let pdf = new jspdf(
+          template.printingModel.model.landScape,
+          template.printingModel.model.unite,
+          template.printingModel.model.format
+        );
+
+        for (const [badgeId, modelData] of badges) {
+          console.log(badgeId);
+          const data = document.getElementById(badgeId);
+          console.log(data);
+          if (data && modelData) {
+            const canvas = await html2canvas(data, { scale: modelData.printingModel.model.scale });
+            const contentDataURL = canvas.toDataURL(modelData.printingModel.model.type, modelData.printingModel.model.quality);
+            pdf.addImage(
+              contentDataURL,
+              modelData.printingModel.model.typeImage,
+              modelData.printingModel.model.x,
+              modelData.printingModel.model.y,
+              modelData.printingModel.model.w,
+              modelData.printingModel.model.h
+            );
+            if (currentIndex !== totalBadges) {
+              pdf.addPage();
+            }
+
+            currentIndex++;
+          }
+        }
+        resolve(pdf);
+      } else {
+        reject();
+        console.error('NO ACC TO PRINT');
+      }
+      console.log('END generateSelectedBadges()');
     });
   }
 
