@@ -1,3 +1,7 @@
+<div *ngIf="this.badgePrinting" class="overlay">
+  <img src="../../../../content/images/loading_icon.gif" />
+</div>
+
 <form *ngIf="accreditations" name="printForm" (ngSubmit)="confirmPrint(accreditations, status)">
   <div class="modal-header">
     <h4 class="modal-title" data-cy="accreditationPrintDialogHeading" sigmaTranslate="entity.print.title">Confirm print operation</h4>

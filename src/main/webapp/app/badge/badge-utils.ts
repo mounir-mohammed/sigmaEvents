@@ -707,8 +707,14 @@ export class BadgeUtils {
             );
             pdf.autoPrint();
             let fileN = ExportUtil.generateFilenameWithDateTime(badgeId + '.pdf');
+            pdf.setProperties({
+              title: fileN,
+              author: 'www.sigmaEvents.ma',
+              creator: 'www.sigmaEvents.ma',
+              subject: 'Accreditation',
+            });
             if (modelData.printingModel.model.autoPrint == true) {
-              pdf.output('dataurlnewwindow', { filename: fileN });
+              window.open(pdf.output('bloburl'));
             } else {
               pdf.save(fileN);
             }
@@ -732,8 +738,13 @@ export class BadgeUtils {
             const template = sortedBadges.values().next().value;
             this.generateSelectedBadges(sortedBadges).then(pdf => {
               let fileN = ExportUtil.generateFilenameWithDateTime('ACC_' + badges.size + '.pdf');
+              pdf.setProperties({
+                title: fileN,
+                author: 'www.sigmaEvents.ma',
+                creator: 'www.sigmaEvents.ma',
+              });
               if (template.printingModel.model.autoPrint == true) {
-                pdf.output('dataurlnewwindow', { filename: fileN });
+                window.open(pdf.output('bloburl'));
               } else {
                 pdf.save(fileN);
               }

@@ -98,7 +98,6 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
           this.activeModal.close(ITEM_MASS_PRINTED_EVENT);
           console.error(error);
         });
-      this.badgePrinting = false;
     }
   }
 
