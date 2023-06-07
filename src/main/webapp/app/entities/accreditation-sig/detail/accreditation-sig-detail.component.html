@@ -141,10 +141,10 @@
         <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ accreditation.accreditationAttributs }}</span>
         </dd>
-        <dt *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
         </dt>
-        <dd *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
           <span>{{ accreditation.accreditationStat | yesNo }}</span>
         </dd>
         <dt *sigmaHasAnyAuthority="[authority.ADMIN]">

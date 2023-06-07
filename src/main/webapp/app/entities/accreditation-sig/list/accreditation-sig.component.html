@@ -370,7 +370,7 @@
           <th
             scope="col"
             sigmaSortBy="accreditationStat"
-            *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN]) && isColumnVisible('accreditationStat')"
+            *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN]) && isColumnVisible('accreditationStat')"
           >
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
@@ -565,7 +565,7 @@
           <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationAttributs')">
             {{ accreditation.accreditationAttributs }}
           </td>
-          <td *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN]) && isColumnVisible('accreditationStat')">
+          <td *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN]) && isColumnVisible('accreditationStat')">
             {{ accreditation.accreditationStat | yesNo }}
           </td>
           <td *ngIf="isColumnVisible('accreditationActivated')">{{ accreditation.accreditationActivated | yesNo }}</td>
