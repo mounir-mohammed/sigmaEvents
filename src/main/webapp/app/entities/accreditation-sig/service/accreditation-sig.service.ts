@@ -59,6 +59,8 @@ export class AccreditationSigService {
     accreditation.accreditationCreationDate = dayjs();
     accreditation.accreditationUpdateDate = null;
     accreditation.accreditationPrintDate = null;
+    accreditation.accreditationPrintNumber = 0;
+    accreditation.accreditationPrintStat = false;
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .post<RestAccreditationSig>(this.resourceUrl, copy, { observe: 'response' })
