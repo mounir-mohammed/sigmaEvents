@@ -81,4 +81,13 @@ public interface AccreditationService {
      * @return the persisted entity.
      */
     Optional<AccreditationDTO> printAccreditation(Long accreditationId, Long statusId);
+
+    /**
+     * mass print accreditations.
+     *
+     * @param accreditationId the entity to update partially.
+     * @param statusId validation status.
+     * @return the persisted entity.
+     */
+    Optional<Boolean> massPrintAccreditation(Long[] accreditationId, Long statusId);
 }

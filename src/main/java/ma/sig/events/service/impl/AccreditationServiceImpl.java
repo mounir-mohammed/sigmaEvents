@@ -1,8 +1,10 @@
 package ma.sig.events.service.impl;
 
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 import java.util.Optional;
 import ma.sig.events.domain.Accreditation;
+import ma.sig.events.domain.Status;
 import ma.sig.events.domain.User;
 import ma.sig.events.repository.AccreditationRepository;
 import ma.sig.events.repository.StatusRepository;
@@ -136,5 +138,32 @@ public class AccreditationServiceImpl implements AccreditationService {
                 return Optional.of(accreditationMapper.toDto(accreditation));
             })
             .orElse(Optional.empty());
+    }
+
+    @Override
+    public Optional<Boolean> massPrintAccreditation(Long[] accreditationId, Long statusId) {
+        Optional<User> currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+        Optional<Status> status = statusRepository.findById(statusId);
+
+        for (Long id : accreditationId) {
+            Optional<Accreditation> accreditationOptional = accreditationRepository.findById(id);
+            if (accreditationOptional.isPresent()) {
+                Accreditation accreditation = accreditationOptional.get();
+                accreditation.setStatus(status.get());
+                accreditation.setAccreditationPrintDate(ZonedDateTime.now());
+                accreditation.setAccreditationPrintStat(true);
+                accreditation.setAccreditationPrintedByuser(currentUser.get().getLogin());
+                Long printNumber = 1L;
+                if (accreditation.getAccreditationPrintNumber() != null) {
+                    printNumber = accreditation.getAccreditationPrintNumber() + 1;
+                }
+                accreditation.setAccreditationPrintNumber(printNumber);
+                accreditationRepository.save(accreditation);
+            } else {
+                return Optional.of(false);
+            }
+        }
+
+        return Optional.of(true);
     }
 }

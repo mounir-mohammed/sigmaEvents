@@ -200,4 +200,10 @@ export class AccreditationSigService {
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/print`, null, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
+
+  massPrint(accreditationId: number[], statusId: number): Observable<EntityResponseType> {
+    return this.http
+      .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/massprint`, null, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res)));
+  }
 }

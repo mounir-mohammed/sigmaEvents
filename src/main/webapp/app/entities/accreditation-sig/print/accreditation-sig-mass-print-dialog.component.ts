@@ -60,6 +60,7 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
       const promises: Promise<void>[] = [];
       let notPrintedIds: number[] = [];
       let badges = new Map();
+      let accreditationIds: number[] = [];
       for (let accreditation of accreditations) {
         if (
           accreditation!.status!.statusUserCanPrint ||
@@ -68,12 +69,11 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
           this.accountService.hasAnyAuthority([Authority.CAN_ACC_REPRINT])
         ) {
           const promise = new Promise<void>(resolve => {
-            this.accreditationService.print(accreditation.accreditationId, status?.statusId!).subscribe(() => {
-              var badgeId =
-                accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!;
-              badges.set(badgeId, accreditation.accreditationPrintingModel);
-              resolve();
-            });
+            var badgeId =
+              accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!;
+            badges.set(badgeId, accreditation.accreditationPrintingModel);
+            accreditationIds.push(accreditation.accreditationId);
+            resolve();
           });
           promises.push(promise);
         } else {
@@ -82,9 +82,11 @@ export class AccreditationMassSigPrintDialogComponent implements OnInit {
       }
       Promise.all(promises)
         .then(() => {
-          this.badgeUtils.massPrint(badges).then(() => {
-            this.badgePrinting = false;
-            this.activeModal.close(ITEM_MASS_PRINTED_EVENT);
+          this.accreditationService.massPrint(accreditationIds, status?.statusId!).subscribe(() => {
+            this.badgeUtils.massPrint(badges).then(() => {
+              this.badgePrinting = false;
+              this.activeModal.close(ITEM_MASS_PRINTED_EVENT);
+            });
           });
         })
         .catch(error => {
