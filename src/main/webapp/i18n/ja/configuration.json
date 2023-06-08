@@ -1,6 +1,7 @@
 {
   "configuration": {
     "title": "設定",
+    "resetCache": "キャッシュのリセット",
     "filter": "フィルター (by prefix)",
     "table": {
       "prefix": "Prefix",

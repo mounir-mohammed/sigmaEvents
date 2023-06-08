@@ -1,6 +1,7 @@
 {
   "configuration": {
     "title": "Konfiguration",
+    "resetCache": "Zwischenspeicher zurücksetzen",
     "filter": "Filter (nach Präfix)",
     "table": {
       "prefix": "Präfix",

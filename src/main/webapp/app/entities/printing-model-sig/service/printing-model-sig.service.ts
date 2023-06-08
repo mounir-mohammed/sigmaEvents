@@ -26,14 +26,14 @@ export class PrintingModelSigService {
   }
 
   update(printingModel: IPrintingModelSig): Observable<EntityResponseType> {
-    this.resetPrintingModelCache(printingModel.printingModelId);
+    this.updatePrintingModelCache(printingModel.printingModelId);
     return this.http.put<IPrintingModelSig>(`${this.resourceUrl}/${this.getPrintingModelSigIdentifier(printingModel)}`, printingModel, {
       observe: 'response',
     });
   }
 
   partialUpdate(printingModel: PartialUpdatePrintingModelSig): Observable<EntityResponseType> {
-    this.resetPrintingModelCache(printingModel.printingModelId);
+    this.updatePrintingModelCache(printingModel.printingModelId);
     return this.http.patch<IPrintingModelSig>(`${this.resourceUrl}/${this.getPrintingModelSigIdentifier(printingModel)}`, printingModel, {
       observe: 'response',
     });
@@ -49,7 +49,7 @@ export class PrintingModelSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    this.resetPrintingModelCache(id);
+    this.updatePrintingModelCache(id);
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -136,11 +136,15 @@ export class PrintingModelSigService {
     }
   }
 
-  resetPrintingModelCache(id: number): void {
+  updatePrintingModelCache(id: number): void {
     this.printingModelCache.delete(this.getIdPrintingModelSigIdentifier(id));
   }
 
   getIdPrintingModelSigIdentifier(id: number): string {
     return id.toString();
+  }
+
+  resetPrintingModelCache(): void {
+    this.printingModelCache.clear();
   }
 }

@@ -1,6 +1,7 @@
 {
   "configuration": {
     "title": "Configuración",
+    "resetCache": "Restablecer caché",
     "filter": "Filtro (por prefijo)",
     "table": {
       "prefix": "Prefijo",

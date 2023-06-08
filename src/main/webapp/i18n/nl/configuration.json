@@ -2,6 +2,7 @@
   "configuration": {
     "title": "Configuratie",
     "filter": "Filteren (op voorvoegsel)",
+    "resetCache": "Cache resetten",
     "table": {
       "prefix": "Voorvoegsel",
       "properties": "Eigenschappen"

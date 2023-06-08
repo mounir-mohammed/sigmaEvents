@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ConfigurationService } from './configuration.service';
 import { Bean, PropertySource } from './configuration.model';
+import { CacheService } from './cache.service';
 
 @Component({
   selector: 'sigma-configuration',
@@ -14,7 +15,7 @@ export class ConfigurationComponent implements OnInit {
   beansAscending = true;
   propertySources: PropertySource[] = [];
 
-  constructor(private configurationService: ConfigurationService) {}
+  constructor(private configurationService: ConfigurationService, private cacheService: CacheService) {}
 
   ngOnInit(): void {
     this.configurationService.getBeans().subscribe(beans => {
@@ -31,5 +32,14 @@ export class ConfigurationComponent implements OnInit {
     this.beans = this.allBeans
       .filter(bean => !this.beansFilter || bean.prefix.toLowerCase().includes(this.beansFilter.toLowerCase()))
       .sort((a, b) => (a.prefix < b.prefix ? beansAscendingValue : beansAscendingValueReverse));
+  }
+
+  resetCache(): void {
+    const reset = this.cacheService.reset();
+    if (reset) {
+      alert('Cache reset is successful');
+    } else {
+      alert('Cache reset failed');
+    }
   }
 }

@@ -40,7 +40,7 @@ export class SettingSigService {
   }
 
   update(setting: ISettingSig): Observable<EntityResponseType> {
-    this.resetSettingCache(setting.settingId);
+    this.updateSettingCache(setting.settingId);
     const copy = this.convertDateFromClient(setting);
     return this.http
       .put<RestSettingSig>(`${this.resourceUrl}/${this.getSettingSigIdentifier(setting)}`, copy, { observe: 'response' })
@@ -48,7 +48,7 @@ export class SettingSigService {
   }
 
   partialUpdate(setting: PartialUpdateSettingSig): Observable<EntityResponseType> {
-    this.resetSettingCache(setting.settingId);
+    this.updateSettingCache(setting.settingId);
     const copy = this.convertDateFromClient(setting);
     return this.http
       .patch<RestSettingSig>(`${this.resourceUrl}/${this.getSettingSigIdentifier(setting)}`, copy, { observe: 'response' })
@@ -69,7 +69,7 @@ export class SettingSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    this.resetSettingCache(id);
+    this.updateSettingCache(id);
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -148,11 +148,15 @@ export class SettingSigService {
     }
   }
 
-  resetSettingCache(id: number): void {
+  updateSettingCache(id: number): void {
     this.settingCache.delete(this.getIdSettingSigIdentifier(id));
   }
 
   getIdSettingSigIdentifier(id: number): string {
     return id.toString();
+  }
+
+  resetSettingCache(): void {
+    this.settingCache.clear();
   }
 }
