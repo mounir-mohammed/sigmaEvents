@@ -652,7 +652,6 @@ export class BadgeUtils {
                       this.addCadres(badge, modelData.printingModel, groupDivs!, data).then(() => {
                         //add codes
                         this.addCodes(badge, modelData.printingModel, groupDivs!, data).then(() => {
-                          console.log(badge);
                           this.deplaceGroupToParent(badge, modelData.printingModel).then(() => {
                             badgeContainer?.appendChild(badge);
                             console.log('END generateadge()');
@@ -777,9 +776,7 @@ export class BadgeUtils {
         );
 
         for (const [badgeId, modelData] of badges) {
-          console.log(badgeId);
           const data = document.getElementById(badgeId);
-          console.log(data);
           if (data && modelData) {
             const canvas = await html2canvas(data, { scale: modelData.printingModel.model.scale });
             const contentDataURL = canvas.toDataURL(modelData.printingModel.model.type, modelData.printingModel.model.quality);
@@ -911,8 +908,6 @@ export class BadgeUtils {
         desiredFontSizeMin // Lower bound
       );
       console.log('END calculateFontSize()');
-      console.log(text);
-      console.log(calculatedFontSize);
       return calculatedFontSize.toString() + unite;
     } catch (error: any) {
       console.error(error.message);
@@ -960,9 +955,6 @@ export class BadgeUtils {
                       text = text.toString().toUpperCase().trim();
                     }
                   }
-                  console.log(code.name);
-                  console.log(code.type);
-                  console.log(text);
                   img.src = CodeUtil.getQrCodeData(text);
                 } else {
                   if (this.dataUtils.searchElementFromJson(code.codeTypePath, data) == CodeType.BAR_CODE) {

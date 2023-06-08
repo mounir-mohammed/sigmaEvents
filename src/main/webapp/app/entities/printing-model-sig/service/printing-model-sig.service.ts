@@ -17,6 +17,8 @@ export type EntityArrayResponseType = HttpResponse<IPrintingModelSig[]>;
 export class PrintingModelSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/printing-models');
 
+  private printingModelCache: Map<string, any> = new Map<string, any>();
+
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService, protected dataUtils: DataUtils) {}
 
   create(printingModel: NewPrintingModelSig): Observable<EntityResponseType> {
@@ -24,12 +26,14 @@ export class PrintingModelSigService {
   }
 
   update(printingModel: IPrintingModelSig): Observable<EntityResponseType> {
+    this.resetPrintingModelCache(printingModel.printingModelId);
     return this.http.put<IPrintingModelSig>(`${this.resourceUrl}/${this.getPrintingModelSigIdentifier(printingModel)}`, printingModel, {
       observe: 'response',
     });
   }
 
   partialUpdate(printingModel: PartialUpdatePrintingModelSig): Observable<EntityResponseType> {
+    this.resetPrintingModelCache(printingModel.printingModelId);
     return this.http.patch<IPrintingModelSig>(`${this.resourceUrl}/${this.getPrintingModelSigIdentifier(printingModel)}`, printingModel, {
       observe: 'response',
     });
@@ -45,6 +49,7 @@ export class PrintingModelSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
+    this.resetPrintingModelCache(id);
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -81,50 +86,61 @@ export class PrintingModelSigService {
     return printingModelCollection;
   }
 
-  getPrintingModelConfig(modelId: number): Promise<any> {
+  async getPrintingModelConfig(modelId: number): Promise<any> {
     console.log('START getPrintingModelConfig()');
-    var printingModel: IPrintingModelSig | null = null;
-    return new Promise(resolve => {
-      try {
-        if (modelId) {
-          this.find(modelId).subscribe(resp => {
-            if (resp.status == 200) {
-              printingModel = resp.body;
-              if (printingModel) {
-                if (printingModel?.printingModelStat) {
-                  if (printingModel?.printingModelData!) {
-                    var modelData = this.dataUtils.base64ToJson(printingModel?.printingModelData!);
-                    if (modelData) {
-                      resolve(modelData);
-                    } else {
-                      console.error('getPrintingModelConfig() => PRINTING MODEL PARSING ERROR');
-                      resolve(false);
-                    }
-                  } else {
-                    console.error('getPrintingModelConfig() => PRINTING MODEL DATA IS EMPTY');
-                    resolve(false);
-                  }
+
+    // Check if the printing model data is already in the cache
+    if (this.printingModelCache.has(this.getIdPrintingModelSigIdentifier(modelId))) {
+      return this.printingModelCache.get(this.getIdPrintingModelSigIdentifier(modelId));
+    }
+    try {
+      if (modelId) {
+        const resp = await this.find(modelId).toPromise();
+        if (resp!.status === 200) {
+          const printingModel = resp!.body;
+          if (printingModel) {
+            if (printingModel.printingModelStat) {
+              if (printingModel.printingModelData) {
+                const modelData = this.dataUtils.base64ToJson(printingModel.printingModelData);
+                if (modelData) {
+                  // Store the printing model data in the cache
+                  this.printingModelCache.set(this.getIdPrintingModelSigIdentifier(modelId), modelData);
+                  return modelData;
                 } else {
-                  console.error('getPrintingModelConfig() => PRINTING MODEL STATE NOT ACTIVATED');
-                  resolve(false);
+                  console.error('getPrintingModelConfig() => PRINTING MODEL PARSING ERROR');
+                  return false;
                 }
               } else {
-                console.error('getPrintingModelConfig() : RESPONSE EMPTY');
-                resolve(false);
+                console.error('getPrintingModelConfig() => PRINTING MODEL DATA IS EMPTY');
+                return false;
               }
             } else {
-              console.error('getPrintingModelConfig() : NETWORK ERROR' + resp.status);
-              resolve(false);
+              console.error('getPrintingModelConfig() => PRINTING MODEL STATE NOT ACTIVATED');
+              return false;
             }
-          });
+          } else {
+            console.error('getPrintingModelConfig(): RESPONSE EMPTY');
+            return false;
+          }
         } else {
-          console.error('getPrintingModelConfig() : modelId IS NULL');
-          resolve(false);
+          console.error('getPrintingModelConfig(): NETWORK ERROR' + resp!.status);
+          return false;
         }
-      } catch (error: any) {
-        console.error(error!.message!);
-        resolve(false);
+      } else {
+        console.error('getPrintingModelConfig(): modelId IS NULL');
+        return false;
       }
-    });
+    } catch (error: any) {
+      console.error(error!.message!);
+      return false;
+    }
+  }
+
+  resetPrintingModelCache(id: number): void {
+    this.printingModelCache.delete(this.getIdPrintingModelSigIdentifier(id));
+  }
+
+  getIdPrintingModelSigIdentifier(id: number): string {
+    return id.toString();
   }
 }

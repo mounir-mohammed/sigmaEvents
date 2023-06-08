@@ -15,18 +15,22 @@ export type EntityArrayResponseType = HttpResponse<IAreaSig[]>;
 @Injectable({ providedIn: 'root' })
 export class AreaSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/areas');
+  private areasCache: IAreaSig[] = [];
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
   create(area: NewAreaSig): Observable<EntityResponseType> {
+    this.resetAreasCache();
     return this.http.post<IAreaSig>(this.resourceUrl, area, { observe: 'response' });
   }
 
   update(area: IAreaSig): Observable<EntityResponseType> {
+    this.resetAreasCache();
     return this.http.put<IAreaSig>(`${this.resourceUrl}/${this.getAreaSigIdentifier(area)}`, area, { observe: 'response' });
   }
 
   partialUpdate(area: PartialUpdateAreaSig): Observable<EntityResponseType> {
+    this.resetAreasCache();
     return this.http.patch<IAreaSig>(`${this.resourceUrl}/${this.getAreaSigIdentifier(area)}`, area, { observe: 'response' });
   }
 
@@ -40,6 +44,7 @@ export class AreaSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
+    this.resetAreasCache();
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -71,11 +76,23 @@ export class AreaSigService {
     return areaCollection;
   }
 
-  public getAllAreas(): Promise<IAreaSig[]> {
-    return new Promise(resolve => {
-      this.http.get<IAreaSig[]>(this.resourceUrl).subscribe(response => {
-        resolve(response);
-      });
-    });
+  async getAllAreas(): Promise<IAreaSig[]> {
+    // Check if areas are already in the cache
+    if (this.areasCache.length > 0) {
+      return this.areasCache;
+    }
+
+    try {
+      const response = await this.http.get<IAreaSig[]>(this.resourceUrl).toPromise();
+      this.areasCache = response!; // Store the retrieved areas in the cache
+      return response!;
+    } catch (error: any) {
+      console.error(error!.message!);
+      return [];
+    }
+  }
+
+  resetAreasCache(): void {
+    this.areasCache = [];
   }
 }
