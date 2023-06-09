@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { IAccreditationSig } from '../accreditation-sig.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccreditationSigService } from '../service/accreditation-sig.service';
@@ -20,7 +20,7 @@ import { IDayPassInfoSig } from 'app/entities/day-pass-info-sig/day-pass-info-si
 import { Authority } from 'app/config/authority.constants';
 import { RECORD_ITEMS } from 'app/config/pagination.constants';
 import { HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs';
+import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 import { AccreditationTypeSigService } from 'app/entities/accreditation-type-sig/service/accreditation-type-sig.service';
 import { AttachementSigService } from 'app/entities/attachement-sig/service/attachement-sig.service';
 import { CategorySigService } from 'app/entities/category-sig/service/category-sig.service';
@@ -43,7 +43,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './accreditation-sig-mass-update.component.html',
 })
 export class AccreditationSigMassUpdateComponent implements OnInit {
-  accreditationsIds?: number[];
+  accreditationsIds?: number[] = [];
 
   massUpdateForm = new FormGroup({
     accreditationOccupation: new FormControl(),
@@ -204,5 +204,80 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
 
   previousState(): void {
     window.history.back();
+  }
+
+  save(): void {
+    if (this.accreditationsIds && this.accreditationsIds.length > 0) {
+      const updatedValues: Partial<IAccreditationSig> = this.getUpdatedValues();
+      const updateRequests: Observable<any>[] = [];
+
+      this.accreditationsIds.forEach((accreditationId: number) => {
+        updateRequests.push(
+          this.accreditationService.find(accreditationId).pipe(
+            map((res: HttpResponse<IAccreditationSig>) => res.body ?? []),
+            switchMap(accreditation => {
+              if (accreditation && this.massUpdateForm.valid) {
+                const updatedAccreditation: IAccreditationSig = { ...accreditation, ...updatedValues, accreditationId };
+                return this.accreditationService.update(updatedAccreditation);
+              } else {
+                return of(null);
+              }
+            })
+          )
+        );
+      });
+
+      forkJoin(updateRequests).subscribe(
+        () => {
+          console.log('All accreditations updated');
+          this.previousState();
+        },
+        (error: any) => {
+          console.error('Error updating accreditations', error);
+          alert('ERROR WHILE UPDATING');
+        }
+      );
+    } else {
+      alert('ERROR WHILE UPDATING');
+    }
+  }
+
+  private getUpdatedValues(): Partial<IAccreditationSig> {
+    const fieldsToUpdate: (keyof IAccreditationSig)[] = [
+      'accreditationOccupation',
+      'accreditationStat',
+      'accreditationActivated',
+      'accreditationDateStart',
+      'accreditationDateEnd',
+      'category',
+      'fonction',
+      'accreditationType',
+      'sites',
+      'organiz',
+      'sexe',
+      'civility',
+      'nationality',
+      'event',
+      'status',
+      'country',
+      'city',
+      'accreditationDescription',
+      'accreditationParams',
+      'accreditationAttributs',
+      'attachement',
+      'code',
+      'dayPassInfo',
+    ];
+
+    const updatedValues: Partial<IAccreditationSig> = {};
+
+    fieldsToUpdate.forEach(field => {
+      const value = this.massUpdateForm.get(field)?.value;
+      if (value !== null) {
+        updatedValues[field] = value;
+      }
+    });
+
+    return updatedValues;
   }
 }

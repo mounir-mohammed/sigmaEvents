@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <div class="col-8">
-    <form name="editForm" role="form" novalidate>
+    <form name="massUpdateForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="massUpdateForm">
       <h2
         id="sigma-accreditation-sig-heading"
         data-cy="AccreditationMassUpdateHeading"
