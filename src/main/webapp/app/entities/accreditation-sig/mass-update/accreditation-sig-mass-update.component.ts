@@ -37,6 +37,9 @@ import { SexeSigService } from 'app/entities/sexe-sig/service/sexe-sig.service';
 import { SiteSigService } from 'app/entities/site-sig/service/site-sig.service';
 import { StatusSigService } from 'app/entities/status-sig/service/status-sig.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
+import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 
 @Component({
   selector: 'sigma-accreditation-sig-mass-update',
@@ -69,6 +72,8 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
     attachement: new FormControl(),
     code: new FormControl(),
     dayPassInfo: new FormControl(),
+    accreditationPhoto: new FormControl(),
+    accreditationPhotoContentType: new FormControl(),
   });
 
   sitesSharedCollection: ISiteSig[] = [];
@@ -107,7 +112,9 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
     protected attachementService: AttachementSigService,
     protected codeService: CodeSigService,
     protected dayPassInfoService: DayPassInfoSigService,
-    protected router: Router
+    protected router: Router,
+    protected dataUtils: DataUtils,
+    protected eventManager: EventManager
   ) {}
 
   ngOnInit(): void {
@@ -267,6 +274,8 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
       'attachement',
       'code',
       'dayPassInfo',
+      'accreditationPhoto',
+      'accreditationPhotoContentType',
     ];
 
     const updatedValues: Partial<IAccreditationSig> = {};
@@ -279,5 +288,16 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
     });
 
     return updatedValues;
+  }
+
+  setFileData(event: Event, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.massUpdateForm, field, isImage).subscribe({
+      error: (err: FileLoadError) =>
+        this.eventManager.broadcast(new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })),
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
   }
 }

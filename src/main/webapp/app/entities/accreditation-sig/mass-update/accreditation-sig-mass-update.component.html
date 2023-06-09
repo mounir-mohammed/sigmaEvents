@@ -435,6 +435,60 @@
           </div>
         </div>
 
+        <div class="group-container" *sigmaHasAnyAuthority="[authority.ADMIN, authority.CAN_ACC_MASS_UPDATE_PHOTO]">
+          <div class="group-title" sigmaTranslate="sigmaEventsApp.accreditation.groups.photo"></div>
+          <div class="group-content">
+            <!-- Field 1 -->
+            <div class="row mb-3">
+              <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationPhoto" for="field_accreditationPhoto"
+                >Accreditation Photo</label
+              >
+              <div>
+                <img
+                  [src]="
+                    'data:' +
+                    massUpdateForm.get('accreditationPhotoContentType')!.value +
+                    ';base64,' +
+                    massUpdateForm.get('accreditationPhoto')!.value
+                  "
+                  style="max-height: 100px"
+                  *ngIf="massUpdateForm.get('accreditationPhoto')!.value"
+                  alt="accreditation image"
+                />
+                <div *ngIf="massUpdateForm.get('accreditationPhoto')!.value" class="form-text text-danger clearfix">
+                  <span class="pull-start"
+                    >{{ massUpdateForm.get('accreditationPhotoContentType')!.value }},
+                    {{ byteSize(massUpdateForm.get('accreditationPhoto')!.value!) }}</span
+                  >
+                </div>
+                <input
+                  type="file"
+                  id="file_accreditationPhoto"
+                  data-cy="accreditationPhoto"
+                  (change)="setFileData($event, 'accreditationPhoto', true)"
+                  accept="image/*;"
+                  sigmaTranslate="entity.action.addimage"
+                />
+              </div>
+              <input
+                type="hidden"
+                class="form-control"
+                name="accreditationPhoto"
+                id="field_accreditationPhoto"
+                data-cy="accreditationPhoto"
+                formControlName="accreditationPhoto"
+              />
+              <input
+                type="hidden"
+                class="form-control"
+                name="accreditationPhotoContentType"
+                id="field_accreditationPhotoContentType"
+                formControlName="accreditationPhotoContentType"
+              />
+            </div>
+          </div>
+        </div>
+
         <!--TODO PHOTO-->
       </div>
 
