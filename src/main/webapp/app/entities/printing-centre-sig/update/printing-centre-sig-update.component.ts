@@ -26,6 +26,7 @@ import { ILanguageSig } from 'app/entities/language-sig/language-sig.model';
 import { LanguageSigService } from 'app/entities/language-sig/service/language-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { RECORD_ITEMS } from 'app/config/pagination.constants';
 
 @Component({
   selector: 'sigma-printing-centre-sig-update',
@@ -191,13 +192,13 @@ export class PrintingCentreSigUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.cityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
       .pipe(map((cities: ICitySig[]) => this.cityService.addCitySigToCollectionIfMissing<ICitySig>(cities, this.printingCentre?.city)))
       .subscribe((cities: ICitySig[]) => (this.citiesSharedCollection = cities));
 
     this.countryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
       .pipe(
         map((countries: ICountrySig[]) =>
@@ -207,7 +208,7 @@ export class PrintingCentreSigUpdateComponent implements OnInit {
       .subscribe((countries: ICountrySig[]) => (this.countriesSharedCollection = countries));
 
     this.organizService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
       .pipe(
         map((organizs: IOrganizSig[]) =>
@@ -217,7 +218,7 @@ export class PrintingCentreSigUpdateComponent implements OnInit {
       .subscribe((organizs: IOrganizSig[]) => (this.organizsSharedCollection = organizs));
 
     this.printingTypeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IPrintingTypeSig[]>) => res.body ?? []))
       .pipe(
         map((printingTypes: IPrintingTypeSig[]) =>
@@ -230,7 +231,7 @@ export class PrintingCentreSigUpdateComponent implements OnInit {
       .subscribe((printingTypes: IPrintingTypeSig[]) => (this.printingTypesSharedCollection = printingTypes));
 
     this.printingServerService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IPrintingServerSig[]>) => res.body ?? []))
       .pipe(
         map((printingServers: IPrintingServerSig[]) =>
@@ -243,7 +244,7 @@ export class PrintingCentreSigUpdateComponent implements OnInit {
       .subscribe((printingServers: IPrintingServerSig[]) => (this.printingServersSharedCollection = printingServers));
 
     this.printingModelService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IPrintingModelSig[]>) => res.body ?? []))
       .pipe(
         map((printingModels: IPrintingModelSig[]) =>
@@ -256,7 +257,7 @@ export class PrintingCentreSigUpdateComponent implements OnInit {
       .subscribe((printingModels: IPrintingModelSig[]) => (this.printingModelsSharedCollection = printingModels));
 
     this.languageService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ILanguageSig[]>) => res.body ?? []))
       .pipe(
         map((languages: ILanguageSig[]) =>
@@ -266,7 +267,7 @@ export class PrintingCentreSigUpdateComponent implements OnInit {
       .subscribe((languages: ILanguageSig[]) => (this.languagesSharedCollection = languages));
 
     this.eventService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.printingCentre?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));

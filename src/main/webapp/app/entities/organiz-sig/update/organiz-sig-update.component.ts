@@ -19,6 +19,7 @@ import { EventSigService } from 'app/entities/event-sig/service/event-sig.servic
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
+import { RECORD_ITEMS } from 'app/config/pagination.constants';
 
 @Component({
   selector: 'sigma-organiz-sig-update',
@@ -142,7 +143,7 @@ export class OrganizSigUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.countryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
       .pipe(
         map((countries: ICountrySig[]) =>
@@ -152,13 +153,13 @@ export class OrganizSigUpdateComponent implements OnInit {
       .subscribe((countries: ICountrySig[]) => (this.countriesSharedCollection = countries));
 
     this.cityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
       .pipe(map((cities: ICitySig[]) => this.cityService.addCitySigToCollectionIfMissing<ICitySig>(cities, this.organiz?.city)))
       .subscribe((cities: ICitySig[]) => (this.citiesSharedCollection = cities));
 
     this.eventService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.organiz?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));

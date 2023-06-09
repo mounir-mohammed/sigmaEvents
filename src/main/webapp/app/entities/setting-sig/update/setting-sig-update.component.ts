@@ -14,6 +14,7 @@ import { ILanguageSig } from 'app/entities/language-sig/language-sig.model';
 import { LanguageSigService } from 'app/entities/language-sig/service/language-sig.service';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
+import { RECORD_ITEMS } from 'app/config/pagination.constants';
 
 @Component({
   selector: 'sigma-setting-sig-update',
@@ -125,7 +126,7 @@ export class SettingSigUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.languageService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ILanguageSig[]>) => res.body ?? []))
       .pipe(
         map((languages: ILanguageSig[]) =>
@@ -135,7 +136,7 @@ export class SettingSigUpdateComponent implements OnInit {
       .subscribe((languages: ILanguageSig[]) => (this.languagesSharedCollection = languages));
 
     this.eventService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.setting?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));

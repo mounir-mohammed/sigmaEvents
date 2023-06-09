@@ -1,9 +1,9 @@
 {
   "name": "sigma-events",
-  "version": "1.1.0",
+  "version": "1.1.0.beta",
   "private": true,
   "description": "SigmaEvents Management",
-  "license": "UNLICENSED",
+  "license": "www.sigmaEvents.ma",
   "scripts": {
     "app:start": "./mvnw",
     "backend:build-cache": "./mvnw dependency:go-offline",

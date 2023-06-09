@@ -17,6 +17,7 @@ import { EventSigService } from 'app/entities/event-sig/service/event-sig.servic
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
+import { RECORD_ITEMS } from 'app/config/pagination.constants';
 
 @Component({
   selector: 'sigma-category-sig-update',
@@ -140,7 +141,7 @@ export class CategorySigUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.printingModelService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IPrintingModelSig[]>) => res.body ?? []))
       .pipe(
         map((printingModels: IPrintingModelSig[]) =>
@@ -153,7 +154,7 @@ export class CategorySigUpdateComponent implements OnInit {
       .subscribe((printingModels: IPrintingModelSig[]) => (this.printingModelsSharedCollection = printingModels));
 
     this.eventService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.category?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));

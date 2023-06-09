@@ -49,6 +49,7 @@ import { Util } from 'app/shared/util/util.shred';
 import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dialog.component';
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
 import { FormControl } from '@angular/forms';
+import { RECORD_ITEMS } from 'app/config/pagination.constants';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -289,6 +290,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
     if (selectedCategory) {
       this.fonctionsSharedCollection = [];
       const req = {
+        size: RECORD_ITEMS,
         'categoryId.equals': selectedCategory.categoryId,
       };
       this.fonctionService
@@ -300,7 +302,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.siteService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
       .pipe(
         map((sites: ISiteSig[]) => this.siteService.addSiteSigToCollectionIfMissing<ISiteSig>(sites, ...(this.accreditation?.sites ?? [])))
@@ -308,13 +310,13 @@ export class AccreditationSigUpdateComponent implements OnInit {
       .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
 
     this.eventService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .pipe(map((events: IEventSig[]) => this.eventService.addEventSigToCollectionIfMissing<IEventSig>(events, this.accreditation?.event)))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
 
     this.civilityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICivilitySig[]>) => res.body ?? []))
       .pipe(
         map((civilities: ICivilitySig[]) =>
@@ -324,13 +326,13 @@ export class AccreditationSigUpdateComponent implements OnInit {
       .subscribe((civilities: ICivilitySig[]) => (this.civilitiesSharedCollection = civilities));
 
     this.sexeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ISexeSig[]>) => res.body ?? []))
       .pipe(map((sexes: ISexeSig[]) => this.sexeService.addSexeSigToCollectionIfMissing<ISexeSig>(sexes, this.accreditation?.sexe)))
       .subscribe((sexes: ISexeSig[]) => (this.sexesSharedCollection = sexes));
 
     this.nationalityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? []))
       .pipe(
         map((nationalities: INationalitySig[]) =>
@@ -340,7 +342,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
       .subscribe((nationalities: INationalitySig[]) => (this.nationalitiesSharedCollection = nationalities));
 
     this.countryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
       .pipe(
         map((countries: ICountrySig[]) =>
@@ -350,13 +352,13 @@ export class AccreditationSigUpdateComponent implements OnInit {
       .subscribe((countries: ICountrySig[]) => (this.countriesSharedCollection = countries));
 
     this.cityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
       .pipe(map((cities: ICitySig[]) => this.cityService.addCitySigToCollectionIfMissing<ICitySig>(cities, this.accreditation?.city)))
       .subscribe((cities: ICitySig[]) => (this.citiesSharedCollection = cities));
 
     this.categoryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
       .pipe(
         map((categories: ICategorySig[]) =>
@@ -368,7 +370,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
     this.loadFonctionsRelationshipsOptions();
 
     this.organizService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
       .pipe(
         map((organizs: IOrganizSig[]) =>
@@ -378,7 +380,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
       .subscribe((organizs: IOrganizSig[]) => (this.organizsSharedCollection = organizs));
 
     this.accreditationTypeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
       .pipe(
         map((accreditationTypes: IAccreditationTypeSig[]) =>
@@ -391,7 +393,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
       .subscribe((accreditationTypes: IAccreditationTypeSig[]) => (this.accreditationTypesSharedCollection = accreditationTypes));
 
     this.statusService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
       .pipe(
         map((statuses: IStatusSig[]) =>
