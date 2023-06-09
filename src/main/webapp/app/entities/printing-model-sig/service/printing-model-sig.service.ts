@@ -7,6 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPrintingModelSig, NewPrintingModelSig } from '../printing-model-sig.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { CacheService } from 'app/admin/configuration/cache.service';
 
 export type PartialUpdatePrintingModelSig = Partial<IPrintingModelSig> & Pick<IPrintingModelSig, 'printingModelId'>;
 
@@ -17,23 +18,24 @@ export type EntityArrayResponseType = HttpResponse<IPrintingModelSig[]>;
 export class PrintingModelSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/printing-models');
 
-  private printingModelCache: Map<string, any> = new Map<string, any>();
-
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService, protected dataUtils: DataUtils) {}
+  constructor(
+    protected http: HttpClient,
+    protected applicationConfigService: ApplicationConfigService,
+    protected dataUtils: DataUtils,
+    protected cacheService: CacheService
+  ) {}
 
   create(printingModel: NewPrintingModelSig): Observable<EntityResponseType> {
     return this.http.post<IPrintingModelSig>(this.resourceUrl, printingModel, { observe: 'response' });
   }
 
   update(printingModel: IPrintingModelSig): Observable<EntityResponseType> {
-    this.updatePrintingModelCache(printingModel.printingModelId);
     return this.http.put<IPrintingModelSig>(`${this.resourceUrl}/${this.getPrintingModelSigIdentifier(printingModel)}`, printingModel, {
       observe: 'response',
     });
   }
 
   partialUpdate(printingModel: PartialUpdatePrintingModelSig): Observable<EntityResponseType> {
-    this.updatePrintingModelCache(printingModel.printingModelId);
     return this.http.patch<IPrintingModelSig>(`${this.resourceUrl}/${this.getPrintingModelSigIdentifier(printingModel)}`, printingModel, {
       observe: 'response',
     });
@@ -49,7 +51,6 @@ export class PrintingModelSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    this.updatePrintingModelCache(id);
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -90,8 +91,8 @@ export class PrintingModelSigService {
     console.log('START getPrintingModelConfig()');
 
     // Check if the printing model data is already in the cache
-    if (this.printingModelCache.has(this.getIdPrintingModelSigIdentifier(modelId))) {
-      return this.printingModelCache.get(this.getIdPrintingModelSigIdentifier(modelId));
+    if (this.cacheService.get(this.getIdPrintingModelSigIdentifier(modelId))) {
+      return this.cacheService.get(this.getIdPrintingModelSigIdentifier(modelId));
     }
     try {
       if (modelId) {
@@ -104,7 +105,7 @@ export class PrintingModelSigService {
                 const modelData = this.dataUtils.base64ToJson(printingModel.printingModelData);
                 if (modelData) {
                   // Store the printing model data in the cache
-                  this.printingModelCache.set(this.getIdPrintingModelSigIdentifier(modelId), modelData);
+                  this.cacheService.set(this.getIdPrintingModelSigIdentifier(modelId), modelData);
                   return modelData;
                 } else {
                   console.error('getPrintingModelConfig() => PRINTING MODEL PARSING ERROR');
@@ -136,15 +137,7 @@ export class PrintingModelSigService {
     }
   }
 
-  updatePrintingModelCache(id: number): void {
-    this.printingModelCache.delete(this.getIdPrintingModelSigIdentifier(id));
-  }
-
   getIdPrintingModelSigIdentifier(id: number): string {
-    return id.toString();
-  }
-
-  resetPrintingModelCache(): void {
-    this.printingModelCache.clear();
+    return 'PRINTING_MODEL_' + id.toString();
   }
 }

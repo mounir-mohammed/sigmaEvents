@@ -4,19 +4,6 @@
   <input type="text" [(ngModel)]="beansFilter" (ngModelChange)="filterAndSortBeans()" class="form-control" />
 
   <h3 id="spring-configuration">Spring configuration</h3>
-
-  <div class="d-flex justify-content-end mb-2">
-    <button
-      id="jh-create-entity"
-      data-cy="entityCreateButton"
-      class="btn btn-danger jh-create-entity create-area-sig"
-      (click)="resetCache()"
-    >
-      <fa-icon icon="trash-alt"></fa-icon>
-      <span sigmaTranslate="configuration.resetCache"> Reset Cache Data </span>
-    </button>
-  </div>
-
   <table class="table table-striped table-bordered table-responsive d-table" aria-describedby="spring-configuration">
     <thead>
       <tr sigmaSort predicate="prefix" [(ascending)]="beansAscending" (sortChange)="filterAndSortBeans()">

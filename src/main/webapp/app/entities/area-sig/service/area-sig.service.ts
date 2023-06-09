@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IAreaSig, NewAreaSig } from '../area-sig.model';
+import { CacheService } from 'app/admin/configuration/cache.service';
 
 export type PartialUpdateAreaSig = Partial<IAreaSig> & Pick<IAreaSig, 'areaId'>;
 
@@ -15,22 +16,22 @@ export type EntityArrayResponseType = HttpResponse<IAreaSig[]>;
 @Injectable({ providedIn: 'root' })
 export class AreaSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/areas');
-  private areasCache: IAreaSig[] = [];
 
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected applicationConfigService: ApplicationConfigService,
+    protected cacheService: CacheService
+  ) {}
 
   create(area: NewAreaSig): Observable<EntityResponseType> {
-    this.resetAreasCache();
     return this.http.post<IAreaSig>(this.resourceUrl, area, { observe: 'response' });
   }
 
   update(area: IAreaSig): Observable<EntityResponseType> {
-    this.resetAreasCache();
     return this.http.put<IAreaSig>(`${this.resourceUrl}/${this.getAreaSigIdentifier(area)}`, area, { observe: 'response' });
   }
 
   partialUpdate(area: PartialUpdateAreaSig): Observable<EntityResponseType> {
-    this.resetAreasCache();
     return this.http.patch<IAreaSig>(`${this.resourceUrl}/${this.getAreaSigIdentifier(area)}`, area, { observe: 'response' });
   }
 
@@ -44,7 +45,6 @@ export class AreaSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    this.resetAreasCache();
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -78,13 +78,13 @@ export class AreaSigService {
 
   async getAllAreas(): Promise<IAreaSig[]> {
     // Check if areas are already in the cache
-    if (this.areasCache.length > 0) {
-      return this.areasCache;
+    if (this.cacheService.get(this.getIdAreasSigIdentifier())) {
+      return this.cacheService.get(this.getIdAreasSigIdentifier());
     }
 
     try {
       const response = await this.http.get<IAreaSig[]>(this.resourceUrl).toPromise();
-      this.areasCache = response!; // Store the retrieved areas in the cache
+      this.cacheService.set(this.getIdAreasSigIdentifier(), response!); // Store the retrieved setting in the cache
       return response!;
     } catch (error: any) {
       console.error(error!.message!);
@@ -92,7 +92,7 @@ export class AreaSigService {
     }
   }
 
-  resetAreasCache(): void {
-    this.areasCache = [];
+  getIdAreasSigIdentifier(): string {
+    return 'EVENT_ALL_AREAS';
   }
 }

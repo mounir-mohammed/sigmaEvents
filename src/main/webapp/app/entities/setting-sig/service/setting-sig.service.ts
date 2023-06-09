@@ -8,6 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { ISettingSig, NewSettingSig } from '../setting-sig.model';
+import { CacheService } from 'app/admin/configuration/cache.service';
 
 export type PartialUpdateSettingSig = Partial<ISettingSig> & Pick<ISettingSig, 'settingId'>;
 
@@ -28,9 +29,11 @@ export type EntityArrayResponseType = HttpResponse<ISettingSig[]>;
 export class SettingSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/settings');
 
-  private settingCache: Map<string, ISettingSig | null> = new Map<string, ISettingSig | null>();
-
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected applicationConfigService: ApplicationConfigService,
+    protected cacheService: CacheService
+  ) {}
 
   create(setting: NewSettingSig): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(setting);
@@ -40,7 +43,6 @@ export class SettingSigService {
   }
 
   update(setting: ISettingSig): Observable<EntityResponseType> {
-    this.updateSettingCache(setting.settingId);
     const copy = this.convertDateFromClient(setting);
     return this.http
       .put<RestSettingSig>(`${this.resourceUrl}/${this.getSettingSigIdentifier(setting)}`, copy, { observe: 'response' })
@@ -48,7 +50,6 @@ export class SettingSigService {
   }
 
   partialUpdate(setting: PartialUpdateSettingSig): Observable<EntityResponseType> {
-    this.updateSettingCache(setting.settingId);
     const copy = this.convertDateFromClient(setting);
     return this.http
       .patch<RestSettingSig>(`${this.resourceUrl}/${this.getSettingSigIdentifier(setting)}`, copy, { observe: 'response' })
@@ -69,7 +70,6 @@ export class SettingSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
-    this.updateSettingCache(id);
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -129,14 +129,14 @@ export class SettingSigService {
 
   async getSetting(id: number): Promise<ISettingSig | null> {
     // Check if the setting is already in the cache
-    if (this.settingCache.has(this.getIdSettingSigIdentifier(id))) {
-      return this.settingCache.get(this.getIdSettingSigIdentifier(id))!;
+    if (this.cacheService.get(this.getIdSettingSigIdentifier(id))) {
+      return this.cacheService.get(this.getIdSettingSigIdentifier(id))!;
     }
 
     try {
       if (id) {
         const response = await this.http.get<ISettingSig>(`${this.resourceUrl}/${id}`).toPromise();
-        this.settingCache.set(this.getIdSettingSigIdentifier(id), response!); // Store the retrieved setting in the cache
+        this.cacheService.set(this.getIdSettingSigIdentifier(id), response!); // Store the retrieved setting in the cache
         return response!;
       } else {
         console.error('getSetting(): id is null');
@@ -148,15 +148,7 @@ export class SettingSigService {
     }
   }
 
-  updateSettingCache(id: number): void {
-    this.settingCache.delete(this.getIdSettingSigIdentifier(id));
-  }
-
   getIdSettingSigIdentifier(id: number): string {
-    return id.toString();
-  }
-
-  resetSettingCache(): void {
-    this.settingCache.clear();
+    return 'SETTING_' + id.toString();
   }
 }
