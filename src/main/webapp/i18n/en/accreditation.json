@@ -6,6 +6,7 @@
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Accreditation",
         "createOrEditLabel": "Create or edit a Accreditation",
+        "massUpdateLabel": "Mass update accreditations",
         "notFound": "No Accreditations found",
         "costumView": "Costum View",
         "DefaultView": "Default View",

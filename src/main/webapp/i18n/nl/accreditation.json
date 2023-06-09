@@ -6,6 +6,7 @@
         "refreshListLabel": "Vernieuw lijst",
         "createLabel": "Maak een nieuwe accreditatie",
         "createOrEditLabel": "Maak of bewerk een accreditatie",
+        "massUpdateLabel": "Massa-update accreditaties",
         "notFound": "Geen accreditaties gevonden",
         "costumView": "Aangepaste weergave",
         "DefaultView": "Standaardweergave",

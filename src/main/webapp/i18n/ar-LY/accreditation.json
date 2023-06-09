@@ -6,6 +6,7 @@
         "refreshListLabel": "تحديث القائمة",
         "createLabel": "إنشاء تصديق جديد",
         "createOrEditLabel": "إنشاء أو تعديل تصديق",
+        "massUpdateLabel": "تحديث الاعتمادات بشكل جماعي",
         "notFound": "لم يتم العثور على تصديقات",
         "costumView": "عرض مخصص",
         "DefaultView": "العرض الافتراضي",

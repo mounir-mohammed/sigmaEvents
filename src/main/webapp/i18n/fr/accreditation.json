@@ -6,6 +6,7 @@
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer une nouvelle accréditation",
         "createOrEditLabel": "Créer ou éditer une accréditation",
+        "massUpdateLabel": "Mise à jour en masse des accréditations",
         "notFound": "Aucune accréditation trouvé",
         "costumView": "Vue personnalisée",
         "DefaultView": "Vue par défaut",

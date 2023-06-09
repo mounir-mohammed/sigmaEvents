@@ -6,6 +6,7 @@
         "refreshListLabel": "刷新列表",
         "createLabel": "创建新认证",
         "createOrEditLabel": "创建或编辑认证",
+        "massUpdateLabel": "批量更新授权",
         "notFound": "未找到认证",
         "costumView": "自定义视图",
         "DefaultView": "默认视图",

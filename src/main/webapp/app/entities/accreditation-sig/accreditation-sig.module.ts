@@ -10,6 +10,7 @@ import { AccreditationSigRoutingModule } from './route/accreditation-sig-routing
 import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dialog.component';
 import { AccreditationSigSearchDialogComponent } from './search/accreditation-sig-search-dialog.component';
 import { AccreditationMassSigPrintDialogComponent } from './print/accreditation-sig-mass-print-dialog.component';
+import { AccreditationSigMassUpdateComponent } from './mass-update/accreditation-sig-mass-update.component';
 
 @NgModule({
   imports: [SharedModule, AccreditationSigRoutingModule],
@@ -23,6 +24,7 @@ import { AccreditationMassSigPrintDialogComponent } from './print/accreditation-
     AccreditationMassSigPrintDialogComponent,
     AccreditationSigSearchDialogComponent,
     CameraLaptopDialogComponent,
+    AccreditationSigMassUpdateComponent,
   ],
 })
 export class AccreditationSigModule {}

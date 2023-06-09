@@ -448,11 +448,29 @@ export class AccreditationSigComponent implements OnInit {
     return selectedAccreditations;
   }
 
+  getSelectedAccreditationsIds(): number[] {
+    const selectedAccreditationsIds: number[] = [];
+    for (const accreditation of this.accreditations!) {
+      if (accreditation.selected) {
+        selectedAccreditationsIds.push(accreditation.accreditationId);
+      }
+    }
+    return selectedAccreditationsIds;
+  }
+
   updateSelectedCount() {
     this.selectedCount = this.accreditations!.filter(accreditation => accreditation.selected).length;
   }
 
-  massUpdate(): void {}
+  massUpdate(): void {
+    if (this.selectedCount) {
+      const accreditationsIds: number[] = this.getSelectedAccreditationsIds();
+      this.router.navigate(['/accreditation-sig', 'massUpdate'], { queryParams: { data: btoa(JSON.stringify(accreditationsIds)) } });
+      this.unSelectAll();
+    } else {
+      alert('NO ACCREDITATION SELECTED');
+    }
+  }
 
   massPrint(): void {
     if (this.selectedCount) {

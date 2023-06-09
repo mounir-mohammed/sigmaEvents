@@ -6,6 +6,7 @@
         "refreshListLabel": "Liste aktualisieren",
         "createLabel": "Neue Akkreditierung erstellen",
         "createOrEditLabel": "Akkreditierung erstellen oder bearbeiten",
+        "massUpdateLabel": "Massenaktualisierung von Akkreditierungen",
         "notFound": "Keine Akkreditierungen gefunden",
         "costumView": "Benutzerdefinierte Ansicht",
         "DefaultView": "Standardansicht",

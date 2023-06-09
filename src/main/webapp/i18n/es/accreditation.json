@@ -6,6 +6,7 @@
         "refreshListLabel": "Actualizar lista",
         "createLabel": "Crear una nueva acreditación",
         "createOrEditLabel": "Crear o editar una acreditación",
+        "massUpdateLabel": "Actualización masiva de acreditaciones",
         "notFound": "No se encontraron acreditaciones",
         "costumView": "Vista personalizada",
         "DefaultView": "Vista predeterminada",

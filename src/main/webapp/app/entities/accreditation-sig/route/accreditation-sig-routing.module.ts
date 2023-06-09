@@ -7,6 +7,7 @@ import { AccreditationSigDetailComponent } from '../detail/accreditation-sig-det
 import { AccreditationSigUpdateComponent } from '../update/accreditation-sig-update.component';
 import { AccreditationSigRoutingResolveService } from './accreditation-sig-routing-resolve.service';
 import { ASC } from 'app/config/navigation.constants';
+import { AccreditationSigMassUpdateComponent } from '../mass-update/accreditation-sig-mass-update.component';
 
 const accreditationRoute: Routes = [
   {
@@ -39,6 +40,11 @@ const accreditationRoute: Routes = [
     resolve: {
       accreditation: AccreditationSigRoutingResolveService,
     },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'massUpdate',
+    component: AccreditationSigMassUpdateComponent,
     canActivate: [UserRouteAccessService],
   },
 ];

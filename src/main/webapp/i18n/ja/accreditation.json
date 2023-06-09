@@ -6,6 +6,7 @@
         "refreshListLabel": "リストを更新",
         "createLabel": "新しい認定を作成",
         "createOrEditLabel": "認定を作成または編集",
+        "massUpdateLabel": "一括更新の認証",
         "notFound": "認定が見つかりません",
         "costumView": "カスタムビュー",
         "DefaultView": "デフォルトビュー",
