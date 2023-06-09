@@ -270,6 +270,12 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
             if (criteria.getAccreditationStat() != null) {
                 specification = specification.and(buildSpecification(criteria.getAccreditationStat(), Accreditation_.accreditationStat));
             }
+
+            if (criteria.getAccreditationActivated() != null) {
+                specification =
+                    specification.and(buildSpecification(criteria.getAccreditationActivated(), Accreditation_.accreditationActivated));
+            }
+
             if (criteria.getPhotoArchiveId() != null) {
                 specification =
                     specification.and(

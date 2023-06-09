@@ -69,6 +69,8 @@ public class AccreditationCriteria implements Serializable, Criteria {
 
     private BooleanFilter accreditationStat;
 
+    private BooleanFilter accreditationActivated;
+
     private LongFilter photoArchiveId;
 
     private LongFilter infoSuppId;
@@ -137,6 +139,7 @@ public class AccreditationCriteria implements Serializable, Criteria {
         this.accreditationParams = other.accreditationParams == null ? null : other.accreditationParams.copy();
         this.accreditationAttributs = other.accreditationAttributs == null ? null : other.accreditationAttributs.copy();
         this.accreditationStat = other.accreditationStat == null ? null : other.accreditationStat.copy();
+        this.accreditationActivated = other.accreditationActivated == null ? null : other.accreditationActivated.copy();
         this.photoArchiveId = other.photoArchiveId == null ? null : other.photoArchiveId.copy();
         this.infoSuppId = other.infoSuppId == null ? null : other.infoSuppId.copy();
         this.noteId = other.noteId == null ? null : other.noteId.copy();
@@ -524,6 +527,21 @@ public class AccreditationCriteria implements Serializable, Criteria {
         this.accreditationStat = accreditationStat;
     }
 
+    public BooleanFilter getAccreditationActivated() {
+        return accreditationActivated;
+    }
+
+    public BooleanFilter accreditationActivated() {
+        if (accreditationActivated == null) {
+            accreditationActivated = new BooleanFilter();
+        }
+        return accreditationActivated;
+    }
+
+    public void setAccreditationActivated(BooleanFilter accreditationActivated) {
+        this.accreditationActivated = accreditationActivated;
+    }
+
     public LongFilter getPhotoArchiveId() {
         return photoArchiveId;
     }
@@ -851,6 +869,7 @@ public class AccreditationCriteria implements Serializable, Criteria {
             Objects.equals(accreditationParams, that.accreditationParams) &&
             Objects.equals(accreditationAttributs, that.accreditationAttributs) &&
             Objects.equals(accreditationStat, that.accreditationStat) &&
+            Objects.equals(accreditationActivated, that.accreditationActivated) &&
             Objects.equals(photoArchiveId, that.photoArchiveId) &&
             Objects.equals(infoSuppId, that.infoSuppId) &&
             Objects.equals(noteId, that.noteId) &&
@@ -901,6 +920,7 @@ public class AccreditationCriteria implements Serializable, Criteria {
             accreditationParams,
             accreditationAttributs,
             accreditationStat,
+            accreditationActivated,
             photoArchiveId,
             infoSuppId,
             noteId,
@@ -952,6 +972,7 @@ public class AccreditationCriteria implements Serializable, Criteria {
             (accreditationParams != null ? "accreditationParams=" + accreditationParams + ", " : "") +
             (accreditationAttributs != null ? "accreditationAttributs=" + accreditationAttributs + ", " : "") +
             (accreditationStat != null ? "accreditationStat=" + accreditationStat + ", " : "") +
+            (accreditationActivated != null ? "accreditationActivated=" + accreditationActivated + ", " : "") +
             (photoArchiveId != null ? "photoArchiveId=" + photoArchiveId + ", " : "") +
             (infoSuppId != null ? "infoSuppId=" + infoSuppId + ", " : "") +
             (noteId != null ? "noteId=" + noteId + ", " : "") +

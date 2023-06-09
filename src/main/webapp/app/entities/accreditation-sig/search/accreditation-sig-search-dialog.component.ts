@@ -171,15 +171,27 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     }
 
     if (this.searchForm.get('accreditationStat')?.value) {
-      this.filters.set('accreditationStat.equals', this.searchForm.get('accreditationStat')?.value);
+      if (this.searchForm.get('accreditationStat')?.value == 'true') {
+        this.filters.set('accreditationStat.equals', [true]);
+      } else if (this.searchForm.get('accreditationStat')?.value == 'false') {
+        this.filters.set('accreditationStat.equals', [false]);
+      }
     }
 
     if (this.searchForm.get('accreditationActivated')?.value) {
-      this.filters.set('accreditationActivated.equals', this.searchForm.get('accreditationActivated')?.value);
+      if (this.searchForm.get('accreditationActivated')?.value == 'true') {
+        this.filters.set('accreditationActivated.equals', [true]);
+      } else if (this.searchForm.get('accreditationActivated')?.value == 'false') {
+        this.filters.set('accreditationActivated.equals', [false]);
+      }
     }
 
     if (this.searchForm.get('accreditationPrinted')?.value) {
-      this.filters.set('accreditationPrintStat.equals', this.searchForm.get('accreditationPrinted')?.value);
+      if (this.searchForm.get('accreditationPrinted')?.value == 'true') {
+        this.filters.set('accreditationPrintStat.equals', [true]);
+      } else if (this.searchForm.get('accreditationPrinted')?.value == 'false') {
+        this.filters.set('accreditationPrintStat.equals', [false]);
+      }
     }
 
     if (this.searchForm.get('accreditationDateStart')?.value) {

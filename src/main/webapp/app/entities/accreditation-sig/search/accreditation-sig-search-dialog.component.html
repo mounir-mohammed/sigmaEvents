@@ -229,27 +229,59 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated" for="field_accreditationActivated"
             >Accreditation Activated</label
           >
-          <input
-            type="checkbox"
-            class="form-check"
-            name="accreditationActivated"
-            id="field_accreditationActivated"
-            data-cy="accreditationActivated"
-            formControlName="accreditationActivated"
-          />
+          <div class="form-check">
+            <div>
+              <input
+                type="radio"
+                class="form-check-input"
+                name="accreditationActivated"
+                id="field_accreditationActivated1"
+                value="true"
+                formControlName="accreditationActivated"
+              />
+              <label class="form-check-label" for="field_accreditationActivated1">{{ true | yesNo }}</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                class="form-check-input"
+                name="accreditationActivated"
+                id="field_accreditationActivated2"
+                value="false"
+                formControlName="accreditationActivated"
+              />
+              <label class="form-check-label" for="field_accreditationActivated2">{{ false | yesNo }}</label>
+            </div>
+          </div>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat" for="field_accreditationPrinted"
             >Accreditation Printed</label
           >
-          <input
-            type="checkbox"
-            class="form-check"
-            name="accreditationPrinted"
-            id="field_accreditationPrinted"
-            data-cy="accreditationPrinted"
-            formControlName="accreditationPrinted"
-          />
+          <div class="form-check">
+            <div>
+              <input
+                type="radio"
+                class="form-check-input"
+                name="accreditationPrinted"
+                id="field_accreditationPrinted1"
+                value="true"
+                formControlName="accreditationPrinted"
+              />
+              <label class="form-check-label" for="field_accreditationPrinted1">{{ true | yesNo }}</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                class="form-check-input"
+                name="accreditationPrinted"
+                id="field_accreditationPrinted2"
+                value="false"
+                formControlName="accreditationPrinted"
+              />
+              <label class="form-check-label" for="field_accreditationPrinted2">{{ false | yesNo }}</label>
+            </div>
+          </div>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateStart" for="field_accreditationDateStart"
@@ -450,14 +482,30 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
             >Accreditation Stat</label
           >
-          <input
-            type="checkbox"
-            class="form-check"
-            name="accreditationStat"
-            id="field_accreditationStat"
-            data-cy="accreditationStat"
-            formControlName="accreditationStat"
-          />
+          <div class="form-check">
+            <div>
+              <input
+                type="radio"
+                class="form-check-input"
+                name="accreditationStat"
+                id="field_accreditationStat1"
+                value="true"
+                formControlName="accreditationStat"
+              />
+              <label class="form-check-label" for="field_accreditationStat1">{{ true | yesNo }}</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                class="form-check-input"
+                name="accreditationStat"
+                id="field_accreditationStat2"
+                value="false"
+                formControlName="accreditationStat"
+              />
+              <label class="form-check-label" for="field_accreditationStat2">{{ false | yesNo }}</label>
+            </div>
+          </div>
         </div>
         <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
