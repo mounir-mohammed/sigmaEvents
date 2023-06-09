@@ -15,7 +15,9 @@ public final class AuthoritiesConstants {
     public static final String CAN_ACC_VALIDATE = "CAN_ACC_VALIDATE";
     public static final String CAN_ACC_AV_SEARCH = "CAN_ACC_AV_SEARCH";
     public static final String CAN_ACC_MASS_UPDATE = "CAN_ACC_MASS_UPDATE";
+    public static final String CAN_ACC_MASS_PRINT = "CAN_ACC_MASS_PRINT";
     public static final String CAN_ACC_IMPORT = "CAN_ACC_IMPORT";
+    public static final String CAN_ACC_EXPORT = "CAN_ACC_EXPORT";
     public static final String CAN_ACC_ACTIVAT = "CAN_ACC_ACTIVAT";
     public static final String CAN_ACC_PRINT = "CAN_ACC_PRINT";
     public static final String CAN_ACC_REPRINT = "CAN_ACC_REPRINT";

@@ -82,24 +82,24 @@
         </div>
       </div>
       <!--START ADD MULTI SELECTION BUTTONS-->
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_MASS_UPDATE]">
         <button type="button" class="btn btn-info me-2" (click)="massUpdate()">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massUpdate"
             >Mass Update</span
           >
         </button>
       </div>
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_MASS_PRINT]">
         <button type="button" class="btn btn-info me-2" (click)="massPrint()">
           <fa-icon icon="print"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massPrint">Mass Print</span>
         </button>
       </div>
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_IMPORT]">
         <button type="button" class="btn btn-info me-2">
           <fa-icon icon="upload"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.upload">Upload</span>
         </button>
       </div>
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_EXPORT]">
         <button type="button" class="btn btn-info me-2" (click)="export()">
           <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.export">Export</span>
         </button>
