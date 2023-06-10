@@ -386,3 +386,19 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
   justify-content: center;
   align-items: center;
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Make the container fill the viewport height */
+}
+
+footer {
+  margin-top: auto; /* Push the footer to the bottom */
+}
