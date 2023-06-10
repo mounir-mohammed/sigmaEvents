@@ -49,7 +49,6 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        String contentSecurityPolicy = jHipsterProperties.getSecurity().getContentSecurityPolicy().concat("; camera 'self'");
         // @formatter:off
         http
             .csrf()
@@ -61,7 +60,7 @@ public class SecurityConfiguration {
                 .accessDeniedHandler(problemSupport)
         .and()
             .headers()
-                .contentSecurityPolicy(contentSecurityPolicy)
+                .contentSecurityPolicy(jHipsterProperties.getSecurity().getContentSecurityPolicy())
             .and()
                 .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
             .and()
