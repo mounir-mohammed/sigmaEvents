@@ -1,0 +1,24 @@
+<form [formGroup]="importForm" (ngSubmit)="confirmImport()">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="accreditationImportDialogHeading" sigmaTranslate="sigmaEventsApp.accreditation.home.upload">Import</h4>
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <sigma-alert-error></sigma-alert-error>
+    <button (click)="downloadModelFile()">Download Model File</button>
+
+    <input type="file" (change)="handleFileInput($event)" accept=".xlsx,.xls" />
+    <button (click)="importData()">Import</button>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="sigma-confirm-import-accreditation" data-cy="entityConfirmImportButton" type="submit" class="btn btn-success">
+      <fa-icon icon="check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
+    </button>
+  </div>
+</form>
