@@ -36,4 +36,16 @@ export class ExportUtil {
 
     return filenameWithDateTime;
   }
+
+  static downloadAccreditationModelFile(columnHeaders: any, sheetNameKey: string, entityNameKey: string, fileNameKey: string): void {
+    let fileName = this.translateService.instant(sheetNameKey);
+    let entityName = this.translateService.instant(entityNameKey);
+    let sheetName = this.translateService.instant(fileNameKey);
+
+    fileName = entityName + '_' + fileName + '.xlsx';
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet([{}], { header: columnHeaders });
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    XLSX.writeFile(wb, this.generateFilenameWithDateTime(fileName));
+  }
 }

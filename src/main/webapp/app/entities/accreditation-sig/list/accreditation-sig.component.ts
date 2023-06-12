@@ -18,6 +18,7 @@ import {
   ITEM_PRINTED_EVENT,
   SEARCH_TEXT,
   ITEM_MASS_PRINTED_EVENT,
+  ITEM_IMPORTED_EVENT,
 } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, AccreditationSigService } from '../service/accreditation-sig.service';
 import { AccreditationSigDeleteDialogComponent } from '../delete/accreditation-sig-delete-dialog.component';
@@ -37,6 +38,7 @@ import { AccreditationSigSearchDialogComponent } from '../search/accreditation-s
 import { ExportUtil } from 'app/shared/util/export.shared';
 import { TranslateService } from '@ngx-translate/core';
 import { AccreditationMassSigPrintDialogComponent } from '../print/accreditation-sig-mass-print-dialog.component';
+import { AccreditationSigImportDialogComponent } from '../import/accreditation-sig-import-dialog.component';
 
 @Component({
   selector: 'sigma-accreditation-sig',
@@ -170,6 +172,24 @@ export class AccreditationSigComponent implements OnInit {
     modalRef.closed
       .pipe(
         filter(reason => reason === ITEM_PRINTED_EVENT),
+        switchMap(() => this.loadFromBackendWithRouteInformations())
+      )
+      .subscribe({
+        next: (res: EntityArrayResponseType) => {
+          this.onResponseSuccess(res);
+        },
+      });
+  }
+
+  import(): void {
+    const modalRef = this.modalService.open(AccreditationSigImportDialogComponent, { size: 'lg', backdrop: 'static' });
+    const status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.IMPORTED).shift();
+    //accreditation.status = status;
+    modalRef.componentInstance.status = status;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed
+      .pipe(
+        filter(reason => reason === ITEM_IMPORTED_EVENT),
         switchMap(() => this.loadFromBackendWithRouteInformations())
       )
       .subscribe({

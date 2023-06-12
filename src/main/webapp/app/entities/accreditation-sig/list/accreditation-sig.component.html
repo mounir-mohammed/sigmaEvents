@@ -95,7 +95,7 @@
         </button>
       </div>
       <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_IMPORT]">
-        <button type="button" class="btn btn-info me-2">
+        <button type="button" class="btn btn-info me-2" (click)="import()">
           <fa-icon icon="upload"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.upload">Upload</span>
         </button>
       </div>
