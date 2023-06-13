@@ -84,7 +84,14 @@ export interface IAccreditationSig {
   > | null;
   fonction?: Pick<
     IFonctionSig,
-    'fonctionId' | 'fonctionName' | 'fonctionAbreviation' | 'fonctionStat' | 'fonctionLogo' | 'fonctionLogoContentType' | 'areas'
+    | 'fonctionId'
+    | 'fonctionName'
+    | 'fonctionAbreviation'
+    | 'fonctionStat'
+    | 'fonctionLogo'
+    | 'fonctionLogoContentType'
+    | 'areas'
+    | 'category'
   > | null;
   organiz?: Pick<IOrganizSig, 'organizId' | 'organizName' | 'organizStat' | 'organizLogo' | 'organizLogoContentType'> | null;
   accreditationType?: Pick<

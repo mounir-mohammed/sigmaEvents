@@ -9,7 +9,7 @@
     <button (click)="downloadModelFile()">Download Model File</button>
 
     <input type="file" (change)="handleFileInput($event)" accept=".xlsx,.xls" />
-    <button (click)="importData()">Import</button>
+    <button (click)="loadData()">Load Data</button>
   </div>
 
   <div class="modal-footer">
@@ -17,7 +17,13 @@
       <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
     </button>
 
-    <button id="sigma-confirm-import-accreditation" data-cy="entityConfirmImportButton" type="submit" class="btn btn-success">
+    <button
+      id="sigma-confirm-import-accreditation"
+      data-cy="entityConfirmImportButton"
+      type="submit"
+      class="btn btn-success"
+      (click)="valider()"
+    >
       <fa-icon icon="check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
     </button>
   </div>

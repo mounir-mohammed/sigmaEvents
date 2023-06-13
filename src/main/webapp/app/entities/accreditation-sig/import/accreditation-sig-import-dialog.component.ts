@@ -36,17 +36,18 @@ import { Authority } from 'app/config/authority.constants';
 import { HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
-import { IAccreditationSig } from '../accreditation-sig.model';
+import { IAccreditationSig, NewAccreditationSig } from '../accreditation-sig.model';
 import { TranslateService } from '@ngx-translate/core';
 import * as XLSX from 'xlsx';
 import { ExportUtil } from 'app/shared/util/export.shared';
+import dayjs from 'dayjs/esm';
 
 @Component({
   templateUrl: './accreditation-sig-import-dialog.component.html',
   styleUrls: ['./accreditation-sig-import-dialog.component.scss'],
 })
 export class AccreditationSigImportDialogComponent implements OnInit {
-  accreditation?: IAccreditationSig[];
+  accreditations?: IAccreditationSig[] = [];
   selectedFile: File | undefined;
   status?: IStatusSig;
   authority = Authority;
@@ -222,18 +223,103 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-  importData() {
+  loadData() {
     if (this.selectedFile) {
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        // Process the jsonData and map it to your IAccreditationSig interface
-        console.log(jsonData);
+        const jsonData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+        if (jsonData.length > 1) {
+          for (let rowIndex = 1; rowIndex < jsonData.length; rowIndex++) {
+            const rowData = jsonData[rowIndex];
+            console.log(rowData);
+            const loadedValues: Partial<IAccreditationSig> = this.getAccreditationValues(rowData);
+            const accreditationId: number = loadedValues['accreditationId'] || 0;
+            const loadedAccreditation: IAccreditationSig = { ...loadedValues, accreditationId };
+            console.log(loadedAccreditation);
+            this.accreditations?.push(loadedAccreditation);
+          }
+
+          console.log(this.accreditations);
+        } else {
+          alert('Please insert Data');
+        }
       };
       fileReader.readAsArrayBuffer(this.selectedFile);
+    }
+  }
+
+  private getAccreditationValues(row: any[]): Partial<IAccreditationSig> {
+    const fieldsToUpdate: (keyof IAccreditationSig)[] = [
+      'accreditationId',
+      'accreditationFirstName',
+      'accreditationLastName',
+      'accreditationBirthDay',
+      // 'accreditationSexe',
+      // 'accreditationOccupation',
+      // 'accreditationType',
+      // 'sites',
+      // 'organiz',
+      // 'nationality',
+    ];
+
+    const loadedValues: Partial<IAccreditationSig> = {};
+    loadedValues['status'] = this.status;
+    loadedValues['accreditationFirstName'] = row[0];
+    loadedValues['accreditationLastName'] = row[1];
+    loadedValues['accreditationBirthDay'] = dayjs(XLSX.SSF.format('DD/MM/YYYY', row[2]), 'DD/MM/YYYY');
+    loadedValues['sexe'] = this.sexesSharedCollection.find(sexe => sexe.sexeValue === row[3]);
+    loadedValues['accreditationOccupation'] = row[4];
+    loadedValues['fonction'] = this.fonctionsSharedCollection.find(
+      fonction => fonction.fonctionName === loadedValues['accreditationOccupation']
+    );
+    loadedValues['category'] = loadedValues['fonction']?.category;
+    loadedValues['accreditationType'] = this.accreditationTypesSharedCollection.find(
+      accreditationType => accreditationType.accreditationTypeValue === row[5]
+    );
+    // loadedValues['sites'] = row[6];
+    loadedValues['organiz'] = this.organizsSharedCollection.find(organiz => organiz.organizName === row[7]);
+    loadedValues['nationality'] = this.nationalitiesSharedCollection.find(nationalities => nationalities.nationalityValue === row[8]);
+
+    return loadedValues;
+  }
+
+  valider(): void {
+    if (this.accreditations && this.accreditations.length > 0) {
+      this.accreditations.forEach((accreditation: IAccreditationSig) => {
+        const newAccreditation: NewAccreditationSig = {
+          accreditationId: null, // Provide the default or null value based on your requirement
+          status: accreditation.status,
+          accreditationFirstName: accreditation.accreditationFirstName,
+          accreditationLastName: accreditation.accreditationLastName,
+          accreditationBirthDay: accreditation.accreditationBirthDay,
+          sexe: accreditation.sexe,
+          accreditationOccupation: accreditation.accreditationOccupation,
+          category: accreditation.category,
+          fonction: accreditation.fonction,
+          accreditationType: accreditation.accreditationType,
+          sites: accreditation.sites,
+          organiz: accreditation.organiz,
+          nationality: accreditation.nationality,
+          // Assign other properties from the accreditation object
+        };
+
+        this.accreditationService.create(newAccreditation).subscribe(
+          (response: any) => {
+            // Handle success response
+            console.log('Accreditation created:', response);
+          },
+          (error: any) => {
+            // Handle error response
+            console.error('Error creating accreditation:', error);
+          }
+        );
+      });
+    } else {
+      alert('No accreditations to create.');
     }
   }
 }
