@@ -477,8 +477,8 @@
           </select>
         </div>
       </div>
-      <div class="search-table-row" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+      <div class="search-table-row" *sigmaHasAnyAuthority="[authority.ADMIN]">
+        <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat" for="field_accreditationStat"
             >Accreditation Stat</label
           >
@@ -511,6 +511,7 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
           <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
             <option [ngValue]="null"></option>
+            <option value="noEvent">No_Event</option>
             <option [ngValue]="eventOption.eventId" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
           </select>
         </div>

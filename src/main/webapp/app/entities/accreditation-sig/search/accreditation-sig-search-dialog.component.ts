@@ -241,7 +241,11 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     }
 
     if (this.searchForm.get('event')?.value) {
-      this.filters.set('eventId.in', this.searchForm.get('event')?.value);
+      if (this.searchForm.get('event')?.value == 'noEvent') {
+        this.filters.set('eventId.specified', [false]);
+      } else {
+        this.filters.set('eventId.in', this.searchForm.get('event')?.value);
+      }
     }
 
     if (this.searchForm.get('status')?.value) {
