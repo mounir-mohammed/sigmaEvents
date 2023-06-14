@@ -38,6 +38,7 @@ import { map } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Authority } from 'app/config/authority.constants';
 import dayjs from 'dayjs';
+import { RECORD_ITEMS } from 'app/config/pagination.constants';
 
 @Component({
   templateUrl: './accreditation-sig-search-dialog.component.html',
@@ -287,77 +288,77 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.siteService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
       .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
 
     this.eventService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
 
     this.civilityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICivilitySig[]>) => res.body ?? []))
       .subscribe((civilities: ICivilitySig[]) => (this.civilitiesSharedCollection = civilities));
 
     this.sexeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ISexeSig[]>) => res.body ?? []))
       .subscribe((sexes: ISexeSig[]) => (this.sexesSharedCollection = sexes));
 
     this.nationalityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? []))
       .subscribe((nationalities: INationalitySig[]) => (this.nationalitiesSharedCollection = nationalities));
 
     this.countryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
       .subscribe((countries: ICountrySig[]) => (this.countriesSharedCollection = countries));
 
     this.cityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
       .subscribe((cities: ICitySig[]) => (this.citiesSharedCollection = cities));
 
     this.categoryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
       .subscribe((categories: ICategorySig[]) => (this.categoriesSharedCollection = categories));
 
     this.fonctionService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
       .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
 
     this.organizService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
       .subscribe((organizs: IOrganizSig[]) => (this.organizsSharedCollection = organizs));
 
     this.accreditationTypeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
       .subscribe((accreditationTypes: IAccreditationTypeSig[]) => (this.accreditationTypesSharedCollection = accreditationTypes));
 
     this.statusService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
       .subscribe((statuses: IStatusSig[]) => (this.statusesSharedCollection = statuses));
 
     this.attachementService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? []))
       .subscribe((attachements: IAttachementSig[]) => (this.attachementsSharedCollection = attachements));
 
     this.codeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? []))
       .subscribe((codes: ICodeSig[]) => (this.codesSharedCollection = codes));
 
     this.dayPassInfoService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? []))
       .subscribe((dayPassInfos: IDayPassInfoSig[]) => (this.dayPassInfosSharedCollection = dayPassInfos));
   }

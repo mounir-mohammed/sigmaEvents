@@ -10,6 +10,38 @@
 
     <input type="file" (change)="handleFileInput($event)" accept=".xlsx,.xls" />
     <button (click)="loadData()">Load Data</button>
+
+    <div *ngIf="errorsMap.size > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Index</th>
+            <th>First Name</th>
+            <th>List Name</th>
+            <th>Occupation</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let entry of errorsMap.entries()">
+            <tr *ngIf="entry[1].hasErrors">
+              <td>{{ entry[0] }}</td>
+              <td>{{ entry[1].firstName }}</td>
+              <td>{{ entry[1].lastName }}</td>
+              <td>{{ entry[1].occupation }}</td>
+              <td class="loaded-fail">{{ entry[1].errors }}</td>
+            </tr>
+            <tr *ngIf="!entry[1].hasErrors">
+              <td>{{ entry[0] }}</td>
+              <td>{{ entry[1].firstName }}</td>
+              <td>{{ entry[1].lastName }}</td>
+              <td>{{ entry[1].occupation }}</td>
+              <td class="loaded-succes">{{ entry[1].errors }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="modal-footer">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccreditationSigService } from '../service/accreditation-sig.service';
 import { AccountService } from 'app/core/auth/account.service';
@@ -41,6 +41,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as XLSX from 'xlsx';
 import { ExportUtil } from 'app/shared/util/export.shared';
 import dayjs from 'dayjs/esm';
+import { RECORD_ITEMS } from 'app/config/pagination.constants';
 
 @Component({
   templateUrl: './accreditation-sig-import-dialog.component.html',
@@ -52,6 +53,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   status?: IStatusSig;
   authority = Authority;
   importForm = new FormGroup({});
+  errorsMap: Map<number, { firstName: string; lastName: string; occupation: string; errors: string; hasErrors: boolean }> = new Map();
 
   sitesSharedCollection: ISiteSig[] = [];
   eventsSharedCollection: IEventSig[] = [];
@@ -88,7 +90,8 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     protected attachementService: AttachementSigService,
     protected codeService: CodeSigService,
     protected dayPassInfoService: DayPassInfoSigService,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -103,77 +106,77 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
   protected loadRelationshipsOptions(): void {
     this.siteService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
       .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
 
     this.eventService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
       .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
 
     this.civilityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICivilitySig[]>) => res.body ?? []))
       .subscribe((civilities: ICivilitySig[]) => (this.civilitiesSharedCollection = civilities));
 
     this.sexeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ISexeSig[]>) => res.body ?? []))
       .subscribe((sexes: ISexeSig[]) => (this.sexesSharedCollection = sexes));
 
     this.nationalityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? []))
       .subscribe((nationalities: INationalitySig[]) => (this.nationalitiesSharedCollection = nationalities));
 
     this.countryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
       .subscribe((countries: ICountrySig[]) => (this.countriesSharedCollection = countries));
 
     this.cityService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
       .subscribe((cities: ICitySig[]) => (this.citiesSharedCollection = cities));
 
     this.categoryService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
       .subscribe((categories: ICategorySig[]) => (this.categoriesSharedCollection = categories));
 
     this.fonctionService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
       .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
 
     this.organizService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
       .subscribe((organizs: IOrganizSig[]) => (this.organizsSharedCollection = organizs));
 
     this.accreditationTypeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
       .subscribe((accreditationTypes: IAccreditationTypeSig[]) => (this.accreditationTypesSharedCollection = accreditationTypes));
 
     this.statusService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
       .subscribe((statuses: IStatusSig[]) => (this.statusesSharedCollection = statuses));
 
     this.attachementService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? []))
       .subscribe((attachements: IAttachementSig[]) => (this.attachementsSharedCollection = attachements));
 
     this.codeService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? []))
       .subscribe((codes: ICodeSig[]) => (this.codesSharedCollection = codes));
 
     this.dayPassInfoService
-      .query()
+      .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? []))
       .subscribe((dayPassInfos: IDayPassInfoSig[]) => (this.dayPassInfosSharedCollection = dayPassInfos));
   }
@@ -220,10 +223,13 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   }
 
   handleFileInput(event: any) {
+    this.errorsMap.clear();
     this.selectedFile = event.target.files[0];
   }
 
   loadData() {
+    this.errorsMap.clear();
+    this.accreditations = [];
     if (this.selectedFile) {
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
@@ -233,17 +239,42 @@ export class AccreditationSigImportDialogComponent implements OnInit {
         const jsonData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
         if (jsonData.length > 1) {
+          const promises: Promise<void>[] = [];
           for (let rowIndex = 1; rowIndex < jsonData.length; rowIndex++) {
             const rowData = jsonData[rowIndex];
             console.log(rowData);
             const loadedValues: Partial<IAccreditationSig> = this.getAccreditationValues(rowData);
             const accreditationId: number = loadedValues['accreditationId'] || 0;
             const loadedAccreditation: IAccreditationSig = { ...loadedValues, accreditationId };
-            console.log(loadedAccreditation);
-            this.accreditations?.push(loadedAccreditation);
+
+            const errors: string[] = this.controlAccreditation(loadedAccreditation);
+            if (errors.length === 0) {
+              this.accreditations?.push(loadedAccreditation);
+              this.errorsMap.set(rowIndex, {
+                firstName: loadedAccreditation.accreditationFirstName!,
+                lastName: loadedAccreditation.accreditationLastName!,
+                occupation: loadedAccreditation.accreditationOccupation!,
+                errors: 'Loaded',
+                hasErrors: false,
+              });
+            } else {
+              console.log(`Errors for accreditation at row ${rowIndex}: ${errors.join(', ')}`);
+              this.errorsMap.set(rowIndex, {
+                firstName: loadedAccreditation.accreditationFirstName!,
+                lastName: loadedAccreditation.accreditationLastName!,
+                occupation: loadedAccreditation.accreditationOccupation!,
+                errors: errors.join(', '),
+                hasErrors: true,
+              });
+            }
+            const rowPromise = new Promise<void>(resolve => resolve());
+            promises.push(rowPromise);
           }
 
-          console.log(this.accreditations);
+          Promise.all(promises).then(() => {
+            console.log(this.accreditations);
+            this.cdr.detectChanges();
+          });
         } else {
           alert('Please insert Data');
         }
@@ -253,19 +284,6 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   }
 
   private getAccreditationValues(row: any[]): Partial<IAccreditationSig> {
-    const fieldsToUpdate: (keyof IAccreditationSig)[] = [
-      'accreditationId',
-      'accreditationFirstName',
-      'accreditationLastName',
-      'accreditationBirthDay',
-      // 'accreditationSexe',
-      // 'accreditationOccupation',
-      // 'accreditationType',
-      // 'sites',
-      // 'organiz',
-      // 'nationality',
-    ];
-
     const loadedValues: Partial<IAccreditationSig> = {};
     loadedValues['status'] = this.status;
     loadedValues['accreditationFirstName'] = row[0];
@@ -289,7 +307,9 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
   valider(): void {
     if (this.accreditations && this.accreditations.length > 0) {
-      this.accreditations.forEach((accreditation: IAccreditationSig) => {
+      this.errorsMap.clear();
+      const promises: Promise<void>[] = [];
+      this.accreditations.forEach((accreditation: IAccreditationSig, index) => {
         const newAccreditation: NewAccreditationSig = {
           accreditationId: null, // Provide the default or null value based on your requirement
           status: accreditation.status,
@@ -309,17 +329,82 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
         this.accreditationService.create(newAccreditation).subscribe(
           (response: any) => {
+            const createPromise = new Promise<void>(resolve => resolve());
+            promises.push(createPromise);
+            const acc: IAccreditationSig = response.body;
+            this.errorsMap.set(acc.accreditationId, {
+              firstName: acc.accreditationFirstName!,
+              lastName: acc.accreditationLastName!,
+              occupation: acc.accreditationOccupation!,
+              errors: 'Imported',
+              hasErrors: false,
+            });
             // Handle success response
             console.log('Accreditation created:', response);
           },
           (error: any) => {
+            const createPromise = new Promise<void>(resolve => resolve());
+            promises.push(createPromise);
+            this.errorsMap.set(index, { firstName: '', lastName: '', occupation: '', errors: error, hasErrors: true });
             // Handle error response
             console.error('Error creating accreditation:', error);
           }
         );
       });
+
+      Promise.all(promises).then(() => {
+        console.log(this.accreditations);
+        this.accreditations = [];
+        this.cdr.detectChanges();
+      });
     } else {
       alert('No accreditations to create.');
     }
+  }
+
+  controlAccreditation(accreditation: Partial<IAccreditationSig>): string[] {
+    const errors: string[] = [];
+
+    if (!accreditation.accreditationFirstName) {
+      errors.push('First Name is required');
+    }
+
+    if (!accreditation.accreditationLastName) {
+      errors.push('Last Name is required');
+    }
+
+    if (!accreditation.accreditationBirthDay) {
+      errors.push('Birth Day is required');
+    }
+
+    if (!accreditation.sexe) {
+      errors.push('Sexe is required');
+    }
+
+    if (!accreditation.accreditationOccupation) {
+      errors.push('Occupation is required');
+    }
+
+    if (!accreditation.fonction) {
+      errors.push('Fonction is required');
+    }
+
+    if (!accreditation.category) {
+      errors.push('Category is required');
+    }
+
+    if (!accreditation.accreditationType) {
+      errors.push('Accreditation Type is required');
+    }
+
+    if (!accreditation.organiz) {
+      errors.push('Organiz is required');
+    }
+
+    if (!accreditation.nationality) {
+      errors.push('Nationality is required');
+    }
+
+    return errors;
   }
 }
