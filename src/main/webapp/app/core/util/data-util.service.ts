@@ -169,22 +169,21 @@ export class DataUtils {
     });
   }
 
-  loadImageFromFile(path: string): Promise<string> {
-    return fetch(path)
-      .then(response => response.blob())
-      .then(blob => {
-        return new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const base64String = reader.result as string;
-            resolve(base64String);
-          };
-          reader.onerror = () => {
-            reject(new Error('Failed to load image.'));
-          };
-          reader.readAsDataURL(blob);
-        });
-      });
+  getBase64FromFile(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        resolve(base64String);
+      };
+
+      reader.onerror = () => {
+        reject(new Error('Failed to read file.'));
+      };
+
+      reader.readAsDataURL(file);
+    });
   }
 
   getContentType(filePath: string) {

@@ -41,6 +41,7 @@
         "selectFile": "Select File",
         "loadData": "Load data",
         "importData": "Import data",
+        "photos": "Select Photos",
         "loaded": "Loaded",
         "imported": "Imported"
       },

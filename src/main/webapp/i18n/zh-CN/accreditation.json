@@ -41,6 +41,7 @@
         "selectFile": "选择文件",
         "loadData": "加载数据",
         "importData": "导入数据",
+        "photos": "选择照片",
         "loaded": "已加载",
         "imported": "已导入"
       },

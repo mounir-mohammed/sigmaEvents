@@ -41,6 +41,7 @@
         "selectFile": "ファイルを選択",
         "loadData": "データを読み込む",
         "importData": "データをインポート",
+        "photos": "写真を選択",
         "loaded": "読み込み済み",
         "imported": "インポート済み"
       },

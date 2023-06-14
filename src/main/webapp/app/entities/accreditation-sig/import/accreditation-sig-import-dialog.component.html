@@ -6,8 +6,8 @@
 
   <div class="modal-body">
     <sigma-alert-error></sigma-alert-error>
-    <div class="row justify-content-center">
-      <div class="col-md-3 text-center">
+    <div class="row justify-content-start">
+      <div class="col-md-2 text-left">
         <button type="button" class="btn btn-secondary" (click)="downloadModelFile()">
           <fa-icon icon="download"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.downloadModelData"
             >Download model file</span
@@ -15,23 +15,29 @@
         </button>
       </div>
 
-      <div class="col-md-3 text-center">
-        <div class="row">
-          <div>
-            <input type="file" id="fileInput" (change)="handleFileInput($event)" accept=".xlsx,.xls" class="hidden-input" />
-            <label for="fileInput" class="custom-file-button" sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"
-              >Select File</label
-            >
-          </div>
-        </div>
-        <div class="row">
-          <div *ngIf="selectedFile">
-            <p id="selectedFileName">{{ selectedFile.name }}</p>
-          </div>
+      <div class="col-md-2 text-left">
+        <div>
+          <input type="file" id="fileInput" (change)="handleFileInput($event)" accept=".xlsx,.xls" class="hidden-input" />
+          <label for="fileInput" class="custom-file-button" sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"
+            >Select File</label
+          >
         </div>
       </div>
 
-      <div class="col-md-3 text-center">
+      <div class="col-md-2 text-left">
+        <input
+          type="file"
+          id="images"
+          name="images"
+          multiple
+          (change)="onFileSelect($event)"
+          accept="image/jpeg,image/jpg,image/png"
+          class="hidden-input"
+        />
+        <label for="images" class="custom-file-button" sigmaTranslate="sigmaEventsApp.accreditation.upload.photos">Select Photos</label>
+      </div>
+
+      <div class="col-md-2 text-left">
         <button type="button" class="btn btn-secondary" (click)="loadData()">
           <fa-icon icon="sync" [spin]="isLoading"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.loadData"
             >Load data</span
@@ -39,7 +45,7 @@
         </button>
       </div>
 
-      <div class="col-md-3 text-center">
+      <div class="col-md-2 text-left">
         <button type="button" class="btn btn-primary" (click)="importData()">
           <fa-icon icon="sync" [spin]="isImporting"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.importData"
             >Import data</span
@@ -54,6 +60,20 @@
         <option [ngValue]="null"></option>
         <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
       </select>
+    </div>
+
+    <div class="row">
+      <div *ngIf="selectedFile">
+        <span sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"></span> :
+        <p id="selectedFileName">{{ selectedFile.name }}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div *ngIf="selectedFileNames">
+        <span sigmaTranslate="sigmaEventsApp.accreditation.upload.photos"></span> :
+        <p id="selectedPhotos">{{ selectedFileNames }}</p>
+      </div>
     </div>
 
     <div *ngIf="errorsMap.size > 0" class="table-responsive table-entities">

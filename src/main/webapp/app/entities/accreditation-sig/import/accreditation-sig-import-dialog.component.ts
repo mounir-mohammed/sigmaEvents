@@ -33,8 +33,8 @@ import { SexeSigService } from 'app/entities/sexe-sig/service/sexe-sig.service';
 import { SiteSigService } from 'app/entities/site-sig/service/site-sig.service';
 import { StatusSigService } from 'app/entities/status-sig/service/status-sig.service';
 import { Authority } from 'app/config/authority.constants';
-import { HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs';
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IAccreditationSig, NewAccreditationSig } from '../accreditation-sig.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -52,6 +52,8 @@ import { DataUtils } from 'app/core/util/data-util.service';
 export class AccreditationSigImportDialogComponent implements OnInit {
   accreditations?: IAccreditationSig[] = [];
   selectedFile: File | undefined;
+  selectedFiles: File[] = [];
+  selectedFileNames: string | null = null;
   status?: IStatusSig;
   authority = Authority;
   errorsMap: Map<number, { firstName: string; lastName: string; occupation: string; errors: string; hasErrors: boolean }> = new Map();
@@ -78,6 +80,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   attachementsSharedCollection: IAttachementSig[] = [];
   codesSharedCollection: ICodeSig[] = [];
   dayPassInfosSharedCollection: IDayPassInfoSig[] = [];
+  http: any;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -236,6 +239,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
   handleFileInput(event: any) {
     this.errorsMap.clear();
+    this.cdr.detectChanges();
     this.selectedFile = event.target.files[0];
   }
 
@@ -245,11 +249,13 @@ export class AccreditationSigImportDialogComponent implements OnInit {
       return;
     }
     this.errorsMap.clear();
+    this.cdr.detectChanges();
     this.accreditations = [];
     if (this.selectedFile) {
       this.isLoading = true;
       const fileReader = new FileReader();
-      fileReader.onload = (e: any) => {
+      fileReader.onload = async (e: any) => {
+        this.cdr.detectChanges();
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -259,8 +265,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
           const promises: Promise<void>[] = [];
           for (let rowIndex = 1; rowIndex < jsonData.length; rowIndex++) {
             const rowData = jsonData[rowIndex];
-            console.log(rowData);
-            const loadedValues: Partial<IAccreditationSig> = this.getAccreditationValues(rowData);
+            const loadedValues: Partial<IAccreditationSig> = await this.getAccreditationValues(rowData);
             const accreditationId: number = loadedValues['accreditationId'] || 0;
             const loadedAccreditation: IAccreditationSig = { ...loadedValues, accreditationId };
 
@@ -274,6 +279,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
                 errors: this.translateService.instant('sigmaEventsApp.accreditation.upload.loaded'),
                 hasErrors: false,
               });
+              this.cdr.detectChanges();
             } else {
               console.log(`Errors for accreditation at row ${rowIndex}: ${errors.join(', ')}`);
               this.errorsMap.set(rowIndex, {
@@ -283,13 +289,13 @@ export class AccreditationSigImportDialogComponent implements OnInit {
                 errors: errors.join(', '),
                 hasErrors: true,
               });
+              this.cdr.detectChanges();
             }
             const rowPromise = new Promise<void>(resolve => resolve());
             promises.push(rowPromise);
           }
 
           Promise.all(promises).then(() => {
-            console.log(this.accreditations);
             this.cdr.detectChanges();
             this.isLoading = false;
           });
@@ -301,7 +307,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     }
   }
 
-  private getAccreditationValues(row: any[]): Partial<IAccreditationSig> {
+  private async getAccreditationValues(row: any[]): Promise<Partial<IAccreditationSig>> {
     const loadedValues: Partial<IAccreditationSig> = {};
     loadedValues['status'] = this.status;
     loadedValues['accreditationFirstName'] = row[0].toString();
@@ -324,16 +330,23 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     if (row[9]) {
       loadedValues['accreditationSecondName'] = row[9].toString();
     }
-    if (row[10]) {
-      this.dataUtils
-        .loadImageFromFile(row[10].toString())
-        .then(base64String => {
+    if (row[10] && this.selectedFiles.length > 0) {
+      const image = this.getFileByName(row[10].toString());
+      if (image) {
+        console.log(image!.name);
+        console.log(image!.type);
+        try {
+          const base64Data = await this.dataUtils.getBase64FromFile(image);
+          const base64String = base64Data.split(',')[1];
           loadedValues['accreditationPhoto'] = base64String;
-          loadedValues['accreditationPhotoContentType'] = this.dataUtils.getContentType(row[10].toString());
-        })
-        .catch(error => {
+          console.log(base64String);
+        } catch (error) {
+          // Handle error
           console.error(error);
-        });
+        }
+
+        loadedValues['accreditationPhotoContentType'] = image!.type;
+      }
     }
     if (row[11]) {
       loadedValues['accreditationDescription'] = row[11].toString();
@@ -393,6 +406,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
       }
     }
 
+    console.log(loadedValues);
     return loadedValues;
   }
 
@@ -400,6 +414,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     if (this.accreditations && this.accreditations.length > 0) {
       this.isImporting = true;
       this.errorsMap.clear();
+      this.cdr.detectChanges();
       const promises: Promise<void>[] = [];
 
       this.accreditations.forEach((accreditation: IAccreditationSig, index) => {
@@ -451,10 +466,12 @@ export class AccreditationSigImportDialogComponent implements OnInit {
                 errors: this.translateService.instant('sigmaEventsApp.accreditation.upload.imported'),
                 hasErrors: false,
               });
+              this.cdr.detectChanges();
               console.log('Accreditation created:', response);
             })
             .catch((error: any) => {
               this.errorsMap.set(index, { firstName: '', lastName: '', occupation: '', errors: error, hasErrors: true });
+              this.cdr.detectChanges();
               console.error('Error creating accreditation:', error);
             })
         );
@@ -515,5 +532,16 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     }
 
     return errors;
+  }
+
+  onFileSelect(event: any) {
+    this.selectedFiles = event.target.files;
+    const filesArray = Array.from(this.selectedFiles);
+    this.selectedFileNames = filesArray.map(file => file.name).join(', ');
+  }
+
+  getFileByName(name: string): File | undefined {
+    const filesArray = Array.from(this.selectedFiles);
+    return filesArray.find(file => file.name === name);
   }
 }
