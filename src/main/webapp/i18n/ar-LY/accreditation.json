@@ -36,6 +36,14 @@
       "search": {
         "placeHolder": "البحث"
       },
+      "upload": {
+        "downloadModelData": "تحميل ملف النموذج",
+        "selectFile": "اختيار ملف",
+        "loadData": "تحميل البيانات",
+        "importData": "استيراد البيانات",
+        "loaded": "تم التحميل",
+        "imported": "تم الاستيراد"
+      },
       "camera": {
         "takePhoto": "التقاط صورة",
         "reTakePhoto": "التقاط صورة أخرى"

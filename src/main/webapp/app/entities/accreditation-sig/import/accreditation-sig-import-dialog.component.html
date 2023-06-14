@@ -6,20 +6,65 @@
 
   <div class="modal-body">
     <sigma-alert-error></sigma-alert-error>
-    <button (click)="downloadModelFile()">Download Model File</button>
+    <div class="row justify-content-center">
+      <div class="col-md-3 text-center">
+        <button type="button" class="btn btn-secondary" (click)="downloadModelFile()">
+          <fa-icon icon="download"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.downloadModelData"
+            >Download model file</span
+          >
+        </button>
+      </div>
 
-    <input type="file" (change)="handleFileInput($event)" accept=".xlsx,.xls" />
-    <button (click)="loadData()">Load Data</button>
+      <div class="col-md-3 text-center">
+        <div class="row">
+          <div>
+            <input type="file" id="fileInput" (change)="handleFileInput($event)" accept=".xlsx,.xls" class="hidden-input" />
+            <label for="fileInput" class="custom-file-button" sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"
+              >Select File</label
+            >
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="selectedFile">
+            <p id="selectedFileName">{{ selectedFile.name }}</p>
+          </div>
+        </div>
+      </div>
 
-    <div *ngIf="errorsMap.size > 0">
-      <table>
+      <div class="col-md-3 text-center">
+        <button type="button" class="btn btn-secondary" (click)="loadData()">
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.loadData"
+            >Load data</span
+          >
+        </button>
+      </div>
+
+      <div class="col-md-3 text-center">
+        <button type="button" class="btn btn-primary" (click)="importData()">
+          <fa-icon icon="sync" [spin]="isImporting"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.importData"
+            >Import data</span
+          >
+        </button>
+      </div>
+    </div>
+
+    <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
+      <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
+      <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+        <option [ngValue]="null"></option>
+        <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="errorsMap.size > 0" class="table-responsive table-entities">
+      <table class="table table-striped">
         <thead>
           <tr>
-            <th>Index</th>
-            <th>First Name</th>
-            <th>List Name</th>
-            <th>Occupation</th>
-            <th>Description</th>
+            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Index</th>
+            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">First Name</th>
+            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName">List Name</th>
+            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Occupation</th>
+            <th sigmaTranslate="sigmaEventsApp.accreditation.status">Description</th>
           </tr>
         </thead>
         <tbody>
@@ -47,16 +92,6 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
       <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
-    </button>
-
-    <button
-      id="sigma-confirm-import-accreditation"
-      data-cy="entityConfirmImportButton"
-      type="submit"
-      class="btn btn-success"
-      (click)="valider()"
-    >
-      <fa-icon icon="check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
     </button>
   </div>
 </form>

@@ -36,6 +36,14 @@
       "search": {
         "placeHolder": "検索"
       },
+      "upload": {
+        "downloadModelData": "モデルファイルのダウンロード",
+        "selectFile": "ファイルを選択",
+        "loadData": "データを読み込む",
+        "importData": "データをインポート",
+        "loaded": "読み込み済み",
+        "imported": "インポート済み"
+      },
       "camera": {
         "takePhoto": "写真を撮る",
         "reTakePhoto": "もう一枚撮る"

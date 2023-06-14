@@ -36,6 +36,14 @@
       "search": {
         "placeHolder": "搜索"
       },
+      "upload": {
+        "downloadModelData": "下载模型文件",
+        "selectFile": "选择文件",
+        "loadData": "加载数据",
+        "importData": "导入数据",
+        "loaded": "已加载",
+        "imported": "已导入"
+      },
       "camera": {
         "takePhoto": "拍照",
         "reTakePhoto": "重新拍照"

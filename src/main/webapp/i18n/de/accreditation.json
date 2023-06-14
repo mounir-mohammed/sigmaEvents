@@ -36,6 +36,14 @@
       "search": {
         "placeHolder": "Suche"
       },
+      "upload": {
+        "downloadModelData": "Modelldatei herunterladen",
+        "selectFile": "Datei auswählen",
+        "loadData": "Daten laden",
+        "importData": "Daten importieren",
+        "loaded": "Geladen",
+        "imported": "Importiert"
+      },
       "camera": {
         "takePhoto": "Foto aufnehmen",
         "reTakePhoto": "Ein weiteres aufnehmen"

@@ -42,6 +42,8 @@ import * as XLSX from 'xlsx';
 import { ExportUtil } from 'app/shared/util/export.shared';
 import dayjs from 'dayjs/esm';
 import { RECORD_ITEMS } from 'app/config/pagination.constants';
+import { Account } from 'app/core/auth/account.model';
+import { DataUtils } from 'app/core/util/data-util.service';
 
 @Component({
   templateUrl: './accreditation-sig-import-dialog.component.html',
@@ -52,8 +54,14 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   selectedFile: File | undefined;
   status?: IStatusSig;
   authority = Authority;
-  importForm = new FormGroup({});
   errorsMap: Map<number, { firstName: string; lastName: string; occupation: string; errors: string; hasErrors: boolean }> = new Map();
+  isLoading = false;
+  isImporting = false;
+  currentAccount: Account | null = null;
+
+  importForm = new FormGroup({
+    event: new FormControl(),
+  });
 
   sitesSharedCollection: ISiteSig[] = [];
   eventsSharedCollection: IEventSig[] = [];
@@ -91,11 +99,13 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     protected codeService: CodeSigService,
     protected dayPassInfoService: DayPassInfoSigService,
     protected translateService: TranslateService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    protected dataUtils: DataUtils
   ) {}
 
   ngOnInit(): void {
     this.loadRelationshipsOptions();
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
   }
 
   cancel(): void {
@@ -110,10 +120,12 @@ export class AccreditationSigImportDialogComponent implements OnInit {
       .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
       .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
 
-    this.eventService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
-      .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      this.eventService
+        .query({ size: RECORD_ITEMS })
+        .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
+        .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+    }
 
     this.civilityService
       .query({ size: RECORD_ITEMS })
@@ -228,9 +240,14 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   }
 
   loadData() {
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN]) && !this.importForm.get('event')?.value) {
+      alert('Please Select Event');
+      return;
+    }
     this.errorsMap.clear();
     this.accreditations = [];
     if (this.selectedFile) {
+      this.isLoading = true;
       const fileReader = new FileReader();
       fileReader.onload = (e: any) => {
         const data = new Uint8Array(e.target.result);
@@ -254,7 +271,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
                 firstName: loadedAccreditation.accreditationFirstName!,
                 lastName: loadedAccreditation.accreditationLastName!,
                 occupation: loadedAccreditation.accreditationOccupation!,
-                errors: 'Loaded',
+                errors: this.translateService.instant('sigmaEventsApp.accreditation.upload.loaded'),
                 hasErrors: false,
               });
             } else {
@@ -274,6 +291,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
           Promise.all(promises).then(() => {
             console.log(this.accreditations);
             this.cdr.detectChanges();
+            this.isLoading = false;
           });
         } else {
           alert('Please insert Data');
@@ -286,29 +304,104 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   private getAccreditationValues(row: any[]): Partial<IAccreditationSig> {
     const loadedValues: Partial<IAccreditationSig> = {};
     loadedValues['status'] = this.status;
-    loadedValues['accreditationFirstName'] = row[0];
-    loadedValues['accreditationLastName'] = row[1];
+    loadedValues['accreditationFirstName'] = row[0].toString();
+    loadedValues['accreditationLastName'] = row[1].toString();
     loadedValues['accreditationBirthDay'] = dayjs(XLSX.SSF.format('DD/MM/YYYY', row[2]), 'DD/MM/YYYY');
-    loadedValues['sexe'] = this.sexesSharedCollection.find(sexe => sexe.sexeValue === row[3]);
-    loadedValues['accreditationOccupation'] = row[4];
+    loadedValues['sexe'] = this.sexesSharedCollection.find(sexe => sexe.sexeValue === row[3].toString());
+    loadedValues['accreditationOccupation'] = row[4].toString();
     loadedValues['fonction'] = this.fonctionsSharedCollection.find(
       fonction => fonction.fonctionName === loadedValues['accreditationOccupation']
     );
     loadedValues['category'] = loadedValues['fonction']?.category;
     loadedValues['accreditationType'] = this.accreditationTypesSharedCollection.find(
-      accreditationType => accreditationType.accreditationTypeValue === row[5]
+      accreditationType => accreditationType.accreditationTypeValue === row[5].toString()
     );
     // loadedValues['sites'] = row[6];
-    loadedValues['organiz'] = this.organizsSharedCollection.find(organiz => organiz.organizName === row[7]);
-    loadedValues['nationality'] = this.nationalitiesSharedCollection.find(nationalities => nationalities.nationalityValue === row[8]);
+    loadedValues['organiz'] = this.organizsSharedCollection.find(organiz => organiz.organizName === row[7].toString());
+    loadedValues['nationality'] = this.nationalitiesSharedCollection.find(
+      nationalities => nationalities.nationalityValue === row[8].toString()
+    );
+    if (row[9]) {
+      loadedValues['accreditationSecondName'] = row[9].toString();
+    }
+    if (row[10]) {
+      this.dataUtils
+        .loadImageFromFile(row[10].toString())
+        .then(base64String => {
+          loadedValues['accreditationPhoto'] = base64String;
+          loadedValues['accreditationPhotoContentType'] = this.dataUtils.getContentType(row[10].toString());
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+    if (row[11]) {
+      loadedValues['accreditationDescription'] = row[11].toString();
+    }
+    if (row[12]) {
+      loadedValues['accreditationCinId'] = row[12].toString();
+    }
+    if (row[13]) {
+      loadedValues['accreditationPasseportId'] = row[13].toString();
+    }
+    if (row[14]) {
+      loadedValues['accreditationCartePresseId'] = row[14].toString();
+    }
+    if (row[15]) {
+      loadedValues['accreditationCarteProfessionnelleId'] = row[15].toString();
+    }
+    if (row[16]) {
+      loadedValues['accreditationEmail'] = row[16].toString();
+    }
+    if (row[17]) {
+      loadedValues['accreditationTel'] = row[17].toString();
+    }
+    if (row[18]) {
+      loadedValues['accreditationDateStart'] = row[18];
+    }
+    if (row[19]) {
+      loadedValues['accreditationDateEnd'] = row[19];
+    }
+    if (row[20]) {
+      loadedValues['civility'] = this.civilitiesSharedCollection.find(civility => civility.civilityValue === row[20].toString());
+    }
+    if (row[21]) {
+      loadedValues['country'] = this.countriesSharedCollection.find(country => country.countryName === row[21].toString());
+    }
+    if (row[22]) {
+      loadedValues['city'] = this.citiesSharedCollection.find(citie => citie.cityName === row[22].toString());
+    }
+    if (row[23]) {
+      loadedValues['attachement'] = this.attachementsSharedCollection.find(attachment => attachment.attachementName === row[23].toString());
+    }
+    if (row[24]) {
+      loadedValues['code'] = this.codesSharedCollection.find(code => code.codeValue === row[24].toString());
+    }
+    if (row[25]) {
+      loadedValues['dayPassInfo'] = this.dayPassInfosSharedCollection.find(
+        dayPassInfo => dayPassInfo.dayPassInfoName === row[25].toString()
+      );
+    }
+
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      if (this.importForm.get('event')?.value) {
+        loadedValues['event'] = this.importForm.get('event')?.value;
+      }
+    } else {
+      if (this.currentAccount?.printingCentre?.event) {
+        loadedValues['event'] = this.currentAccount?.printingCentre?.event;
+      }
+    }
 
     return loadedValues;
   }
 
-  valider(): void {
+  importData(): void {
     if (this.accreditations && this.accreditations.length > 0) {
+      this.isImporting = true;
       this.errorsMap.clear();
       const promises: Promise<void>[] = [];
+
       this.accreditations.forEach((accreditation: IAccreditationSig, index) => {
         const newAccreditation: NewAccreditationSig = {
           accreditationId: null, // Provide the default or null value based on your requirement
@@ -325,37 +418,53 @@ export class AccreditationSigImportDialogComponent implements OnInit {
           organiz: accreditation.organiz,
           nationality: accreditation.nationality,
           // Assign other properties from the accreditation object
+          accreditationSecondName: accreditation.accreditationSecondName,
+          accreditationDescription: accreditation.accreditationDescription,
+          accreditationCinId: accreditation.accreditationCinId,
+          accreditationPasseportId: accreditation.accreditationPasseportId,
+          accreditationCartePresseId: accreditation.accreditationCartePresseId,
+          accreditationCarteProfessionnelleId: accreditation.accreditationCarteProfessionnelleId,
+          accreditationEmail: accreditation.accreditationEmail,
+          accreditationTel: accreditation.accreditationTel,
+          accreditationDateStart: accreditation.accreditationDateStart,
+          accreditationDateEnd: accreditation.accreditationDateEnd,
+          civility: accreditation.civility,
+          city: accreditation.city,
+          attachement: accreditation.attachement,
+          code: accreditation.code,
+          dayPassInfo: accreditation.dayPassInfo,
+          event: accreditation.event,
+
+          accreditationPhoto: accreditation.accreditationPhoto,
+          accreditationPhotoContentType: accreditation.accreditationPhotoContentType,
         };
 
-        this.accreditationService.create(newAccreditation).subscribe(
-          (response: any) => {
-            const createPromise = new Promise<void>(resolve => resolve());
-            promises.push(createPromise);
-            const acc: IAccreditationSig = response.body;
-            this.errorsMap.set(acc.accreditationId, {
-              firstName: acc.accreditationFirstName!,
-              lastName: acc.accreditationLastName!,
-              occupation: acc.accreditationOccupation!,
-              errors: 'Imported',
-              hasErrors: false,
-            });
-            // Handle success response
-            console.log('Accreditation created:', response);
-          },
-          (error: any) => {
-            const createPromise = new Promise<void>(resolve => resolve());
-            promises.push(createPromise);
-            this.errorsMap.set(index, { firstName: '', lastName: '', occupation: '', errors: error, hasErrors: true });
-            // Handle error response
-            console.error('Error creating accreditation:', error);
-          }
+        const createPromise = this.accreditationService.create(newAccreditation).toPromise();
+        promises.push(
+          createPromise
+            .then((response: any) => {
+              const acc: IAccreditationSig = response.body;
+              this.errorsMap.set(acc.accreditationId, {
+                firstName: acc.accreditationFirstName!,
+                lastName: acc.accreditationLastName!,
+                occupation: acc.accreditationOccupation!,
+                errors: this.translateService.instant('sigmaEventsApp.accreditation.upload.imported'),
+                hasErrors: false,
+              });
+              console.log('Accreditation created:', response);
+            })
+            .catch((error: any) => {
+              this.errorsMap.set(index, { firstName: '', lastName: '', occupation: '', errors: error, hasErrors: true });
+              console.error('Error creating accreditation:', error);
+            })
         );
       });
 
       Promise.all(promises).then(() => {
-        console.log(this.accreditations);
+        this.isImporting = false;
         this.accreditations = [];
         this.cdr.detectChanges();
+        // Your code to execute after all promises are resolved
       });
     } else {
       alert('No accreditations to create.');

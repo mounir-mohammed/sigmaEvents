@@ -13,7 +13,7 @@
         "advancedSearch": "Recherche avancée",
         "massUpdate": "Mise à jour en masse",
         "massPrint": "Impression en masse",
-        "upload": "Télécharger",
+        "upload": "Importer",
         "export": "Exporter"
       },
       "created": "Une nouvelle Accreditation a été créé avec l'identifiant {{ param }}",
@@ -35,6 +35,14 @@
       },
       "search": {
         "placeHolder": "Rechercher"
+      },
+      "upload": {
+        "downloadModelData": "Télécharger le fichier du modèle",
+        "selectFile": "Sélectionner un fichier",
+        "loadData": "Charger les données",
+        "importData": "Importer les données",
+        "loaded": "Chargé",
+        "imported": "Importé"
       },
       "camera": {
         "takePhoto": "Prendre une photo",

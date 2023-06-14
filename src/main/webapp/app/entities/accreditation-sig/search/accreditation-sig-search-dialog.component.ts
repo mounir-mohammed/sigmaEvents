@@ -292,10 +292,12 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
       .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
       .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
 
-    this.eventService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
-      .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      this.eventService
+        .query({ size: RECORD_ITEMS })
+        .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
+        .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+    }
 
     this.civilityService
       .query({ size: RECORD_ITEMS })

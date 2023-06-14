@@ -168,4 +168,48 @@ export class DataUtils {
       resolve(sortedBadges);
     });
   }
+
+  loadImageFromFile(path: string): Promise<string> {
+    return fetch(path)
+      .then(response => response.blob())
+      .then(blob => {
+        return new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64String = reader.result as string;
+            resolve(base64String);
+          };
+          reader.onerror = () => {
+            reject(new Error('Failed to load image.'));
+          };
+          reader.readAsDataURL(blob);
+        });
+      });
+  }
+
+  getContentType(filePath: string) {
+    const extname = this.getFileExtension(filePath);
+
+    switch (extname) {
+      case '.jpg':
+      case '.jpeg':
+        return 'image/jpeg';
+      case '.png':
+        return 'image/png';
+      case '.gif':
+        return 'image/gif';
+      // Add more cases for other file extensions and their corresponding content types
+      default:
+        return 'application/octet-stream'; // Default content type for unknown file types
+    }
+  }
+
+  protected getFileExtension(filePath: string): string {
+    const fileName = filePath.split('/').pop() || filePath.split('\\').pop(); // Get the file name from the path
+    const fileParts = fileName!.split('.'); // Split the file name by dot (.)
+    if (fileParts.length > 1) {
+      return fileParts.pop()!.toLowerCase(); // Get the last part and convert to lowercase
+    }
+    return ''; // Return an empty string if no extension found
+  }
 }

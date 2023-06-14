@@ -13,7 +13,7 @@
         "advancedSearch": "Advanced Search",
         "massUpdate": "Mass Update",
         "massPrint": "Mass Print",
-        "upload": "Upload",
+        "upload": "Import",
         "export": "Export"
       },
       "created": "A new Accreditation is created with identifier {{ param }}",
@@ -36,6 +36,14 @@
       "search": {
         "placeHolder": "Search"
       },
+      "upload": {
+        "downloadModelData": "Download model file",
+        "selectFile": "Select File",
+        "loadData": "Load data",
+        "importData": "Import data",
+        "loaded": "Loaded",
+        "imported": "Imported"
+      },
       "camera": {
         "takePhoto": "Take Photo",
         "reTakePhoto": "Take Another"
@@ -53,7 +61,6 @@
         "additionalInformation": "Additional Information",
         "photo": "Photo"
       },
-
       "accreditationId": "Id",
       "accreditationFirstName": "First Name",
       "accreditationSecondName": "Second Name",

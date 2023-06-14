@@ -5,3 +5,35 @@
 .loaded-fail {
   background-color: red;
 }
+
+.scrollable {
+  overflow: scroll;
+}
+
+.modal-body {
+  height: 50vh;
+  width: 100vh;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.custom-file-button {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #6c757d;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.custom-file-button:hover {
+  background-color: #45a049;
+}
+
+.custom-file-button:active {
+  background-color: #3e8e41;
+}
+
+.hidden-input {
+  display: none;
+}
