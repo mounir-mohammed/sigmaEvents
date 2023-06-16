@@ -59,6 +59,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   errorsMap: Map<number, { firstName: string; lastName: string; occupation: string; errors: string; hasErrors: boolean }> = new Map();
   isLoading = false;
   isImporting = false;
+  isConfigLoading = false;
   currentAccount: Account | null = null;
 
   importForm = new FormGroup({
@@ -118,85 +119,296 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   confirmImport(): void {}
 
   protected loadRelationshipsOptions(): void {
-    this.siteService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
-      .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
+    const promises: Promise<void>[] = [];
+    this.isConfigLoading = true;
 
-    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
-      this.eventService
-        .query({ size: RECORD_ITEMS })
-        .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
-        .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.siteService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (sites: ISiteSig[]) => {
+                this.sitesSharedCollection = sites;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading sites:', error);
+                reject(error);
+              },
+            });
+        })
+      );
     }
 
-    this.civilityService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICivilitySig[]>) => res.body ?? []))
-      .subscribe((civilities: ICivilitySig[]) => (this.civilitiesSharedCollection = civilities));
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.eventService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (events: IEventSig[]) => {
+                this.eventsSharedCollection = events;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading events:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
 
-    this.sexeService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ISexeSig[]>) => res.body ?? []))
-      .subscribe((sexes: ISexeSig[]) => (this.sexesSharedCollection = sexes));
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.civilityService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<ICivilitySig[]>) => res.body ?? []))
+          .subscribe({
+            next: (civilities: ICivilitySig[]) => {
+              this.civilitiesSharedCollection = civilities;
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading civilities:', error);
+              reject(error);
+            },
+          });
+      }),
+      new Promise<void>((resolve, reject) => {
+        this.sexeService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<ISexeSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (sexes: ISexeSig[]) => {
+              this.sexesSharedCollection = sexes;
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading sexes:', error);
+              reject(error);
+            },
+          });
+      }),
+      new Promise<void>((resolve, reject) => {
+        this.nationalityService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? []))
+          .subscribe({
+            next: (nationalities: INationalitySig[]) => {
+              this.nationalitiesSharedCollection = nationalities;
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading nationalities:', error);
+              reject(error);
+            },
+          });
+      }),
+      new Promise<void>((resolve, reject) => {
+        this.countryService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
+          .subscribe({
+            next: (countries: ICountrySig[]) => {
+              this.countriesSharedCollection = countries;
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading countries:', error);
+              reject(error);
+            },
+          });
+      }),
+      new Promise<void>((resolve, reject) => {
+        this.cityService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
+          .subscribe({
+            next: (cities: ICitySig[]) => {
+              this.citiesSharedCollection = cities;
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading cities:', error);
+              reject(error);
+            },
+          });
+      })
+    );
 
-    this.nationalityService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? []))
-      .subscribe((nationalities: INationalitySig[]) => (this.nationalitiesSharedCollection = nationalities));
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.categoryService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
+            .subscribe({
+              next: (categories: ICategorySig[]) => {
+                this.categoriesSharedCollection = categories;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading categories:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.fonctionService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (fonctions: IFonctionSig[]) => {
+                this.fonctionsSharedCollection = fonctions;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading fonctions:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.organizService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (organizs: IOrganizSig[]) => {
+                this.organizsSharedCollection = organizs;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading organizs:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
 
-    this.countryService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
-      .subscribe((countries: ICountrySig[]) => (this.countriesSharedCollection = countries));
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.accreditationTypeService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (accreditationTypes: IAccreditationTypeSig[]) => {
+                this.accreditationTypesSharedCollection = accreditationTypes;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading accreditation types:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
 
-    this.cityService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
-      .subscribe((cities: ICitySig[]) => (this.citiesSharedCollection = cities));
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.statusService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (statuses: IStatusSig[]) => {
+              this.statusesSharedCollection = statuses;
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading statuses:', error);
+              reject(error);
+            },
+          });
+      })
+    );
 
-    this.categoryService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
-      .subscribe((categories: ICategorySig[]) => (this.categoriesSharedCollection = categories));
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.attachementService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (attachements: IAttachementSig[]) => {
+                this.attachementsSharedCollection = attachements;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading attachements:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.codeService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (codes: ICodeSig[]) => {
+                this.codesSharedCollection = codes;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading codes:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
+    if (!this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      promises.push(
+        new Promise<void>((resolve, reject) => {
+          this.dayPassInfoService
+            .query({ size: RECORD_ITEMS })
+            .pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? []))
+            .subscribe({
+              next: (dayPassInfos: IDayPassInfoSig[]) => {
+                this.dayPassInfosSharedCollection = dayPassInfos;
+                resolve();
+              },
+              error: (error: any) => {
+                console.error('Error loading day pass infos:', error);
+                reject(error);
+              },
+            });
+        })
+      );
+    }
 
-    this.fonctionService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
-      .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
-
-    this.organizService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
-      .subscribe((organizs: IOrganizSig[]) => (this.organizsSharedCollection = organizs));
-
-    this.accreditationTypeService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
-      .subscribe((accreditationTypes: IAccreditationTypeSig[]) => (this.accreditationTypesSharedCollection = accreditationTypes));
-
-    this.statusService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
-      .subscribe((statuses: IStatusSig[]) => (this.statusesSharedCollection = statuses));
-
-    this.attachementService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? []))
-      .subscribe((attachements: IAttachementSig[]) => (this.attachementsSharedCollection = attachements));
-
-    this.codeService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? []))
-      .subscribe((codes: ICodeSig[]) => (this.codesSharedCollection = codes));
-
-    this.dayPassInfoService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? []))
-      .subscribe((dayPassInfos: IDayPassInfoSig[]) => (this.dayPassInfosSharedCollection = dayPassInfos));
+    Promise.all(promises)
+      .then(() => {
+        this.isConfigLoading = false;
+      })
+      .catch(error => {
+        console.error('Error loading relationships options:', error);
+        this.isConfigLoading = false;
+      });
   }
 
   downloadModelFile() {
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN]) && !this.importForm.get('event')?.value) {
+      alert('Please Select Event');
+      return;
+    }
     const columnHeaders = [
       //Required fields
       this.translateService.instant('sigmaEventsApp.accreditation.accreditationFirstName'),
@@ -233,7 +445,19 @@ export class AccreditationSigImportDialogComponent implements OnInit {
       columnHeaders,
       'sigmaEventsApp.accreditation.home.title',
       'sigmaEventsApp.accreditation.home.upload',
-      'sigmaEventsApp.accreditation.home.title'
+      'sigmaEventsApp.accreditation.home.title',
+      'sigmaEventsApp.accreditation.accreditationOccupation',
+      this.fonctionsSharedCollection,
+      'sigmaEventsApp.accreditation.accreditationSexe',
+      this.sexesSharedCollection,
+      'sigmaEventsApp.accreditation.accreditationType',
+      this.accreditationTypesSharedCollection,
+      'sigmaEventsApp.accreditation.organiz',
+      this.organizsSharedCollection,
+      'sigmaEventsApp.accreditation.nationality',
+      this.nationalitiesSharedCollection,
+      'sigmaEventsApp.accreditation.site',
+      this.sitesSharedCollection
     );
   }
 
@@ -411,6 +635,10 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   }
 
   importData(): void {
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN]) && !this.importForm.get('event')?.value) {
+      alert('Please Select Event');
+      return;
+    }
     if (this.accreditations && this.accreditations.length > 0) {
       this.isImporting = true;
       this.errorsMap.clear();
@@ -543,5 +771,193 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   getFileByName(name: string): File | undefined {
     const filesArray = Array.from(this.selectedFiles);
     return filesArray.find(file => file.name === name);
+  }
+
+  reloadAndFilterByEvent(): void {
+    const selectedEvent = this.importForm.get('event')?.value;
+    if (selectedEvent) {
+      this.loadRelationshipsOptionsByEvent(selectedEvent.eventId);
+    }
+  }
+
+  protected loadRelationshipsOptionsByEvent(eventId: number): void {
+    const promises: Promise<void>[] = [];
+    this.isConfigLoading = true;
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.siteService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (sites: ISiteSig[]) => {
+              this.sitesSharedCollection = sites.filter(site => site.event?.eventId === eventId);
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading sites:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.accreditationTypeService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (accreditationTypes: IAccreditationTypeSig[]) => {
+              this.accreditationTypesSharedCollection = accreditationTypes.filter(
+                accreditationType => accreditationType.event?.eventId === eventId
+              );
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading sites:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.categoryService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
+          .subscribe({
+            next: (categories: ICategorySig[]) => {
+              this.categoriesSharedCollection = categories.filter(category => category.event?.eventId === eventId);
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading categories:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.fonctionService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (fonctions: IFonctionSig[]) => {
+              this.fonctionsSharedCollection = fonctions.filter(fonction => fonction.event?.eventId === eventId);
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading fonctions:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.organizService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (organizs: IOrganizSig[]) => {
+              this.organizsSharedCollection = organizs.filter(organiz => organiz.event?.eventId === eventId);
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading organizs:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.accreditationTypeService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (accreditationTypes: IAccreditationTypeSig[]) => {
+              this.accreditationTypesSharedCollection = accreditationTypes.filter(
+                accreditationType => accreditationType.event?.eventId === eventId
+              );
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading accreditation types:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.attachementService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (attachements: IAttachementSig[]) => {
+              this.attachementsSharedCollection = attachements.filter(attachement => attachement.event?.eventId === eventId);
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading attachements:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.codeService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (codes: ICodeSig[]) => {
+              this.codesSharedCollection = codes.filter(code => code.event?.eventId === eventId);
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading codes:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    promises.push(
+      new Promise<void>((resolve, reject) => {
+        this.dayPassInfoService
+          .query({ size: RECORD_ITEMS })
+          .pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? []))
+          .subscribe({
+            next: (dayPassInfos: IDayPassInfoSig[]) => {
+              this.dayPassInfosSharedCollection = dayPassInfos.filter(dayPassInfo => dayPassInfo.event?.eventId === eventId);
+              resolve();
+            },
+            error: (error: any) => {
+              console.error('Error loading day pass infos:', error);
+              reject(error);
+            },
+          });
+      })
+    );
+
+    Promise.all(promises)
+      .then(() => {
+        console.log(this.sitesSharedCollection);
+        this.isConfigLoading = false;
+      })
+      .catch(error => {
+        this.isConfigLoading = false;
+        console.error('Error loading relationships options by event:', error);
+      });
   }
 }

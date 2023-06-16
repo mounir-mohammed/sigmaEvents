@@ -1,3 +1,7 @@
+<div *ngIf="this.isConfigLoading" class="overlay">
+  <img src="../../../../content/images/loading_icon.gif" />
+</div>
+
 <form [formGroup]="importForm" (ngSubmit)="confirmImport()">
   <div class="modal-header">
     <h4 class="modal-title" data-cy="accreditationImportDialogHeading" sigmaTranslate="sigmaEventsApp.accreditation.home.upload">Import</h4>
@@ -6,106 +10,130 @@
 
   <div class="modal-body">
     <sigma-alert-error></sigma-alert-error>
-    <div class="row justify-content-start">
-      <div class="col-md-2 text-left">
-        <button type="button" class="btn btn-secondary" (click)="downloadModelFile()">
-          <fa-icon icon="download"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.downloadModelData"
-            >Download model file</span
-          >
-        </button>
-      </div>
 
-      <div class="col-md-2 text-left">
-        <div>
+    <div class="row">
+      <div class="col-md-4 actions-container">
+        <div class="row" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
+          <select
+            class="form-control"
+            id="field_event"
+            data-cy="event"
+            name="event"
+            formControlName="event"
+            (change)="reloadAndFilterByEvent()"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
+          </select>
+        </div>
+        <div class="row" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <fa-icon icon="down-long" class="actions-icon"></fa-icon>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-secondary" (click)="downloadModelFile()">
+            <fa-icon icon="file-excel"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.downloadModelData"
+              >Download model file</span
+            >
+          </button>
+        </div>
+        <div class="row">
+          <fa-icon icon="down-long" class="actions-icon"></fa-icon>
+        </div>
+        <div class="row">
           <input type="file" id="fileInput" (change)="handleFileInput($event)" accept=".xlsx,.xls" class="hidden-input" />
-          <label for="fileInput" class="custom-file-button" sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"
+          <label
+            for="fileInput"
+            class="custom-file-button btn btn-secondary"
+            sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"
             >Select File</label
           >
         </div>
-      </div>
-
-      <div class="col-md-2 text-left">
-        <input
-          type="file"
-          id="images"
-          name="images"
-          multiple
-          (change)="onFileSelect($event)"
-          accept="image/jpeg,image/jpg,image/png"
-          class="hidden-input"
-        />
-        <label for="images" class="custom-file-button" sigmaTranslate="sigmaEventsApp.accreditation.upload.photos">Select Photos</label>
-      </div>
-
-      <div class="col-md-2 text-left">
-        <button type="button" class="btn btn-secondary" (click)="loadData()">
-          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.loadData"
-            >Load data</span
+        <div class="row">
+          <fa-icon icon="down-long" class="actions-icon"></fa-icon>
+        </div>
+        <div class="row">
+          <input
+            type="file"
+            id="images"
+            name="images"
+            multiple
+            (change)="onFileSelect($event)"
+            accept="image/jpeg,image/jpg,image/png"
+            class="hidden-input"
+          />
+          <label for="images" class="custom-file-button btn btn-secondary" sigmaTranslate="sigmaEventsApp.accreditation.upload.photos"
+            >Select Photos</label
           >
-        </button>
+        </div>
+        <div class="row">
+          <fa-icon icon="down-long" class="actions-icon"></fa-icon>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-secondary" (click)="loadData()">
+            <fa-icon icon="sync" [spin]="isLoading"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.loadData"
+              >Load data</span
+            >
+          </button>
+        </div>
+        <div class="row">
+          <fa-icon icon="down-long" class="actions-icon"></fa-icon>
+        </div>
+        <div class="row">
+          <button type="button" class="btn btn-primary" (click)="importData()">
+            <fa-icon icon="sync" [spin]="isImporting"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.importData"
+              >Import data</span
+            >
+          </button>
+        </div>
+        <div class="row">
+          <div *ngIf="selectedFile">
+            <fa-icon icon="file-excel"></fa-icon>
+            <span sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"></span> :
+            <p id="selectedFileName">{{ selectedFile.name }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="selectedFileNames">
+            <fa-icon icon="images"></fa-icon>
+            <span sigmaTranslate="sigmaEventsApp.accreditation.upload.photos"></span> :
+            <p id="selectedPhotos">{{ selectedFileNames }}</p>
+          </div>
+        </div>
       </div>
-
-      <div class="col-md-2 text-left">
-        <button type="button" class="btn btn-primary" (click)="importData()">
-          <fa-icon icon="sync" [spin]="isImporting"></fa-icon>&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.upload.importData"
-            >Import data</span
-          >
-        </button>
+      <div class="col-md-8 data-container">
+        <div *ngIf="errorsMap.size > 0" class="table-responsive table-entities">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Index</th>
+                <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">First Name</th>
+                <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName">List Name</th>
+                <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Occupation</th>
+                <th sigmaTranslate="sigmaEventsApp.accreditation.status">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let entry of errorsMap.entries()">
+                <tr *ngIf="entry[1].hasErrors">
+                  <td>{{ entry[0] }}</td>
+                  <td>{{ entry[1].firstName }}</td>
+                  <td>{{ entry[1].lastName }}</td>
+                  <td>{{ entry[1].occupation }}</td>
+                  <td class="loaded-fail">{{ entry[1].errors }}</td>
+                </tr>
+                <tr *ngIf="!entry[1].hasErrors">
+                  <td>{{ entry[0] }}</td>
+                  <td>{{ entry[1].firstName }}</td>
+                  <td>{{ entry[1].lastName }}</td>
+                  <td>{{ entry[1].occupation }}</td>
+                  <td class="loaded-succes">{{ entry[1].errors }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-
-    <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
-      <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
-      <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
-        <option [ngValue]="null"></option>
-        <option [ngValue]="eventOption" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
-      </select>
-    </div>
-
-    <div class="row">
-      <div *ngIf="selectedFile">
-        <span sigmaTranslate="sigmaEventsApp.accreditation.upload.selectFile"></span> :
-        <p id="selectedFileName">{{ selectedFile.name }}</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div *ngIf="selectedFileNames">
-        <span sigmaTranslate="sigmaEventsApp.accreditation.upload.photos"></span> :
-        <p id="selectedPhotos">{{ selectedFileNames }}</p>
-      </div>
-    </div>
-
-    <div *ngIf="errorsMap.size > 0" class="table-responsive table-entities">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Index</th>
-            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">First Name</th>
-            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName">List Name</th>
-            <th sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Occupation</th>
-            <th sigmaTranslate="sigmaEventsApp.accreditation.status">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let entry of errorsMap.entries()">
-            <tr *ngIf="entry[1].hasErrors">
-              <td>{{ entry[0] }}</td>
-              <td>{{ entry[1].firstName }}</td>
-              <td>{{ entry[1].lastName }}</td>
-              <td>{{ entry[1].occupation }}</td>
-              <td class="loaded-fail">{{ entry[1].errors }}</td>
-            </tr>
-            <tr *ngIf="!entry[1].hasErrors">
-              <td>{{ entry[0] }}</td>
-              <td>{{ entry[1].firstName }}</td>
-              <td>{{ entry[1].lastName }}</td>
-              <td>{{ entry[1].occupation }}</td>
-              <td class="loaded-succes">{{ entry[1].errors }}</td>
-            </tr>
-          </ng-container>
-        </tbody>
-      </table>
     </div>
   </div>
 
