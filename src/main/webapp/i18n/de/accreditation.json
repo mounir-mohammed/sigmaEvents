@@ -62,6 +62,14 @@
         "additionalInformation": "Zusätzliche Informationen",
         "photo": "Foto"
       },
+      "alerts": {
+        "noEventSelected": "Keine Veranstaltung ausgewählt.",
+        "noDataFound": "Keine Daten gefunden.",
+        "noAccreditationToCreate": "Keine Akkreditierungen zu erstellen.",
+        "noAccreditationSelected": "Keine Akkreditierungen ausgewählt.",
+        "noDataFoundToExport": "Keine Daten zum Exportieren gefunden.",
+        "errorMassUpdate": "Fehler beim Aktualisieren von Akkreditierungen."
+      },
       "accreditationId": "Kennung",
       "accreditationFirstName": "Vorname",
       "accreditationSecondName": "Zweiter Name",

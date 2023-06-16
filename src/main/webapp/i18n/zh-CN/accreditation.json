@@ -62,6 +62,14 @@
         "additionalInformation": "附加信息",
         "photo": "照片"
       },
+      "alerts": {
+        "noEventSelected": "未选择任何事件。",
+        "noDataFound": "未找到数据。",
+        "noAccreditationToCreate": "无可创建的认证。",
+        "noAccreditationSelected": "未选择任何认证。",
+        "noDataFoundToExport": "未找到要导出的数据。",
+        "errorMassUpdate": "更新认证时出错。"
+      },
       "accreditationId": "编号",
       "accreditationFirstName": "名字",
       "accreditationSecondName": "中间名",

@@ -62,6 +62,14 @@
         "additionalInformation": "追加情報",
         "photo": "写真"
       },
+      "alerts": {
+        "noEventSelected": "イベントが選択されていません。",
+        "noDataFound": "データが見つかりませんでした。",
+        "noAccreditationToCreate": "作成する認定がありません。",
+        "noAccreditationSelected": "認定が選択されていません。",
+        "noDataFoundToExport": "エクスポートするデータが見つかりませんでした。",
+        "errorMassUpdate": "アクレディテーションの更新中にエラーが発生しました。"
+      },
       "accreditationId": "ID",
       "accreditationFirstName": "名",
       "accreditationSecondName": "ミドルネーム",

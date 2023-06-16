@@ -71,6 +71,14 @@
         "code": "الرمز",
         "dayPassInfo": "معلومات تذكرة اليوم"
       },
+      "alerts": {
+        "noEventSelected": "لم يتم تحديد أي حدث.",
+        "noDataFound": "لم يتم العثور على بيانات.",
+        "noAccreditationToCreate": "لا توجد اعتمادات لإنشائها.",
+        "noAccreditationSelected": "لم يتم تحديد أي اعتمادات.",
+        "noDataFoundToExport": "لم يتم العثور على بيانات للتصدير.",
+        "errorMassUpdate": "خطأ أثناء تحديث الاعتمادات."
+      },
       "accreditationId": "المعرف",
       "accreditationFirstName": "الاسم الأول",
       "accreditationSecondName": "الاسم الثاني",

@@ -406,7 +406,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
   downloadModelFile() {
     if (this.accountService.hasAnyAuthority([Authority.ADMIN]) && !this.importForm.get('event')?.value) {
-      alert('Please Select Event');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noEventSelected'));
       return;
     }
     const columnHeaders = [
@@ -469,7 +469,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
   loadData() {
     if (this.accountService.hasAnyAuthority([Authority.ADMIN]) && !this.importForm.get('event')?.value) {
-      alert('Please Select Event');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noEventSelected'));
       return;
     }
     this.errorsMap.clear();
@@ -526,7 +526,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
             this.isLoading = false;
           });
         } else {
-          alert('Please insert Data');
+          alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noDataFound'));
         }
       };
       fileReader.readAsArrayBuffer(this.selectedFile);
@@ -659,7 +659,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
   importData(): void {
     if (this.accountService.hasAnyAuthority([Authority.ADMIN]) && !this.importForm.get('event')?.value) {
-      alert('Please Select Event');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noEventSelected'));
       return;
     }
     if (this.accreditations && this.accreditations.length > 0) {
@@ -735,7 +735,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
         // Your code to execute after all promises are resolved
       });
     } else {
-      alert('No accreditations to create.');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noAccreditationToCreate'));
     }
   }
 

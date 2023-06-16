@@ -488,7 +488,7 @@ export class AccreditationSigComponent implements OnInit {
       this.router.navigate(['/accreditation-sig', 'massUpdate'], { queryParams: { data: btoa(JSON.stringify(accreditationsIds)) } });
       this.unSelectAll();
     } else {
-      alert('NO ACCREDITATION SELECTED');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noAccreditationSelected'));
     }
   }
 
@@ -512,7 +512,7 @@ export class AccreditationSigComponent implements OnInit {
         });
       this.unSelectAll();
     } else {
-      alert('NO ACCREDITATION SELECTED');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noAccreditationSelected'));
     }
   }
 
@@ -527,7 +527,7 @@ export class AccreditationSigComponent implements OnInit {
         'sigmaEventsApp.accreditation.home.title'
       );
     } else {
-      alert('NO DATA FOUND TO EXPORT');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noDataFoundToExport'));
     }
   }
 }

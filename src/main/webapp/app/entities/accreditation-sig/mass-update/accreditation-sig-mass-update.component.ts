@@ -40,6 +40,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'sigma-accreditation-sig-mass-update',
@@ -47,6 +48,7 @@ import { EventManager, EventWithContent } from 'app/core/util/event-manager.serv
 })
 export class AccreditationSigMassUpdateComponent implements OnInit {
   accreditationsIds?: number[] = [];
+  isUpdateLoading = false;
 
   massUpdateForm = new FormGroup({
     accreditationOccupation: new FormControl(),
@@ -114,7 +116,8 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
     protected dayPassInfoService: DayPassInfoSigService,
     protected router: Router,
     protected dataUtils: DataUtils,
-    protected eventManager: EventManager
+    protected eventManager: EventManager,
+    protected translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -215,6 +218,7 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
 
   save(): void {
     if (this.accreditationsIds && this.accreditationsIds.length > 0) {
+      this.isUpdateLoading = true;
       const updatedValues: Partial<IAccreditationSig> = this.getUpdatedValues();
       const updateRequests: Observable<any>[] = [];
 
@@ -237,15 +241,17 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
       forkJoin(updateRequests).subscribe(
         () => {
           console.log('All accreditations updated');
+          this.isUpdateLoading = false;
           this.previousState();
         },
         (error: any) => {
           console.error('Error updating accreditations', error);
-          alert('ERROR WHILE UPDATING');
+          this.isUpdateLoading = false;
+          alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.errorMassUpdate'));
         }
       );
     } else {
-      alert('ERROR WHILE UPDATING');
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.errorMassUpdate'));
     }
   }
 

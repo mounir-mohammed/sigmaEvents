@@ -62,6 +62,14 @@
         "additionalInformation": "Aanvullende informatie",
         "photo": "Foto"
       },
+      "alerts": {
+        "noEventSelected": "Geen evenement geselecteerd.",
+        "noDataFound": "Geen gegevens gevonden.",
+        "noAccreditationToCreate": "Geen accreditaties om aan te maken.",
+        "noAccreditationSelected": "Geen accreditaties geselecteerd.",
+        "noDataFoundToExport": "Geen gegevens gevonden om te exporteren.",
+        "errorMassUpdate": "Fout bij het bijwerken van accreditaties."
+      },
       "accreditationId": "ID",
       "accreditationFirstName": "Voornaam",
       "accreditationSecondName": "Tweede naam",
