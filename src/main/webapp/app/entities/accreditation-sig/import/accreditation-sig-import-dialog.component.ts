@@ -484,39 +484,41 @@ export class AccreditationSigImportDialogComponent implements OnInit {
         const workbook = XLSX.read(data, { type: 'array' });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
+        console.log(jsonData.length);
         if (jsonData.length > 1) {
           const promises: Promise<void>[] = [];
           for (let rowIndex = 1; rowIndex < jsonData.length; rowIndex++) {
             const rowData = jsonData[rowIndex];
-            const loadedValues: Partial<IAccreditationSig> = await this.getAccreditationValues(rowData);
-            const accreditationId: number = loadedValues['accreditationId'] || 0;
-            const loadedAccreditation: IAccreditationSig = { ...loadedValues, accreditationId };
+            if (rowData.length > 1) {
+              const loadedValues: Partial<IAccreditationSig> = await this.getAccreditationValues(rowData);
+              const accreditationId: number = loadedValues['accreditationId'] || 0;
+              const loadedAccreditation: IAccreditationSig = { ...loadedValues, accreditationId };
 
-            const errors: string[] = this.controlAccreditation(loadedAccreditation);
-            if (errors.length === 0) {
-              this.accreditations?.push(loadedAccreditation);
-              this.errorsMap.set(rowIndex, {
-                firstName: loadedAccreditation.accreditationFirstName!,
-                lastName: loadedAccreditation.accreditationLastName!,
-                occupation: loadedAccreditation.accreditationOccupation!,
-                errors: this.translateService.instant('sigmaEventsApp.accreditation.upload.loaded'),
-                hasErrors: false,
-              });
-              this.cdr.detectChanges();
-            } else {
-              console.log(`Errors for accreditation at row ${rowIndex}: ${errors.join(', ')}`);
-              this.errorsMap.set(rowIndex, {
-                firstName: loadedAccreditation.accreditationFirstName!,
-                lastName: loadedAccreditation.accreditationLastName!,
-                occupation: loadedAccreditation.accreditationOccupation!,
-                errors: errors.join(', '),
-                hasErrors: true,
-              });
-              this.cdr.detectChanges();
+              const errors: string[] = this.controlAccreditation(loadedAccreditation);
+              if (errors.length === 0) {
+                this.accreditations?.push(loadedAccreditation);
+                this.errorsMap.set(rowIndex, {
+                  firstName: loadedAccreditation.accreditationFirstName!,
+                  lastName: loadedAccreditation.accreditationLastName!,
+                  occupation: loadedAccreditation.accreditationOccupation!,
+                  errors: this.translateService.instant('sigmaEventsApp.accreditation.upload.loaded'),
+                  hasErrors: false,
+                });
+                this.cdr.detectChanges();
+              } else {
+                console.log(`Errors for accreditation at row ${rowIndex}: ${errors.join(', ')}`);
+                this.errorsMap.set(rowIndex, {
+                  firstName: loadedAccreditation.accreditationFirstName!,
+                  lastName: loadedAccreditation.accreditationLastName!,
+                  occupation: loadedAccreditation.accreditationOccupation!,
+                  errors: errors.join(', '),
+                  hasErrors: true,
+                });
+                this.cdr.detectChanges();
+              }
+              const rowPromise = new Promise<void>(resolve => resolve());
+              promises.push(rowPromise);
             }
-            const rowPromise = new Promise<void>(resolve => resolve());
-            promises.push(rowPromise);
           }
 
           Promise.all(promises).then(() => {
@@ -534,18 +536,30 @@ export class AccreditationSigImportDialogComponent implements OnInit {
   private async getAccreditationValues(row: any[]): Promise<Partial<IAccreditationSig>> {
     const loadedValues: Partial<IAccreditationSig> = {};
     loadedValues['status'] = this.status;
-    loadedValues['accreditationFirstName'] = row[0].toString();
-    loadedValues['accreditationLastName'] = row[1].toString();
-    loadedValues['accreditationBirthDay'] = dayjs(XLSX.SSF.format('DD/MM/YYYY', row[2]), 'DD/MM/YYYY');
-    loadedValues['sexe'] = this.sexesSharedCollection.find(sexe => sexe.sexeValue === row[3].toString());
-    loadedValues['accreditationOccupation'] = row[4].toString();
-    loadedValues['fonction'] = this.fonctionsSharedCollection.find(
-      fonction => fonction.fonctionName === loadedValues['accreditationOccupation']
-    );
-    loadedValues['category'] = loadedValues['fonction']?.category;
-    loadedValues['accreditationType'] = this.accreditationTypesSharedCollection.find(
-      accreditationType => accreditationType.accreditationTypeValue === row[5].toString()
-    );
+    if (row[0]) {
+      loadedValues['accreditationFirstName'] = row[0].toString();
+    }
+    if (row[1]) {
+      loadedValues['accreditationLastName'] = row[1].toString();
+    }
+    if (row[2]) {
+      loadedValues['accreditationBirthDay'] = dayjs(XLSX.SSF.format('DD/MM/YYYY', row[2]), 'DD/MM/YYYY');
+    }
+    if (row[3]) {
+      loadedValues['sexe'] = this.sexesSharedCollection.find(sexe => sexe.sexeValue === row[3].toString());
+    }
+    if (row[4]) {
+      loadedValues['accreditationOccupation'] = row[4].toString();
+      loadedValues['fonction'] = this.fonctionsSharedCollection.find(
+        fonction => fonction.fonctionName === loadedValues['accreditationOccupation']
+      );
+      loadedValues['category'] = loadedValues['fonction']?.category;
+    }
+    if (row[5]) {
+      loadedValues['accreditationType'] = this.accreditationTypesSharedCollection.find(
+        accreditationType => accreditationType.accreditationTypeValue === row[5].toString()
+      );
+    }
     if (row[6]) {
       let selectedSites: ISiteSig[] = [];
       const sites = row[6].toString().split(',');
@@ -556,10 +570,14 @@ export class AccreditationSigImportDialogComponent implements OnInit {
       }
       loadedValues['sites'] = selectedSites;
     }
-    loadedValues['organiz'] = this.organizsSharedCollection.find(organiz => organiz.organizName === row[7].toString());
-    loadedValues['nationality'] = this.nationalitiesSharedCollection.find(
-      nationalities => nationalities.nationalityValue === row[8].toString()
-    );
+    if (row[7]) {
+      loadedValues['organiz'] = this.organizsSharedCollection.find(organiz => organiz.organizName === row[7].toString());
+    }
+    if (row[8]) {
+      loadedValues['nationality'] = this.nationalitiesSharedCollection.find(
+        nationalities => nationalities.nationalityValue === row[8].toString()
+      );
+    }
     if (row[9]) {
       loadedValues['accreditationSecondName'] = row[9].toString();
     }
@@ -626,7 +644,6 @@ export class AccreditationSigImportDialogComponent implements OnInit {
         dayPassInfo => dayPassInfo.dayPassInfoName === row[25].toString()
       );
     }
-
     if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
       if (this.importForm.get('event')?.value) {
         loadedValues['event'] = this.importForm.get('event')?.value;
@@ -636,7 +653,6 @@ export class AccreditationSigImportDialogComponent implements OnInit {
         loadedValues['event'] = this.currentAccount?.printingCentre?.event;
       }
     }
-
     console.log(loadedValues);
     return loadedValues;
   }
