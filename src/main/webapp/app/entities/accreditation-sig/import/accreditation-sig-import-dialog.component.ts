@@ -546,7 +546,16 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     loadedValues['accreditationType'] = this.accreditationTypesSharedCollection.find(
       accreditationType => accreditationType.accreditationTypeValue === row[5].toString()
     );
-    // loadedValues['sites'] = row[6];
+    if (row[6]) {
+      let selectedSites: ISiteSig[] = [];
+      const sites = row[6].toString().split(',');
+      if (sites.length > 0) {
+        sites.forEach((siteName: string) => {
+          selectedSites.push(this.sitesSharedCollection.find(site => site.siteName === siteName)!);
+        });
+      }
+      loadedValues['sites'] = selectedSites;
+    }
     loadedValues['organiz'] = this.organizsSharedCollection.find(organiz => organiz.organizName === row[7].toString());
     loadedValues['nationality'] = this.nationalitiesSharedCollection.find(
       nationalities => nationalities.nationalityValue === row[8].toString()
@@ -563,9 +572,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
           const base64Data = await this.dataUtils.getBase64FromFile(image);
           const base64String = base64Data.split(',')[1];
           loadedValues['accreditationPhoto'] = base64String;
-          console.log(base64String);
         } catch (error) {
-          // Handle error
           console.error(error);
         }
 
@@ -952,7 +959,6 @@ export class AccreditationSigImportDialogComponent implements OnInit {
 
     Promise.all(promises)
       .then(() => {
-        console.log(this.sitesSharedCollection);
         this.isConfigLoading = false;
       })
       .catch(error => {
