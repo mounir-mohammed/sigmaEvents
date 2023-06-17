@@ -170,10 +170,10 @@ export class AccreditationSigUpdateComponent implements OnInit {
       })
       .subscribe(data => {
         console.log(data);
-        // this.dataUtils.loadFileAfterEditToForm(data.file!, this.editForm, field, isImage).subscribe({
-        //   error: (err: FileLoadError) =>
-        //     this.eventManager.broadcast(new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })),
-        // });
+        this.dataUtils.loadFileAfterEditToForm(data.file!, this.editForm, field, isImage).subscribe({
+          error: (err: FileLoadError) =>
+            this.eventManager.broadcast(new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })),
+        });
       });
   }
 
@@ -451,12 +451,12 @@ export class AccreditationSigUpdateComponent implements OnInit {
           })
           .subscribe(data => {
             console.log(data);
-            // this.dataUtils.loadFileAfterEditToForm(data.file!, this.editForm, 'accreditationPhoto', true).subscribe({
-            //   error: (err: FileLoadError) =>
-            //     this.eventManager.broadcast(
-            //       new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })
-            //     ),
-            // });
+            this.dataUtils.loadFileAfterEditToForm(data.file!, this.editForm, 'accreditationPhoto', true).subscribe({
+              error: (err: FileLoadError) =>
+                this.eventManager.broadcast(
+                  new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })
+                ),
+            });
           });
       }
     });
