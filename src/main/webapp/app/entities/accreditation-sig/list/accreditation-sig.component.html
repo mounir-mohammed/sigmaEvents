@@ -51,15 +51,15 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-start">
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_AV_SEARCH]">
+    <div class="actions-container row row-cols-md-auto">
+      <div class="col" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_AV_SEARCH]">
         <button type="button" class="btn btn-info me-2" (click)="advancedSearch()">
           <fa-icon icon="search"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch"
             >Advanced Search</span
           >
         </button>
       </div>
-      <div class="select-columns" id="select-columns">
+      <div class="col select-columns" id="select-columns">
         <button type="button" class="btn btn-info me-2" (click)="toggleColumnsCheckboxes()">
           <fa-icon icon="list-ul"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.costumView"
             >Costum View</span
@@ -82,30 +82,30 @@
         </div>
       </div>
       <!--START ADD MULTI SELECTION BUTTONS-->
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_MASS_UPDATE]">
+      <div class="col" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_MASS_UPDATE]">
         <button type="button" class="btn btn-info me-2" (click)="massUpdate()">
           <fa-icon icon="pencil-alt"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massUpdate"
             >Mass Update</span
           >
         </button>
       </div>
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_MASS_PRINT]">
+      <div class="col" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_MASS_PRINT]">
         <button type="button" class="btn btn-info me-2" (click)="massPrint()">
           <fa-icon icon="print"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.massPrint">Mass Print</span>
         </button>
       </div>
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_IMPORT]">
+      <div class="col" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_IMPORT]">
         <button type="button" class="btn btn-info me-2" (click)="import()">
           <fa-icon icon="upload"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.upload">Upload</span>
         </button>
       </div>
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_EXPORT]">
+      <div class="col" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_EXPORT]">
         <button type="button" class="btn btn-info me-2" (click)="export()">
           <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.export">Export</span>
         </button>
       </div>
       <!--END ADD MULTI SELECTION BUTTONS-->
-      <div>
+      <div class="col">
         <select class="form-control" id="field_listSize" #listSize (change)="changeListSize(listSize.value)">
           <option value="20">20</option>
           <option value="50">50</option>
