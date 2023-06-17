@@ -17,8 +17,7 @@ public class FeaturePolicyFilter implements Filter {
         httpServletResponse.setHeader(
             "Feature-Policy",
             "accelerometer 'none'; camera *; geolocation 'none'; " +
-            "gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment *; usb 'none'; " +
-            "default-src 'self' data:;"
+            "gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment *; usb 'none'"
         );
         chain.doFilter(request, response);
     }
