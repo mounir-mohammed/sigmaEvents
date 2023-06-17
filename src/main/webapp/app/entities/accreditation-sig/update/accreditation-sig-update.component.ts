@@ -50,6 +50,7 @@ import { CameraLaptopDialogComponent } from 'app/camera/laptop/camera-laptop-dia
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
 import { FormControl } from '@angular/forms';
 import { RECORD_ITEMS } from 'app/config/pagination.constants';
+import { NgxPhotoEditorService } from 'ngx-photo-editor';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -103,7 +104,8 @@ export class AccreditationSigUpdateComponent implements OnInit {
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private accountService: AccountService,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private photoEditorService: NgxPhotoEditorService
   ) {}
 
   compareSiteSig = (o1: ISiteSig | null, o2: ISiteSig | null): boolean => this.siteService.compareSiteSig(o1, o2);
@@ -161,10 +163,17 @@ export class AccreditationSigUpdateComponent implements OnInit {
   }
 
   setFileData(event: Event, field: string, isImage: boolean): void {
-    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({
-      error: (err: FileLoadError) =>
-        this.eventManager.broadcast(new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })),
-    });
+    this.photoEditorService
+      .open(event, {
+        aspectRatio: 4 / 3,
+        autoCropArea: 1,
+      })
+      .subscribe(data => {
+        this.dataUtils.loadFileAfterEditToForm(data.file!, this.editForm, field, isImage).subscribe({
+          error: (err: FileLoadError) =>
+            this.eventManager.broadcast(new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })),
+        });
+      });
   }
 
   clearInputImage(field: string, fieldContentType: string, idInput: string): void {
@@ -432,10 +441,21 @@ export class AccreditationSigUpdateComponent implements OnInit {
   openCapturePhotoDialog(): void {
     const modalRef = this.modalService.open(CameraLaptopDialogComponent, { size: 'lg', backdrop: 'static' });
     // unsubscribe not needed because closed completes on modal close
-    modalRef.closed.pipe().subscribe(data => {
-      if (data) {
-        this.editForm.patchValue({ accreditationPhoto: data });
-        this.editForm.patchValue({ accreditationPhotoContentType: 'image/png' });
+    modalRef.closed.pipe().subscribe(file => {
+      if (file) {
+        this.photoEditorService
+          .open(file, {
+            aspectRatio: 4 / 3,
+            autoCropArea: 1,
+          })
+          .subscribe(data => {
+            this.dataUtils.loadFileAfterEditToForm(data.file!, this.editForm, 'accreditationPhoto', true).subscribe({
+              error: (err: FileLoadError) =>
+                this.eventManager.broadcast(
+                  new EventWithContent<AlertError>('sigmaEventsApp.error', { ...err, key: 'error.file.' + err.key })
+                ),
+            });
+          });
       }
     });
   }

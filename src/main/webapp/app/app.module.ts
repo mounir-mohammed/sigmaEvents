@@ -26,6 +26,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     NgxWebstorageModule.forRoot({ prefix: 'sigma', separator: '-', caseSensitive: true }),
     TranslationModule,
     ColorPickerModule,
+    NgxPhotoEditorModule,
   ],
   providers: [
     Title,

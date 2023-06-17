@@ -95,6 +95,7 @@
     "jspdf": "^2.5.1",
     "ngx-color-picker": "^11.0.0",
     "ngx-infinite-scroll": "14.0.0",
+    "ngx-photo-editor": "^0.4.4",
     "ngx-webstorage": "10.0.1",
     "qrcode": "^1.5.3",
     "rxjs": "7.5.6",

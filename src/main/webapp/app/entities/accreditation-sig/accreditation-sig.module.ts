@@ -12,9 +12,10 @@ import { AccreditationSigSearchDialogComponent } from './search/accreditation-si
 import { AccreditationMassSigPrintDialogComponent } from './print/accreditation-sig-mass-print-dialog.component';
 import { AccreditationSigMassUpdateComponent } from './mass-update/accreditation-sig-mass-update.component';
 import { AccreditationSigImportDialogComponent } from './import/accreditation-sig-import-dialog.component';
+import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 
 @NgModule({
-  imports: [SharedModule, AccreditationSigRoutingModule],
+  imports: [SharedModule, AccreditationSigRoutingModule, NgxPhotoEditorModule],
   declarations: [
     AccreditationSigComponent,
     AccreditationSigDetailComponent,
