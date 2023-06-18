@@ -16,6 +16,7 @@ import { PrintingType } from 'app/config/printingType.contants';
 import { BadgeUtils } from 'app/badge/badge-utils';
 import { Authority } from 'app/config/authority.constants';
 import { ErrorModalUtil } from 'app/shared/util/errorModal.shared';
+import { error } from 'console';
 
 @Component({
   templateUrl: './accreditation-sig-print-dialog.component.html',
@@ -26,6 +27,7 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
   currentAccount: Account | null = null;
   status?: IStatusSig;
   badgeGenerated: boolean = false;
+  badgePrinting: boolean = false;
 
   constructor(
     protected accreditationService: AccreditationSigService,
@@ -58,12 +60,22 @@ export class AccreditationSigPrintDialogComponent implements OnInit {
       this.accountService.hasAnyAuthority([Authority.EVENT_ADMIN]) ||
       this.accountService.hasAnyAuthority([Authority.CAN_ACC_REPRINT])
     ) {
+      this.badgePrinting = true;
       this.accreditationService.print(accreditation.accreditationId, status?.statusId!).subscribe(() => {
-        this.activeModal.close(ITEM_PRINTED_EVENT);
         var badgeId = accreditation.event?.eventAbreviation! + '_' + accreditation.event?.eventId! + '_' + accreditation.accreditationId!;
-        this.badgeUtils.print(badgeId, accreditation.accreditationPrintingModel);
+        this.badgeUtils
+          .print(badgeId, accreditation.accreditationPrintingModel)
+          .then(() => {
+            this.badgePrinting = false;
+            this.activeModal.close(ITEM_PRINTED_EVENT);
+          })
+          .catch(error => {
+            console.error(error);
+            this.badgePrinting = false;
+          });
       });
     } else {
+      this.badgePrinting = false;
       this.errorModalUtil.throwAlertErrorUnauthorizedPrinting(accreditation!.accreditationId!);
       this.cancel();
     }
