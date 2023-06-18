@@ -91,6 +91,7 @@ export class AccreditationSigService {
   }
 
   partialUpdate(accreditation: PartialUpdateAccreditationSig, isMassUpdate: boolean): Observable<EntityResponseType> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .patch<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, {
@@ -113,6 +114,7 @@ export class AccreditationSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.operationHistorySigService
       .createNewOperation(
         Entity.Accreditation,
@@ -239,18 +241,21 @@ export class AccreditationSigService {
   }
 
   validate(accreditationId: number, statusId: number): Observable<EntityResponseType> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/validate`, null, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res, OperationType.Validate, [])));
   }
 
   print(accreditationId: number, statusId: number): Observable<EntityResponseType> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/print`, null, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res, OperationType.Print, [])));
   }
 
   massPrint(accreditationId: number[], statusId: number): Observable<EntityResponseType> {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/massprint`, null, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res, OperationType.MassPrint, accreditationId)));
