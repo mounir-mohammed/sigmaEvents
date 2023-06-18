@@ -14,6 +14,7 @@
       "delete": {
         "question": "Organiz {{ id }}を削除してもよろしいですか？"
       },
+      "organizAlreadyExists": "組織は既に存在しています。",
       "detail": {
         "title": "Organiz"
       },

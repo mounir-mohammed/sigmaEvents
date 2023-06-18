@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { filter, finalize, map, switchMap } from 'rxjs/operators';
 
 import { AccreditationSigFormService, AccreditationSigFormGroup } from './accreditation-sig-form.service';
 import { IAccreditationSig } from '../accreditation-sig.model';
@@ -51,6 +51,7 @@ import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig
 import { FormControl } from '@angular/forms';
 import { RECORD_ITEMS } from 'app/config/pagination.constants';
 import { NgxPhotoEditorService } from 'ngx-photo-editor';
+import { AccreditationSigOrganizDialogComponent } from '../organiz/accreditation-sig-organiz-dialog.component';
 
 @Component({
   selector: 'sigma-accreditation-sig-update',
@@ -469,5 +470,28 @@ export class AccreditationSigUpdateComponent implements OnInit {
     modalRef.componentInstance.accreditation = accreditation;
     modalRef.componentInstance.status = status;
     // unsubscribe not needed because closed completes on modal close
+  }
+
+  createNewOrganiz() {
+    const modalRef = this.modalService.open(AccreditationSigOrganizDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.organisations = this.organizsSharedCollection;
+    modalRef.closed.pipe().subscribe(organiz => {
+      this.reloadAndSelectOrganiz(organiz);
+    });
+  }
+
+  reloadAndSelectOrganiz(organiz: IOrganizSig) {
+    this.organizService
+      .query({ size: RECORD_ITEMS })
+      .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
+      .pipe(
+        map((organizs: IOrganizSig[]) =>
+          this.organizService.addOrganizSigToCollectionIfMissing<IOrganizSig>(organizs, this.accreditation?.organiz)
+        )
+      )
+      .subscribe((organizs: IOrganizSig[]) => {
+        this.organizsSharedCollection = organizs;
+        this.editForm.get('organiz')?.setValue(organiz);
+      });
   }
 }

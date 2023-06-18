@@ -13,6 +13,7 @@ import { AccreditationMassSigPrintDialogComponent } from './print/accreditation-
 import { AccreditationSigMassUpdateComponent } from './mass-update/accreditation-sig-mass-update.component';
 import { AccreditationSigImportDialogComponent } from './import/accreditation-sig-import-dialog.component';
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
+import { AccreditationSigOrganizDialogComponent } from './organiz/accreditation-sig-organiz-dialog.component';
 
 @NgModule({
   imports: [SharedModule, AccreditationSigRoutingModule, NgxPhotoEditorModule],
@@ -28,6 +29,7 @@ import { NgxPhotoEditorModule } from 'ngx-photo-editor';
     CameraLaptopDialogComponent,
     AccreditationSigMassUpdateComponent,
     AccreditationSigImportDialogComponent,
+    AccreditationSigOrganizDialogComponent,
   ],
 })
 export class AccreditationSigModule {}

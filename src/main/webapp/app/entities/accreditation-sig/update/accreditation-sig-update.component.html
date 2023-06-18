@@ -162,6 +162,11 @@
                   {{ organizOption.organizName }}
                 </option>
               </select>
+              <ul *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ADD_ORGANIZ]">
+                <li>
+                  <a (click)="createNewOrganiz()"><span sigmaTranslate="sigmaEventsApp.organiz.home.createLabel"></span></a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

@@ -2,32 +2,33 @@
   "sigmaEventsApp": {
     "organiz": {
       "home": {
-        "title": "Organizs",
+        "title": "Organisations",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Organiz",
-        "createOrEditLabel": "Créer ou éditer un Organiz",
-        "notFound": "Aucun Organiz trouvé"
+        "createLabel": "Créer une nouvelle Organisation",
+        "createOrEditLabel": "Créer ou éditer une Organisation",
+        "notFound": "Aucune Organisation trouvé"
       },
-      "created": "Un nouveau Organiz a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Organiz avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Organiz avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Organisation a été créé avec l'identifiant {{ param }}",
+      "updated": "L'Organisation avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "L'Organisation avec l'identifiant {{ param }} a été supprimé",
       "delete": {
         "question": "Êtes-vous certain de vouloir supprimer le Organiz {{ id }} ?"
       },
+      "organizAlreadyExists": "L'organisation existe déjà.",
       "detail": {
-        "title": "Organiz"
+        "title": "Organisation"
       },
-      "organizId": "Organiz Id",
-      "organizName": "Organiz Name",
-      "organizDescription": "Organiz Description",
-      "organizLogo": "Organiz Logo",
-      "organizTel": "Organiz Tel",
-      "organizFax": "Organiz Fax",
-      "organizEmail": "Organiz Email",
-      "organizAdresse": "Organiz Adresse",
-      "organizParams": "Organiz Params",
-      "organizAttributs": "Organiz Attributs",
-      "organizStat": "Organiz Stat",
+      "organizId": "Id",
+      "organizName": "Nom",
+      "organizDescription": "Description",
+      "organizLogo": "Logo",
+      "organizTel": "Tel",
+      "organizFax": "Fax",
+      "organizEmail": "Email",
+      "organizAdresse": "Adresse",
+      "organizParams": "Params",
+      "organizAttributs": "Attributs",
+      "organizStat": "Stat",
       "printingCentre": "Printing Centre",
       "accreditation": "Accreditation",
       "country": "Country",

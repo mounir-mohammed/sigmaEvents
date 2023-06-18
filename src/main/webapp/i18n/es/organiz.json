@@ -14,6 +14,7 @@
       "delete": {
         "question": "¿Seguro que quiere eliminar Organiz {{ id }}?"
       },
+      "organizAlreadyExists": "La organización ya existe.",
       "detail": {
         "title": "Organiz"
       },

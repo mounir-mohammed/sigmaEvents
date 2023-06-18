@@ -1,0 +1,84 @@
+<form [formGroup]="addOrganizForm" (ngSubmit)="confirmAddOrganiz()">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="accreditationOrganizDialogHeading" sigmaTranslate="sigmaEventsApp.organiz.home.createLabel"></h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <sigma-alert-error></sigma-alert-error>
+
+    <div class="row mb-3">
+      <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizName" for="field_organizName">Organiz Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="organizName"
+        id="field_organizName"
+        data-cy="organizName"
+        formControlName="organizName"
+      />
+      <div
+        *ngIf="
+          addOrganizForm.get('organizName')!.invalid &&
+          (addOrganizForm.get('organizName')!.dirty || addOrganizForm.get('organizName')!.touched)
+        "
+      >
+        <small
+          class="form-text text-danger"
+          *ngIf="addOrganizForm.get('organizName')?.errors?.required"
+          sigmaTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+        <small
+          class="form-text text-danger"
+          *ngIf="addOrganizForm.get('organizName')?.errors?.maxlength"
+          sigmaTranslate="entity.validation.maxlength"
+          [translateValues]="{ max: 50 }"
+        >
+          This field cannot be longer than 50 characters.
+        </small>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="form-label" sigmaTranslate="sigmaEventsApp.organiz.organizDescription" for="field_organizDescription"
+        >Organiz Description</label
+      >
+      <input
+        type="text"
+        class="form-control"
+        name="organizDescription"
+        id="field_organizDescription"
+        data-cy="organizDescription"
+        formControlName="organizDescription"
+      />
+      <div
+        *ngIf="
+          addOrganizForm.get('organizDescription')!.invalid &&
+          (addOrganizForm.get('organizDescription')!.dirty || addOrganizForm.get('organizDescription')!.touched)
+        "
+      >
+        <small
+          class="form-text text-danger"
+          *ngIf="addOrganizForm.get('organizDescription')?.errors?.maxlength"
+          sigmaTranslate="entity.validation.maxlength"
+          [translateValues]="{ max: 200 }"
+        >
+          This field cannot be longer than 200 characters.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="sigma-confirm-validate-accreditation" data-cy="entityConfirmValidateButton" type="submit" class="btn btn-success">
+      <fa-icon icon="check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
+    </button>
+  </div>
+</form>

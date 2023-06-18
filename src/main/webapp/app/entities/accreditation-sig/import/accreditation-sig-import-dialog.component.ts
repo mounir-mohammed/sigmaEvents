@@ -13,7 +13,7 @@ import { IDayPassInfoSig } from 'app/entities/day-pass-info-sig/day-pass-info-si
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
 import { IFonctionSig } from 'app/entities/fonction-sig/fonction-sig.model';
 import { INationalitySig } from 'app/entities/nationality-sig/nationality-sig.model';
-import { IOrganizSig } from 'app/entities/organiz-sig/organiz-sig.model';
+import { IOrganizSig, NewOrganizSig } from 'app/entities/organiz-sig/organiz-sig.model';
 import { ISexeSig } from 'app/entities/sexe-sig/sexe-sig.model';
 import { ISiteSig } from 'app/entities/site-sig/site-sig.model';
 import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
@@ -572,6 +572,48 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     }
     if (row[7]) {
       loadedValues['organiz'] = this.organizsSharedCollection.find(organiz => organiz.organizName === row[7].toString());
+
+      if (!loadedValues['organiz']) {
+        let userEvent: IEventSig | undefined;
+
+        if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+          if (this.importForm.get('event')?.value) {
+            userEvent = this.importForm.get('event')?.value;
+          }
+        } else {
+          if (this.currentAccount?.printingCentre?.event) {
+            userEvent = this.currentAccount?.printingCentre?.event;
+          }
+        }
+        if (userEvent) {
+          const newOrganiz: NewOrganizSig = {
+            organizId: null, // Provide the default or null value based on your requirement
+            organizName: row[7],
+            organizStat: true,
+            event: userEvent,
+          };
+
+          const createOrganizPromise = new Promise<IOrganizSig>((resolve, reject) => {
+            this.organizService.create(newOrganiz).subscribe(
+              response => {
+                const organiz: IOrganizSig = response.body!;
+                resolve(organiz);
+              },
+              error => {
+                reject(error);
+              }
+            );
+          });
+
+          try {
+            const organiz = await createOrganizPromise;
+            loadedValues['organiz'] = organiz;
+            await this.reloadOrganiz();
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      }
     }
     if (row[8]) {
       loadedValues['nationality'] = this.nationalitiesSharedCollection.find(
@@ -981,5 +1023,23 @@ export class AccreditationSigImportDialogComponent implements OnInit {
         this.isConfigLoading = false;
         console.error('Error loading relationships options by event:', error);
       });
+  }
+
+  reloadOrganiz(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.organizService
+        .query({ size: RECORD_ITEMS })
+        .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
+        .subscribe({
+          next: (organizs: IOrganizSig[]) => {
+            this.organizsSharedCollection = organizs;
+            resolve(); // Resolve the promise when the operation is completed
+          },
+          error: (error: any) => {
+            console.error('Error loading organizs:', error);
+            reject(error); // Reject the promise if there's an error
+          },
+        });
+    });
   }
 }
