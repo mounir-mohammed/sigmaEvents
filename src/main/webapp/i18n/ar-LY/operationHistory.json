@@ -2,36 +2,36 @@
   "sigmaEventsApp": {
     "operationHistory": {
       "home": {
-        "title": "Operation Histories",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Create a new Operation History",
-        "createOrEditLabel": "Create or edit a Operation History",
-        "notFound": "No Operation Histories found"
+        "title": "سجل العمليات",
+        "refreshListLabel": "تحديث القائمة",
+        "createLabel": "إنشاء سجل جديد للعمليات",
+        "createOrEditLabel": "إنشاء أو تحرير سجل للعمليات",
+        "notFound": "لم يتم العثور على سجلات للعمليات"
       },
-      "created": "A new Operation History is created with identifier {{ param }}",
-      "updated": "A Operation History is updated with identifier {{ param }}",
-      "deleted": "A Operation History is deleted with identifier {{ param }}",
+      "created": "تم إنشاء سجل جديد للعمليات بمعرف {{ param }}",
+      "updated": "تم تحديث سجل للعمليات بمعرف {{ param }}",
+      "deleted": "تم حذف سجل للعمليات بمعرف {{ param }}",
       "delete": {
-        "question": "Are you sure you want to delete Operation History {{ id }}?"
+        "question": "هل أنت متأكد أنك تريد حذف سجل العمليات {{ id }}؟"
       },
       "detail": {
-        "title": "Operation History"
+        "title": "سجل العمليات"
       },
-      "operationHistoryId": "Operation History Id",
-      "operationHistoryDescription": "Operation History Description",
-      "operationHistoryDate": "Operation History Date",
-      "operationHistoryUserID": "Operation History User ID",
-      "operationHistoryOldValue": "Operation History Old Value",
-      "operationHistoryNewValue": "Operation History New Value",
-      "operationHistoryOldId": "Operation History Old Id",
-      "operationHistoryNewId": "Operation History New Id",
-      "operationHistoryImportedFile": "Operation History Imported File",
-      "operationHistoryImportedFilePath": "Operation History Imported File Path",
-      "operationHistoryParams": "Operation History Params",
-      "operationHistoryAttributs": "Operation History Attributs",
-      "operationHistoryStat": "Operation History Stat",
-      "typeoperation": "Typeoperation",
-      "event": "Event"
+      "operationHistoryId": "المعرف",
+      "operationHistoryDescription": "اسم الكيان",
+      "operationHistoryDate": "التاريخ",
+      "operationHistoryUserID": "معرف مركز الطباعة",
+      "operationHistoryOldValue": "القيمة القديمة",
+      "operationHistoryNewValue": "القيمة الجديدة",
+      "operationHistoryOldId": "معرف الكيان القديم",
+      "operationHistoryNewId": "معرف الكيان الجديد",
+      "operationHistoryImportedFile": "الملف المستورد",
+      "operationHistoryImportedFilePath": "مسار الملف المستورد",
+      "operationHistoryParams": "المعرفات",
+      "operationHistoryAttributs": "المستخدم",
+      "operationHistoryStat": " الحالة",
+      "typeoperation": "النوع",
+      "event": "الحدث"
     }
   }
 }

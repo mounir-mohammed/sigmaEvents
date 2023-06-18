@@ -8,7 +8,7 @@
         <span sigmaTranslate="sigmaEventsApp.operationHistory.home.refreshListLabel">Refresh list</span>
       </button>
 
-      <button
+      <!-- <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-operation-history-sig"
@@ -16,7 +16,7 @@
       >
         <fa-icon icon="plus"></fa-icon>
         <span sigmaTranslate="sigmaEventsApp.operationHistory.home.createLabel"> Create a new Operation History </span>
-      </button>
+      </button> -->
     </div>
   </h2>
 
@@ -88,32 +88,32 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="operationHistoryImportedFilePath">
+          <!-- <th scope="col" sigmaSortBy="operationHistoryImportedFilePath">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryImportedFilePath"
                 >Operation History Imported File Path</span
               >
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
-          <th scope="col" sigmaSortBy="operationHistoryParams" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          </th> -->
+          <th scope="col" sigmaSortBy="operationHistoryParams">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryParams">Operation History Params</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="operationHistoryAttributs" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <th scope="col" sigmaSortBy="operationHistoryAttributs">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryAttributs">Operation History Attributs</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="operationHistoryStat">
+          <!-- <th scope="col" sigmaSortBy="operationHistoryStat">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryStat">Operation History Stat</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th> -->
           <th scope="col" sigmaSortBy="typeoperation.operationTypeId">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.typeoperation">Typeoperation</span>
@@ -144,10 +144,10 @@
           <td>{{ operationHistory.operationHistoryOldId }}</td>
           <td>{{ operationHistory.operationHistoryNewId }}</td>
           <td>{{ operationHistory.operationHistoryImportedFile }}</td>
-          <td>{{ operationHistory.operationHistoryImportedFilePath }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ operationHistory.operationHistoryParams }}</td>
-          <td *sigmaHasAnyAuthority="[authority.ADMIN]">{{ operationHistory.operationHistoryAttributs }}</td>
-          <td>{{ operationHistory.operationHistoryStat | yesNo }}</td>
+          <!-- <td>{{ operationHistory.operationHistoryImportedFilePath }}</td> -->
+          <td>{{ operationHistory.operationHistoryParams }}</td>
+          <td>{{ operationHistory.operationHistoryAttributs }}</td>
+          <!-- <td>{{ operationHistory.operationHistoryStat | yesNo }}</td> -->
           <td>
             <div *ngIf="operationHistory.typeoperation">
               <a [routerLink]="['/operation-type-sig', operationHistory.typeoperation.operationTypeId, 'view']">{{
@@ -172,7 +172,7 @@
                 <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
               </button>
 
-              <button
+              <!-- <button
                 type="submit"
                 [routerLink]="['/operation-history-sig', operationHistory.operationHistoryId, 'edit']"
                 class="btn btn-primary btn-sm"
@@ -185,7 +185,7 @@
               <button type="submit" (click)="delete(operationHistory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
-              </button>
+              </button> -->
             </div>
           </td>
         </tr>

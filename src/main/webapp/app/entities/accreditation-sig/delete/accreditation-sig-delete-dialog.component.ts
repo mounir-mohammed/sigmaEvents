@@ -35,7 +35,7 @@ export class AccreditationSigDeleteDialogComponent {
     if (accreditation) {
       accreditation!.accreditationStat = false;
       accreditation!.accreditationActivated = false;
-      this.accreditationService.update(accreditation).subscribe(() => {
+      this.accreditationService.update(accreditation, false, true).subscribe(() => {
         this.activeModal.close(ITEM_DELETED_EVENT);
       });
     }

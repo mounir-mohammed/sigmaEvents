@@ -207,10 +207,10 @@ export class AccreditationSigUpdateComponent implements OnInit {
       accreditation.event = this.currentAccount?.printingCentre?.event;
     }
     if (accreditation.accreditationId !== null) {
-      this.subscribeToSaveResponse(this.accreditationService.update(accreditation), autoPrint);
+      this.subscribeToSaveResponse(this.accreditationService.update(accreditation, false, false), autoPrint);
     } else {
       accreditation.status = this.statusesSharedCollection.filter(status => status.statusAbreviation == Status.INPROGRESS).shift();
-      this.subscribeToSaveResponse(this.accreditationService.create(accreditation), autoPrint);
+      this.subscribeToSaveResponse(this.accreditationService.create(accreditation, false), autoPrint);
     }
   }
 

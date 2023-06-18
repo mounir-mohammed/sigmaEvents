@@ -2,36 +2,36 @@
   "sigmaEventsApp": {
     "operationHistory": {
       "home": {
-        "title": "Operation Histories",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Operation History",
-        "createOrEditLabel": "创建或编辑 Operation History",
-        "notFound": "No Operation Histories found"
+        "title": "操作历史记录",
+        "refreshListLabel": "刷新列表",
+        "createLabel": "创建新的操作历史记录",
+        "createOrEditLabel": "创建或编辑操作历史记录",
+        "notFound": "未找到操作历史记录"
       },
-      "created": "Operation History {{ param }} 创建成功",
-      "updated": "Operation History {{ param }} 更新成功",
-      "deleted": "Operation History {{ param }} 删除成功",
+      "created": "新的操作历史记录已创建，标识符为 {{ param }}",
+      "updated": "操作历史记录已更新，标识符为 {{ param }}",
+      "deleted": "操作历史记录已删除，标识符为 {{ param }}",
       "delete": {
-        "question": "你确定要删除 Operation History {{ id }} 吗？"
+        "question": "您确定要删除操作历史记录 {{ id }} 吗？"
       },
       "detail": {
-        "title": "Operation History"
+        "title": "操作历史记录"
       },
-      "operationHistoryId": "Operation History Id",
-      "operationHistoryDescription": "Operation History Description",
-      "operationHistoryDate": "Operation History Date",
-      "operationHistoryUserID": "Operation History User ID",
-      "operationHistoryOldValue": "Operation History Old Value",
-      "operationHistoryNewValue": "Operation History New Value",
-      "operationHistoryOldId": "Operation History Old Id",
-      "operationHistoryNewId": "Operation History New Id",
-      "operationHistoryImportedFile": "Operation History Imported File",
-      "operationHistoryImportedFilePath": "Operation History Imported File Path",
-      "operationHistoryParams": "Operation History Params",
-      "operationHistoryAttributs": "Operation History Attributs",
-      "operationHistoryStat": "Operation History Stat",
-      "typeoperation": "Typeoperation",
-      "event": "Event"
+      "operationHistoryId": "标识符",
+      "operationHistoryDescription": "实体名称",
+      "operationHistoryDate": "日期",
+      "operationHistoryUserID": "打印中心标识符",
+      "operationHistoryOldValue": "旧值",
+      "operationHistoryNewValue": "新值",
+      "operationHistoryOldId": "旧实体标识符",
+      "operationHistoryNewId": "新实体标识符",
+      "operationHistoryImportedFile": "已导入文件",
+      "operationHistoryImportedFilePath": "已导入文件路径",
+      "operationHistoryParams": "标识符",
+      "operationHistoryAttributs": "用户",
+      "operationHistoryStat": "状态",
+      "typeoperation": "类型",
+      "event": "事件"
     }
   }
 }

@@ -44,6 +44,8 @@ import dayjs from 'dayjs/esm';
 import { RECORD_ITEMS } from 'app/config/pagination.constants';
 import { Account } from 'app/core/auth/account.model';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { Entity, OperationType } from 'app/config/operationType.contants';
+import { OperationHistorySigService } from 'app/entities/operation-history-sig/service/operation-history-sig.service';
 
 @Component({
   templateUrl: './accreditation-sig-import-dialog.component.html',
@@ -104,7 +106,8 @@ export class AccreditationSigImportDialogComponent implements OnInit {
     protected dayPassInfoService: DayPassInfoSigService,
     protected translateService: TranslateService,
     private cdr: ChangeDetectorRef,
-    protected dataUtils: DataUtils
+    protected dataUtils: DataUtils,
+    private operationHistorySigService: OperationHistorySigService
   ) {}
 
   ngOnInit(): void {
@@ -709,6 +712,7 @@ export class AccreditationSigImportDialogComponent implements OnInit {
       this.errorsMap.clear();
       this.cdr.detectChanges();
       const promises: Promise<void>[] = [];
+      const accreditationsIds: number[] = [];
 
       this.accreditations.forEach((accreditation: IAccreditationSig, index) => {
         const newAccreditation: NewAccreditationSig = {
@@ -747,11 +751,12 @@ export class AccreditationSigImportDialogComponent implements OnInit {
           accreditationPhotoContentType: accreditation.accreditationPhotoContentType,
         };
 
-        const createPromise = this.accreditationService.create(newAccreditation).toPromise();
+        const createPromise = this.accreditationService.create(newAccreditation, true).toPromise();
         promises.push(
           createPromise
             .then((response: any) => {
               const acc: IAccreditationSig = response.body;
+              accreditationsIds.push(acc.accreditationId);
               this.errorsMap.set(acc.accreditationId, {
                 firstName: acc.accreditationFirstName!,
                 lastName: acc.accreditationLastName!,
@@ -771,6 +776,19 @@ export class AccreditationSigImportDialogComponent implements OnInit {
       });
 
       Promise.all(promises).then(() => {
+        this.operationHistorySigService
+          .createNewOperation(
+            Entity.Accreditation,
+            0,
+            dayjs(),
+            this.currentAccount?.printingCentre?.event!,
+            OperationType.Import,
+            this.currentAccount?.login!,
+            accreditationsIds,
+            this.currentAccount?.printingCentre?.printingCentreId!,
+            this.selectedFile?.name!
+          )
+          .subscribe();
         this.isImporting = false;
         this.accreditations = [];
         this.cdr.detectChanges();

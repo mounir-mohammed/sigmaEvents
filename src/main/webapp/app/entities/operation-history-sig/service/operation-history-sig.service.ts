@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import dayjs from 'dayjs/esm';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IOperationHistorySig, NewOperationHistorySig } from '../operation-history-sig.model';
+import { IEventSig } from 'app/entities/event-sig/event-sig.model';
+import { IOperationTypeSig } from 'app/entities/operation-type-sig/operation-type-sig.model';
+import { OperationTypeSigService } from 'app/entities/operation-type-sig/service/operation-type-sig.service';
 
 export type PartialUpdateOperationHistorySig = Partial<IOperationHistorySig> & Pick<IOperationHistorySig, 'operationHistoryId'>;
 
@@ -27,8 +30,14 @@ export type EntityArrayResponseType = HttpResponse<IOperationHistorySig[]>;
 @Injectable({ providedIn: 'root' })
 export class OperationHistorySigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/operation-histories');
+  operationTypesSharedCollection: IOperationTypeSig[] = [];
+  private isOperationTypesLoaded = false;
 
-  constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
+  constructor(
+    protected http: HttpClient,
+    protected applicationConfigService: ApplicationConfigService,
+    protected operationTypeService: OperationTypeSigService
+  ) {}
 
   create(operationHistory: NewOperationHistorySig): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(operationHistory);
@@ -131,5 +140,64 @@ export class OperationHistorySigService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+
+  createNewOperation(
+    entity: string,
+    id: number,
+    date: dayjs.Dayjs,
+    event: IEventSig,
+    operationType: string,
+    login: string,
+    ids: number[],
+    printingCenterId: number,
+    filename: string
+  ): Observable<EntityResponseType> {
+    return this.getOperationTypesSharedCollection().pipe(
+      switchMap((operationTypes: IOperationTypeSig[]) => {
+        const selectedOperationType = operationTypes.find(type => type.operationTypeValue === operationType);
+
+        if (!selectedOperationType) {
+          console.error('Selected operation type not found');
+          throw new Error('Selected operation type not found');
+        }
+
+        const operationHistory: NewOperationHistorySig = {
+          operationHistoryId: null,
+          operationHistoryUserID: printingCenterId,
+          operationHistoryOldId: id,
+          operationHistoryDescription: entity,
+          operationHistoryDate: date,
+          operationHistoryStat: true,
+          operationHistoryAttributs: login,
+          operationHistoryParams: ids ? ids.toString() : undefined,
+          typeoperation: selectedOperationType,
+          operationHistoryImportedFile: filename ? filename : undefined,
+          event: event,
+        };
+
+        console.log('createNewOperation');
+        console.log(operationHistory);
+
+        return this.http
+          .post<RestOperationHistorySig>(this.resourceUrl, operationHistory, { observe: 'response' })
+          .pipe(map(res => this.convertResponseFromServer(res)));
+      })
+    );
+  }
+
+  getOperationTypesSharedCollection(): Observable<IOperationTypeSig[]> {
+    if (this.isOperationTypesLoaded) {
+      // If the list has already been loaded, return it from the shared collection
+      return of(this.operationTypesSharedCollection);
+    } else {
+      return this.operationTypeService.query().pipe(
+        map((res: HttpResponse<IOperationTypeSig[]>) => res.body ?? []),
+        tap((operationTypes: IOperationTypeSig[]) => {
+          this.operationTypesSharedCollection = operationTypes;
+          this.isOperationTypesLoaded = true;
+        })
+      );
+    }
   }
 }

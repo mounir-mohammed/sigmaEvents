@@ -2,36 +2,36 @@
   "sigmaEventsApp": {
     "operationHistory": {
       "home": {
-        "title": "Operation Histories",
+        "title": "Verlaufsprotokoll",
         "refreshListLabel": "Liste aktualisieren",
-        "createLabel": "Operation History erstellen",
-        "createOrEditLabel": "Operation History erstellen oder bearbeiten",
-        "notFound": "Keine Operation Histories gefunden"
+        "createLabel": "Neues Verlaufsprotokoll erstellen",
+        "createOrEditLabel": "Verlaufsprotokoll erstellen oder bearbeiten",
+        "notFound": "Keine Verlaufsprotokolle gefunden"
       },
-      "created": "Operation History erstellt mit ID {{ param }}",
-      "updated": "Operation History aktualisiert mit ID {{ param }}",
-      "deleted": "Operation History gelöscht mit ID {{ param }}",
+      "created": "Ein neues Verlaufsprotokoll wurde mit der Kennung {{ param }} erstellt",
+      "updated": "Ein Verlaufsprotokoll wurde mit der Kennung {{ param }} aktualisiert",
+      "deleted": "Ein Verlaufsprotokoll wurde mit der Kennung {{ param }} gelöscht",
       "delete": {
-        "question": "Soll Operation History {{ id }} wirklich dauerhaft gelöscht werden?"
+        "question": "Sind Sie sicher, dass Sie das Verlaufsprotokoll {{ id }} löschen möchten?"
       },
       "detail": {
-        "title": "Operation History"
+        "title": "Verlaufsprotokoll"
       },
-      "operationHistoryId": "Operation History Id",
-      "operationHistoryDescription": "Operation History Description",
-      "operationHistoryDate": "Operation History Date",
-      "operationHistoryUserID": "Operation History User ID",
-      "operationHistoryOldValue": "Operation History Old Value",
-      "operationHistoryNewValue": "Operation History New Value",
-      "operationHistoryOldId": "Operation History Old Id",
-      "operationHistoryNewId": "Operation History New Id",
-      "operationHistoryImportedFile": "Operation History Imported File",
-      "operationHistoryImportedFilePath": "Operation History Imported File Path",
-      "operationHistoryParams": "Operation History Params",
-      "operationHistoryAttributs": "Operation History Attributs",
-      "operationHistoryStat": "Operation History Stat",
-      "typeoperation": "Typeoperation",
-      "event": "Event"
+      "operationHistoryId": "ID",
+      "operationHistoryDescription": "Entitätsname",
+      "operationHistoryDate": "Datum",
+      "operationHistoryUserID": "Druckzentrum ID",
+      "operationHistoryOldValue": "Alter Wert",
+      "operationHistoryNewValue": "Neuer Wert",
+      "operationHistoryOldId": "Alte Entitäts-ID",
+      "operationHistoryNewId": "Neue Entitäts-ID",
+      "operationHistoryImportedFile": "Importierte Datei",
+      "operationHistoryImportedFilePath": "Importierter Dateipfad",
+      "operationHistoryParams": "IDs",
+      "operationHistoryAttributs": "Benutzer",
+      "operationHistoryStat": " Status",
+      "typeoperation": "Typ",
+      "event": "Ereignis"
     }
   }
 }

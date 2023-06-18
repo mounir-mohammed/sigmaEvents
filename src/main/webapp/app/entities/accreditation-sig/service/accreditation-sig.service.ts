@@ -11,6 +11,8 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { IAccreditationSig, NewAccreditationSig } from '../accreditation-sig.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { OperationHistorySigService } from 'app/entities/operation-history-sig/service/operation-history-sig.service';
+import { Entity, OperationType } from 'app/config/operationType.contants';
 
 export type PartialUpdateAccreditationSig = Partial<IAccreditationSig> & Pick<IAccreditationSig, 'accreditationId'>;
 
@@ -48,10 +50,11 @@ export class AccreditationSigService {
   constructor(
     protected http: HttpClient,
     protected applicationConfigService: ApplicationConfigService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private operationHistorySigService: OperationHistorySigService
   ) {}
 
-  create(accreditation: NewAccreditationSig): Observable<EntityResponseType> {
+  create(accreditation: NewAccreditationSig, isImport: boolean): Observable<EntityResponseType> {
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     accreditation.accreditationActivated = true;
     accreditation.accreditationStat = true;
@@ -61,35 +64,45 @@ export class AccreditationSigService {
     accreditation.accreditationPrintDate = null;
     accreditation.accreditationPrintNumber = 0;
     accreditation.accreditationPrintStat = false;
+
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .post<RestAccreditationSig>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+      .pipe(map(res => this.convertResponseFromServer(res, isImport ? OperationType.Import : OperationType.Create, [])));
   }
 
-  update(accreditation: IAccreditationSig): Observable<EntityResponseType> {
+  update(accreditation: IAccreditationSig, isMassUpdate: boolean, isUserDelete: boolean): Observable<EntityResponseType> {
+    let operationType = OperationType.Update;
+
+    if (isMassUpdate) {
+      operationType = OperationType.MassUpdate;
+    }
+    if (isUserDelete) {
+      operationType = OperationType.Delete;
+    }
+
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
     accreditation.accreditationUpdateDate = dayjs();
     accreditation.accreditationUpdatedByuser = this.currentAccount?.login;
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+      .pipe(map(res => this.convertResponseFromServer(res, operationType, [])));
   }
 
-  partialUpdate(accreditation: PartialUpdateAccreditationSig): Observable<EntityResponseType> {
+  partialUpdate(accreditation: PartialUpdateAccreditationSig, isMassUpdate: boolean): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(accreditation);
     return this.http
       .patch<RestAccreditationSig>(`${this.resourceUrl}/${this.getAccreditationSigIdentifier(accreditation)}`, copy, {
         observe: 'response',
       })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+      .pipe(map(res => this.convertResponseFromServer(res, isMassUpdate ? OperationType.MassUpdate : OperationType.Update, [])));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
       .get<RestAccreditationSig>(`${this.resourceUrl}/${id}`, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+      .pipe(map(res => this.convertResponseFromServer(res, OperationType.Search, [])));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
@@ -100,6 +113,19 @@ export class AccreditationSigService {
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
+    this.operationHistorySigService
+      .createNewOperation(
+        Entity.Accreditation,
+        id,
+        dayjs(),
+        this.currentAccount?.printingCentre?.event!,
+        OperationType.Delete,
+        this.currentAccount?.login!,
+        [],
+        this.currentAccount?.printingCentre?.printingCentreId!,
+        ''
+      )
+      .subscribe();
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
@@ -166,7 +192,28 @@ export class AccreditationSigService {
     };
   }
 
-  protected convertResponseFromServer(res: HttpResponse<RestAccreditationSig>): HttpResponse<IAccreditationSig> {
+  protected convertResponseFromServer(
+    res: HttpResponse<RestAccreditationSig>,
+    operationType: string,
+    ids: number[]
+  ): HttpResponse<IAccreditationSig> {
+    if (operationType != OperationType.Search) {
+      console.log('convertResponseFromServer');
+      const entity = res.body ? this.convertDateFromServer(res.body) : null;
+      this.operationHistorySigService
+        .createNewOperation(
+          Entity.Accreditation,
+          entity?.accreditationId!,
+          dayjs(),
+          this.currentAccount?.printingCentre?.event!,
+          operationType,
+          this.currentAccount?.login!,
+          ids,
+          this.currentAccount?.printingCentre?.printingCentreId!,
+          ''
+        )
+        .subscribe();
+    }
     return res.clone({
       body: res.body ? this.convertDateFromServer(res.body) : null,
     });
@@ -194,18 +241,18 @@ export class AccreditationSigService {
   validate(accreditationId: number, statusId: number): Observable<EntityResponseType> {
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/validate`, null, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+      .pipe(map(res => this.convertResponseFromServer(res, OperationType.Validate, [])));
   }
 
   print(accreditationId: number, statusId: number): Observable<EntityResponseType> {
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/print`, null, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+      .pipe(map(res => this.convertResponseFromServer(res, OperationType.Print, [])));
   }
 
   massPrint(accreditationId: number[], statusId: number): Observable<EntityResponseType> {
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/massprint`, null, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+      .pipe(map(res => this.convertResponseFromServer(res, OperationType.MassPrint, accreditationId)));
   }
 }

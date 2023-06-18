@@ -41,6 +41,11 @@ import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { EventManager, EventWithContent } from 'app/core/util/event-manager.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Entity, OperationType } from 'app/config/operationType.contants';
+import dayjs from 'dayjs/esm';
+import { AccountService } from 'app/core/auth/account.service';
+import { OperationHistorySigService } from 'app/entities/operation-history-sig/service/operation-history-sig.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'sigma-accreditation-sig-mass-update',
@@ -95,6 +100,7 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
   dayPassInfosSharedCollection: IDayPassInfoSig[] = [];
 
   authority = Authority;
+  currentAccount: Account | null = null;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -117,10 +123,13 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
     protected router: Router,
     protected dataUtils: DataUtils,
     protected eventManager: EventManager,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
+    private accountService: AccountService,
+    private operationHistorySigService: OperationHistorySigService
   ) {}
 
   ngOnInit(): void {
+    this.accountService.identity().subscribe(account => (this.currentAccount = account));
     this.activatedRoute.queryParams.subscribe(params => {
       if (params.data) {
         const accreditationsIds = JSON.parse(atob(params.data));
@@ -229,7 +238,7 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
             switchMap(accreditation => {
               if (accreditation && this.massUpdateForm.valid) {
                 const updatedAccreditation: IAccreditationSig = { ...accreditation, ...updatedValues, accreditationId };
-                return this.accreditationService.update(updatedAccreditation);
+                return this.accreditationService.update(updatedAccreditation, true, false);
               } else {
                 return of(null);
               }
@@ -240,6 +249,19 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
 
       forkJoin(updateRequests).subscribe(
         () => {
+          this.operationHistorySigService
+            .createNewOperation(
+              Entity.Accreditation,
+              0,
+              dayjs(),
+              this.currentAccount?.printingCentre?.event!,
+              OperationType.MassUpdate,
+              this.currentAccount?.login!,
+              this.accreditationsIds!,
+              this.currentAccount?.printingCentre?.printingCentreId!,
+              ''
+            )
+            .subscribe();
           console.log('All accreditations updated');
           this.isUpdateLoading = false;
           this.previousState();

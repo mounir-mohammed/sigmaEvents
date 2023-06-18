@@ -2,36 +2,36 @@
   "sigmaEventsApp": {
     "operationHistory": {
       "home": {
-        "title": "OperationHistories",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "Genera un nuovo Operation History",
-        "createOrEditLabel": "Genera o modifica un Operation History",
-        "notFound": "No Operation Histories found"
+        "title": "Cronologia operazioni",
+        "refreshListLabel": "Aggiorna lista",
+        "createLabel": "Crea una nuova cronologia operazioni",
+        "createOrEditLabel": "Crea o modifica una cronologia operazioni",
+        "notFound": "Nessuna cronologia operazioni trovata"
       },
-      "created": "&Egrave; stato generato un nuovo Operation History con identificatore {{ param }}",
-      "updated": "&Egrave; stato aggiornato Operation History identificato da {{ param }}",
-      "deleted": "&Egrave; stato eliminato Operation History con identificatore {{ param }}",
+      "created": "Creata una nuova cronologia operazioni con identificatore {{ param }}",
+      "updated": "Aggiornata una cronologia operazioni con identificatore {{ param }}",
+      "deleted": "Eliminata una cronologia operazioni con identificatore {{ param }}",
       "delete": {
-        "question": "Sei sicuro di volere eliminare Operation History {{ id }}?"
+        "question": "Sei sicuro di voler eliminare la cronologia operazioni {{ id }}?"
       },
       "detail": {
-        "title": "Operation History"
+        "title": "Cronologia operazioni"
       },
-      "operationHistoryId": "Operation History Id",
-      "operationHistoryDescription": "Operation History Description",
-      "operationHistoryDate": "Operation History Date",
-      "operationHistoryUserID": "Operation History User ID",
-      "operationHistoryOldValue": "Operation History Old Value",
-      "operationHistoryNewValue": "Operation History New Value",
-      "operationHistoryOldId": "Operation History Old Id",
-      "operationHistoryNewId": "Operation History New Id",
-      "operationHistoryImportedFile": "Operation History Imported File",
-      "operationHistoryImportedFilePath": "Operation History Imported File Path",
-      "operationHistoryParams": "Operation History Params",
-      "operationHistoryAttributs": "Operation History Attributs",
-      "operationHistoryStat": "Operation History Stat",
-      "typeoperation": "Typeoperation",
-      "event": "Event"
+      "operationHistoryId": "Id",
+      "operationHistoryDescription": "Nome entità",
+      "operationHistoryDate": "Data",
+      "operationHistoryUserID": "Id centro stampa",
+      "operationHistoryOldValue": "Vecchio valore",
+      "operationHistoryNewValue": "Nuovo valore",
+      "operationHistoryOldId": "Vecchio id entità",
+      "operationHistoryNewId": "Nuovo id entità",
+      "operationHistoryImportedFile": "File importato",
+      "operationHistoryImportedFilePath": "Percorso file importato",
+      "operationHistoryParams": "Ids",
+      "operationHistoryAttributs": "Utente",
+      "operationHistoryStat": "Stato",
+      "typeoperation": "Tipo",
+      "event": "Evento"
     }
   }
 }
