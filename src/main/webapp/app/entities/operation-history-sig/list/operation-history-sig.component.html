@@ -10,12 +10,7 @@
           <option value="100">100</option>
         </select>
       </div>
-      <button
-        *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_EXPORT]"
-        type="button"
-        class="btn btn-info me-2"
-        (click)="export()"
-      >
+      <button type="button" class="btn btn-info me-2" (click)="export()">
         <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.export">Export</span>
       </button>
       <button type="button" class="btn btn-info me-2" (click)="advancedSearch()">
@@ -54,33 +49,21 @@
     <table class="table table-striped" aria-describedby="page-heading" id="operationHistoriesTable">
       <thead>
         <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" sigmaSortBy="operationHistoryId">
+          <th scope="col" sigmaSortBy="operationHistoryId" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryId">Operation History Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="operationHistoryDescription">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryDescription">Operation History Description</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="operationHistoryOldId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryOldId">Operation History Old Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="operationHistoryNewId">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryNewId">Operation History New Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
           <th scope="col" sigmaSortBy="typeoperation.operationTypeId">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.typeoperation">Typeoperation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="operationHistoryDescription">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryDescription">Operation History Description</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -96,9 +79,21 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="operationHistoryUserID">
+          <th scope="col" sigmaSortBy="operationHistoryUserID" *sigmaHasAnyAuthority="[authority.ADMIN]">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryUserID">Operation History User ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="operationHistoryOldId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryOldId">Operation History Old Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="operationHistoryNewId">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryNewId">Operation History New Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -153,10 +148,24 @@
       </thead>
       <tbody>
         <tr *ngFor="let operationHistory of operationHistories; trackBy: trackOperationHistoryId" data-cy="entityTable">
-          <td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
             {{ operationHistory.operationHistoryId }}
           </td>
+          <td>
+            <div *ngIf="operationHistory.typeoperation">
+              {{ operationHistory.typeoperation.operationTypeValue }}
+            </div>
+          </td>
           <td>{{ operationHistory.operationHistoryDescription }}</td>
+          <td>{{ operationHistory.operationHistoryDate | formatMediumDatetime }}</td>
+          <td>{{ operationHistory.operationHistoryAttributs }}</td>
+          <td *sigmaHasAnyAuthority="[authority.ADMIN]">
+            <div *ngIf="operationHistory.operationHistoryUserID">
+              <a [routerLink]="['/printing-centre-sig', operationHistory.operationHistoryUserID, 'view']">{{
+                operationHistory.operationHistoryUserID
+              }}</a>
+            </div>
+          </td>
           <td>
             <div *ngIf="operationHistory.operationHistoryOldId && operationHistory.operationHistoryDescription == Entity.Accreditation">
               <a [routerLink]="['/accreditation-sig', operationHistory.operationHistoryOldId, 'view']">{{
@@ -178,14 +187,6 @@
               {{ operationHistory.operationHistoryNewId }}
             </div>
           </td>
-          <td>
-            <div *ngIf="operationHistory.typeoperation">
-              {{ operationHistory.typeoperation.operationTypeValue }}
-            </div>
-          </td>
-          <td>{{ operationHistory.operationHistoryDate | formatMediumDatetime }}</td>
-          <td>{{ operationHistory.operationHistoryAttributs }}</td>
-          <td>{{ operationHistory.operationHistoryUserID }}</td>
           <td>{{ operationHistory.operationHistoryOldValue }}</td>
           <td>{{ operationHistory.operationHistoryNewValue }}</td>
           <td>{{ operationHistory.operationHistoryImportedFile }}</td>
@@ -197,7 +198,7 @@
               <a [routerLink]="['/event-sig', operationHistory.event.eventId, 'view']">{{ operationHistory.event.eventName }}</a>
             </div>
           </td>
-          <td class="text-end" *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <td class="text-end">
             <div class="btn-group">
               <button
                 type="submit"
