@@ -14,6 +14,7 @@ import { FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter/
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
+import { Entity } from 'app/config/operationType.contants';
 
 @Component({
   selector: 'sigma-operation-history-sig',
@@ -23,6 +24,7 @@ export class OperationHistorySigComponent implements OnInit {
   currentAccount: Account | null = null;
   operationHistories?: IOperationHistorySig[];
   isLoading = false;
+  Entity = Entity;
 
   predicate = 'operationHistoryId';
   ascending = true;
