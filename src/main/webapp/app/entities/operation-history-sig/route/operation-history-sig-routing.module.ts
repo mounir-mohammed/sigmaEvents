@@ -25,22 +25,22 @@ const operationHistoryRoute: Routes = [
     },
     canActivate: [UserRouteAccessService],
   },
-  {
-    path: 'new',
-    component: OperationHistorySigUpdateComponent,
-    resolve: {
-      operationHistory: OperationHistorySigRoutingResolveService,
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: ':operationHistoryId/edit',
-    component: OperationHistorySigUpdateComponent,
-    resolve: {
-      operationHistory: OperationHistorySigRoutingResolveService,
-    },
-    canActivate: [UserRouteAccessService],
-  },
+  // {
+  //   path: 'new',
+  //   component: OperationHistorySigUpdateComponent,
+  //   resolve: {
+  //     operationHistory: OperationHistorySigRoutingResolveService,
+  //   },
+  //   canActivate: [UserRouteAccessService],
+  // },
+  // {
+  //   path: ':operationHistoryId/edit',
+  //   component: OperationHistorySigUpdateComponent,
+  //   resolve: {
+  //     operationHistory: OperationHistorySigRoutingResolveService,
+  //   },
+  //   canActivate: [UserRouteAccessService],
+  // },
 ];
 
 @NgModule({

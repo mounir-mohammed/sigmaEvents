@@ -75,9 +75,7 @@
         <dt><span sigmaTranslate="sigmaEventsApp.operationHistory.typeoperation">Typeoperation</span></dt>
         <dd>
           <div *ngIf="operationHistory.typeoperation">
-            <a [routerLink]="['/operation-type-sig', operationHistory.typeoperation.operationTypeId, 'view']">{{
-              operationHistory.typeoperation.operationTypeValue
-            }}</a>
+            {{ operationHistory.typeoperation.operationTypeValue }}
           </div>
         </dd>
         <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.operationHistory.event">Event</span></dt>
@@ -91,10 +89,10 @@
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
       </button>
-
+      <!-- 
       <button type="button" [routerLink]="['/operation-history-sig', operationHistory.operationHistoryId, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.edit">Edit</span>
-      </button>
+      </button> -->
     </div>
   </div>
 </div>
