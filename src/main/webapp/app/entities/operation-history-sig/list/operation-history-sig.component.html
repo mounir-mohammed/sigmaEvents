@@ -3,6 +3,26 @@
     <span sigmaTranslate="sigmaEventsApp.operationHistory.home.title">Operation Histories</span>
 
     <div class="d-flex justify-content-end">
+      <div class="me-2">
+        <select class="form-control" id="field_listSize" #listSize (change)="changeListSize(listSize.value)">
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <button
+        *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_EXPORT]"
+        type="button"
+        class="btn btn-info me-2"
+        (click)="export()"
+      >
+        <fa-icon icon="download"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.export">Export</span>
+      </button>
+      <button type="button" class="btn btn-info me-2" (click)="advancedSearch()">
+        <fa-icon icon="search"></fa-icon>&nbsp;&nbsp;<span sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch"
+          >Advanced Search</span
+        >
+      </button>
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span sigmaTranslate="sigmaEventsApp.operationHistory.home.refreshListLabel">Refresh list</span>
@@ -31,7 +51,7 @@
   </div>
 
   <div class="table-responsive table-entities" id="entities" *ngIf="operationHistories && operationHistories.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <table class="table table-striped" aria-describedby="page-heading" id="operationHistoriesTable">
       <thead>
         <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
           <th scope="col" sigmaSortBy="operationHistoryId">

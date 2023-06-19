@@ -15,6 +15,8 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { Authority } from 'app/config/authority.constants';
 import { Entity } from 'app/config/operationType.contants';
+import { TranslateService } from '@ngx-translate/core';
+import { ExportUtil } from 'app/shared/util/export.shared';
 
 @Component({
   selector: 'sigma-operation-history-sig',
@@ -40,7 +42,8 @@ export class OperationHistorySigComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected modalService: NgbModal,
-    private accountService: AccountService
+    private accountService: AccountService,
+    protected translateService: TranslateService
   ) {}
 
   trackOperationHistoryId = (_index: number, item: IOperationHistorySig): number =>
@@ -48,6 +51,7 @@ export class OperationHistorySigComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
+    this.loadListSize();
     this.load();
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
@@ -97,7 +101,7 @@ export class OperationHistorySigComponent implements OnInit {
     this.page = +(page ?? 1);
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
     this.predicate = sort[0];
-    this.ascending = sort[1] === ASC;
+    this.ascending = sort[1] === DESC;
     this.filters.initializeFromParams(params);
   }
 
@@ -159,4 +163,52 @@ export class OperationHistorySigComponent implements OnInit {
       return [predicate + ',' + ascendingQueryParam];
     }
   }
+
+  changeListSize(listSize: any) {
+    this.itemsPerPage = listSize;
+    this.saveListSize();
+    this.load();
+  }
+
+  saveListSize(): void {
+    localStorage.setItem('listSize', JSON.stringify(this.itemsPerPage));
+  }
+
+  loadListSize(): void {
+    const listSize = localStorage.getItem('listSize');
+    if (listSize) {
+      this.itemsPerPage = JSON.parse(listSize);
+    } else {
+      this.itemsPerPage = ITEMS_PER_PAGE;
+    }
+    this.selectListSize();
+  }
+
+  selectListSize() {
+    const selectElement = document.getElementById('field_listSize') as HTMLSelectElement;
+    const valueToSelect = this.itemsPerPage.toString();
+
+    for (let i = 0; i < selectElement.options.length; i++) {
+      const option = selectElement.options[i] as HTMLOptionElement;
+      if (option.value === valueToSelect) {
+        option.selected = true;
+        break;
+      }
+    }
+  }
+
+  export(): void {
+    if (this.operationHistories && this.operationHistories.length > 0) {
+      ExportUtil.initialize(this.translateService);
+      ExportUtil.exportTableToExcel(
+        'operationHistoriesTable',
+        'sigmaEventsApp.operationHistory.home.title',
+        'sigmaEventsApp.operationHistory.home.title'
+      );
+    } else {
+      alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noDataFoundToExport'));
+    }
+  }
+
+  advancedSearch(): void {}
 }
