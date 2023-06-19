@@ -20,6 +20,8 @@
       "operationHistoryId": "Id",
       "operationHistoryDescription": "Nombre de la entidad",
       "operationHistoryDate": "Fecha",
+      "operationHistoryDateGreaterThan": "Fecha mayor que",
+      "operationHistoryDateLowerThan": "Fecha menor que",
       "operationHistoryUserID": "Id del centro de impresión",
       "operationHistoryOldValue": "Valor antiguo",
       "operationHistoryNewValue": "Valor nuevo",

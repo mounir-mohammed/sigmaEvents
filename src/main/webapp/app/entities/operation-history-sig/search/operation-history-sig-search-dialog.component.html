@@ -1,0 +1,217 @@
+<form [formGroup]="searchForm" (ngSubmit)="confirmSearch()">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="accreditationSearchDialogHeading" sigmaTranslate="sigmaEventsApp.accreditation.home.advancedSearch">
+      Advanced Search
+    </h4>
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body scrollable">
+    <sigma-alert-error></sigma-alert-error>
+
+    <div class="search-table">
+      <div class="search-table-row">
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationHistory.typeoperation" for="field_typeoperation"
+            >Typeoperation</label
+          >
+          <select
+            class="form-control"
+            id="field_typeoperation"
+            data-cy="typeoperation"
+            name="typeoperation"
+            formControlName="typeoperation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="operationTypeOption.operationTypeId" *ngFor="let operationTypeOption of operationTypesSharedCollection">
+              {{ operationTypeOption.operationTypeValue }}
+            </option>
+          </select>
+        </div>
+
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryDescription"
+            for="field_operationHistoryDescription"
+            >Operation History Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationHistoryDescription"
+            id="field_operationHistoryDescription"
+            data-cy="operationHistoryDescription"
+            formControlName="operationHistoryDescription"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryDateGreaterThan"
+            for="field_operationHistoryDateStart"
+            >Operation History Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_operationHistoryDateStart"
+              data-cy="operationHistoryDateStart"
+              type="datetime-local"
+              class="form-control"
+              name="operationHistoryDateStart"
+              formControlName="operationHistoryDateStart"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryDateLowerThan"
+            for="field_operationHistoryDateEnd"
+            >Operation History Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_operationHistoryDateEnd"
+              data-cy="operationHistoryDateEnd"
+              type="datetime-local"
+              class="form-control"
+              name="operationHistoryDateEnd"
+              formControlName="operationHistoryDateEnd"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="search-table-row">
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryAttributs"
+            for="field_operationHistoryAttributs"
+            >Operation History Attributs</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationHistoryAttributs"
+            id="field_operationHistoryAttributs"
+            data-cy="operationHistoryAttributs"
+            formControlName="operationHistoryAttributs"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryParams"
+            for="field_operationHistoryParams"
+            >Operation History Params</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationHistoryParams"
+            id="field_operationHistoryParams"
+            data-cy="operationHistoryParams"
+            formControlName="operationHistoryParams"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryOldId" for="field_operationHistoryOldId"
+            >Operation History Old Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="operationHistoryOldId"
+            id="field_operationHistoryOldId"
+            data-cy="operationHistoryOldId"
+            formControlName="operationHistoryOldId"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryNewId" for="field_operationHistoryNewId"
+            >Operation History New Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="operationHistoryNewId"
+            id="field_operationHistoryNewId"
+            data-cy="operationHistoryNewId"
+            formControlName="operationHistoryNewId"
+          />
+        </div>
+      </div>
+      <div class="search-table-row">
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryImportedFile"
+            for="field_operationHistoryImportedFile"
+            >Operation History Imported File</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="operationHistoryImportedFile"
+            id="field_operationHistoryImportedFile"
+            data-cy="operationHistoryImportedFile"
+            formControlName="operationHistoryImportedFile"
+          />
+        </div>
+        <div class="search-table-cell"></div>
+      </div>
+      <div class="search-table-row" *sigmaHasAnyAuthority="[authority.ADMIN]">
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryId" for="field_operationHistoryId"
+            >Operation History Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="operationHistoryId"
+            id="field_operationHistoryId"
+            data-cy="operationHistoryId"
+            formControlName="operationHistoryId"
+          />
+        </div>
+        <div class="search-table-cell">
+          <label
+            class="form-label"
+            sigmaTranslate="sigmaEventsApp.operationHistory.operationHistoryUserID"
+            for="field_operationHistoryUserID"
+            >Operation History User ID</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="operationHistoryUserID"
+            id="field_operationHistoryUserID"
+            data-cy="operationHistoryUserID"
+            formControlName="operationHistoryUserID"
+          />
+        </div>
+
+        <div class="search-table-cell">
+          <label class="form-label" sigmaTranslate="sigmaEventsApp.operationHistory.event" for="field_event">Event</label>
+          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="eventOption.eventId" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="sigma-confirm-search-accreditation" data-cy="entityConfirmSearchButton" type="submit" class="btn btn-success">
+      <fa-icon icon="check"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.validate">Validate</span>
+    </button>
+  </div>
+</form>

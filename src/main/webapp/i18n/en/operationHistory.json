@@ -20,6 +20,8 @@
       "operationHistoryId": "Id",
       "operationHistoryDescription": "Entity name",
       "operationHistoryDate": "Date",
+      "operationHistoryDateGreaterThan": "Date greater than",
+      "operationHistoryDateLowerThan": "Date lower than",
       "operationHistoryUserID": "Printing center id",
       "operationHistoryOldValue": "Old value",
       "operationHistoryNewValue": "New value",

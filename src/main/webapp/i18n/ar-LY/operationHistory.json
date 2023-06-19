@@ -20,6 +20,8 @@
       "operationHistoryId": "المعرف",
       "operationHistoryDescription": "اسم الكيان",
       "operationHistoryDate": "التاريخ",
+      "operationHistoryDateGreaterThan": "تاريخ أكبر من",
+      "operationHistoryDateLowerThan": "تاريخ أقل من",
       "operationHistoryUserID": "معرف مركز الطباعة",
       "operationHistoryOldValue": "القيمة القديمة",
       "operationHistoryNewValue": "القيمة الجديدة",

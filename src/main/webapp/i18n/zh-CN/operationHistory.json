@@ -20,6 +20,8 @@
       "operationHistoryId": "标识符",
       "operationHistoryDescription": "实体名称",
       "operationHistoryDate": "日期",
+      "operationHistoryDateGreaterThan": "大于日期",
+      "operationHistoryDateLowerThan": "小于日期",
       "operationHistoryUserID": "打印中心标识符",
       "operationHistoryOldValue": "旧值",
       "operationHistoryNewValue": "新值",

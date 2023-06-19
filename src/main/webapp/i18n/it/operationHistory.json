@@ -20,6 +20,8 @@
       "operationHistoryId": "Id",
       "operationHistoryDescription": "Nome entità",
       "operationHistoryDate": "Data",
+      "operationHistoryDateGreaterThan": "Data maggiore di",
+      "operationHistoryDateLowerThan": "Data inferiore a",
       "operationHistoryUserID": "Id centro stampa",
       "operationHistoryOldValue": "Vecchio valore",
       "operationHistoryNewValue": "Nuovo valore",

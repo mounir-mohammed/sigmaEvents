@@ -20,6 +20,8 @@
       "operationHistoryId": "Id",
       "operationHistoryDescription": "Entiteitnaam",
       "operationHistoryDate": "Datum",
+      "operationHistoryDateGreaterThan": "Datum groter dan",
+      "operationHistoryDateLowerThan": "Datum kleiner dan",
       "operationHistoryUserID": "Printcentrum id",
       "operationHistoryOldValue": "Oude waarde",
       "operationHistoryNewValue": "Nieuwe waarde",

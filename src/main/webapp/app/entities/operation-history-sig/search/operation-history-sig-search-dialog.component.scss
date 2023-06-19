@@ -1,0 +1,23 @@
+.search-table {
+  display: table;
+  overflow: scroll;
+}
+
+.search-table-row {
+  display: table-row;
+}
+
+.search-table-cell {
+  padding: 10px;
+  display: table-cell;
+  min-width: 220px;
+  white-space: nowrap;
+}
+
+.scrollable {
+  overflow: scroll;
+}
+
+.modal-body {
+  overflow-y: auto;
+}

@@ -17,6 +17,7 @@ import { Authority } from 'app/config/authority.constants';
 import { Entity } from 'app/config/operationType.contants';
 import { TranslateService } from '@ngx-translate/core';
 import { ExportUtil } from 'app/shared/util/export.shared';
+import { OperationHistorySearchSigComponent } from '../search/operation-history-sig-search-dialog.component';
 
 @Component({
   selector: 'sigma-operation-history-sig',
@@ -210,5 +211,16 @@ export class OperationHistorySigComponent implements OnInit {
     }
   }
 
-  advancedSearch(): void {}
+  advancedSearch(): void {
+    const modalRef = this.modalService.open(OperationHistorySearchSigComponent, { size: 'lg', backdrop: 'static' });
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.pipe().subscribe(searchFilters => {
+      if (searchFilters) {
+        searchFilters.forEach((value: any, key: any) => {
+          this.filters.addFilter(key, value);
+        });
+      }
+    });
+    console.log(this.filters.filterOptions);
+  }
 }

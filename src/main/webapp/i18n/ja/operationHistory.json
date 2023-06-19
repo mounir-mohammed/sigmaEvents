@@ -20,6 +20,8 @@
       "operationHistoryId": "ID",
       "operationHistoryDescription": "エンティティ名",
       "operationHistoryDate": "日付",
+      "operationHistoryDateGreaterThan": "より大きい日付",
+      "operationHistoryDateLowerThan": "より小さい日付",
       "operationHistoryUserID": "印刷センターID",
       "operationHistoryOldValue": "古い値",
       "operationHistoryNewValue": "新しい値",
