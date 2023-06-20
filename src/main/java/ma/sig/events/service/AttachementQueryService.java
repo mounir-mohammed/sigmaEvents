@@ -176,4 +176,41 @@ public class AttachementQueryService extends QueryService<Attachement> {
         }
         return specification;
     }
+
+    public Optional<AttachementDTO> findByIdCheckEvent(Long id) {
+        log.debug("find AttachementDTO by id and check event : {}", id);
+        final Specification<Attachement> specification = createEventSpecification(id);
+        return attachementRepository.findOne(specification).map(attachementMapper::toDto);
+    }
+
+    private Specification<Attachement> createEventSpecification(Long id) {
+        Specification<Attachement> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), Attachement_.attachementId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Attachement_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(Attachement_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+
+        return specification;
+    }
 }

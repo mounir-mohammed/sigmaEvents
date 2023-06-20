@@ -185,7 +185,7 @@ public class FonctionResource {
     @GetMapping("/fonctions/{id}")
     public ResponseEntity<FonctionDTO> getFonction(@PathVariable Long id) {
         log.debug("REST request to get Fonction : {}", id);
-        Optional<FonctionDTO> fonctionDTO = fonctionService.findOne(id);
+        Optional<FonctionDTO> fonctionDTO = fonctionQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(fonctionDTO);
     }
 

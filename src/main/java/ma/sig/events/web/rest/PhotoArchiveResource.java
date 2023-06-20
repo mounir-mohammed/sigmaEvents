@@ -186,7 +186,7 @@ public class PhotoArchiveResource {
     @GetMapping("/photo-archives/{id}")
     public ResponseEntity<PhotoArchiveDTO> getPhotoArchive(@PathVariable Long id) {
         log.debug("REST request to get PhotoArchive : {}", id);
-        Optional<PhotoArchiveDTO> photoArchiveDTO = photoArchiveService.findOne(id);
+        Optional<PhotoArchiveDTO> photoArchiveDTO = photoArchiveQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(photoArchiveDTO);
     }
 

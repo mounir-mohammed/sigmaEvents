@@ -185,7 +185,7 @@ public class InfoSuppResource {
     @GetMapping("/info-supps/{id}")
     public ResponseEntity<InfoSuppDTO> getInfoSupp(@PathVariable Long id) {
         log.debug("REST request to get InfoSupp : {}", id);
-        Optional<InfoSuppDTO> infoSuppDTO = infoSuppService.findOne(id);
+        Optional<InfoSuppDTO> infoSuppDTO = infoSuppQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(infoSuppDTO);
     }
 

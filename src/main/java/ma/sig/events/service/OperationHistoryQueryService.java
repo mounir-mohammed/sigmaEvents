@@ -219,4 +219,41 @@ public class OperationHistoryQueryService extends QueryService<OperationHistory>
         }
         return specification;
     }
+
+    public Optional<OperationHistoryDTO> findByIdCheckEvent(Long id) {
+        log.debug("find OperationHistoryDTO by id and check event : {}", id);
+        final Specification<OperationHistory> specification = createEventSpecification(id);
+        return operationHistoryRepository.findOne(specification).map(operationHistoryMapper::toDto);
+    }
+
+    private Specification<OperationHistory> createEventSpecification(Long id) {
+        Specification<OperationHistory> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), OperationHistory_.operationHistoryId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(OperationHistory_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(OperationHistory_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+
+        return specification;
+    }
 }

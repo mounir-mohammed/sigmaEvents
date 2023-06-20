@@ -167,4 +167,40 @@ public class PhotoArchiveQueryService extends QueryService<PhotoArchive> {
         }
         return specification;
     }
+
+    public Optional<PhotoArchiveDTO> findByIdCheckEvent(Long id) {
+        log.debug("find PhotoArchiveDTO by id and check event : {}", id);
+        final Specification<PhotoArchive> specification = createEventSpecification(id);
+        return photoArchiveRepository.findOne(specification).map(photoArchiveMapper::toDto);
+    }
+
+    private Specification<PhotoArchive> createEventSpecification(Long id) {
+        Specification<PhotoArchive> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), PhotoArchive_.photoArchiveId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(PhotoArchive_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(PhotoArchive_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+        return specification;
+    }
 }

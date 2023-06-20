@@ -167,4 +167,37 @@ public class CodeQueryService extends QueryService<Code> {
         }
         return specification;
     }
+
+    public Optional<CodeDTO> findByIdCheckEvent(Long id) {
+        log.debug("find CodeDTO by id and check event : {}", id);
+        final Specification<Code> specification = createEventSpecification(id);
+        return codeRepository.findOne(specification).map(codeMapper::toDto);
+    }
+
+    private Specification<Code> createEventSpecification(Long id) {
+        Specification<Code> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), Code_.codeId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Code_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(new LongFilter().setEquals(0L), root -> root.join(Code_.event, JoinType.LEFT).get(Event_.eventId))
+                );
+        }
+        return specification;
+    }
 }

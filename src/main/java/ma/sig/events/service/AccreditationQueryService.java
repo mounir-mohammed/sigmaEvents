@@ -595,7 +595,7 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
      */
     @Transactional(readOnly = true)
     public Optional<AccreditationDTO> findByIdCheckEvent(Long id) {
-        log.debug("find by id and check event : {}", id);
+        log.debug("find AccreditationDTO by id and check event : {}", id);
         final Specification<Accreditation> specification = createEventSpecification(id);
         return accreditationRepository.findOne(specification).map(accreditationMapper::toDto);
     }

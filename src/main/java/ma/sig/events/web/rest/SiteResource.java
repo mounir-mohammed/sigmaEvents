@@ -181,7 +181,7 @@ public class SiteResource {
     @GetMapping("/sites/{id}")
     public ResponseEntity<SiteDTO> getSite(@PathVariable Long id) {
         log.debug("REST request to get Site : {}", id);
-        Optional<SiteDTO> siteDTO = siteService.findOne(id);
+        Optional<SiteDTO> siteDTO = siteQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(siteDTO);
     }
 

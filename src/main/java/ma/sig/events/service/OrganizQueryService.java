@@ -188,4 +188,38 @@ public class OrganizQueryService extends QueryService<Organiz> {
         }
         return specification;
     }
+
+    public Optional<OrganizDTO> findByIdCheckEvent(Long id) {
+        log.debug("find OrganizDTO by id and check event : {}", id);
+        final Specification<Organiz> specification = createEventSpecification(id);
+        return organizRepository.findOne(specification).map(organizMapper::toDto);
+    }
+
+    private Specification<Organiz> createEventSpecification(Long id) {
+        Specification<Organiz> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), Organiz_.organizId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Organiz_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(new LongFilter().setEquals(0L), root -> root.join(Organiz_.event, JoinType.LEFT).get(Event_.eventId))
+                );
+        }
+
+        return specification;
+    }
 }

@@ -185,7 +185,7 @@ public class DayPassInfoResource {
     @GetMapping("/day-pass-infos/{id}")
     public ResponseEntity<DayPassInfoDTO> getDayPassInfo(@PathVariable Long id) {
         log.debug("REST request to get DayPassInfo : {}", id);
-        Optional<DayPassInfoDTO> dayPassInfoDTO = dayPassInfoService.findOne(id);
+        Optional<DayPassInfoDTO> dayPassInfoDTO = dayPassInfoQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(dayPassInfoDTO);
     }
 

@@ -193,7 +193,7 @@ public class OperationHistoryResource {
     @GetMapping("/operation-histories/{id}")
     public ResponseEntity<OperationHistoryDTO> getOperationHistory(@PathVariable Long id) {
         log.debug("REST request to get OperationHistory : {}", id);
-        Optional<OperationHistoryDTO> operationHistoryDTO = operationHistoryService.findOne(id);
+        Optional<OperationHistoryDTO> operationHistoryDTO = operationHistoryQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(operationHistoryDTO);
     }
 

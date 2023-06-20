@@ -165,4 +165,41 @@ public class InfoSuppQueryService extends QueryService<InfoSupp> {
         }
         return specification;
     }
+
+    public Optional<InfoSuppDTO> findByIdCheckEvent(Long id) {
+        log.debug("find InfoSuppDTO by id and check event : {}", id);
+        final Specification<InfoSupp> specification = createEventSpecification(id);
+        return infoSuppRepository.findOne(specification).map(infoSuppMapper::toDto);
+    }
+
+    private Specification<InfoSupp> createEventSpecification(Long id) {
+        Specification<InfoSupp> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), InfoSupp_.infoSuppId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(InfoSupp_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(InfoSupp_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+
+        return specification;
+    }
 }

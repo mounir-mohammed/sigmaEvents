@@ -185,7 +185,7 @@ public class AttachementResource {
     @GetMapping("/attachements/{id}")
     public ResponseEntity<AttachementDTO> getAttachement(@PathVariable Long id) {
         log.debug("REST request to get Attachement : {}", id);
-        Optional<AttachementDTO> attachementDTO = attachementService.findOne(id);
+        Optional<AttachementDTO> attachementDTO = attachementQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(attachementDTO);
     }
 

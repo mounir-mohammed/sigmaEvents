@@ -181,7 +181,7 @@ public class NoteResource {
     @GetMapping("/notes/{id}")
     public ResponseEntity<NoteDTO> getNote(@PathVariable Long id) {
         log.debug("REST request to get Note : {}", id);
-        Optional<NoteDTO> noteDTO = noteService.findOne(id);
+        Optional<NoteDTO> noteDTO = noteQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(noteDTO);
     }
 

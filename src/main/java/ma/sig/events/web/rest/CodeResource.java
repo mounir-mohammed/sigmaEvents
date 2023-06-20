@@ -181,7 +181,7 @@ public class CodeResource {
     @GetMapping("/codes/{id}")
     public ResponseEntity<CodeDTO> getCode(@PathVariable Long id) {
         log.debug("REST request to get Code : {}", id);
-        Optional<CodeDTO> codeDTO = codeService.findOne(id);
+        Optional<CodeDTO> codeDTO = codeQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(codeDTO);
     }
 

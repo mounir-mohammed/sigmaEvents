@@ -181,7 +181,7 @@ public class OrganizResource {
     @GetMapping("/organizs/{id}")
     public ResponseEntity<OrganizDTO> getOrganiz(@PathVariable Long id) {
         log.debug("REST request to get Organiz : {}", id);
-        Optional<OrganizDTO> organizDTO = organizService.findOne(id);
+        Optional<OrganizDTO> organizDTO = organizQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(organizDTO);
     }
 

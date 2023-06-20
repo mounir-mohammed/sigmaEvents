@@ -181,7 +181,7 @@ public class AreaResource {
     @GetMapping("/areas/{id}")
     public ResponseEntity<AreaDTO> getArea(@PathVariable Long id) {
         log.debug("REST request to get Area : {}", id);
-        Optional<AreaDTO> areaDTO = areaService.findOne(id);
+        Optional<AreaDTO> areaDTO = areaQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(areaDTO);
     }
 

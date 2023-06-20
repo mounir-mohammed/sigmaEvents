@@ -181,4 +181,40 @@ public class CategoryQueryService extends QueryService<Category> {
         }
         return specification;
     }
+
+    public Optional<CategoryDTO> findByIdCheckEvent(Long id) {
+        log.debug("find CategoryDTO by id and check event : {}", id);
+        final Specification<Category> specification = createEventSpecification(id);
+        return categoryRepository.findOne(specification).map(categoryMapper::toDto);
+    }
+
+    private Specification<Category> createEventSpecification(Long id) {
+        Specification<Category> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), Category_.categoryId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Category_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(Category_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+        return specification;
+    }
 }

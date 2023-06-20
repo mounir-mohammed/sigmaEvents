@@ -185,7 +185,7 @@ public class CategoryResource {
     @GetMapping("/categories/{id}")
     public ResponseEntity<CategoryDTO> getCategory(@PathVariable Long id) {
         log.debug("REST request to get Category : {}", id);
-        Optional<CategoryDTO> categoryDTO = categoryService.findOne(id);
+        Optional<CategoryDTO> categoryDTO = categoryQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(categoryDTO);
     }
 

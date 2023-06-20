@@ -178,4 +178,40 @@ public class FonctionQueryService extends QueryService<Fonction> {
         }
         return specification;
     }
+
+    public Optional<FonctionDTO> findByIdCheckEvent(Long id) {
+        log.debug("find FonctionDTO by id and check event : {}", id);
+        final Specification<Fonction> specification = createEventSpecification(id);
+        return fonctionRepository.findOne(specification).map(fonctionMapper::toDto);
+    }
+
+    private Specification<Fonction> createEventSpecification(Long id) {
+        Specification<Fonction> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), Fonction_.fonctionId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Fonction_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(Fonction_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+        return specification;
+    }
 }

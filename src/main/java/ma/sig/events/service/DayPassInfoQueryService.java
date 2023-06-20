@@ -186,4 +186,40 @@ public class DayPassInfoQueryService extends QueryService<DayPassInfo> {
         }
         return specification;
     }
+
+    public Optional<DayPassInfoDTO> findByIdCheckEvent(Long id) {
+        log.debug("find DayPassInfoDTO by id and check event : {}", id);
+        final Specification<DayPassInfo> specification = createEventSpecification(id);
+        return dayPassInfoRepository.findOne(specification).map(dayPassInfoMapper::toDto);
+    }
+
+    private Specification<DayPassInfo> createEventSpecification(Long id) {
+        Specification<DayPassInfo> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), DayPassInfo_.dayPassInfoId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(DayPassInfo_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(DayPassInfo_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+        return specification;
+    }
 }

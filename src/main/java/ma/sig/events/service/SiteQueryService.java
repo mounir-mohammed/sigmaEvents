@@ -179,4 +179,38 @@ public class SiteQueryService extends QueryService<Site> {
         }
         return specification;
     }
+
+    public Optional<SiteDTO> findByIdCheckEvent(Long id) {
+        log.debug("find SiteDTO by id and check event : {}", id);
+        final Specification<Site> specification = createEventSpecification(id);
+        return siteRepository.findOne(specification).map(siteMapper::toDto);
+    }
+
+    private Specification<Site> createEventSpecification(Long id) {
+        Specification<Site> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), Site_.siteId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Site_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(new LongFilter().setEquals(0L), root -> root.join(Site_.event, JoinType.LEFT).get(Event_.eventId))
+                );
+        }
+
+        return specification;
+    }
 }
