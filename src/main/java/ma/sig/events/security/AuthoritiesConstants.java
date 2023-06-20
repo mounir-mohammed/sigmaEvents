@@ -10,6 +10,7 @@ public final class AuthoritiesConstants {
     public static final String USER = "ROLE_USER";
     public static final String EVENT_USER = "EVENT_USER";
     public static final String EVENT_ADMIN = "EVENT_ADMIN";
+    public static final String EVENT_SECURITY_AGENT = "EVENT_SECURITY_AGENT";
     public static final String EVENT_USER_MOBILE = "EVENT_USER_MOBILE";
     public static final String CAN_ACC_DELETE = "CAN_ACC_DELETE";
     public static final String CAN_ACC_VALIDATE = "CAN_ACC_VALIDATE";
@@ -28,7 +29,6 @@ public final class AuthoritiesConstants {
     public static final String CAN_ACC_SHOW_ATTACHMENT = "CAN_ACC_SHOW_ATTACHMENT";
     public static final String CAN_ACC_SHOW_ARCH_PHOTO = "CAN_ACC_SHOW_ARCH_PHOTO";
     public static final String CAN_ADD_ORGANIZ = "CAN_ADD_ORGANIZ";
-    public static final String EVENT_SECURITY_AGENT = "EVENT_SECURITY_AGENT";
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";
 
     private AuthoritiesConstants() {}
