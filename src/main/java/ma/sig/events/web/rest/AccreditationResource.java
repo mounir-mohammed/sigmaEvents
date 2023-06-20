@@ -196,7 +196,7 @@ public class AccreditationResource {
     @GetMapping("/accreditations/{id}")
     public ResponseEntity<AccreditationDTO> getAccreditation(@PathVariable Long id) {
         log.debug("REST request to get Accreditation : {}", id);
-        Optional<AccreditationDTO> accreditationDTO = accreditationService.findOne(id);
+        Optional<AccreditationDTO> accreditationDTO = accreditationQueryService.findByIdCheckEvent(id);
         return ResponseUtil.wrapOrNotFound(accreditationDTO);
     }
 

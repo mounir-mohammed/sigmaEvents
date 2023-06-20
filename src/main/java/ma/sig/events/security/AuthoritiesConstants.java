@@ -28,7 +28,7 @@ public final class AuthoritiesConstants {
     public static final String CAN_ACC_SHOW_ATTACHMENT = "CAN_ACC_SHOW_ATTACHMENT";
     public static final String CAN_ACC_SHOW_ARCH_PHOTO = "CAN_ACC_SHOW_ARCH_PHOTO";
     public static final String CAN_ADD_ORGANIZ = "CAN_ADD_ORGANIZ";
-
+    public static final String EVENT_SECURITY_AGENT = "EVENT_SECURITY_AGENT";
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";
 
     private AuthoritiesConstants() {}

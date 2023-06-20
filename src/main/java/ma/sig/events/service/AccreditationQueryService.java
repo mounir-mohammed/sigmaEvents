@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.function.Predicate;
 import javax.persistence.criteria.JoinType;
 import ma.sig.events.domain.*; // for static metamodels
 import ma.sig.events.domain.Accreditation;
@@ -550,5 +549,54 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
         }
         //ADD FILTER END
         return specification;
+    }
+
+    /**
+     * Function to filter by event and create a {@link Specification}
+     * @return the matching {@link Specification} of the entity.
+     */
+    protected Specification<Accreditation> createEventSpecification(Long id) {
+        Specification<Accreditation> specification = Specification.where(null);
+        specification = specification.and(buildSpecification(new LongFilter().setEquals(id), Accreditation_.accreditationId));
+        //ADD FILTER START
+        Optional<User> currentUser = null;
+        try {
+            if (!SecurityUtils.hasCurrentUserAnyOfAuthorities(AuthoritiesConstants.ADMIN)) {
+                currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+                if (currentUser.isPresent() && currentUser.get().getPrintingCentre().getEvent().getEventId() != null) {
+                    specification =
+                        specification.and(
+                            buildSpecification(
+                                new LongFilter().setEquals(currentUser.get().getPrintingCentre().getEvent().getEventId()),
+                                root -> root.join(Accreditation_.event, JoinType.LEFT).get(Event_.eventId)
+                            )
+                        );
+                    specification =
+                        specification.and(buildSpecification(new BooleanFilter().setEquals(true), Accreditation_.accreditationStat));
+                }
+            }
+        } catch (Exception e) {
+            specification =
+                specification.and(
+                    buildSpecification(
+                        new LongFilter().setEquals(0L),
+                        root -> root.join(Accreditation_.event, JoinType.LEFT).get(Event_.eventId)
+                    )
+                );
+        }
+        return specification;
+    }
+
+    /**
+     * Return  {@link Accreditation} which matches the criteria from the database.
+     *
+     * @param id accreditation id.
+     * @return the matching entitie.
+     */
+    @Transactional(readOnly = true)
+    public Optional<AccreditationDTO> findByIdCheckEvent(Long id) {
+        log.debug("find by id and check event : {}", id);
+        final Specification<Accreditation> specification = createEventSpecification(id);
+        return accreditationRepository.findOne(specification).map(accreditationMapper::toDto);
     }
 }

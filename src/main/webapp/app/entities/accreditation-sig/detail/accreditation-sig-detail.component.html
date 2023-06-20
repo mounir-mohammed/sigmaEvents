@@ -220,6 +220,22 @@
             </div>
           </div>
         </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.area">Area</span></dt>
+        <dd>
+          <div *ngIf="accreditation.fonction">
+            <div *ngIf="accreditation.fonction.areas">
+              <span *ngFor="let area of accreditation.fonction!.areas!; let last = last">
+                <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+                  <a [routerLink]="['/area-sig', area.areaId, 'view']">{{ area.areaName }}</a
+                  >{{ last ? '' : ', ' }}
+                </div>
+                <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+                  {{ area.areaName }} {{ last ? '' : ', ' }}
+                </div>
+              </span>
+            </div>
+          </div>
+        </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span></dt>
         <dd>
           <div *ngIf="accreditation.organiz">
