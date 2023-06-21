@@ -20,10 +20,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private accountService: AccountService, private router: Router) {}
 
-  links = [
+  eventUserLinks = [
     { label: 'sigmaEventsApp.accreditation.home.title', url: '/accreditation-sig' },
     { label: 'sigmaEventsApp.accreditation.home.createLabel', url: '/accreditation-sig/new' },
   ];
+
+  eventAdminLinks = [{ label: 'sigmaEventsApp.operationHistory.home.title', url: '/operation-history-sig' }];
 
   ngOnInit(): void {
     this.accountService

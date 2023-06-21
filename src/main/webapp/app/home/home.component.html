@@ -66,10 +66,19 @@
     </div>
 
     <div *ngIf="account !== null">
-      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.EVENT_USER, authority.EVENT_USER]">
+      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.EVENT_USER]">
         <div *ngIf="account!.printingCentre!.event">
           <ul>
-            <li *ngFor="let link of links">
+            <li *ngFor="let link of eventUserLinks">
+              <a [href]="link.url">{{ link.label | translate }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <div *ngIf="account!.printingCentre!.event">
+          <ul>
+            <li *ngFor="let link of eventAdminLinks">
               <a [href]="link.url">{{ link.label | translate }}</a>
             </li>
           </ul>
