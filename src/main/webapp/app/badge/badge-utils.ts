@@ -25,7 +25,7 @@ export class BadgeUtils {
     protected accreditationSigService: AccreditationSigService,
     protected areaSigService: AreaSigService,
     protected printingModelSigService: PrintingModelSigService
-  ) {}
+  ) { }
 
   addImages(parent: any, dataModel: any, groupDivs: Array<any>, data: any): Promise<Boolean> {
     console.log('START addImages');
@@ -690,11 +690,21 @@ export class BadgeUtils {
         if (data && modelData) {
           html2canvas(data, { scale: modelData.printingModel.model.scale }).then(canvas => {
             const contentDataURL = canvas.toDataURL(modelData.printingModel.model.type, modelData.printingModel.model.quality);
-            let pdf = new jspdf(
-              modelData.printingModel.model.landScape,
-              modelData.printingModel.model.unite,
-              modelData.printingModel.model.format
-            );
+            let pdf = null;
+            if (modelData.printingModel.model.manualFormat) {
+              pdf = new jspdf(
+                modelData.printingModel.model.landScape,
+                modelData.printingModel.model.unite,
+                [modelData.printingModel.model.widthFormat, modelData.printingModel.model.heightFormat]
+              );
+            }
+            else {
+              pdf = new jspdf(
+                modelData.printingModel.model.landScape,
+                modelData.printingModel.model.unite,
+                modelData.printingModel.model.format
+              );
+            }
             //landscape values p/l
             pdf.addImage(
               contentDataURL,
