@@ -166,7 +166,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
   setFileData(event: Event, field: string, isImage: boolean): void {
     this.photoEditorService
       .open(event, {
-        aspectRatio: 4 / 3,
+        aspectRatio: 4 / 4,
         autoCropArea: 1,
       })
       .subscribe(data => {
@@ -447,7 +447,7 @@ export class AccreditationSigUpdateComponent implements OnInit {
       if (file) {
         this.photoEditorService
           .open(file, {
-            aspectRatio: 4 / 3,
+            aspectRatio: 4 / 4,
             autoCropArea: 1,
           })
           .subscribe(data => {
