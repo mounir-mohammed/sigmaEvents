@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="accreditation">
+      <h2 data-cy="accreditationDetailsHeading"><span sigmaTranslate="sigmaEventsApp.accreditation.detail.title">Accreditation</span></h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      NOT FOUND
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+    </div>
+  </div>
+</div>

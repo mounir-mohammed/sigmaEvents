@@ -1,0 +1,280 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="accreditation">
+      <h2 data-cy="accreditationDetailsHeading">
+        <span sigmaTranslate="sigmaEventsApp.accreditation.detail.title">Accreditation</span> <fa-icon icon="check"></fa-icon>
+      </h2>
+
+      <hr />
+
+      <sigma-alert-error></sigma-alert-error>
+
+      <sigma-alert></sigma-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Accreditation Id</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">Accreditation First Name</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationFirstName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSecondName">Accreditation Second Name</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationSecondName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName">Accreditation Last Name</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationLastName }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationBirthDay">Accreditation Birth Day</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationBirthDay | formatMediumDate }}</span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe">Accreditation Sexe</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span>{{ accreditation.sexe!.sexeValue! }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationOccupation">Accreditation Occupation</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationOccupation }}</span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDescription">Accreditation Description</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span>{{ accreditation.accreditationDescription }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPhoto">Accreditation Photo</span></dt>
+        <dd>
+          <div *ngIf="accreditation.accreditationPhoto">
+            <a (click)="openFile(accreditation.accreditationPhoto, accreditation.accreditationPhotoContentType)">
+              <img
+                [src]="'data:' + accreditation.accreditationPhotoContentType + ';base64,' + accreditation.accreditationPhoto"
+                style="max-width: 100%"
+                alt="accreditation image"
+              />
+            </a>
+            {{ accreditation.accreditationPhotoContentType }}, {{ byteSize(accreditation.accreditationPhoto) }}
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCinId">Accreditation Cin Id</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationCinId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPasseportId">Accreditation Passeport Id</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationPasseportId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCartePresseId">Accreditation Carte Presse Id</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationCartePresseId }}</span>
+        </dd>
+        <dt>
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCarteProfessionnelleId"
+            >Accreditation Carte Professionnelle Id</span
+          >
+        </dt>
+        <dd>
+          <span>{{ accreditation.accreditationCarteProfessionnelleId }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreationDate">Accreditation Creation Date</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationCreationDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationCreatedByuser">Accreditation Created Byuser</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationCreatedByuser }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdateDate">Accreditation Update Date</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationUpdateDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationUpdatedByuser">Accreditation Updated Byuser</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationUpdatedByuser }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintDate">Accreditation Print Date</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationPrintDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintedByuser">Accreditation Printed Byuser</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationPrintedByuser }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateStart">Accreditation Date Start</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationDateStart | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationDateEnd">Accreditation Date End</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationDateEnd | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintStat">Accreditation Print Stat</span></dt>
+        <dd>
+          <span>{{ accreditation.accreditationPrintStat | yesNo }}</span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationPrintNumber">Accreditation Print Number</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span>{{ accreditation.accreditationPrintNumber }}</span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationParams">Accreditation Params</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span>{{ accreditation.accreditationParams }}</span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationAttributs">Accreditation Attributs</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span>{{ accreditation.accreditationAttributs }}</span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationStat">Accreditation Stat</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span>{{ accreditation.accreditationStat | yesNo }}</span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated">Accreditation Activated</span>
+        </dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <span>{{ accreditation.accreditationActivated | yesNo }}</span>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.site">Site</span></dt>
+        <dd>
+          <span *ngFor="let site of accreditation.sites; let last = last"> {{ site.siteName }}{{ last ? '' : ', ' }} </span>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.accreditation.sexe">Sexe</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <div *ngIf="accreditation.sexe">
+            <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span></dt>
+        <dd>
+          <div *ngIf="accreditation.nationality">
+            <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+              <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
+                accreditation.nationality.nationalityValue
+              }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.nationality.nationalityValue }}</div>
+          </div>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.accreditation.country">Country</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <div *ngIf="accreditation.country">
+            <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryName }}</a>
+          </div>
+        </dd>
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.accreditation.city">City</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <div *ngIf="accreditation.city">
+            <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityName }}</a>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span></dt>
+        <dd>
+          <div *ngIf="accreditation.category">
+            <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              <a [routerLink]="['/category-sig', accreditation.category.categoryId, 'view']">{{ accreditation.category.categoryName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              {{ accreditation.category.categoryName }}
+            </div>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span></dt>
+        <dd>
+          <div *ngIf="accreditation.fonction">
+            <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              <a [routerLink]="['/fonction-sig', accreditation.fonction.fonctionId, 'view']">{{ accreditation.fonction.fonctionName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              {{ accreditation.fonction.fonctionName }}
+            </div>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.fonction.area">Area</span></dt>
+        <dd>
+          <div *ngIf="accreditation.fonction">
+            <div *ngIf="accreditation.fonction.areas">
+              <span *ngFor="let area of accreditation.fonction!.areas!; let last = last">
+                <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+                  <a [routerLink]="['/area-sig', area.areaId, 'view']">{{ area.areaName }}</a
+                  >{{ last ? '' : ', ' }}
+                </div>
+                <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+                  {{ area.areaName }} {{ last ? '' : ', ' }}
+                </div>
+              </span>
+            </div>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span></dt>
+        <dd>
+          <div *ngIf="accreditation.organiz">
+            <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              {{ accreditation.organiz.organizName }}
+            </div>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span></dt>
+        <dd>
+          <div *ngIf="accreditation.accreditationType">
+            <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+              <a [routerLink]="['/accreditation-type-sig', accreditation.accreditationType.accreditationTypeId, 'view']">{{
+                accreditation.accreditationType.accreditationTypeValue
+              }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">
+              {{ accreditation.accreditationType.accreditationTypeValue }}
+            </div>
+          </div>
+        </dd>
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span></dt>
+        <dd>
+          <div *ngIf="accreditation.status">
+            <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+              <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.status.statusName }}</div>
+          </div>
+        </dd>
+
+        <dt><span sigmaTranslate="sigmaEventsApp.accreditation.code">Code</span></dt>
+        <dd>
+          <div *ngIf="accreditation.code">
+            <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              <a [routerLink]="['/code-sig', accreditation.code.codeId, 'view']">{{ accreditation.code.codeValue }}</a>
+            </div>
+            <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+              {{ accreditation.code.codeValue }}
+            </div>
+          </div>
+        </dd>
+
+        <dt *sigmaHasAnyAuthority="[authority.ADMIN]"><span sigmaTranslate="sigmaEventsApp.accreditation.event">Event</span></dt>
+        <dd *sigmaHasAnyAuthority="[authority.ADMIN]">
+          <div *ngIf="accreditation.event">
+            <a [routerLink]="['/event-sig', accreditation.event.eventId, 'view']">{{ accreditation.event.eventName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sigmaTranslate="entity.action.back">Back</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { EventAdminEntityRoutingModule } from './entities/event-admin-entity-rou
 import { AdminEntityRoutingModule } from './entities/admin-entity-routing.module';
 import { AdminEventCanAccesEntities } from './core/auth/admin-event-can-acces-entites';
 import { AdminCanAccesEntities } from './core/auth/admin-can-acces-entites';
+import { SecurityAgentEventCanAccesEntities } from './core/auth/security-agent-event-can-acces-entites';
 
 @NgModule({
   imports: [
@@ -32,6 +33,11 @@ import { AdminCanAccesEntities } from './core/auth/admin-can-acces-entites';
         {
           path: 'login',
           loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+        },
+        {
+          path: '',
+          canActivate: [SecurityAgentEventCanAccesEntities],
+          loadChildren: () => import(`./entities/security-agent-entity-routing.module`).then(m => m.SecurityAgentEntityRoutingModule),
         },
         {
           path: '',
