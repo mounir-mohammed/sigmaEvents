@@ -13,7 +13,7 @@ export interface IFonctionSig {
   fonctionParams?: string | null;
   fonctionAttributs?: string | null;
   fonctionStat?: boolean | null;
-  areas?: Pick<IAreaSig, 'areaId' | 'areaName' | 'areaStat'>[] | null;
+  areas?: Pick<IAreaSig, 'areaId' | 'areaName' | 'areaAbreviation' | 'areaStat'>[] | null;
   category?: Pick<ICategorySig, 'categoryId' | 'categoryName' | 'categoryStat'> | null;
   event?: Pick<IEventSig, 'eventId' | 'eventName' | 'eventStat'> | null;
 }

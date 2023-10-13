@@ -155,10 +155,15 @@
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.site">Site</span></dt>
         <dd>
-          <span *ngFor="let site of accreditation.sites; let last = last">
-            <a [routerLink]="['/site-sig', site.siteId, 'view']">{{ site.siteName }}</a
-            >{{ last ? '' : ', ' }}
-          </span>
+          <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+            <span *ngFor="let site of accreditation.sites; let last = last">
+              <a [routerLink]="['/site-sig', site.siteId, 'view']">{{ site.siteName }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </div>
+          <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+            <span *ngFor="let site of accreditation.sites; let last = last"> {{ site.siteName }}{{ last ? '' : ', ' }} </span>
+          </div>
         </dd>
         <dt><span sigmaTranslate="sigmaEventsApp.accreditation.civility">Civility</span></dt>
         <dd>

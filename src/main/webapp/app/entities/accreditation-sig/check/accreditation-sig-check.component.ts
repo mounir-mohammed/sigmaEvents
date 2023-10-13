@@ -13,12 +13,14 @@ import { Authority } from 'app/config/authority.constants';
 export class AccreditationSigCheckComponent implements OnInit {
   accreditation: IAccreditationSig | null = null;
   authority = Authority;
+  verifing: boolean = true;
 
   constructor(protected dataUtils: DataUtils, protected activatedRoute: ActivatedRoute, protected accountService: AccountService) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ accreditation }) => {
       this.accreditation = accreditation;
+      this.verifing = false;
     });
   }
 
