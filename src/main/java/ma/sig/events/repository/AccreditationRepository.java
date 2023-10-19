@@ -29,4 +29,10 @@ public interface AccreditationRepository
     default Page<Accreditation> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    List<Accreditation> findByEventEventId(Long eventId);
+
+    default List<Accreditation> findAllWithEagerRelationships(Long eventId) {
+        return this.fetchBagRelationships(this.findByEventEventId(eventId));
+    }
 }

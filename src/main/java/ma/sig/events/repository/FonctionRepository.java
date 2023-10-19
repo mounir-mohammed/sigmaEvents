@@ -29,4 +29,10 @@ public interface FonctionRepository
     default Page<Fonction> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    List<Fonction> findByEventEventId(Long eventId);
+
+    default List<Fonction> findByEventEventIdWithEagerRelationships(Long eventId) {
+        return this.fetchBagRelationships(findByEventEventId(eventId));
+    }
 }

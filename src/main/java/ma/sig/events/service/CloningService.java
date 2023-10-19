@@ -55,4 +55,6 @@ public interface CloningService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    CloningDTO clone(CloningDTO cloningDTO);
 }

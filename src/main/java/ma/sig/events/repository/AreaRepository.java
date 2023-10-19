@@ -1,5 +1,6 @@
 package ma.sig.events.repository;
 
+import java.util.List;
 import ma.sig.events.domain.Area;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AreaRepository extends JpaRepository<Area, Long>, JpaSpecificationExecutor<Area> {}
+public interface AreaRepository extends JpaRepository<Area, Long>, JpaSpecificationExecutor<Area> {
+    List<Area> findByEventEventId(Long eventId);
+}

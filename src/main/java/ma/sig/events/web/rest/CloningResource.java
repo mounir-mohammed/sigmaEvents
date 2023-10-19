@@ -65,7 +65,7 @@ public class CloningResource {
         if (cloningDTO.getCloningId() != null) {
             throw new BadRequestAlertException("A new cloning cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        CloningDTO result = cloningService.save(cloningDTO);
+        CloningDTO result = cloningService.clone(cloningDTO);
         return ResponseEntity
             .created(new URI("/api/clonings/" + result.getCloningId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getCloningId().toString()))
