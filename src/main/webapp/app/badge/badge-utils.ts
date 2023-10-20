@@ -25,7 +25,7 @@ export class BadgeUtils {
     protected accreditationSigService: AccreditationSigService,
     protected areaSigService: AreaSigService,
     protected printingModelSigService: PrintingModelSigService
-  ) { }
+  ) {}
 
   addImages(parent: any, dataModel: any, groupDivs: Array<any>, data: any): Promise<Boolean> {
     console.log('START addImages');
@@ -628,6 +628,11 @@ export class BadgeUtils {
           if (accreditation) {
             await this.accreditationSigService.getAccreditation(accreditation?.accreditationId!).then(accreditationFullData => {
               if (accreditationFullData) {
+                if (!accreditationFullData.accreditationPrintNumber || accreditationFullData.accreditationPrintNumber == 0) {
+                  accreditationFullData.accreditationPrintNumber = 1;
+                } else {
+                  accreditationFullData.accreditationPrintNumber = accreditationFullData.accreditationPrintNumber + 1;
+                }
                 var accreditationJson = JSON.stringify(accreditationFullData);
                 var data = JSON.parse(accreditationJson);
                 var badgeContainer = document.getElementById(badgeContainerId!);
@@ -692,13 +697,11 @@ export class BadgeUtils {
             const contentDataURL = canvas.toDataURL(modelData.printingModel.model.type, modelData.printingModel.model.quality);
             let pdf = null;
             if (modelData.printingModel.model.manualFormat) {
-              pdf = new jspdf(
-                modelData.printingModel.model.landScape,
-                modelData.printingModel.model.unite,
-                [modelData.printingModel.model.widthFormat, modelData.printingModel.model.heightFormat]
-              );
-            }
-            else {
+              pdf = new jspdf(modelData.printingModel.model.landScape, modelData.printingModel.model.unite, [
+                modelData.printingModel.model.widthFormat,
+                modelData.printingModel.model.heightFormat,
+              ]);
+            } else {
               pdf = new jspdf(
                 modelData.printingModel.model.landScape,
                 modelData.printingModel.model.unite,
