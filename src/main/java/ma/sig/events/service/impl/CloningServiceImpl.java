@@ -37,6 +37,8 @@ public class CloningServiceImpl implements CloningService {
 
     private final SiteRepository siteRepository;
 
+    private final AccreditationTypeRepository acreditationTypeRepository;
+
     private final OrganizRepository organizRepository;
 
     private final AccreditationRepository accreditationRepository;
@@ -53,23 +55,24 @@ public class CloningServiceImpl implements CloningService {
         FonctionRepository fonctionRepository,
         AreaRepository areaRepository,
         SiteRepository siteRepository,
+        AccreditationTypeRepository acreditationTypeRepository,
         OrganizRepository organizRepository,
         AccreditationRepository accreditationRepository,
         EventRepository eventRepository,
         CloningMapper cloningMapper,
-        UserService userService,
-        UserService userService1
+        UserService userService
     ) {
         this.cloningRepository = cloningRepository;
         this.categoryRepository = categoryRepository;
         this.fonctionRepository = fonctionRepository;
         this.areaRepository = areaRepository;
         this.siteRepository = siteRepository;
+        this.acreditationTypeRepository = acreditationTypeRepository;
         this.organizRepository = organizRepository;
         this.accreditationRepository = accreditationRepository;
         this.eventRepository = eventRepository;
         this.cloningMapper = cloningMapper;
-        this.userService = userService1;
+        this.userService = userService;
     }
 
     @Override
@@ -143,6 +146,7 @@ public class CloningServiceImpl implements CloningService {
                     Map<Long, Long> tempAreas = new HashMap<>();
                     Map<Long, Long> tempSites = new HashMap<>();
                     Map<Long, Long> tempOrganizs = new HashMap<>();
+                    Map<Long, Long> tempAccreditationTypes = new HashMap<>();
                     Map<Long, Long> tempAccreditations = new HashMap<>();
 
                     List<Category> categorys = categoryRepository.findByEventEventId(oldEvent.getEventId());
@@ -150,6 +154,7 @@ public class CloningServiceImpl implements CloningService {
                     List<Area> areas = areaRepository.findByEventEventId(oldEvent.getEventId());
                     List<Site> sites = siteRepository.findByEventEventId(oldEvent.getEventId());
                     List<Organiz> organizs = organizRepository.findByEventEventId(oldEvent.getEventId());
+                    List<AccreditationType> acreditationTypes = acreditationTypeRepository.findByEventEventId(oldEvent.getEventId());
                     List<Accreditation> accreditations = accreditationRepository.findByEventEventId(oldEvent.getEventId());
 
                     List<Category> newCategorys = new ArrayList<>();
@@ -157,7 +162,23 @@ public class CloningServiceImpl implements CloningService {
                     List<Area> newAreas = new ArrayList<>();
                     List<Site> newSites = new ArrayList<>();
                     List<Organiz> newOrganizs = new ArrayList<>();
+                    List<AccreditationType> newAcreditationTypes = new ArrayList<>();
                     List<Accreditation> newAccreditations = new ArrayList<>();
+
+                    for (AccreditationType accreditationType : acreditationTypes) {
+                        Long tempAccreditationTypeID = accreditationType.getAccreditationTypeId();
+                        AccreditationType newAccreditationType = new AccreditationType();
+                        newAccreditationType.setAccreditationTypeValue(accreditationType.getAccreditationTypeValue());
+                        newAccreditationType.setAccreditationTypeAbreviation(accreditationType.getAccreditationTypeAbreviation());
+                        newAccreditationType.setAccreditationTypeDescription(accreditationType.getAccreditationTypeDescription());
+                        newAccreditationType.setAccreditationTypeAttributs(accreditationType.getAccreditationTypeAttributs());
+                        newAccreditationType.setAccreditationTypeParams(accreditationType.getAccreditationTypeParams());
+                        newAccreditationType.setAccreditationTypeStat(accreditationType.getAccreditationTypeStat());
+                        newAccreditationType.setEvent(newEvent);
+                        AccreditationType savedAccreditationType = acreditationTypeRepository.save(newAccreditationType);
+                        newAcreditationTypes.add(savedAccreditationType);
+                        tempAccreditationTypes.put(tempAccreditationTypeID, savedAccreditationType.getAccreditationTypeId());
+                    }
 
                     for (Site site : sites) {
                         Long tempSiteID = site.getSiteId();
@@ -293,9 +314,6 @@ public class CloningServiceImpl implements CloningService {
                         newAccreditation.setNationality(accreditation.getNationality());
                         newAccreditation.setCountry(accreditation.getCountry());
                         newAccreditation.setCity(accreditation.getCity());
-                        newAccreditation.setAccreditationType(accreditation.getAccreditationType());
-                        newAccreditation.setAttachement(accreditation.getAttachement());
-
                         newAccreditation.setEvent(newEvent);
 
                         Category newCategory = findCategoryByMapping(
@@ -314,6 +332,13 @@ public class CloningServiceImpl implements CloningService {
 
                         Organiz newOrganiz = findOrganizByMapping(newOrganizs, tempOrganizs, accreditation.getOrganiz().getOrganizId());
                         newAccreditation.setOrganiz(newOrganiz);
+
+                        AccreditationType newAccreditationType = findAccreditationTypeByMapping(
+                            newAcreditationTypes,
+                            tempAccreditationTypes,
+                            accreditation.getAccreditationType().getAccreditationTypeId()
+                        );
+                        newAccreditation.setAccreditationType(newAccreditationType);
 
                         for (Site site : accreditation.getSites()) {
                             Site newSite = findSiteByMapping(newSites, tempSites, site.getSiteId());
@@ -429,6 +454,19 @@ public class CloningServiceImpl implements CloningService {
             for (Organiz organiz : newList) {
                 if (organiz.getOrganizId().equals(newId)) {
                     return organiz;
+                }
+            }
+        }
+        return null;
+    }
+
+    private AccreditationType findAccreditationTypeByMapping(List<AccreditationType> newList, Map<Long, Long> map, Long oldId) {
+        if (map.containsKey(oldId)) {
+            Long newId = map.get(oldId);
+
+            for (AccreditationType accreditationType : newList) {
+                if (accreditationType.getAccreditationTypeId().equals(newId)) {
+                    return accreditationType;
                 }
             }
         }
