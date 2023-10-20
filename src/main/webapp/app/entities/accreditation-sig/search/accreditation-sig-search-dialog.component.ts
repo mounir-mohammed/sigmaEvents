@@ -99,6 +99,12 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
   codesSharedCollection: ICodeSig[] = [];
   dayPassInfosSharedCollection: IDayPassInfoSig[] = [];
 
+  FiltredSitesSharedCollection: ISiteSig[] = [];
+  FiltredCategoriesSharedCollection: ICategorySig[] = [];
+  FiltredFonctionsSharedCollection: IFonctionSig[] = [];
+  FiltredOrganizsSharedCollection: IOrganizSig[] = [];
+  FiltredAccreditationTypesSharedCollection: IAccreditationTypeSig[] = [];
+
   constructor(
     protected accreditationService: AccreditationSigService,
     protected activeModal: NgbActiveModal,
@@ -146,8 +152,6 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     }
 
     if (this.searchForm.get('accreditationBirthDay')?.value) {
-      console.log(this.searchForm.get('accreditationBirthDay')?.value);
-      console.log(dayjs(this.searchForm.get('accreditationBirthDay')?.value).format('YYYY-MM-DD'));
       this.filters.set('accreditationBirthDay.equals', dayjs(this.searchForm.get('accreditationBirthDay')?.value).format('YYYY-MM-DD'));
     }
 
@@ -290,7 +294,10 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     this.siteService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
-      .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
+      .subscribe((sites: ISiteSig[]) => {
+        this.sitesSharedCollection = sites;
+        this.FiltredSitesSharedCollection = sites;
+      });
 
     if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
       this.eventService
@@ -327,22 +334,34 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     this.categoryService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
-      .subscribe((categories: ICategorySig[]) => (this.categoriesSharedCollection = categories));
+      .subscribe((categories: ICategorySig[]) => {
+        this.categoriesSharedCollection = categories;
+        this.FiltredCategoriesSharedCollection = categories;
+      });
 
     this.fonctionService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
-      .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
+      .subscribe((fonctions: IFonctionSig[]) => {
+        this.fonctionsSharedCollection = fonctions;
+        this.FiltredFonctionsSharedCollection = fonctions;
+      });
 
     this.organizService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
-      .subscribe((organizs: IOrganizSig[]) => (this.organizsSharedCollection = organizs));
+      .subscribe((organizs: IOrganizSig[]) => {
+        this.organizsSharedCollection = organizs;
+        this.FiltredOrganizsSharedCollection = organizs;
+      });
 
     this.accreditationTypeService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
-      .subscribe((accreditationTypes: IAccreditationTypeSig[]) => (this.accreditationTypesSharedCollection = accreditationTypes));
+      .subscribe((accreditationTypes: IAccreditationTypeSig[]) => {
+        this.accreditationTypesSharedCollection = accreditationTypes;
+        this.FiltredAccreditationTypesSharedCollection = accreditationTypes;
+      });
 
     this.statusService
       .query({ size: RECORD_ITEMS })
@@ -363,5 +382,49 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? []))
       .subscribe((dayPassInfos: IDayPassInfoSig[]) => (this.dayPassInfosSharedCollection = dayPassInfos));
+  }
+
+  filterByEvent() {
+    if (this.searchForm.get('event')?.value) {
+      this.FiltredAccreditationTypesSharedCollection = this.filterAccreditationTypesByEventId(
+        this.accreditationTypesSharedCollection,
+        this.searchForm.get('event')?.value
+      );
+      this.FiltredCategoriesSharedCollection = this.filterCategoriesByEventId(
+        this.categoriesSharedCollection,
+        this.searchForm.get('event')?.value
+      );
+      this.FiltredFonctionsSharedCollection = this.filterFonctionsByEventId(
+        this.fonctionsSharedCollection,
+        this.searchForm.get('event')?.value
+      );
+      this.FiltredOrganizsSharedCollection = this.filterOrganizsByEventId(
+        this.organizsSharedCollection,
+        this.searchForm.get('event')?.value
+      );
+      this.FiltredSitesSharedCollection = this.filterSitesByEventId(this.sitesSharedCollection, this.searchForm.get('event')?.value);
+    } else {
+      this.FiltredAccreditationTypesSharedCollection = this.accreditationTypesSharedCollection;
+      this.FiltredCategoriesSharedCollection = this.categoriesSharedCollection;
+      this.FiltredFonctionsSharedCollection = this.fonctionsSharedCollection;
+      this.FiltredOrganizsSharedCollection = this.organizsSharedCollection;
+      this.FiltredSitesSharedCollection = this.sitesSharedCollection;
+    }
+  }
+
+  filterAccreditationTypesByEventId(accreditationTypes: IAccreditationTypeSig[], eventId: number): IAccreditationTypeSig[] {
+    return accreditationTypes.filter(type => type.event?.eventId === eventId);
+  }
+  filterOrganizsByEventId(organizs: IOrganizSig[], eventId: number): IOrganizSig[] {
+    return organizs.filter(organiz => organiz.event?.eventId === eventId);
+  }
+  filterCategoriesByEventId(categories: ICategorySig[], eventId: number): ICategorySig[] {
+    return categories.filter(category => category.event?.eventId === eventId);
+  }
+  filterFonctionsByEventId(fonctions: IFonctionSig[], eventId: number): IFonctionSig[] {
+    return fonctions.filter(fonction => fonction.event?.eventId === eventId);
+  }
+  filterSitesByEventId(sites: ISiteSig[], eventId: number): ISiteSig[] {
+    return sites.filter(site => site.event?.eventId === eventId);
   }
 }

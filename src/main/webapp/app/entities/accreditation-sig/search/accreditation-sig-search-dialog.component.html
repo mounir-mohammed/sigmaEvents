@@ -218,7 +218,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="accreditationTypeOption.accreditationTypeId"
-              *ngFor="let accreditationTypeOption of accreditationTypesSharedCollection"
+              *ngFor="let accreditationTypeOption of FiltredAccreditationTypesSharedCollection"
               [disabled]="accreditationTypeOption.accreditationTypeStat === false"
             >
               {{ accreditationTypeOption.accreditationTypeValue }}
@@ -323,7 +323,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="categoryOption.categoryId"
-              *ngFor="let categoryOption of categoriesSharedCollection"
+              *ngFor="let categoryOption of FiltredCategoriesSharedCollection"
               [disabled]="categoryOption.categoryStat === false"
             >
               {{ categoryOption.categoryName }}
@@ -336,7 +336,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="fonctionOption.fonctionId"
-              *ngFor="let fonctionOption of fonctionsSharedCollection"
+              *ngFor="let fonctionOption of FiltredFonctionsSharedCollection"
               [disabled]="fonctionOption.fonctionStat === false"
             >
               {{ fonctionOption.fonctionName }}
@@ -361,7 +361,7 @@
           <select class="form-control" id="field_sites" data-cy="site" multiple name="sites" formControlName="sites">
             <option
               [ngValue]="siteOption.siteId"
-              *ngFor="let siteOption of sitesSharedCollection"
+              *ngFor="let siteOption of FiltredSitesSharedCollection"
               [disabled]="siteOption.siteStat === false"
             >
               {{ siteOption.siteName }}
@@ -374,7 +374,7 @@
             <option [ngValue]="null"></option>
             <option
               [ngValue]="organizOption.organizId"
-              *ngFor="let organizOption of organizsSharedCollection"
+              *ngFor="let organizOption of FiltredOrganizsSharedCollection"
               [disabled]="organizOption.organizStat === false"
             >
               {{ organizOption.organizName }}
@@ -509,7 +509,7 @@
         </div>
         <div class="search-table-cell" *sigmaHasAnyAuthority="[authority.ADMIN]">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.event" for="field_event">Event</label>
-          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event" (change)="filterByEvent()">
             <option [ngValue]="null"></option>
             <option value="noEvent">No_Event</option>
             <option [ngValue]="eventOption.eventId" *ngFor="let eventOption of eventsSharedCollection">{{ eventOption.eventName }}</option>
