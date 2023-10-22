@@ -12,6 +12,7 @@ import ma.sig.events.service.AccreditationQueryService;
 import ma.sig.events.service.AccreditationService;
 import ma.sig.events.service.criteria.AccreditationCriteria;
 import ma.sig.events.service.dto.AccreditationDTO;
+import ma.sig.events.service.dto.MassUpdateAccreditationDTO;
 import ma.sig.events.web.rest.errors.BadRequestAlertException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -302,5 +303,32 @@ public class AccreditationResource {
         }
         Optional<Boolean> result = accreditationService.massPrintAccreditation(accreditationId, statusId);
         return ResponseUtil.wrapOrNotFound(result);
+    }
+
+    /**
+     * {@code PATCH  /accreditations/massUpdate} : Mass Partial updates given fields of an existing accreditation, field will ignore if it is null
+     *
+     * @param accreditations the accreditationDTO List to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the stat,
+     * or with status {@code 500 (Internal Server Error)} if the accreditations couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping(value = "/accreditations/massUpdate")
+    public ResponseEntity<Boolean> massUpdateAccreditations(
+        @RequestBody(required = true) MassUpdateAccreditationDTO massUpdateAccreditationDTO
+    ) {
+        int size = massUpdateAccreditationDTO.getAccreditationIds().size();
+        log.debug("REST request to mass update Accreditations partially size: {}", size);
+
+        Optional<Boolean> result = accreditationService.massUpdate(massUpdateAccreditationDTO);
+
+        if (size == 0) {
+            log.debug("REST request to mass update Accreditations partially : No Accreditation Found");
+        }
+
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, String.valueOf(size))
+        );
     }
 }

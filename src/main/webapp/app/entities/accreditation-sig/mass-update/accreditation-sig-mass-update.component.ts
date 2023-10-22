@@ -46,14 +46,16 @@ import dayjs from 'dayjs/esm';
 import { AccountService } from 'app/core/auth/account.service';
 import { OperationHistorySigService } from 'app/entities/operation-history-sig/service/operation-history-sig.service';
 import { Account } from 'app/core/auth/account.model';
+import { IAccreditationMassUpdateSig } from '../accreditation-mass-update-sig.model';
 
 @Component({
   selector: 'sigma-accreditation-sig-mass-update',
   templateUrl: './accreditation-sig-mass-update.component.html',
 })
 export class AccreditationSigMassUpdateComponent implements OnInit {
-  accreditationsIds?: number[] = [];
+  accreditationsIds?: number[];
   isUpdateLoading = false;
+  isDataLoading = false;
 
   massUpdateForm = new FormGroup({
     accreditationOccupation: new FormControl(),
@@ -81,6 +83,7 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
     dayPassInfo: new FormControl(),
     accreditationPhoto: new FormControl(),
     accreditationPhotoContentType: new FormControl(),
+    accreditationUpdateSites: new FormControl(false),
   });
 
   sitesSharedCollection: ISiteSig[] = [];
@@ -126,99 +129,69 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
     protected translateService: TranslateService,
     private accountService: AccountService,
     private operationHistorySigService: OperationHistorySigService
-  ) {}
+  ) {
+    const state = history.state;
+    if (state && state.ids) {
+      const ids = state.ids;
+      this.accreditationsIds = ids;
+      localStorage.setItem('accreditationsIds', JSON.stringify(this.accreditationsIds));
+    }
+  }
 
   ngOnInit(): void {
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
-    this.activatedRoute.queryParams.subscribe(params => {
-      if (params.data) {
-        const accreditationsIds = JSON.parse(atob(params.data));
-        if (accreditationsIds) {
-          this.accreditationsIds = accreditationsIds;
-          console.log(accreditationsIds);
-          this.loadRelationshipsOptions();
-        } else {
-          this.router.navigate(['404']);
-        }
-      }
-    });
+    const storedData = localStorage.getItem('accreditationsIds');
+    if (storedData) {
+      this.accreditationsIds = JSON.parse(storedData);
+    }
+    if (this.accreditationsIds) {
+      this.loadRelationshipsOptions();
+    } else {
+      this.router.navigate(['404']);
+    }
   }
 
   protected loadRelationshipsOptions(): void {
-    this.siteService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? []))
-      .subscribe((sites: ISiteSig[]) => (this.sitesSharedCollection = sites));
+    this.isDataLoading = true; // Set isLoading to true
 
-    this.eventService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? []))
-      .subscribe((events: IEventSig[]) => (this.eventsSharedCollection = events));
+    const serviceCalls = [
+      this.siteService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<ISiteSig[]>) => res.body ?? [])),
+      this.eventService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<IEventSig[]>) => res.body ?? [])),
+      this.civilityService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<ICivilitySig[]>) => res.body ?? [])),
+      this.sexeService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<ISexeSig[]>) => res.body ?? [])),
+      this.nationalityService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? [])),
+      this.countryService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? [])),
+      this.cityService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? [])),
+      this.categoryService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? [])),
+      this.fonctionService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? [])),
+      this.organizService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? [])),
+      this.accreditationTypeService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? [])),
+      this.statusService.query({ size: RECORD_ITEMS }).pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? [])),
+      this.attachementService.query().pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? [])),
+      this.codeService.query().pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? [])),
+      this.dayPassInfoService.query().pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? [])),
+    ];
 
-    this.civilityService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICivilitySig[]>) => res.body ?? []))
-      .subscribe((civilities: ICivilitySig[]) => (this.civilitiesSharedCollection = civilities));
+    forkJoin(serviceCalls).subscribe(results => {
+      // All service calls are complete, and results is an array of the data from each call.
 
-    this.sexeService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ISexeSig[]>) => res.body ?? []))
-      .subscribe((sexes: ISexeSig[]) => (this.sexesSharedCollection = sexes));
-
-    this.nationalityService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? []))
-      .subscribe((nationalities: INationalitySig[]) => (this.nationalitiesSharedCollection = nationalities));
-
-    this.countryService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICountrySig[]>) => res.body ?? []))
-      .subscribe((countries: ICountrySig[]) => (this.countriesSharedCollection = countries));
-
-    this.cityService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICitySig[]>) => res.body ?? []))
-      .subscribe((cities: ICitySig[]) => (this.citiesSharedCollection = cities));
-
-    this.categoryService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
-      .subscribe((categories: ICategorySig[]) => (this.categoriesSharedCollection = categories));
-
-    this.fonctionService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
-      .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
-
-    this.organizService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
-      .subscribe((organizs: IOrganizSig[]) => (this.organizsSharedCollection = organizs));
-
-    this.accreditationTypeService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
-      .subscribe((accreditationTypes: IAccreditationTypeSig[]) => (this.accreditationTypesSharedCollection = accreditationTypes));
-
-    this.statusService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
-      .subscribe((statuses: IStatusSig[]) => (this.statusesSharedCollection = statuses));
-
-    this.attachementService
-      .query()
-      .pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? []))
-      .subscribe((attachements: IAttachementSig[]) => (this.attachementsSharedCollection = attachements));
-
-    this.codeService
-      .query()
-      .pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? []))
-      .subscribe((codes: ICodeSig[]) => (this.codesSharedCollection = codes));
-
-    this.dayPassInfoService
-      .query()
-      .pipe(map((res: HttpResponse<IDayPassInfoSig[]>) => res.body ?? []))
-      .subscribe((dayPassInfos: IDayPassInfoSig[]) => (this.dayPassInfosSharedCollection = dayPassInfos));
+      this.sitesSharedCollection = results[0] as ISiteSig[];
+      this.eventsSharedCollection = results[1] as IEventSig[];
+      this.civilitiesSharedCollection = results[2] as ICivilitySig[];
+      this.sexesSharedCollection = results[3] as ISexeSig[];
+      this.nationalitiesSharedCollection = results[4] as INationalitySig[];
+      this.countriesSharedCollection = results[5] as ICountrySig[];
+      this.citiesSharedCollection = results[6] as ICitySig[];
+      this.categoriesSharedCollection = results[7] as ICategorySig[];
+      this.fonctionsSharedCollection = results[8] as IFonctionSig[];
+      this.organizsSharedCollection = results[9] as IOrganizSig[];
+      this.accreditationTypesSharedCollection = results[10] as IAccreditationTypeSig[];
+      this.statusesSharedCollection = results[11] as IStatusSig[];
+      this.attachementsSharedCollection = results[12] as IAttachementSig[];
+      this.codesSharedCollection = results[13] as ICodeSig[];
+      this.dayPassInfosSharedCollection = results[14] as IDayPassInfoSig[];
+      this.isDataLoading = false; // Set isLoading to false when all service calls are complete
+    });
   }
 
   previousState(): void {
@@ -228,27 +201,20 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
   save(): void {
     if (this.accreditationsIds && this.accreditationsIds.length > 0) {
       this.isUpdateLoading = true;
-      const updatedValues: Partial<IAccreditationSig> = this.getUpdatedValues();
-      const updateRequests: Observable<any>[] = [];
+      const updatedValues = this.getUpdatedValues(); // Extract updated values from the form fields
+      const accreditationMassUpdate = this.createAccreditationMassUpdate(updatedValues, this.accreditationsIds);
+      accreditationMassUpdate.accreditationIds = this.accreditationsIds;
 
-      this.accreditationsIds.forEach((accreditationId: number) => {
-        updateRequests.push(
-          this.accreditationService.find(accreditationId).pipe(
-            map((res: HttpResponse<IAccreditationSig>) => res.body ?? []),
-            switchMap(accreditation => {
-              if (accreditation && this.massUpdateForm.valid) {
-                const updatedAccreditation: IAccreditationSig = { ...accreditation, ...updatedValues, accreditationId };
-                return this.accreditationService.update(updatedAccreditation, true, false);
-              } else {
-                return of(null);
-              }
-            })
-          )
-        );
-      });
+      if (this.massUpdateForm.get('accreditationDateStart')?.value) {
+        accreditationMassUpdate.accreditationDateStart = dayjs(this.massUpdateForm.get('accreditationDateStart')?.value);
+      }
 
-      forkJoin(updateRequests).subscribe(
-        () => {
+      if (this.massUpdateForm.get('accreditationDateEnd')?.value) {
+        accreditationMassUpdate.accreditationDateEnd = dayjs(this.massUpdateForm.get('accreditationDateEnd')?.value);
+      }
+
+      this.accreditationService.massUpdate(accreditationMassUpdate).subscribe(result => {
+        if (result) {
           this.operationHistorySigService
             .createNewOperation(
               Entity.Accreditation,
@@ -261,24 +227,22 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
               this.currentAccount?.printingCentre?.printingCentreId!,
               ''
             )
-            .subscribe();
-          console.log('All accreditations updated');
-          this.isUpdateLoading = false;
-          this.previousState();
-        },
-        (error: any) => {
-          console.error('Error updating accreditations', error);
-          this.isUpdateLoading = false;
+            .subscribe(result => {
+              this.isUpdateLoading = false;
+              this.previousState();
+            });
+        } else {
           alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.errorMassUpdate'));
+          this.isUpdateLoading = false;
         }
-      );
+      });
     } else {
       alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.errorMassUpdate'));
     }
   }
 
-  private getUpdatedValues(): Partial<IAccreditationSig> {
-    const fieldsToUpdate: (keyof IAccreditationSig)[] = [
+  private getUpdatedValues(): Partial<IAccreditationMassUpdateSig> {
+    const fieldsToUpdate: (keyof IAccreditationMassUpdateSig)[] = [
       'accreditationOccupation',
       'accreditationStat',
       'accreditationActivated',
@@ -304,9 +268,10 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
       'dayPassInfo',
       'accreditationPhoto',
       'accreditationPhotoContentType',
+      'accreditationUpdateSites',
     ];
 
-    const updatedValues: Partial<IAccreditationSig> = {};
+    const updatedValues: Partial<IAccreditationMassUpdateSig> = {};
 
     fieldsToUpdate.forEach(field => {
       const value = this.massUpdateForm.get(field)?.value;
@@ -327,5 +292,35 @@ export class AccreditationSigMassUpdateComponent implements OnInit {
 
   byteSize(base64String: string): string {
     return this.dataUtils.byteSize(base64String);
+  }
+
+  createAccreditationMassUpdate(
+    updatedValues: Partial<IAccreditationMassUpdateSig>,
+    accreditationIds: number[]
+  ): IAccreditationMassUpdateSig {
+    return {
+      ...updatedValues,
+      accreditationIds,
+    };
+  }
+
+  protected loadFonctionsRelationshipsOptions(): void {
+    const selectedCategory: any = (this.massUpdateForm.get('category') as FormControl).value;
+    if (selectedCategory) {
+      this.fonctionsSharedCollection = [];
+      const req = {
+        size: RECORD_ITEMS,
+        'categoryId.equals': selectedCategory.categoryId,
+      };
+      this.fonctionService
+        .query(req)
+        .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
+        .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
+    } else {
+      this.fonctionService
+        .query()
+        .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
+        .subscribe((fonctions: IFonctionSig[]) => (this.fonctionsSharedCollection = fonctions));
+    }
   }
 }

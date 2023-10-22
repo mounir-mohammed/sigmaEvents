@@ -485,7 +485,7 @@ export class AccreditationSigComponent implements OnInit {
   massUpdate(): void {
     if (this.selectedCount) {
       const accreditationsIds: number[] = this.getSelectedAccreditationsIds();
-      this.router.navigate(['/accreditation-sig', 'massUpdate'], { queryParams: { data: btoa(JSON.stringify(accreditationsIds)) } });
+      this.router.navigate(['/accreditation-sig', 'massUpdate'], { state: { ids: accreditationsIds } });
       this.unSelectAll();
     } else {
       alert(this.translateService.instant('sigmaEventsApp.accreditation.alerts.noAccreditationSelected'));

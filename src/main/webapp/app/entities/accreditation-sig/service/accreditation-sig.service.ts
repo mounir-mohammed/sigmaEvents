@@ -13,6 +13,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { OperationHistorySigService } from 'app/entities/operation-history-sig/service/operation-history-sig.service';
 import { Entity, OperationType } from 'app/config/operationType.contants';
+import { IAccreditationMassUpdateSig, NewAccreditationMassUpdateSig } from '../accreditation-mass-update-sig.model';
 
 export type PartialUpdateAccreditationSig = Partial<IAccreditationSig> & Pick<IAccreditationSig, 'accreditationId'>;
 
@@ -31,6 +32,14 @@ type RestOf<T extends IAccreditationSig | NewAccreditationSig> = Omit<
   accreditationPrintDate?: string | null;
   accreditationDateStart?: string | null;
   accreditationDateEnd?: string | null;
+};
+
+type DefOf<T extends IAccreditationMassUpdateSig | NewAccreditationMassUpdateSig> = Omit<
+  T,
+  'accreditationDateEnd' | 'accreditationDateStart'
+> & {
+  accreditationDateEnd?: string | null;
+  accreditationDateStart?: string | null;
 };
 
 export type RestAccreditationSig = RestOf<IAccreditationSig>;
@@ -178,6 +187,44 @@ export class AccreditationSigService {
     };
   }
 
+  protected convertDateFromClientForMassUpdate<T extends IAccreditationMassUpdateSig | NewAccreditationMassUpdateSig>(
+    accreditationMassUpdateSig: T
+  ): DefOf<T> {
+    if (accreditationMassUpdateSig.accreditationDateEnd && accreditationMassUpdateSig.accreditationDateStart) {
+      return {
+        ...accreditationMassUpdateSig,
+        accreditationDateEnd:
+          accreditationMassUpdateSig.accreditationDateEnd != null ? accreditationMassUpdateSig.accreditationDateEnd.toJSON() ?? null : null,
+        accreditationDateStart:
+          accreditationMassUpdateSig.accreditationDateStart != null
+            ? accreditationMassUpdateSig.accreditationDateStart.toJSON() ?? null
+            : null,
+      };
+    } else if (accreditationMassUpdateSig.accreditationDateEnd && !accreditationMassUpdateSig.accreditationDateStart) {
+      return {
+        ...accreditationMassUpdateSig,
+        accreditationDateEnd:
+          accreditationMassUpdateSig.accreditationDateEnd != null ? accreditationMassUpdateSig.accreditationDateEnd.toJSON() ?? null : null,
+        accreditationDateStart: null,
+      };
+    } else if (!accreditationMassUpdateSig.accreditationDateEnd && accreditationMassUpdateSig.accreditationDateStart) {
+      return {
+        ...accreditationMassUpdateSig,
+        accreditationDateEnd: null,
+        accreditationDateStart:
+          accreditationMassUpdateSig.accreditationDateStart != null
+            ? accreditationMassUpdateSig.accreditationDateStart.toJSON() ?? null
+            : null,
+      };
+    } else {
+      return {
+        ...accreditationMassUpdateSig,
+        accreditationDateEnd: null,
+        accreditationDateStart: null,
+      };
+    }
+  }
+
   protected convertDateFromServer(restAccreditationSig: RestAccreditationSig): IAccreditationSig {
     return {
       ...restAccreditationSig,
@@ -259,5 +306,12 @@ export class AccreditationSigService {
     return this.http
       .put<RestAccreditationSig>(`${this.resourceUrl}/${accreditationId}/status/${statusId}/massprint`, null, { observe: 'response' })
       .pipe(map(res => this.convertResponseFromServer(res, OperationType.MassPrint, accreditationId)));
+  }
+
+  massUpdate(accreditationMassUpdate: IAccreditationMassUpdateSig | NewAccreditationMassUpdateSig): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClientForMassUpdate(accreditationMassUpdate);
+    return this.http
+      .post<RestAccreditationSig>(`${this.resourceUrl}/massUpdate`, copy, { observe: 'response' })
+      .pipe(map(res => this.convertResponseFromServer(res, OperationType.MassUpdate, [])));
   }
 }

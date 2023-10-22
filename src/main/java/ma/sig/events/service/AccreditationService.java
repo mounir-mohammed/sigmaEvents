@@ -2,6 +2,7 @@ package ma.sig.events.service;
 
 import java.util.Optional;
 import ma.sig.events.service.dto.AccreditationDTO;
+import ma.sig.events.service.dto.MassUpdateAccreditationDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -90,4 +91,6 @@ public interface AccreditationService {
      * @return the persisted entity.
      */
     Optional<Boolean> massPrintAccreditation(Long[] accreditationId, Long statusId);
+
+    Optional<Boolean> massUpdate(MassUpdateAccreditationDTO massUpdateAccreditationDTO);
 }

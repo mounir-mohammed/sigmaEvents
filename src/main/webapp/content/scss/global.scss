@@ -423,3 +423,9 @@ footer {
 .search-container .col-md-4 {
   padding: 0%;
 }
+
+.line-break-label {
+  white-space: pre-wrap;
+  max-width: 100%;
+  overflow: auto;
+}

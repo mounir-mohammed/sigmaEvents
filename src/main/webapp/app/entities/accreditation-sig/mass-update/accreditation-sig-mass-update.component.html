@@ -1,4 +1,4 @@
-<div *ngIf="this.isUpdateLoading" class="globalOverlay">
+<div *ngIf="this.isUpdateLoading || this.isDataLoading" class="globalOverlay">
   <img src="../../../../content/images/loading_icon.gif" />
 </div>
 
@@ -18,12 +18,11 @@
         <div class="group-container" *ngIf="accreditationsIds !== null">
           <div class="group-title" sigmaTranslate="sigmaEventsApp.accreditation.groups.id"></div>
           <div class="group-content">
-            <!-- Field 1 -->
             <div class="row mb-3" *ngIf="accreditationsIds !== null">
               <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationId" for="field_accreditationId"
                 >Accreditation Id</label
               >
-              <label class="form-label">{{ accreditationsIds }}</label>
+              <label class="form-label line-break-label">{{ accreditationsIds }}</label>
             </div>
           </div>
         </div>
@@ -33,7 +32,14 @@
             <!-- Field 1 -->
             <div class="row mb-3">
               <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.category" for="field_category">Category</label>
-              <select class="form-control" id="field_category" data-cy="category" name="category" formControlName="category">
+              <select
+                class="form-control"
+                id="field_category"
+                data-cy="category"
+                name="category"
+                formControlName="category"
+                (change)="this.loadFonctionsRelationshipsOptions()"
+              >
                 <option [ngValue]="null"></option>
                 <option
                   [ngValue]="categoryOption"
@@ -100,7 +106,25 @@
 
             <div class="row mb-3">
               <label sigmaTranslate="sigmaEventsApp.accreditation.site" for="field_sites">Site</label>
-              <select class="form-control" id="field_sites" data-cy="site" multiple name="sites" formControlName="sites">
+              <input
+                type="checkbox"
+                id="accreditationUpdateSites"
+                data-cy="accreditationUpdateSites"
+                name="accreditationUpdateSites"
+                formControlName="accreditationUpdateSites"
+              />
+            </div>
+            <div class="row mb-3">
+              <label></label>
+              <select
+                class="form-control"
+                id="field_sites"
+                data-cy="site"
+                multiple
+                name="sites"
+                formControlName="sites"
+                [attr.disabled]="!massUpdateForm.get('accreditationUpdateSites')?.value ? '' : null"
+              >
                 <option [ngValue]="siteOption" *ngFor="let siteOption of sitesSharedCollection" [disabled]="siteOption.siteStat === false">
                   {{ siteOption.siteName }}
                 </option>
