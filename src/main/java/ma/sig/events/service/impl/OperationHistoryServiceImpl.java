@@ -1,8 +1,14 @@
 package ma.sig.events.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import ma.sig.events.domain.Event;
 import ma.sig.events.domain.OperationHistory;
+import ma.sig.events.domain.OperationType;
+import ma.sig.events.repository.EventRepository;
 import ma.sig.events.repository.OperationHistoryRepository;
+import ma.sig.events.repository.OperationTypeRepository;
 import ma.sig.events.service.OperationHistoryService;
 import ma.sig.events.service.dto.OperationHistoryDTO;
 import ma.sig.events.service.mapper.OperationHistoryMapper;
@@ -26,20 +32,72 @@ public class OperationHistoryServiceImpl implements OperationHistoryService {
 
     private final OperationHistoryMapper operationHistoryMapper;
 
+    private final OperationTypeRepository operationTypeRepository;
+
+    private final EventRepository eventRepository;
+
     public OperationHistoryServiceImpl(
         OperationHistoryRepository operationHistoryRepository,
-        OperationHistoryMapper operationHistoryMapper
+        OperationHistoryMapper operationHistoryMapper,
+        OperationTypeRepository operationTypeRepository,
+        EventRepository eventRepository
     ) {
         this.operationHistoryRepository = operationHistoryRepository;
         this.operationHistoryMapper = operationHistoryMapper;
+        this.operationTypeRepository = operationTypeRepository;
+        this.eventRepository = eventRepository;
     }
 
     @Override
     public OperationHistoryDTO save(OperationHistoryDTO operationHistoryDTO) {
-        log.debug("Request to save OperationHistory : {}", operationHistoryDTO);
-        OperationHistory operationHistory = operationHistoryMapper.toEntity(operationHistoryDTO);
-        operationHistory = operationHistoryRepository.save(operationHistory);
-        return operationHistoryMapper.toDto(operationHistory);
+        List<String> paramsSegments = this.getOperationHistoryParamsSegments(operationHistoryDTO.getOperationHistoryParams());
+        if (!paramsSegments.isEmpty() && paramsSegments.size() > 1) {
+            Event event;
+            OperationType operationType;
+            OperationHistoryDTO toGo = null;
+
+            if (operationHistoryDTO.getEvent() != null) {
+                event = eventRepository.findById(operationHistoryDTO.getEvent().getEventId()).get();
+            } else {
+                event = null;
+            }
+
+            if (operationHistoryDTO.getTypeoperation() != null) {
+                operationType = operationTypeRepository.findById(operationHistoryDTO.getTypeoperation().getOperationTypeId()).get();
+            } else {
+                operationType = null;
+            }
+
+            for (String segment : paramsSegments) {
+                OperationHistoryDTO segmentDTO = new OperationHistoryDTO();
+
+                segmentDTO.setOperationHistoryDescription(operationHistoryDTO.getOperationHistoryDescription());
+                segmentDTO.setOperationHistoryDate(operationHistoryDTO.getOperationHistoryDate());
+                segmentDTO.setOperationHistoryUserID(operationHistoryDTO.getOperationHistoryUserID());
+                segmentDTO.setOperationHistoryOldValue(operationHistoryDTO.getOperationHistoryOldValue());
+                segmentDTO.setOperationHistoryNewValue(operationHistoryDTO.getOperationHistoryNewValue());
+                segmentDTO.setOperationHistoryOldId(operationHistoryDTO.getOperationHistoryOldId());
+                segmentDTO.setOperationHistoryNewId(operationHistoryDTO.getOperationHistoryNewId());
+                segmentDTO.setOperationHistoryImportedFile(operationHistoryDTO.getOperationHistoryImportedFile());
+                segmentDTO.setOperationHistoryImportedFilePath(operationHistoryDTO.getOperationHistoryImportedFilePath());
+                segmentDTO.setOperationHistoryParams(segment);
+                segmentDTO.setOperationHistoryAttributs(operationHistoryDTO.getOperationHistoryAttributs());
+                segmentDTO.setOperationHistoryStat(operationHistoryDTO.getOperationHistoryStat());
+                log.debug("Request to save OperationHistory segment: {}", segmentDTO);
+
+                OperationHistory operationHistory = operationHistoryMapper.toEntity(segmentDTO);
+                operationHistory.setEvent(event);
+                operationHistory.setTypeoperation(operationType);
+                operationHistory = operationHistoryRepository.save(operationHistory);
+                toGo = operationHistoryMapper.toDto(operationHistory);
+            }
+            return toGo;
+        } else {
+            log.debug("Request to save one segment OperationHistory : {}", operationHistoryDTO);
+            OperationHistory operationHistory = operationHistoryMapper.toEntity(operationHistoryDTO);
+            operationHistory = operationHistoryRepository.save(operationHistory);
+            return operationHistoryMapper.toDto(operationHistory);
+        }
     }
 
     @Override
@@ -83,5 +141,17 @@ public class OperationHistoryServiceImpl implements OperationHistoryService {
     public void delete(Long id) {
         log.debug("Request to delete OperationHistory : {}", id);
         operationHistoryRepository.deleteById(id);
+    }
+
+    public List<String> getOperationHistoryParamsSegments(String operationHistoryDescription) {
+        List<String> segments = new ArrayList<>();
+        if (operationHistoryDescription != null) {
+            int maxSegmentLength = 200;
+            for (int i = 0; i < operationHistoryDescription.length(); i += maxSegmentLength) {
+                int endIndex = Math.min(i + maxSegmentLength, operationHistoryDescription.length());
+                segments.add(operationHistoryDescription.substring(i, endIndex));
+            }
+        }
+        return segments;
     }
 }
