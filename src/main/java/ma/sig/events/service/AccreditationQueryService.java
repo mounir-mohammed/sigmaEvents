@@ -599,4 +599,17 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
         final Specification<Accreditation> specification = createEventSpecification(id);
         return accreditationRepository.findOne(specification).map(accreditationMapper::toDto);
     }
+
+    /**
+     * Return  {@link Accreditation} which matches the criteria from the database.
+     *
+     * @param id accreditation id.
+     * @return the matching entitie.
+     */
+    @Transactional(readOnly = true)
+    public Optional<Accreditation> findAccreditationByIdCheckEvent(Long id) {
+        log.debug("find AccreditationDTO by id and check event : {}", id);
+        final Specification<Accreditation> specification = createEventSpecification(id);
+        return accreditationRepository.findOne(specification);
+    }
 }

@@ -19,6 +19,7 @@
       "created": "新しい認定が識別子 {{ param }} で作成されました",
       "updated": "認定が識別子 {{ param }} で更新されました",
       "deleted": "認定が識別子 {{ param }} で削除されました",
+      "massUpdated": "{{ param }}つの認定が一括更新されました",
       "delete": {
         "question": "認定 {{ id }} を削除してもよろしいですか？"
       },

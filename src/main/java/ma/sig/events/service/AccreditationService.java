@@ -1,6 +1,7 @@
 package ma.sig.events.service;
 
 import java.util.Optional;
+import ma.sig.events.domain.Accreditation;
 import ma.sig.events.service.dto.AccreditationDTO;
 import ma.sig.events.service.dto.MassUpdateAccreditationDTO;
 import org.springframework.data.domain.Page;
@@ -93,4 +94,6 @@ public interface AccreditationService {
     Optional<Boolean> massPrintAccreditation(Long[] accreditationId, Long statusId);
 
     Optional<Boolean> massUpdate(MassUpdateAccreditationDTO massUpdateAccreditationDTO);
+
+    Optional<Accreditation> findAccreditationByIdCheckEvent(Long id);
 }

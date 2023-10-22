@@ -13,6 +13,7 @@ import ma.sig.events.service.AccreditationService;
 import ma.sig.events.service.criteria.AccreditationCriteria;
 import ma.sig.events.service.dto.AccreditationDTO;
 import ma.sig.events.service.dto.MassUpdateAccreditationDTO;
+import ma.sig.events.service.utils.AccreditationHeaderUtil;
 import ma.sig.events.web.rest.errors.BadRequestAlertException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -328,7 +329,7 @@ public class AccreditationResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, String.valueOf(size))
+            AccreditationHeaderUtil.createEntityMassUpdateAlert(applicationName, true, ENTITY_NAME, String.valueOf(size))
         );
     }
 }

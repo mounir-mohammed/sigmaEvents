@@ -19,6 +19,7 @@
       "created": "Een nieuwe accreditatie is aangemaakt met identificatienummer {{ param }}",
       "updated": "Een accreditatie is bijgewerkt met identificatienummer {{ param }}",
       "deleted": "Een accreditatie is verwijderd met identificatienummer {{ param }}",
+      "massUpdated": "{{ param }} accreditaties zijn grootschalig bijgewerkt",
       "delete": {
         "question": "Weet u zeker dat u accreditatie {{ id }} wilt verwijderen?"
       },

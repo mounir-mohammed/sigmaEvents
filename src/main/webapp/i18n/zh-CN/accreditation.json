@@ -19,6 +19,7 @@
       "created": "已创建新的认证，标识符为 {{ param }}",
       "updated": "已更新标识符为 {{ param }} 的认证",
       "deleted": "已删除标识符为 {{ param }} 的认证",
+      "massUpdated": "已批量更新 {{ param }} 认证",
       "delete": {
         "question": "确定要删除认证 {{ id }} 吗？"
       },

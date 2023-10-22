@@ -5,6 +5,7 @@ import java.util.*;
 import ma.sig.events.domain.*;
 import ma.sig.events.repository.*;
 import ma.sig.events.security.SecurityUtils;
+import ma.sig.events.service.AccreditationQueryService;
 import ma.sig.events.service.AccreditationService;
 import ma.sig.events.service.UserService;
 import ma.sig.events.service.dto.AccreditationDTO;
@@ -40,8 +41,6 @@ public class AccreditationServiceImpl implements AccreditationService {
 
     private final FonctionRepository fonctionRepository;
 
-    private final AreaRepository areaRepository;
-
     private final SiteRepository siteRepository;
 
     private final AccreditationTypeRepository accreditationTypeRepository;
@@ -66,6 +65,8 @@ public class AccreditationServiceImpl implements AccreditationService {
 
     private final CityRepository cityRepository;
 
+    private final AccreditationQueryService accreditationQueryService;
+
     public AccreditationServiceImpl(
         AccreditationRepository accreditationRepository,
         AccreditationMapper accreditationMapper,
@@ -73,7 +74,6 @@ public class AccreditationServiceImpl implements AccreditationService {
         UserService userService,
         CategoryRepository categoryRepository,
         FonctionRepository fonctionRepository,
-        AreaRepository areaRepository,
         SiteRepository siteRepository,
         AccreditationTypeRepository accreditationTypeRepository,
         CivilityRepository civilityRepository,
@@ -85,7 +85,8 @@ public class AccreditationServiceImpl implements AccreditationService {
         DayPassInfoRepository dayPassInfoRepository,
         AttachementRepository attachementRepository,
         CodeRepository codeRepository,
-        CityRepository cityRepository
+        CityRepository cityRepository,
+        AccreditationQueryService accreditationQueryService
     ) {
         this.accreditationRepository = accreditationRepository;
         this.accreditationMapper = accreditationMapper;
@@ -93,7 +94,6 @@ public class AccreditationServiceImpl implements AccreditationService {
         this.userService = userService;
         this.categoryRepository = categoryRepository;
         this.fonctionRepository = fonctionRepository;
-        this.areaRepository = areaRepository;
         this.siteRepository = siteRepository;
         this.accreditationTypeRepository = accreditationTypeRepository;
         this.civilityRepository = civilityRepository;
@@ -106,6 +106,7 @@ public class AccreditationServiceImpl implements AccreditationService {
         this.attachementRepository = attachementRepository;
         this.codeRepository = codeRepository;
         this.cityRepository = cityRepository;
+        this.accreditationQueryService = accreditationQueryService;
     }
 
     @Override
@@ -343,8 +344,7 @@ public class AccreditationServiceImpl implements AccreditationService {
         try {
             for (Long id : massUpdateAccreditationDTO.getAccreditationIds()) {
                 // Map AccreditationDTO to Accreditation
-                accreditationRepository
-                    .findById(id)
+                this.findAccreditationByIdCheckEvent(id)
                     .ifPresent(existingAccreditation -> {
                         try {
                             existingAccreditation.setAccreditationUpdateDate(ZonedDateTime.now());
@@ -462,5 +462,10 @@ public class AccreditationServiceImpl implements AccreditationService {
             log.error("Error updating accreditations", e);
             return Optional.of(false);
         }
+    }
+
+    @Override
+    public Optional<Accreditation> findAccreditationByIdCheckEvent(Long id) {
+        return accreditationQueryService.findAccreditationByIdCheckEvent(id);
     }
 }

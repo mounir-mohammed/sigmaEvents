@@ -19,6 +19,7 @@
       "created": "Eine neue Akkreditierung wurde mit der Kennung {{ param }} erstellt",
       "updated": "Eine Akkreditierung wurde mit der Kennung {{ param }} aktualisiert",
       "deleted": "Eine Akkreditierung wurde mit der Kennung {{ param }} gelöscht",
+      "massUpdated": "{{ param }} Akkreditierungen wurden massenweise aktualisiert",
       "delete": {
         "question": "Sind Sie sicher, dass Sie die Akkreditierung {{ id }} löschen möchten?"
       },

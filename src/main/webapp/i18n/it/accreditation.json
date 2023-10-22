@@ -19,6 +19,7 @@
       "created": "Una nuova Accreditazione è stata creata con l'identificatore {{ param }}",
       "updated": "Un'Accreditazione è stata aggiornata con l'identificatore {{ param }}",
       "deleted": "Un'Accreditazione è stata eliminata con l'identificatore {{ param }}",
+      "massUpdated": "Le {{ param }} accreditazioni sono state aggiornate in massa",
       "delete": {
         "question": "Sei sicuro di voler eliminare l'Accreditazione {{ id }}?"
       },

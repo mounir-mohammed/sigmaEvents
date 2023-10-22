@@ -19,6 +19,7 @@
       "created": "Se ha creado una nueva acreditación con el identificador {{ param }}",
       "updated": "Se ha actualizado una acreditación con el identificador {{ param }}",
       "deleted": "Se ha eliminado una acreditación con el identificador {{ param }}",
+      "massUpdated": "Se han actualizado masivamente {{ param }} acreditaciones",
       "delete": {
         "question": "¿Está seguro de que desea eliminar la acreditación {{ id }}?"
       },
