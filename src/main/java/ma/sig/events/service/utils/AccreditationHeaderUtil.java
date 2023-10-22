@@ -24,8 +24,8 @@ public final class AccreditationHeaderUtil {
         headers.add("X-" + applicationName + "-alert", message);
 
         try {
-            headers.add("X-" + applicationName + "-params", URLEncoder.encode(param, StandardCharsets.UTF_8.toString()));
-        } catch (UnsupportedEncodingException var5) {}
+            headers.add("X-" + applicationName + "-params", URLEncoder.encode(param, StandardCharsets.UTF_8));
+        } catch (Exception e) {}
 
         return headers;
     }
