@@ -119,7 +119,7 @@
     <span sigmaTranslate="sigmaEventsApp.accreditation.home.notFound">No Accreditations found</span>
   </div>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="accreditations && accreditations.length > 0">
+  <div class="table-responsive table-entities table-entities-size" id="entities" *ngIf="accreditations && accreditations.length > 0">
     <table class="table table-striped" aria-describedby="page-heading" id="accreditationsTable">
       <thead>
         <tr sigmaSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
@@ -681,14 +681,9 @@
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
                 class="btn btn-info btn-sm"
                 data-cy="filterOtherEntityButton"
+                title="{{ 'sigmaEventsApp.accreditation.photoArchive' | translate }}"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span
-                  class="d-none d-md-inline"
-                  sigmaTranslate="entity.action.show"
-                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.photoArchive' | translate) }"
-                  >Show Photo Archive</span
-                >
               </button>
               <button
                 *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_INFOSUP]"
@@ -697,14 +692,9 @@
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
                 class="btn btn-info btn-sm"
                 data-cy="filterOtherEntityButton"
+                title="{{ 'sigmaEventsApp.accreditation.infoSupp' | translate }}"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span
-                  class="d-none d-md-inline"
-                  sigmaTranslate="entity.action.show"
-                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.infoSupp' | translate) }"
-                  >Show Info Supp</span
-                >
               </button>
               <button
                 *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_NOTES]"
@@ -713,14 +703,9 @@
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
                 class="btn btn-info btn-sm"
                 data-cy="filterOtherEntityButton"
+                title="{{ 'sigmaEventsApp.accreditation.note' | translate }}"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span
-                  class="d-none d-md-inline"
-                  sigmaTranslate="entity.action.show"
-                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.note' | translate) }"
-                  >Show Note</span
-                >
               </button>
               <button
                 *sigmaHasAnyAuthority="[authority.ADMIN]"
@@ -729,14 +714,9 @@
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
                 class="btn btn-info btn-sm"
                 data-cy="filterOtherEntityButton"
+                title="{{ 'sigmaEventsApp.accreditation.checkAccreditationHistory' | translate }}"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span
-                  class="d-none d-md-inline"
-                  sigmaTranslate="entity.action.show"
-                  [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.checkAccreditationHistory' | translate) }"
-                  >Show Check Accreditation History</span
-                >
               </button>
             </div>
           </td>
