@@ -71,7 +71,7 @@
         "noDataFoundToExport": "Aucune donnée trouvée à exporter.",
         "errorMassUpdate": "Erreur lors de la mise à jour des accréditations."
       },
-      "accreditationId": "Id",
+      "accreditationId": "Numéro",
       "accreditationFirstName": "Prénom",
       "accreditationSecondName": "Deuxième prénom",
       "accreditationLastName": "Nom",
