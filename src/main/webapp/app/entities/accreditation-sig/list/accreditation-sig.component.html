@@ -129,6 +129,7 @@
               <label *ngIf="selectedCount" class="count-checkbox-label">({{ selectedCount }})</label>
             </div>
           </th>
+          <th scope="col"></th>
           <th scope="col" sigmaSortBy="accreditationId" *ngIf="isColumnVisible('accreditationId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Accreditation Id</span>
@@ -425,6 +426,63 @@
           <td>
             <input type="checkbox" [checked]="accreditation.selected" (change)="onRowCheckboxChange(accreditation)" />
           </td>
+
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="{{ 'entity.action.view' | translate }}"
+              >
+                <fa-icon icon="eye"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+                title="{{ 'entity.action.edit' | translate }}"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                (click)="validate(accreditation)"
+                class="btn btn-success btn-sm"
+                data-cy="entityValidateButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_VALIDATE]"
+                title="{{ 'entity.action.validate' | translate }}"
+              >
+                <fa-icon icon="check"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                (click)="print(accreditation)"
+                class="btn btn-info btn-sm"
+                data-cy="entityPrintButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_PRINT]"
+                title="{{ 'entity.action.print' | translate }}"
+              >
+                <fa-icon icon="print"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(accreditation)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_DELETE]"
+                title="{{ 'entity.action.delete' | translate }}"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+          </td>
           <td *ngIf="isColumnVisible('accreditationId')">
             <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
           </td>
@@ -679,58 +737,6 @@
                   [translateValues]="{ otherEntity: ('sigmaEventsApp.accreditation.checkAccreditationHistory' | translate) }"
                   >Show Check Accreditation History</span
                 >
-              </button>
-              <button
-                type="submit"
-                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" sigmaTranslate="entity.action.view">View</span>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" sigmaTranslate="entity.action.edit">Edit</span>
-              </button>
-
-              <button
-                type="submit"
-                (click)="validate(accreditation)"
-                class="btn btn-success btn-sm"
-                data-cy="entityValidateButton"
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_VALIDATE]"
-              >
-                <fa-icon icon="check"></fa-icon>
-                <span class="d-none d-md-inline" sigmaTranslate="entity.action.validate">Validate</span>
-              </button>
-
-              <button
-                type="submit"
-                (click)="print(accreditation)"
-                class="btn btn-info btn-sm"
-                data-cy="entityPrintButton"
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_PRINT]"
-              >
-                <fa-icon icon="print"></fa-icon>
-                <span class="d-none d-md-inline" sigmaTranslate="entity.action.print">Print</span>
-              </button>
-
-              <button
-                type="submit"
-                (click)="delete(accreditation)"
-                class="btn btn-danger btn-sm"
-                data-cy="entityDeleteButton"
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_DELETE]"
-              >
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" sigmaTranslate="entity.action.delete">Delete</span>
               </button>
             </div>
           </td>
