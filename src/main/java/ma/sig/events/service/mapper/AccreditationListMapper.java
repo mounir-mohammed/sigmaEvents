@@ -29,9 +29,14 @@ public interface AccreditationListMapper extends EntityMapper<AccreditationDTO, 
     @Mapping(target = "attachement", source = "attachement", qualifiedByName = "attachementAttachementId")
     @Mapping(target = "code", source = "code", qualifiedByName = "codeCodeId")
     @Mapping(target = "dayPassInfo", source = "dayPassInfo", qualifiedByName = "dayPassInfoDayPassInfoId")
+    @Mapping(target = "accreditationPhotoStat", expression = "java(mapAccreditationPhotoToStat(s.getAccreditationPhoto()))")
     @Mapping(target = "accreditationPhoto", ignore = true)
     @Mapping(target = "accreditationPhotoContentType", ignore = true)
     AccreditationDTO toDto(Accreditation s);
+
+    default Boolean mapAccreditationPhotoToStat(byte[] accreditationPhoto) {
+        return accreditationPhoto != null && accreditationPhoto.length > 0;
+    }
 
     @Mapping(target = "removeSite", ignore = true)
     Accreditation toEntity(AccreditationDTO accreditationDTO);

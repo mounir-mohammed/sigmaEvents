@@ -45,6 +45,8 @@ public class AccreditationDTO implements Serializable {
     private byte[] accreditationPhoto;
 
     private String accreditationPhotoContentType;
+
+    private Boolean accreditationPhotoStat;
     private String accreditationCinId;
 
     private String accreditationPasseportId;
@@ -471,6 +473,14 @@ public class AccreditationDTO implements Serializable {
         this.dayPassInfo = dayPassInfo;
     }
 
+    public Boolean getAccreditationPhotoStat() {
+        return accreditationPhotoStat;
+    }
+
+    public void setAccreditationPhotoStat(Boolean accreditationPhotoStat) {
+        this.accreditationPhotoStat = accreditationPhotoStat;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -507,6 +517,7 @@ public class AccreditationDTO implements Serializable {
             ", accreditationEmail='" + getAccreditationEmail() + "'" +
             ", accreditationTel='" + getAccreditationTel() + "'" +
             ", accreditationPhoto='" + getAccreditationPhoto() + "'" +
+            ", accreditationPhotoStat='" + getAccreditationPhotoStat() + "'" +
             ", accreditationCinId='" + getAccreditationCinId() + "'" +
             ", accreditationPasseportId='" + getAccreditationPasseportId() + "'" +
             ", accreditationCartePresseId='" + getAccreditationCartePresseId() + "'" +

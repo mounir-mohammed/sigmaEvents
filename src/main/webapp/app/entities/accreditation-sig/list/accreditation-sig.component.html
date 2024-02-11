@@ -153,6 +153,36 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" sigmaSortBy="organiz.organizId" *ngIf="isColumnVisible('organiz')">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="category.categoryId" *ngIf="isColumnVisible('category')">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="fonction.fonctionId" *ngIf="isColumnVisible('fonction')">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="nationality.nationalityId" *ngIf="isColumnVisible('nationality')">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" sigmaSortBy="status.statusId" *ngIf="isColumnVisible('status')">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <!-- <th scope="col" sigmaSortBy="accreditationFirstName" *ngIf="isColumnVisible('accreditationFirstName')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">Accreditation First Name</span>
@@ -189,12 +219,6 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="nationality.nationalityId" *ngIf="isColumnVisible('nationality')">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.nationality">Nationality</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
           <th
             scope="col"
             sigmaSortBy="country.countryId"
@@ -211,33 +235,10 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="category.categoryId" *ngIf="isColumnVisible('category')">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.category">Category</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="fonction.fonctionId" *ngIf="isColumnVisible('fonction')">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.fonction">Fonction</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="organiz.organizId" *ngIf="isColumnVisible('organiz')">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.organiz">Organiz</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
+
           <th scope="col" sigmaSortBy="accreditationType.accreditationTypeId" *ngIf="isColumnVisible('accreditationTypeId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationType">Accreditation Type</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" sigmaSortBy="status.statusId" *ngIf="isColumnVisible('status')">
-            <div class="d-flex">
-              <span sigmaTranslate="sigmaEventsApp.accreditation.status">Status</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -453,9 +454,11 @@
           <td *ngIf="isColumnVisible('civility')">
             <div *ngIf="accreditation.civility">
               <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
-                <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{ accreditation.civility.civilityCode }}</a>
+                <a [routerLink]="['/civility-sig', accreditation.civility.civilityId, 'view']">{{
+                  accreditation.civility.civilityValue
+                }}</a>
               </div>
-              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.civility.civilityCode }}</div>
+              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.civility.civilityValue }}</div>
             </div>
           </td>
           <!-- <td *ngIf="isColumnVisible('accreditationFirstName')">{{ accreditation.accreditationFirstName }}</td>
@@ -465,34 +468,14 @@
             {{ accreditation.accreditationLastName }}, {{ accreditation.accreditationFirstName }}
             {{ accreditation.accreditationSecondName }}
           </td>
-          <td *ngIf="isColumnVisible('accreditationBirthDay')">{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
-          <td *ngIf="isColumnVisible('accreditationSexe')">
-            <div *ngIf="accreditation.sexe">
-              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
-                <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
+          <td *ngIf="isColumnVisible('organiz')">
+            <div *ngIf="accreditation.organiz">
+              <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+                <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizName }}</a>
               </div>
-              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.sexe.sexeValue }}</div>
-            </div>
-          </td>
-          <td *ngIf="isColumnVisible('accreditationOccupation')">{{ accreditation.accreditationOccupation }}</td>
-          <td *ngIf="isColumnVisible('nationality')">
-            <div *ngIf="accreditation.nationality">
-              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
-                <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
-                  accreditation.nationality.nationalityValue
-                }}</a>
+              <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
+                {{ accreditation.organiz.organizName }}
               </div>
-              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.nationality.nationalityValue }}</div>
-            </div>
-          </td>
-          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('country')">
-            <div *ngIf="accreditation.country">
-              <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryName }}</a>
-            </div>
-          </td>
-          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('city')">
-            <div *ngIf="accreditation.city">
-              <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityName }}</a>
             </div>
           </td>
           <td *ngIf="isColumnVisible('category')">
@@ -515,14 +498,43 @@
               </div>
             </div>
           </td>
-          <td *ngIf="isColumnVisible('organiz')">
-            <div *ngIf="accreditation.organiz">
-              <div *ngIf="this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
-                <a [routerLink]="['/organiz-sig', accreditation.organiz.organizId, 'view']">{{ accreditation.organiz.organizName }}</a>
+          <td *ngIf="isColumnVisible('nationality')">
+            <div *ngIf="accreditation.nationality">
+              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+                <a [routerLink]="['/nationality-sig', accreditation.nationality.nationalityId, 'view']">{{
+                  accreditation.nationality.nationalityValue
+                }}</a>
               </div>
-              <div *ngIf="!this.accountService.hasAnyAuthority([authority.ADMIN, authority.EVENT_ADMIN])">
-                {{ accreditation.organiz.organizName }}
+              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.nationality.nationalityValue }}</div>
+            </div>
+          </td>
+          <td *ngIf="isColumnVisible('status')">
+            <div *ngIf="accreditation.status">
+              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+                <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
               </div>
+              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.status.statusName }}</div>
+            </div>
+          </td>
+          <td *ngIf="isColumnVisible('accreditationBirthDay')">{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
+          <td *ngIf="isColumnVisible('accreditationSexe')">
+            <div *ngIf="accreditation.sexe">
+              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
+                <a [routerLink]="['/sexe-sig', accreditation.sexe.sexeId, 'view']">{{ accreditation.sexe.sexeValue }}</a>
+              </div>
+              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.sexe.sexeValue }}</div>
+            </div>
+          </td>
+          <td *ngIf="isColumnVisible('accreditationOccupation')">{{ accreditation.accreditationOccupation }}</td>
+
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('country')">
+            <div *ngIf="accreditation.country">
+              <a [routerLink]="['/country-sig', accreditation.country.countryId, 'view']">{{ accreditation.country.countryName }}</a>
+            </div>
+          </td>
+          <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('city')">
+            <div *ngIf="accreditation.city">
+              <a [routerLink]="['/city-sig', accreditation.city.cityId, 'view']">{{ accreditation.city.cityName }}</a>
             </div>
           </td>
           <td *ngIf="isColumnVisible('accreditationTypeId')">
@@ -535,14 +547,6 @@
               <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">
                 {{ accreditation.accreditationType.accreditationTypeValue }}
               </div>
-            </div>
-          </td>
-          <td *ngIf="isColumnVisible('status')">
-            <div *ngIf="accreditation.status">
-              <div *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN)">
-                <a [routerLink]="['/status-sig', accreditation.status.statusId, 'view']">{{ accreditation.status.statusName }}</a>
-              </div>
-              <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.status.statusName }}</div>
             </div>
           </td>
           <td *ngIf="this.accountService.hasAnyAuthority(authority.ADMIN) && isColumnVisible('accreditationDescription')">
@@ -722,6 +726,9 @@
                 title="{{ 'sigmaEventsApp.accreditation.checkAccreditationHistory' | translate }}"
               >
                 <fa-icon icon="eye"></fa-icon>
+              </button>
+              <button *ngIf="!accreditation.accreditationPhotoStat" class="btn btn-danger btn-sm" disabled>
+                <fa-icon icon="camera"></fa-icon>
               </button>
             </div>
           </td>

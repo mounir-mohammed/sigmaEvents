@@ -28,6 +28,7 @@ export interface IAccreditationSig {
   accreditationTel?: string | null;
   accreditationPhoto?: string | null;
   accreditationPhotoContentType?: string | null;
+  accreditationPhotoStat?: boolean | null;
   accreditationCinId?: string | null;
   accreditationPasseportId?: string | null;
   accreditationCartePresseId?: string | null;
