@@ -1,0 +1,1 @@
+DELETE FROM sigmaevents.rel_fonction__area WHERE fonction_fonction_id IN (SELECT fonction_id FROM sigmaevents.fonction WHERE event_event_id='5')
