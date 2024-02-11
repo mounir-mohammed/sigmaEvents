@@ -75,6 +75,7 @@
       "accreditationFirstName": "Nome",
       "accreditationSecondName": "Secondo nome",
       "accreditationLastName": "Cognome",
+      "accreditationName": "Nome",
       "accreditationBirthDay": "Data di nascita",
       "accreditationSexe": "Genere",
       "accreditationOccupation": "Occupazione",

@@ -75,6 +75,7 @@
       "accreditationFirstName": "名字",
       "accreditationSecondName": "中间名",
       "accreditationLastName": "姓氏",
+      "accreditationName": "姓氏",
       "accreditationBirthDay": "出生日期",
       "accreditationSexe": "性别",
       "accreditationOccupation": "职业",

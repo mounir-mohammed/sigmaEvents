@@ -129,7 +129,6 @@
               <label *ngIf="selectedCount" class="count-checkbox-label">({{ selectedCount }})</label>
             </div>
           </th>
-          <th scope="col"></th>
           <th scope="col" sigmaSortBy="accreditationId" *ngIf="isColumnVisible('accreditationId')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationId">Accreditation Id</span>
@@ -148,7 +147,13 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" sigmaSortBy="accreditationFirstName" *ngIf="isColumnVisible('accreditationFirstName')">
+          <th scope="col" sigmaSortBy="accreditationLastName" *ngIf="isColumnVisible('accreditationName')">
+            <div class="d-flex">
+              <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationName">Accreditation Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <!-- <th scope="col" sigmaSortBy="accreditationFirstName" *ngIf="isColumnVisible('accreditationFirstName')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationFirstName">Accreditation First Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -165,7 +170,7 @@
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationLastName">Accreditation Last Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th> -->
           <th scope="col" sigmaSortBy="accreditationBirthDay" *ngIf="isColumnVisible('accreditationBirthDay')">
             <div class="d-flex">
               <span sigmaTranslate="sigmaEventsApp.accreditation.accreditationBirthDay">Accreditation Birth Day</span>
@@ -427,62 +432,6 @@
             <input type="checkbox" [checked]="accreditation.selected" (change)="onRowCheckboxChange(accreditation)" />
           </td>
 
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-                title="{{ 'entity.action.view' | translate }}"
-              >
-                <fa-icon icon="eye"></fa-icon>
-              </button>
-
-              <button
-                type="submit"
-                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-                title="{{ 'entity.action.edit' | translate }}"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-              </button>
-
-              <button
-                type="submit"
-                (click)="validate(accreditation)"
-                class="btn btn-success btn-sm"
-                data-cy="entityValidateButton"
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_VALIDATE]"
-                title="{{ 'entity.action.validate' | translate }}"
-              >
-                <fa-icon icon="check"></fa-icon>
-              </button>
-
-              <button
-                type="submit"
-                (click)="print(accreditation)"
-                class="btn btn-info btn-sm"
-                data-cy="entityPrintButton"
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_PRINT]"
-                title="{{ 'entity.action.print' | translate }}"
-              >
-                <fa-icon icon="print"></fa-icon>
-              </button>
-
-              <button
-                type="submit"
-                (click)="delete(accreditation)"
-                class="btn btn-danger btn-sm"
-                data-cy="entityDeleteButton"
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_DELETE]"
-                title="{{ 'entity.action.delete' | translate }}"
-              >
-                <fa-icon icon="times"></fa-icon>
-              </button>
-            </div>
-          </td>
           <td *ngIf="isColumnVisible('accreditationId')">
             <a [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']">{{ accreditation.accreditationId }}</a>
           </td>
@@ -509,9 +458,13 @@
               <div *ngIf="!this.accountService.hasAnyAuthority(authority.ADMIN)">{{ accreditation.civility.civilityCode }}</div>
             </div>
           </td>
-          <td *ngIf="isColumnVisible('accreditationFirstName')">{{ accreditation.accreditationFirstName }}</td>
+          <!-- <td *ngIf="isColumnVisible('accreditationFirstName')">{{ accreditation.accreditationFirstName }}</td>
           <td *ngIf="isColumnVisible('accreditationSecondName')">{{ accreditation.accreditationSecondName }}</td>
-          <td *ngIf="isColumnVisible('accreditationLastName')">{{ accreditation.accreditationLastName }}</td>
+          <td *ngIf="isColumnVisible('accreditationLastName')">{{ accreditation.accreditationLastName }}</td> -->
+          <td *ngIf="isColumnVisible('accreditationName')">
+            {{ accreditation.accreditationLastName }}, {{ accreditation.accreditationFirstName }}
+            {{ accreditation.accreditationSecondName }}
+          </td>
           <td *ngIf="isColumnVisible('accreditationBirthDay')">{{ accreditation.accreditationBirthDay | formatMediumDate }}</td>
           <td *ngIf="isColumnVisible('accreditationSexe')">
             <div *ngIf="accreditation.sexe">
@@ -675,7 +628,59 @@
           <td class="text-end">
             <div class="btn-group">
               <button
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO]"
+                type="submit"
+                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+                title="{{ 'entity.action.view' | translate }}"
+              >
+                <fa-icon icon="eye"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+                title="{{ 'entity.action.edit' | translate }}"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                (click)="validate(accreditation)"
+                class="btn btn-success btn-sm"
+                data-cy="entityValidateButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_VALIDATE]"
+                title="{{ 'entity.action.validate' | translate }}"
+              >
+                <fa-icon icon="check"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                (click)="print(accreditation)"
+                class="btn btn-info btn-sm"
+                data-cy="entityPrintButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_PRINT]"
+                title="{{ 'entity.action.print' | translate }}"
+              >
+                <fa-icon icon="print"></fa-icon>
+              </button>
+
+              <button
+                type="submit"
+                (click)="delete(accreditation)"
+                class="btn btn-danger btn-sm"
+                data-cy="entityDeleteButton"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_DELETE]"
+                title="{{ 'entity.action.delete' | translate }}"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+              <button
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.CAN_ACC_SHOW_ARCH_PHOTO]"
                 type="submit"
                 [routerLink]="['/photo-archive-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
@@ -686,7 +691,7 @@
                 <fa-icon icon="eye"></fa-icon>
               </button>
               <button
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_INFOSUP]"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.CAN_ACC_SHOW_INFOSUP]"
                 type="submit"
                 [routerLink]="['/info-supp-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"
@@ -697,7 +702,7 @@
                 <fa-icon icon="eye"></fa-icon>
               </button>
               <button
-                *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_SHOW_NOTES]"
+                *sigmaHasAnyAuthority="[authority.ADMIN, authority.CAN_ACC_SHOW_NOTES]"
                 type="submit"
                 [routerLink]="['/note-sig']"
                 [queryParams]="{ 'filter[accreditationId.in]': accreditation.accreditationId }"

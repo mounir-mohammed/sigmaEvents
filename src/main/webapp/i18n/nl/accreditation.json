@@ -75,6 +75,7 @@
       "accreditationFirstName": "Voornaam",
       "accreditationSecondName": "Tweede naam",
       "accreditationLastName": "Achternaam",
+      "accreditationName": "naam",
       "accreditationBirthDay": "Geboortedatum",
       "accreditationSexe": "Geslacht",
       "accreditationOccupation": "Beroep",
