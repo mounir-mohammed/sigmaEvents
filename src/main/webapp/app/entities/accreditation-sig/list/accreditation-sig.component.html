@@ -631,6 +631,9 @@
           </td>
           <td class="text-end">
             <div class="btn-group">
+              <button *ngIf="!accreditation.accreditationPhotoStat" class="btn btn-danger btn-sm" disabled>
+                <fa-icon icon="camera"></fa-icon>
+              </button>
               <button
                 type="submit"
                 [routerLink]="['/accreditation-sig', accreditation.accreditationId, 'view']"
@@ -726,9 +729,6 @@
                 title="{{ 'sigmaEventsApp.accreditation.checkAccreditationHistory' | translate }}"
               >
                 <fa-icon icon="eye"></fa-icon>
-              </button>
-              <button *ngIf="!accreditation.accreditationPhotoStat" class="btn btn-danger btn-sm" disabled>
-                <fa-icon icon="camera"></fa-icon>
               </button>
             </div>
           </td>
