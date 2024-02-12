@@ -2,34 +2,34 @@
   "sigmaEventsApp": {
     "category": {
       "home": {
-        "title": "Categories",
+        "title": "Catégories",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Category",
-        "createOrEditLabel": "Créer ou éditer un Category",
-        "notFound": "Aucun Category trouvé"
+        "createLabel": "Créer une nouvelle Catégorie",
+        "createOrEditLabel": "Créer ou éditer un Catégorie",
+        "notFound": "Aucun Catégorie trouvé"
       },
-      "created": "Un nouveau Category a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Category avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Category avec l'identifiant {{ param }} a été supprimé",
+      "created": "une nouvelle Catégorie a été créé avec l'identifiant {{ param }}",
+      "updated": "La Catégorie avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Catégorie avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Category {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer La Catégorie {{ id }} ?"
       },
       "detail": {
-        "title": "Category"
+        "title": "Catégorie"
       },
-      "categoryId": "Category Id",
-      "categoryName": "Category Name",
-      "categoryAbreviation": "Category Abreviation",
-      "categoryColor": "Category Color",
-      "categoryDescription": "Category Description",
-      "categoryLogo": "Category Logo",
-      "categoryParams": "Category Params",
-      "categoryAttributs": "Category Attributs",
-      "categoryStat": "Category Stat",
+      "categoryId": "ID Catégorie",
+      "categoryName": "Nom de la Catégorie",
+      "categoryAbreviation": "Abreviation de la Catégorie",
+      "categoryColor": "Couleur de la Catégorie",
+      "categoryDescription": "Description de la Catégorie",
+      "categoryLogo": "Image de la Catégorie",
+      "categoryParams": "Paramétres de la Catégorie",
+      "categoryAttributs": "Attributes de la Catégorie",
+      "categoryStat": "état de la Catégorie",
       "fonction": "Fonction",
-      "accreditation": "Accreditation",
-      "printingModel": "Printing Model",
-      "event": "Event"
+      "accreditation": "Accréditation",
+      "printingModel": "Model d'impréssion",
+      "event": "évenement"
     }
   }
 }

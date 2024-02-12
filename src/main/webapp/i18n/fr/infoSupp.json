@@ -2,7 +2,7 @@
   "sigmaEventsApp": {
     "infoSupp": {
       "home": {
-        "title": "InfoSupps",
+        "title": "Information supplémentaire",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Info Supp",
         "createOrEditLabel": "Créer ou éditer un Info Supp",
@@ -15,7 +15,7 @@
         "question": "Êtes-vous certain de vouloir supprimer le Info Supp {{ id }} ?"
       },
       "detail": {
-        "title": "Info Supp"
+        "title": "Information supplémentaire"
       },
       "infoSuppId": "Info Supp Id",
       "infoSuppName": "Info Supp Name",
@@ -25,7 +25,7 @@
       "infoSuppStat": "Info Supp Stat",
       "infoSuppType": "Info Supp Type",
       "accreditation": "Accreditation",
-      "event": "Event"
+      "event": "évenement"
     }
   }
 }

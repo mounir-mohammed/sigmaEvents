@@ -4,6 +4,9 @@
     "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=es\">actualice su navegador</a> para mejorar su experiencia.",
     "menu": {
       "home": "Inicio",
+      "sysManagement": "Gestión del sistema",
+      "eventManagement": "Gestión de eventos",
+      "securityManagement": "Gestión de seguridad",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Servicios",
@@ -46,6 +49,8 @@
         "eventFormSig": "Formulario de evento",
         "eventFieldSig": "Campo de evento",
         "eventControlSig": "Control de evento",
+        "reportSig": "Informes",
+        "statisticSig": "Estadísticas",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

@@ -2,7 +2,7 @@
   "sigmaEventsApp": {
     "photoArchive": {
       "home": {
-        "title": "PhotoArchives",
+        "title": "Archive des photos",
         "refreshListLabel": "Actualiser la liste",
         "createLabel": "Créer un nouveau Photo Archive",
         "createOrEditLabel": "Créer ou éditer un Photo Archive",
@@ -15,7 +15,7 @@
         "question": "Êtes-vous certain de vouloir supprimer le Photo Archive {{ id }} ?"
       },
       "detail": {
-        "title": "Photo Archive"
+        "title": "Archive des photos"
       },
       "photoArchiveId": "Photo Archive Id",
       "photoArchiveName": "Photo Archive Name",

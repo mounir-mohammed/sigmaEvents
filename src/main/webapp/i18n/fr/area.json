@@ -2,31 +2,31 @@
   "sigmaEventsApp": {
     "area": {
       "home": {
-        "title": "Areas",
+        "title": "Zones",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Area",
-        "createOrEditLabel": "Créer ou éditer un Area",
-        "notFound": "Aucun Area trouvé"
+        "createLabel": "Créer une nouvelle Zone",
+        "createOrEditLabel": "Créer ou éditer une Zone",
+        "notFound": "Aucun Zone trouvé"
       },
-      "created": "Un nouveau Area a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Area avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Area avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Zone a été créé avec l'identifiant {{ param }}",
+      "updated": "La Zone avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Zone avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Area {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Zone {{ id }} ?"
       },
       "detail": {
-        "title": "Area"
+        "title": "Zone"
       },
-      "areaId": "Area Id",
-      "areaName": "Area Name",
-      "areaAbreviation": "Area Abreviation",
-      "areaColor": "Area Color",
-      "areaDescription": "Area Description",
-      "areaLogo": "Area Logo",
-      "areaParams": "Area Params",
-      "areaAttributs": "Area Attributs",
-      "areaStat": "Area Stat",
-      "event": "Event",
+      "areaId": "ID Zone",
+      "areaName": "Nom de la Zone",
+      "areaAbreviation": "Abreviation de la Zone",
+      "areaColor": "Couleur de la Zone",
+      "areaDescription": "Description de la Zone",
+      "areaLogo": "Image de la Zone",
+      "areaParams": "Paramétres de la Zone",
+      "areaAttributs": "Attributes de la Zone",
+      "areaStat": "état de la Zone",
+      "event": "évenement",
       "fonction": "Fonction"
     }
   }

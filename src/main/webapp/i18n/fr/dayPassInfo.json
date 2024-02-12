@@ -2,36 +2,36 @@
   "sigmaEventsApp": {
     "dayPassInfo": {
       "home": {
-        "title": "DayPassInfos",
+        "title": "Laissez-passer journalier",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Day Pass Info",
-        "createOrEditLabel": "Créer ou éditer un Day Pass Info",
-        "notFound": "Aucun Day Pass Info trouvé"
+        "createLabel": "Créer un nouveau Laissez-passer",
+        "createOrEditLabel": "Créer ou éditer un Laissez-passer",
+        "notFound": "Aucun Laissez-passer trouvé"
       },
-      "created": "Un nouveau Day Pass Info a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Day Pass Info avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Day Pass Info avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Laissez-passer a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Laissez-passer avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Laissez-passer avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Day Pass Info {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Laissez-passer {{ id }} ?"
       },
       "detail": {
-        "title": "Day Pass Info"
+        "title": "Laissez-passer"
       },
-      "dayPassInfoId": "Day Pass Info Id",
-      "dayPassInfoName": "Day Pass Info Name",
-      "dayPassDescription": "Day Pass Description",
-      "dayPassLogo": "Day Pass Logo",
-      "dayPassInfoCreationDate": "Day Pass Info Creation Date",
-      "dayPassInfoUpdateDate": "Day Pass Info Update Date",
-      "dayPassInfoCreatedByuser": "Day Pass Info Created Byuser",
-      "dayPassInfoDateStart": "Day Pass Info Date Start",
-      "dayPassInfoDateEnd": "Day Pass Info Date End",
-      "dayPassInfoNumber": "Day Pass Info Number",
-      "dayPassParams": "Day Pass Params",
-      "dayPassAttributs": "Day Pass Attributs",
-      "dayPassInfoStat": "Day Pass Info Stat",
-      "accreditation": "Accreditation",
-      "event": "Event"
+      "dayPassInfoId": "Laissez-passer ID",
+      "dayPassInfoName": "Laissez-passer Nom",
+      "dayPassDescription": "Laissez-passer Description",
+      "dayPassLogo": "Laissez-passer image",
+      "dayPassInfoCreationDate": "Laissez-passer date de création",
+      "dayPassInfoUpdateDate": "Laissez-passer date de modification",
+      "dayPassInfoCreatedByuser": "Laissez-passer créé par",
+      "dayPassInfoDateStart": "Laissez-passer date début",
+      "dayPassInfoDateEnd": "Laissez-passer date fin",
+      "dayPassInfoNumber": "Laissez-passer quantité",
+      "dayPassParams": "Laissez-passer paramétres",
+      "dayPassAttributs": "Laissez-passer attributes",
+      "dayPassInfoStat": "Laissez-passer état",
+      "accreditation": "Accréditation",
+      "event": "événement"
     }
   }
 }

@@ -2,33 +2,33 @@
   "sigmaEventsApp": {
     "attachement": {
       "home": {
-        "title": "Attachements",
+        "title": "Pièce jointe",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Attachement",
-        "createOrEditLabel": "Créer ou éditer un Attachement",
-        "notFound": "Aucun Attachement trouvé"
+        "createLabel": "Créer une nouvelle Pièce jointe",
+        "createOrEditLabel": "Créer ou éditer un Pièce jointe",
+        "notFound": "Aucun Pièce jointe trouvé"
       },
-      "created": "Un nouveau Attachement a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Attachement avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Attachement avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Pièce jointe a été créé avec l'identifiant {{ param }}",
+      "updated": "La Pièce jointe avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Pièce jointe avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Attachement {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Pièce jointe {{ id }} ?"
       },
       "detail": {
-        "title": "Attachement"
+        "title": "Pièce jointe"
       },
-      "attachementId": "Attachement Id",
-      "attachementName": "Attachement Name",
-      "attachementPath": "Attachement Path",
-      "attachementBlob": "Attachement Blob",
-      "attachementDescription": "Attachement Description",
-      "attachementPhoto": "Attachement Photo",
-      "attachementParams": "Attachement Params",
-      "attachementAttributs": "Attachement Attributs",
-      "attachementStat": "Attachement Stat",
+      "attachementId": "Pièce jointe ID",
+      "attachementName": "Pièce jointe Nom",
+      "attachementPath": "Pièce jointe chemin",
+      "attachementBlob": "Pièce jointe Blob",
+      "attachementDescription": "Pièce jointe Description",
+      "attachementPhoto": "Pièce jointe Photo",
+      "attachementParams": "Pièce jointe paramétres",
+      "attachementAttributs": "Pièce jointe attributes",
+      "attachementStat": "Pièce jointe état",
       "accreditation": "Accreditation",
-      "attachementType": "Attachement Type",
-      "event": "Event"
+      "attachementType": "Pièce jointe Type",
+      "event": "évenement"
     }
   }
 }

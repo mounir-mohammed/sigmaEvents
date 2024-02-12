@@ -17,23 +17,23 @@
       "detail": {
         "title": "Site"
       },
-      "siteId": "Site Id",
-      "siteName": "Site Name",
-      "siteColor": "Site Color",
-      "siteAbreviation": "Site Abreviation",
-      "siteDescription": "Site Description",
-      "siteLogo": "Site Logo",
-      "siteAdresse": "Site Adresse",
-      "siteEmail": "Site Email",
-      "siteTel": "Site Tel",
-      "siteFax": "Site Fax",
-      "siteResponsableName": "Site Responsable Name",
-      "siteParams": "Site Params",
-      "siteAttributs": "Site Attributs",
-      "siteStat": "Site Stat",
-      "city": "City",
-      "event": "Event",
-      "accreditation": "Accreditation"
+      "siteId": "ID Site",
+      "siteName": "Nom du Site",
+      "siteColor": "Couleur du Site",
+      "siteAbreviation": "Abreviation du Site",
+      "siteDescription": "Description du Site",
+      "siteLogo": "Image du Site",
+      "siteAdresse": "Adresse du Site",
+      "siteEmail": "Email du site",
+      "siteTel": "Tel du Site",
+      "siteFax": "Fax du Site",
+      "siteResponsableName": "Responsable du Site",
+      "siteParams": "Paramétres du Site",
+      "siteAttributs": "Attributes du Site",
+      "siteStat": "état du Site",
+      "city": "Ville du site",
+      "event": "évenement",
+      "accreditation": "Accréditation"
     }
   }
 }

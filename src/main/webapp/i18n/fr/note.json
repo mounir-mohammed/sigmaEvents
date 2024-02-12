@@ -4,27 +4,27 @@
       "home": {
         "title": "Notes",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Note",
+        "createLabel": "Créer une nouvelle Note",
         "createOrEditLabel": "Créer ou éditer un Note",
-        "notFound": "Aucun Note trouvé"
+        "notFound": "Aucune Note trouvée"
       },
-      "created": "Un nouveau Note a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Note avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Note avec l'identifiant {{ param }} a été supprimé",
+      "created": "Une nouvelle Note a été créé avec l'identifiant {{ param }}",
+      "updated": "La Note avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La Note avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Note {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer la Note {{ id }} ?"
       },
       "detail": {
         "title": "Note"
       },
-      "noteId": "Note Id",
-      "noteValue": "Note Value",
-      "noteDescription": "Note Description",
-      "noteTypeParams": "Note Type Params",
-      "noteTypeAttributs": "Note Type Attributs",
-      "noteStat": "Note Stat",
-      "accreditation": "Accreditation",
-      "event": "Event"
+      "noteId": "ID Note",
+      "noteValue": "Valeur de la Note",
+      "noteDescription": "Description de la Note",
+      "noteTypeParams": "Paramétres de la Note",
+      "noteTypeAttributs": "Attributes de la Note",
+      "noteStat": "état de la Note",
+      "accreditation": "Accréditation",
+      "event": "évenement"
     }
   }
 }

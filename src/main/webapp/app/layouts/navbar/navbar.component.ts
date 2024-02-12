@@ -11,6 +11,29 @@ import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
 import { Authority } from 'app/config/authority.constants';
+import { faCity, faIdCard, faKeyboard, faSquarePollHorizontal } from '@fortawesome/free-solid-svg-icons';
+import { faShieldHalved } from '@fortawesome/free-solid-svg-icons';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { faMedal } from '@fortawesome/free-solid-svg-icons';
+import { faList12 } from '@fortawesome/free-solid-svg-icons';
+import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faUserDoctor } from '@fortawesome/free-solid-svg-icons';
+import { faUsersLine } from '@fortawesome/free-solid-svg-icons';
+import { faBarcode } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faSitemap } from '@fortawesome/free-solid-svg-icons';
+import { faImages } from '@fortawesome/free-solid-svg-icons';
+import { faHotel } from '@fortawesome/free-solid-svg-icons';
+import { faTicket } from '@fortawesome/free-solid-svg-icons';
+import { faNoteSticky } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import { faClone } from '@fortawesome/free-solid-svg-icons';
+import { faVenusMars } from '@fortawesome/free-solid-svg-icons';
+import { faPassport } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'sigma-navbar',
@@ -26,6 +49,32 @@ export class NavbarComponent implements OnInit {
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
   authority = Authority;
+  faShieldHalved = faShieldHalved;
+  faGear = faGear;
+  faIdCard = faIdCard;
+  faMedal = faMedal;
+  faList12 = faList12;
+  faFile = faFile;
+  faLocationDot = faLocationDot;
+  faUserDoctor = faUserDoctor;
+  faUsersLine = faUsersLine;
+  faBarcode = faBarcode;
+  faCircleInfo = faCircleInfo;
+  faPaperclip = faPaperclip;
+  faSitemap = faSitemap;
+  faImages = faImages;
+  faHotel = faHotel;
+  faTicket = faTicket;
+  faNoteSticky = faNoteSticky;
+  faClockRotateLeft = faClockRotateLeft;
+  faChartSimple = faChartSimple;
+  faClone = faClone;
+  faVenusMars = faVenusMars;
+  faPassport = faPassport;
+  faGlobe = faGlobe;
+  faCity = faCity;
+  faKeyboard = faKeyboard;
+  faSquarePollHorizontal = faSquarePollHorizontal;
 
   constructor(
     private loginService: LoginService,
@@ -75,9 +124,36 @@ export class NavbarComponent implements OnInit {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
-  canShowEntities(): boolean {
+  canShowAccreditations(): boolean {
     if (this.account) {
       if (this.account?.printingCentre?.event?.eventId != null || this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  canShowSystem(): boolean {
+    if (this.account) {
+      if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  canShowEvent(): boolean {
+    if (this.account) {
+      if (this.accountService.hasAnyAuthority([Authority.ADMIN, Authority.EVENT_ADMIN])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  canShowSecurity(): boolean {
+    if (this.account) {
+      if (this.accountService.hasAnyAuthority([Authority.ADMIN, Authority.EVENT_ADMIN])) {
         return true;
       }
     }

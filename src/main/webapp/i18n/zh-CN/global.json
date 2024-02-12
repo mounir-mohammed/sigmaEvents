@@ -4,6 +4,9 @@
     "browsehappy": "您目前使用<strong>过于老旧</strong>的浏览器, 建议您<a href=\"http://browsehappy.com/?locale=en\">升级浏览器</a>让您有更佳的上网体验.",
     "menu": {
       "home": "首页",
+      "sysManagement": "系统管理",
+      "eventManagement": "事件管理",
+      "securityManagement": "安全管理",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "服务",
@@ -46,6 +49,8 @@
         "eventFormSig": "事件表单",
         "eventFieldSig": "事件字段",
         "eventControlSig": "事件控制",
+        "reportSig": "报告",
+        "statisticSig": "统计",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

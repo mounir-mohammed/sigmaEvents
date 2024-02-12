@@ -4,6 +4,9 @@
     "browsehappy": "U gebruikt een <strong>verouderde</strong> browser. <a href=\"http://browsehappy.com/?locale=en\">upgrade uw browser</a> om de bruikbaarheid te verbeteren.",
     "menu": {
       "home": "Startpagina",
+      "sysManagement": "Systeembeheer",
+      "eventManagement": "Gebeurtenissenbeheer",
+      "securityManagement": "Beveiligingsbeheer",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Diensten",
@@ -46,6 +49,8 @@
         "eventFormSig": "Evenementformulier",
         "eventFieldSig": "Evenementveld",
         "eventControlSig": "Evenementscontrole",
+        "reportSig": "Rapporten",
+        "statisticSig": "Statistieken",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
