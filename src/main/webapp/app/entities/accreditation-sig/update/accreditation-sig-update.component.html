@@ -699,7 +699,7 @@
           </div>
         </div>
 
-        <div class="group-container" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+        <div class="group-container" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.EVENT_USER]">
           <div class="group-title" sigmaTranslate="sigmaEventsApp.accreditation.groups.additionalInformation"></div>
           <div class="group-content">
             <!-- Field 1 -->
@@ -774,14 +774,25 @@
               </select>
             </div>
 
-            <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+            <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN]">
               <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
               <select class="form-control" id="field_code" data-cy="code" name="code" formControlName="code" [compareWith]="compareCodeSig">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="codeOption" *ngFor="let codeOption of codesSharedCollection" [disabled]="codeOption.codeStat === false">
+                <option
+                  [ngValue]="codeOption"
+                  *ngFor="let codeOption of codesSharedCollection"
+                  [disabled]="codeOption.codeStat === false || codeOption.codeUsed === true"
+                >
                   {{ codeOption.codeValue }}
                 </option>
               </select>
+            </div>
+
+            <div class="row mb-3" *sigmaHasAnyAuthority="[authority.EVENT_ADMIN, authority.EVENT_USER]">
+              <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
+              <ng-container *ngIf="accreditation?.code?.codeValue">
+                <label class="form-control">{{ accreditation?.code?.codeValue }}</label>
+              </ng-container>
             </div>
 
             <div class="row mb-3" *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">

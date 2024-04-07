@@ -193,6 +193,7 @@
     "userexists": "اسم الدخول سبق استخدامه!",
     "emailexists": "البريد الالكتروني قيد الاستخدام بالفعل!",
     "idexists": "{{ entityName }} جديد لا يمكن أن يكون له معرف بالفعل",
+    "codenotfound": "لا يمكن إنشاء {{ entityName }} جديد، لم يتم العثور على رمز غير مستخدم، يرجى التحقق من معلمات الحدث.",
     "idnull": "Invalid ID",
     "idinvalid": "Invalid Id",
     "idnotfound": "ID cannot be found",

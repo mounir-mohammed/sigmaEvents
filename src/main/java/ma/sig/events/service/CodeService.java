@@ -55,4 +55,55 @@ public interface CodeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Update used code with the "id" code.
+     *
+     * @param id the id of the entity.
+     */
+    void used(Long id);
+
+    /**
+     * Get code nonUsed with event id.
+     *
+     * @param eventId the id of the event.
+     * @return the entity.
+     */
+    Optional<CodeDTO> findOneNonUsed(Long eventId);
+
+    /**
+     * Get code nonUsed with event id filter by accreditationType.
+     *
+     * @param eventId the id of the event.
+     * @param accreditationType the accreditation Type.
+     * @return the entity.
+     */
+    Optional<CodeDTO> findOneNonUsedWithAccreditationType(Long eventId, String accreditationType);
+
+    /**
+     * Get code nonUsed with event id filter by category.
+     *
+     * @param eventId the id of the event.
+     * @param category the accreditation Type.
+     * @return the entity.
+     */
+    Optional<CodeDTO> findOneNonUsedWithCategory(Long eventId, String category);
+
+    /**
+     * Get code nonUsed with event id filter by function.
+     *
+     * @param eventId the id of the event.
+     * @param function the accreditation Type.
+     * @return the entity.
+     */
+    Optional<CodeDTO> findOneNonUsedWithFunction(Long eventId, String function);
+
+    /**
+     * Get code nonUsed with event id filter by organiz.
+     *
+     * @param eventId the id of the event.
+     * @param organiz the accreditation Type.
+     * @return the entity.
+     */
+    Optional<CodeDTO> findOneNonUsedWithOrganiz(Long eventId, String organiz);
 }

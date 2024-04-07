@@ -23,14 +23,19 @@
 
         <div class="row mb-3">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.code.codeForEntity" for="field_codeForEntity">Code For Entity</label>
-          <input
-            type="text"
+          <select
             class="form-control"
             name="codeForEntity"
             id="field_codeForEntity"
             data-cy="codeForEntity"
             formControlName="codeForEntity"
-          />
+          >
+            <option value=""></option>
+            <option value="ACCREDITATION_TYPE">ACCREDITATION_TYPE</option>
+            <option value="CATEGORY">CATEGORY</option>
+            <option value="FUNCTION">FUNCTION</option>
+            <option value="ORGANIZ">ORGANIZ</option>
+          </select>
         </div>
 
         <div class="row mb-3">

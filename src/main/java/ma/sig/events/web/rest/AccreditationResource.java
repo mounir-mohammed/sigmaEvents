@@ -309,7 +309,7 @@ public class AccreditationResource {
     /**
      * {@code PATCH  /accreditations/massUpdate} : Mass Partial updates given fields of an existing accreditation, field will ignore if it is null
      *
-     * @param accreditations the accreditationDTO List to update.
+     * @param massUpdateAccreditationDTO the accreditationDTO List to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the stat,
      * or with status {@code 500 (Internal Server Error)} if the accreditations couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.

@@ -193,6 +193,7 @@
     "userexists": "Login name already used!",
     "emailexists": "Email is already in use!",
     "idexists": "A new {{entityName}} cannot already have an ID",
+    "codenotfound": "新しい {{ entityName }} を作成できません。未使用のコードが見つかりませんでした。イベントのパラメータを確認してください。",
     "idnull": "Invalid ID",
     "idinvalid": "Invalid Id",
     "idnotfound": "ID cannot be found",

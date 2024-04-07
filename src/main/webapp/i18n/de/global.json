@@ -193,6 +193,7 @@
     "userexists": "Benutzername bereits vergeben!",
     "emailexists": "Email wird bereits verwendet!",
     "idexists": "Ein neuer {{entityName}} kann noch keine ID haben",
+    "codenotfound": "Es kann kein neues {{ entityName }} erstellt werden. Es wurde kein unbenutzter Code gefunden. Bitte überprüfen Sie die Ereignisparameter.",
     "idnull": "Ungültige ID",
     "idinvalid": "Ungültige ID",
     "idnotfound": "ID konnte nicht gefunden werden",

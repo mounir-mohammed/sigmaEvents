@@ -193,6 +193,7 @@
     "userexists": "Il nome utente è già in uso!",
     "emailexists": "L'email è già in uso!",
     "idexists": "Un(a) nuovo/a {{entityName}} non può già avere un ID",
+    "codenotfound": "Impossibile creare un nuovo {{ entityName }}, nessun codice non utilizzato trovato, si prega di verificare i parametri dell'evento.",
     "idnull": "Invalid ID",
     "idinvalid": "Invalid Id",
     "idnotfound": "ID cannot be found",

@@ -5,6 +5,7 @@ import ma.sig.events.domain.Code;
 import ma.sig.events.repository.CodeRepository;
 import ma.sig.events.service.CodeService;
 import ma.sig.events.service.dto.CodeDTO;
+import ma.sig.events.service.enums.CodeForEntityEnum;
 import ma.sig.events.service.mapper.CodeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,5 +81,77 @@ public class CodeServiceImpl implements CodeService {
     public void delete(Long id) {
         log.debug("Request to delete Code : {}", id);
         codeRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void used(Long id) {
+        log.debug("Marking Code as used: {}", id);
+        codeRepository
+            .findById(id)
+            .ifPresent(code -> {
+                code.setCodeUsed(true);
+                codeRepository.save(code);
+            });
+    }
+
+    @Override
+    @Transactional
+    public Optional<CodeDTO> findOneNonUsed(Long eventId) {
+        log.debug("Finding non-used Code for event ID: {}", eventId);
+        Optional<Code> codeOptional = codeRepository.findTopByEventEventIdAndCodeUsedAndCodeStat(eventId, false, true);
+        return codeOptional.map(codeMapper::toDto);
+    }
+
+    @Override
+    @Transactional
+    public Optional<CodeDTO> findOneNonUsedWithAccreditationType(Long eventId, String accreditationType) {
+        Optional<Code> codeOptional = codeRepository.findTopByCodeForEntityAndCodeEntityValueAndEventEventIdAndCodeUsedAndCodeStat(
+            String.valueOf(CodeForEntityEnum.ACCREDITATION_TYPE),
+            accreditationType,
+            eventId,
+            false,
+            true
+        );
+        return codeOptional.map(codeMapper::toDto);
+    }
+
+    @Override
+    @Transactional
+    public Optional<CodeDTO> findOneNonUsedWithCategory(Long eventId, String category) {
+        Optional<Code> codeOptional = codeRepository.findTopByCodeForEntityAndCodeEntityValueAndEventEventIdAndCodeUsedAndCodeStat(
+            String.valueOf(CodeForEntityEnum.CATEGORY),
+            category,
+            eventId,
+            false,
+            true
+        );
+        return codeOptional.map(codeMapper::toDto);
+    }
+
+    @Override
+    @Transactional
+    public Optional<CodeDTO> findOneNonUsedWithFunction(Long eventId, String function) {
+        Optional<Code> codeOptional = codeRepository.findTopByCodeForEntityAndCodeEntityValueAndEventEventIdAndCodeUsedAndCodeStat(
+            String.valueOf(CodeForEntityEnum.FUNCTION),
+            function,
+            eventId,
+            false,
+            true
+        );
+        return codeOptional.map(codeMapper::toDto);
+    }
+
+    @Override
+    @Transactional
+    public Optional<CodeDTO> findOneNonUsedWithOrganiz(Long eventId, String organiz) {
+        Optional<Code> codeOptional = codeRepository.findTopByCodeForEntityAndCodeEntityValueAndEventEventIdAndCodeUsedAndCodeStat(
+            String.valueOf(CodeForEntityEnum.ORGANIZ),
+            organiz,
+            eventId,
+            false,
+            true
+        );
+        return codeOptional.map(codeMapper::toDto);
     }
 }

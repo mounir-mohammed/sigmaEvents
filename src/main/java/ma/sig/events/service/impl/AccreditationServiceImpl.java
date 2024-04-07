@@ -7,11 +7,14 @@ import ma.sig.events.repository.*;
 import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.AccreditationQueryService;
 import ma.sig.events.service.AccreditationService;
+import ma.sig.events.service.CodeService;
 import ma.sig.events.service.UserService;
 import ma.sig.events.service.dto.AccreditationDTO;
+import ma.sig.events.service.dto.CodeDTO;
 import ma.sig.events.service.dto.MassUpdateAccreditationDTO;
 import ma.sig.events.service.dto.SiteDTO;
 import ma.sig.events.service.mapper.AccreditationMapper;
+import ma.sig.events.web.rest.errors.BadRequestAlertException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class AccreditationServiceImpl implements AccreditationService {
 
     private final Logger log = LoggerFactory.getLogger(AccreditationServiceImpl.class);
+
+    private static final String ENTITY_NAME = "accreditationSig";
 
     private final AccreditationRepository accreditationRepository;
 
@@ -67,6 +72,8 @@ public class AccreditationServiceImpl implements AccreditationService {
 
     private final AccreditationQueryService accreditationQueryService;
 
+    private final CodeService codeService;
+
     public AccreditationServiceImpl(
         AccreditationRepository accreditationRepository,
         AccreditationMapper accreditationMapper,
@@ -86,7 +93,8 @@ public class AccreditationServiceImpl implements AccreditationService {
         AttachementRepository attachementRepository,
         CodeRepository codeRepository,
         CityRepository cityRepository,
-        AccreditationQueryService accreditationQueryService
+        AccreditationQueryService accreditationQueryService,
+        CodeService codeService
     ) {
         this.accreditationRepository = accreditationRepository;
         this.accreditationMapper = accreditationMapper;
@@ -107,11 +115,51 @@ public class AccreditationServiceImpl implements AccreditationService {
         this.codeRepository = codeRepository;
         this.cityRepository = cityRepository;
         this.accreditationQueryService = accreditationQueryService;
+        this.codeService = codeService;
     }
 
     @Override
     public AccreditationDTO save(AccreditationDTO accreditationDTO) {
         log.debug("Request to save Accreditation : {}", accreditationDTO);
+        if (accreditationDTO.getEvent() != null) {
+            if (!accreditationDTO.getEvent().getEventNoCode()) {
+                Optional<CodeDTO> code = null;
+                if (accreditationDTO.getEvent().getEventCodeNoFilter()) {
+                    code = codeService.findOneNonUsed(accreditationDTO.getEvent().getEventId());
+                } else if (accreditationDTO.getEvent().getEventCodeByTypeAccreditation()) {
+                    code =
+                        codeService.findOneNonUsedWithAccreditationType(
+                            accreditationDTO.getEvent().getEventId(),
+                            accreditationDTO.getAccreditationType().getAccreditationTypeValue()
+                        );
+                } else if (accreditationDTO.getEvent().getEventCodeByTypeCategorie()) {
+                    code =
+                        codeService.findOneNonUsedWithCategory(
+                            accreditationDTO.getEvent().getEventId(),
+                            accreditationDTO.getCategory().getCategoryName()
+                        );
+                } else if (accreditationDTO.getEvent().getEventCodeByTypeFonction()) {
+                    code =
+                        codeService.findOneNonUsedWithFunction(
+                            accreditationDTO.getEvent().getEventId(),
+                            accreditationDTO.getFonction().getFonctionName()
+                        );
+                } else if (accreditationDTO.getEvent().getEventCodeByTypeOrganiz()) {
+                    code =
+                        codeService.findOneNonUsedWithOrganiz(
+                            accreditationDTO.getEvent().getEventId(),
+                            accreditationDTO.getOrganiz().getOrganizName()
+                        );
+                }
+                if (code != null && code.isPresent()) {
+                    codeService.used(code.get().getCodeId());
+                    accreditationDTO.setCode(code.get());
+                } else {
+                    throw new BadRequestAlertException("cannot create a new accreditation code not found", ENTITY_NAME, "codenotfound");
+                }
+            }
+        }
+
         Accreditation accreditation = accreditationMapper.toEntity(accreditationDTO);
         accreditation = accreditationRepository.save(accreditation);
         return accreditationMapper.toDto(accreditation);
