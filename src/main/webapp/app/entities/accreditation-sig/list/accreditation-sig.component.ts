@@ -7,7 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAccreditationSig } from '../accreditation-sig.model';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
+import { CACHE_RECORD_ITEMS, ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import {
   ASC,
   DESC,
@@ -86,7 +86,7 @@ export class AccreditationSigComponent implements OnInit {
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
     this.statusService
-      .query()
+      .query({ size: CACHE_RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
       .subscribe((statuses: IStatusSig[]) => (this.statusesSharedCollection = statuses));
   }

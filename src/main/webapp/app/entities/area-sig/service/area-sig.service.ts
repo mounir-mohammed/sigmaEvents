@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of, switchMap } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -8,6 +8,10 @@ import { createRequestOption } from 'app/core/request/request-util';
 import { IAreaSig, NewAreaSig } from '../area-sig.model';
 import { CacheService } from 'app/admin/configuration/cache.service';
 import { CACHE_RECORD_ITEMS } from 'app/config/pagination.constants';
+import { FilterOptions, IFilterOptions } from 'app/shared/filter/filter.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+import { Authority } from 'app/config/authority.constants';
 
 export type PartialUpdateAreaSig = Partial<IAreaSig> & Pick<IAreaSig, 'areaId'>;
 
@@ -17,11 +21,13 @@ export type EntityArrayResponseType = HttpResponse<IAreaSig[]>;
 @Injectable({ providedIn: 'root' })
 export class AreaSigService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/areas');
+  currentAccount: Account | null = null;
 
   constructor(
     protected http: HttpClient,
     protected applicationConfigService: ApplicationConfigService,
-    protected cacheService: CacheService
+    protected cacheService: CacheService,
+    protected accountService: AccountService
   ) {}
 
   create(area: NewAreaSig): Observable<EntityResponseType> {
@@ -78,20 +84,59 @@ export class AreaSigService {
   }
 
   async getAllAreas(): Promise<IAreaSig[]> {
-    // Check if areas are already in the cache
-    if (this.cacheService.get(this.getIdAreasSigIdentifier())) {
-      return this.cacheService.get(this.getIdAreasSigIdentifier());
-    }
+    if (this.accountService.hasAnyAuthority([Authority.ADMIN])) {
+      try {
+        const account = await this.accountService.identity().toPromise();
+        if (!account) {
+          console.error('Account is undefined.');
+          return []; // Return empty array if account is undefined
+        }
+        this.currentAccount = account;
+        console.log('getAllAreas for admin ignore cache');
+        let filters: IFilterOptions = new FilterOptions();
+        if (
+          this.currentAccount.printingCentre &&
+          this.currentAccount.printingCentre.event &&
+          this.currentAccount.printingCentre.event.eventId
+        ) {
+          console.log('getAllAreas for admin ignore cache : event id ' + this.currentAccount.printingCentre.event.eventId.toString());
+          filters.addFilter('eventId.in', this.currentAccount.printingCentre.event.eventId.toString());
+        } else {
+          console.log('getAllAreas for admin ignore cache : no event found');
+        }
 
-    try {
-      const response = await this.query({ size: CACHE_RECORD_ITEMS })
-        .pipe(map((res: HttpResponse<IAreaSig[]>) => res.body ?? []))
-        .toPromise();
-      this.cacheService.set(this.getIdAreasSigIdentifier(), response!); // Store the retrieved setting in the cache
-      return response!;
-    } catch (error: any) {
-      console.error(error!.message!);
-      return [];
+        const queryObject: any = {
+          size: CACHE_RECORD_ITEMS,
+        };
+        filters?.filterOptions?.forEach(filterOption => {
+          queryObject[filterOption.name] = filterOption.values;
+        });
+
+        console.log(queryObject);
+
+        const response = await this.query(queryObject).toPromise();
+        console.log(this.getIdAreasSigIdentifier() + ' SIZE : ' + response!.body?.length);
+        return response!.body ?? [];
+      } catch (error: any) {
+        console.error(error!.message! || 'An error occurred during getAllAreas() for admin');
+        return [];
+      }
+    } else {
+      console.log('getAllAreas for user with cache');
+      if (this.cacheService.get(this.getIdAreasSigIdentifier())) {
+        console.log('getAllAreas for user from cache');
+        return this.cacheService.get(this.getIdAreasSigIdentifier());
+      }
+      try {
+        console.log('getAllAreas for user from api and set cache');
+        const response = await this.query({ size: CACHE_RECORD_ITEMS }).toPromise();
+        console.log(this.getIdAreasSigIdentifier() + ' SIZE : ' + response!.body?.length);
+        this.cacheService.set(this.getIdAreasSigIdentifier(), response!.body ?? []); // Store the retrieved setting in the cache
+        return response!.body ?? [];
+      } catch (error: any) {
+        console.error(error!.message!);
+        return [];
+      }
     }
   }
 
