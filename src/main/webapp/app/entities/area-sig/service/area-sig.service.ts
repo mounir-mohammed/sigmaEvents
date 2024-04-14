@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IAreaSig, NewAreaSig } from '../area-sig.model';
 import { CacheService } from 'app/admin/configuration/cache.service';
+import { CACHE_RECORD_ITEMS } from 'app/config/pagination.constants';
 
 export type PartialUpdateAreaSig = Partial<IAreaSig> & Pick<IAreaSig, 'areaId'>;
 
@@ -83,7 +84,9 @@ export class AreaSigService {
     }
 
     try {
-      const response = await this.http.get<IAreaSig[]>(this.resourceUrl).toPromise();
+      const response = await this.query({ size: CACHE_RECORD_ITEMS })
+        .pipe(map((res: HttpResponse<IAreaSig[]>) => res.body ?? []))
+        .toPromise();
       this.cacheService.set(this.getIdAreasSigIdentifier(), response!); // Store the retrieved setting in the cache
       return response!;
     } catch (error: any) {
