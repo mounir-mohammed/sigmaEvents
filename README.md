@@ -249,3 +249,5 @@ To configure CI for your project, run the ci-cd sub-generator (`SigmaEvents ci-c
 [leaflet]: https://leafletjs.com/
 [definitelytyped]: https://definitelytyped.org/
 [angular cli]: https://cli.angular.io/
+
+check build
