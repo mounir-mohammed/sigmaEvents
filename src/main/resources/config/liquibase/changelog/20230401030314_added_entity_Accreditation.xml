@@ -162,7 +162,11 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="accreditation_accreditation_id, site_site_id" tableName="rel_accreditation__site"/>
+        <!--<addPrimaryKey columnNames="accreditation_accreditation_id, site_site_id" tableName="rel_accreditation__site"/>-->
+        <addUniqueConstraint
+            tableName="rel_accreditation__site"
+            columnNames="accreditation_accreditation_id, site_site_id"
+            constraintName="uq_rel_accreditation__site"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

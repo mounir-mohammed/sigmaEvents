@@ -62,7 +62,11 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="fonction_fonction_id, area_area_id" tableName="rel_fonction__area"/>
+        <!--<addPrimaryKey columnNames="fonction_fonction_id, area_area_id" tableName="rel_fonction__area"/>-->
+        <addUniqueConstraint
+            tableName="rel_fonction__area"
+            columnNames="fonction_fonction_id, area_area_id"
+            constraintName="uq_rel_fonction__area"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

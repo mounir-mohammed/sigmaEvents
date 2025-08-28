@@ -61,7 +61,11 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="user_id, authority_name" tableName="sigma_user_authority"/>
+        <!--<addPrimaryKey columnNames="user_id, authority_name" tableName="sigma_user_authority"/>-->
+        <addUniqueConstraint
+            tableName="sigma_user_authority"
+            columnNames="user_id, authority_name"
+            constraintName="uq_sigma_user_authority"/>
 
         <addForeignKeyConstraint baseColumnNames="authority_name"
                                  baseTableName="sigma_user_authority"
