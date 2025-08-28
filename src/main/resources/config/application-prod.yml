@@ -32,9 +32,9 @@ spring:
     livereload:
       enabled: false
   datasource:
-    url: jdbc:mysql://sigmaeventsdbserver.mysql.database.azure.com/sigmaevents?serverTimezone=UTC
-    username: sigma
-    password: admindbazure#123
+    url: jdbc:mysql://sigmaeventsdbserver-x001.mysql.database.azure.com/sigmaevents?serverTimezone=UTC
+    username: sigmaeventsdbadmin
+    password: Hyqgpuvu@100
     hikari:
       poolName: Hikari
       auto-commit: false
