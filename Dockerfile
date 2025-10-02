@@ -36,4 +36,5 @@ FROM adoptopenjdk:11-jre-hotspot
 WORKDIR /app
 COPY --from=build-springboot /app/target/*.jar app.jar
 EXPOSE 80
-CMD ["java", "-jar", "-Dspring.profiles.active=prod,console", "app.jar"]
+CMD ["sh", "-c", "java $WEBSITE_JAVA_OPTS -jar -Dspring.profiles.active=prod,console app.jar"]
+
