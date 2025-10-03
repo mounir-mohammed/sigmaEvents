@@ -30,11 +30,13 @@ export class CloningSigService {
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
-  create(cloning: NewCloningSig): Observable<EntityResponseType> {
+  create(cloning: ICloningSig): Observable<HttpResponse<{ jobId: string }>> {
     const copy = this.convertDateFromClient(cloning);
-    return this.http
-      .post<RestCloningSig>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map(res => this.convertResponseFromServer(res)));
+    return this.http.post<{ jobId: string }>(this.resourceUrl, copy, { observe: 'response' });
+  }
+
+  getJobStatus(jobId: string): Observable<{ status: string }> {
+    return this.http.get<{ status: string }>(`${this.resourceUrl}/job/${jobId}/status`);
   }
 
   update(cloning: ICloningSig): Observable<EntityResponseType> {

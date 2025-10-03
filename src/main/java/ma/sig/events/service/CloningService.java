@@ -4,6 +4,7 @@ import java.util.Optional;
 import ma.sig.events.service.dto.CloningDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 
 /**
  * Service Interface for managing {@link ma.sig.events.domain.Cloning}.
@@ -57,4 +58,7 @@ public interface CloningService {
     void delete(Long id);
 
     CloningDTO clone(CloningDTO cloningDTO);
+
+    @Async
+    void cloneAsync(CloningDTO cloningDTO);
 }

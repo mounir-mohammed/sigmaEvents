@@ -3,6 +3,7 @@ package ma.sig.events.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -10,8 +11,10 @@ import javax.validation.constraints.NotNull;
 import ma.sig.events.repository.CloningRepository;
 import ma.sig.events.service.CloningQueryService;
 import ma.sig.events.service.CloningService;
+import ma.sig.events.service.JobService;
 import ma.sig.events.service.criteria.CloningCriteria;
 import ma.sig.events.service.dto.CloningDTO;
+import ma.sig.events.service.dto.Job;
 import ma.sig.events.web.rest.errors.BadRequestAlertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -46,10 +50,18 @@ public class CloningResource {
 
     private final CloningQueryService cloningQueryService;
 
-    public CloningResource(CloningService cloningService, CloningRepository cloningRepository, CloningQueryService cloningQueryService) {
+    private final JobService jobService;
+
+    public CloningResource(
+        CloningService cloningService,
+        CloningRepository cloningRepository,
+        CloningQueryService cloningQueryService,
+        JobService jobService
+    ) {
         this.cloningService = cloningService;
         this.cloningRepository = cloningRepository;
         this.cloningQueryService = cloningQueryService;
+        this.jobService = jobService;
     }
 
     /**
@@ -59,17 +71,18 @@ public class CloningResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new cloningDTO, or with status {@code 400 (Bad Request)} if the cloning has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+
     @PostMapping("/clonings")
-    public ResponseEntity<CloningDTO> createCloning(@Valid @RequestBody CloningDTO cloningDTO) throws URISyntaxException {
-        log.debug("REST request to save Cloning : {}", cloningDTO);
-        if (cloningDTO.getCloningId() != null) {
-            throw new BadRequestAlertException("A new cloning cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        CloningDTO result = cloningService.clone(cloningDTO);
-        return ResponseEntity
-            .created(new URI("/api/clonings/" + result.getCloningId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getCloningId().toString()))
-            .body(result);
+    public ResponseEntity<Map<String, String>> createCloning(@Valid @RequestBody CloningDTO cloningDTO) {
+        String jobId = jobService.submit(() -> {
+            // your long-running cloning logic here
+            log.debug("REST request to save Cloning : {}", cloningDTO);
+            if (cloningDTO.getCloningId() != null) {
+                throw new BadRequestAlertException("A new cloning cannot already have an ID", ENTITY_NAME, "idexists");
+            }
+            cloningService.cloneAsync(cloningDTO);
+        });
+        return ResponseEntity.accepted().body(Map.of("jobId", jobId));
     }
 
     /**
@@ -199,5 +212,14 @@ public class CloningResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/job/{jobId}/status")
+    public ResponseEntity<Map<String, String>> getJobStatus(@PathVariable String jobId) {
+        Job job = jobService.getJob(jobId);
+        if (job == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(Map.of("status", job.getStatus().name()));
     }
 }
