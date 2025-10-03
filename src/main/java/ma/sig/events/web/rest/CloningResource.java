@@ -8,7 +8,9 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import ma.sig.events.domain.User;
 import ma.sig.events.repository.CloningRepository;
+import ma.sig.events.security.SecurityUtils;
 import ma.sig.events.service.CloningQueryService;
 import ma.sig.events.service.CloningService;
 import ma.sig.events.service.JobService;
@@ -74,13 +76,15 @@ public class CloningResource {
 
     @PostMapping("/clonings")
     public ResponseEntity<Map<String, String>> createCloning(@Valid @RequestBody CloningDTO cloningDTO) {
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+
         String jobId = jobService.submit(() -> {
             // your long-running cloning logic here
             log.debug("REST request to save Cloning : {}", cloningDTO);
             if (cloningDTO.getCloningId() != null) {
                 throw new BadRequestAlertException("A new cloning cannot already have an ID", ENTITY_NAME, "idexists");
             }
-            cloningService.cloneAsync(cloningDTO);
+            cloningService.cloneAsync(cloningDTO, currentUserLogin.orElse(null));
         });
         return ResponseEntity.accepted().body(Map.of("jobId", jobId));
     }
@@ -214,7 +218,7 @@ public class CloningResource {
             .build();
     }
 
-    @GetMapping("/job/{jobId}/status")
+    @GetMapping("/clonings/job/{jobId}/status")
     public ResponseEntity<Map<String, String>> getJobStatus(@PathVariable String jobId) {
         Job job = jobService.getJob(jobId);
         if (job == null) {

@@ -57,8 +57,8 @@ public interface CloningService {
      */
     void delete(Long id);
 
-    CloningDTO clone(CloningDTO cloningDTO);
+    CloningDTO clone(CloningDTO cloningDTO, String currentUserLogin);
 
     @Async
-    void cloneAsync(CloningDTO cloningDTO);
+    void cloneAsync(CloningDTO cloningDTO, String currentUserLogin);
 }

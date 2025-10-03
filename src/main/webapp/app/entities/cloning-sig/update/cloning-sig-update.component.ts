@@ -38,6 +38,7 @@ export class CloningSigUpdateComponent implements OnInit {
   }
 
   async save(): Promise<void> {
+    this.isSaving = true;
     const cloning = this.cloningFormService.getCloningSig(this.editForm);
 
     try {
@@ -92,7 +93,7 @@ export class CloningSigUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    alert('Cloning process completed successfully!');
   }
 
   protected onSaveError(): void {
@@ -100,7 +101,7 @@ export class CloningSigUpdateComponent implements OnInit {
   }
 
   protected onSaveFinalize(): void {
-    alert('Cloning process completed successfully!');
+    this.isSaving = false;
   }
 
   protected updateForm(cloning: ICloningSig): void {

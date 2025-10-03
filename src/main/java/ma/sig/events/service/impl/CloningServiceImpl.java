@@ -127,8 +127,7 @@ public class CloningServiceImpl implements CloningService {
         cloningRepository.deleteById(id);
     }
 
-    @Override
-    public CloningDTO clone(CloningDTO cloningDTO) {
+    public CloningDTO clone(CloningDTO cloningDTO, String currentUserLogin) {
         log.debug("Request to clone event {} to : {}", cloningDTO.getCloningOldEventId(), cloningDTO.getCloningNewEventId());
         if (cloningDTO != null && cloningDTO.getCloningOldEventId() != null && cloningDTO.getCloningNewEventId() != null) {
             Event newEvent = eventRepository.getReferenceById(cloningDTO.getCloningNewEventId());
@@ -138,7 +137,9 @@ public class CloningServiceImpl implements CloningService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDateTime = currentDateTime.format(formatter);
 
-            Optional<User> currentUser = userService.getUserWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin().get().toString());
+            Optional<User> currentUser = currentUserLogin == null
+                ? Optional.empty()
+                : userService.getUserWithAuthoritiesByLogin(currentUserLogin);
 
             if (newEvent != null && oldEvent != null) {
                 try {
@@ -475,8 +476,8 @@ public class CloningServiceImpl implements CloningService {
     }
 
     @Async
-    public void cloneAsync(CloningDTO cloningDTO) {
+    public void cloneAsync(CloningDTO cloningDTO, String currentUserLogin) {
         // This runs in a separate thread
-        this.clone(cloningDTO); // call your existing synchronous clone logic
+        this.clone(cloningDTO, currentUserLogin); // call your existing synchronous clone logic
     }
 }
