@@ -138,10 +138,6 @@ public class CloningServiceImpl implements CloningService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedDateTime = currentDateTime.format(formatter);
 
-            Optional<User> currentUser = currentUserLogin == null
-                ? Optional.empty()
-                : userService.getUserWithAuthoritiesByLogin(currentUserLogin);
-
             if (newEvent != null && oldEvent != null) {
                 try {
                     Map<Long, Long> tempCategorys = new HashMap<>();
@@ -349,7 +345,7 @@ public class CloningServiceImpl implements CloningService {
                         }
 
                         newAccreditation.setAccreditationCreationDate(ZonedDateTime.now());
-                        newAccreditation.setAccreditationCreatedByuser(SecurityUtils.getCurrentUserLogin().get());
+                        newAccreditation.setAccreditationCreatedByuser(currentUserLogin);
                         Accreditation savedAccreditation = accreditationRepository.save(newAccreditation);
                         newAccreditations.add(savedAccreditation);
                         tempAccreditations.put(tempAccreditationID, savedAccreditation.getAccreditationId());
@@ -364,12 +360,11 @@ public class CloningServiceImpl implements CloningService {
                         " AT " +
                         formattedDateTime +
                         " BY " +
-                        currentUser.get().getLogin()
+                        currentUserLogin
                     );
                     newEvent.setEventAttributs("Category, Fonction, Area, Site, Organiz, Accreditation");
                     eventRepository.save(newEvent);
 
-                    cloningDTO.setCloningUserId(currentUser.get().getId());
                     cloningDTO.setClonedEntitys("Category, Fonction, Area, Site, Organiz, Accreditation");
                     cloningDTO.setCloningDescription(
                         "CLONED FROM EVENT " +
@@ -379,7 +374,7 @@ public class CloningServiceImpl implements CloningService {
                         " AT " +
                         formattedDateTime +
                         " BY " +
-                        currentUser.get().getLogin()
+                        currentUserLogin
                     );
                     Cloning cloning = cloningMapper.toEntity(cloningDTO);
                     cloning = cloningRepository.save(cloning);
