@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    ma.sig.events: INFO
+    ma.sig.events: DEBUG
 
 management:
   metrics:

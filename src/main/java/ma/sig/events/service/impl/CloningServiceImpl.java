@@ -11,6 +11,7 @@ import ma.sig.events.service.CloningService;
 import ma.sig.events.service.UserService;
 import ma.sig.events.service.dto.CloningDTO;
 import ma.sig.events.service.mapper.CloningMapper;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -384,7 +385,9 @@ public class CloningServiceImpl implements CloningService {
                     cloning = cloningRepository.save(cloning);
                     return cloningMapper.toDto(cloning);
                 } catch (Exception e) {
-                    log.error("ERROR CLONNING : " + e.getMessage());
+                    log.error("ERROR CLONNING : " + e.getMessage(), e);
+                    e.printStackTrace();
+                    log.error("Exception : " + ExceptionUtils.getStackTrace(e));
                     return null;
                 }
             } else {
