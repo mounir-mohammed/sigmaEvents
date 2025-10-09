@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "report": {
+      "home": {
+        "title": "Report",
+        "refreshLabel": "Refresh",
+        "exportPdfLabel": "Export as PDF",
+        "exportExcelLabel": "Export as Excel",
+        "totalAccreditationsLabel": "Total accreditations",
+        "printedAccreditationsLabel": "Printed accreditations",
+        "inProgressAccreditationsLabel": "Accreditations in progress",
+        "printedAccreditationsPerDayLabel": "Printed accreditations per day",
+        "day": "Day",
+        "status": "Status",
+        "label": "Label",
+        "value": "Value",
+        "printedAccreditationsByCategoryLabel": "Printed accreditations by category",
+        "printedAccreditationsByFunctionLabel": "Printed accreditations by function",
+        "printedAccreditationsBySiteLabel": "Printed accreditations by site",
+        "printedAccreditationsByOrganizationLabel": "Printed accreditations by organization",
+        "printedAccreditationsByTypeLabel": "Printed accreditations by type",
+        "printedAccreditationsByNationalityLabel": "Printed accreditations by nationality",
+        "printedAccreditationsShortLabel": "Printed accreditations",
+        "accreditationStatusDistributionTitle": "Distribution of accreditations by status"
+      }
+    }
+  }
+}

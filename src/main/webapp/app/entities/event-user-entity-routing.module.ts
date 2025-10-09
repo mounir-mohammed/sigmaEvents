@@ -9,6 +9,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'sigmaEventsApp.accreditation.home.title' },
         loadChildren: () => import('./accreditation-sig/accreditation-sig.module').then(m => m.AccreditationSigModule),
       },
+      {
+        path: 'report-sig',
+        data: { pageTitle: 'global.menu.entities.reportSig' },
+        loadChildren: () => import('./report-sig/report-sig.module').then(m => m.ReportSigModule),
+      },
     ]),
   ],
 })

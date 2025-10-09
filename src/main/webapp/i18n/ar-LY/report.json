@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "report": {
+      "home": {
+        "title": "تقرير",
+        "refreshLabel": "تحديث",
+        "exportPdfLabel": "تصدير إلى PDF",
+        "exportExcelLabel": "تصدير إلى Excel",
+        "totalAccreditationsLabel": "إجمالي الاعتمادات",
+        "printedAccreditationsLabel": "الاعتمادات المطبوعة",
+        "inProgressAccreditationsLabel": "الاعتمادات قيد التقدم",
+        "printedAccreditationsPerDayLabel": "عدد الاعتمادات المطبوعة يوميًا",
+        "day": "اليوم",
+        "status": "الحالة",
+        "label": "التسمية",
+        "value": "القيمة",
+        "printedAccreditationsByCategoryLabel": "عدد الاعتمادات المطبوعة حسب الفئة",
+        "printedAccreditationsByFunctionLabel": "عدد الاعتمادات المطبوعة حسب الوظيفة",
+        "printedAccreditationsBySiteLabel": "عدد الاعتمادات المطبوعة حسب الموقع",
+        "printedAccreditationsByOrganizationLabel": "عدد الاعتمادات المطبوعة حسب المؤسسة",
+        "printedAccreditationsByTypeLabel": "عدد الاعتمادات المطبوعة حسب النوع",
+        "printedAccreditationsByNationalityLabel": "عدد الاعتمادات المطبوعة حسب الجنسية",
+        "printedAccreditationsShortLabel": "الاعتمادات المطبوعة",
+        "accreditationStatusDistributionTitle": "توزيع الاعتمادات حسب الحالة"
+      }
+    }
+  }
+}

@@ -61,10 +61,10 @@
                   <span sigmaTranslate="sigmaEventsApp.accreditation.home.title">Accreditations</span>
                 </a>
               </li>
-              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, 'CAN_ACC_REPORTS']">
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN, authority.CAN_ACC_REPORTS]">
                 <a
                   class="dropdown-item"
-                  routerLink=""
+                  routerLink="report-sig"
                   routerLinkActive="active"
                   [routerLinkActiveOptions]="{ exact: true }"
                   (click)="collapseNavbar()"

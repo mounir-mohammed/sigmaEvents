@@ -69,6 +69,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'sigmaEventsApp.operationHistory.home.title' },
         loadChildren: () => import('./operation-history-sig/operation-history-sig.module').then(m => m.OperationHistorySigModule),
       },
+      {
+        path: 'report-sig',
+        data: { pageTitle: 'global.menu.entities.reportSig' },
+        loadChildren: () => import('./report-sig/report-sig.module').then(m => m.ReportSigModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

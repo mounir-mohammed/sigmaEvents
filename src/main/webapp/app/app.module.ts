@@ -27,6 +27,11 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
+import { NgChartsModule } from 'ng2-charts';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart } from 'chart.js';
+
+Chart.register(ChartDataLabels);
 
 @NgModule({
   imports: [
@@ -42,6 +47,7 @@ import { NgxPhotoEditorModule } from 'ngx-photo-editor';
     TranslationModule,
     ColorPickerModule,
     NgxPhotoEditorModule,
+    NgChartsModule,
   ],
   providers: [
     Title,

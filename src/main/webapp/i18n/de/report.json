@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "report": {
+      "home": {
+        "title": "Bericht",
+        "refreshLabel": "Aktualisieren",
+        "exportPdfLabel": "Als PDF exportieren",
+        "exportExcelLabel": "Als Excel exportieren",
+        "totalAccreditationsLabel": "Gesamtanzahl Akkreditierungen",
+        "printedAccreditationsLabel": "Gedruckte Akkreditierungen",
+        "inProgressAccreditationsLabel": "Akkreditierungen in Bearbeitung",
+        "printedAccreditationsPerDayLabel": "Gedruckte Akkreditierungen pro Tag",
+        "day": "Tag",
+        "status": "Status",
+        "label": "Bezeichnung",
+        "value": "Wert",
+        "printedAccreditationsByCategoryLabel": "Gedruckte Akkreditierungen nach Kategorie",
+        "printedAccreditationsByFunctionLabel": "Gedruckte Akkreditierungen nach Funktion",
+        "printedAccreditationsBySiteLabel": "Gedruckte Akkreditierungen nach Standort",
+        "printedAccreditationsByOrganizationLabel": "Gedruckte Akkreditierungen nach Organisation",
+        "printedAccreditationsByTypeLabel": "Gedruckte Akkreditierungen nach Typ",
+        "printedAccreditationsByNationalityLabel": "Gedruckte Akkreditierungen nach Nationalität",
+        "printedAccreditationsShortLabel": "Gedruckte Akkreditierungen",
+        "accreditationStatusDistributionTitle": "Verteilung der Akkreditierungen nach Status"
+      }
+    }
+  }
+}

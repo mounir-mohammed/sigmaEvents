@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "report": {
+      "home": {
+        "title": "レポート",
+        "refreshLabel": "更新",
+        "exportPdfLabel": "PDFとしてエクスポート",
+        "exportExcelLabel": "Excelとしてエクスポート",
+        "totalAccreditationsLabel": "合計認定数",
+        "printedAccreditationsLabel": "印刷された認定",
+        "inProgressAccreditationsLabel": "進行中の認定",
+        "printedAccreditationsPerDayLabel": "1日あたりの印刷認定数",
+        "day": "日",
+        "status": "ステータス",
+        "label": "ラベル",
+        "value": "値",
+        "printedAccreditationsByCategoryLabel": "カテゴリ別印刷認定数",
+        "printedAccreditationsByFunctionLabel": "職務別印刷認定数",
+        "printedAccreditationsBySiteLabel": "サイト別印刷認定数",
+        "printedAccreditationsByOrganizationLabel": "組織別印刷認定数",
+        "printedAccreditationsByTypeLabel": "認定タイプ別印刷認定数",
+        "printedAccreditationsByNationalityLabel": "国籍別印刷認定数",
+        "printedAccreditationsShortLabel": "印刷された認定",
+        "accreditationStatusDistributionTitle": "ステータス別認定の分布"
+      }
+    }
+  }
+}

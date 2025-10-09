@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "report": {
+      "home": {
+        "title": "Informe",
+        "refreshLabel": "Actualizar",
+        "exportPdfLabel": "Exportar a PDF",
+        "exportExcelLabel": "Exportar a Excel",
+        "totalAccreditationsLabel": "Total de acreditaciones",
+        "printedAccreditationsLabel": "Acreditaciones impresas",
+        "inProgressAccreditationsLabel": "Acreditaciones en curso",
+        "printedAccreditationsPerDayLabel": "Acreditaciones impresas por día",
+        "day": "Día",
+        "status": "Estado",
+        "label": "Etiqueta",
+        "value": "Valor",
+        "printedAccreditationsByCategoryLabel": "Acreditaciones impresas por categoría",
+        "printedAccreditationsByFunctionLabel": "Acreditaciones impresas por función",
+        "printedAccreditationsBySiteLabel": "Acreditaciones impresas por sitio",
+        "printedAccreditationsByOrganizationLabel": "Acreditaciones impresas por organización",
+        "printedAccreditationsByTypeLabel": "Acreditaciones impresas por tipo",
+        "printedAccreditationsByNationalityLabel": "Acreditaciones impresas por nacionalidad",
+        "printedAccreditationsShortLabel": "Acreditaciones impresas",
+        "accreditationStatusDistributionTitle": "Distribución de acreditaciones por estado"
+      }
+    }
+  }
+}

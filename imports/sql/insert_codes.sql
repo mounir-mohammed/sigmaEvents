@@ -1,0 +1,1 @@
+INSERT INTO sigmaevents.code (code_value, code_entity_value, code_used, code_stat, code_type_code_type_id, event_event_id) VALUES ('novyuygwke96srt3','ALL ACCESS',	b'0',b'1',1,1000001);

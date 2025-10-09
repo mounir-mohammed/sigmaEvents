@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "report": {
+      "home": {
+        "title": "报告",
+        "refreshLabel": "刷新",
+        "exportPdfLabel": "导出为 PDF",
+        "exportExcelLabel": "导出为 Excel",
+        "totalAccreditationsLabel": "认证总数",
+        "printedAccreditationsLabel": "已打印的认证",
+        "inProgressAccreditationsLabel": "进行中的认证",
+        "printedAccreditationsPerDayLabel": "每日打印的认证数量",
+        "day": "天",
+        "status": "状态",
+        "label": "标签",
+        "value": "值",
+        "printedAccreditationsByCategoryLabel": "按类别打印的认证数量",
+        "printedAccreditationsByFunctionLabel": "按职能打印的认证数量",
+        "printedAccreditationsBySiteLabel": "按地点打印的认证数量",
+        "printedAccreditationsByOrganizationLabel": "按组织打印的认证数量",
+        "printedAccreditationsByTypeLabel": "按类型打印的认证数量",
+        "printedAccreditationsByNationalityLabel": "按国籍打印的认证数量",
+        "printedAccreditationsShortLabel": "已打印的认证",
+        "accreditationStatusDistributionTitle": "按状态分布的认证"
+      }
+    }
+  }
+}

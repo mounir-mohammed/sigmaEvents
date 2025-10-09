@@ -1,0 +1,28 @@
+{
+  "sigmaEventsApp": {
+    "report": {
+      "home": {
+        "title": "Rapport",
+        "refreshLabel": "Vernieuwen",
+        "exportPdfLabel": "Exporteren als PDF",
+        "exportExcelLabel": "Exporteren als Excel",
+        "totalAccreditationsLabel": "Totaal aantal accreditaties",
+        "printedAccreditationsLabel": "Afgedrukte accreditaties",
+        "inProgressAccreditationsLabel": "Lopende accreditaties",
+        "printedAccreditationsPerDayLabel": "Afgedrukte accreditaties per dag",
+        "day": "Dag",
+        "status": "Status",
+        "label": "Label",
+        "value": "Waarde",
+        "printedAccreditationsByCategoryLabel": "Afgedrukte accreditaties per categorie",
+        "printedAccreditationsByFunctionLabel": "Afgedrukte accreditaties per functie",
+        "printedAccreditationsBySiteLabel": "Afgedrukte accreditaties per locatie",
+        "printedAccreditationsByOrganizationLabel": "Afgedrukte accreditaties per organisatie",
+        "printedAccreditationsByTypeLabel": "Afgedrukte accreditaties per type",
+        "printedAccreditationsByNationalityLabel": "Afgedrukte accreditaties per nationaliteit",
+        "printedAccreditationsShortLabel": "Afgedrukte accreditaties",
+        "accreditationStatusDistributionTitle": "Verdeling van accreditaties per status"
+      }
+    }
+  }
+}

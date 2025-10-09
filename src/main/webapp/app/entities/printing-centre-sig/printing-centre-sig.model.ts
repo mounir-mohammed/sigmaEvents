@@ -30,7 +30,15 @@ export interface IPrintingCentreSig {
   language?: Pick<ILanguageSig, 'languageId' | 'languageName' | 'languageStat'> | null;
   event?: Pick<
     IEventSig,
-    'eventId' | 'eventName' | 'eventStat' | 'eventLogo' | 'eventDescription' | 'eventLogoContentType' | 'eventdateStart' | 'eventdateEnd'
+    | 'eventId'
+    | 'eventName'
+    | 'eventStat'
+    | 'eventLogo'
+    | 'eventDescription'
+    | 'eventAbreviation'
+    | 'eventLogoContentType'
+    | 'eventdateStart'
+    | 'eventdateEnd'
   > | null;
 }
 
