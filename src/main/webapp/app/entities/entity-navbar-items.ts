@@ -197,6 +197,6 @@ export const EntityNavbarItems = [
   {
     name: 'EventReportSig',
     route: 'report-sig',
-    translationKey: 'global.menu.entities.reportSig',
+    translationKey: 'global.menu.entities.statisticSig',
   },
 ];

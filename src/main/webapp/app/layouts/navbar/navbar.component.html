@@ -69,8 +69,8 @@
                   [routerLinkActiveOptions]="{ exact: true }"
                   (click)="collapseNavbar()"
                 >
-                  <fa-icon [icon]="faFile" [fixedWidth]="true"></fa-icon>
-                  <span sigmaTranslate="global.menu.entities.reportSig">Reports</span>
+                  <fa-icon [icon]="faChartSimple" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.statisticSig">Statistics</span>
                 </a>
               </li>
             </ul>
@@ -461,20 +461,6 @@
                   <span sigmaTranslate="global.menu.entities.categorySig">Category</span>
                 </a>
               </li>
-
-              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-                <a
-                  class="dropdown-item"
-                  routerLink="code-sig"
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  (click)="collapseNavbar()"
-                >
-                  <fa-icon [icon]="faBarcode" [fixedWidth]="true"></fa-icon>
-                  <span sigmaTranslate="global.menu.entities.codeSig">Code</span>
-                </a>
-              </li>
-
               <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
                 <a
                   class="dropdown-item"
@@ -563,19 +549,7 @@
                   <span sigmaTranslate="global.menu.entities.noteSig">Note</span>
                 </a>
               </li>
-              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
-                <a
-                  class="dropdown-item"
-                  routerLink="operation-history-sig"
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  (click)="collapseNavbar()"
-                >
-                  <fa-icon [icon]="faClockRotateLeft" [fixedWidth]="true"></fa-icon>
-                  <span sigmaTranslate="global.menu.entities.operationHistorySig">Operation History</span>
-                </a>
-              </li>
-              <li>
+              <!-- <li>
                 <a
                   class="dropdown-item"
                   routerLink=""
@@ -586,7 +560,7 @@
                   <fa-icon [icon]="faChartSimple" [fixedWidth]="true"></fa-icon>
                   <span sigmaTranslate="global.menu.entities.statisticSig">Statistics</span>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
         </ng-container>
@@ -606,7 +580,32 @@
                 <span sigmaTranslate="global.menu.securityManagement">Security Management</span>
               </span>
             </a>
-            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="security-menu"></ul>
+            <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="security-menu">
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="operation-history-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon [icon]="faClockRotateLeft" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.operationHistorySig">Operation History</span>
+                </a>
+              </li>
+              <li *sigmaHasAnyAuthority="[authority.ADMIN, authority.EVENT_ADMIN]">
+                <a
+                  class="dropdown-item"
+                  routerLink="code-sig"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon [icon]="faBarcode" [fixedWidth]="true"></fa-icon>
+                  <span sigmaTranslate="global.menu.entities.codeSig">Code</span>
+                </a>
+              </li>
+            </ul>
           </li>
         </ng-container>
 
