@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChildren } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
-import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, filter, Observable, Subject, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IAccreditationSig } from '../accreditation-sig.model';
@@ -32,7 +32,7 @@ import { IStatusSig } from 'app/entities/status-sig/status-sig.model';
 import { Status } from 'app/config/status.contants';
 import { StatusSigService } from 'app/entities/status-sig/service/status-sig.service';
 import { HttpResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { AccreditationSigPrintDialogComponent } from '../print/accreditation-sig-print-dialog.component';
 import { AccreditationSigSearchDialogComponent } from '../search/accreditation-sig-search-dialog.component';
 import { ExportUtil } from 'app/shared/util/export.shared';
@@ -65,6 +65,8 @@ export class AccreditationSigComponent implements OnInit {
   selectAllRows: boolean = false;
   selectedCount: number = 0;
 
+  searchTextChanged = new Subject<string | null>();
+
   constructor(
     protected accreditationService: AccreditationSigService,
     protected accountService: AccountService,
@@ -82,13 +84,32 @@ export class AccreditationSigComponent implements OnInit {
     this.loadColumnVisibility();
     this.loadListSize();
     this.accountService.identity().subscribe(account => (this.currentAccount = account));
-    this.load();
+
+    // 👇 une seule souscription ici
+    this.loadFromBackendWithRouteInformations().subscribe({
+      next: (res: EntityArrayResponseType) => this.onResponseSuccess(res),
+    });
 
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
+
     this.statusService
       .query({ size: CACHE_RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IStatusSig[]>) => res.body ?? []))
       .subscribe((statuses: IStatusSig[]) => (this.statusesSharedCollection = statuses));
+
+    this.searchTextChanged
+      .pipe(
+        debounceTime(400), // ⏱ attend 400 ms après la dernière frappe
+        distinctUntilChanged(), // ⚡ n’envoie que si le texte a vraiment changé
+        switchMap(() => {
+          this.searchLoading = true;
+          this.page = 1;
+          return this.queryBackend(this.page, this.predicate, this.ascending, this.filters.filterOptions);
+        })
+      )
+      .subscribe({
+        next: res => this.onResponseSuccess(res),
+      });
   }
 
   byteSize(base64String: string): string {
@@ -295,9 +316,7 @@ export class AccreditationSigComponent implements OnInit {
   }
 
   search(): void {
-    this.searchLoading = true;
-    this.navigateToPage(0);
-    this.load();
+    this.searchTextChanged.next(this.searchText);
   }
 
   //Costum columns code

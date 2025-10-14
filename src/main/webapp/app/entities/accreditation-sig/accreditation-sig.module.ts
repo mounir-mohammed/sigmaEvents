@@ -14,9 +14,10 @@ import { AccreditationSigMassUpdateComponent } from './mass-update/accreditation
 import { AccreditationSigImportDialogComponent } from './import/accreditation-sig-import-dialog.component';
 import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 import { AccreditationSigOrganizDialogComponent } from './organiz/accreditation-sig-organiz-dialog.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-  imports: [SharedModule, AccreditationSigRoutingModule, NgxPhotoEditorModule],
+  imports: [SharedModule, AccreditationSigRoutingModule, NgxPhotoEditorModule, NgSelectModule],
   declarations: [
     AccreditationSigComponent,
     AccreditationSigDetailComponent,

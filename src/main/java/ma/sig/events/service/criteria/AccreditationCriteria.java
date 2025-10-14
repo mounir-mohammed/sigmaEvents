@@ -111,6 +111,8 @@ public class AccreditationCriteria implements Serializable, Criteria {
 
     private Boolean distinct;
 
+    private StringFilter code;
+
     public AccreditationCriteria() {}
 
     public AccreditationCriteria(AccreditationCriteria other) {
@@ -160,6 +162,7 @@ public class AccreditationCriteria implements Serializable, Criteria {
         this.codeId = other.codeId == null ? null : other.codeId.copy();
         this.dayPassInfoId = other.dayPassInfoId == null ? null : other.dayPassInfoId.copy();
         this.distinct = other.distinct;
+        this.code = other.code == null ? null : other.code.copy();
     }
 
     @Override
@@ -835,6 +838,21 @@ public class AccreditationCriteria implements Serializable, Criteria {
         this.distinct = distinct;
     }
 
+    public StringFilter getCode() {
+        return code;
+    }
+
+    public StringFilter code() {
+        if (code == null) {
+            code = new StringFilter();
+        }
+        return code;
+    }
+
+    public void setCode(StringFilter code) {
+        this.code = code;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -889,7 +907,8 @@ public class AccreditationCriteria implements Serializable, Criteria {
             Objects.equals(attachementId, that.attachementId) &&
             Objects.equals(codeId, that.codeId) &&
             Objects.equals(dayPassInfoId, that.dayPassInfoId) &&
-            Objects.equals(distinct, that.distinct)
+            Objects.equals(distinct, that.distinct) &&
+            Objects.equals(code, that.code)
         );
     }
 
@@ -940,7 +959,8 @@ public class AccreditationCriteria implements Serializable, Criteria {
             attachementId,
             codeId,
             dayPassInfoId,
-            distinct
+            distinct,
+            code
         );
     }
 
@@ -993,6 +1013,7 @@ public class AccreditationCriteria implements Serializable, Criteria {
             (codeId != null ? "codeId=" + codeId + ", " : "") +
             (dayPassInfoId != null ? "dayPassInfoId=" + dayPassInfoId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
+            (code != null ? "code=" + code + ", " : "") +
             "}";
     }
 }

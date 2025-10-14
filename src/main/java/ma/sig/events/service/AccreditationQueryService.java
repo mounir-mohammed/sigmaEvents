@@ -434,6 +434,13 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
                         )
                     );
             }
+
+            if (criteria.code() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.code(), root -> root.join(Accreditation_.code, JoinType.LEFT).get(Code_.codeValue))
+                    );
+            }
         }
         return specification;
     }
@@ -508,6 +515,7 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
                 specification.or(
                     buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationOccupation)
                 );
+            /*
             specification =
                 specification.or(
                     buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationCreatedByuser)
@@ -520,6 +528,7 @@ public class AccreditationQueryService extends QueryService<Accreditation> {
                 specification.or(
                     buildStringSpecification(new StringFilter().setContains(searchText), Accreditation_.accreditationPrintedByuser)
                 );
+            */
         }
         //ADD FILTER START
         Optional<User> currentUser = null;

@@ -35,9 +35,9 @@
             type="text"
             name="search"
             [(ngModel)]="searchText"
+            (ngModelChange)="searchTextChanged.next($event)"
             autocomplete="off"
             placeholder="{{ 'sigmaEventsApp.accreditation.search.placeHolder' | translate }}"
-            (keyup)="search()"
           />
           <div class="input-group-append">
             <span class="input-group-text search-input-icon" *ngIf="searchLoading">

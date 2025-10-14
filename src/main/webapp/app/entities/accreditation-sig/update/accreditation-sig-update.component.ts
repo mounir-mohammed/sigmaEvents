@@ -253,10 +253,13 @@ export class AccreditationSigUpdateComponent implements OnInit {
       accreditation.civility
     );
     this.sexesSharedCollection = this.sexeService.addSexeSigToCollectionIfMissing<ISexeSig>(this.sexesSharedCollection, accreditation.sexe);
-    this.nationalitiesSharedCollection = this.nationalityService.addNationalitySigToCollectionIfMissing<INationalitySig>(
-      this.nationalitiesSharedCollection,
-      accreditation.nationality
-    );
+    this.nationalitiesSharedCollection = this.nationalityService
+      .addNationalitySigToCollectionIfMissing<INationalitySig>(this.nationalitiesSharedCollection ?? [], accreditation.nationality)
+      .map(nat => ({
+        ...nat,
+        disabled: nat.nationalityStat === false, // 🔹 désactive si inactif
+      }));
+
     this.countriesSharedCollection = this.countryService.addCountrySigToCollectionIfMissing<ICountrySig>(
       this.countriesSharedCollection,
       accreditation.country
@@ -265,23 +268,36 @@ export class AccreditationSigUpdateComponent implements OnInit {
       this.citiesSharedCollection,
       accreditation.city
     );
-    this.categoriesSharedCollection = this.categoryService.addCategorySigToCollectionIfMissing<ICategorySig>(
-      this.categoriesSharedCollection,
-      accreditation.category
-    );
-    this.fonctionsSharedCollection = this.fonctionService.addFonctionSigToCollectionIfMissing<IFonctionSig>(
-      this.fonctionsSharedCollection,
-      accreditation.fonction
-    );
-    this.organizsSharedCollection = this.organizService.addOrganizSigToCollectionIfMissing<IOrganizSig>(
-      this.organizsSharedCollection,
-      accreditation.organiz
-    );
-    this.accreditationTypesSharedCollection =
-      this.accreditationTypeService.addAccreditationTypeSigToCollectionIfMissing<IAccreditationTypeSig>(
-        this.accreditationTypesSharedCollection,
+    this.categoriesSharedCollection = this.categoryService
+      .addCategorySigToCollectionIfMissing<ICategorySig>(this.categoriesSharedCollection ?? [], accreditation.category)
+      .map(cat => ({
+        ...cat,
+        disabled: cat.categoryStat === false,
+      }));
+    this.fonctionsSharedCollection = this.fonctionService
+      .addFonctionSigToCollectionIfMissing<IFonctionSig>(this.fonctionsSharedCollection ?? [], accreditation.fonction)
+      .map(f => ({
+        ...f,
+        disabled: f.fonctionStat === false, // 🔹 désactive si statut inactif
+      }));
+
+    this.organizsSharedCollection = this.organizService
+      .addOrganizSigToCollectionIfMissing<IOrganizSig>(this.organizsSharedCollection ?? [], accreditation.organiz)
+      .map(org => ({
+        ...org,
+        disabled: org.organizStat === false, // 🔹 désactive si inactif
+      }));
+
+    this.accreditationTypesSharedCollection = this.accreditationTypeService
+      .addAccreditationTypeSigToCollectionIfMissing<IAccreditationTypeSig>(
+        this.accreditationTypesSharedCollection ?? [],
         accreditation.accreditationType
-      );
+      )
+      .map(type => ({
+        ...type,
+        disabled: type.accreditationTypeStat === false, // 🔹 désactive si inactif
+      }));
+
     this.statusesSharedCollection = this.statusService.addStatusSigToCollectionIfMissing<IStatusSig>(
       this.statusesSharedCollection,
       accreditation.status

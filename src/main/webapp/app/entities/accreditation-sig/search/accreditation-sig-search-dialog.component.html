@@ -208,22 +208,15 @@
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationType" for="field_accreditationType"
             >Accreditation Type</label
           >
-          <select
+          <ng-select
             class="form-control"
-            id="field_accreditationType"
-            data-cy="accreditationType"
-            name="accreditationType"
+            [items]="FiltredAccreditationTypesSharedCollection"
+            bindLabel="accreditationTypeValue"
+            bindValue="accreditationTypeId"
+            [searchable]="true"
             formControlName="accreditationType"
           >
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="accreditationTypeOption.accreditationTypeId"
-              *ngFor="let accreditationTypeOption of FiltredAccreditationTypesSharedCollection"
-              [disabled]="accreditationTypeOption.accreditationTypeStat === false"
-            >
-              {{ accreditationTypeOption.accreditationTypeValue }}
-            </option>
-          </select>
+          </ng-select>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationActivated" for="field_accreditationActivated"
@@ -319,42 +312,39 @@
       <div class="search-table-row">
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.category" for="field_category">Category</label>
-          <select class="form-control" id="field_category" data-cy="category" name="category" formControlName="category">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="categoryOption.categoryId"
-              *ngFor="let categoryOption of FiltredCategoriesSharedCollection"
-              [disabled]="categoryOption.categoryStat === false"
-            >
-              {{ categoryOption.categoryName }}
-            </option>
-          </select>
+          <ng-select
+            class="form-control"
+            [items]="FiltredCategoriesSharedCollection"
+            bindLabel="categoryName"
+            bindValue="categoryId"
+            [searchable]="true"
+            formControlName="category"
+          >
+          </ng-select>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.fonction" for="field_fonction">Fonction</label>
-          <select class="form-control" id="field_fonction" data-cy="fonction" name="fonction" formControlName="fonction">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="fonctionOption.fonctionId"
-              *ngFor="let fonctionOption of FiltredFonctionsSharedCollection"
-              [disabled]="fonctionOption.fonctionStat === false"
-            >
-              {{ fonctionOption.fonctionName }}
-            </option>
-          </select>
+          <ng-select
+            class="form-control"
+            [items]="FiltredFonctionsSharedCollection"
+            bindLabel="fonctionName"
+            bindValue="fonctionId"
+            [searchable]="true"
+            formControlName="fonction"
+          >
+          </ng-select>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.nationality" for="field_nationality">Nationality</label>
-          <select class="form-control" id="field_nationality" data-cy="nationality" name="nationality" formControlName="nationality">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="nationalityOption.nationalityId"
-              *ngFor="let nationalityOption of nationalitiesSharedCollection"
-              [disabled]="nationalityOption.nationalityStat === false"
-            >
-              {{ nationalityOption.nationalityValue }}
-            </option>
-          </select>
+          <ng-select
+            class="form-control"
+            [items]="nationalitiesSharedCollection"
+            bindLabel="nationalityValue"
+            bindValue="nationalityId"
+            [searchable]="true"
+            formControlName="nationality"
+          >
+          </ng-select>
         </div>
         <div class="search-table-cell">
           <label sigmaTranslate="sigmaEventsApp.accreditation.site" for="field_sites">Site</label>
@@ -370,16 +360,15 @@
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.organiz" for="field_organiz">Organiz</label>
-          <select class="form-control" id="field_organiz" data-cy="organiz" name="organiz" formControlName="organiz">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="organizOption.organizId"
-              *ngFor="let organizOption of FiltredOrganizsSharedCollection"
-              [disabled]="organizOption.organizStat === false"
-            >
-              {{ organizOption.organizName }}
-            </option>
-          </select>
+          <ng-select
+            class="form-control"
+            [items]="FiltredOrganizsSharedCollection"
+            bindLabel="organizName"
+            bindValue="organizId"
+            [searchable]="true"
+            formControlName="organiz"
+          >
+          </ng-select>
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.accreditationSexe" for="field_sexe"
@@ -426,16 +415,7 @@
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.code" for="field_code">Code</label>
-          <select class="form-control" id="field_code" data-cy="code" name="code" formControlName="code">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="codeOption.codeId"
-              *ngFor="let codeOption of codesSharedCollection"
-              [disabled]="codeOption.codeStat === false"
-            >
-              {{ codeOption.codeValue }}
-            </option>
-          </select>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
         </div>
         <div class="search-table-cell">
           <label class="form-label" sigmaTranslate="sigmaEventsApp.accreditation.dayPassInfo" for="field_dayPassInfo">Day Pass Info</label>

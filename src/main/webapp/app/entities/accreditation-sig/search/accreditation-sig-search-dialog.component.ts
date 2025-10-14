@@ -8,7 +8,6 @@ import { IAttachementSig } from 'app/entities/attachement-sig/attachement-sig.mo
 import { ICategorySig } from 'app/entities/category-sig/category-sig.model';
 import { ICitySig } from 'app/entities/city-sig/city-sig.model';
 import { ICivilitySig } from 'app/entities/civility-sig/civility-sig.model';
-import { ICodeSig } from 'app/entities/code-sig/code-sig.model';
 import { ICountrySig } from 'app/entities/country-sig/country-sig.model';
 import { IDayPassInfoSig } from 'app/entities/day-pass-info-sig/day-pass-info-sig.model';
 import { IEventSig } from 'app/entities/event-sig/event-sig.model';
@@ -23,7 +22,6 @@ import { AttachementSigService } from 'app/entities/attachement-sig/service/atta
 import { CategorySigService } from 'app/entities/category-sig/service/category-sig.service';
 import { CitySigService } from 'app/entities/city-sig/service/city-sig.service';
 import { CivilitySigService } from 'app/entities/civility-sig/service/civility-sig.service';
-import { CodeSigService } from 'app/entities/code-sig/service/code-sig.service';
 import { CountrySigService } from 'app/entities/country-sig/service/country-sig.service';
 import { DayPassInfoSigService } from 'app/entities/day-pass-info-sig/service/day-pass-info-sig.service';
 import { EventSigService } from 'app/entities/event-sig/service/event-sig.service';
@@ -96,7 +94,6 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
   accreditationTypesSharedCollection: IAccreditationTypeSig[] = [];
   statusesSharedCollection: IStatusSig[] = [];
   attachementsSharedCollection: IAttachementSig[] = [];
-  codesSharedCollection: ICodeSig[] = [];
   dayPassInfosSharedCollection: IDayPassInfoSig[] = [];
 
   FiltredSitesSharedCollection: ISiteSig[] = [];
@@ -122,7 +119,6 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     protected accreditationTypeService: AccreditationTypeSigService,
     protected statusService: StatusSigService,
     protected attachementService: AttachementSigService,
-    protected codeService: CodeSigService,
     protected dayPassInfoService: DayPassInfoSigService
   ) {}
 
@@ -141,6 +137,10 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
 
     if (this.searchForm.get('accreditationFirstName')?.value) {
       this.filters.set('accreditationFirstName.contains', this.searchForm.get('accreditationFirstName')?.value);
+    }
+
+    if (this.searchForm.get('code')?.value) {
+      this.filters.set('code.contains', this.searchForm.get('code')?.value);
     }
 
     if (this.searchForm.get('accreditationSecondName')?.value) {
@@ -269,10 +269,6 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
       this.filters.set('attachementId.in', this.searchForm.get('attachement')?.value);
     }
 
-    if (this.searchForm.get('code')?.value) {
-      this.filters.set('codeId.in', this.searchForm.get('code')?.value);
-    }
-
     if (this.searchForm.get('dayPassInfo')?.value) {
       this.filters.set('dayPassInfoId.in', this.searchForm.get('dayPassInfo')?.value);
     }
@@ -319,7 +315,13 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
     this.nationalityService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<INationalitySig[]>) => res.body ?? []))
-      .subscribe((nationalities: INationalitySig[]) => (this.nationalitiesSharedCollection = nationalities));
+      .subscribe((nationalities: INationalitySig[]) => {
+        // ✅ Ajoute la propriété disabled selon le statut
+        this.nationalitiesSharedCollection = nationalities.map(nat => ({
+          ...nat,
+          disabled: nat.nationalityStat === false, // 🔹 désactive si inactif
+        }));
+      });
 
     this.countryService
       .query({ size: RECORD_ITEMS })
@@ -335,32 +337,56 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<ICategorySig[]>) => res.body ?? []))
       .subscribe((categories: ICategorySig[]) => {
-        this.categoriesSharedCollection = categories;
-        this.FiltredCategoriesSharedCollection = categories;
+        // ✅ Ajoute la propriété disabled selon le statut
+        this.categoriesSharedCollection = categories.map(cat => ({
+          ...cat,
+          disabled: cat.categoryStat === false, // 🔹 désactive les catégories inactives
+        }));
+
+        // ✅ Initialise la liste filtrée avec tout le contenu
+        this.FiltredCategoriesSharedCollection = this.categoriesSharedCollection;
       });
 
     this.fonctionService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IFonctionSig[]>) => res.body ?? []))
       .subscribe((fonctions: IFonctionSig[]) => {
-        this.fonctionsSharedCollection = fonctions;
-        this.FiltredFonctionsSharedCollection = fonctions;
+        // ✅ Ajoute la propriété disabled selon le statut
+        this.fonctionsSharedCollection = fonctions.map(f => ({
+          ...f,
+          disabled: f.fonctionStat === false, // 🔹 désactive si inactif
+        }));
+
+        // ✅ Initialise la liste filtrée
+        this.FiltredFonctionsSharedCollection = this.fonctionsSharedCollection;
       });
 
     this.organizService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IOrganizSig[]>) => res.body ?? []))
       .subscribe((organizs: IOrganizSig[]) => {
-        this.organizsSharedCollection = organizs;
-        this.FiltredOrganizsSharedCollection = organizs;
+        // ✅ Ajoute la propriété disabled selon le statut
+        this.organizsSharedCollection = organizs.map(org => ({
+          ...org,
+          disabled: org.organizStat === false, // 🔹 désactive si inactif
+        }));
+
+        // ✅ Initialise la liste filtrée
+        this.FiltredOrganizsSharedCollection = this.organizsSharedCollection;
       });
 
     this.accreditationTypeService
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAccreditationTypeSig[]>) => res.body ?? []))
       .subscribe((accreditationTypes: IAccreditationTypeSig[]) => {
-        this.accreditationTypesSharedCollection = accreditationTypes;
-        this.FiltredAccreditationTypesSharedCollection = accreditationTypes;
+        // ✅ Ajoute la propriété disabled selon le statut
+        this.accreditationTypesSharedCollection = accreditationTypes.map(type => ({
+          ...type,
+          disabled: type.accreditationTypeStat === false, // 🔹 désactive si inactif
+        }));
+
+        // ✅ Initialise la liste filtrée
+        this.FiltredAccreditationTypesSharedCollection = this.accreditationTypesSharedCollection;
       });
 
     this.statusService
@@ -372,11 +398,6 @@ export class AccreditationSigSearchDialogComponent implements OnInit {
       .query({ size: RECORD_ITEMS })
       .pipe(map((res: HttpResponse<IAttachementSig[]>) => res.body ?? []))
       .subscribe((attachements: IAttachementSig[]) => (this.attachementsSharedCollection = attachements));
-
-    this.codeService
-      .query({ size: RECORD_ITEMS })
-      .pipe(map((res: HttpResponse<ICodeSig[]>) => res.body ?? []))
-      .subscribe((codes: ICodeSig[]) => (this.codesSharedCollection = codes));
 
     this.dayPassInfoService
       .query({ size: RECORD_ITEMS })

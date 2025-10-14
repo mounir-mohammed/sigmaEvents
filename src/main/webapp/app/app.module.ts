@@ -30,6 +30,7 @@ import { NgxPhotoEditorModule } from 'ngx-photo-editor';
 import { NgChartsModule } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 Chart.register(ChartDataLabels);
 
@@ -48,6 +49,7 @@ Chart.register(ChartDataLabels);
     ColorPickerModule,
     NgxPhotoEditorModule,
     NgChartsModule,
+    NgSelectModule,
   ],
   providers: [
     Title,
