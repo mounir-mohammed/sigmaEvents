@@ -37,16 +37,11 @@ export class CacheService {
   }
 
   private getCache(): any {
-    const encodedCacheStr = localStorage.getItem(this.cacheKey);
-    if (encodedCacheStr) {
-      const decodedCacheStr = atob(encodedCacheStr);
-      return JSON.parse(decodedCacheStr);
-    }
-    return {};
+    const stored = localStorage.getItem(this.cacheKey);
+    return stored ? JSON.parse(stored) : {};
   }
 
   private saveCache(cache: any): void {
-    const encodedCacheStr = btoa(JSON.stringify(cache));
-    localStorage.setItem(this.cacheKey, encodedCacheStr);
+    localStorage.setItem(this.cacheKey, JSON.stringify(cache));
   }
 }
