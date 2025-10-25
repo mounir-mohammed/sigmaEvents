@@ -327,6 +327,11 @@ export class AccreditationSigUpdateComponent implements OnInit {
     }
   }
 
+  changeCategory() {
+    this.editForm.get('fonction')?.reset();
+    this.loadFonctionsRelationshipsOptions();
+  }
+
   protected loadRelationshipsOptions(): void {
     this.siteService
       .query({ size: RECORD_ITEMS })
